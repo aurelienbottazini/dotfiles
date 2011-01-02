@@ -49,7 +49,7 @@ function minutes_since_last_commit {
     echo $minutes_since_last_commit
 }
 
-function prompt_grb_scm_time_since_commit() {
+function prompt_botta_scm_time_since_commit() {
     local -A pc
     pc=(${(kv)botta_prompt_colors})
 
@@ -67,9 +67,9 @@ function prompt_grb_scm_time_since_commit() {
     fi
 }
 
-function prompt_grb_scm_info() {
+function prompt_botta_scm_info() {
     if zgit_inworktree; then
-        echo "$(prompt_grb_scm_time_since_commit)"
+        echo "$(prompt_botta_scm_time_since_commit)"
     fi
 }
 
@@ -161,7 +161,7 @@ prompt_botta_setup() {
 	PROMPT+="%(?.. $pc[rc]exited %1v$pc[reset])"
 	PROMPT+="
 "
-	PROMPT+="\$(prompt_grb_scm_info) "
+	PROMPT+="\$(prompt_botta_scm_info) "
 	PROMPT+="$pc[shortpath]%1~$pc[reset]"
 	PROMPT+=" $pc[#]%#$pc[reset] "
 

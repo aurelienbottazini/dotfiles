@@ -1,0 +1,4 @@
+# emacs users: C-a a (meta) Send the command character (C-a) to window. See escape command.
+# Use C-A ESC to scroll back in the terminal
+
+startup_message off # Turn off the splash screen

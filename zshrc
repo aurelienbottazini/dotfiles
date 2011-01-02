@@ -1,5 +1,6 @@
 # http://www.zsh.org/
 export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH:~/dotfiles/bin:~/android-sdk-mac_86/tools
+export CDPATH=$HOME:$HOME/projects
 
 setopt promptsubst 		# Expansion for prompt string
 
@@ -11,9 +12,7 @@ autoload -U compinit		# Completion
 compinit
 setopt MENU_COMPLETE
 zstyle ':completion:*' hosts $( sed 's/[, ].*$//' $HOME/.ssh/known_hosts ) # adding completion for ssh hosts based on known_hosts file
-zstyle ':completion:*' menu select=2
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-
+zstyle ':completion:*' menu select=2 # nice menu for completion selection
 
 export EDITOR="emacs"
 

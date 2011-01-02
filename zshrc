@@ -7,7 +7,7 @@ setopt promptsubst 		# Expansion for prompt string
 
 autoload -U promptinit		# Loading presintalled themes
 promptinit
-prompt grb			# Using grb theme
+prompt botta			# Using grb theme
 
 autoload -U compinit		# Completion
 compinit

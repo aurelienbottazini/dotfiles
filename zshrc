@@ -9,22 +9,70 @@ prompt wunjo			# Using wunjo theme
 
 autoload -U compinit		# Completion
 compinit
+setopt MENU_COMPLETE
+zstyle ':completion:*' hosts $( sed 's/[, ].*$//' $HOME/.ssh/known_hosts ) # adding completion for ssh hosts based on known_hosts file
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+
 
 export EDITOR="emacs"
 
 setopt correctall		# autocorrection for typos
 
-alias ls='ls -G'
-alias ll='ls -lG'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
 export GREP_OPTIONS="--color"	# grep with colors
 
-zstyle ':completion:*' hosts $( sed 's/[, ].*$//' $HOME/.ssh/known_hosts ) # adding completion for ssh hosts based on known_hosts file
 
 export HISTSIZE=1000		# default history of 30 is not enough nowadays...
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
 
+REPORTTIME=10 # Show elapsed time if command took more than X seconds
 WORDCHARS=${WORDCHARS//[&=\/;\!#%\{]} # Make CTRL-W delete after other chars, not just spaces
 
+
+# find a process easily
+function gps() {
+    ps -A | grep "$*" | grep -v grep
+}
+
+alias o='open . &'		# finder
+
+alias ..='cd ..'   # up one dir
+
+alias a='ls -A' # -A all except literal . ..
+alias c='clear'
+alias cdd='cd -'  # goto last dir cd'ed from
+alias cl='clear; l'
+alias cls='clear; ls'
+alias h='history'
+alias l.='ls -d .[^.]*'
+alias l='ls -lhGt'  # -l long listing, most recent first
+alias la="ls -A -l -G"
+alias lh="ls -lh"
+alias ll='ls -lhG'  # -l long listing, human readable, no group info
+alias ls='ls -G'
+alias lt='ls -lt' # sort with recently modified first
+alias md='mkdir -p' # create directory with intermediate directory if required
+
+
+alias g='git status'
+alias ga="git add ."
+alias gb='git branch'
+alias gco='git checkout'
+alias gd='git diff'
+alias gl='git pull'
+alias gm="git mergetool"
+alias gp='git push'
+alias ungit="find . -name '.git' -exec rm -rf {} \;"
+
+# Quickly clobber a file and checkout
+function grf() { 
+    rm $1
+    git checkout $1 
+}
+# Commit pending changes and quote all args as message
+function gg() { 
+    git commit -v -a -m "$*"
+}

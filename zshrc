@@ -5,7 +5,7 @@ setopt promptsubst 		# Expansion for prompt string
 
 autoload -U promptinit		# Loading presintalled themes
 promptinit
-prompt wunjo			# Using wunjo theme
+prompt grb			# Using grb theme
 
 autoload -U compinit		# Completion
 compinit

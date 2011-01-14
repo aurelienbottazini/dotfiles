@@ -67,11 +67,13 @@ alias gp='git push'
 alias ungit="find . -name '.git' -exec rm -rf {} \;"
 
 # Quickly clobber a file and checkout
-function grf() { 
+function grf() {
     rm $1
-    git checkout $1 
+    git checkout $1
 }
 # Commit pending changes and quote all args as message
-function gg() { 
+function gg() {
     git commit -v -a -m "$*"
 }
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.

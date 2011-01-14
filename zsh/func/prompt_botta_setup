@@ -120,24 +120,24 @@ prompt_botta_setup() {
 
 	local -A pc
 	pc[default]='default'
-	pc[date]='cyan'
+	pc[date]='blue'
 	pc[time]='Blue'
-	pc[host]='Green'
-	pc[user]='cyan'
-	pc[punc]='yellow'
+	pc[host]='green'
+	pc[user]='blue'
+	pc[punc]='Magenta'
 	pc[line]='magenta'
 	pc[hist]='green'
-	pc[path]='Cyan'
+	pc[path]='blue'
 	pc[shortpath]='default'
 	pc[rc]='red'
-	pc[scm_branch]='Cyan'
-	pc[scm_commitid]='Yellow'
+	pc[scm_branch]='Blue'
+	pc[scm_commitid]='magenta'
 	pc[scm_status_dirty]='Red'
 	pc[scm_status_staged]='Green'
 	pc[scm_time_short]='green'
 	pc[scm_time_medium]='yellow'
 	pc[scm_time_long]='red'
-	pc[#]='Yellow'
+	pc[#]='magenta'
 	for cn in ${(k)pc}; do
 		pc[${cn}]=$(colorword $pc[$cn])
 	done

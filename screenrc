@@ -20,6 +20,11 @@
 # / -    Search forward
 # ? -    Search backward
 
+# Copy and Paste
+# Scrollback mode is also know as copy mode and it allows you to copy any section of text into a copy buffer. To copy text, move the cursor to the start of the text you want to copy, hit spacebar, move the cursor to the end of the text you want to copy (Screen will highlight the text to be copied as you move), and again hit spacebar. Screen will indicate the number of characters copied into the copy buffer.
+
+# To paste text, simply hit C-a ].
+
 startup_message off # Turn off the splash screen
 term xterm-256color # more colors
 

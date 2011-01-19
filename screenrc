@@ -27,7 +27,7 @@
 # To paste text, simply hit C-a ].
 
 startup_message off # Turn off the splash screen
-term screen-256color # more colors
+term xterm-256color # more colors
 
 defscrollback 5000 # increase scrollback
 

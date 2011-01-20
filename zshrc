@@ -2,6 +2,8 @@
 export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH:~/dotfiles/bin:~/android-sdk-mac_86/tools
 export CDPATH=$HOME:$HOME/projects
 
+export RUBYOPT=rubygems		# make rubygems automatically available for my ruby scripts
+
 setopt promptsubst 		# Expansion for prompt string
 
 autoload -U promptinit		# Loading presintalled themes

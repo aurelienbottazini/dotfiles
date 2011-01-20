@@ -1,5 +1,5 @@
 [user]
-	name = Aurélien Bottazzini
+	name = Aurélien Bottazzini
 	email = aurelien.bottazzini@gmail.com
 [color]
 	branch = auto
@@ -10,3 +10,9 @@
 	editor = emacs
 [push]
 	default = current
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope

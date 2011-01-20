@@ -2,6 +2,8 @@
 # emacs users: C-a a (meta) Send the command character (C-a) to window. See escape command.
 # Use C-A ESC to scroll back in the terminal
 
+# http://news.softpedia.com/news/GNU-Screen-Tutorial-44274.shtml
+
 # h -    Move the cursor left by one character
 # j -    Move the cursor down by one line
 # k -    Move the cursor up by one line

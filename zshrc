@@ -68,6 +68,8 @@ alias gm="git mergetool"
 alias gp='git push'
 alias ungit="find . -name '.git' -exec rm -rf {} \;"
 
+alias bs = "bundle exec autotest"
+
 # Quickly clobber a file and checkout
 function grf() {
     rm $1

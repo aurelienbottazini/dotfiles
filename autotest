@@ -1,0 +1,6 @@
+# sudo gem install autotest-growl
+require 'autotest/growl'
+
+# sudo gem install autotest-fsevent - to save battery life
+require 'autotest/fsevent'
+

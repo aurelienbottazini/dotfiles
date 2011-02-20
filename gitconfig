@@ -1,5 +1,5 @@
 [user]
-	name = Aurélien Bottazzini
+	name = Aurélien Bottazzini
 	email = aurelien.bottazzini@gmail.com
 [color]
 	branch = auto
@@ -8,6 +8,7 @@
 	interactive = auto
 [core]
 	editor = emacs
+	quotepath = false
 [push]
 	default = current
 [difftool "Kaleidoscope"]

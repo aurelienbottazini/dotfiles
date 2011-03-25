@@ -1,5 +1,5 @@
 # http://www.zsh.org/
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH:~/dotfiles/bin:~/android-sdk-mac_86/tools
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:~/dotfiles/bin:~/android-sdk-mac_86/tools
 export CDPATH=$HOME:$HOME/projects
 export LC_ALL=C
 

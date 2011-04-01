@@ -1,7 +1,7 @@
 # http://www.zsh.org/
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH:~/dotfiles/bin:~/android-sdk-mac_86/tools
 export CDPATH=$HOME:$HOME/projects
-export LC_ALL=C
+export LC_ALL=fr_FR.UTF-8
 
 export RUBYOPT=rubygems		# make rubygems automatically available for my ruby scripts
 

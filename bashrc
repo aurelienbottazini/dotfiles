@@ -1,5 +1,5 @@
 export PATH=/usr/local/bin:/usr/local/sbin:"${PATH}"
-export CDPATH=".:~:~/projects"
+export CDPATH=.:~:~/projects
 
 # Black       0;30     Dark Gray     1;30
 # Blue        0;34     Light Blue    1;34
@@ -40,3 +40,7 @@ alias gp='git push'
 function gg() {
     git commit -v -a -m "$*"
 }
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi

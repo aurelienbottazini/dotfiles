@@ -42,7 +42,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
-PROMPT_COMMAND='PS1="\[\033[0;34m\]\w $(git_prompt)\n\[\033[0;31m\]♥\[\033[0m\] "'
+PROMPT_COMMAND='PS1="\[\033[0;34m\]\w $(git_prompt)\n\[\033[1;32m\]‣\[\033[0m\] "'
 
 alias o='open . &'		# finder
 

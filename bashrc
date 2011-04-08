@@ -31,7 +31,7 @@ function git_prompt {
         fi
 	right_echo=" $COLOR$minutes_since_last_commit"
     else
-	right_echo=" \[\033[0;32m\]✔"
+	right_echo=" \[\033[0;32m\]✓"
     fi
     echo "\[\033[0;36m\]$(__git_ps1 '(%s)')$right_echo"
 }
@@ -66,6 +66,8 @@ alias g='git status'
 alias ga="git add ."
 alias gl='git pull'
 alias gp='git push'
+
+alias rii='ri -i --no-gem' 	# interactive ri
 
 # Commit pending changes and quote all args as message
 function gg() {

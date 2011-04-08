@@ -35,4 +35,4 @@ defscrollback 5000 # increase scrollback
 
 bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'" # c-a b sends screen copy buffer to macosx clipboard
 
-escape ``
+escape ^Oo

@@ -23,7 +23,8 @@ function git_prompt {
 	seconds_since_last_commit=$((now-last_commit))
 	minutes_since_last_commit=$((seconds_since_last_commit/60))
 
-	if [ $minutes_since_last_commit -gt 30 ]; then                                                   COLOR="\[\033[0;31m\]"
+	if [ $minutes_since_last_commit -gt 30 ]; then
+            COLOR="\[\033[0;31m\]"
         elif [ $minutes_since_last_commit -gt 10 ]; then
 	    COLOR="\[\033[1;33m\]"
         else

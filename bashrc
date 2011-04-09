@@ -67,6 +67,7 @@ alias g='git status'
 alias ga="git add ."
 alias gl='git pull'
 alias gp='git push'
+alias gd='git diff'
 
 alias rii='ri -i --no-gem' 	# interactive ri
 

@@ -1,5 +1,5 @@
 [user]
-	name = Aurélien Bottazzini
+	name = Aurélien Bottazzini
 	email = aurelien.bottazzini@gmail.com
 [color]
 	branch = auto
@@ -9,6 +9,7 @@
 [core]
 	editor = emacs
 	quotepath = false
+	excludesfile = /Users/aurelienbottazzini/.gitignore_global
 [push]
 	default = current
 [difftool "Kaleidoscope"]
@@ -17,3 +18,12 @@
 	prompt = false
 [diff]
 	tool = Kaleidoscope
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[github]
+	user = aurelienbottazzini
+	tooken = dafc10e4f7c66a933baba52b1f50bc2e

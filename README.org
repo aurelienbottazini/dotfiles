@@ -2,6 +2,9 @@ My zsh, screenrc, rspec, git and autotest config files
 
 Install it using install.sh
 
+To test if your terminal uses 256 colors:
+$ perl dotfiles/bin/colortest -w
+
 Note:
 two rubygems are required for autotest: autotest-growl and
 autotest-fsevent. You also need to install growl and growlnotify to

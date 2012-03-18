@@ -14,6 +14,13 @@ ZSH_THEME="aure"
 alias l.="ls -ld .*"
 alias tu="tmux -u"
 alias o="open ."
+alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
+
+function gg() {
+    git commit -v -a -m "$*"
+}
+
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -27,7 +34,7 @@ alias o="open ."
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/

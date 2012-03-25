@@ -13,6 +13,7 @@ ZSH_THEME="aure"
 
 alias l.="ls -ld .*"
 alias tu="tmux -u"
+alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 

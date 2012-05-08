@@ -11,11 +11,14 @@ ZSH_THEME="aure"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export LANG="fr_FR.UTF-8"
+
 alias l.="ls -ld .*"
 alias tu="tmux -u"
 alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
+alias ee="emacs -q --no-splash"
 
 function gg() {
     git commit -v -a -m "$*"
@@ -45,7 +48,7 @@ plugins=(git brew thor)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:~/dotfiles/bin:~/android-sdk-mac_86/tools
+export PATH=/usr/local/bin:/usr/local/sbin:~/dotfiles/bin:/usr/local/lib/node_modules:~/node_modules/less/bin:$PATH
 export CDPATH=$HOME:$HOME/projects
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -52,3 +52,5 @@ export PATH=/usr/local/bin:/usr/local/sbin:~/dotfiles/bin:/usr/local/lib/node_mo
 export CDPATH=$HOME:$HOME/projects
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

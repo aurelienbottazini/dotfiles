@@ -18,9 +18,9 @@ alias tu="tmux -u"
 alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
-alias et="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t"
-alias ec="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c &"
-alias ed="/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"
+alias et="emacsclient -t"
+alias emacs="emacsclient -t"
+alias ed="emacs --daemon"
 
 function gg() {
     git commit -v -a -m "$*"

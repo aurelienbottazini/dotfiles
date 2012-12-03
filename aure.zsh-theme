@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
 #          FILE: aure.zsh-theme
 #   DESCRIPTION: oh-my-zsh theme file, based on smt by Stephen Tudor.
+#                Made for a light background with PragmataPro font.
 #        AUTHOR: Aurélien Bottazzini
 #       VERSION: 1
 # -----------------------------------------------------------------------------

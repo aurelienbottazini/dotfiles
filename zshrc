@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="aure"
+ZSH_THEME="robbyrussell"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -18,20 +18,19 @@ alias tu="tmux -u"
 alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
-alias et="emacsclient -t"
-alias emacs="emacsclient -t"
-alias ed="emacs --daemon"
 
 function gg() {
     git commit -v -a -m "$*"
 }
 
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
-# Comment this out to disable weekly auto-update checks
+# Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
+
+# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
+# export UPDATE_ZSH_DAYS=13
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
@@ -49,10 +48,7 @@ plugins=(git brew thor)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:~/dotfiles/bin:/usr/local/lib/node_modules:~/node_modules/less/bin:$PATH
 export CDPATH=$HOME:$HOME/projects
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Customize to your needs...
+export PATH=/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:/Users/aurelienbottazzini/dotfiles/bin:/usr/local/lib/node_modules:/Users/aurelienbottazzini/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/sbin:/Users/aurelienbottazzini/dotfiles/bin:/usr/local/lib/node_modules:/Users/aurelienbottazzini/node_modules/less/bin:/Users/aurelienbottazzini/.rvm/bin:/Users/aurelienbottazzini/.rvm/bin

@@ -11,9 +11,9 @@ local return_status="%{$fg[red]%}%(?..⚠)%{$reset_color%} "
 
 ZSH_THEME_GIT_PROMPT_PREFIX="|"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}⌁%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[red]%}⚠%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}∞%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} ⌁%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[red]%} ⚠%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} ∞%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ⁇"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} Δ"

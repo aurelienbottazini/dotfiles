@@ -7,13 +7,13 @@
 # -----------------------------------------------------------------------------
 
 MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
-local return_status="%{$fg[red]%}%(?..⚠)%{$reset_color%} "
+local return_status="%(?,%{$fg[green]%}⍨%{$reset_color%},%{$fg[red]%}⍩%{$reset_color%}) "
 
 ZSH_THEME_GIT_PROMPT_PREFIX="|"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} ⌁%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[red]%} ⚠%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} ∞%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ⌁%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[red]%} ⚠%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ⍢%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ⁇"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} Δ"
@@ -26,10 +26,9 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ⇢"
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="► %{$fg_bold[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 
-function prompt_char() {
-  git branch >/dev/null 2>/dev/null && echo "%{$fg[green]%}g%{$reset_color%}" && return
-  hg root >/dev/null 2>/dev/null && echo "%{$fg_bold[red]%}m%{$reset_color%}" && return
-  echo "%{$fg[cyan]%}⍨%{$reset_color%}"
+function source_control_char() {
+  git branch >/dev/null 2>/dev/null && echo "%{$fg[green]%}G%{$reset_color%}" && return
+  hg root >/dev/null 2>/dev/null && echo "%{$fg_bold[red]%}☿%{$reset_color%}" && return
 }
 
 # Colors vary depending on time lapsed.
@@ -84,7 +83,7 @@ function git_time_since_commit() {
     fi
 }
 
-PROMPT='$(prompt_char) %{$fg[blue]%}%~ %{$reset_color%}$(git_prompt_info)
-'
+PROMPT='%{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info)
+${return_status}'
 
-RPROMPT='${return_status}$(git_time_since_commit)$(git_prompt_status)%{$reset_color%}'
+RPROMPT='$(git_time_since_commit)$(git_prompt_status)%{$reset_color%}'

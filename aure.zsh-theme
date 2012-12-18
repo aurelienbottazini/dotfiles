@@ -29,11 +29,11 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 function source_control_char() {
   git branch >/dev/null 2>/dev/null && echo "%{$fg[green]%}G%{$reset_color%}" && return
   hg root >/dev/null 2>/dev/null && Echo "%{$fg[blue]%}☿%{$reset_color%}" && return
-  bzr root >/dev/null 2>/dev/null && Echo "%{$fg[yellow]%}B%{$reset_color%}" && return
+  bzr root >/dev/null 2>/dev/null && Echo "%{$fg[yellow]%}ℬ%{$reset_color%}" && return
 }
 
 PROMPT='
 %{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info)
 ${return_status}'
 
-RPROMPT='$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
+RPROMPT='%{$fg[blue]%}$(~/.rvm/bin/rvm-prompt) $(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'

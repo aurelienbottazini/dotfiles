@@ -50,6 +50,7 @@ plugins=(git brew thor)
 source $ZSH/oh-my-zsh.sh
 
 export CDPATH=$HOME:$HOME/projects
+export CDPATH=.:$CDPATH
 
 # Customize to your needs...
 export PATH=/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:/Users/aurelienbottazzini/dotfiles/bin:/usr/local/lib/node_modules:/Users/aurelienbottazzini/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/sbin:/Users/aurelienbottazzini/dotfiles/bin:/usr/local/lib/node_modules:/Users/aurelienbottazzini/node_modules/less/bin:/Users/aurelienbottazzini/.rvm/bin:/Users/aurelienbottazzini/.rvm/bin

@@ -33,7 +33,7 @@ function source_control_char() {
 }
 
 PROMPT='
-%{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info)
+%{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info) $(git_prompt_short_sha)
 ${return_status}'
 
-RPROMPT='%{$fg[blue]%}$(~/.rvm/bin/rvm-prompt) $(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
+RPROMPT='%{$fg[blue]%}$(~/.rvm/bin/rvm-prompt) $(git_prompt_status)%{$reset_color%}'

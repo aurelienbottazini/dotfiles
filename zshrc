@@ -45,7 +45,7 @@ function gg() {
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew thor)
+plugins=(git brew thor rvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,4 +53,6 @@ export CDPATH=$HOME:$HOME/projects
 export CDPATH=.:$CDPATH
 
 # Customize to your needs...
-export PATH=/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:/Users/aurelienbottazzini/dotfiles/bin:/usr/local/lib/node_modules:/Users/aurelienbottazzini/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/sbin:/Users/aurelienbottazzini/dotfiles/bin:/usr/local/lib/node_modules:/Users/aurelienbottazzini/node_modules/less/bin:/Users/aurelienbottazzini/.rvm/bin:/Users/aurelienbottazzini/.rvm/bin
+export PATH=/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

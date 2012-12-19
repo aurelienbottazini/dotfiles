@@ -47,10 +47,8 @@ function gg() {
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew thor rvm)
 
+cdpath=(~ ~/projects)
 source $ZSH/oh-my-zsh.sh
-
-export CDPATH=$HOME:$HOME/projects
-export CDPATH=.:$CDPATH
 
 # Customize to your needs...
 export PATH=/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin

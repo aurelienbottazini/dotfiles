@@ -16,6 +16,7 @@ export LANG="fr_FR.UTF-8"
 
 alias l.="ls -ld .*"
 alias tu="tmux -u"
+alias tmux="tmux -u"
 alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
@@ -45,11 +46,11 @@ function gg() {
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew thor rvm)
+plugins=(git brew thor)
 
-cdpath=(~ ~/projects)
 source $ZSH/oh-my-zsh.sh
 
+export CDPATH=:$HOME:$HOME/projects
 # Customize to your needs...
 export PATH=$PATH:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
 

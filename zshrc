@@ -22,6 +22,9 @@ alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 
 function gg() {
+    git commit -v -m "$*"
+}
+function gga() {
     git commit -v -a -m "$*"
 }
 

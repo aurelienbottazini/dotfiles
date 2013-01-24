@@ -15,12 +15,12 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ⌁%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[red]%} ⚠%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ⍢%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}Δ"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}␡"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}≈"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}‼"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}⁇"
+ZSH_THEME_GIT_PROMPT_ADDED=" %{$fg[green]%}+"
+ZSH_THEME_GIT_PROMPT_MODIFIED=" %{$fg[yellow]%}Δ"
+ZSH_THEME_GIT_PROMPT_DELETED=" %{$fg[red]%}␡"
+ZSH_THEME_GIT_PROMPT_RENAMED=" %{$fg[magenta]%}≈"
+ZSH_THEME_GIT_PROMPT_UNMERGED=" %{$fg[yellow]%}‼"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[yellow]%}⁇"
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[magenta]%}"
@@ -33,7 +33,7 @@ function source_control_char() {
 }
 
 PROMPT='
-%{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info) $(git_prompt_status) $(git_prompt_short_sha)
+%{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info)$(git_prompt_status) $(git_prompt_short_sha)
 ${return_status}'
 
 RPROMPT='%{$fg[blue]%}$(~/.rvm/bin/rvm-prompt)%{$reset_color%}'

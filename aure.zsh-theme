@@ -15,12 +15,12 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ⌁%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[red]%} ⚠%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ⍢%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ⁇"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} Δ"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ‼"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} →"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ↔"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ⇢"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} +"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%} Δ"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ␡"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ≈"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ‼"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} ⁇"
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[magenta]%}"

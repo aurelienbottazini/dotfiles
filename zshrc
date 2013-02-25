@@ -55,6 +55,6 @@ source $ZSH/oh-my-zsh.sh
 
 export CDPATH=:$HOME:$HOME/projects
 # Customize to your needs...
-export PATH=$PATH:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

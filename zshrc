@@ -52,6 +52,7 @@ function gga() {
 plugins=(git brew thor)
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/dotfiles/bin/bashmarks.sh
 
 export CDPATH=:$HOME:$HOME/projects
 # Customize to your needs...

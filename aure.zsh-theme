@@ -36,4 +36,4 @@ PROMPT='
 %{$fg[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info)$(git_prompt_status) $(git_prompt_short_sha)
 ${return_status}'
 
-RPROMPT='%{$fg[blue]%}$(~/.rvm/bin/rvm-prompt)%{$reset_color%}'
+RPROMPT='%{$fg[blue]%}%{$reset_color%}'

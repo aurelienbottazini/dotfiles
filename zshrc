@@ -58,4 +58,5 @@ export CDPATH=:$HOME:$HOME/projects
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+export RBENV_ROOT=/usr/local/var/rbenv
+eval "$(rbenv init -)"

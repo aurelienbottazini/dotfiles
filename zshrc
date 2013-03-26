@@ -20,7 +20,7 @@ alias tmux="tmux -u"
 alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
-
+alias pd="psql -p 5432 -h localhost -d "
 function gg() {
     git commit -v -m "$*"
 }
@@ -50,6 +50,11 @@ function gga() {
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew thor rbenv)
+export EDITOR="emacs -Q -l ~/.emacs.d/themes/color-theme-tronesque-terminal.el"
+
+# unlimited postgre history
+export HISTFILESIZE=
+export HISTSIZE=
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/bin/bashmarks.sh

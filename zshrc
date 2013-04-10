@@ -21,12 +21,14 @@ alias screen="screen -U"
 alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 alias pd="psql -p 5432 -h localhost -d "
+alias funiq="awk '!x[$0]++' "
 function gg() {
     git commit -v -m "$*"
 }
 function gga() {
     git commit -v -a -m "$*"
 }
+alias clean_open_with_list="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

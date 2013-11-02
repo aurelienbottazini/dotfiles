@@ -22,12 +22,21 @@ alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 alias pd="psql -p 5432 -h localhost -d "
 alias funiq="awk '!x[$0]++' "
-function gg() {
-    git commit -v -m "$*"
+
+export MARKPATH=$HOME/.marks
+function jump {
+    cd -P $MARKPATH/$1 2>/dev/null ||echo"No such mark: $1"
 }
-function gga() {
-    git commit -v -a -m "$*"
+function mark {
+    mkdir -p $MARKPATH; ln -s $(pwd) $MARKPATH/$1
 }
+function unmark {
+    rm -i $MARKPATH/$1
+}
+function marks {
+    ls -l $MARKPATH | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/ -/g' && echo
+}
+
 alias clean_open_with_list="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user"
 
 # Set to this to use case-sensitive completion

@@ -70,7 +70,7 @@ export HISTSIZE=
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/bin/bashmarks.sh
 
-export CDPATH=:$HOME:$HOME/projects
+export CDPATH=:$HOME:$HOME/Documents/projects
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin
 

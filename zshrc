@@ -68,7 +68,7 @@ export HISTFILESIZE=
 export HISTSIZE=
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/dotfiles/bin/bashmarks.sh
+source $HOME/Documents/projects/dotfiles/bin/bashmarks.sh
 
 export CDPATH=:$HOME:$HOME/Documents/projects
 # Customize to your needs...

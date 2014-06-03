@@ -61,7 +61,7 @@ alias clean_open_with_list="/System/Library/Frameworks/CoreServices.framework/Ve
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew thor rbenv)
-export EDITOR="emacs -Q -l ~/.emacs.d/themes/color-theme-tronesque-terminal.el"
+export EDITOR="emacs -Q"
 
 # unlimited postgre history
 export HISTFILESIZE=
@@ -73,7 +73,7 @@ source $HOME/Documents/projects/dotfiles/bin/bashmarks.sh
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH # for bzr to work properly
 export CDPATH=:$HOME:$HOME/Documents/projects
 # Customize to your needs...
-export PATH=/usr/local/bin:$PATH:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin
+export PATH=/usr/local/bin:~/.cabal/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin:$PATH
 
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"

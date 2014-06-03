@@ -7,7 +7,7 @@
 	diff = auto
 	interactive = auto
 [core]
-	editor = emacs
+	editor = "emacs -Q"
 	quotepath = false
 	excludesfile = /Users/aurelienbottazzini/.gitignore_global
 [push]
@@ -20,7 +20,7 @@
 	tool = Kaleidoscope
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

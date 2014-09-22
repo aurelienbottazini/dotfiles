@@ -18,9 +18,10 @@
 	prompt = false
 [diff]
 	tool = Kaleidoscope
+	external = emacs
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -29,3 +30,6 @@
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
 [credential]
 	helper = osxkeychain
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

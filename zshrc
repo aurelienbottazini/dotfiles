@@ -68,12 +68,14 @@ export HISTFILESIZE=
 export HISTSIZE=
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/Documents/projects/dotfiles/bin/bashmarks.sh
+source $HOME/projects/dotfiles/bin/bashmarks.sh
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH # for bzr to work properly
-export CDPATH=:$HOME:$HOME/Documents/projects
+export CDPATH=:$HOME:$HOME/projects:$HOME/Documents/projects
 # Customize to your needs...
 export PATH=/usr/local/bin:~/.cabal/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin:$PATH
 
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
+
+export LSCOLORS="acdxcxdxbxegedabagabab"

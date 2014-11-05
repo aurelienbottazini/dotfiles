@@ -22,6 +22,7 @@ alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 alias pd="psql -p 5432 -h localhost -d "
 alias funiq="awk '!x[$0]++' "
+alias irb="irb -EUTF-8"
 
 export MARKPATH=$HOME/.marks
 function jump {

@@ -12,7 +12,8 @@ ZSH_THEME="aure"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export LANG="fr_FR.UTF-8"
+export LANG=fr_FR.UTF-8
+export LC_ALL=fr_FR.UTF-8
 
 alias l.="ls -ld .*"
 alias tu="tmux -u"
@@ -22,7 +23,6 @@ alias o="open ."
 alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 alias pd="psql -p 5432 -h localhost -d "
 alias funiq="awk '!x[$0]++' "
-alias irb="irb -EUTF-8"
 
 export MARKPATH=$HOME/.marks
 function jump {

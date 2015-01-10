@@ -74,12 +74,14 @@ source $HOME/projects/dotfiles/bin/bashmarks.sh
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH # for bzr to work properly
 export CDPATH=:$HOME:$HOME/projects:$HOME/Documents/projects
 # Customize to your needs...
-export PATH=/usr/local/bin:~/.cabal/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin:$PATH
+export PATH=/usr/sbin:/usr/local/bin:~/.cabal/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin:$PATH
 
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
 
-export LSCOLORS="acdxcxdxbxegedabagabab"
-export LS_COLORS="di=30;42:ln=31;41:so=31;41:pi=31;41:ex=31;41:bd=31;41:cd=31;41:su=31;41:sg=31;41:tw=31;41:ow=31;41:"
+# lscolors generator: http://geoff.greer.fm/lscolors/
+export LSCOLORS="cxBxcxdxbaegedabagacad"
+export LS_COLORS="di=32;40:ln=1;32;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories

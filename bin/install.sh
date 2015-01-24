@@ -11,4 +11,5 @@ ln -sf ~/projects/dotfiles/dictionaries/fr_FR.aff ~/Library/Spelling/fr_FR.aff
 ln -sf ~/projects/dotfiles/dictionaries/fr_FR.dic ~/Library/Spelling/fr_FR.dic
 ln -sf ~/projects/dotfiles/dictionaries/fr_FR.aff ~/Library/Spelling/fr_FR_aurelien.aff
 ln -sf ~/projects/dotfiles/dictionaries/fr_FR.dic ~/Library/Spelling/fr_FR_aurelien.dic
-ln -sf ~/projects/dotfiles/dictionaries/LocalDictionary ~/Library/Spelling/LocalDictionary
+ln -sf ~/projects/dotfiles/dictionaries/.hunspell_en_US_aurelien ~/.hunspell_en_US_aurelien
+ln -sf ~/projects/dotfiles/dictionaries/.hunspell_fr_FR_aurelien ~/.hunspell_fr_FR_aurelien

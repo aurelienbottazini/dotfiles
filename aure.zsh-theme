@@ -7,7 +7,7 @@
 # -----------------------------------------------------------------------------
 
 MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
-local return_status="%(?,%{$fg[green]%}✓%{$reset_color%},%{$fg[red]%}×%{$reset_color%}) "
+local return_status="%(?,%{$fg[green]%}✓%{$reset_color%},%{$fg[red]%}✗%{$reset_color%}) "
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
@@ -32,8 +32,7 @@ function source_control_char() {
   bzr root >/dev/null 2>/dev/null && Echo "%{$fg_bold[magenta]%}ℬ%{$reset_color%}" && return
 }
 
-PROMPT='%{$fg_bold[blue]%}%~%{$reset_color%} $(source_control_char)$(git_prompt_info)$(git_prompt_status) $(git_prompt_short_sha)
-
+PROMPT='%{$bg[blue]%}%{$fg_bold[blue]%}%~ %{$reset_color%}%{$fg[blue]%}%{$reset_color%} $(source_control_char)$(git_prompt_info)$(git_prompt_status) $(git_prompt_short_sha)
 ${return_status}'
 
 RPROMPT='%{$fg[blue]%}%{$reset_color%}'

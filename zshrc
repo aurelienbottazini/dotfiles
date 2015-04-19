@@ -20,7 +20,6 @@ alias tu="tmux -u"
 alias tmux="tmux -u"
 alias screen="screen -U"
 alias o="open ."
-alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
 alias pd="psql -p 5432 -h localhost -d "
 alias funiq="awk '!x[$0]++' "
 
@@ -74,7 +73,7 @@ source $HOME/projects/dotfiles/bin/bashmarks.sh
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH # for bzr to work properly
 export CDPATH=:$HOME:$HOME/projects:$HOME/Documents/projects
 # Customize to your needs...
-export PATH=/usr/sbin:/usr/local/bin:~/.cabal/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin:$PATH
+export PATH=/usr/sbin:/usr/local/bin:~/.cabal/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/dotfiles/bin:/usr/local/lib/node_modules:$HOME/node_modules/less/bin:/opt/X11/bin:/sbin:$PATH
 
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
@@ -83,10 +82,22 @@ eval "$(rbenv init -)"
 export LSCOLORS="cxBxcxdxbaegedabagacad"
 export LS_COLORS="di=32;40:ln=1;32;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
 
-export UNITEUS_URL="uniteus.dev"
-export UNITEUS_BASE_HOST="uniteus.dev"
-export UNITEUS_SAAS_URL="saas.uniteus.dev"
-export UNITEUS_PRO_URL="pro.uniteus.dev"
+export UNITEUS_URL="uniteus.dev:3000"
+export UNITEUS_BASE_HOST="uniteus.dev:3000"
+export UNITEUS_SAAS_URL="saas.uniteus.dev:3000"
+export UNITEUS_PRO_URL="pro.uniteus.dev:3000"
+export UNITEUS_ADMIN_URL="admin.uniteus.dev:3000"
+export UNITEUS_SETUP_URL="setup.uniteus.dev:3000"
+
+export UNITEUS_REMOTE_IP="78.227.138.242"
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/aurelienbottazzini/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+
+# Docker (default for Vagrant based boxes)
+export DOCKER_HOST=tcp://localhost:2375
+

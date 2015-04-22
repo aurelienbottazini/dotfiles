@@ -6,12 +6,15 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # Use: export ZSH; ./theme_chooser.sh to get a preview of all themes
-ZSH_THEME="aure"
+ZSH_THEME="agnoster"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# For my prompt theme. When set hides user and host on local computer
+# with corresponding user
+export DEFAULT_USER=aurelienbottazzini
 export LANG=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 
@@ -100,4 +103,3 @@ zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-dir
 
 # Docker (default for Vagrant based boxes)
 export DOCKER_HOST=tcp://localhost:2375
-

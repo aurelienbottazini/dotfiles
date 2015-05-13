@@ -1,4 +1,5 @@
 ln -sf ~/projects/dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/projects/dotfiles/gitignore_global ~/.gitignore_global
 ln -sf ~/projects/dotfiles/screenrc ~/.screenrc
 ln -sf ~/projects/dotfiles/rspec ~/.rspec
 ln -sf ~/projects/dotfiles/autotest ~/.autotest

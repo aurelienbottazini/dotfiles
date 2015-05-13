@@ -10,9 +10,38 @@
 [github]
 	user = aurelienbottazzini
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
+[alias]
+        st = status
+        ci = commit
+        di = diff
+        co = checkout
+        amend = commit --amend
+        b = branch
+        ignore-tracked = update-index --assume-unchanged
 [credential]
 	helper = osxkeychain
 [filter "media"]
 	clean = git media clean %f
 	smudge = git media smudge %f
 	required = true
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope

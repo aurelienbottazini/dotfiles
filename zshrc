@@ -85,21 +85,12 @@ eval "$(rbenv init -)"
 export LSCOLORS="cxBxcxdxbaegedabagacad"
 export LS_COLORS="di=32;40:ln=1;32;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
 
-export UNITEUS_URL="uniteus.dev:3000"
-export UNITEUS_BASE_HOST="uniteus.dev:3000"
-export UNITEUS_SAAS_URL="saas.uniteus.dev:3000"
-export UNITEUS_PRO_URL="pro.uniteus.dev:3000"
-export UNITEUS_ADMIN_URL="admin.uniteus.dev:3000"
-export UNITEUS_SETUP_URL="setup.uniteus.dev:3000"
+export VAGRANT_IP="192.168.33.10"
+export DOCKER_HOST="tcp://192.168.33.10:2375"
+export VAGRANT_DEFAULT_PROVIDER=parallels
 
-export UNITEUS_REMOTE_IP="78.227.138.242"
-
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/aurelienbottazzini/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+# alias delete_docker_containers="docker rm $(docker ps -a -q)"
+# alias delete_docker_images="docker rmi $(docker images -q)"
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-
-# Docker (default for Vagrant based boxes)
-export DOCKER_HOST=tcp://localhost:2375

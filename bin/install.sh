@@ -1,3 +1,10 @@
+#!/usr/bin/env zsh
+
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
 ln -sf ~/projects/dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/projects/dotfiles/gitignore_global ~/.gitignore_global
 ln -sf ~/projects/dotfiles/screenrc ~/.screenrc

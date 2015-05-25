@@ -42,5 +42,6 @@ alias o="open ."
 alias pd="psql -p 5432 -h localhost -d "
 alias funiq="awk '!x[$0]++' "
 
+export PATH=$PATH:~/projects/dotfiles/bin/:/usr/sbin
 # alias delete_docker_containers="docker rm $(docker ps -a -q)"
 # alias delete_docker_images="docker rmi $(docker images -q)"

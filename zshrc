@@ -21,10 +21,6 @@ export VAGRANT_DEFAULT_PROVIDER=parallels
 
 export EDITOR="emacs -Q"
 
-# unlimited postgre history
-export HISTFILESIZE=
-export HISTSIZE=
-
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH # for bzr to work properly
 export CDPATH=:$HOME:$HOME/projects:$HOME/Documents/projects
 
@@ -42,6 +38,19 @@ alias o="open ."
 alias pd="psql -p 5432 -h localhost -d "
 alias funiq="awk '!x[$0]++' "
 
-export PATH=$PATH:~/projects/dotfiles/bin/:/usr/sbin
+export PATH=$PATH:~/projects/dotfiles/bin/:/usr/local/bin:/usr/sbin
+
+_not_inside_tmux() { [[ -z "$TMUX" ]] }
+
+ensure_tmux_is_running() {
+    if _not_inside_tmux; then
+        tat
+    fi
+
+}
+ensure_tmux_is_running
+
+alias ec="emacsclient -ta ''"
+
 # alias delete_docker_containers="docker rm $(docker ps -a -q)"
 # alias delete_docker_images="docker rmi $(docker images -q)"

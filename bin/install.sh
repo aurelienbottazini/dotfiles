@@ -2,7 +2,11 @@
 
 brew tap Goles/battery
 brew install reattach-to-user-namespace battery fzf coreutils git
-the_silver_searcher binutils findutils libtool
+the_silver_searcher binutils findutils libtool npm tidy-html5
+
+npm install -g jshint
+npm install -g coffeelint
+gem install rubocop
 
 git clone --recursive git@github.com:aurelienbottazini/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 

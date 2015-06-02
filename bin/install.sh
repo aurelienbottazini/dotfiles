@@ -29,3 +29,4 @@ ln -sf ~/projects/dotfiles/dictionaries/fr_FR.aff ~/Library/Spelling/fr_FR_aurel
 ln -sf ~/projects/dotfiles/dictionaries/fr_FR.dic ~/Library/Spelling/fr_FR_aurelien.dic
 ln -sf ~/projects/dotfiles/dictionaries/.hunspell_en_US_aurelien ~/.hunspell_en_US_aurelien
 ln -sf ~/projects/dotfiles/dictionaries/.hunspell_fr_FR_aurelien ~/.hunspell_fr_FR_aurelien
+ln -sf ~/projects/dotfiles/tmuxinator ~/.tmuxinator

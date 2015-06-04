@@ -5,7 +5,9 @@ brew install reattach-to-user-namespace battery fzf coreutils git the_silver_sea
 
 npm install -g jshint
 npm install -g coffeelint
-gem install rubocop
+npm install -g grunt-cli
+
+gem install rubocop sass
 
 git clone --recursive git@github.com:aurelienbottazini/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 

@@ -31,7 +31,7 @@ windows:
       layout: main-horizontal
       panes:
         - dcrs web bundle exec rails s
-        - dcr web job
+        - dcr web bundle exec rake jobs:work
   - console:
       layout: main-horizontal
       panes:

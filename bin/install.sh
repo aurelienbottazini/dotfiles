@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
 brew tap Goles/battery
-brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
-
+brew install caskroom/cask/brew-cask
+brew install Caskroom/cask/xquartz
+brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool wn
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli

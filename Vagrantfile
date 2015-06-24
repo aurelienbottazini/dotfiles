@@ -14,13 +14,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.network 'private_network', ip: '192.168.33.10'
 
-  config.vm.synced_folder './projects/work/UniteUs',
-                          '/UniteUs',
-                          type: 'nfs'
-
-  config.vm.synced_folder './projects/vins-scrapper',
-                          '/vins-scrapper',
-                          type: 'nfs'
+  config.vm.synced_folder './projects',
+                          '/projects', linux__nfs_options: ["no_root_squash"]
 
   # Fix busybox/udhcpc issue
   config.vm.provision :shell do |s|

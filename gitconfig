@@ -2,7 +2,7 @@
 	name = Aurélien Bottazzini
 	email = contact@aurelienbottazini.com
 [core]
-	editor = "emacs -Q"
+	editor = atom --wait
 	quotepath = false
 	excludesfile = /Users/aurelienbottazzini/.gitignore_global
 [push]

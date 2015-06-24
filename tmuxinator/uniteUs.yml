@@ -22,18 +22,18 @@ root: ~/projects/work/uniteUs
 # startup_window: logs
 
 windows:
-  - emacs:
+  - terminal:
       layout: main-horizontal
       panes:
-        - ec .
         -
+        - sleep 2 && dcr web /bin/bash
   - servers:
       layout: main-horizontal
       panes:
         - dcrs web bundle exec rails s
-        - dcr web bundle exec rake jobs:work
+        - dcr jobs
   - console:
       layout: main-horizontal
       panes:
-        - dcr web bundle exec rails c
-        -
+        - sleep 3 && dcr web bundle exec rails c
+        - sleep 4 && dcr web bundle exec rails db

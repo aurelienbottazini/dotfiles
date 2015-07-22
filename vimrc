@@ -8,15 +8,22 @@ nmap <leader>vr :e $MYVIMRC<cr>
 
 " Source (reload) your vimrc. Type space, s, o in sequence to trigger
 nmap <leader>so :source $MYVIMRC<cr>
+" save with Control s
+nmap <C-s> :w<cr>
+" easily escape from insert mode
+imap jk <esc>
+imap kj <esc>
 
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible' " base set of configurations
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'thoughtbot/vim-rspec'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
@@ -59,9 +66,27 @@ set gdefault " use the `g` flag by default.
 set virtualedit+=block
 
 set relativenumber
+set number
+set backspace=indent,eol,start  " Sane backspace behavior
+set history=1000                " Remember last 1000 commands
+set scrolloff=4                 " Keep at least 4 lines below cursor
+set hidden                      " Allow buffer change w/o saving
+set lazyredraw                  " Don't update while executing macros
 " Visual line nav, not real line nav
 " If you wrap lines, vim by default won't let you move down one line to the
 " wrapped portion. This fixes that.
 noremap j gj
 noremap k gk
 
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+let g:rspec_command = "call VtrSendCommand('dcr web bundle exec rspec {spec}')"
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+colorscheme jellybeans

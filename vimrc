@@ -24,6 +24,13 @@ Plug 'tpope/vim-commentary'
 Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'nanotech/jellybeans.vim'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'vim-ruby/vim-ruby'
+Plug 'bling/vim-airline'
+" Plug 'bling/vim-bufferline'
+Plug 'mkitt/tabline.vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
@@ -90,3 +97,16 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 colorscheme jellybeans
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+let g:ag_working_path_mode="r" " ag search from project root instead of cwd
+
+noremap <Leader>f :Ag<Space>
+:nnoremap <leader>b :buffers<CR>:buffer<Space>
+
+" set background=dark

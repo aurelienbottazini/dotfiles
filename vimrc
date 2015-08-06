@@ -31,6 +31,7 @@ Plug 'bling/vim-airline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'kchmck/vim-coffee-script'
 call plug#end()
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
@@ -42,10 +43,9 @@ let g:ctrlp_max_height = 30
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
-set tabstop=4
-
-set shiftwidth=4
-set softtabstop=4
+" set tabstop=4
+" set shiftwidth=4
+" set softtabstop=4
 set expandtab " use spaces instead of tabs.
 set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set shiftround " tab / shifting moves to closest tabstop.
@@ -97,6 +97,7 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 colorscheme jellybeans
+let g:jellybeans_use_lowcolor_black = 0
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -109,4 +110,8 @@ let g:ag_working_path_mode="r" " ag search from project root instead of cwd
 noremap <Leader>f :Ag<Space>
 :nnoremap <leader>b :buffers<CR>:buffer<Space>
 
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set encoding=utf-8
 " set background=dark

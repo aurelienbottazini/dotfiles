@@ -4,7 +4,7 @@ set nocompatible
 
 let mapleader = "\<Space>"
 " Split edit your vimrc. Type space, v, r in sequence to trigger
-nmap <leader>vr :e $MYVIMRC<cr>
+nmap <leader>vr :e `=resolve(expand("~/.vimrc"))`<cr>
 
 " Source (reload) your vimrc. Type space, s, o in sequence to trigger
 nmap <leader>so :source $MYVIMRC<cr>
@@ -21,16 +21,17 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'nanotech/jellybeans.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'vim-ruby/vim-ruby'
 Plug 'bling/vim-airline'
 " Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'kchmck/vim-coffee-script'
 call plug#end()
 
@@ -96,8 +97,11 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+set background=dark
 colorscheme jellybeans
 let g:jellybeans_use_lowcolor_black = 0
+" set background=dark
+" colorscheme solarized
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -114,4 +118,5 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 set encoding=utf-8
-" set background=dark
+
+map <leader>gl :Gbrowse!<CR>

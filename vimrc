@@ -119,4 +119,5 @@ set shiftwidth=2
 set softtabstop=2
 set encoding=utf-8
 
+map <leader>gs :Gstatus<CR>
 map <leader>gl :Gbrowse!<CR>

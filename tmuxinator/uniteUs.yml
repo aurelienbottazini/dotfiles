@@ -1,7 +1,7 @@
 # ~/.tmuxinator/tmuxinator.yml
 
 name: uniteUs
-root: ~/projects/work/uniteUs
+root: ~/projects/work/uu
 
 # Optional tmux socket
 # socket_name: foo

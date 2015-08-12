@@ -2,11 +2,10 @@
 	name = Aurélien Bottazzini
 	email = contact@aurelienbottazini.com
 [core]
-	editor = atom --wait
 	quotepath = false
 	excludesfile = /Users/aurelienbottazzini/.gitignore_global
 [push]
-	default = current
+	default = simple
 [github]
 	user = aurelienbottazzini
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
@@ -32,16 +31,7 @@
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
 	required = true
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
-[merge]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
 [mergetool]
 	prompt = false
-[diff]
-	tool = Kaleidoscope

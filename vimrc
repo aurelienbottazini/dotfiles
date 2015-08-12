@@ -33,6 +33,8 @@ Plug 'bling/vim-airline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
@@ -98,10 +100,9 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 set background=dark
-colorscheme jellybeans
-let g:jellybeans_use_lowcolor_black = 0
-" set background=dark
-" colorscheme solarized
+" colorscheme jellybeans
+" let g:jellybeans_use_lowcolor_black = 0
+colorscheme solarized
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -121,3 +122,8 @@ set encoding=utf-8
 
 map <leader>gs :Gstatus<CR>
 map <leader>gl :Gbrowse!<CR>
+map <leader>e :Explore<CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"

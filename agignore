@@ -1,3 +1,4 @@
 .git
 .atom
 .cache
+vendor/bundle

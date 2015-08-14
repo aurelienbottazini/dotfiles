@@ -35,6 +35,7 @@ Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
@@ -105,8 +106,6 @@ set background=dark
 colorscheme solarized
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline_powerline_fonts = 1
 
@@ -127,3 +126,12 @@ map <leader>e :Explore<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+command! W w " Bind W to w since sometimes I hold shift too long
+
+" Emacs-like beginning and end of line.
+imap <c-e> <c-o>$
+imap <c-a> <c-o>^
+
+" Use Silver Searcher instead of grep
+set grepprg=ag

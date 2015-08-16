@@ -134,4 +134,5 @@ imap <c-e> <c-o>$
 imap <c-a> <c-o>^
 
 " Use Silver Searcher instead of grep
-set grepprg=ag
+set grepprg=ag\ --nogroup\ --column\ $*
+set grepformat=%f:%l:%c:%m

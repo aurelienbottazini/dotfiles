@@ -2,3 +2,4 @@
 .atom
 .cache
 vendor/bundle
+log

@@ -14,9 +14,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.network 'private_network', ip: '192.168.33.10'
 
-  config.vm.synced_folder './projects',
-                          '/projects', linux__nfs_options: ["no_root_squash"]
-
+  config.vm.synced_folder './projects', '/projects', type: "rsync",
+  rsync__exclude: '.git/'
   # Fix busybox/udhcpc issue
   config.vm.provision :shell do |s|
     s.inline = <<-EOT

@@ -22,18 +22,22 @@ root: ~/projects/work/uu
 # startup_window: logs
 
 windows:
-  - terminal:
+  - vim:
       layout: main-horizontal
       panes:
-        -
-        - sleep 2 && dcr web /bin/bash
+        - vagrant ssh -c "cd UniteUs && vim ."
+        - sleep 2 && vagrant ssh -c "cd UniteUs && docker-compose run web /bin/bash"
+  - vagrant:
+      layout: main-horizontal
+      panes:
+        - vagrant ssh -c "cd UniteUs && /bin/bash"
   - servers:
       layout: main-horizontal
       panes:
-        - dcrs web bundle exec rails s
-        - dcr jobs
+        - vagrant ssh -c "cd UniteUs && docker-compose run --service-ports web bundle exec rails s"
+        - vagrant ssh -c "cd UniteUs && docker-compose run jobs"
   - console:
       layout: main-horizontal
       panes:
-        - sleep 3 && dcr web bundle exec rails c
-        - sleep 4 && dcr web bundle exec rails db
+        - sleep 3 && vagrant ssh -c "cd UniteUs && docker-compose run web bundle exec rails c"
+        - sleep 4 && vagrant ssh -c "cd UniteUs && docker-compose run web bundle exec rails db"

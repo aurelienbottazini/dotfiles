@@ -91,7 +91,7 @@ noremap k gk
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 " zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>z :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
 let g:rspec_command = "call VtrSendCommand('dcr web bundle exec rspec {spec}')"

@@ -135,3 +135,8 @@ imap <c-a> <c-o>^
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column\ $*
 set grepformat=%f:%l:%c:%m
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+

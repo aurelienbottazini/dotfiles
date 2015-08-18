@@ -25,19 +25,24 @@ windows:
   - vim:
       layout: main-horizontal
       panes:
-        - vagrant ssh -c "cd UniteUs && vim ."
-        - sleep 2 && vagrant ssh -c "cd UniteUs && docker-compose run web /bin/bash"
+        - vim . 
+        - sleep 2 && vagrant ssh -c "cd /Users/aurelienbottazini/projects/work/UniteUs && docker-compose run web /bin/bash"
   - vagrant:
       layout: main-horizontal
       panes:
-        - vagrant ssh -c "cd UniteUs && /bin/bash"
+        - vagrant ssh -c "cd /Users/aurelienbottazini/projects/work/UniteUs && /bin/bash"
   - servers:
       layout: main-horizontal
       panes:
-        - vagrant ssh -c "cd UniteUs && docker-compose run --service-ports web bundle exec rails s"
-        - vagrant ssh -c "cd UniteUs && docker-compose run jobs"
+        - vagrant ssh -c "cd /Users/aurelienbottazini/projects/work/UniteUs && docker-compose run --service-ports web bundle exec rails s"
+        - vagrant ssh -c "cd /Users/aurelienbottazini/projects/work/UniteUs && docker-compose run jobs"
   - console:
       layout: main-horizontal
       panes:
-        - sleep 3 && vagrant ssh -c "cd UniteUs && docker-compose run web bundle exec rails c"
-        - sleep 4 && vagrant ssh -c "cd UniteUs && docker-compose run web bundle exec rails db"
+        - sleep 3 && vagrant ssh -c "cd /Users/aurelienbottazini/projects/work/UniteUs && docker-compose run web bundle exec rails c"
+        - sleep 4 && vagrant ssh -c "cd /Users/aurelienbottazini/projects/work/UniteUs && docker-compose run web bundle exec rails db"
+  - rsync:
+      layout: main-horizontal
+      panes:
+        - vagrant rsync-auto
+

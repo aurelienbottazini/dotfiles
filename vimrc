@@ -152,3 +152,6 @@ map <leader>ln :lnext<cr>
 map <leader>lp :lprevious<cr>
 map <leader>lo :lopen<cr>
 map <leader>lc :lcl<cr>
+
+
+nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>

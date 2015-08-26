@@ -5,7 +5,8 @@ set nocompatible
 let mapleader = "\<Space>"
 " Split edit your vimrc. Type space, v, r in sequence to trigger
 nmap <leader>vr :e `=resolve(expand("~/.vimrc"))`<cr>
-
+nmap <leader>vs :VtrSendCommandToRunner<cr>
+nmap <leader>vc :VtrSendCommandToRunner<space>
 " Source (reload) your vimrc. Type space, s, o in sequence to trigger
 nmap <leader>so :source $MYVIMRC<cr>
 " save with Control s
@@ -123,8 +124,8 @@ map <leader>gl :Gbrowse!<CR>
 map <leader>e :Explore<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 command! W w " Bind W to w since sometimes I hold shift too long
 
@@ -135,8 +136,4 @@ imap <c-a> <c-o>^
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column\ $*
 set grepformat=%f:%l:%c:%m
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 

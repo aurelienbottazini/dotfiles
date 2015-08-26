@@ -36,6 +36,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/syntastic'
 call plug#end()
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
@@ -137,3 +138,17 @@ imap <c-a> <c-o>^
 set grepprg=ag\ --nogroup\ --column\ $*
 set grepformat=%f:%l:%c:%m
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ruby_checkers = ['rubocop']
+
+map <leader>ln :lnext<cr>
+map <leader>lp :lprevious<cr>
+map <leader>lo :lopen<cr>
+map <leader>lc :lcl<cr>

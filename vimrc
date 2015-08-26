@@ -155,3 +155,5 @@ map <leader>lc :lcl<cr>
 
 
 nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
+
+set clipboard=unnamed " copy paste within tmux

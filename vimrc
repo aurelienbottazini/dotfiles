@@ -37,7 +37,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-unimpaired'
 call plug#end()
+
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'

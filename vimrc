@@ -124,6 +124,7 @@ set encoding=utf-8
 
 map <leader>gs :Gstatus<CR>
 map <leader>gl :Gbrowse!<CR>
+map <leader>gp :Gpush<CR>
 map <leader>e :Explore<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"

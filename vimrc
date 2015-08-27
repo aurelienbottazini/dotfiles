@@ -150,12 +150,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ruby_checkers = ['rubocop']
 
-map <leader>ln :lnext<cr>
-map <leader>lp :lprevious<cr>
 map <leader>lo :lopen<cr>
 map <leader>lc :lcl<cr>
 
-
+" remove whitespace
 nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
 
 set clipboard=unnamed " copy paste within tmux

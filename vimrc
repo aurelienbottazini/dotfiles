@@ -38,6 +38,7 @@ Plug 'honza/vim-snippets'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
+Plug 'skwp/greplace.vim'
 call plug#end()
 
 
@@ -138,8 +139,10 @@ imap <c-e> <c-o>$
 imap <c-a> <c-o>^
 
 " Use Silver Searcher instead of grep
-set grepprg=ag\ --nogroup\ --column\ $*
+" set grepprg=ag\ --nogroup\ --column\ $*
+set grepprg=ag
 set grepformat=%f:%l:%c:%m
+let g:grep_cmd_opts = '--line-numbers --noheading'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -156,5 +159,7 @@ map <leader>lc :lcl<cr>
 
 " remove whitespace
 nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
+map <leader>r :Gsearch<space>
+
 
 set clipboard=unnamed " copy paste within tmux

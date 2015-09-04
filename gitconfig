@@ -17,6 +17,7 @@
         amend = commit --amend
         b = branch
         ignore-tracked = update-index --assume-unchanged
+	ctags = !.git/hooks/ctags
 [credential]
 	helper = osxkeychain
 [filter "media"]
@@ -35,3 +36,5 @@
 	prompt = false
 [mergetool]
 	prompt = false
+[init]
+	templatedir = ~/.git_template

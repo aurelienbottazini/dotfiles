@@ -27,6 +27,8 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'nanotech/jellybeans.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'bling/vim-airline'
 " Plug 'bling/vim-bufferline'
@@ -160,6 +162,11 @@ map <leader>lc :lcl<cr>
 " remove whitespace
 nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
 map <leader>r :Gsearch<space>
-
+map <leader>a :A<CR>
 
 set clipboard=unnamed " copy paste within tmux
+
+command! Path :call EchoPath()
+function! EchoPath()
+    echo join(split(&path, ","), "\n")
+endfunction

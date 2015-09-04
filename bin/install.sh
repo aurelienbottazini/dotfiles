@@ -4,11 +4,12 @@ brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool wn
-brew install htop
+brew install htop ctags
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli
 
+gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier
 
 # git clone --recursive git@github.com:aurelienbottazini/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"

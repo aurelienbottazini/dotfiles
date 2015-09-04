@@ -166,7 +166,14 @@ map <leader>a :A<CR>
 
 set clipboard=unnamed " copy paste within tmux
 
+" Easier to see current paths, with one path per line
 command! Path :call EchoPath()
 function! EchoPath()
     echo join(split(&path, ","), "\n")
 endfunction
+
+" Easier to see which tag files are used. One tag file per line
+command! TagFiles :call EchoTags()
+function! EchoTags()
+    echo join(split(&tags, ","), "\n")
+  endfunction

@@ -135,6 +135,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 command! W w " Bind W to w since sometimes I hold shift too long
+command! Q q " Bind Q to q since sometimes I hold shift too long
 
 " Emacs-like beginning and end of line.
 imap <c-e> <c-o>$
@@ -176,4 +177,6 @@ endfunction
 command! TagFiles :call EchoTags()
 function! EchoTags()
     echo join(split(&tags, ","), "\n")
-  endfunction
+endfunction
+
+set guifont=PragmataPro:h16

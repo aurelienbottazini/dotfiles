@@ -3,21 +3,26 @@
 brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
-brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool wn
+brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
 brew install htop rbenv rbenv-ctags ctags
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli
 
+export RBENV_ROOT=/usr/local/var/rbenv
+eval "$(rbenv init -)"
+   
 gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier
 
-# git clone --recursive git@github.com:aurelienbottazini/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
+  git clone --recursive git@github.com:aurelienbottazini/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-# setopt EXTENDED_GLOB
-# for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  # ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-# done
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+fi
 
 ln -sf ~/dotfiles/Vagrantfile ~/Vagrantfile
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig

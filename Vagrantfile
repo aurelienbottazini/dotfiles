@@ -8,37 +8,19 @@
 Vagrant.require_version '>= 1.6.3'
 
 Vagrant.configure(2) do |config|
-  config.vm.define 'boot2docker'
-
-  config.vm.box = 'parallels/boot2docker'
+  config.vm.box = 'boxcutter/ubuntu1504'
+  config.vm.provider 'parallels' do |v|
+    v.update_guest_tools = true
+    v.memory = 4096
+    v.cpus = 4
+  end
 
   config.vm.network 'private_network', ip: '192.168.33.10'
 
-  config.vm.synced_folder './projects', '/projects', type: "rsync",
-  rsync__exclude: '.git/'
-  # Fix busybox/udhcpc issue
-  config.vm.provision :shell do |s|
-    s.inline = <<-EOT
-      if ! grep -qs ^nameserver /etc/resolv.conf; then
-        sudo /sbin/udhcpc
-      fi
-      cat /etc/resolv.conf
-    EOT
-  end
+  config.vm.synced_folder '/Users/aurelienbottazini/projects',
+                          '/Users/aurelienbottazini/projects',
+                          type: 'rsync',
+                          rsync__exclude: ['.git/', 'vendor/bundle']
 
-  # Adjust datetime after suspend and resume
-  config.vm.provision :shell do |s|
-    s.inline = <<-EOT
-      sudo /usr/local/bin/ntpclient -s -h pool.ntp.org
-      date
-    EOT
-  end
-
-  config.vm.provision :docker do |d|
-    d.pull_images 'yungsang/busybox'
-    d.run 'simple-echo',
-          image: 'yungsang/busybox',
-          args: '-p 8080:8080',
-          cmd: 'nc -p 8080 -l -l -e echo hello world!'
-  end
+  config.vm.provision 'shell', privileged: false, path: 'Vagrantfile_shell_provision.sh'
 end

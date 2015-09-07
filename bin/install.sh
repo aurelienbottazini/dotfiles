@@ -25,6 +25,7 @@ if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
 fi
 
 ln -sf ~/dotfiles/Vagrantfile ~/Vagrantfile
+ln -sf ~/dotfiles/Vagrantfile_shell_provision.sh ~/Vagrantfile_shell_provision.sh
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/gitignore_global ~/.gitignore_global
 ln -sf ~/dotfiles/screenrc ~/.screenrc

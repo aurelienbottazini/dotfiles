@@ -180,3 +180,6 @@ function! EchoTags()
 endfunction
 
 set guifont=PragmataPro:h16
+set cursorline
+set cursorcolumn
+set colorcolumn=80

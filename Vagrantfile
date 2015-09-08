@@ -8,7 +8,7 @@
 Vagrant.require_version '>= 1.6.3'
 
 Vagrant.configure(2) do |config|
-  config.vm.box = 'boxcutter/ubuntu1504'
+  config.vm.box = 'parallels/ubuntu-14.04'
 
   config.vm.provider 'parallels' do |v|
     v.update_guest_tools = true

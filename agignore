@@ -3,3 +3,11 @@
 .cache
 vendor/bundle
 log
+.gem
+.local
+.docker
+.dropbox
+.npm
+.emacs.d/elpa/
+.Trash
+.vagrant.d

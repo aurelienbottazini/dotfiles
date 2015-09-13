@@ -3,7 +3,7 @@
 	email = contact@aurelienbottazini.com
 [core]
 	quotepath = false
-	excludesfile = /Users/aurelienbottazzini/.gitignore_global
+	excludesfile = /Users/aurelienbottazini/.gitignore_global
 [push]
 	default = simple
 [github]

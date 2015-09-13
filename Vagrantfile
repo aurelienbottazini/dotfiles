@@ -21,7 +21,11 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder '/Users/aurelienbottazini/projects',
                           '/Users/aurelienbottazini/projects',
                           type: 'rsync',
-                          rsync__exclude: ['.git/', 'vendor/bundle']
+                          rsync__exclude: ['.git/',
+                                           'vendor/bundle',
+                                           'vendor/ruby',
+                                           'public/system',
+                                           'tmp']
 
   config.vm.provision 'shell', privileged: false, path: 'Vagrantfile_shell_provision.sh'
 end

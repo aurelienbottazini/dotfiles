@@ -2,3 +2,4 @@
 .DS_Store
 config/projections.json
 tmuxinator.yml
+.tags*

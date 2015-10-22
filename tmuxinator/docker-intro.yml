@@ -1,0 +1,18 @@
+name: dockerIntro
+root: ~/projects/work/introduction-to-docker
+
+windows:
+  - docker-clients:
+      layout: main-horizontal
+      panes:
+        - 
+        -
+  - vim:
+      layout: main-horizontal
+      panes:
+        - vim .
+  - rsync:
+      layout: main-horizontal
+      panes:
+        - vagrant rsync-auto
+

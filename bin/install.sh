@@ -5,15 +5,18 @@ brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
 brew install htop rbenv rbenv-ctags ctags
+brew install unison
+brew cask install launchrocket
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli
+npm -g install instant-markdown-d
 
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
-   
+
 gem install gem-ctags
-gem install rubocop sass ruby-beautify htmlbeautifier
+gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman
 
 if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
   git clone --recursive git@github.com:aurelienbottazini/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"

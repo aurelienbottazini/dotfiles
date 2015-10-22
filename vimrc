@@ -41,9 +41,19 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'skwp/greplace.vim'
+Plug 'suan/vim-instant-markdown'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'bronson/vim-visual-star-search'
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 
+" Use Silver Searcher instead of grep
+set grepprg=ag\ --nogroup\ --column
+" set grepprg=ag
+set grepformat=%f:%l:%c:%m
+let g:grep_cmd_opts = '--line-numbers --noheading'
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 let g:ctrlp_use_caching = 0
@@ -77,7 +87,7 @@ set smartcase " If there are uppercase letters, become case-sensitive.
 set incsearch " live incremental searching
 set showmatch " live match highlighting
 set hlsearch " highlight matches
-set gdefault " use the `g` flag by default.
+" set gdefault " use the `g` flag by default.
 
 " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
@@ -110,6 +120,7 @@ set background=dark
 " colorscheme jellybeans
 " let g:jellybeans_use_lowcolor_black = 0
 colorscheme solarized
+" let g:solarized_termcolors=256
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
@@ -141,16 +152,11 @@ command! Q q " Bind Q to q since sometimes I hold shift too long
 imap <c-e> <c-o>$
 imap <c-a> <c-o>^
 
-" Use Silver Searcher instead of grep
-" set grepprg=ag\ --nogroup\ --column\ $*
-set grepprg=ag
-set grepformat=%f:%l:%c:%m
-let g:grep_cmd_opts = '--line-numbers --noheading'
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_enable_signs = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
@@ -164,6 +170,7 @@ map <leader>lc :lcl<cr>
 nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
 map <leader>r :Gsearch<space>
 map <leader>a :A<CR>
+map <leader>d :redraw!<cr>
 
 set clipboard=unnamed " copy paste within tmux
 
@@ -179,7 +186,7 @@ function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
 
-set guifont=PragmataPro:h16
+set guifont=PragmataPro:h14
 set cursorline
 set cursorcolumn
 set colorcolumn=80

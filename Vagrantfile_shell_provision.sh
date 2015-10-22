@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if ! (dpkg --get-selections | grep software-properties-common) &> /dev/null; then
+if ! type "add-apt-repository" &> /dev/null; then
   # Make sure add-apt-repository command is available
   sudo apt-get install -y software-properties-common
 fi
@@ -34,7 +34,7 @@ if ! type "docker" &> /dev/null; then
   sudo systemctl daemon-reload
   sudo systemctl restart docker
   # for docker using upstart
-  sudo sed -i.bak 's/#DOCKER_OPTS=.*/DOCKER_OPTS="-H 0.0.0.0:2375 -H unix:///var/run/docker.sock"/' /etc/default/docker
+  sudo sed -i.bak 's/#DOCKER_OPTS=.*/DOCKER_OPTS="-H 0.0.0.0:2375 -H unix:\/\/\/var\/run\/docker.sock"/' /etc/default/docker
   sudo restart docker
 fi
 
@@ -53,3 +53,11 @@ if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
   done
 fi
 
+if ! type "unison" &> /dev/null; then
+  sudo add-apt-repository -y ppa:eugenesan/ppa
+  sudo apt-get update
+  sudo apt-get install unison
+
+  sudo mkdir /Users
+  sudo chown vagrant:vagrant /Users
+fi

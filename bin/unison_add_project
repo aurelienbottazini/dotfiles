@@ -17,8 +17,8 @@ ignore = Name {.git,.vagrant}
 prefer = .
 repeat = 2
 terse = true
-dontchmod = true
-perms = 0
+dontchmod = false
+perms = 0o1777
 sshargs = -F $ssh_config
 "
 

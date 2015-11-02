@@ -18,15 +18,15 @@ Vagrant.configure(2) do |config|
 
   config.vm.network 'private_network', ip: '192.168.33.10'
 
-  config.vm.synced_folder '.', '/vagrant', disabled: true
-  # config.vm.synced_folder '/Users/aurelienbottazini/projects',
-  #                         '/Users/aurelienbottazini/projects',
-  #                         type: 'rsync',
-  #                         rsync__exclude: ['.git/',
-  #                                          'vendor/bundle',
-  #                                          'vendor/ruby',
-  #                                          'public/system',
-  #                                          'tmp']
-  #
+  config.vm.synced_folder '.', '/vagrant', disabled: false
+  config.vm.synced_folder '/Users/aurelienbottazini/projects',
+                          '/Users/aurelienbottazini/projects',
+                          type: 'rsync',
+                          rsync__exclude: ['.git/',
+                                           'vendor/bundle',
+                                           'vendor/ruby',
+                                           'public/system',
+                                           'log',
+                                           'tmp']
   config.vm.provision 'shell', privileged: false, path: 'Vagrantfile_shell_provision.sh'
 end

@@ -22,10 +22,10 @@ root: ~/projects/work/UniteUs
 # startup_window: logs
 
 windows:
-  - docker shell:
+  - vim:
       layout: main-horizontal
       panes:
-        - sleep 1 && docker-compose run web /bin/bash
+        - vim .
         - sleep 2 && docker-compose run test /bin/bash
   - vagrant:
       layout: main-horizontal

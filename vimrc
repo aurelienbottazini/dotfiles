@@ -25,13 +25,12 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'nanotech/jellybeans.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'bling/vim-airline'
-" Plug 'bling/vim-bufferline'
+Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
@@ -116,9 +115,8 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+map <Leader><Leader> :VtrSendCommandToRunner<CR>
 set background=dark
-" colorscheme jellybeans
-" let g:jellybeans_use_lowcolor_black = 0
 colorscheme solarized
 " let g:solarized_termcolors=256
 
@@ -127,7 +125,6 @@ let g:airline#extensions#bufferline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
-
 noremap <Leader>f :Ag<Space>
 :nnoremap <leader>b :buffers<CR>:buffer<Space>
 
@@ -190,3 +187,5 @@ set guifont=PragmataPro:h14
 set cursorline
 set cursorcolumn
 set colorcolumn=80
+
+hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow

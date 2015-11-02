@@ -12,7 +12,7 @@ vagrant ssh -c "mkdir -p $(pwd)"
 profile="
 root = .
 root = ssh://default//$(pwd)/
-ignore = Name {.git,.vagrant}
+ignore = Name {.git,.vagrant,.DS_Store}
 
 prefer = .
 repeat = 2

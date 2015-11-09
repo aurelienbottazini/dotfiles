@@ -27,6 +27,11 @@ if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
   done
 fi
 
+# code climate
+curl -SLo "jet-0.11.5.tar.gz" "https://s3.amazonaws.com/codeship-jet-releases/0.11.5/jet-darwin_amd64_0.11.5.tar.gz"
+tar -xC /usr/local/bin/ -f jet-0.11.5.tar.gz
+chmod u+x /usr/local/bin/jet
+
 ln -sf ~/dotfiles/Vagrantfile ~/Vagrantfile
 ln -sf ~/dotfiles/Vagrantfile_shell_provision.sh ~/Vagrantfile_shell_provision.sh
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig

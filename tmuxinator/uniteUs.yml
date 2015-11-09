@@ -26,7 +26,7 @@ windows:
       layout: main-horizontal
       panes:
         - vim .
-        - sleep 2 && docker-compose run test /bin/bash
+        - sleep 1 && docker-compose run test /bin/bash
   - vagrant:
       layout: main-horizontal
       panes:
@@ -39,9 +39,9 @@ windows:
   - console:
       layout: main-horizontal
       panes:
-        - sleep 3 && docker-compose run web bundle exec ./script/rails c
-        - sleep 4 && docker-compose run web bundle exec ./script/rails db
-  - unison:
+        - sleep 2 && docker-compose run web bundle exec ./script/rails c
+        - sleep 3 && docker-compose run web bundle exec ./script/rails db
+  - sync:
       layout: main-horizontal
       panes:
-        - unison UniteUs
+        - vagrant rsync-auto 

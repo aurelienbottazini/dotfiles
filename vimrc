@@ -5,8 +5,8 @@ set nocompatible
 let mapleader = "\<Space>"
 " Split edit your vimrc. Type space, v, r in sequence to trigger
 nmap <leader>vr :e `=resolve(expand("~/.vimrc"))`<cr>
-nmap <leader>vs :VtrSendCommandToRunner<cr>
-nmap <leader>vc :VtrSendCommandToRunner<space>
+nmap <leader>c :VtrSendCommandToRunner<space>
+map <Leader><Leader> :VtrSendCommandToRunner<CR>
 " Source (reload) your vimrc. Type space, s, o in sequence to trigger
 nmap <leader>so :source $MYVIMRC<cr>
 " save with Control s
@@ -115,7 +115,6 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-map <Leader><Leader> :VtrSendCommandToRunner<CR>
 set background=dark
 colorscheme solarized
 " let g:solarized_termcolors=256
@@ -139,6 +138,7 @@ map <leader>gp :Gpush<CR>
 map <leader>e :Explore<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsListSnippets="<c-q>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
@@ -164,7 +164,9 @@ map <leader>lo :lopen<cr>
 map <leader>lc :lcl<cr>
 
 " remove whitespace
-nmap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
+nmap <leader>ww :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>:w<CR>
+" save as sudo user
+nmap <leader>ws :w !sudo tee % > /dev/null
 map <leader>r :Gsearch<space>
 map <leader>a :A<CR>
 map <leader>d :redraw!<cr>

@@ -61,9 +61,3 @@ if ! type "unison" &> /dev/null; then
   sudo mkdir /Users
   sudo chown vagrant:vagrant /Users
 fi
-
-if ! type "btsync" &> /dev/null; then
-  sudo add-apt-repository -y ppa:tuxpoldo/btsync
-  sudo apt-get update
-  sudo apt-get install -y btsync
-fi

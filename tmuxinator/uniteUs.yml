@@ -19,14 +19,15 @@ root: ~/projects/work/UniteUs
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: logs
+startup_window: vim
 
 windows:
   - vim:
-      layout: main-horizontal
+    # tip: get the layout configuration with list-windows
+      layout: 5e03,272x66,0,0[272x49,0,0,66,272x16,0,50,71]
       panes:
         - vim .
-        - sleep 1 && docker-compose run test /bin/bash
+        - sleep 1 && dcr test /bin/bash
   - vagrant:
       layout: main-horizontal
       panes:
@@ -34,13 +35,13 @@ windows:
   - servers:
       layout: main-horizontal
       panes:
-        - docker-compose run --service-ports web bundle exec ./script/rails s
-        - docker-compose run jobs
+        - dcrs web bundle exec ./script/rails s
+        - dcr jobs
   - console:
       layout: main-horizontal
       panes:
-        - sleep 2 && docker-compose run web bundle exec ./script/rails c
-        - sleep 3 && docker-compose run web bundle exec ./script/rails db
+        - sleep 2 && dcr web bundle exec ./script/rails c
+        - sleep 3 && dcr web bundle exec ./script/rails db
   - sync:
       layout: main-horizontal
       panes:

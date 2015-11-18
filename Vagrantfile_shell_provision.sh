@@ -53,11 +53,11 @@ if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
   done
 fi
 
-if ! type "unison" &> /dev/null; then
-  sudo add-apt-repository -y ppa:eugenesan/ppa
-  sudo apt-get update
-  sudo apt-get install unison
+# if ! type "unison" &> /dev/null; then
+#   sudo add-apt-repository -y ppa:eugenesan/ppa
+#   sudo apt-get update
+#   sudo apt-get install unison
 
-  sudo mkdir /Users
-  sudo chown vagrant:vagrant /Users
-fi
+#   sudo mkdir /Users
+#   sudo chown vagrant:vagrant /Users
+# fi

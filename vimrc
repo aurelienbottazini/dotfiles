@@ -6,7 +6,7 @@ let mapleader = "\<Space>"
 " Split edit your vimrc. Type space, v, r in sequence to trigger
 nmap <leader>vr :e `=resolve(expand("~/.vimrc"))`<cr>
 nmap <leader>c :VtrSendCommandToRunner<space>
-map <Leader><Leader> :VtrSendCommandToRunner<CR>
+map <Leader>x :VtrSendCommandToRunner<CR>
 " Source (reload) your vimrc. Type space, s, o in sequence to trigger
 nmap <leader>so :source $MYVIMRC<cr>
 " save with Control s
@@ -16,38 +16,39 @@ imap jk <esc>
 imap kj <esc>
 
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim' " quickly find files
 Plug 'tpope/vim-sensible' " base set of configurations
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround' " s to surround
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat' " better . support for plugins
+Plug 'tpope/vim-commentary' " gc to comment
+Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'thoughtbot/vim-rspec'
-Plug 'christoomey/vim-tmux-runner'
-Plug 'altercation/vim-colors-solarized'
-Plug 'tpope/vim-rake'
+Plug 'christoomey/vim-tmux-runner' " send commands from vim to tmux
+Plug 'altercation/vim-colors-solarized' " color theme
+Plug 'tpope/vim-rake' " use rails.vim commands in non rails projects
 Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
-Plug 'bling/vim-airline'
+Plug 'bling/vim-airline' " better status and tab line
 Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-unimpaired'
-Plug 'skwp/greplace.vim'
+Plug 'honza/vim-snippets' " ultisnips snippets
+Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
+Plug 'scrooloose/syntastic' " code linter
+Plug 'tpope/vim-unimpaired' " [ ] mappings
 Plug 'suan/vim-instant-markdown'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'bronson/vim-visual-star-search'
-Plug 'mattn/emmet-vim'
+Plug 'mxw/vim-jsx' " react jsx
+Plug 'bronson/vim-visual-star-search' " seach current selection with *
+Plug 'mattn/emmet-vim' " c-y, to zen code
+Plug 'vim-scripts/LanguageTool'
+Plug 'easymotion/vim-easymotion' " <leader><leader>s (or others) to jump
 call plug#end()
 
-
+let g:user_emmet_mode='inv'
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column
 " set grepprg=ag
@@ -117,11 +118,13 @@ map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 set background=dark
 colorscheme solarized
-" let g:solarized_termcolors=256
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#bufferline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
 noremap <Leader>f :Ag<Space>
@@ -191,3 +194,8 @@ set cursorcolumn
 set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
+hi CursorLine term=None,underline cterm=NONE,underline gui=NONE,underline
+
+map <F5> :setlocal spell!<CR>
+map <F6> :LanguageToolCheck<CR>
+map <F7> :LanguageToolClear<CR>

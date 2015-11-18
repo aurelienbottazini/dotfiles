@@ -123,7 +123,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-
+let g:airline_detect_whitespace=1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
@@ -199,3 +199,8 @@ hi CursorLine term=None,underline cterm=NONE,underline gui=NONE,underline
 map <F5> :setlocal spell!<CR>
 map <F6> :LanguageToolCheck<CR>
 map <F7> :LanguageToolClear<CR>
+
+nmap <leader>i :set list!<CR>
+set listchars=tab:▸\ ,eol:¬,space:⚀
+highlight NonText ctermfg=10 ctermbg=NONE
+highlight SpecialKey ctermfg=10 ctermbg=NONE

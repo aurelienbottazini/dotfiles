@@ -194,7 +194,7 @@ function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
 
-set guifont=PragmataPro:h14
+set guifont=Monoid-Retina:h12
 set cursorline
 set cursorcolumn
 set colorcolumn=80
@@ -209,5 +209,5 @@ map <F7> :LanguageToolClear<CR>
 
 nmap <leader>i :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:∙
-highlight NonText ctermfg=10 ctermbg=NONE
-highlight SpecialKey ctermfg=10 ctermbg=NONE
+highlight NonText ctermbg=NONE ctermfg=10
+highlight SpecialKey ctermbg=NONE ctermfg=10

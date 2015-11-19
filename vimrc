@@ -34,8 +34,8 @@ Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' " ultisnips snippets
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets' " ultisnips snippets
 Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
 Plug 'scrooloose/syntastic' " code linter
 Plug 'tpope/vim-unimpaired' " [ ] mappings
@@ -117,6 +117,12 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 set background=dark
+
+let g:solarized_termcolors = 16
+let g:solarized_termtrans=1
+let g:solarized_underline=1
+let g:solarized_visibility='high'
+let g:solarized_hitrail = 1
 colorscheme solarized
 
 let g:airline#extensions#tabline#enabled = 1
@@ -156,7 +162,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_enable_signs = 0
+let g:syntastic_enable_signs = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
@@ -194,13 +200,14 @@ set cursorcolumn
 set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
-hi CursorLine term=None,underline cterm=NONE,underline gui=NONE,underline
+hi clear CursorLine
+hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
 
 map <F5> :setlocal spell!<CR>
 map <F6> :LanguageToolCheck<CR>
 map <F7> :LanguageToolClear<CR>
 
 nmap <leader>i :set list!<CR>
-set listchars=tab:▸\ ,eol:¬,space:⚀
+set listchars=tab:▸\ ,eol:¬,space:∙
 highlight NonText ctermfg=10 ctermbg=NONE
 highlight SpecialKey ctermfg=10 ctermbg=NONE

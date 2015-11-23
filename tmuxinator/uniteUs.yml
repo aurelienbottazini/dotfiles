@@ -28,21 +28,17 @@ windows:
       panes:
         - vim .
         - sleep 1 && dcr test /bin/bash
-  - vagrant:
-      layout: main-horizontal
-      panes:
-        - vagrant ssh
-  - servers:
-      layout: main-horizontal
-      panes:
-        - dcrs web bundle exec ./script/rails s
-        - dcr jobs
   - console:
       layout: main-horizontal
       panes:
-        - sleep 2 && dcr web bundle exec ./script/rails c
-        - sleep 3 && dcr web bundle exec ./script/rails db
+        - sleep 2 && dcr web bundle exec rails c
+        - sleep 3 && dcr web bundle exec rails db
+  - servers:
+      layout: main-horizontal
+      panes:
+        - dcrs web bundle exec rails s
+        - dcr jobs
   - sync:
       layout: main-horizontal
       panes:
-        - vagrant rsync-auto 
+        - watch_projects

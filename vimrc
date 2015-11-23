@@ -119,7 +119,7 @@ map <Leader>a :call RunAllSpecs()<CR>
 set background=dark
 
 let g:solarized_termcolors = 16
-let g:solarized_termtrans=1
+let g:solarized_termtrans=0
 let g:solarized_underline=1
 let g:solarized_visibility='high'
 let g:solarized_hitrail = 1
@@ -201,7 +201,7 @@ set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
 hi clear CursorLine
-hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
+hi CursorLine term=NONE ctermbg=7 cterm=underline gui=underline
 
 map <F5> :setlocal spell!<CR>
 map <F6> :LanguageToolCheck<CR>

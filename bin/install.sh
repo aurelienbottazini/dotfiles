@@ -51,3 +51,8 @@ ln -sf ~/dotfiles/dictionaries/.hunspell_fr_FR_aurelien ~/.hunspell_fr_FR_aureli
 ln -sf ~/dotfiles/tmuxinator ~/.tmuxinator
 ln -sf ~/dotfiles/agignore ~/.agignore
 ln -sf ~/dotfiles/vimrc ~/.vimrc
+
+echo "Set a blazingly fast keyboard repeat rate"
+defaults write NSGlobalDomain KeyRepeat -int 0.02
+echo "Set a shorter Delay until key repeat"
+defaults write NSGlobalDomain InitialKeyRepeat -int 12

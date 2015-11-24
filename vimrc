@@ -34,8 +34,8 @@ Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets' " ultisnips snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets' " ultisnips snippets
 Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
 Plug 'scrooloose/syntastic' " code linter
 Plug 'tpope/vim-unimpaired' " [ ] mappings
@@ -89,11 +89,11 @@ set showmatch " live match highlighting
 set hlsearch " highlight matches
 " set gdefault " use the `g` flag by default.
 
-" allow the cursor to go anywhere in visual block mode.
+" " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 
-set relativenumber
-set number
+" set relativenumber
+" set number
 set backspace=indent,eol,start  " Sane backspace behavior
 set history=1000                " Remember last 1000 commands
 set scrolloff=4                 " Keep at least 4 lines below cursor
@@ -116,8 +116,8 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-set background=dark
 
+set background=dark
 let g:solarized_termcolors = 16
 let g:solarized_termtrans=0
 let g:solarized_underline=1
@@ -201,7 +201,7 @@ set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
 hi clear CursorLine
-hi CursorLine term=NONE ctermbg=7 cterm=underline gui=underline
+hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
 
 map <F5> :setlocal spell!<CR>
 map <F6> :LanguageToolCheck<CR>

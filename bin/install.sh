@@ -3,11 +3,16 @@
 brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
+<<<<<<< Updated upstream
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
 brew install htop rbenv rbenv-ctags ctags
 brew install unison
 brew cask install launchrocket
 brew install tree
+=======
+brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool wn
+brew install htop rbenv rbenv-ctags ctags
+>>>>>>> Stashed changes
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli

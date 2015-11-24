@@ -192,6 +192,7 @@ endfunction
 command! TagFiles :call EchoTags()
 function! EchoTags()
     echo join(split(&tags, ","), "\n")
+<<<<<<< Updated upstream
 endfunction
 
 set guifont=Monoid-Retina:h12
@@ -211,3 +212,6 @@ nmap <leader>i :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:∙
 highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
+=======
+  endfunction
+>>>>>>> Stashed changes

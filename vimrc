@@ -22,7 +22,6 @@ Plug 'tpope/vim-surround' " s to surround
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat' " better . support for plugins
 Plug 'tpope/vim-commentary' " gc to comment
-Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner' " send commands from vim to tmux
 Plug 'altercation/vim-colors-solarized' " color theme
@@ -34,21 +33,13 @@ Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' " ultisnips snippets
 Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
-Plug 'scrooloose/syntastic' " code linter
 Plug 'tpope/vim-unimpaired' " [ ] mappings
-Plug 'suan/vim-instant-markdown'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
-Plug 'mattn/emmet-vim' " c-y, to zen code
-Plug 'vim-scripts/LanguageTool'
-Plug 'easymotion/vim-easymotion' " <leader><leader>s (or others) to jump
 call plug#end()
 
-let g:user_emmet_mode='inv'
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column
 " set grepprg=ag
@@ -141,15 +132,7 @@ set shiftwidth=2
 set softtabstop=2
 set encoding=utf-8
 
-map <leader>gs :Gstatus<CR>
-map <leader>gl :Gbrowse!<CR>
-map <leader>gp :Gpush<CR>
 map <leader>e :Explore<CR>
-
-let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsListSnippets="<c-q>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 command! W w " Bind W to w since sometimes I hold shift too long
 command! Q q " Bind Q to q since sometimes I hold shift too long
@@ -161,13 +144,6 @@ imap <c-a> <c-o>^
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_enable_signs = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_ruby_checkers = ['rubocop']
 
 map <leader>lo :lopen<cr>
 map <leader>lc :lcl<cr>
@@ -192,7 +168,6 @@ endfunction
 command! TagFiles :call EchoTags()
 function! EchoTags()
     echo join(split(&tags, ","), "\n")
-<<<<<<< Updated upstream
 endfunction
 
 set guifont=Monoid-Retina:h12
@@ -204,14 +179,7 @@ hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
 hi clear CursorLine
 hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
 
-map <F5> :setlocal spell!<CR>
-map <F6> :LanguageToolCheck<CR>
-map <F7> :LanguageToolClear<CR>
-
 nmap <leader>i :set list!<CR>
 set listchars=tab:▸\ ,eol:¬,space:∙
 highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
-=======
-  endfunction
->>>>>>> Stashed changes

@@ -22,11 +22,11 @@ root: ~/projects/work/UniteUs
 startup_window: vim
 
 windows:
-  - vim:
+  - emacs:
     # tip: get the layout configuration with list-windows
       layout: 5e03,272x66,0,0[272x49,0,0,66,272x16,0,50,71]
       panes:
-        - vim .
+        - emacs .
         - sleep 1 && dcr test /bin/bash
   - console:
       layout: main-horizontal

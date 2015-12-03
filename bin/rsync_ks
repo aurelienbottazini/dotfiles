@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+rsync -rhvlz --exclude=vendor --exclude=public/uploads --exclude=tmp --exclude=.git --exclude=log/ --exclude=Gemfile.lock --exclude=db/structure.sql --delete /Users/aurelienbottazini/projects/ ks:/Users/aurelienbottazini/projects/

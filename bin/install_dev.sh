@@ -3,20 +3,17 @@
 brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
-<<<<<<< Updated upstream
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
 brew install htop rbenv rbenv-ctags ctags
+brew install global --with-exuberant-ctags --with-pygments
 brew install unison
 brew cask install launchrocket
 brew install tree
-=======
-brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool wn
-brew install htop rbenv rbenv-ctags ctags
->>>>>>> Stashed changes
+brew install node
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli
-npm -g install instant-markdown-d
+npm install -g instant-markdown-d
 
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
@@ -32,11 +29,6 @@ if ! [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
   done
 fi
-
-# code climate
-curl -SLo "jet-0.11.5.tar.gz" "https://s3.amazonaws.com/codeship-jet-releases/0.11.5/jet-darwin_amd64_0.11.5.tar.gz"
-tar -xC /usr/local/bin/ -f jet-0.11.5.tar.gz
-chmod u+x /usr/local/bin/jet
 
 ln -sf ~/dotfiles/Vagrantfile ~/Vagrantfile
 ln -sf ~/dotfiles/Vagrantfile_shell_provision.sh ~/Vagrantfile_shell_provision.sh
@@ -57,8 +49,9 @@ ln -sf ~/dotfiles/dictionaries/.hunspell_fr_FR_aurelien ~/.hunspell_fr_FR_aureli
 ln -sf ~/dotfiles/tmuxinator ~/.tmuxinator
 ln -sf ~/dotfiles/agignore ~/.agignore
 ln -sf ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/git_template ~/.git_template
 
-echo "Set a blazingly fast keyboard repeat rate"
-defaults write NSGlobalDomain KeyRepeat -int 0.02
-echo "Set a shorter Delay until key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
+# echo "Set a blazingly fast keyboard repeat rate"
+# defaults write NSGlobalDomain KeyRepeat -int 0.02
+# echo "Set a shorter Delay until key repeat"
+# defaults write NSGlobalDomain InitialKeyRepeat -int 12

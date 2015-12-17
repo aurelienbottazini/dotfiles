@@ -3,3 +3,6 @@
 config/projections.json
 tmuxinator.yml
 .tags*
+GPATH
+GRTAGS
+GTAGS

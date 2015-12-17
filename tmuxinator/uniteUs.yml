@@ -22,17 +22,15 @@ root: ~/projects/work/UniteUs
 startup_window: vim
 
 windows:
-  - emacs:
+  - tests:
     # tip: get the layout configuration with list-windows
-      layout: 5e03,272x66,0,0[272x49,0,0,66,272x16,0,50,71]
       panes:
-        - ec .
-        - sleep 5 && dcr test /bin/bash
+        - sleep 2 && dcrs test /bin/bash
   - console:
       layout: main-horizontal
       panes:
-        - sleep 6 && dcr web bundle exec rails c
-        - sleep 7 && dcr web bundle exec rails db
+        - sleep 4 && dcr web bundle exec rails c
+        - sleep 6 && dcr web bundle exec rails db
   - servers:
       layout: main-horizontal
       panes:

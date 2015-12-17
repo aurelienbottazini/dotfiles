@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+rsync -rhvlz ks:$(pwd)/Gemfile.lock .

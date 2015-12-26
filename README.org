@@ -1,15 +1,8 @@
-My zsh, screenrc, rspec, git,autotest... config files
+All my Dotfiles managed with gnu stow
 
 To test if your terminal uses 256 colors:
 $ perl dotfiles/bin/colortest -w
 
-Notes:
-- two rubygems are required for autotest: autotest-growl and
-  autotest-fsevent. You also need to install growl and growlnotify to
-  have a working autotest on your machine.
-
 Usage:
 
-- Checkout [[https://github.com/sorin-ionescu/prezto][Presto]]
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 - Run install.sh

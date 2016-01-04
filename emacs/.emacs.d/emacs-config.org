@@ -30,6 +30,7 @@
 #+END_SRC
 
 * text-mode
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook
             (lambda ()
@@ -177,12 +178,17 @@
 
 * org-mode
 
-  Making sure I have the latest /Emacs/.
+Making sure I have the latest /Emacs/.
 #+BEGIN_SRC emacs-lisp
   (require-package 'org)
+  (require-package 'org-bullets)
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (set-display-table-slot standard-display-table
+                          'selective-display (string-to-vector " ･･･ "))
 #+END_SRC
 
 #+RESULTS:
+:  ･･･
 
 ** Settings
    Auto-correction, automatic paragraph.
@@ -190,7 +196,12 @@
   ;;(add-hook 'org-mode-hook '(lambda ()
                               ;;(turn-on-flyspell)
     ;;                          (writegood-mode t)))
+  (setq org-indent-mode t)
+  (setq org-indent-indentation-per-level 2)
 #+END_SRC
+
+#+RESULTS:
+: 2
 
    Automatically break line at a previous space, in insertion of text
 #+BEGIN_SRC emacs-lisp
@@ -239,10 +250,11 @@
 : 2
 
 ** Org babel
-    +[[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][ List of Code block arguments]]
-    + [[http://orgmode.org/worg/org-contrib/babel/header-args.html][Header Args]]
 
-    I don’t need confirmation before evaluating code blocks.
++[[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][ List of Code block arguments]]
++ [[http://orgmode.org/worg/org-contrib/babel/header-args.html][Header Args]]
+
+I don’t need confirmation before evaluating code blocks.
 #+BEGIN_SRC emacs-lisp
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
@@ -1007,15 +1019,15 @@ Whenever an external process changes a file underneath emacs, and there
   (require-package 'synosaurus)
 #+end_src
 * IRC
-  I use ~erc~ to chat on IRC.
+I use ~erc~ to chat on IRC.
 
-  Setting nickname and default IRC server.
+Setting nickname and default IRC server.
 #+BEGIN_SRC emacs-lisp
   (setq erc-nick "Auray")
   (setq erc-server "irc.freenode.org")
 #+END_SRC
 
-  Hiding some IRC messages.
+Hiding some IRC messages.
 #+BEGIN_SRC emacs-lisp
   (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
 #+END_SRC
@@ -1118,10 +1130,12 @@ Whenever an external process changes a file underneath emacs, and there
      (~|~ inside org-tables)
      http://orgmode.org/worg/org-symbols.html
    + Good tutorial :: http://doc.norang.ca/org-mode.html
+   + Markup: http://orgmode.org/manual/Structural-markup-elements.html
    + To add tags ~C-c C-c~ or ~C-c C-q~
    + ~C-c C-w~ org refile
    + archive with ~C-c $~
-   + M-S-enter insert heading
+   + M-C-enter insert heading after current one
+   + M-S-enter insert heading before current one
    + ~C-c C-s~ to schedule
 ** Multiple Selections
    You can use Multiple cursors by selecting a region and
@@ -1166,6 +1180,18 @@ Whenever an external process changes a file underneath emacs, and there
 
   C-n completes in insert mode with hippie expand.
   ~M-/~ for hippie expand
+** Cool buffers
+*** follow-mode
+*** indirect buffer
+*** Palimpset mode
+   C-c C-r send selected text to the bottom
+   C-c C-q send selected text to trash file
+#+begin_src emacs-lisp
+  (require-package 'palimpsest)
+#+end_src
+
+#+RESULTS:
+| [cl-struct-package-desc palimpsest (20130731 821) Various deletion strategies when editing nil single melpa nil nil nil] |
 
 * Emoji
 #+begin_src emacs-lisp

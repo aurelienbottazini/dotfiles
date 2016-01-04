@@ -143,8 +143,12 @@
 : copy-from-osx
 
 * Tabs
- tabs = frames or/and window configurations
+
+  Tabs can be reproduced as frames or window configurations. You can
+  use registers to save windows configurations.
+
 * Encoding
+
    I want UTF-8 everywhere.
 #+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
@@ -1170,6 +1174,8 @@ Hiding some IRC messages.
    ~c-t~ to switch between helm window configurations
    ~c-z~ to perform/unperform first action for helm entry
    Use ~tab~ to see all actions possible on an entry
+
+   ~projectile-invalidate-cache~ to have a brand new C-p
 
    First thing to do when Emacs starts: ~helm-projectile-switch-project~
 ** Autocompletion

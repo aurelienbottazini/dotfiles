@@ -439,63 +439,63 @@ Whenever an external process changes a file underneath emacs, and there
 #+END_SRC
 
 * Visual interface
-   No bell
-   #+BEGIN_SRC emacs-lisp
+  No bell
+  #+BEGIN_SRC emacs-lisp
        (setq ring-bell-function 'ignore)
-   #+END_SRC
+  #+END_SRC
 
-   #+RESULTS:
+  #+RESULTS:
    : ignore
 
-   I want to hide extra bars. I like my Emacs clean. I don't use the
-   mouse and I want to do everything through the keyboard
-   #+BEGIN_SRC emacs-lisp
+  I want to hide extra bars. I like my Emacs clean. I don't use the
+  mouse and I want to do everything through the keyboard
+  #+BEGIN_SRC emacs-lisp
      (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
      (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
      (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-   #+END_SRC
+  #+END_SRC
 
-   #+RESULTS:
+  #+RESULTS:
 
-   #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
      (when (string-match "apple-darwin" system-configuration)
        ;; on mac, there's always a menu bar drown, don't have it empty
        (when window-system
          (menu-bar-mode 1)))
-   #+END_SRC
+  #+END_SRC
 
-   #+RESULTS:
+  #+RESULTS:
 
-   Show end of buffer with /q/ left fringe.
-   #+BEGIN_SRC emacs-lisp
+  Show end of buffer with /q/ left fringe.
+  #+BEGIN_SRC emacs-lisp
      (setq default-indicate-empty-lines t)
-   #+END_SRC
+  #+END_SRC
 
-   Delete selected text when typing
-   #+BEGIN_SRC emacs-lisp
+  Delete selected text when typing
+  #+BEGIN_SRC emacs-lisp
      (delete-selection-mode 1)
-   #+END_SRC
+  #+END_SRC
 
-   Different buffer names when a new buffer has the same name as
-   an existing one.
-   #+BEGIN_SRC emacs-lisp
+  Different buffer names when a new buffer has the same name as
+  an existing one.
+  #+BEGIN_SRC emacs-lisp
      (require 'uniquify "uniquify")
      (setq uniquify-buffer-name-style 'forward)
-   #+END_SRC
+  #+END_SRC
 
-   #+RESULTS:
+  #+RESULTS:
    : forward
 
-    File path in frame title.
-   #+BEGIN_SRC emacs-lisp
+  File path in frame title.
+  #+BEGIN_SRC emacs-lisp
      (setq frame-title-format
            '((:eval (if (buffer-file-name)
                         (abbreviate-file-name (buffer-file-name))
                       "%b"))))
-   #+END_SRC
+  #+END_SRC
 
-   #+RESULTS:
-   | :eval | (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) %b) |
+  #+RESULTS:
+  | :eval | (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) %b) |
 
 * guide-key
    Get a visual aid for key sequences.
@@ -554,6 +554,7 @@ Whenever an external process changes a file underneath emacs, and there
 
    (require-package 'relative-line-numbers)
    (global-relative-line-numbers-mode)
+     (column-number-mode)
    (defun better-relative-number-format (offset)
      "Another formatting function"
      (format "%3d " (abs offset)))
@@ -638,10 +639,14 @@ Whenever an external process changes a file underneath emacs, and there
   ;; I want to only check spelling inside comments and doc. Not in strings
   (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
 
+   ;; let's see the 80ish column
+   (setq-default fill-column 80)
+   (require-package 'fill-column-indicator)
+   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
 #+END_SRC
 
 #+RESULTS:
-| font-lock-comment-face | font-lock-doc-face |
+| turn-on-fci-mode | rainbow-delimiters-mode | rainbow-identifiers-mode | rainbow-mode |
 
 ** CSS
 #+BEGIN_SRC emacs-lisp
@@ -1166,6 +1171,7 @@ Hiding some IRC messages.
      #+END_SRC
      You can navigate trough “errors” with ~M-g p~ and ~M-g n~. You
      can edit “errors” directly in /all/ buffer.
+   + ~helm-ag~. Use ~M--~ to add options
 ** Bookmarks
    ~C-x r m~
    ~C-x r b~
@@ -1236,7 +1242,6 @@ Hiding some IRC messages.
 
 #+RESULTS:
 * Tags
-  Ideally I should switch to gnu tags
 #+begin_src emacs-lisp
   (require-package 'ggtags)
   (add-hook 'ruby-mode-hook 'ggtags-mode)

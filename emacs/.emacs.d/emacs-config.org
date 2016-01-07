@@ -917,6 +917,8 @@ Follow symlinks without asking
   (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
   (evil-leader/set-key "b" 'helm-bookmarks)
   (evil-leader/set-key "p" 'helm-projectile-switch-project)
+  (evil-leader/set-key "s" 'helm-swoop)
+  (evil-leader/set-key "S" 'helm-multi-swoop)
 
 
   (define-key my-keys-minor-mode-map (kbd "s-\\") 'neotree-toggle)
@@ -951,8 +953,10 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-  (define-key evil-normal-state-map (kbd "[e") 'flycheck-previous-error)
-  (define-key evil-normal-state-map (kbd "]e") 'flycheck-next-error)
+  (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
+  (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
+  (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+  (define-key evil-normal-state-map (kbd "]e") 'next-error)
 
   (define-key evil-normal-state-map (kbd "]]") 'ggtags-find-tag-dwim)
 
@@ -1171,7 +1175,15 @@ TODO: add keybindings
      After using helm-occur do ~C-c C-a~ to edit results in all buffer
      You can navigate trough “errors” with previous-error ~M-g p~ and next-error
      ~M-g n~. You can edit “errors” directly in /all/ buffer.
+   + ~helm-swoop~ and ~helm-multi-swoop~
+      #+begin_src emacs-lisp
+       (require-package 'helm-swoop)
+      #+end_src
 
+      #+RESULTS:
+
+      Replace occur and all? Search and C-c C-e to edit.
+      All is still usable with swoop by using the regular shortcut ~C-c C-a~
    + ~helm-ag~. Use ~M--~ to add options
 ** Bookmarks
    ~C-x r m~

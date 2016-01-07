@@ -388,10 +388,10 @@ Whenever an external process changes a file underneath emacs, and there
 #+RESULTS:
 : t
 
- If files is a symbolic link, ask if we should follow the symbolic link and
- open the corresponding file.
+Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
-  (setq vc-follow-symlinks (quote ask))
+  (setq vc-follow-symlinks t)
+  ;; (setq vc-follow-symlinks (quote ask))
 #+END_SRC
 * save, delete & restore
 
@@ -1147,11 +1147,11 @@ Hiding some IRC messages.
    + M-S-enter insert heading before current one
    + ~C-c C-s~ to schedule
 ** Multiple Selections
-   You can use Multiple cursors by selecting a region and
-   TODO: add keybindings
-   + ~C-c m a~ to select all identical
-   + ~C->~ to select next
-   + ~C-<~ to select previous
+helloYou can use Multiple cursors by selecting a region and
+TODO: add keybindings
++ ~C-c m a~ to select all identical
++ ~C->~ to select next
++ ~C-<~ to select previous
 
    Hit ~C-g~ where you are done.
 
@@ -1164,13 +1164,14 @@ Hiding some IRC messages.
    + ~query-replace-regex~, ~replace-regex~
    + occur & all
      Find occurrences of a regular expression in your file.
-     /all/ is a buffed up /occur/.
      #+BEGIN_SRC emacs-lisp
        (require-package 'all-ext)
        (require 'all-ext)
      #+END_SRC
-     You can navigate trough “errors” with ~M-g p~ and ~M-g n~. You
-     can edit “errors” directly in /all/ buffer.
+     After using helm-occur do ~C-c C-a~ to edit results in all buffer
+     You can navigate trough “errors” with previous-error ~M-g p~ and next-error
+     ~M-g n~. You can edit “errors” directly in /all/ buffer.
+
    + ~helm-ag~. Use ~M--~ to add options
 ** Bookmarks
    ~C-x r m~

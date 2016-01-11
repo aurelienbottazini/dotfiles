@@ -601,6 +601,7 @@ Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
   (require-package 'magit)
 #+END_SRC
+
 * Registers
   List of frequently visited files. I can access them using
   ~C-x r j <letter>~.
@@ -795,7 +796,6 @@ Follow symlinks without asking
     ~Install npm install -g coffeelint~
 
 * Navigation
-
 ** Helm
 #+BEGIN_SRC emacs-lisp
   (require-package 'helm)
@@ -924,7 +924,6 @@ Follow symlinks without asking
   (define-key my-keys-minor-mode-map (kbd "s-\\") 'neotree-toggle)
   (define-key my-keys-minor-mode-map (kbd "C-c n") 'evil-normal-state)
   (define-key my-keys-minor-mode-map (kbd "C-c m") 'evil-motion-state)
-  (define-key my-keys-minor-mode-map (kbd "C-z") 'suspend-emacs)
   (define-key my-keys-minor-mode-map (kbd "M-/") 'hippie-expand)
 
   (define-key my-keys-minor-mode-map (kbd "C-o") 'previous-buffer)
@@ -957,6 +956,8 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
   (define-key evil-normal-state-map (kbd "[e") 'previous-error)
   (define-key evil-normal-state-map (kbd "]e") 'next-error)
+  (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+  (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
 
   (define-key evil-normal-state-map (kbd "]]") 'ggtags-find-tag-dwim)
 
@@ -1150,8 +1151,9 @@ Hiding some IRC messages.
    + M-C-enter insert heading after current one
    + M-S-enter insert heading before current one
    + ~C-c C-s~ to schedule
+   + C-Super-enter insert current heading
 ** Multiple Selections
-helloYou can use Multiple cursors by selecting a region and
+You can use Multiple cursors by selecting a region and
 TODO: add keybindings
 + ~C-c m a~ to select all identical
 + ~C->~ to select next
@@ -1205,6 +1207,15 @@ TODO: add keybindings
 
   C-n completes in insert mode with hippie expand.
   ~M-/~ for hippie expand
+** Windows
+Navigate between windows configurations with C-c Left/Right Arrow
+#+begin_src emacs-lisp
+  (winner-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Cool buffers
 *** follow-mode
 *** indirect buffer

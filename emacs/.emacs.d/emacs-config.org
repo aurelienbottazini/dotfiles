@@ -234,9 +234,9 @@ Making sure I have the latest /Emacs/.
    other org-files using ~C-c C-w~ on headlines.
 #+BEGIN_SRC emacs-lisp
   (setq org-refile-use-outline-path t)
-  ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-  (setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                   (org-agenda-files :maxlevel . 9))))
+  ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
+  (setq org-refile-targets (quote ((nil :maxlevel . 2)
+                                   (org-agenda-files :maxlevel . 2))))
 #+END_SRC
 
    Setting up the clock for time tracking
@@ -1137,6 +1137,9 @@ Hiding some IRC messages.
   rgrep to search/replace with C-x C-q like dired to live edit
 
   to surround word with double quotes with evil-surround: ysiw"
+
+  Emacs Help is accessible with ~F1~
+
 ** Org Tips
    + Disable ~_~ subscripts with ~C-C C-x \~
    + ~C-c ~~ to alternate between org-table and table.el
@@ -1152,6 +1155,8 @@ Hiding some IRC messages.
    + M-S-enter insert heading before current one
    + ~C-c C-s~ to schedule
    + C-Super-enter insert current heading
+   + ~C-c [~ and ~C-c ]~ add and remove agenda files. ~C-c `~ cycle through
+     agenda
 ** Multiple Selections
 You can use Multiple cursors by selecting a region and
 TODO: add keybindings
@@ -1206,7 +1211,7 @@ TODO: add keybindings
   company. ~M-n~ and ~M-p~ to select candidates. And tab to complete
 
   C-n completes in insert mode with hippie expand.
-  ~M-/~ for hippie expand
+  ~M-/~ or ~C-n~ for hippie expand
 ** Windows
 Navigate between windows configurations with C-c Left/Right Arrow
 #+begin_src emacs-lisp

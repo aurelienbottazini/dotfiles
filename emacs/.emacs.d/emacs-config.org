@@ -316,7 +316,7 @@ I don’t need confirmation before evaluating code blocks.
 * UI
 
 #+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode)
+  (blink-cursor-mode 0)
 #+END_SRC
 
 No tabs
@@ -523,6 +523,7 @@ Follow symlinks without asking
   #+END_SRC
 
 * Better undo
+  Supercharge C-x u. Use ~d~ to see a diff
 #+begin_src emacs-lisp
   (require-package 'undo-tree)
   (global-undo-tree-mode)
@@ -799,9 +800,12 @@ Follow symlinks without asking
 ** Helm
 #+BEGIN_SRC emacs-lisp
   (require-package 'helm)
+      (require 'helm-config)
   (require-package 'helm-ag)
-  (helm-mode 1)
 #+END_SRC
+
+#+RESULTS:
+: t
 
 ** Projectile
 #+BEGIN_SRC emacs-lisp
@@ -910,6 +914,7 @@ Follow symlinks without asking
   (evil-leader/set-key "gs" 'magit-status)
   (require-package 'git-link)
   (evil-leader/set-key "gl" 'git-link)
+  (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
   (evil-leader/set-key "h" 'helm-mini)
   (evil-leader/set-key "f" 'helm-projectile-ag)
@@ -921,13 +926,16 @@ Follow symlinks without asking
   (evil-leader/set-key "S" 'helm-multi-swoop)
 
 
-  (define-key my-keys-minor-mode-map (kbd "s-\\") 'neotree-toggle)
-  (define-key my-keys-minor-mode-map (kbd "C-c n") 'evil-normal-state)
-  (define-key my-keys-minor-mode-map (kbd "C-c m") 'evil-motion-state)
-  (define-key my-keys-minor-mode-map (kbd "M-/") 'hippie-expand)
+  (define-key my-keys-minor-mode-map (kbd "s-\\")    'neotree-toggle)
+  (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
+  (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
+  (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-  (define-key my-keys-minor-mode-map (kbd "C-o") 'previous-buffer)
-  (define-key my-keys-minor-mode-map (kbd "C-i") 'next-buffer)
+  (define-key my-keys-minor-mode-map (kbd "C-o")     'previous-buffer)
+  (define-key my-keys-minor-mode-map (kbd "C-i")     'next-buffer)
+  (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
+  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
   (require-package 'key-chord)
   (require 'key-chord)
@@ -1100,9 +1108,9 @@ Hiding some IRC messages.
   (setq yas-snippet-dirs
         '("~/.emacs.d/snippets"))
   ;; I use company mode for snippets
-  (define-key yas-minor-mode-map [(tab)]        nil)
-  (define-key yas-minor-mode-map (kbd "TAB")    nil)
-  (define-key yas-minor-mode-map (kbd "<tab>")  nil)
+  ;; (define-key yas-minor-mode-map [(tab)]        nil)
+  ;; (define-key yas-minor-mode-map (kbd "TAB")    nil)
+  ;; (define-key yas-minor-mode-map (kbd "<tab>")  nil)
 #+END_SRC
 
 #+RESULTS:
@@ -1111,18 +1119,18 @@ Hiding some IRC messages.
 
 #+begin_src emacs-lisp
   (require-package 'company)
-  (global-company-mode t)
-  (setq company-minimum-prefix-length 2)
-  (setq company-backends '((company-yasnippet company-dabbrev-code company-dabbrev company-keywords company-files)))
-  (with-eval-after-load 'company
+  ;; (global-company-mode t)
+  ;; (setq company-minimum-prefix-length 2)
+  ;; (setq company-backends '((company-yasnippet company-dabbrev-code company-dabbrev company-keywords company-files)))
+  ;; (with-eval-after-load 'company
     ;;company tab to complete instead of enter
-    (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-    (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-    (define-key company-active-map [tab] 'company-complete-selection)
+    ;; (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+    ;; (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+    ;; (define-key company-active-map [tab] 'company-complete-selection)
     ;;disable enter
-    (define-key company-active-map [return] nil)
-    (define-key company-active-map (kbd "RET") nil)
-   )
+    ;; (define-key company-active-map [return] nil)
+    ;; (define-key company-active-map (kbd "RET") nil)
+   ;; )
 #+end_src
 
 #+RESULTS:
@@ -1222,6 +1230,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
 : t
 
 ** Cool buffers
+
 *** follow-mode
 *** indirect buffer
 *** Palimpset mode
@@ -1234,6 +1243,8 @@ Navigate between windows configurations with C-c Left/Right Arrow
 #+RESULTS:
 | [cl-struct-package-desc palimpsest (20130731 821) Various deletion strategies when editing nil single melpa nil nil nil] |
 
+** Magit
+   - view buffer history: ~magit-log-buffer-file~
 * Emoji
 #+begin_src emacs-lisp
   (defun --set-emoji-font (frame)
@@ -1249,10 +1260,11 @@ Navigate between windows configurations with C-c Left/Right Arrow
   ;; Hook for when a frame is created with emacsclient
   ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
   (add-hook 'after-make-frame-functions '--set-emoji-font)
-  (require-package 'emojify)
-  (add-hook 'after-init-hook #'global-emojify-mode)
-  (require 'company-emoji)
-  (add-to-list 'company-backends 'company-emoji)
+
+  ;; (require-package 'emojify)
+  ;; (add-hook 'after-init-hook #'global-emojify-mode)
+  ;; (require 'company-emoji)
+  ;; (add-to-list 'company-backends 'company-emoji)
 #+end_src
 
 #+RESULTS:

@@ -1170,6 +1170,16 @@ Hiding some IRC messages.
    + C-Super-enter insert current heading
    + ~C-c [~ and ~C-c ]~ add and remove agenda files. ~C-c `~ cycle through
      agenda
+   + [[http://orgmode.org/manual/Agenda-commands.html][Agenda Commands are amazing]]
+     F for agenda-follow-mode
+     d focus on day
+     w focus on week
+     v m view month
+     f forward
+     b backward
+     r reload
+     S-Left item date backward
+     S-Right item date forward
 ** Multiple Selections
 You can use Multiple cursors by selecting a region and
 TODO: add keybindings

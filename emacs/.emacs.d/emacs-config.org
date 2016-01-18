@@ -21,13 +21,24 @@
 (setq package-archives
       '(("gnu"         . "http://elpa.gnu.org/packages/")
         ("org"         . "http://orgmode.org/elpa/")
-        ("melpa"       . "http://melpa.milkbox.net/packages/")
-        ("marmalade"   . "http://marmalade-repo.org/packages/")))
+        ("marmalade"   . "http://marmalade-repo.org/packages/")
+        ("melpa"       . "http://melpa.milkbox.net/packages/")))
 (setq package-user-dir (concat user-emacs-directory "elpa"))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 #+END_SRC
+
+#+RESULTS:
+
+* Git
+
+#+BEGIN_SRC emacs-lisp
+   (require-package 'magit)
+#+END_SRC
+
+#+RESULTS:
+
 
 * text-mode
 
@@ -535,73 +546,67 @@ Follow symlinks without asking
 * Vim
 
 #+BEGIN_SRC emacs-lisp
-   (require-package 'evil-leader)
-   (require 'evil-leader)
-   (global-evil-leader-mode)
-   (setq evil-toggle-key "C-c e")
-   (require-package 'evil)
+  (require-package 'evil-leader)
+  (require 'evil-leader)
+  (global-evil-leader-mode)
+  (setq evil-toggle-key "C-c e")
+  (require-package 'evil)
 
-   (require 'evil)
-   (evil-mode 1)
-   (require-package 'evil-magit)
-   (require 'evil-magit)
-   (require-package 'evil-surround)
-   (global-evil-surround-mode 1)
-   (require-package 'evil-commentary)
-   (evil-commentary-mode)
-   (require-package 'evil-visualstar)
-   (global-evil-visualstar-mode t)
+  (require 'evil)
+  (evil-mode 1)
+  (require-package 'evil-magit)
+  (require 'evil-magit)
+  (require-package 'evil-surround)
+  (global-evil-surround-mode 1)
+  (require-package 'evil-commentary)
+  (evil-commentary-mode)
+  (require-package 'evil-visualstar)
+  (global-evil-visualstar-mode t)
 
 
-   (require-package 'relative-line-numbers)
-   (global-relative-line-numbers-mode)
-     (column-number-mode)
-   (defun better-relative-number-format (offset)
-     "Another formatting function"
-     (format "%3d " (abs offset)))
-   (setq relative-line-numbers-format 'better-relative-number-format)
-   (require-package 'evil-search-highlight-persist)
-   (require 'evil-search-highlight-persist)
-   (global-evil-search-highlight-persist t)
+  (require-package 'relative-line-numbers)
+  (global-relative-line-numbers-mode)
+  (column-number-mode)
+  (defun better-relative-number-format (offset)
+    "Another formatting function"
+    (format "%3d " (abs offset)))
+  (setq relative-line-numbers-format 'better-relative-number-format)
+  (require-package 'evil-search-highlight-persist)
+  (require 'evil-search-highlight-persist)
+  (global-evil-search-highlight-persist t)
 
-   (require-package 'evil-matchit)
-   (global-evil-matchit-mode 1)
+  (require-package 'evil-matchit)
+  (global-evil-matchit-mode 1)
 
-   (require-package 'evil-org)
-   (require 'evil-org)
+  (require-package 'evil-org)
+  (require 'evil-org)
 
-   ;; (setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
-   ;; (setq evil-emacs-state-modes nil)
-   (eval-after-load 'dired
-     '(progn
-        ;; use the standard Dired bindings as a base
-        (evil-define-key 'normal dired-mode-map
-          "-" 'dired-up-directory
-          )))
+  ;; (setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
+  ;; (setq evil-emacs-state-modes nil)
+  (eval-after-load 'dired
+    '(progn
+       ;; use the standard Dired bindings as a base
+       (evil-define-key 'normal dired-mode-map
+         "-" 'dired-up-directory
+         )))
 
-   (defmacro define-and-bind-text-object (key start-regex end-regex)
-     (let ((inner-name (make-symbol "inner-name"))
-           (outer-name (make-symbol "outer-name")))
-       `(progn
-          (evil-define-text-object ,inner-name (count &optional beg end type)
-            (evil-select-paren ,start-regex ,end-regex beg end type count nil))
-          (evil-define-text-object ,outer-name (count &optional beg end type)
-            (evil-select-paren ,start-regex ,end-regex beg end type count t))
-          (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
-          (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
+  (defmacro define-and-bind-text-object (key start-regex end-regex)
+    (let ((inner-name (make-symbol "inner-name"))
+          (outer-name (make-symbol "outer-name")))
+      `(progn
+         (evil-define-text-object ,inner-name (count &optional beg end type)
+           (evil-select-paren ,start-regex ,end-regex beg end type count nil))
+         (evil-define-text-object ,outer-name (count &optional beg end type)
+           (evil-select-paren ,start-regex ,end-regex beg end type count t))
+         (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
+         (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
 
-   (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end")
+  (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end")
 
 #+END_SRC
 
 #+RESULTS:
 : outer-name
-
-* Git
-
-#+BEGIN_SRC emacs-lisp
-  (require-package 'magit)
-#+END_SRC
 
 * Registers
   List of frequently visited files. I can access them using
@@ -1056,7 +1061,7 @@ Hiding some IRC messages.
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
   (require-package 'smart-mode-line)
-  (setq sml/theme 'respectful)
+  (setq sml/theme 'light)
   (sml/setup)
 #+END_SRC
 
@@ -1278,7 +1283,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
   (setq custom-theme-directory "~/.emacs.d/themes")
-  (load-theme 'pantone)
+  ;; (load-theme 'pantone)
 #+end_src
 
 #+RESULTS:

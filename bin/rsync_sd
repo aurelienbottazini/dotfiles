@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+rsync -rhvlz --exclude=vendor --exclude=public/uploads --exclude=tmp --exclude=.git --exclude=log/ --exclude=Gemfile.lock --exclude=db/structure.sql --exclude GPATH --exclude GRTAGS --exclude GTAGS --delete $1 sd:$1
+gtags --single-update $1

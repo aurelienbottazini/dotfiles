@@ -1,7 +1,7 @@
 set PATH ~/dotfiles/bin/ $PATH
 set -x CDPATH $HOME $HOME/projects $HOME/projects/work
 
-set -x DOCKER_HOST tcp://ks212069.kimsufi.com:2376
+set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376
 set -x DOCKER_TLS_VERIFY 1
 set -x VAGRANT_DEFAULT_PROVIDER parallels
 
@@ -18,6 +18,6 @@ alias tmux "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
 
-alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp /Users/aurelienbottazini/projects | xargs -0 -n 1 -I file rsync_ks file"
+alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp /Users/aurelienbottazini/projects | xargs -0 -n 1 -I file rsync_sd file"
 
 set --erase fish_greeting

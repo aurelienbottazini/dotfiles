@@ -749,9 +749,9 @@ Follow symlinks without asking
   (require 'inf-ruby)
 #+END_SRC
 
-   Robe requires gems ~pry~ and ~pry-doc~
 #+BEGIN_SRC emacs-lisp
   (require-package 'projectile-rails)
+  (require-package 'rspec-mode)
   (add-hook 'projectile-mode-hook 'projectile-rails-on)
 #+END_SRC
 
@@ -907,6 +907,10 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
   (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
   (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
+  (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
+  (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
+  (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
+  (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
 #+END_SRC
 
 #+RESULTS:
@@ -936,8 +940,6 @@ Follow symlinks without asking
   (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
   (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-  (define-key my-keys-minor-mode-map (kbd "C-o")     'previous-buffer)
-  (define-key my-keys-minor-mode-map (kbd "C-i")     'next-buffer)
   (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
   (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
   (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
@@ -971,6 +973,8 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "]e") 'next-error)
   (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
   (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+  (define-key my-keys-minor-mode-map (kbd "]b")     'previous-buffer)
+  (define-key my-keys-minor-mode-map (kbd "[b")     'next-buffer)
 
   (define-key evil-normal-state-map (kbd "]]") 'ggtags-find-tag-dwim)
 

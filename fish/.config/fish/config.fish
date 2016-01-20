@@ -21,3 +21,4 @@ alias pd "psql -p 5432 -h localhost -d "
 alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp /Users/aurelienbottazini/projects | xargs -0 -n 1 -I file rsync_sd file"
 
 set --erase fish_greeting
+set -Ux EDITOR 'emacsclient -t -a ""'

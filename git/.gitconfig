@@ -4,6 +4,7 @@
 [core]
 	quotepath = false
 	excludesfile = /Users/aurelienbottazini/.gitignore_global
+	editor = emacsclient -t -a ''
 [push]
 	default = current
 [github]

@@ -126,14 +126,16 @@
 * Fonts
   #+BEGIN_SRC emacs-lisp
     (set-frame-font "PragmataPro-14")
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (progn
-                  (set-frame-font "PragmataPro-14"))))
+    ;; (add-hook 'after-make-frame-functions
+    ;;           (lambda (frame)
+    ;;             (progn
+    ;;               ;; (set-face-attribute 'default nil :font  "PragmataPro-14" )
+    ;;               (set-frame-font "PragmataPro-14"))))
+    (setq default-frame-alist '((font . "PragmataPro-14")))
   #+END_SRC
 
   #+RESULTS:
-  | evil-init-esc | (lambda (frame) (progn (set-frame-font PragmataPro-14))) | select-frame |
+  | (lambda (frame) (progn (set-face-attribute (quote default) nil :font PragmataPro-14) (set-frame-font PragmataPro-14))) | --set-emoji-font | evil-init-esc | (lambda (frame) (progn (set-frame-font PragmataPro-14))) | select-frame |
 
 * Copy paste
 #+BEGIN_SRC emacs-lisp
@@ -413,9 +415,9 @@ Follow symlinks without asking
 
 #+BEGIN_SRC emacs-lisp
   (savehist-mode 1)                       ;saves minibuffer history
-  (desktop-save-mode 1)                     ;save opened buffers
+  ;; (desktop-save-mode 1)                     ;save opened buffers
                                           ;between emacs sessions
-  (setq desktop-restore-eager 5) ; restore only 5 buffers at once
+  ;; (setq desktop-restore-eager 5) ; restore only 5 buffers at once
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -973,8 +975,8 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "]e") 'next-error)
   (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
   (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-  (define-key my-keys-minor-mode-map (kbd "]b")     'previous-buffer)
-  (define-key my-keys-minor-mode-map (kbd "[b")     'next-buffer)
+  (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+  (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
 
   (define-key evil-normal-state-map (kbd "]]") 'ggtags-find-tag-dwim)
 

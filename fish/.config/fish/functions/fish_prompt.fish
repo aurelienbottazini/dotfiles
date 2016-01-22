@@ -30,8 +30,10 @@ function _git_ahead_of_upstream
 end
 
 function _git_dirty_status
-  if test (git status 2> /dev/null ^&1 | tail -n1) != "nothing to commit (working directory clean)"
+  if test (git status 2> /dev/null ^&1 | tail -n1) != "nothing to commit, working directory clean"
     echo '*'
+  else
+    echo ' '
   end
 end
 
@@ -68,6 +70,14 @@ function _prompt_color_for_status
   end
 end
 
+function g
+  if eval [[ count $argv ]]
+    git  $argv
+  else
+    git status
+  end
+end
+
 function fish_prompt
   set -l last_status $status
 
@@ -78,7 +88,7 @@ function fish_prompt
     _print_in_color " "(git rev-parse --short HEAD) green
     _print_in_color " "(_git_upstream_status) cyan
 
-    _print_in_color ""(_git_dirty_status) red
+    _print_in_color " "(_git_dirty_status) red
   end
 
   _print_in_color "\n❯ " (_prompt_color_for_status $last_status)

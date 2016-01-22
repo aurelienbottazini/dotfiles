@@ -17,7 +17,7 @@ npm install -g grunt-cli
 npm install -g instant-markdown-d
 
 gem install gem-ctags
-gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman
+gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail
 
 brew tap railwaycat/emacsmacport
 brew install emacs-mac

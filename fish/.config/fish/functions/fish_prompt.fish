@@ -29,6 +29,12 @@ function _git_ahead_of_upstream
   test (git rev-list --left-only --count HEAD...@"{u}" ^ /dev/null) -gt 0
 end
 
+function _git_dirty_status
+  if test (git status 2> /dev/null ^&1 | tail -n1) != "nothing to commit (working directory clean)"
+    echo '*'
+  end
+end
+
 function _git_upstream_status
   set -l arrows
 
@@ -69,7 +75,10 @@ function fish_prompt
 
   if _in_git_directory
     _print_in_color " "(_git_branch_name_or_revision) magenta
+    _print_in_color " "(git rev-parse --short HEAD) green
     _print_in_color " "(_git_upstream_status) cyan
+
+    _print_in_color ""(_git_dirty_status) red
   end
 
   _print_in_color "\n❯ " (_prompt_color_for_status $last_status)

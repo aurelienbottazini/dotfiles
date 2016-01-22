@@ -1,24 +1,27 @@
 [user]
 	name = Aurélien Bottazzini
-	email = contact@aurelienbottazini.com
+	email = aurelien@bottazini.com
 [core]
 	quotepath = false
 	excludesfile = /Users/aurelienbottazini/.gitignore_global
 	editor = emacsclient -t -a ''
 [push]
-	default = current
+	default = upstream
 [github]
 	user = aurelienbottazzini
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
 [alias]
-        st = status
-        ci = commit
+        cm = commit
         di = diff
         co = checkout
-        amend = commit --amend
         b = branch
         ignore-tracked = update-index --assume-unchanged
 	ctags = !.git/hooks/ctags
+	glog = log -E -i --grep
+	sla = log --oneline --decorate --graph --all
+	car = commit --amend --no-edit
+	unstage = reset
+	uncommit = reset --soft HEAD^
 [credential]
 	helper = osxkeychain
 [filter "media"]
@@ -39,3 +42,7 @@
 	prompt = false
 [init]
 	templatedir = ~/.git_template
+[merge]
+        ff = only
+[fetch]
+        prune = true

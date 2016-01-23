@@ -70,7 +70,7 @@ function _prompt_color_for_status
   end
 end
 
-function g
+function g --wraps git
   if count $argv > /dev/null
     git $argv
   else
@@ -88,7 +88,7 @@ function fish_prompt
     _print_in_color " "(git rev-parse --short HEAD) green
     _print_in_color " "(_git_upstream_status) cyan
 
-    _print_in_color " "(_git_dirty_status) red
+    _print_in_color (_git_dirty_status) red
   end
 
   _print_in_color "\n❯ " (_prompt_color_for_status $last_status)

@@ -71,8 +71,8 @@ function _prompt_color_for_status
 end
 
 function g
-  if eval [[ count $argv ]]
-    git  $argv
+  if count $argv > /dev/null
+    git $argv
   else
     git status
   end

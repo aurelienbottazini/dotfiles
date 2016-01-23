@@ -681,7 +681,11 @@ Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '("\\zshrc$" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\zsh$" . shell-script-mode))
+
+(require-package 'fish-mode)
 #+END_SRC
+
+#+RESULTS:
 
 ** markdown
 #+BEGIN_SRC emacs-lisp

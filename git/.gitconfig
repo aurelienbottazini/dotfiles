@@ -11,7 +11,7 @@
 	user = aurelienbottazzini
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
 [alias]
-        cm = commit
+        cm = !git-cm
         di = diff
         co = checkout
         b = branch
@@ -22,20 +22,10 @@
 	car = commit --amend --no-edit
 	unstage = reset
 	uncommit = reset --soft HEAD^
+	mup = !git checkout master && git pull && git checkout -
+	ureset = !git upstream && git reset --hard (git upstream)
 [credential]
 	helper = osxkeychain
-[filter "media"]
-	clean = git media clean %f
-	smudge = git media smudge %f
-	required = true
-[filter "hawser"]
-	clean = git hawser clean %f
-	smudge = git hawser smudge %f
-	required = true
-[filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git lfs smudge %f
-	required = true
 [difftool]
 	prompt = false
 [mergetool]

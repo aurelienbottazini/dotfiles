@@ -567,7 +567,7 @@ Follow symlinks without asking
 
 
   (require-package 'relative-line-numbers)
-  (global-relative-line-numbers-mode)
+  ;; (global-relative-line-numbers-mode)
   (column-number-mode)
   (defun better-relative-number-format (offset)
     "Another formatting function"
@@ -618,6 +618,7 @@ Follow symlinks without asking
       (r `((?e (file . ,(concat user-emacs-directory "emacs-config.org")))
            (?t (file . ,(expand-file-name "~/.tmux.conf")))
            (?g (file . ,(expand-file-name "~/Dropbox/org/gtd.org")))
+           (?i (file . ,(expand-file-name "~/Dropbox/org/inbox.org")))
            (?w (file . ,(expand-file-name "~/projects/aurelienbottazini.com/_org")))
            ))
     (set-register (car r) (cadr r)))
@@ -1190,6 +1191,8 @@ Hiding some IRC messages.
      r reload
      S-Left item date backward
      S-Right item date forward
+   + ~Spc a < t~ to see todo view for buffer and ~number r~ to select a type of todo
+     ~m~ to mark them and ~B~ to perform an action on them.
 ** Multiple Selections
 You can use Multiple cursors by selecting a region and
 TODO: add keybindings
@@ -1303,7 +1306,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
   (setq custom-theme-directory "~/.emacs.d/themes")
-  ;; (load-theme 'pantone)
+  (load-theme 'pantone)
 #+end_src
 
 #+RESULTS:

@@ -7,10 +7,10 @@ brew install reattach-to-user-namespace battery fzf coreutils git the_silver_sea
 #TODO update rbenv
 brew install htop rbenv rbenv-ctags ctags
 brew install global --with-exuberant-ctags --with-pygments
-brew install unison
 brew cask install launchrocket
 brew install tree
 brew install node
+brew install hub
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli

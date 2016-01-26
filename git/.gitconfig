@@ -24,6 +24,13 @@
 	uncommit = reset --soft HEAD^
 	mup = !git checkout master && git pull && git checkout -
 	ureset = !git upstream && git reset --hard (git upstream)
+        browse = !hub browse
+        compare = !hub compare
+        issues = !hub browse -- issues
+        pr = !hub pull-request
+        ci = !hub ci-status
+        upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
+        fall = !for remote in $(git remote); do echo Fetching $remote; git fetch $remote; done
 [credential]
 	helper = osxkeychain
 [difftool]
@@ -36,3 +43,7 @@
         ff = only
 [fetch]
         prune = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

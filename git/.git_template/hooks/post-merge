@@ -1,2 +1,2 @@
 #!/bin/sh
-.git/hooks/gtags >/dev/null 2>&1 &
+.git/hooks/create_gtags >/dev/null 2>&1 &

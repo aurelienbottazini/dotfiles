@@ -20,7 +20,10 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 (let (
       (background (if (window-system) "#f1f2f1" nil))
       (foreground (if (window-system) "#212822" black))
-      (blue (if (window-system) "#003d92" "blue"))
+      (blue (if (window-system) "#23249e" "blue"))
+      (comments (if (window-system) "#616568" "black"))
+      (comments-delimiters (if (window-system) "#3d3c38" "black"))
+
 
       ;; (base01 (if (window-system) "#033340" "brightblack"))
       ;; (base02 (if (window-system) "#1d5483" "brightyellow"))
@@ -41,6 +44,11 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
   (custom-theme-set-faces
    'pantone
 
+   `(default ((t (:background ,background :foreground ,foreground))))
+   `(outline-1 ((t (:foreground ,blue :weight bold))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
+   `(font-lock-comment-face ((t (:foreground ,comments))))
+   `(font-lock-function-name-face ((t (:foreground ,blue))))
 
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
@@ -53,7 +61,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                      :inherit nil
    ;;                      :box (:line-width 2 :style released-button)))))
    ;; `(custom-state ((t (:foreground ,green))))
-   `(default ((t (:background ,background :foreground ,foreground))))
    ;; `(dired-directory ((t (:background ,green :foreground ,base00))))
    ;; `(dired-symlink ((t (:foreground ,yellow))))
 
@@ -65,11 +72,8 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                         :foreground ,base00
    ;;                         :underline nil))))
    ;; `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
-   ;; `(font-lock-comment-delimiter-face ((t (:foreground ,base03))))
-   ;; `(font-lock-comment-face ((t (:foreground ,base03))))
    ;; `(font-lock-constant-face ((t (:weight bold :foreground ,magenta))))
    ;; `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
-   `(font-lock-function-name-face ((t (:foreground ,blue))))
    ;; `(font-lock-keyword-face ((t (:weight bold :foreground ,violet))))
    ;; `(font-lock-negation-char-face ((t (:foreground ,red))))
    ;; `(font-lock-preprocessor-face ((t (:foreground ,violet))))
@@ -135,7 +139,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                     :foreground ,red
    ;;                     :background ,base00))))
 
-   ;; `(outline-1 ((t (:foreground ,red :height 1.7))))
    ;; `(outline-2 ((t (:foreground ,orange :height 1.3))))
    ;; `(outline-3 ((t (:foreground ,yellow :height 1.05))))
    ;; `(outline-4 ((t (:foreground ,blue))))

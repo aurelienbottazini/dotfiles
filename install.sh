@@ -19,8 +19,7 @@ npm install -g instant-markdown-d
 gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail
 
-brew tap railwaycat/emacsmacport
-brew install emacs-mac
+brew install docker-machine-parallels
 
 brew install stow
 stow emacs

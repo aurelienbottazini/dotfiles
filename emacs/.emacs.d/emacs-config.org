@@ -39,7 +39,6 @@
 
 #+RESULTS:
 
-
 * text-mode
 
 #+BEGIN_SRC emacs-lisp
@@ -580,9 +579,6 @@ Follow symlinks without asking
   (require-package 'evil-matchit)
   (global-evil-matchit-mode 1)
 
-  (require-package 'evil-org)
-  (require 'evil-org)
-
   ;; (setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
   ;; (setq evil-emacs-state-modes nil)
   (eval-after-load 'dired
@@ -852,7 +848,7 @@ Follow symlinks without asking
       (setq mac-right-control-modifier 'hyper)
       (setq mac-right-option-modifier 'none)
       (setq mac-right-command-modifier 'super)
-      ;;    (setq ns-function-modifier 'hyper)
+      ;;(setq ns-function-modifier 'hyper)
   (setq default-input-method "MacOSX"))
 #+END_SRC
 
@@ -950,6 +946,12 @@ Follow symlinks without asking
   (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
   (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
   (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
+
+  (evil-leader/set-key-for-mode 'org-mode
+    "t"  'org-show-todo-tree
+    "a"  'org-agenda
+    "c"  'org-archive-subtree
+    )
 
   (require-package 'key-chord)
   (require 'key-chord)
@@ -1306,7 +1308,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
   (setq custom-theme-directory "~/.emacs.d/themes")
-  (load-theme 'pantone)
+  ;; (load-theme 'pantone)
 #+end_src
 
 #+RESULTS:

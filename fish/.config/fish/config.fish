@@ -8,6 +8,7 @@ set -x VAGRANT_DEFAULT_PROVIDER parallels
 status --is-interactive; and . (rbenv init -|psub)
 
 alias ec "emacsclient -ta ''"
+alias ef "emacsclient -ncq -a ''"
 alias dcr 'docker-compose run'
 alias dcrs 'docker-compose run --service-ports'
 alias delete_docker_containers 'docker rm (docker ps -a -q)'

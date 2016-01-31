@@ -6,3 +6,6 @@ $ perl dotfiles/bin/colortest -w
 Usage:
 
 - Run install.sh
+
+You need a .env file with user name and password env variables for your
+preferred smtp server to use bin/send_mail.rb

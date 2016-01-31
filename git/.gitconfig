@@ -12,7 +12,7 @@
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
 [alias]
         cm = !git-cm
-        di = diff
+        df = diff --word-diff --color-words
         co = checkout
         b = branch
         ignore-tracked = update-index --assume-unchanged

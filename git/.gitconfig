@@ -16,7 +16,7 @@
         co = checkout
         b = branch
         ignore-tracked = update-index --assume-unchanged
-	ctags = !.git/hooks/ctags
+	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep
 	sla = log --oneline --decorate --graph --all
 	car = commit --amend --no-edit
@@ -32,6 +32,7 @@
         ci = !hub ci-status
         upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
         fall = !git-fetch-all-remote
+        rm-from-history = !git-remove-from-history
 [credential]
 	helper = osxkeychain
 [difftool]

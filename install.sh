@@ -22,6 +22,7 @@ gem install dotenv
 brew install docker-machine-parallels
 
 brew install stow
+
 stow emacs
 stow fish
 stow git

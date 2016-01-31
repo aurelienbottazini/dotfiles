@@ -1,0 +1,2 @@
+#!/bin/bash
+for remote in $(git remote); do echo Fetching $remote; git fetch $remote; done

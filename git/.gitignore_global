@@ -6,3 +6,6 @@ tmuxinator.yml
 GPATH
 GRTAGS
 GTAGS
+dummy/tmp/*
+*.dump
+.vagrant

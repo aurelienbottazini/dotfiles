@@ -23,6 +23,7 @@
 	unstage = reset
 	uncommit = reset --soft HEAD^
 	mup = !git checkout master && git pull && git checkout -
+	sup = !git checkout staging && git pull && git checkout -
 	ureset = !git upstream && git reset --hard (git upstream)
         browse = !hub browse
         compare = !hub compare
@@ -30,7 +31,7 @@
         pr = !hub pull-request
         ci = !hub ci-status
         upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
-        fall = !for remote in $(git remote); do echo Fetching $remote; git fetch $remote; done
+        fall = !git-fetch-all-remote
 [credential]
 	helper = osxkeychain
 [difftool]

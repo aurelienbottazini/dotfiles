@@ -19,9 +19,11 @@ alias tmux "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
 
-alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp /Users/aurelienbottazini/projects | xargs -0 -n 1 -I file rsync_sd file"
+alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor (pwd) | xargs -0 -n 1 -I file rsync_sd file"
 
 set --erase fish_greeting
 set -Ux EDITOR 'emacsclient -t -a ""'
 set -Ux fish_color_autosuggestion black
 set -Ux fish_term24bit 1
+
+set -x GTAGSLABEL pygments

@@ -4,7 +4,6 @@ brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
-#TODO update rbenv
 brew install htop rbenv rbenv-ctags ctags
 brew install global --with-exuberant-ctags --with-pygments
 brew cask install launchrocket
@@ -18,7 +17,7 @@ npm install -g instant-markdown-d
 
 gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail
-
+gem install rcodetools fastri
 brew install docker-machine-parallels
 
 brew install stow

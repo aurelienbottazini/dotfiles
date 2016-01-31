@@ -1,4 +1,6 @@
-set PATH ~/dotfiles/bin/ $PATH
+set -x PATH ~/dotfiles/bin/ ~/.rbenv/shims/ /usr/local/var/rbenv/shims $PATH
+rbenv rehash
+
 set -x CDPATH $HOME $HOME/projects $HOME/projects/work
 
 set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376

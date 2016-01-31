@@ -10,7 +10,7 @@
 
 * Packages
 
-  An helper to install missing packages installation.
+  An helper to install missing packages.
 
 #+BEGIN_SRC emacs-lisp
 (defun require-package (package &optional min-version)
@@ -27,14 +27,19 @@
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
+
+(require-package 'use-package)
+(require 'use-package)
+
 #+END_SRC
 
 #+RESULTS:
+: use-package
 
 * Git
 
 #+BEGIN_SRC emacs-lisp
-   (require-package 'magit)
+   (use-package magit)
 #+END_SRC
 
 #+RESULTS:
@@ -73,16 +78,18 @@
 
 * Initialization
 
-   Useful variables to know in which environment I am.
+   Useful variables to know in which environment I am in.
 #+BEGIN_SRC emacs-lisp
   (setq *is-a-windows* (eq system-type 'windows-nt))
   (setq *is-a-mac* (eq system-type 'darwin))
   ;; my computer is fast, don't halt redrawing if a new input event arrives
   (setq redisplay-dont-pause t)
+  (let ((default-directory  "~/.emacs.d/site-lisp/"))
+    (normal-top-level-add-to-load-path '("."))
+    (normal-top-level-add-subdirs-to-load-path))
 #+END_SRC
 
 #+RESULTS:
-: t
 
   Should use default Mac OS X browser on Mac.
 #+BEGIN_SRC emacs-lisp
@@ -117,7 +124,7 @@
 #+END_SRC
 
 #+RESULTS:
-: 1
+: /Users/aurelienbottazini/dotfiles/bin/:/usr/local/var/rbenv/shims:/Users/aurelienbottazini/dotfiles/bin/:/usr/local/var/rbenv/shims:/Users/aurelienbottazini/dotfiles/bin/:/usr/local/var/rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:
 
    Furthermore, on mac, /path_helper/ is messing with the path. I commented the
    calls to path helper in /etc/profile/ and /etc/zshenv/
@@ -512,17 +519,12 @@ Follow symlinks without asking
 * guide-key
    Get a visual aid for key sequences.
    #+BEGIN_SRC emacs-lisp
-   (require-package 'guide-key)
-   (require 'guide-key)
-   (guide-key-mode 1)
-   (setq guide-key/recursive-key-sequence-flag t)
-   (setq guide-key/popup-window-position 'bottom)
+    (require-package 'which-key)
+    (which-key-mode)
    #+END_SRC
 
-   Add key sequences you want to be guided through below.
-   #+BEGIN_SRC emacs-lisp
-   (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-c p" "C-c r" "C-c g" "C-c C-c" "C-c C-t"))
-   #+END_SRC
+   #+RESULTS:
+   : t
 
 * Strange functionality
   “Dangerous” functionality enabled (disabled by default or with a warning).
@@ -635,12 +637,12 @@ Follow symlinks without asking
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ;; (setq comment-auto-fill-only-comments t)
-  ;; (add-hook 'prog-mode-hook
-  ;;         (lambda ()
-  ;;           (turn-on-auto-fill)
-  ;;           ))
-  ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (setq comment-auto-fill-only-comments t)
+  (add-hook 'prog-mode-hook
+          (lambda ()
+            (turn-on-auto-fill)
+            ))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
   ;; I want to only check spelling inside comments and doc. Not in strings
   (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
@@ -652,7 +654,7 @@ Follow symlinks without asking
 #+END_SRC
 
 #+RESULTS:
-| turn-on-fci-mode | rainbow-delimiters-mode | rainbow-identifiers-mode | rainbow-mode |
+| flyspell-prog-mode | (lambda nil (turn-on-auto-fill)) | rainbow-delimiters-mode | rainbow-identifiers-mode | turn-on-fci-mode | rainbow-mode |
 
 ** CSS
 #+BEGIN_SRC emacs-lisp
@@ -757,6 +759,17 @@ Follow symlinks without asking
   (require-package 'rspec-mode)
   (add-hook 'projectile-mode-hook 'projectile-rails-on)
 #+END_SRC
+
+   Hitting ~M-;~ twice adds an xmpfilter comment.
+   Hitting xmp keybinding will put the output in this comment
+#+begin_src emacs-lisp
+  (require 'rcodetools)
+  (evil-leader/set-key-for-mode 'ruby-mode
+    "x"  'xmp
+    )
+#+end_src
+
+#+RESULTS:
 
 ** Haml
 #+BEGIN_SRC emacs-lisp

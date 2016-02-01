@@ -24,6 +24,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
       (comments (if (window-system) "#616568" "black"))
       (comments-delimiters (if (window-system) "#3d3c38" "black"))
 
+      (yellow (if (window-system) "#f4f867" "yellow"))
 
       ;; (base01 (if (window-system) "#033340" "brightblack"))
       ;; (base02 (if (window-system) "#1d5483" "brightyellow"))
@@ -49,6 +50,9 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
    `(font-lock-comment-face ((t (:foreground ,comments))))
    `(font-lock-function-name-face ((t (:foreground ,blue))))
+
+   `(mode-line ((t (:background ,yellow :foreground "#212822" :box (:line-width 2 :color "#f1f2f1")))))
+   `(mode-line-inactive ((t (:background "black"))))
 
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
@@ -239,9 +243,9 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;  `(markdown-header-face-4 ((t (:inherit outline-4))))
    ;;  `(markdown-header-face-5 ((t (:inherit outline-5))))
    )
-)
-;;   (custom-theme-set-variables
-;;    'tronesque
+
+  (custom-theme-set-variables
+   'pantone
 
 ;;    `(ansi-color-names-vector
 ;;      ;; black, red, green, yellow, blue, magenta, cyan, white
@@ -262,14 +266,15 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 ;;   (make-face 'mode-line-vc-face)
 ;;   (make-face 'mode-line-80col-face)
 
-;;   (set-face-attribute 'mode-line nil
-;;                       :foreground base00 :background base03
-;;                       :inverse-video nil
-;;                       :box `(:line-width 2 :color ,base03  :style nil))
-;;   (set-face-attribute 'mode-line-inactive nil
-;;                       :foreground base00 :background base01
-;;                       :inverse-video nil
-;;                       :box `(:line-width 2 :color ,base01 :style nil))
+  ;; (set-face-attribute 'mode-line nil
+                      ;; :foreground foreground
+                      ;; :background background
+                      ;; :inverse-video nil
+                      ;; :box `(:line-width 2 :color ,background))
+  ;; (set-face-attribute 'mode-line-inactive nil
+                      ;; :foreground base00 :background base01
+                      ;; :inverse-video nil
+                      ;; :box `(:line-width 2 :color ,base01 :style nil))
 ;;   (set-face-attribute 'mode-line-read-only-face nil
 ;;                       :inherit 'mode-line-face
 ;;                       :foreground red)
@@ -312,7 +317,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 ;;                       :foreground "black" :background orange
 ;;                       :box `(:line-width 2 :color ,orange :style nil))
 ;;   )
-
+)
 ;; (defun tronesque-mode-line ()
 ;;   "Change default mode-line."
 ;;   (interactive)
@@ -346,7 +351,8 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 ;;      (:eval (propertize (format-mode-line minor-mode-alist)
 ;;                         'face 'mode-line-minor-mode-face))
 ;;      mode-line-misc-info
-;;      mode-line-end-spaces)))
+   ;; mode-line-end-spaces))
+)
 
 ;; ;; Helper function
 ;; (defun shorten-directory (dir max-length)

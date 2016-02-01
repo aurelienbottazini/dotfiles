@@ -1,6 +1,44 @@
+-*- coding: utf-8 -*-
+
 #+BEGIN_SRC emacs-lisp :exports both
   (emacs-version)
 #+END_SRC
+* Encoding
+
+   I want UTF-8 everywhere.
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (setq buffer-file-coding-system 'utf-8)
+  (setq erc-server-coding-system '(utf-8 . utf-8))
+  (setq locale-coding-system 'utf-8)
+  (setq org-export-coding-system (quote utf-8))
+  (setq org-export-html-coding-system (quote utf-8))
+  ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+  (if (boundp 'buffer-file-coding-system)
+      (setq-default buffer-file-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8))
+#+End_SRC
+
+#+RESULTS:
+: utf-8
+
+   Making sure emacs language environment variables are also
+   specifying UTF-8. When starting Emacs with a GUI, it is not
+   always the case.
+   Great explanation of emacs environment variables [[http://ergoemacs.org/emacs/emacs_env_var_paths.html][here]].
+#+BEGIN_SRC emacs-lisp
+    (setenv "LANG" "fr_FR.UTF-8")
+    (setenv "LC_ALL" "fr_FR.UTF-8")
+#+END_SRC
+
+#+RESULTS:
+: fr_FR.UTF-8
+
 
   Before everything loading my custom setting file
 #+BEGIN_SRC emacs-lisp
@@ -171,39 +209,6 @@
 
   Tabs can be reproduced as frames or window configurations. You can
   use registers to save windows configurations.
-
-* Encoding
-
-   I want UTF-8 everywhere.
-#+BEGIN_SRC emacs-lisp
-  (prefer-coding-system 'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (setq buffer-file-coding-system 'utf-8)
-  (setq erc-server-coding-system '(utf-8 . utf-8))
-  (setq locale-coding-system 'utf-8)
-  (setq org-export-coding-system (quote utf-8))
-  (setq org-export-html-coding-system (quote utf-8))
-  ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-#+End_SRC
-
-#+RESULTS:
-| UTF8_STRING | COMPOUND_TEXT | TEXT | STRING |
-
-   Making sure emacs language environment variables are also
-   specifying UTF-8. When starting Emacs with a GUI, it is not
-   always the case.
-   Great explanation of emacs environment variables [[http://ergoemacs.org/emacs/emacs_env_var_paths.html][here]].
-#+BEGIN_SRC emacs-lisp
-    (setenv "LANG" "fr_FR.UTF-8")
-    (setenv "LC_ALL" "fr_FR.UTF-8")
-#+END_SRC
-
-#+RESULTS:
-: fr_FR.UTF-8
 
 * org-mode
 
@@ -639,11 +644,11 @@ Follow symlinks without asking
   (require-package 'evil-visualstar)
   (global-evil-visualstar-mode t)
 
-  (setq evil-emacs-state-cursor  '("red" box))
-  (setq evil-normal-state-cursor '("gray" box))
-  (setq evil-visual-state-cursor '("gray" box))
-  (setq evil-insert-state-cursor '("gray" bar))
-  (setq evil-motion-state-cursor '("gray" box))
+  (setq evil-emacs-state-cursor  '("#dc4386" box))
+  (setq evil-normal-state-cursor '("#de1900" box))
+  (setq evil-visual-state-cursor '("#380097" box))
+  (setq evil-insert-state-cursor '("#de1900" bar))
+  (setq evil-motion-state-cursor '("#de1900" box))
 
   (evil-ex-define-cmd "W"     'evil-write-all)
 
@@ -1268,8 +1273,8 @@ Hiding some IRC messages.
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
   (require-package 'smart-mode-line)
-  (require-package 'smart-mode-line-powerline-theme)
-  (setq sml/theme 'light)
+  ;; (require-package 'smart-mode-line-powerline-theme)
+  ;; (setq sml/theme 'light)
   (sml/setup)
 #+END_SRC
 

@@ -887,7 +887,7 @@ Follow symlinks without asking
          (subword-mode +1))))
 
    (add-hook 'ruby-mode-hook (lambda ()
-                                 (run-hooks 'ruby-mode-hook)))))
+                                 (run-hooks 'ruby-mode-hook)))
 (define-category ?U "Uppercase")
 (define-category ?u "Lowercase")
 (modify-category-entry (cons ?A ?Z) ?U)

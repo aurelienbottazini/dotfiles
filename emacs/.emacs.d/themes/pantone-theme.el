@@ -24,7 +24,13 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
       (comments-delimiters (if (window-system) "#3d3c38" "black"))
 
       (blue (if (window-system) "#23249e" "blue"))
-      (yellow (if (window-system) "#f6e07c" "yellow"))
+      (yellow (if (window-system) "#ffe863" "yellow"))
+      (red (if (window-system) "#da0039" "red"))
+      (green (if (window-system) "#005c4d" "green"))
+      (violet (if (window-system) "#600b92" "violet"))
+
+      (brightyellow (if (window-system) "#fbf59b" "brightyellow"))
+
 
       ;; (base01 (if (window-system) "#033340" "brightblack"))
       ;; (base02 (if (window-system) "#1d5483" "brightyellow"))
@@ -50,7 +56,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
    `(font-lock-comment-face ((t (:foreground ,comments))))
    `(font-lock-function-name-face ((t (:foreground ,blue))))
-   `(mode-line ((t (:background "#f6e07c" :foreground "black" :inverse-video nil :box nil))))
+   `(mode-line ((t (:background ,yellow :foreground "black" :inverse-video nil :box nil))))
    `(mode-line-inactive ((t (:background "#d1d2d1" :box nil))))
 
 
@@ -64,28 +70,28 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                      :foreground ,base00
    ;;                      :inherit nil
    ;;                      :box (:line-width 2 :style released-button)))))
-   ;; `(custom-state ((t (:foreground ,green))))
-   ;; `(dired-directory ((t (:background ,green :foreground ,base00))))
+   `(custom-state ((t (:foreground ,green))))
+   `(dired-directory ((t (:background ,green :foreground ,background))))
    ;; `(dired-symlink ((t (:foreground ,yellow))))
 
-   ;; `(escape-glyph ((t (:foreground ,green))))
+   `(escape-glyph ((t (:foreground ,green))))
    ;; `(flymake-errline ((t (:background ,red
    ;;                        :foreground ,base00
    ;;                        :underline nil))))
    ;; `(flymake-warnline ((t (:background ,orange
    ;;                         :foreground ,base00
    ;;                         :underline nil))))
-   ;; `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
+   `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
    ;; `(font-lock-constant-face ((t (:weight bold :foreground ,magenta))))
-   ;; `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
-   ;; `(font-lock-keyword-face ((t (:weight bold :foreground ,violet))))
-   ;; `(font-lock-negation-char-face ((t (:foreground ,red))))
-   ;; `(font-lock-preprocessor-face ((t (:foreground ,violet))))
+   `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
+   `(font-lock-keyword-face ((t (:weight bold :foreground ,violet))))
+   `(font-lock-negation-char-face ((t (:foreground ,red))))
+   `(font-lock-preprocessor-face ((t (:foreground ,violet))))
    ;; `(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
    ;; `(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
-   ;; `(font-lock-string-face ((t (:foreground ,green))))
+   `(font-lock-string-face ((t (:foreground ,green))))
    ;; `(font-lock-type-face ((t (:foreground ,orange))))
-   ;; `(font-lock-variable-name-face ((t (:foreground ,red))))
+   `(font-lock-variable-name-face ((t (:foreground ,red))))
    ;; `(font-lock-warning-face ((t (:foreground ,orange :underline t))))
    ;; `(fringe ((t (:foreground ,base04 :background ,base01))))
    ;; `(header-line ((t (:box (:line-width -1 :color nil :style released-button)
@@ -93,16 +99,16 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(highlight ((t (:background ,yellow :foreground ,base00))))
    ;; `(hl-line ((t (:background ,base01 :inherit nil))))
    ;; `(idle-highlight ((t (:background ,base01 :foreground nil))))
-   ;; `(ido-indicator ((t (:background ,red
-   ;;                      :foreground ,base00
-   ;;                      :width condensed))))
-   ;; `(ido-only-match ((t (:background ,green :foreground ,base00))))
-   ;; `(ido-first-match ((t (:background ,green :foreground ,base00))))
-   ;; `(ido-subdir ((t (:foreground ,red))))
-   ;; `(info-menu-star ((t (:foreground ,red))))
-   ;; `(info-xref ((t (:foreground ,green))))
+   `(ido-indicator ((t (:background ,red
+                        :foreground ,background
+                        :width condensed))))
+   `(ido-only-match ((t (:background ,green :foreground ,background))))
+   `(ido-first-match ((t (:background ,green :foreground ,background))))
+   `(ido-subdir ((t (:foreground ,red))))
+   `(info-menu-star ((t (:foreground ,red))))
+   `(info-xref ((t (:foreground ,green))))
    ;; `(isearch ((t (:weight bold :foreground ,base00 :background ,yellow))))
-   ;; `(isearch-fail ((t (:weight bold :foreground ,red))))
+   `(isearch-fail ((t (:weight bold :foreground ,red))))
    ;; `(lazy-highlight ((t (:weight bold
    ;;                       :foreground ,base00
    ;;                       :background ,base07))))
@@ -112,14 +118,14 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(minibuffer-prompt ((t (:foreground ,yellow))))
    ;; `(next-error ((t (:inherit (region)))))
    ;; `(org-hide ((t (:background ,base00 :foreground ,base00))))
-   ;; `(org-code ((t (:foreground ,violet))))
-   ;; `(org-date ((t (:underline t :foreground ,green))))
-   ;; `(org-agenda-date-today ((t (:foreground ,red :weight bold))))
+   `(org-code ((t (:foreground ,violet))))
+   `(org-date ((t (:underline t :foreground ,green))))
+   `(org-agenda-date-today ((t (:foreground ,red :weight bold))))
    ;; `(query-regplace ((t (:inherit (isearch)))))
    ;; `(region ((t (:background ,base02))))
    ;; `(secondary-selection ((t (:background ,base01))))
    ;; `(shadow ((t (:foreground ,base02))))
-   ;; `(trailing-whitespace ((t (:background ,red))))
+   `(trailing-whitespace ((t (:background ,red))))
 
    ;; `(magit-header ((t (:background ,base01
    ;;                     :foreground ,magenta
@@ -136,12 +142,12 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                         :inherit nil
    ;;                         :box (:line-width 2 :style released-button)))))
    ;; `(diff-context ((t (:inherit diff-changed :foreground ,base03))))
-   ;; `(diff-added ((t (:inherit diff-changed
-   ;;                   :foreground ,green
-   ;;                   :background ,base00))))
-   ;; `(diff-removed ((t (:inherit diff-changed
-   ;;                     :foreground ,red
-   ;;                     :background ,base00))))
+   `(diff-added ((t (:inherit diff-changed
+                     :foreground ,green
+                     :background ,background))))
+   `(diff-removed ((t (:inherit diff-changed
+                       :foreground ,red
+                       :background ,background))))
 
    ;; `(outline-2 ((t (:foreground ,orange :height 1.3))))
    ;; `(outline-3 ((t (:foreground ,yellow :height 1.05))))
@@ -149,36 +155,36 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(outline-5 ((t (:foreground ,magenta))))
    ;; `(outline-6 ((t (:foreground ,green))))
    ;; `(outline-7 ((t (:foreground ,cyan))))
-   ;; `(outline-8 ((t (:foreground ,violet))))
+   `(outline-8 ((t (:foreground ,violet))))
 
-   ;; `(success ((t (:background ,green :foreground ,base00 :weight bold))))
-   ;; `(compilation-mode-line-exit ((t (:inherit compilation-info
-   ;;                                   :background ,green
-   ;;                                   :weight bold))))
-   ;; `(compilation-mode-line-fail ((t (:inherit compilation-error
-   ;;                                   :background ,red
-   ;;                                   :weight bold))))
+   `(success ((t (:background ,green :foreground ,background :weight bold))))
+   `(compilation-mode-line-exit ((t (:inherit compilation-info
+                                     :background ,green
+                                     :weight bold))))
+   `(compilation-mode-line-fail ((t (:inherit compilation-error
+                                     :background ,red
+                                     :weight bold))))
 
-   ;; `(erc-dangerous-host-face ((t (:foreground ,red))))
-   ;; `(erc-direct-msg-face ((t (:foreground ,red))))
-   ;; `(erc-error-face ((t (:foreground ,red))))
+   `(erc-dangerous-host-face ((t (:foreground ,red))))
+   `(erc-direct-msg-face ((t (:foreground ,red))))
+   `(erc-error-face ((t (:foreground ,red))))
    ;; `(erc-fool-face ((t (:foreground ,base02))))
    ;; `(erc-header-line ((t (:background ,base07 :foreground ,base00))))
    ;; `(erc-inverse-face ((t (:background ,base04 :foreground ,base00))))
-   ;; `(erc-keyword-face ((t (:foreground ,green :weight bold))))
-   ;; `(erc-nick-msg-face ((t (:foreground ,red :weight bold))))
+   `(erc-keyword-face ((t (:foreground ,green :weight bold))))
+   `(erc-nick-msg-face ((t (:foreground ,red :weight bold))))
    ;; `(erc-notice-face ((t (:foreground ,base02 :weight bold))))
    ;; `(erc-pal-face ((t (:foreground ,magenta :weight bold))))
-   ;; `(erc-prompt-face ((t (:background ,violet
-   ;;                        :foreground ,base00
-   ;;                        :weight bold))))
-   ;; `(erc-timestamp-face ((t (:foreground ,green :weight bold))))
+   `(erc-prompt-face ((t (:background ,violet
+                          :foreground ,background
+                          :weight bold))))
+   `(erc-timestamp-face ((t (:foreground ,green :weight bold))))
    ;; `(erc-input-face ((t (:foreground ,orange))))
    ;; `(erc-my-nick-face ((t (:foreground ,yellow))))
    ;; `(erc-current-nick-face ((t (:foreground ,yellow))))
 
-   ;; `(show-paren-match ((t (:background ,base03 :foreground ,green))))
-   ;; `(show-paren-mismatch ((t (:background ,red :foreground ,base00))))
+   `(show-paren-match ((t (:background ,background :foreground ,green))))
+   `(show-paren-mismatch ((t (:background ,red :foreground ,background))))
    ;; `(sp-show-pair-match-face ((t (:inherit show-paren-match))))
    ;; `(sp-show-pair-mismatch-face ((t (:inherit show-paren-mismatch))))
    ;; `(sp-pair-overlay-face ((t (:inherit sp-show-pair-match-face))))
@@ -194,9 +200,9 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                               :foreground ,base05))))
    ;; `(company-preview-search ((t (:inherit company-preview
    ;;                               :background ,yellow))))
-   ;; `(company-scrollbar-bg ((t (:inherit company-tooltip :background ,violet))))
+   `(company-scrollbar-bg ((t (:inherit company-tooltip :background ,violet))))
    ;; `(company-scrollbar-fg ((t (:background ,blue))))
-   ;; `(company-template-field ((t (:background ,yellow :foreground ,violet))))
+   `(company-template-field ((t (:background ,yellow :foreground ,violet))))
    ;; `(company-tooltip ((t (:background ,base02 :foreground ,base04))))
    ;; `(company-tooltip-annotation ((t (:inherit company-tooltip
    ;;                                   :foreground ,base00))))
@@ -206,26 +212,26 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                                         :foreground ,yellow))))
    ;; `(company-tooltip-selection ((t (:inherit company-tooltip
    ;;                                  :background ,base01))))
-   ;; `(helm-buffer-directory ((t (:background ,base00 :foreground ,red))))
+   `(helm-buffer-directory ((t (:background ,background :foreground ,red))))
    ;; `(helm-buffer-file ((t (:foreground ,base05 :background ,base00))))
    ;; `(helm-buffer-not-saved ((t (:foreground ,orange))))
    ;; `(helm-buffer-process ((t (:foreground ,orange))))
-   ;; `(helm-buffer-saved-out ((t (:background ,base00 :foreground ,red))))
+   `(helm-buffer-saved-out ((t (:background ,background :foreground ,red))))
    ;; `(helm-buffer-size ((t (:foreground ,magenta))))
    ;; `(helm-candidate-number ((t (:background ,yellow :foreground ,base00))))
    ;; `(helm-header ((t (:inherit header-line))))
-   ;; `(helm-prefarg ((t (:foreground ,green))))
-   ;; `(helm-selection ((t (:background ,green
-   ;;                       :foreground ,base00
-   ;;                       :underline nil))))
-   ;; `(helm-separator ((t (:foreground ,red))))
-   ;; `(helm-source-header ((t (:background ,violet
-   ;;                           :foreground ,base00
-   ;;                           :weight bold :height 1.3))))
-   ;; `(helm-visible-mark ((t (:background ,green :foreground ,base00))))
+   `(helm-prefarg ((t (:foreground ,green))))
+   `(helm-selection ((t (:background ,green
+                         :foreground ,background
+                         :underline nil))))
+   `(helm-separator ((t (:foreground ,red))))
+   `(helm-source-header ((t (:background ,violet
+                             :foreground ,background
+                             :weight bold :height 1.3))))
+   `(helm-visible-mark ((t (:background ,green :foreground ,background))))
 
    ;; `(whitespace-empty ((t (:background ,yellow :foreground ,base00))))
-   ;;          `(whitespace-hspace ((t (:background ,red :foreground ,yellow))))
+   ;; `(whitespace-hspace ((t (:background ,red :foreground ,yellow))))
    ;; `(whitespace-indentation ((t (:background ,red :foreground ,yellow))))
    ;; `(whitespace-line ((t (:foreground ,red))))
    ;; `(whitespace-newline ((t (:foreground ,base02 :weight normal))))
@@ -236,12 +242,12 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(whitespace-trailing ((t (:background ,red
    ;;                            :foreground ,yellow :weight bold))))
 
-   ;;  `(markdown-header-face ((t (:foreground ,red :weight bold))))
-   ;;  `(markdown-header-face-1 ((t (:inherit outline-1))))
-   ;;  `(markdown-header-face-2 ((t (:inherit outline-2))))
-   ;;  `(markdown-header-face-3 ((t (:inherit outline-3))))
-   ;;  `(markdown-header-face-4 ((t (:inherit outline-4))))
-   ;;  `(markdown-header-face-5 ((t (:inherit outline-5))))
+    `(markdown-header-face ((t (:foreground ,red :weight bold))))
+    `(markdown-header-face-1 ((t (:inherit outline-1))))
+    `(markdown-header-face-2 ((t (:inherit outline-2))))
+    `(markdown-header-face-3 ((t (:inherit outline-3))))
+    `(markdown-header-face-4 ((t (:inherit outline-4))))
+    `(markdown-header-face-5 ((t (:inherit outline-5))))
    )
 
   (custom-theme-set-variables

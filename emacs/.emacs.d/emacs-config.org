@@ -1300,6 +1300,7 @@ Hiding some IRC messages.
   (require-package 'diminish)
   (diminish 'which-key-mode)
   (diminish 'flycheck-mode)
+  (diminish 'flyspell-mode)
   (diminish 'abbrev-mode)
   (diminish 'auto-revert-mode)
   (diminish 'visual-line-mode)
@@ -1307,9 +1308,11 @@ Hiding some IRC messages.
   (diminish 'evil-commentary-mode)
   (diminish 'my-keys-minor-mode)
   (diminish 'yas-minor-mode)
+  (diminish 'rainbow-mode)
 #+end_src
 
 #+RESULTS:
+|
 
 
 #+begin_src emacs-lisp

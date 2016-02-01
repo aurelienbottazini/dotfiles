@@ -148,7 +148,7 @@
 
 (define-abbrev-table 'ruby-mode-abbrev-table
   '(
-    ("env" "#!/usr/bin/env ruby" nil 2)
+    ("!env" "#!/usr/bin/env ruby" nil 2)
    ))
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())

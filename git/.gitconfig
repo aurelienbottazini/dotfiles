@@ -33,6 +33,7 @@
         upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
         fall = !git-fetch-all-remote
         rm-from-history = !git-remove-from-history
+        find-commits-for-file = log --all --
 [credential]
 	helper = osxkeychain
 [difftool]

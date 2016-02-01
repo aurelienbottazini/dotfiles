@@ -20,11 +20,11 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 (let (
       (background (if (window-system) "#f1f2f1" nil))
       (foreground (if (window-system) "#212822" black))
-      (blue (if (window-system) "#23249e" "blue"))
       (comments (if (window-system) "#616568" "black"))
       (comments-delimiters (if (window-system) "#3d3c38" "black"))
 
-      (yellow (if (window-system) "#f4f867" "yellow"))
+      (blue (if (window-system) "#23249e" "blue"))
+      (yellow (if (window-system) "#f6e07c" "yellow"))
 
       ;; (base01 (if (window-system) "#033340" "brightblack"))
       ;; (base02 (if (window-system) "#1d5483" "brightyellow"))
@@ -50,9 +50,9 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
    `(font-lock-comment-face ((t (:foreground ,comments))))
    `(font-lock-function-name-face ((t (:foreground ,blue))))
+   `(mode-line ((t (:background "#f6e07c" :foreground "black" :inverse-video nil :box nil))))
+   `(mode-line-inactive ((t (:background "#d1d2d1" :box nil))))
 
-   `(mode-line ((t (:background ,yellow :foreground "#212822" :box (:line-width 2 :color "#f1f2f1")))))
-   `(mode-line-inactive ((t (:background "black"))))
 
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta

@@ -644,6 +644,9 @@ Follow symlinks without asking
   (require-package 'evil-visualstar)
   (global-evil-visualstar-mode t)
 
+  (require-package 'evil-indent-plus)
+  (evil-indent-plus-default-bindings)
+
   (setq evil-emacs-state-cursor  '("#dc4386" box))
   (setq evil-normal-state-cursor '("#de1900" box))
   (setq evil-visual-state-cursor '("#380097" box))
@@ -853,61 +856,73 @@ Follow symlinks without asking
 ** Ruby
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'yaml-mode)
-  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+    (require-package 'yaml-mode)
+    (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
-  (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.cap\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Podfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.podspec\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Puppetfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Berksfile\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Appraisals\\'" . ruby-mode))
+    (require-package 'enh-ruby-mode)
+    (require-package 'bundler)
+    (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
+    (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+    (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+    (require-package 'ruby-interpolation)
+    (require 'ruby-interpolation) ; adds hook to enable ruby-interpolation with ruby-mode
 
-  (require-package 'ruby-interpolation)
-  (require 'ruby-interpolation) ; adds hook to enable ruby-interpolation with ruby-mode
+    (require-package 'inf-ruby)
+    (require 'inf-ruby)
 
-  (require-package 'inf-ruby)
-  (require 'inf-ruby)
+    ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
+    ;; make it easier to work with global gnu tags
+    (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
+    (eval-after-load 'enh-ruby-mode
+      '(progn
+         (defun ruby-mode-defaults ()
+           (inf-ruby-minor-mode +1)
+           ;; CamelCase aware editing operations
+           (subword-mode +1))))
 
-  ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
-  ;; make it easier to work with global gnu tags
-  (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
-  (eval-after-load 'ruby-mode
+     (add-hook 'enh-ruby-mode-hook (lambda ()
+                                   (run-hooks 'ruby-mode-hook)))
+  (define-category ?U "Uppercase")
+  (define-category ?u "Lowercase")
+  (modify-category-entry (cons ?A ?Z) ?U)
+  (modify-category-entry (cons ?a ?z) ?u)
+  (make-variable-buffer-local 'evil-cjk-word-separating-categories)
+  (add-hook 'subword-mode-hook
+          (lambda ()
+              (if subword-mode
+                  (push '(?u . ?U) evil-cjk-word-separating-categories)
+              (setq evil-cjk-word-separating-categories
+                      (default-value 'evil-cjk-word-separating-categories)))))
+
+  (eval-after-load 'enh-ruby-mode
     '(progn
-       (defun ruby-mode-defaults ()
-         (inf-ruby-minor-mode +1)
-         ;; CamelCase aware editing operations
-         (subword-mode +1))))
+       ;; use the standard Dired bindings as a base
+       (evil-define-key 'normal enh-ruby-mode-map
+         "[m" 'enh-ruby-beginning-of-defun
+         "]m" 'enh-ruby-end-of-defun
+         )))
 
-   (add-hook 'ruby-mode-hook (lambda ()
-                                 (run-hooks 'ruby-mode-hook)))
-(define-category ?U "Uppercase")
-(define-category ?u "Lowercase")
-(modify-category-entry (cons ?A ?Z) ?U)
-(modify-category-entry (cons ?a ?z) ?u)
-(make-variable-buffer-local 'evil-cjk-word-separating-categories)
-(add-hook 'subword-mode-hook
-        (lambda ()
-            (if subword-mode
-                (push '(?u . ?U) evil-cjk-word-separating-categories)
-            (setq evil-cjk-word-separating-categories
-                    (default-value 'evil-cjk-word-separating-categories)))))
 #+END_SRC
 
 #+RESULTS:
-| (lambda nil (run-hooks (quote ruby-mode-hook))) | ruby-interpolation-mode | inf-ruby-minor-mode | rspec-enable-appropriate-mode |
+| Auxiliary keymap for Normal state | (93 keymap (109 . enh-ruby-end-of-defun)) | (91 keymap (109 . enh-ruby-beginning-of-defun)) |
 
 #+BEGIN_SRC emacs-lisp
   (require-package 'projectile-rails)
@@ -1162,7 +1177,7 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
 
-  (define-key evil-normal-state-map (kbd "]]") 'ggtags-find-tag-dwim)
+  (define-key evil-normal-state-map (kbd "gt") 'ggtags-find-tag-dwim)
 
   (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
 
@@ -1280,6 +1295,22 @@ Hiding some IRC messages.
 
 #+RESULTS:
 : t
+
+#+begin_src emacs-lisp
+  (require-package 'diminish)
+  (diminish 'which-key-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'abbrev-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'visual-line-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'evil-commentary-mode)
+  (diminish 'my-keys-minor-mode)
+  (diminish 'yas-minor-mode)
+#+end_src
+
+#+RESULTS:
+
 
 #+begin_src emacs-lisp
   (require 'cl)
@@ -1519,12 +1550,4 @@ Navigate between windows configurations with C-c Left/Right Arrow
 #+end_src
 
 #+RESULTS:
-=t
-==~/.emacs.d/themes
-=* Tags
-#+begin_src emacs-lisp
-  (require-package 'ggtags)
-  (add-hook 'ruby-mode-hook 'ggtags-mode)
-#+end_src
-
-#+RESULTS:
+: t

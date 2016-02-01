@@ -8,7 +8,7 @@
  '(company-idle-delay 0.2)
  '(custom-safe-themes
    (quote
-    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "d0274f587a35fb882864a595a62c84e3cea744c356eaf7fac3f9103a86caab78" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("9b9fef458986a1ad01e9b99f90bcc20696e2e33d8d1d9996b4722dab5fd22e29" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(electric-pair-mode nil)
  '(elscreen-tab-display-control nil)
  '(emojify-display-style (quote unicode))
@@ -32,5 +32,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(mode-line ((t (:background "#f6e07c" :foreground "black" :inverse-video nil :box nil))))
- '(mode-line-inactive ((t (:background "#d1d2d1" :box nil)))))
+ )

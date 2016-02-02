@@ -650,7 +650,7 @@ Follow symlinks without asking
 
   (setq evil-emacs-state-cursor  '("#dc4388" box))
   (setq evil-normal-state-cursor '("#da0039" box))
-  (setq evil-visual-state-cursor '("#380097" box))
+  (setq evil-visual-state-cursor '("#8fdcf1" box))
   (setq evil-insert-state-cursor '("#da0039" bar))
   (setq evil-motion-state-cursor '("#da0039" box))
 
@@ -1297,12 +1297,12 @@ Hiding some IRC messages.
                                      (face-foreground 'mode-line)))))
   (add-hook 'post-command-hook
             (lambda ()
-              (let ((color (cond ((minibufferp) '("#fbf59b" . "#212822"))
+              (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
                                  ((evil-insert-state-p) '("#a4eddd" . "#212822"))
                                  ((evil-visual-state-p) '("#8fdcf1" . "#212822"))
                                  ((evil-emacs-state-p)  '("#d6daeb" . "#212822"))
                                  ((buffer-modified-p)   '("#ffcfd8" . "#212822"))
-                                 (t '("#fbf59b" . "#212822")))))
+                                 (t '("#fff7c7" . "#212822")))))
                     (set-face-background 'mode-line (car color))
                     (set-face-foreground 'mode-line (cdr color)))))
 #+END_SRC

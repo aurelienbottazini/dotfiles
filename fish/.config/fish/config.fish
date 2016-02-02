@@ -13,6 +13,7 @@ alias ec "emacsclient -ta ''"
 alias ef "emacsclient -ncq -a ''"
 alias dcr 'docker-compose run'
 alias dcrs 'docker-compose run --service-ports'
+alias dru 'docker-compose run --service-ports web bundle exec rails s'
 alias delete_docker_containers 'docker rm (docker ps -a -q)'
 alias delete_docker_images 'docker rmi (docker images -q)'
 

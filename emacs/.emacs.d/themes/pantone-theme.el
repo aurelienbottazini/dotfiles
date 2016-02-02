@@ -28,7 +28,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
       (red (if (window-system) "#da0039" "red"))
       (green (if (window-system) "#005c4d" "green"))
       (violet (if (window-system) "#600b92" "violet"))
-      (orange (if (window-system) "#ffaa0e" "orange"))
+      (orange (if (window-system) "#e6a547" "orange"))
       (rose (if (window-system) "#dc4388" "rose"))
 
 
@@ -60,9 +60,26 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
    `(font-lock-comment-face ((t (:foreground ,comments))))
    `(font-lock-function-name-face ((t (:foreground ,blue))))
-   `(mode-line ((t (:background ,yellow :foreground "black" :inverse-video nil :box nil))))
-   `(mode-line-inactive ((t (:background "#d1d2d1" :box nil))))
+   `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
+   `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
+   `(font-lock-keyword-face ((t (:weight bold :foreground ,violet))))
+   `(font-lock-negation-char-face ((t (:foreground ,red))))
+   `(font-lock-preprocessor-face ((t (:foreground ,violet))))
+   `(font-lock-constant-face ((t (:weight bold :foreground ,rose))))
+   `(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
+   `(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
+   `(font-lock-string-face ((t (:foreground ,green))))
+   `(font-lock-type-face ((t (:foreground ,orange))))
+   `(font-lock-variable-name-face ((t (:foreground ,red))))
+   `(font-lock-warning-face ((t (:foreground ,orange :underline t))))
 
+   `(mode-line ((t (:background ,yellow :foreground "black" :inverse-video nil :box nil))))
+
+   `(mode-line-inactive ((t (:background "#d1d2d1" :box nil))))
+   `(escape-glyph ((t (:foreground ,green))))
+
+   `(custom-state ((t (:foreground ,green))))
+   `(dired-directory ((t (:foreground ,blue))))
 
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
@@ -74,29 +91,14 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                      :foreground ,base00
    ;;                      :inherit nil
    ;;                      :box (:line-width 2 :style released-button)))))
-   `(custom-state ((t (:foreground ,green))))
-   `(dired-directory ((t (:background ,green :foreground ,background))))
    ;; `(dired-symlink ((t (:foreground ,yellow))))
 
-   `(escape-glyph ((t (:foreground ,green))))
    ;; `(flymake-errline ((t (:background ,red
    ;;                        :foreground ,base00
    ;;                        :underline nil))))
    ;; `(flymake-warnline ((t (:background ,orange
    ;;                         :foreground ,base00
    ;;                         :underline nil))))
-   `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
-   ;; `(font-lock-constant-face ((t (:weight bold :foreground ,magenta))))
-   `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
-   `(font-lock-keyword-face ((t (:weight bold :foreground ,violet))))
-   `(font-lock-negation-char-face ((t (:foreground ,red))))
-   `(font-lock-preprocessor-face ((t (:foreground ,violet))))
-   ;; `(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
-   ;; `(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
-   `(font-lock-string-face ((t (:foreground ,green))))
-   ;; `(font-lock-type-face ((t (:foreground ,orange))))
-   `(font-lock-variable-name-face ((t (:foreground ,red))))
-   ;; `(font-lock-warning-face ((t (:foreground ,orange :underline t))))
    ;; `(fringe ((t (:foreground ,base04 :background ,base01))))
    ;; `(header-line ((t (:box (:line-width -1 :color nil :style released-button)
    ;;                    :foreground ,base00 :background ,base07))))

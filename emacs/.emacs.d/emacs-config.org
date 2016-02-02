@@ -376,7 +376,6 @@ I don’t need confirmation before evaluating code blocks.
 
 #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
-  (global-visual-line-mode)
 #+END_SRC
 
 #+RESULTS:
@@ -1023,10 +1022,10 @@ Follow symlinks without asking
 #+RESULTS:
 : helm-projectile
 
-** Neotree
+** Project-explorer
 
 #+begin_src emacs-lisp
-  (require-package 'neotree)
+  (require-package 'project-explorer)
 #+end_src
 
 #+RESULTS:
@@ -1130,7 +1129,7 @@ Follow symlinks without asking
   (evil-leader/set-key "S" 'helm-multi-swoop)
 
 
-  (define-key my-keys-minor-mode-map (kbd "s-\\")    'neotree-toggle)
+  (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
   (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
   (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
   (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
@@ -1177,7 +1176,8 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
 
-  (define-key evil-normal-state-map (kbd "gt") 'ggtags-find-tag-dwim)
+  (require-package 'helm-gtags)
+  (define-key evil-normal-state-map (kbd "gt") 'helm-gtags-dwim)
 
   (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
 
@@ -1287,15 +1287,27 @@ Hiding some IRC messages.
 
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
-  (require-package 'smart-mode-line)
-  (require-package 'powerline)
-  (require-package 'smart-mode-line-powerline-theme)
-  (setq sml/theme 'light-powerline)
-  (sml/setup)
+   (require-package 'smart-mode-line)
+   (require-package 'powerline)
+   ;; (require-package 'smart-mode-line-powerline-theme)
+   ;; (setq sml/theme 'respectful)
+   (sml/setup)
+  ;; change mode-line color by evil state
+    (lexical-let ((default-color (cons (face-background 'mode-line)
+                                       (face-foreground 'mode-line))))
+      (add-hook 'post-command-hook
+        (lambda ()
+          (let ((color (cond ((minibufferp) default-color)
+                             ((evil-insert-state-p) '("#e80000" . "#ffffff"))
+                             ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+                             ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+                             (t default-color))))
+            (set-face-background 'mode-line (car color))
+            (set-face-foreground 'mode-line (cdr color))))))
 #+END_SRC
 
 #+RESULTS:
-: t
+| (lambda (&rest --cl-rest--) (apply (quote (lambda (G56402) (let ((color (cond ((minibufferp) (symbol-value G56402)) ((evil-insert-state-p) (quote (#e80000 . #ffffff))) ((evil-emacs-state-p) (quote (#444488 . #ffffff))) ((buffer-modified-p) (quote (#006fa0 . #ffffff))) (t (symbol-value G56402))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color))))) (quote --default-color--) --cl-rest--)) | winner-save-old-configurations | (lambda (&rest --cl-rest--) (apply (quote (lambda (G56401) (let ((color (cond ((minibufferp) (symbol-value G56401)) ((evil-insert-state-p) (quote (#e80000 . #ffffff))) ((evil-emacs-state-p) (quote (#444488 . #ffffff))) ((buffer-modified-p) (quote (#006fa0 . #ffffff))) (t (symbol-value G56401))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color))))) (quote --default-color--) --cl-rest--)) | sml/generate-position-help | evil-repeat-post-hook |
 
 #+begin_src emacs-lisp
   (require-package 'diminish)

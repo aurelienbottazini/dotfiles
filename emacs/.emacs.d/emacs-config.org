@@ -1297,12 +1297,12 @@ Hiding some IRC messages.
                                      (face-foreground 'mode-line)))))
   (add-hook 'post-command-hook
             (lambda ()
-              (let ((color (cond ((minibufferp) '("#ffe863" . "#212822"))
-                                 ((evil-insert-state-p) '("#da0039" . "#f1f2f1"))
-                                 ((evil-visual-state-p) '("#23249e" . "#f1f2f1"))
-                                 ((evil-emacs-state-p)  '("#444488" . "#f1f2f1"))
-                                 ((buffer-modified-p)   '("#dc4388" . "#f1f2f1"))
-                                 (t '("#ffe863" . "#212822")))))
+              (let ((color (cond ((minibufferp) '("#fbf59b" . "#212822"))
+                                 ((evil-insert-state-p) '("#a4eddd" . "#212822"))
+                                 ((evil-visual-state-p) '("#8fdcf1" . "#212822"))
+                                 ((evil-emacs-state-p)  '("#d6daeb" . "#212822"))
+                                 ((buffer-modified-p)   '("#ffcfd8" . "#212822"))
+                                 (t '("#fbf59b" . "#212822")))))
                     (set-face-background 'mode-line (car color))
                     (set-face-foreground 'mode-line (cdr color)))))
 #+END_SRC

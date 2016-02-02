@@ -122,6 +122,8 @@
 
    Useful variables to know in which environment I am in.
 #+BEGIN_SRC emacs-lisp
+  (setq custom-safe-themes t)
+
   (setq *is-a-windows* (eq system-type 'windows-nt))
   (setq *is-a-mac* (eq system-type 'darwin))
   ;; my computer is fast, don't halt redrawing if a new input event arrives

@@ -1309,22 +1309,11 @@ Hiding some IRC messages.
 | (lambda nil (let ((color (cond ((minibufferp) (quote (#ffe863 . #212822))) ((evil-insert-state-p) (quote (#da0039 . #f1f2f1))) ((evil-visual-state-p) (quote (#23249e . #f1f2f1))) ((evil-emacs-state-p) (quote (#444488 . #f1f2f1))) ((buffer-modified-p) (quote (#dc4388 . #f1f2f1))) (t (quote (#ffe863 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | winner-save-old-configurations | sml/generate-position-help | evil-repeat-post-hook |
 
 #+begin_src emacs-lisp
-  (require-package 'diminish)
-  (diminish 'which-key-mode)
-  (diminish 'flycheck-mode)
-  (diminish 'flyspell-mode)
-  (diminish 'abbrev-mode)
-  (diminish 'auto-revert-mode)
-  (diminish 'visual-line-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'evil-commentary-mode)
-  (diminish 'my-keys-minor-mode)
-  (diminish 'yas-minor-mode)
-  (diminish 'rainbow-mode)
+  (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill")))
 #+end_src
 
 #+RESULTS:
-|
+| FlyC- | yas | my-keys | s-/ | Undo-Tree | WK | ARev | Abbrev | Fill |
 
 
 #+begin_src emacs-lisp

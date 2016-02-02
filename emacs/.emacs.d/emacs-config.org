@@ -708,7 +708,7 @@ Follow symlinks without asking
          (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
          (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
 
-  (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end")
+  (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
 
 #+END_SRC
 
@@ -1288,8 +1288,9 @@ Hiding some IRC messages.
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
   (require-package 'smart-mode-line)
-  ;; (require-package 'smart-mode-line-powerline-theme)
-  ;; (setq sml/theme 'light)
+  (require-package 'powerline)
+  (require-package 'smart-mode-line-powerline-theme)
+  (setq sml/theme 'light-powerline)
   (sml/setup)
 #+END_SRC
 

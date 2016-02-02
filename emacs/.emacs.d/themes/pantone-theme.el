@@ -28,6 +28,10 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
       (red (if (window-system) "#da0039" "red"))
       (green (if (window-system) "#005c4d" "green"))
       (violet (if (window-system) "#600b92" "violet"))
+      (orange (if (window-system) "#ffaa0e" "orange"))
+      (rose (if (window-system) "#dc4388" "rose"))
+
+
 
       (brightyellow (if (window-system) "#fbf59b" "brightyellow"))
 

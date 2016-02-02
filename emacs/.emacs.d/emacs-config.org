@@ -646,11 +646,11 @@ Follow symlinks without asking
   (require-package 'evil-indent-plus)
   (evil-indent-plus-default-bindings)
 
-  (setq evil-emacs-state-cursor  '("#dc4386" box))
-  (setq evil-normal-state-cursor '("#de1900" box))
+  (setq evil-emacs-state-cursor  '("#dc4388" box))
+  (setq evil-normal-state-cursor '("#da0039" box))
   (setq evil-visual-state-cursor '("#380097" box))
-  (setq evil-insert-state-cursor '("#de1900" bar))
-  (setq evil-motion-state-cursor '("#de1900" box))
+  (setq evil-insert-state-cursor '("#da0039" bar))
+  (setq evil-motion-state-cursor '("#da0039" box))
 
   (evil-ex-define-cmd "W"     'evil-write-all)
 
@@ -1287,27 +1287,26 @@ Hiding some IRC messages.
 
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
-   (require-package 'smart-mode-line)
-   (require-package 'powerline)
-   ;; (require-package 'smart-mode-line-powerline-theme)
-   ;; (setq sml/theme 'respectful)
-   (sml/setup)
+  (require-package 'smart-mode-line)
+  (setq sml/theme 'respectful)
+  (sml/setup)
   ;; change mode-line color by evil state
-    (lexical-let ((default-color (cons (face-background 'mode-line)
-                                       (face-foreground 'mode-line))))
-      (add-hook 'post-command-hook
-        (lambda ()
-          (let ((color (cond ((minibufferp) default-color)
-                             ((evil-insert-state-p) '("#e80000" . "#ffffff"))
-                             ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
-                             ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-                             (t default-color))))
-            (set-face-background 'mode-line (car color))
-            (set-face-foreground 'mode-line (cdr color))))))
+  (lexical-let ((default-color (cons (face-background 'mode-line)
+                                     (face-foreground 'mode-line)))))
+  (add-hook 'post-command-hook
+            (lambda ()
+              (let ((color (cond ((minibufferp) '("#ffe863" . "#212822"))
+                                 ((evil-insert-state-p) '("#da0039" . "#f1f2f1"))
+                                 ((evil-visual-state-p) '("#23249e" . "#f1f2f1"))
+                                 ((evil-emacs-state-p)  '("#444488" . "#f1f2f1"))
+                                 ((buffer-modified-p)   '("#dc4388" . "#f1f2f1"))
+                                 (t '("#ffe863" . "#212822")))))
+                    (set-face-background 'mode-line (car color))
+                    (set-face-foreground 'mode-line (cdr color)))))
 #+END_SRC
 
 #+RESULTS:
-| (lambda (&rest --cl-rest--) (apply (quote (lambda (G56402) (let ((color (cond ((minibufferp) (symbol-value G56402)) ((evil-insert-state-p) (quote (#e80000 . #ffffff))) ((evil-emacs-state-p) (quote (#444488 . #ffffff))) ((buffer-modified-p) (quote (#006fa0 . #ffffff))) (t (symbol-value G56402))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color))))) (quote --default-color--) --cl-rest--)) | winner-save-old-configurations | (lambda (&rest --cl-rest--) (apply (quote (lambda (G56401) (let ((color (cond ((minibufferp) (symbol-value G56401)) ((evil-insert-state-p) (quote (#e80000 . #ffffff))) ((evil-emacs-state-p) (quote (#444488 . #ffffff))) ((buffer-modified-p) (quote (#006fa0 . #ffffff))) (t (symbol-value G56401))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color))))) (quote --default-color--) --cl-rest--)) | sml/generate-position-help | evil-repeat-post-hook |
+| (lambda nil (let ((color (cond ((minibufferp) (quote (#ffe863 . #212822))) ((evil-insert-state-p) (quote (#da0039 . #f1f2f1))) ((evil-visual-state-p) (quote (#23249e . #f1f2f1))) ((evil-emacs-state-p) (quote (#444488 . #f1f2f1))) ((buffer-modified-p) (quote (#dc4388 . #f1f2f1))) (t (quote (#ffe863 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | winner-save-old-configurations | sml/generate-position-help | evil-repeat-post-hook |
 
 #+begin_src emacs-lisp
   (require-package 'diminish)

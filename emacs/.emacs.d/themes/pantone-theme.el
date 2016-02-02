@@ -19,6 +19,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 
 (let (
       (background (if (window-system) "#f1f2f1" nil))
+      (background1 (if (window-system) "#e9eae8" nil))
       (foreground (if (window-system) "#212822" black))
       (comments (if (window-system) "#616568" "black"))
       (comments-delimiters (if (window-system) "#3d3c38" "black"))
@@ -81,6 +82,11 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(custom-state ((t (:foreground ,green))))
    `(dired-directory ((t (:foreground ,blue))))
 
+   `(org-code ((t (:foreground ,violet))))
+   `(org-block-background ((t (:background ,background1))))
+   `(org-date ((t (:underline t :foreground ,green))))
+   `(org-agenda-date-today ((t (:foreground ,red :weight bold))))
+
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
    ;;               :inherit nil
@@ -124,9 +130,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(minibuffer-prompt ((t (:foreground ,yellow))))
    ;; `(next-error ((t (:inherit (region)))))
    ;; `(org-hide ((t (:background ,base00 :foreground ,base00))))
-   `(org-code ((t (:foreground ,violet))))
-   `(org-date ((t (:underline t :foreground ,green))))
-   `(org-agenda-date-today ((t (:foreground ,red :weight bold))))
    ;; `(query-regplace ((t (:inherit (isearch)))))
    ;; `(region ((t (:background ,base02))))
    ;; `(secondary-selection ((t (:background ,base01))))

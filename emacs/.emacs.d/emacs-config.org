@@ -3,6 +3,7 @@
 #+BEGIN_SRC emacs-lisp :exports both
   (emacs-version)
 #+END_SRC
+
 * Encoding
 
    I want UTF-8 everywhere.
@@ -857,59 +858,59 @@ Follow symlinks without asking
 ** Ruby
 
 #+BEGIN_SRC emacs-lisp
-    (require-package 'yaml-mode)
-    (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+  (require-package 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
-    (require-package 'enh-ruby-mode)
-    (require-package 'bundler)
-    (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
-    (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-    (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
-    (require-package 'ruby-interpolation)
-    (require 'ruby-interpolation) ; adds hook to enable ruby-interpolation with ruby-mode
+  (require-package 'enh-ruby-mode)
+  (require-package 'bundler)
+  (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+  (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+  (require-package 'ruby-interpolation)
+  (require 'ruby-interpolation) ; adds hook to enable ruby-interpolation with ruby-mode
 
-    (require-package 'inf-ruby)
-    (require 'inf-ruby)
+  (require-package 'inf-ruby)
+  (require 'inf-ruby)
 
-    ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
-    ;; make it easier to work with global gnu tags
-    (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
-    (eval-after-load 'enh-ruby-mode
-      '(progn
-         (defun ruby-mode-defaults ()
-           (inf-ruby-minor-mode +1)
-           ;; CamelCase aware editing operations
-           (subword-mode +1))))
+  ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
+  ;; make it easier to work with global gnu tags
+  (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
+  (eval-after-load 'enh-ruby-mode
+    '(progn
+       (defun ruby-mode-defaults ()
+         (inf-ruby-minor-mode +1)
+         ;; CamelCase aware editing operations
+         (subword-mode +1))))
 
-     (add-hook 'enh-ruby-mode-hook (lambda ()
-                                   (run-hooks 'ruby-mode-hook)))
+  (add-hook 'enh-ruby-mode-hook (lambda ()
+                                  (run-hooks 'ruby-mode-hook)))
   (define-category ?U "Uppercase")
   (define-category ?u "Lowercase")
   (modify-category-entry (cons ?A ?Z) ?U)
   (modify-category-entry (cons ?a ?z) ?u)
   (make-variable-buffer-local 'evil-cjk-word-separating-categories)
   (add-hook 'subword-mode-hook
-          (lambda ()
+            (lambda ()
               (if subword-mode
                   (push '(?u . ?U) evil-cjk-word-separating-categories)
-              (setq evil-cjk-word-separating-categories
+                (setq evil-cjk-word-separating-categories
                       (default-value 'evil-cjk-word-separating-categories)))))
 
   (eval-after-load 'enh-ruby-mode
@@ -920,6 +921,11 @@ Follow symlinks without asking
          "]m" 'enh-ruby-end-of-defun
          )))
 
+  (add-hook 'enh-ruby-mode-hook
+            (lambda ()
+              (set (make-local-variable imenu-generic-expression)
+                   '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
+                     ))))
 #+END_SRC
 
 #+RESULTS:
@@ -1129,7 +1135,7 @@ Follow symlinks without asking
   (evil-leader/set-key "p" 'helm-projectile-switch-project)
   (evil-leader/set-key "s" 'helm-swoop)
   (evil-leader/set-key "S" 'helm-multi-swoop)
-
+  (evil-leader/set-key "i" 'helm-imenu)
 
   (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
   (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
@@ -1308,7 +1314,8 @@ Hiding some IRC messages.
 #+END_SRC
 
 #+RESULTS:
-| (lambda nil (let ((color (cond ((minibufferp) (quote (#ffe863 . #212822))) ((evil-insert-state-p) (quote (#da0039 . #f1f2f1))) ((evil-visual-state-p) (quote (#23249e . #f1f2f1))) ((evil-emacs-state-p) (quote (#444488 . #f1f2f1))) ((buffer-modified-p) (quote (#dc4388 . #f1f2f1))) (t (quote (#ffe863 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | winner-save-old-configurations | sml/generate-position-help | evil-repeat-post-hook |
+| winner-save-old-configurations | (lambda nil (let ((color (cond ((minibufferp) (quote (#fff7c7 . #212822))) ((evil-insert-state-p) (quote (#a4eddd . #212822))) ((evil-visual-state-p) (quote (#8fdcf1 . #212822))) ((evil-emacs-state-p) (quote (#d6daeb . #212822))) ((buffer-modified-p) (quote (#ffcfd8 . #212822))) (t (quote (#fff7c7 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | sml/generate-position-help | evil-repeat-post-hook |
+
 
 #+begin_src emacs-lisp
   (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill")))

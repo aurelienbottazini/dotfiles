@@ -19,8 +19,8 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 
 (let (
       (background (if (window-system) "#f1f2f1" nil))
-      (background1 (if (window-system) "#e9eae8" nil))
-      (foreground (if (window-system) "#212822" black))
+      (background1 (if (window-system) "#e9eae8" "brightblack"))
+      (foreground (if (window-system) "#212822" "black"))
       (comments (if (window-system) "#616568" "black"))
       (comments-delimiters (if (window-system) "#3d3c38" "black"))
 
@@ -30,34 +30,24 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
       (green (if (window-system) "#005c4d" "green"))
       (violet (if (window-system) "#600b92" "violet"))
       (orange (if (window-system) "#e6a547" "orange"))
-      (rose (if (window-system) "#dc4388" "rose"))
 
-
-
-      (brightyellow (if (window-system) "#fbf59b" "brightyellow"))
-
-
-      ;; (base01 (if (window-system) "#033340" "brightblack"))
-      ;; (base02 (if (window-system) "#1d5483" "brightyellow"))
-      ;; (base03 (if (window-system) "#2872b2" "brightblue"))
-      ;; (base04 (if (window-system) "#d3f9ee" "white"))
-      ;; (base05 (if (window-system) "#a6f3dd" "brightgreen"))
-      ;; (base06 (if (window-system) "#effffe" "brightwhite"))
-      ;; (base07 (if (window-system) "#fffed9" "brightcyan"))
-      ;; (red (if (window-system) "#ff694d" "red"))
-      ;; (orange (if (window-system) "#f5b55f" "brightred"))
-      ;; (yellow (if (window-system) "#fffe4e" "yellow"))
-      ;; (magenta (if (window-system) "#afc0fd" "brightmagenta"))
-      ;; (violet (if (window-system) "#96a5d9" "magenta"))
-      ;; (blue (if (window-system) "#bad6e2" "blue"))
-      ;; (cyan (if (window-system) "#d2f1ff" "cyan"))
-      ;; (green (if (window-system) "#68f6cb" "green"))
-      )
+      (rose (if (window-system) "#dc4388" "brighttred"))
+      (brightyellow (if (window-system) "#fbf59b" "brightyellow")))
   (custom-theme-set-faces
    'pantone
 
    `(default ((t (:background ,background :foreground ,foreground))))
    `(outline-1 ((t (:foreground ,blue :weight bold))))
+   `(outline-2 ((t (:foreground ,violet :weight bold))))
+   ;; `(outline-3 ((t (:foreground ,yellow :height 1.05))))
+   ;; `(outline-4 ((t (:foreground ,blue))))
+   ;; `(outline-5 ((t (:foreground ,magenta))))
+   ;; `(outline-6 ((t (:foreground ,green))))
+   ;; `(outline-7 ((t (:foreground ,cyan))))
+   `(outline-8 ((t (:foreground ,violet))))
+
+   `(success ((t (:background ,green :foreground ,background :weight bold))))
+
    `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
    `(font-lock-comment-face ((t (:foreground ,comments))))
    `(font-lock-function-name-face ((t (:foreground ,blue))))
@@ -87,6 +77,9 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(org-date ((t (:underline t :foreground ,green))))
    `(org-agenda-date-today ((t (:foreground ,red :weight bold))))
 
+   `(fringe ((t (:foreground ,foreground :background ,background1))))
+   `(region ((t (:background ,yellow))))
+
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
    ;;               :inherit nil
@@ -105,7 +98,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(flymake-warnline ((t (:background ,orange
    ;;                         :foreground ,base00
    ;;                         :underline nil))))
-   ;; `(fringe ((t (:foreground ,base04 :background ,base01))))
    ;; `(header-line ((t (:box (:line-width -1 :color nil :style released-button)
    ;;                    :foreground ,base00 :background ,base07))))
    ;; `(highlight ((t (:background ,yellow :foreground ,base00))))
@@ -131,7 +123,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(next-error ((t (:inherit (region)))))
    ;; `(org-hide ((t (:background ,base00 :foreground ,base00))))
    ;; `(query-regplace ((t (:inherit (isearch)))))
-   ;; `(region ((t (:background ,base02))))
    ;; `(secondary-selection ((t (:background ,base01))))
    ;; `(shadow ((t (:foreground ,base02))))
    `(trailing-whitespace ((t (:background ,red))))
@@ -158,15 +149,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
                        :foreground ,red
                        :background ,background))))
 
-   ;; `(outline-2 ((t (:foreground ,orange :height 1.3))))
-   ;; `(outline-3 ((t (:foreground ,yellow :height 1.05))))
-   ;; `(outline-4 ((t (:foreground ,blue))))
-   ;; `(outline-5 ((t (:foreground ,magenta))))
-   ;; `(outline-6 ((t (:foreground ,green))))
-   ;; `(outline-7 ((t (:foreground ,cyan))))
-   `(outline-8 ((t (:foreground ,violet))))
-
-   `(success ((t (:background ,green :foreground ,background :weight bold))))
    `(compilation-mode-line-exit ((t (:inherit compilation-info
                                      :background ,green
                                      :weight bold))))

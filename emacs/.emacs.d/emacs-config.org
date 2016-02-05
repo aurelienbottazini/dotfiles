@@ -1296,8 +1296,10 @@ Hiding some IRC messages.
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
   (require-package 'smart-mode-line)
+  (setq sml/no-confirm-load-theme t)
   (setq sml/theme 'respectful)
-  (sml/setup)
+  (add-hook 'after-init-hook #'sml/setup)
+
   ;; change mode-line color by evil state
   (lexical-let ((default-color (cons (face-background 'mode-line)
                                      (face-foreground 'mode-line)))))
@@ -1305,9 +1307,8 @@ Hiding some IRC messages.
             (lambda ()
               (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
                                  ((evil-insert-state-p) '("#a4eddd" . "#212822"))
-                                 ((evil-visual-state-p) '("#8fdcf1" . "#212822"))
-                                 ((evil-emacs-state-p)  '("#d6daeb" . "#212822"))
-                                 ((buffer-modified-p)   '("#ffcfd8" . "#212822"))
+                                 ((evil-visual-state-p) '("#ffe863" . "#212822"))
+                                 ((evil-emacs-state-p)  '("#600b92" . "#f1f2f1"))
                                  (t '("#fff7c7" . "#212822")))))
                     (set-face-background 'mode-line (car color))
                     (set-face-foreground 'mode-line (cdr color)))))

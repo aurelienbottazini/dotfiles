@@ -1315,7 +1315,7 @@ Hiding some IRC messages.
 #+END_SRC
 
 #+RESULTS:
-| winner-save-old-configurations | (lambda nil (let ((color (cond ((minibufferp) (quote (#fff7c7 . #212822))) ((evil-insert-state-p) (quote (#a4eddd . #212822))) ((evil-visual-state-p) (quote (#8fdcf1 . #212822))) ((evil-emacs-state-p) (quote (#d6daeb . #212822))) ((buffer-modified-p) (quote (#ffcfd8 . #212822))) (t (quote (#fff7c7 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | sml/generate-position-help | evil-repeat-post-hook |
+| sml/generate-position-help | winner-save-old-configurations | (lambda nil (let ((color (cond ((minibufferp) (quote (#fff7c7 . #212822))) ((evil-insert-state-p) (quote (#a4eddd . #212822))) ((evil-visual-state-p) (quote (#ffe863 . #212822))) ((evil-emacs-state-p) (quote (#600b92 . #f1f2f1))) (t (quote (#fff7c7 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | evil-repeat-post-hook |
 
 
 #+begin_src emacs-lisp

@@ -65,7 +65,7 @@
 
 (require-package 'use-package)
 (require 'use-package)
-
+(setq use-package-always-ensure t)
 #+END_SRC
 
 #+RESULTS:
@@ -267,39 +267,11 @@ Making sure I have the latest /Emacs/.
    (setq org-html-htmlize-output-type (quote css)))
 #+END_SRC
 
-*** Publishing
-  C-c C-e for publishing options or run ~org-publish-project~
-#+BEGIN_SRC emacs-lisp
-  (use-package ox-publish
-   :config
-   (setq org-publish-project-alist
-        '(("org-notes-to-html"
-           :base-directory "~/projects/aurelienbottazini.com/_org/"
-           :base-extension "org"
-           :publishing-directory "~/projects/aurelienbottazini.com/"
-           :recursive t
-           :publishing-function org-html-publish-to-html
-           :headline-levels 4
-           :auto-preamble t
-           :html-extension "html"
-           :with-toc nil
-           :body-only t
-           )
-        ("org-notes-to-pdf"
-           :base-directory "~/projects/aurelienbottazini.com/_org/"
-           :base-extension "org"
-           :publishing-directory "~/projects/aurelienbottazini.com/"
-           :recursive t
-           :publishing-function org-latex-publish-to-pdf
-           :headline-levels 4
-           :auto-preamble t
-           :with-toc nil
-           ))))
-#+END_SRC
 * UI
 
 #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
+  (column-number-mode)
 #+END_SRC
 
 #+RESULTS:
@@ -344,8 +316,9 @@ Whenever an external process changes a file underneath emacs, and there
 
  Better print menus.
 #+BEGIN_SRC emacs-lisp
-  (require 'printing)
-  (pr-update-menus t)
+  (use-package printing
+   :config
+   (pr-update-menus t))
 #+END_SRC
 
 #+RESULTS:
@@ -370,8 +343,9 @@ Whenever an external process changes a file underneath emacs, and there
  When a region selected, certain character like ~"~ and ~(~
  will /wrap/ region between quotes, parenthesis and so on.
 #+BEGIN_SRC emacs-lisp
-  (require-package 'wrap-region)
-  (turn-on-wrap-region-mode)
+  (use-package wrap-region
+   :config
+   (turn-on-wrap-region-mode))
 #+END_SRC
 
 #+RESULTS:
@@ -497,8 +471,8 @@ Follow symlinks without asking
   Different buffer names when a new buffer has the same name as
   an existing one.
   #+BEGIN_SRC emacs-lisp
-     (require 'uniquify "uniquify")
-     (setq uniquify-buffer-name-style 'forward)
+     (require 'uniquify)
+      (setq uniquify-buffer-name-style 'forward)
   #+END_SRC
 
   #+RESULTS:
@@ -518,8 +492,9 @@ Follow symlinks without asking
 * guide-key
    Get a visual aid for key sequences.
    #+BEGIN_SRC emacs-lisp
-    (require-package 'which-key)
-    (which-key-mode)
+    (use-package which-key
+     :config
+     (which-key-mode))
    #+END_SRC
 
    #+RESULTS:
@@ -540,8 +515,9 @@ Follow symlinks without asking
 * Better undo
   Supercharge C-x u. Use ~d~ to see a diff
 #+begin_src emacs-lisp
-  (require-package 'undo-tree)
-  (global-undo-tree-mode)
+  (use-package undo-tree
+   :config
+   (global-undo-tree-mode))
 #+end_src
 
 #+RESULTS:
@@ -550,34 +526,19 @@ Follow symlinks without asking
 * Vim
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'evil-leader)
-  (require 'evil-leader)
-  (global-evil-leader-mode)
-  (setq evil-toggle-key "C-c e")
-  (require-package 'evil)
+  (use-package evil-leader
+   :config
+   (global-evil-leader-mode)
+   (setq evil-toggle-key "C-c e"))
 
-  (require 'evil)
-  (evil-mode 1)
-  (require-package 'evil-magit)
-  (require 'evil-magit)
-  (require-package 'evil-surround)
-  (global-evil-surround-mode 1)
-  (require-package 'evil-commentary)
-  (evil-commentary-mode)
-  (require-package 'evil-visualstar)
-  (global-evil-visualstar-mode t)
-
-  (require-package 'evil-indent-plus)
-  (evil-indent-plus-default-bindings)
-
+  (use-package evil
+   :config
+   (evil-mode 1)
   (setq evil-emacs-state-cursor  '("#dc4388" box))
   (setq evil-normal-state-cursor '("#da0039" box))
   (setq evil-visual-state-cursor '("#8fdcf1" box))
   (setq evil-insert-state-cursor '("#da0039" bar))
   (setq evil-motion-state-cursor '("#da0039" box))
-
-  (evil-ex-define-cmd "W"     'evil-write-all)
-
 (evil-declare-key 'normal org-mode-map
     "gk" 'outline-up-heading
     "gj" 'outline-next-visible-heading
@@ -597,29 +558,7 @@ Follow symlinks without asking
     "<" 'org-metaleft ; out-dent
     ">" 'org-metaright ; indent
     )
-  (require-package 'relative-line-numbers)
-  ;; (global-relative-line-numbers-mode)
-  (column-number-mode)
-  (defun better-relative-number-format (offset)
-    "Another formatting function"
-    (format "%3d " (abs offset)))
-  (setq relative-line-numbers-format 'better-relative-number-format)
-  (require-package 'evil-search-highlight-persist)
-  (require 'evil-search-highlight-persist)
-  (global-evil-search-highlight-persist t)
-
-  (require-package 'evil-matchit)
-  (global-evil-matchit-mode 1)
-
-  ;; (setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
-  ;; (setq evil-emacs-state-modes nil)
-  (eval-after-load 'dired
-    '(progn
-       ;; use the standard Dired bindings as a base
-       (evil-define-key 'normal dired-mode-map
-         "-" 'dired-up-directory
-         )))
-
+  (evil-ex-define-cmd "W"     'evil-write-all)
   (defmacro define-and-bind-text-object (key start-regex end-regex)
     (let ((inner-name (make-symbol "inner-name"))
           (outer-name (make-symbol "outer-name")))
@@ -633,10 +572,51 @@ Follow symlinks without asking
 
   (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
 
+  (eval-after-load 'dired
+    '(progn
+       ;; use the standard Dired bindings as a base
+       (evil-define-key 'normal dired-mode-map
+         "-" 'dired-up-directory
+         )))
+
+)
+
+  (use-package evil-magit)
+  (use-package evil-surround
+   :config
+   (global-evil-surround-mode 1))
+
+  (use-package evil-commentary
+   :config
+   (evil-commentary-mode))
+
+  (use-package evil-visualstar
+   :config
+   (global-evil-visualstar-mode t))
+
+  (use-package evil-indent-plus
+   :config
+   (evil-indent-plus-default-bindings))
+
+  (use-package relative-line-numbers
+   :config
+   (defun better-relative-number-format (offset)
+    "Another formatting function"
+    (format "%3d " (abs offset)))
+  (setq relative-line-numbers-format 'better-relative-number-format))
+
+  (use-package evil-search-highlight-persist
+   :config
+   (global-evil-search-highlight-persist t))
+
+  (use-package evil-matchit
+   :config
+  (global-evil-matchit-mode 1))
+
 #+END_SRC
 
 #+RESULTS:
-: outer-name
+: t
 
 * Registers
   List of frequently visited files. I can access them using
@@ -659,15 +639,16 @@ Follow symlinks without asking
   Hexadecimal strings colored with corresponding colors in certain
   modes
 #+BEGIN_SRC emacs-lisp
-  (require-package 'rainbow-mode)
-  (add-hook 'prog-mode-hook 'rainbow-mode)
-  (setq rainbow-html-colors-major-mode-list
-   (quote
-    (html-mode css-mode php-mode nxml-mode xml-mode less-css-mode scss-mode)))
+  (use-package rainbow-mode
+   :config
+   (add-hook 'prog-mode-hook 'rainbow-mode)
+   (setq rainbow-html-colors-major-mode-list
+     (quote
+       (html-mode css-mode php-mode nxml-mode xml-mode less-css-mode scss-mode))))
 #+END_SRC
 
 #+RESULTS:
-| html-mode | css-mode | php-mode | nxml-mode | xml-mode | less-css-mode | scss-mode |
+: t
 
 #+BEGIN_SRC emacs-lisp
   (setq comment-auto-fill-only-comments t)
@@ -682,12 +663,13 @@ Follow symlinks without asking
 
    ;; let's see the 80ish column
    (setq-default fill-column 80)
-   (require-package 'fill-column-indicator)
-   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+   (use-package fill-column-indicator
+    :config
+    (add-hook 'prog-mode-hook 'turn-on-fci-mode))
 #+END_SRC
 
 #+RESULTS:
-| turn-on-fci-mode | flyspell-prog-mode | (lambda nil (turn-on-auto-fill)) | rainbow-mode |
+: t
 
 ** CSS
 #+BEGIN_SRC emacs-lisp
@@ -707,29 +689,31 @@ Follow symlinks without asking
 
 ** SASS
 #+BEGIN_SRC emacs-lisp
-  (require-package 'scss-mode)
-  (autoload 'scss-mode "scss-mode")
-  (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
-  (add-hook 'scss-mode-hook 'my-css-mode-setup)
+  (use-package scss-mode
+   :config
+   (autoload 'scss-mode "scss-mode")
+   (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+   (add-hook 'scss-mode-hook 'my-css-mode-setup))
 
-  (require-package 'sass-mode)
+  (use-package sass-mode)
 #+END_SRC
 
 #+RESULTS:
 
 ** shell
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '("\\zshrc$" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\zsh$" . shell-script-mode))
+  (add-to-list 'auto-mode-alist '("\\zshrc$" . shell-script-mode))
+  (add-to-list 'auto-mode-alist '("\\zsh$" . shell-script-mode))
 
-(require-package 'fish-mode)
+  (use-package fish-mode)
 #+END_SRC
 
 #+RESULTS:
 
 ** markdown
 #+BEGIN_SRC emacs-lisp
-  (require-package 'markdown-mode)
+  (use-package markdown-mode
+   :config
   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
   (setq markdown-imenu-generic-expression
@@ -748,19 +732,21 @@ Follow symlinks without asking
             (lambda ()
               (setq imenu-generic-expression markdown-imenu-generic-expression)
               ;; (turn-on-flyspell)
-              (writegood-mode t)))
+              (writegood-mode t))))
 #+END_SRC
 
 #+RESULTS:
-| lambda | nil | (setq imenu-generic-expression markdown-imenu-generic-expression) | (writegood-mode t) |
+: t
 
 ** JavaScript
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'js2-mode)
+  (use-package js2-mode
+   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (setq js2-highlight-level 3)
-  (require-package 'typescript-mode)
+  (setq js2-highlight-level 3))
+
+  (use-package typescript-mode)
 
 #+END_SRC
 
@@ -768,12 +754,14 @@ Follow symlinks without asking
 : 3
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'coffee-mode)
-  (require-package 'highlight-indentation)
+  (use-package coffee-mode
+   :config
   (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
   (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+  (custom-set-variables '(coffee-tab-width 2)))
 
-  (custom-set-variables '(coffee-tab-width 2))
+  (use-package highlight-indentation)
+
 #+END_SRC
 
 #+RESULTS:
@@ -781,11 +769,12 @@ Follow symlinks without asking
 ** Ruby
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'yaml-mode)
-  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+  (use-package yaml-mode
+   :config
+   (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode)))
 
-  (require-package 'enh-ruby-mode)
-  (require-package 'bundler)
+  (use-package enh-ruby-mode
+   :config
   (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
   (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
@@ -806,14 +795,7 @@ Follow symlinks without asking
   (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
   (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
-  (require-package 'ruby-interpolation)
-  (require 'ruby-interpolation) ; adds hook to enable ruby-interpolation with ruby-mode
 
-  (require-package 'inf-ruby)
-  (require 'inf-ruby)
-
-  ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
-  ;; make it easier to work with global gnu tags
   (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
   (eval-after-load 'enh-ruby-mode
     '(progn
@@ -824,6 +806,9 @@ Follow symlinks without asking
 
   (add-hook 'enh-ruby-mode-hook (lambda ()
                                   (run-hooks 'ruby-mode-hook)))
+
+  ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
+  ;; make it easier to work with global gnu tags
   (define-category ?U "Uppercase")
   (define-category ?u "Lowercase")
   (modify-category-entry (cons ?A ?Z) ?U)
@@ -849,36 +834,46 @@ Follow symlinks without asking
               (set (make-local-variable imenu-generic-expression)
                    '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
                      ))))
+  (add-hook 'enh-ruby-mode-hook 'rspec-mode))
+
+  (use-package bundler)
+
+  (use-package ruby-interpolation)
+  (use-package inf-ruby)
+
 #+END_SRC
 
 #+RESULTS:
-| Auxiliary keymap for Normal state | (93 keymap (109 . enh-ruby-end-of-defun)) | (91 keymap (109 . enh-ruby-beginning-of-defun)) |
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'projectile-rails)
-  (require-package 'rspec-mode)
-  (add-hook 'ruby-mode-hook 'rspec-mode)
-  (add-hook 'projectile-mode-hook 'projectile-rails-on)
+  (use-package projectile-rails
+   :config
+   (add-hook 'projectile-mode-hook 'projectile-rails-on))
+
+  (use-package rspec-mode)
 #+END_SRC
 
 #+RESULTS:
-| projectile-rails-on |
 
    Hitting ~M-;~ twice adds an xmpfilter comment.
    Hitting xmp keybinding will put the output in this comment
 #+begin_src emacs-lisp
-  (require 'rcodetools)
-  (evil-leader/set-key-for-mode 'ruby-mode
-    "x"  'xmp
-    )
+  (use-package rcodetools
+   :load-path "/site-lisp/rcodetools.el"
+   :pin manual
+   :ensure nil
+   :config
+   (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp))
 #+end_src
 
 #+RESULTS:
+: t
 
 ** Haml
 #+BEGIN_SRC emacs-lisp
- (require-package 'haml-mode)
- (add-hook 'haml-mode-hook '(lambda () (highlight-indentation-mode)))
+ (use-package haml-mode
+  :config
+  (add-hook 'haml-mode-hook '(lambda () (highlight-indentation-mode))))
 #+END_SRC
 
 #+RESULTS:
@@ -887,7 +882,7 @@ Follow symlinks without asking
 ** Docker
 
 #+begin_src emacs-lisp
-  (require-package 'dockerfile-mode)
+  (use-package dockerfile-mode)
 #+end_src
 
 #+RESULTS:
@@ -899,15 +894,17 @@ Follow symlinks without asking
   buffer listing your errors next to your code.
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'flycheck)
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  (require-package 'flycheck-typescript-tslint)
-  (eval-after-load 'flycheck
-    '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
+  (use-package flycheck
+   :config
+   (add-hook 'after-init-hook #'global-flycheck-mode)
+   (require-package 'flycheck-typescript-tslint)
+   (eval-after-load 'flycheck
+     '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup)))
 
 #+END_SRC
 
 #+RESULTS:
+: t
 
   Don't forget to install:
   + Ruby
@@ -933,33 +930,37 @@ Follow symlinks without asking
 * Navigation
 ** Helm
 #+BEGIN_SRC emacs-lisp
-  (require-package 'helm)
-      (require 'helm-config)
-  (require-package 'helm-ag)
+  (use-package helm
+   :config
+   (require 'helm-config))
+  (use-package helm-ag)
 #+END_SRC
 
 #+RESULTS:
 
 ** Projectile
 #+BEGIN_SRC emacs-lisp
-  (require-package 'ag) ;; ultra fast search
-  (require-package 'projectile)
-  (require-package 'helm-projectile)
-  (setq projectile-completion-system 'helm)
-  (helm-projectile-on)
-  (projectile-global-mode)
-  (setq projectile-indexing-method 'alien)
-  (setq projectile-enable-caching t)
-  (setq projectile-switch-project-action 'helm-projectile)
+  (use-package ag) ;; ultra fast search
+  (use-package projectile
+   :config
+   (projectile-global-mode)
+   (setq projectile-indexing-method 'alien)
+   (setq projectile-enable-caching t)
+   (setq projectile-switch-project-action 'helm-projectile))
+
+  (use-package helm-projectile
+   :config
+   (setq projectile-completion-system 'helm)
+   (helm-projectile-on))
 #+END_SRC
 
 #+RESULTS:
-: helm-projectile
+: t
 
 ** Project-explorer
 
 #+begin_src emacs-lisp
-  (require-package 'project-explorer)
+  (use-package project-explorer)
 #+end_src
 
 #+RESULTS:
@@ -1092,18 +1093,19 @@ Follow symlinks without asking
       "c"  'org-archive-subtree
       )
 
-    (require-package 'key-chord)
-    (require 'key-chord)
-    (key-chord-mode 1)
-    (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
-    (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state)
+    (use-package key-chord
+     :config
+     (key-chord-mode 1)
+     (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+     (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
 
     (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
 
     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
-    (require-package 'windresize)
-    (define-key evil-normal-state-map (kbd "C-w r") 'windresize)
+    (use-package windresize
+     :config
+     (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
 
     (define-key evil-normal-state-map (kbd "g t") 'other-frame)
 
@@ -1184,18 +1186,18 @@ Follow symlinks without asking
 
    ~brew install languagetool~
 #+BEGIN_SRC emacs-lisp
-(require-package 'langtool)
-(require 'langtool)
+(use-package langtool
+ :config
 (setq langtool-language-tool-jar "/usr/local/Cellar/languagetool/2.8/libexec/languagetool-commandline.jar"
       langtool-mother-tongue "en"
       ;; rules: https://www.languagetool.org/languages/
       langtool-disabled-rules '("WHITESPACE_RULE"
                                 "EN_UNPAIRED_BRACKETS"
-                                "COMMA_PARENTHESIS_WHITESPACE"))
+                                "COMMA_PARENTHESIS_WHITESPACE")))
 #+END_SRC
 
 #+RESULTS:
-| WHITESPACE_RULE | EN_UNPAIRED_BRACKETS | COMMA_PARENTHESIS_WHITESPACE |
+: t
 
 ** ~writegood~
 
@@ -1210,14 +1212,14 @@ Follow symlinks without asking
    Reader's Digest magazine has a readability index of about 65. Time
    magazine scores about 52
 #+BEGIN_SRC emacs-lisp
-  (require-package 'writegood-mode)
+  (use-package writegood-mode)
 #+END_SRC
 
 #+RESULTS:
 
 ** Synonyms
 #+begin_src emacs-lisp
-  (require-package 'synosaurus)
+  (use-package synosaurus)
 #+end_src
 
 #+RESULTS:
@@ -1244,10 +1246,11 @@ Hiding some IRC messages.
 
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
-  (require-package 'smart-mode-line)
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'respectful)
-  (add-hook 'after-init-hook #'sml/setup)
+  (use-package smart-mode-line
+   :config
+   (setq sml/no-confirm-load-theme t)
+   (setq sml/theme 'respectful)
+   (add-hook 'after-init-hook #'sml/setup)
 
   ;; change mode-line color by evil state
   (lexical-let ((default-color (cons (face-background 'mode-line)
@@ -1261,18 +1264,11 @@ Hiding some IRC messages.
                                  (t '("#fff7c7" . "#212822")))))
                     (set-face-background 'mode-line (car color))
                     (set-face-foreground 'mode-line (cdr color)))))
+  (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
 #+END_SRC
 
 #+RESULTS:
-| sml/generate-position-help | winner-save-old-configurations | (lambda nil (let ((color (cond ((minibufferp) (quote (#fff7c7 . #212822))) ((evil-insert-state-p) (quote (#a4eddd . #212822))) ((evil-visual-state-p) (quote (#ffe863 . #212822))) ((evil-emacs-state-p) (quote (#600b92 . #f1f2f1))) (t (quote (#fff7c7 . #212822)))))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line) (cdr color)))) | evil-repeat-post-hook |
-
-
-#+begin_src emacs-lisp
-  (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill")))
-#+end_src
-
-#+RESULTS:
-| FlyC- | yas | my-keys | s-/ | Undo-Tree | WK | ARev | Abbrev | Fill |
+: t
 
 
 #+begin_src emacs-lisp
@@ -1318,10 +1314,11 @@ Hiding some IRC messages.
 ** Yasnippets
 
 #+BEGIN_SRC emacs-lisp
-  (require-package 'yasnippet)
+  (use-package yasnippet
+   :config
   (yas-global-mode 1)
   (setq yas-snippet-dirs
-        '("~/.emacs.d/snippets"))
+        '("~/.emacs.d/snippets")))
   ;; I use company mode for snippets
   ;; (define-key yas-minor-mode-map [(tab)]        nil)
   ;; (define-key yas-minor-mode-map (kbd "TAB")    nil)
@@ -1329,12 +1326,12 @@ Hiding some IRC messages.
 #+END_SRC
 
 #+RESULTS:
-| ~/.emacs.d/snippets |
+: t
 
 ** Company
 
 #+begin_src emacs-lisp
-  (require-package 'company)
+  (use-package company)
   ;; (global-company-mode t)
   ;; (setq company-minimum-prefix-length 2)
   ;; (setq company-backends '((company-yasnippet company-dabbrev-code company-dabbrev company-keywords company-files)))
@@ -1472,7 +1469,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
    C-c C-r send selected text to the bottom
    C-c C-q send selected text to trash file
 #+begin_src emacs-lisp
-  (require-package 'palimpsest)
+  (use-package palimpsest)
 #+end_src
 
 #+RESULTS:
@@ -1506,14 +1503,17 @@ Navigate between windows configurations with C-c Left/Right Arrow
 
 * colors
 #+begin_src emacs-lisp
-  (require-package 'rainbow-identifiers)
-  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-  (require-package 'rainbow-delimiters)
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  (use-package rainbow-identifiers
+   :config
+   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+
+  (use-package rainbow-delimiters
+   :config
+   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
   (setq custom-theme-directory "~/.emacs.d/themes")
   (load-theme 'pantone)
-  (require-package 'load-theme-buffer-local)
+  (use-package load-theme-buffer-local)
 #+end_src
 
 #+RESULTS:

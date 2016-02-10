@@ -5,12 +5,12 @@
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(blink-matching-paren (quote jump))
- '(coffee-tab-width 2 t)
+ '(coffee-tab-width 2)
  '(column-number-mode t)
- '(company-idle-delay 0.2 t)
+ '(company-idle-delay 0.2)
  '(custom-safe-themes
    (quote
-    ("b9899647a9911aeaef0f8188f03e9a4842c6dc2c168e899e78b0dbd83ebcadf3" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("497592d471ac50f60022f1223fece5f4e99af8e5a08b9281935c7c2a3ec92a65" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(electric-pair-mode nil)
  '(elscreen-tab-display-control nil t)
  '(emojify-display-style (quote unicode) t)
@@ -20,7 +20,7 @@
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
  '(global-emojify-mode t t)
- '(js2-basic-offset 2 t)
+ '(js2-basic-offset 2)
  '(linum-relative-current-symbol "" t)
  '(magit-push-always-verify nil t)
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
@@ -32,7 +32,7 @@
  '(sml/name-width 44)
  '(sml/vc-mode-show-backend nil)
  '(tool-bar-mode nil)
- '(typescript-indent-level 2 t)
+ '(typescript-indent-level 2)
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

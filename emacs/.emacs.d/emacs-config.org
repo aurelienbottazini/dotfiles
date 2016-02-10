@@ -179,16 +179,17 @@
 
 * Fonts
   #+BEGIN_SRC emacs-lisp
-    (set-frame-font "PragmataPro-14")
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (progn
-                  ;; (set-face-attribute 'default nil :font  "PragmataPro-14" )
-                  (set-frame-font "PragmataPro-14"))))
-    (setq default-frame-alist '((font . "PragmataPro-14")))
+    ;; (set-default-font "Monoid-12")
+    ;; (set-frame-font "Monoid-12")
+    ;; (add-hook 'after-make-frame-functions
+    ;;           (lambda (frame)
+    ;;             (progn
+    ;;                (set-face-attribute 'default nil :font  "Monoid-12" )
+    ;;               (set-frame-font "Monoid-12"))))
   #+END_SRC
 
   #+RESULTS:
+  | --set-emoji-font | evil-init-esc | (lambda (frame) (progn (set-face-attribute (quote default) nil :font Monoid-12) (set-frame-font Monoid-12))) |
 
 * Copy paste
 #+BEGIN_SRC emacs-lisp
@@ -839,6 +840,8 @@ Follow symlinks without asking
   (require-package 'js2-mode)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (setq js2-highlight-level 3)
+  (require-package 'typescript-mode)
+
 #+END_SRC
 
 #+RESULTS:
@@ -978,10 +981,13 @@ Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
   (require-package 'flycheck)
   (add-hook 'after-init-hook #'global-flycheck-mode)
+  (require-package 'flycheck-typescript-tslint)
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
+
 #+END_SRC
 
 #+RESULTS:
-| global-flycheck-mode | magit-auto-revert-mode--maybe-turn-off-after-init | magit-startup-asserts | magit-version | #[0 \302\303\304\305\n\300@\306N\300A\203 \307\202 \310\311\312\300A\313#%\314#\207 [(invalid-read-syntax )) user-init-file display-warning initialization format An error occurred while loading `%s':\n\n%s%s%s\n\nTo ensure normal operation, you should investigate and remove the\ncause of the error in your initialization file.  Start Emacs with\nthe `--debug-init' option to view a complete error backtrace. error-message :   mapconcat #[257 \300\301"\207 [prin1-to-string t] 4 \n\n(fn S)] ,  :warning] 11 \n\n(fn)] |
 
   Don't forget to install:
   + Ruby
@@ -1120,79 +1126,93 @@ Follow symlinks without asking
 
 ** Bindings
 #+BEGIN_SRC emacs-lisp
-  (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-leader "<SPC>")
 
-  (evil-leader/set-key "gs" 'magit-status)
-  (require-package 'git-link)
-  (evil-leader/set-key "gl" 'git-link)
-  (evil-leader/set-key "gh" 'magit-log-buffer-file)
+    (evil-leader/set-key "gs" 'magit-status)
+    (require-package 'git-link)
+    (evil-leader/set-key "gl" 'git-link)
+    (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
-  (evil-leader/set-key "h" 'helm-mini)
-  (evil-leader/set-key "f" 'helm-projectile-ag)
-  (evil-leader/set-key "e" 'dired-jump)
-  (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-  (evil-leader/set-key "b" 'helm-bookmarks)
-  (evil-leader/set-key "p" 'helm-projectile-switch-project)
-  (evil-leader/set-key "s" 'helm-swoop)
-  (evil-leader/set-key "S" 'helm-multi-swoop)
-  (evil-leader/set-key "i" 'helm-imenu)
 
-  (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
-  (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
-  (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
-  (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
+    (defun visit-term-buffer ()
+      "Create or visit a terminal buffer."
+      (interactive)
+      (if (not (get-buffer "*ansi-term*"))
+          (progn
+            (split-window-sensibly (selected-window))
+            (other-window 1)
+            (load-theme-buffer-local 'pantone-term (ansi-term (getenv "SHELL"))
 
-  (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
-  (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
+  ))
+        (switch-to-buffer-other-window "*ansi-term*")))
+    (evil-leader/set-key "vs" 'visit-term-buffer)
 
-  (evil-leader/set-key-for-mode 'org-mode
-    "t"  'org-show-todo-tree
-    "a"  'org-agenda
-    "c"  'org-archive-subtree
-    )
+    (evil-leader/set-key "h" 'helm-mini)
+    (evil-leader/set-key "f" 'helm-projectile-ag)
+    (evil-leader/set-key "e" 'dired-jump)
+    (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+    (evil-leader/set-key "b" 'helm-bookmarks)
+    (evil-leader/set-key "p" 'helm-projectile-switch-project)
+    (evil-leader/set-key "s" 'helm-swoop)
+    (evil-leader/set-key "S" 'helm-multi-swoop)
+    (evil-leader/set-key "i" 'helm-imenu)
 
-  (require-package 'key-chord)
-  (require 'key-chord)
-  (key-chord-mode 1)
-  (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
-  (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state)
+    (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
+    (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
+    (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
+    (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-  (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
+    (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
+    (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+    (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
-  (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
-  (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
-  (require-package 'windresize)
-  (define-key evil-normal-state-map (kbd "C-w r") 'windresize)
+    (evil-leader/set-key-for-mode 'org-mode
+      "t"  'org-show-todo-tree
+      "a"  'org-agenda
+      "c"  'org-archive-subtree
+      )
 
-  (define-key evil-normal-state-map (kbd "g t") 'other-frame)
+    (require-package 'key-chord)
+    (require 'key-chord)
+    (key-chord-mode 1)
+    (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state)
 
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
+    (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
 
-  (define-key evil-normal-state-map (kbd "C-o") 'previous-buffer)
-  (define-key evil-normal-state-map (kbd "C-i") 'next-buffer)
+    (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
+    (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
+    (require-package 'windresize)
+    (define-key evil-normal-state-map (kbd "C-w r") 'windresize)
 
-  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+    (define-key evil-normal-state-map (kbd "g t") 'other-frame)
 
-  (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
-  (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
-  (define-key evil-normal-state-map (kbd "[e") 'previous-error)
-  (define-key evil-normal-state-map (kbd "]e") 'next-error)
-  (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
-  (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-  (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-  (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
 
-  (require-package 'helm-gtags)
-  (define-key evil-normal-state-map (kbd "gt") 'helm-gtags-dwim)
+    (define-key evil-normal-state-map (kbd "C-o") 'previous-buffer)
+    (define-key evil-normal-state-map (kbd "C-i") 'next-buffer)
 
-  (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+    (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+    (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-  (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
-  (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
-  (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
-  (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
+    (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
+    (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
+    (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+    (define-key evil-normal-state-map (kbd "]e") 'next-error)
+    (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+    (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+    (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+    (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+
+    (require-package 'helm-gtags)
+    (define-key evil-normal-state-map (kbd "gt") 'helm-gtags-dwim)
+
+    (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+
+    (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
+    (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
+    (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
+    (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 #+END_SRC
 
 #+RESULTS:
@@ -1211,6 +1231,15 @@ Follow symlinks without asking
 
 #+RESULTS:
 : gls
+
+* Terminal
+#+begin_src emacs-lisp
+  (setq term-default-bg-color "#332f21")
+  (setq term-default-fg-color "#d9d9d6")
+#+end_src
+
+#+RESULTS:
+: #d9d9d6
 
 * Spell Check
     https://joelkuiper.eu/spellcheck_emacs
@@ -1416,6 +1445,7 @@ Hiding some IRC messages.
   Emacs Help is accessible with ~F1~
 
 ** Org Tips
+   + http://orgmode.org/manual/Breaking-down-tasks.html
    + Disable ~_~ subscripts with ~C-C C-x \~
    + ~C-c ~~ to alternate between org-table and table.el
    + Sometimes you want to escape some characters
@@ -1561,7 +1591,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
 
   (setq custom-theme-directory "~/.emacs.d/themes")
   (load-theme 'pantone)
+  (require-package 'load-theme-buffer-local)
 #+end_src
 
 #+RESULTS:
-: t

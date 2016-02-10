@@ -14,6 +14,8 @@ npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli
 npm install -g instant-markdown-d
+npm install -g typescript
+npm install -g tslint
 
 gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail

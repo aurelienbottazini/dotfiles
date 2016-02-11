@@ -1524,8 +1524,10 @@ Navigate between windows configurations with C-c Left/Right Arrow
   (use-package yatemplate
    :init
    (auto-insert-mode t)
+   (setq auto-insert t)
    :config
    (setq auto-insert-alist nil)
+   (setq auto-insert-query nil)
    (yatemplate-fill-alist))
 #+end_src
 

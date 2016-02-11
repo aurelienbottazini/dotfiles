@@ -712,7 +712,11 @@ Follow symlinks without asking
 
 ** markdown
 #+BEGIN_SRC emacs-lisp
+
   (use-package markdown-mode
+   :init
+   (require 'livedown)
+
    :config
   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
@@ -727,12 +731,15 @@ Follow symlinks without asking
           ("h6"   "^###### \\(.*\\)$" 1)
           ("fn"   "^\\[\\^\\(.*\\)\\]" 1)
           ))
-
   (add-hook 'markdown-mode-hook
             (lambda ()
               (setq imenu-generic-expression markdown-imenu-generic-expression)
               ;; (turn-on-flyspell)
+              (livedown:preview)
               (writegood-mode t))))
+
+
+
 #+END_SRC
 
 #+RESULTS:

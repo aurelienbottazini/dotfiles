@@ -64,7 +64,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-variable-name-face ((t (:foreground ,red))))
    `(font-lock-warning-face ((t (:foreground ,orange :underline t))))
 
-   `(mode-line ((t (:background ,yellow :foreground "black" :inverse-video nil :box nil))))
+   `(mode-line ((t (:background "#fff7c7" :foreground "black" :inverse-video nil :box nil))))
 
    `(mode-line-inactive ((t (:background "#d1d2d1" :box nil))))
    `(escape-glyph ((t (:foreground ,green))))

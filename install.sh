@@ -13,7 +13,7 @@ brew install hub
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli
-npm install -g instant-markdown-d
+npm install -g livedown
 npm install -g typescript
 npm install -g tslint
 

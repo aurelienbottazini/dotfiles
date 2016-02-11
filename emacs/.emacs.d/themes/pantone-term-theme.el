@@ -39,6 +39,8 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    'pantone
 
    `(default ((t (:background ,background-term :foreground ,background))))
+   `(mode-line ((t (:background "#fff7c7" :foreground "black" :inverse-video nil :box nil))))
+
    )
 
   (custom-theme-set-variables

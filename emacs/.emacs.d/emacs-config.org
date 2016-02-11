@@ -1518,3 +1518,15 @@ Navigate between windows configurations with C-c Left/Right Arrow
 #+end_src
 
 #+RESULTS:
+
+* Templates
+#+begin_src emacs-lisp
+  (use-package yatemplate
+   :init
+   (auto-insert-mode t)
+   :config
+   (setq auto-insert-alist nil)
+   (yatemplate-fill-alist))
+#+end_src
+
+#+RESULTS:

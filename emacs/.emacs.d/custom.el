@@ -10,7 +10,7 @@
  '(company-idle-delay 0.2)
  '(custom-safe-themes
    (quote
-    ("497592d471ac50f60022f1223fece5f4e99af8e5a08b9281935c7c2a3ec92a65" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("0d77f867d61e640cb261fa3117282be70001c0703be64b05bdf9e311878acd46" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(electric-pair-mode nil)
  '(elscreen-tab-display-control nil t)
  '(emojify-display-style (quote unicode) t)

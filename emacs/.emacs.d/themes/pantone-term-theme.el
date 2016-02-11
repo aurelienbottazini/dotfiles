@@ -20,6 +20,8 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 (let (
       (background (if (window-system) "#f1f2f1" nil))
       (background1 (if (window-system) "#e9eae8" "brightblack"))
+      (background-term (if (window-system) "#332f21" "black"))
+
       (foreground (if (window-system) "#212822" "black"))
       (comments (if (window-system) "#616568" "black"))
       (comments-delimiters (if (window-system) "#3d3c38" "black"))
@@ -36,7 +38,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
   (custom-theme-set-faces
    'pantone
 
-   `(default ((t (:background ,foreground :foreground ,background))))
+   `(default ((t (:background ,background-term :foreground ,background))))
    )
 
   (custom-theme-set-variables

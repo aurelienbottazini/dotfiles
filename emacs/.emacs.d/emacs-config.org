@@ -1050,8 +1050,9 @@ Follow symlinks without asking
     (evil-leader/set-leader "<SPC>")
 
     (evil-leader/set-key "gs" 'magit-status)
-    (require-package 'git-link)
-    (evil-leader/set-key "gl" 'git-link)
+    (use-package git-link
+     :config
+     (evil-leader/set-key "gl" 'git-link))
     (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
 

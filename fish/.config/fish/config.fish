@@ -9,6 +9,7 @@ set -x VAGRANT_DEFAULT_PROVIDER parallels
 
 status --is-interactive; and . (rbenv init -|psub)
 
+alias em "emacs_starter.sh"
 alias ec "emacsclient -ta ''"
 alias ef "emacsclient -ncq -a ''"
 

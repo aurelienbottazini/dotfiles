@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 brew tap Goles/battery
 brew install caskroom/cask/brew-cask
@@ -16,6 +16,12 @@ npm install -g grunt-cli
 npm install -g livedown
 npm install -g typescript
 npm install -g tslint
+
+brew install emacs
+brew install offlineimap
+EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-em
+acs --HEAD
+brew install gnutls
 
 gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail

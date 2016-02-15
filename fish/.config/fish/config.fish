@@ -33,3 +33,7 @@ set -Ux fish_color_autosuggestion black
 set -Ux fish_term24bit 1
 
 set -x GTAGSLABEL pygments
+
+if [ -z "$TMUX" ]
+  tat
+end

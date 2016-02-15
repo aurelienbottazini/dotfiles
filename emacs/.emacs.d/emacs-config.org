@@ -155,7 +155,7 @@
     ;; -*-Operator Mono-ultralight-normal-normal-*-*-*-*-*-m-0-iso10646-1
     ;; '(default ((t (:family "Operator Mono" :foundry "nil" :slant italic :weight light :height 120 :width normal))))
 
-    (set-default-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+    (set-default-font "-*-Operator Mono-light-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   #+END_SRC
 
 * Copy paste

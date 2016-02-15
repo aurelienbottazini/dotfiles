@@ -48,18 +48,18 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 
    `(success ((t (:background ,green :foreground ,background :weight bold))))
 
-   `(font-lock-comment-delimiter-face ((t (:foreground ,comments-delimiters))))
-   `(font-lock-comment-face ((t (:foreground ,comments))))
+   `(font-lock-comment-delimiter-face ((t (:slant italic :foreground ,comments-delimiters))))
+   `(font-lock-comment-face ((t (:slant italic :foreground ,comments))))
    `(font-lock-function-name-face ((t (:foreground ,blue))))
    `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
    `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
-   `(font-lock-keyword-face ((t (:weight bold :foreground ,violet))))
+   `(font-lock-keyword-face ((t (:weight normal :foreground ,violet))))
    `(font-lock-negation-char-face ((t (:foreground ,red))))
    `(font-lock-preprocessor-face ((t (:foreground ,violet))))
    `(font-lock-constant-face ((t (:weight bold :foreground ,rose))))
    `(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
    `(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
-   `(font-lock-string-face ((t (:foreground ,green))))
+   `(font-lock-string-face ((t (:slant italic :foreground ,green))))
    `(font-lock-type-face ((t (:foreground ,orange))))
    `(font-lock-variable-name-face ((t (:foreground ,red))))
    `(font-lock-warning-face ((t (:foreground ,orange :underline t))))
@@ -79,6 +79,12 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
 
    `(fringe ((t (:foreground ,foreground :background ,background1))))
    `(region ((t (:background ,yellow))))
+
+
+   `(show-paren-match ((t (:background ,blue :foreground ,green :underline ,blue))))
+   `(show-paren-mismatch ((t (:background ,red :foreground ,background))))
+
+   `(highlight ((t (:background ,yellow :foreground ,foreground))))
 
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
@@ -100,7 +106,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;;                         :underline nil))))
    ;; `(header-line ((t (:box (:line-width -1 :color nil :style released-button)
    ;;                    :foreground ,base00 :background ,base07))))
-   ;; `(highlight ((t (:background ,yellow :foreground ,base00))))
    ;; `(hl-line ((t (:background ,base01 :inherit nil))))
    ;; `(idle-highlight ((t (:background ,base01 :foreground nil))))
    `(ido-indicator ((t (:background ,red
@@ -174,8 +179,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    ;; `(erc-my-nick-face ((t (:foreground ,yellow))))
    ;; `(erc-current-nick-face ((t (:foreground ,yellow))))
 
-   `(show-paren-match ((t (:background ,background :foreground ,green))))
-   `(show-paren-mismatch ((t (:background ,red :foreground ,background))))
    ;; `(sp-show-pair-match-face ((t (:inherit show-paren-match))))
    ;; `(sp-show-pair-mismatch-face ((t (:inherit show-paren-mismatch))))
    ;; `(sp-pair-overlay-face ((t (:inherit sp-show-pair-match-face))))

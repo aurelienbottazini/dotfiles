@@ -10,7 +10,7 @@
  '(company-idle-delay 0.2)
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("7f9efecf4346f84d217a7e1c2004ba2733d3fa247dcacb5b046d318a67061bf0" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(electric-pair-mode nil)
  '(elscreen-tab-display-control nil t)
  '(emojify-display-style (quote unicode) t)
@@ -21,6 +21,7 @@
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
  '(global-emojify-mode t t)
  '(js2-basic-offset 2)
+ '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)
  '(magit-push-always-verify nil t)
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
@@ -43,6 +44,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(font-lock-keyword-face ((t (:foreground "#600b92" :weight semi-light))))
+ '(show-paren-match ((t (:background "#f1f2f1" :foreground "#005c4d" :underline "blue"))))
  '(sml/git ((t (:background "#005c4d" :foreground "#f1f2f1"))))
  '(sml/projectile ((t (:background "#e6a547"))))
  '(sml/vc-edited ((t (:background "#da0039" :foreground "#f1f2f1"))))

@@ -16,6 +16,7 @@ npm install -g grunt-cli
 npm install -g livedown
 npm install -g typescript
 npm install -g tslint
+npm install -g less
 
 brew install emacs
 brew install offlineimap

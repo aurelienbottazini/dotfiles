@@ -4,13 +4,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
- '(blink-matching-paren (quote jump))
+ '(blink-matching-paren t)
  '(coffee-tab-width 2)
  '(column-number-mode t)
  '(company-idle-delay 0.2)
  '(custom-safe-themes
    (quote
-    ("7f9efecf4346f84d217a7e1c2004ba2733d3fa247dcacb5b046d318a67061bf0" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(electric-pair-mode nil)
  '(elscreen-tab-display-control nil t)
  '(emojify-display-style (quote unicode) t)
@@ -27,10 +27,14 @@
  '(org-bullets-bullet-list (quote ("◉" "○" "■" "□")))
  '(org-hide-leading-stars t)
  '(ruby-deep-arglist nil)
+ '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
+ '(show-paren-style (quote mixed))
  '(sml/mode-width (quote right))
  '(sml/name-width 44)
  '(sml/vc-mode-show-backend nil)
+ '(smtpmail-smtp-server "mail.messagingengine.com")
+ '(smtpmail-smtp-service 587)
  '(tool-bar-mode nil)
  '(typescript-indent-level 2)
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow))))
@@ -39,7 +43,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Monoid" :foundry "nil" :slant normal :weight light :height 120 :width semi-condensed))))
  '(sml/git ((t (:background "#005c4d" :foreground "#f1f2f1"))))
  '(sml/projectile ((t (:background "#e6a547"))))
  '(sml/vc-edited ((t (:background "#da0039" :foreground "#f1f2f1"))))

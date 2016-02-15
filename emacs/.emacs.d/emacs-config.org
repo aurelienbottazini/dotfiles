@@ -1,4 +1,5 @@
--*- coding: utf-8 -*-
+ -*- coding: utf-8 -*-
+#+PROPERTY: header-args    :results silent
 
 * Encoding
 
@@ -21,9 +22,6 @@
   (setq default-buffer-file-coding-system 'utf-8))
 #+End_SRC
 
-#+RESULTS:
-: utf-8
-
    Making sure emacs language environment variables are also
    specifying UTF-8. When starting Emacs with a GUI, it is not
    always the case.
@@ -32,10 +30,6 @@
     (setenv "LANG" "fr_FR.UTF-8")
     (setenv "LC_ALL" "fr_FR.UTF-8")
 #+END_SRC
-
-#+RESULTS:
-: fr_FR.UTF-8
-
 
   Before everything loading my custom setting file
 #+BEGIN_SRC emacs-lisp
@@ -68,16 +62,11 @@
 (setq use-package-always-ensure t)
 #+END_SRC
 
-#+RESULTS:
-: use-package
-
 * Git
 
 #+BEGIN_SRC emacs-lisp
    (use-package magit)
 #+END_SRC
-
-#+RESULTS:
 
 * text-mode
 
@@ -86,9 +75,6 @@
             (lambda ()
               (turn-on-auto-fill)))
 #+END_SRC
-
-#+RESULTS:
-| (lambda nil (turn-on-auto-fill)) | text-mode-hook-identify |
 
 * About
 
@@ -100,10 +86,6 @@
 #+BEGIN_SRC emacs-lisp :exports both
   (emacs-version)
 #+END_SRC
-
-#+RESULTS:
-: GNU Emacs 24.5.1 (x86_64-apple-darwin15.0.0, NS apple-appkit-1404.13)
-:  of 2015-12-07 on Aureliens-MacBook-Pro.local
 
 * Inspiration
 
@@ -130,24 +112,16 @@
     (normal-top-level-add-subdirs-to-load-path))
 #+END_SRC
 
-#+RESULTS:
-
   Should use default Mac OS X browser on Mac.
 #+BEGIN_SRC emacs-lisp
   (when *is-a-mac*
     (setq browse-url-browser-function (quote browse-url-default-macosx-browser)))
 #+END_SRC
 
-#+RESULTS:
-: browse-url-default-macosx-browser
-
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Aurelien Bottazini"
       user-mail-address "aurelien@bottazini.com")
 #+END_SRC
-
-#+RESULTS:
-: aurelien@bottazini.com
 
   Getting right into the action. No initial message and clean
   scratch buffer.
@@ -155,8 +129,6 @@
   (setq inhibit-startup-message t)
   (setq initial-scratch-message "")
 #+END_SRC
-
-#+RESULTS:
 
 * Exec path
    Picking ~PATH~ from shell
@@ -168,24 +140,23 @@
     (exec-path-from-shell-copy-env "DOCKER_TLS_VERIFY"))
 #+END_SRC
 
-#+RESULTS:
-: t
-
    Furthermore, on mac, /path_helper/ is messing with the path. I commented the
    calls to path helper in /etc/profile/ and /etc/zshenv/
 
 * Fonts
   #+BEGIN_SRC emacs-lisp
-    ;; (set-default-font "Monoid-12")
-    ;; (set-frame-font "Monoid-12")
-    ;; (add-hook 'after-make-frame-functions
-    ;;           (lambda (frame)
-    ;;             (progn
-    ;;                (set-face-attribute 'default nil :font  "Monoid-12" )
-    ;;               (set-frame-font "Monoid-12"))))
-  #+END_SRC
+    ;; -*-Operator Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-light-italic-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-light-normal-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-ultralight-italic-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; -*-Operator Mono-ultralight-normal-normal-*-*-*-*-*-m-0-iso10646-1
+    ;; '(default ((t (:family "Operator Mono" :foundry "nil" :slant italic :weight light :height 120 :width normal))))
 
-  #+RESULTS:
+    (set-default-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+  #+END_SRC
 
 * Copy paste
 #+BEGIN_SRC emacs-lisp
@@ -201,9 +172,6 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
 #+END_SRC
-
-#+RESULTS:
-: copy-from-osx
 
 * Tabs
 
@@ -274,15 +242,10 @@ Making sure I have the latest /Emacs/.
   (column-number-mode)
 #+END_SRC
 
-#+RESULTS:
-: t
-
 No tabs
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
 #+END_SRC
-
-#+RESULTS:
 
 Auto-indent and Automatic pair insertion and deletion.
 #+BEGIN_SRC emacs-lisp
@@ -290,17 +253,10 @@ Auto-indent and Automatic pair insertion and deletion.
   ;; (electric-pair-mode 1)
 #+END_SRC
 
-#+RESULTS:
-: t
-
-
 y and n instead of yes or no
 #+BEGIN_SRC emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
-
-#+RESULTS:
-: yes-or-no-p
 
 Whenever an external process changes a file underneath emacs, and there
  was no unsaved changes in the corresponding buffer, just revert its
@@ -308,9 +264,6 @@ Whenever an external process changes a file underneath emacs, and there
 #+BEGIN_SRC emacs-lisp
   (global-auto-revert-mode 1)
 #+END_SRC
-
-#+RESULTS:
-: t
 
  This is how you enable errors with a full backtrace:
 
@@ -321,8 +274,6 @@ Whenever an external process changes a file underneath emacs, and there
    (pr-update-menus t))
 #+END_SRC
 
-#+RESULTS:
-: t
 
  One space after a period makes a sentence. Not two. Allows sentence
  based commands to work properly.
@@ -330,15 +281,11 @@ Whenever an external process changes a file underneath emacs, and there
   (setq sentence-end-double-space nil)    ; Fix M-e
 #+END_SRC
 
-#+RESULTS:
-
  To be able to execute commands while in the minibuffer
 #+BEGIN_SRC emacs-lisp
   (setq enable-recursive-minibuffers t)
 #+END_SRC
 
- #+RESULTS:
- : t
 
  When a region selected, certain character like ~"~ and ~(~
  will /wrap/ region between quotes, parenthesis and so on.
@@ -348,8 +295,6 @@ Whenever an external process changes a file underneath emacs, and there
    (turn-on-wrap-region-mode))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
@@ -357,8 +302,6 @@ Follow symlinks without asking
   ;; (setq vc-follow-symlinks (quote ask))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 * save, delete & restore
 
@@ -367,8 +310,6 @@ Follow symlinks without asking
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
-#+RESULTS:
-| time-stamp | delete-trailing-whitespace |
 
 #+BEGIN_SRC emacs-lisp
   (savehist-mode 1)                       ;saves minibuffer history
@@ -377,8 +318,6 @@ Follow symlinks without asking
   ;; (setq desktop-restore-eager 5) ; restore only 5 buffers at once
 #+END_SRC
 
-#+RESULTS:
-: t
 
 #+BEGIN_SRC emacs-lisp
   (autoload 'saveplace "saveplace" "automatically remember last edited place in a file")
@@ -388,8 +327,6 @@ Follow symlinks without asking
         recentf-max-menu-items 50)
 #+END_SRC
 
-#+RESULTS:
-: 50
 
 #+BEGIN_SRC emacs-lisp
   (setq backup-by-copying t      ; don't clobber symlinks
@@ -404,24 +341,18 @@ Follow symlinks without asking
         `((".*" ,"~/.local/share/emacs-saves" t)))
 #+END_SRC
 
-#+RESULTS:
-| .* | ~/.local/share/emacs-saves | t |
 
    Deleted files go to OS’s trash folder.
 #+BEGIN_SRC emacs-lisp
   (setq delete-by-moving-to-trash t)
 #+END_SRC
 
-#+RESULTS:
-: t
 
   Updating time-stamp on save if one is present
 #+BEGIN_SRC emacs-lisp
   (add-hook 'before-save-hook 'time-stamp)
 #+END_SRC
 
-#+RESULTS:
-| time-stamp | delete-trailing-whitespace |
 
 * Visual interface
   No bell
@@ -429,8 +360,6 @@ Follow symlinks without asking
        (setq ring-bell-function 'ignore)
   #+END_SRC
 
-  #+RESULTS:
-  : ignore
 
   I want to hide extra bars. I like my Emacs clean. I don't use the
   mouse and I want to do everything through the keyboard
@@ -440,33 +369,25 @@ Follow symlinks without asking
      (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   #+END_SRC
 
-  #+RESULTS:
-
-  #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp
      (when (string-match "apple-darwin" system-configuration)
        ;; on mac, there's always a menu bar drown, don't have it empty
        (when window-system
          (menu-bar-mode 1)))
   #+END_SRC
 
-  #+RESULTS:
-  : t
 
   Show end of buffer with /q/ left fringe.
   #+BEGIN_SRC emacs-lisp
      (setq default-indicate-empty-lines t)
   #+END_SRC
 
-  #+RESULTS:
-  : t
 
   Delete selected text when typing
   #+BEGIN_SRC emacs-lisp
      (delete-selection-mode 1)
   #+END_SRC
 
-  #+RESULTS:
-  : t
 
   Different buffer names when a new buffer has the same name as
   an existing one.
@@ -475,8 +396,6 @@ Follow symlinks without asking
       (setq uniquify-buffer-name-style 'forward)
   #+END_SRC
 
-  #+RESULTS:
-  : forward
 
   File path in frame title.
   #+BEGIN_SRC emacs-lisp
@@ -486,8 +405,6 @@ Follow symlinks without asking
                       "%b"))))
   #+END_SRC
 
-  #+RESULTS:
-  | :eval | (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) %b) |
 
 * guide-key
    Get a visual aid for key sequences.
@@ -497,8 +414,6 @@ Follow symlinks without asking
      (which-key-mode))
    #+END_SRC
 
-   #+RESULTS:
-   : t
 
 * Strange functionality
   “Dangerous” functionality enabled (disabled by default or with a warning).
@@ -510,8 +425,6 @@ Follow symlinks without asking
     (put 'set-goal-column 'disabled nil)
   #+END_SRC
 
-  #+RESULTS:
-
 * Better undo
   Supercharge C-x u. Use ~d~ to see a diff
 #+begin_src emacs-lisp
@@ -520,8 +433,6 @@ Follow symlinks without asking
    (global-undo-tree-mode))
 #+end_src
 
-#+RESULTS:
-: t
 
 * Vim
 
@@ -615,8 +526,6 @@ Follow symlinks without asking
 
 #+END_SRC
 
-#+RESULTS:
-: t
 
 * Registers
   List of frequently visited files. I can access them using
@@ -632,8 +541,6 @@ Follow symlinks without asking
     (set-register (car r) (cadr r)))
 #+END_SRC
 
-#+RESULTS:
-
 * prog-mode(s)
 
   Hexadecimal strings colored with corresponding colors in certain
@@ -647,8 +554,6 @@ Follow symlinks without asking
        (html-mode css-mode php-mode nxml-mode xml-mode less-css-mode scss-mode))))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 #+BEGIN_SRC emacs-lisp
   (setq comment-auto-fill-only-comments t)
@@ -668,8 +573,6 @@ Follow symlinks without asking
     (add-hook 'prog-mode-hook 'turn-on-fci-mode))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 ** CSS
 #+BEGIN_SRC emacs-lisp
@@ -684,8 +587,6 @@ Follow symlinks without asking
   (add-hook 'css-mode-hook 'my-css-mode-setup)
 #+END_SRC
 
-#+RESULTS:
-| my-css-mode-setup |
 
 ** SASS
 #+BEGIN_SRC emacs-lisp
@@ -698,7 +599,11 @@ Follow symlinks without asking
   (use-package sass-mode)
 #+END_SRC
 
-#+RESULTS:
+
+** LESS
+#+begin_src emacs-lisp
+  (use-package less-css-mode)
+#+end_src
 
 ** shell
 #+BEGIN_SRC emacs-lisp
@@ -707,8 +612,6 @@ Follow symlinks without asking
 
   (use-package fish-mode)
 #+END_SRC
-
-#+RESULTS:
 
 ** markdown
 #+BEGIN_SRC emacs-lisp
@@ -742,8 +645,6 @@ Follow symlinks without asking
 
 #+END_SRC
 
-#+RESULTS:
-: t
 
 ** JavaScript
 
@@ -757,8 +658,6 @@ Follow symlinks without asking
 
 #+END_SRC
 
-#+RESULTS:
-: 3
 
 #+BEGIN_SRC emacs-lisp
   (use-package coffee-mode
@@ -770,8 +669,6 @@ Follow symlinks without asking
   (use-package highlight-indentation)
 
 #+END_SRC
-
-#+RESULTS:
 
 ** Ruby
 
@@ -850,8 +747,6 @@ Follow symlinks without asking
 
 #+END_SRC
 
-#+RESULTS:
-
 #+BEGIN_SRC emacs-lisp
   (use-package projectile-rails
    :config
@@ -859,8 +754,6 @@ Follow symlinks without asking
 
   (use-package rspec-mode)
 #+END_SRC
-
-#+RESULTS:
 
    Hitting ~M-;~ twice adds an xmpfilter comment.
    Hitting xmp keybinding will put the output in this comment
@@ -873,8 +766,6 @@ Follow symlinks without asking
    (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp))
 #+end_src
 
-#+RESULTS:
-: t
 
 ** Haml
 #+BEGIN_SRC emacs-lisp
@@ -883,16 +774,12 @@ Follow symlinks without asking
   (add-hook 'haml-mode-hook '(lambda () (highlight-indentation-mode))))
 #+END_SRC
 
-#+RESULTS:
-| lambda | nil | (highlight-indentation-mode) |
 
 ** Docker
 
 #+begin_src emacs-lisp
   (use-package dockerfile-mode)
 #+end_src
-
-#+RESULTS:
 
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
@@ -910,8 +797,6 @@ Follow symlinks without asking
 
 #+END_SRC
 
-#+RESULTS:
-: t
 
   Don't forget to install:
   + Ruby
@@ -943,8 +828,6 @@ Follow symlinks without asking
   (use-package helm-ag)
 #+END_SRC
 
-#+RESULTS:
-
 ** Projectile
 #+BEGIN_SRC emacs-lisp
   (use-package ag) ;; ultra fast search
@@ -961,8 +844,6 @@ Follow symlinks without asking
    (helm-projectile-on))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 ** Project-explorer
 
@@ -970,8 +851,6 @@ Follow symlinks without asking
   (use-package project-explorer)
 #+end_src
 
-#+RESULTS:
-* Keybindings
 ** Setting it up
   Adjusting command, control and option keys on mac.
 #+BEGIN_SRC emacs-lisp
@@ -985,8 +864,6 @@ Follow symlinks without asking
   (setq default-input-method "MacOSX"))
 #+END_SRC
 
-#+RESULTS:
-: MacOSX
 
 
   Defining my key-map where I define my keys and give them top priorities.
@@ -1006,8 +883,6 @@ Follow symlinks without asking
   (ad-activate 'load)
 #+END_SRC
 
-#+RESULTS:
-: load
 
 ** Tmux
 #+BEGIN_SRC emacs-lisp
@@ -1049,8 +924,6 @@ Follow symlinks without asking
   (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
 #+END_SRC
 
-#+RESULTS:
-: tmux-move-right
 
 ** Bindings
 #+BEGIN_SRC emacs-lisp
@@ -1145,8 +1018,6 @@ Follow symlinks without asking
     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 #+END_SRC
 
-#+RESULTS:
-: ispell-buffer
 
 * Dired
   buffed up dired (emacs). Dired is for directory listing,
@@ -1159,8 +1030,6 @@ Follow symlinks without asking
                                           ; seems better
 #+END_SRC
 
-#+RESULTS:
-: gls
 
 * Terminal
 #+begin_src emacs-lisp
@@ -1168,8 +1037,6 @@ Follow symlinks without asking
   (setq term-default-fg-color "#d9d9d6")
 #+end_src
 
-#+RESULTS:
-: #d9d9d6
 
 * Spell Check
     https://joelkuiper.eu/spellcheck_emacs
@@ -1187,8 +1054,6 @@ Follow symlinks without asking
     (setq ispell-dictionary "en_US_aurelien"))
 #+End_SRC
 
-#+RESULTS:
-: en_US_aurelien
 
 ** ~languagetool~
 
@@ -1204,8 +1069,6 @@ Follow symlinks without asking
                                 "COMMA_PARENTHESIS_WHITESPACE")))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 ** ~writegood~
 
@@ -1223,14 +1086,10 @@ Follow symlinks without asking
   (use-package writegood-mode)
 #+END_SRC
 
-#+RESULTS:
-
 ** Synonyms
 #+begin_src emacs-lisp
   (use-package synosaurus)
 #+end_src
-
-#+RESULTS:
 
 * IRC
 I use ~erc~ to chat on IRC.
@@ -1241,16 +1100,12 @@ Setting nickname and default IRC server.
   (setq erc-server "irc.freenode.org")
 #+END_SRC
 
-#+RESULTS:
-: irc.freenode.org
 
 Hiding some IRC messages.
 #+BEGIN_SRC emacs-lisp
   (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
 #+END_SRC
 
-#+RESULTS:
-| JOIN | QUIT | left |
 
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
@@ -1275,8 +1130,6 @@ Hiding some IRC messages.
   (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 
 #+begin_src emacs-lisp
@@ -1302,8 +1155,6 @@ Hiding some IRC messages.
 
 #+end_src
 
-#+RESULTS:
-: new-post
 
 * Autotyping
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
@@ -1316,8 +1167,6 @@ Hiding some IRC messages.
   (setq default-abbrev-mode t)
 #+end_src
 
-#+RESULTS:
-: t
 
 ** Yasnippets
 
@@ -1333,8 +1182,6 @@ Hiding some IRC messages.
   ;; (define-key yas-minor-mode-map (kbd "<tab>")  nil)
 #+END_SRC
 
-#+RESULTS:
-: t
 
 ** Company
 
@@ -1353,8 +1200,6 @@ Hiding some IRC messages.
     ;; (define-key company-active-map (kbd "RET") nil)
    ;; )
 #+end_src
-
-#+RESULTS:
 
 * Wiki
   My own personal notes for commands I like/discover/learn.
@@ -1424,8 +1269,6 @@ TODO: add keybindings
        (require 'all-ext)
      #+END_SRC
 
-     #+RESULTS:
-     : all-ext
 
      After using helm-occur do ~C-c C-a~ to edit results in all buffer
      You can navigate trough “errors” with previous-error ~M-g p~ and next-error
@@ -1435,9 +1278,7 @@ TODO: add keybindings
        (require-package 'helm-swoop)
       #+end_src
 
-      #+RESULTS:
-
-      Replace occur and all? Search and C-c C-e to edit.
+            Replace occur and all? Search and C-c C-e to edit.
       All is still usable with swoop by using the regular shortcut ~C-c C-a~
    + ~helm-ag~. Use ~M--~ to add options
 ** Bookmarks
@@ -1466,8 +1307,6 @@ Navigate between windows configurations with C-c Left/Right Arrow
   (winner-mode 1)
 #+end_src
 
-#+RESULTS:
-: t
 
 ** Cool buffers
 
@@ -1479,8 +1318,6 @@ Navigate between windows configurations with C-c Left/Right Arrow
 #+begin_src emacs-lisp
   (use-package palimpsest)
 #+end_src
-
-#+RESULTS:
 
 ** Magit
    - view buffer history: ~magit-log-buffer-file~
@@ -1506,25 +1343,27 @@ Navigate between windows configurations with C-c Left/Right Arrow
   ;; (add-to-list 'company-backends 'company-emoji)
 #+end_src
 
-#+RESULTS:
-| --set-emoji-font | evil-init-esc | (lambda (frame) (progn (set-frame-font PragmataPro-14))) | select-frame |
 
-* colors
+* Colors
 #+begin_src emacs-lisp
   (use-package rainbow-identifiers
-   :config
-   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
   (use-package rainbow-delimiters
-   :config
-   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
   (setq custom-theme-directory "~/.emacs.d/themes")
   (load-theme 'pantone)
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (select-frame frame)
+                  (load-theme 'pantone t)))
+    (load-theme 'pantone t))
   (use-package load-theme-buffer-local)
 #+end_src
-
-#+RESULTS:
 
 * Templates
 #+begin_src emacs-lisp
@@ -1538,4 +1377,85 @@ Navigate between windows configurations with C-c Left/Right Arrow
    (yatemplate-fill-alist))
 #+end_src
 
+* Email
+** gnus
+#+begin_src emacs-lisp
+  (setq nnmail-expiry-target "INBOX.Trash")
+  (setq nnmail-expiry-wait 'immediate)
+  (setq gnus-select-method
+        '(nnimap "Fastmail" ; primary email
+                  (nnimap-address "mail.messagingengine.com")
+                  (nnimap-server-port 993)
+                  (nnimap-authenticator login)
+                  (nnimap-expunge-on-close 'never)
+                  (nnimap-stream ssl)))
+#+end_src
+
+** mu4e
+#+begin_src emacs-lisp
+  (require 'mu4e)
+  (setq mu4e-maildir "~/.Mail")
+  (setq mu4e-drafts-folder "/fastmail/INBOX.Drafts")
+  (setq mu4e-sent-folder   "/fastmail/INBOX.Sent Items")
+  (setq mu4e-trash-folder  "/fastmail/INBOX.Trash")
+
+  ;; don't save message to Sent Messages, Gmail/IMAP takes care of this, What
+  ;; about fastmail?
+  ;; (setq mu4e-sent-messages-behavior 'delete)
+
+  ;; allow for updating mail using 'U' in the main view:
+  (setq mu4e-get-mail-command "offlineimap")
+
+  ;; shortcuts
+  (setq mu4e-maildir-shortcuts
+      '( ("/fastmail/INBOX"               . ?i)
+         ("/fastmail/INBOX.Archive"   . ?a)
+         ("/fastmail/INBOX.Sent Items"   . ?s)
+))
+
+  ;; something about ourselves
+  (setq
+     mu4e-compose-signature
+      (concat
+        "Cheers,\n"))
+
+  ;; show images
+  (setq mu4e-show-images t)
+
+  ;; use imagemagick, if available
+  (when (fboundp 'imagemagick-register-types)
+    (imagemagick-register-types))
+
+  ;; convert html emails properly
+  ;; Possible options:
+  ;;   - html2text -utf8 -width 72
+  ;;   - textutil -stdin -format html -convert txt -stdout
+  ;;   - html2markdown | grep -v '&nbsp_place_holder;' (Requires html2text pypi)
+  ;;   - w3m -dump -cols 80 -T text/html
+  ;;   - view in browser (provided below)
+  (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
+
+  ;; spell check
+  (add-hook 'mu4e-compose-mode-hook
+          (defun my-do-compose-stuff ()
+             "My settings for message composition."
+             (set-fill-column 72)
+             (flyspell-mode)))
+
+  ;; add option to view html message in a browser
+  ;; `aV` in view to activate
+  (add-to-list 'mu4e-view-actions
+    '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
+  ;; fetch mail every 10 mins
+  (setq mu4e-update-interval 600)
+
+(setq message-send-mail-function 'smtpmail-send-it
+     smtpmail-stream-type 'starttls
+     smtpmail-default-smtp-server "mail.messagingengine.com"
+     smtpmail-smtp-server "mail.messagingengine.com"
+     smtpmail-smtp-service 587)
+#+end_src
+
 #+RESULTS:
+: 587

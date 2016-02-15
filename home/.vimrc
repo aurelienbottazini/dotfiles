@@ -109,12 +109,6 @@ map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
 set background=dark
-let g:solarized_termcolors = 16
-let g:solarized_termtrans=0
-let g:solarized_underline=1
-let g:solarized_visibility='high'
-let g:solarized_hitrail = 1
-colorscheme solarized
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1

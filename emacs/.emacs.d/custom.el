@@ -24,7 +24,7 @@
  '(linum-relative-current-symbol "" t)
  '(magit-push-always-verify nil t)
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
- '(org-bullets-bullet-list (quote ("◉" "○" "■" "□")))
+ '(org-bullets-bullet-list (quote ("•" "†" "‡")))
  '(org-hide-leading-stars t)
  '(ruby-deep-arglist nil)
  '(send-mail-function (quote smtpmail-send-it))

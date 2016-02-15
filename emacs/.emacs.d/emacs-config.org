@@ -224,7 +224,7 @@ Making sure I have the latest /Emacs/.
    :config
    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
    (set-display-table-slot standard-display-table
-                          'selective-display (string-to-vector " ･･･ ")))
+                          'selective-display (string-to-vector "  ••• ")))
 #+END_SRC
 
 ** Html export

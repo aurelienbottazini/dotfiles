@@ -302,7 +302,6 @@ Follow symlinks without asking
   ;; (setq vc-follow-symlinks (quote ask))
 #+END_SRC
 
-
 * save, delete & restore
 
    Delete trailing white-space when saving buffer.
@@ -352,7 +351,6 @@ Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
   (add-hook 'before-save-hook 'time-stamp)
 #+END_SRC
-
 
 * Visual interface
   No bell
@@ -405,7 +403,6 @@ Follow symlinks without asking
                       "%b"))))
   #+END_SRC
 
-
 * guide-key
    Get a visual aid for key sequences.
    #+BEGIN_SRC emacs-lisp
@@ -413,7 +410,6 @@ Follow symlinks without asking
      :config
      (which-key-mode))
    #+END_SRC
-
 
 * Strange functionality
   “Dangerous” functionality enabled (disabled by default or with a warning).
@@ -432,7 +428,6 @@ Follow symlinks without asking
    :config
    (global-undo-tree-mode))
 #+end_src
-
 
 * Vim
 
@@ -525,7 +520,6 @@ Follow symlinks without asking
   (global-evil-matchit-mode 1))
 
 #+END_SRC
-
 
 * Registers
   List of frequently visited files. I can access them using
@@ -1018,7 +1012,6 @@ Follow symlinks without asking
     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 #+END_SRC
 
-
 * Dired
   buffed up dired (emacs). Dired is for directory listing,
   navigation and manipulation inside emacs.
@@ -1030,13 +1023,11 @@ Follow symlinks without asking
                                           ; seems better
 #+END_SRC
 
-
 * Terminal
 #+begin_src emacs-lisp
   (setq term-default-bg-color "#332f21")
   (setq term-default-fg-color "#d9d9d6")
 #+end_src
-
 
 * Spell Check
     https://joelkuiper.eu/spellcheck_emacs
@@ -1106,7 +1097,6 @@ Hiding some IRC messages.
   (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
 #+END_SRC
 
-
 * Mode-line / Powerline / Smart line
 #+BEGIN_SRC emacs-lisp
   (use-package smart-mode-line
@@ -1154,7 +1144,6 @@ Hiding some IRC messages.
       ))
 
 #+end_src
-
 
 * Autotyping
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
@@ -1342,7 +1331,6 @@ Navigate between windows configurations with C-c Left/Right Arrow
   ;; (require 'company-emoji)
   ;; (add-to-list 'company-backends 'company-emoji)
 #+end_src
-
 
 * Colors
 #+begin_src emacs-lisp

@@ -29,10 +29,14 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
       (red (if (window-system) "#da0039" "red"))
       (green (if (window-system) "#005c4d" "green"))
       (violet (if (window-system) "#600b92" "violet"))
-      (orange (if (window-system) "#e6a547" "orange"))
-
+      (brown (if (window-system) "#785a20" "orange"))
       (rose (if (window-system) "#dc4388" "brighttred"))
-      (brightyellow (if (window-system) "#fbf59b" "brightyellow")))
+
+      (brightyellow (if (window-system) "#fbf59b" "brightyellow"))
+      (brightorange (if (window-system) "#ffbd36" "brightyellow"))
+      )
+
+
   (custom-theme-set-faces
    'pantone
 
@@ -60,9 +64,9 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
    `(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
    `(font-lock-string-face ((t (:slant italic :foreground ,green))))
-   `(font-lock-type-face ((t (:foreground ,orange))))
+   `(font-lock-type-face ((t (:foreground ,brown :weight bold))))
    `(font-lock-variable-name-face ((t (:foreground ,red))))
-   `(font-lock-warning-face ((t (:foreground ,orange :underline t))))
+   `(font-lock-warning-face ((t (:background ,brown :foreground ,background))))
 
    `(mode-line ((t (:background "#fff7c7" :foreground "black" :inverse-video nil :box nil))))
 

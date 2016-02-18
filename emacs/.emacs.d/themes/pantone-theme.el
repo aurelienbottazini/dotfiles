@@ -57,6 +57,8 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(font-lock-function-name-face ((t (:foreground ,blue))))
    `(font-lock-builtin-face ((t (:slant italic :foreground ,violet))))
    `(font-lock-doc-face ((t (:slant italic :foreground ,green))))
+   `(font-lock-keyword-face ((t (:foreground ,violet :weight semi-light))))
+
    `(font-lock-keyword-face ((t (:weight normal :foreground ,violet))))
    `(font-lock-negation-char-face ((t (:foreground ,red))))
    `(font-lock-preprocessor-face ((t (:foreground ,violet))))
@@ -84,11 +86,13 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(fringe ((t (:foreground ,foreground :background ,background1))))
    `(region ((t (:background ,yellow))))
 
-
+   `(show-paren-match ((t (:background "#f1f2f1" :foreground "#005c4d" :weight bold :underline "blue"))))
    `(show-paren-match ((t (:background ,blue :foreground ,green :underline ,blue))))
    `(show-paren-mismatch ((t (:background ,red :foreground ,background))))
 
    `(highlight ((t (:background ,yellow :foreground ,foreground))))
+   `(isearch ((t (:weight bold :foreground ,foreground :background ,yellow))))
+   `(evil-search-highlight-persist-highlight-face ((t (:background ,yellow))))
 
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
@@ -120,7 +124,6 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(ido-subdir ((t (:foreground ,red))))
    `(info-menu-star ((t (:foreground ,red))))
    `(info-xref ((t (:foreground ,green))))
-   ;; `(isearch ((t (:weight bold :foreground ,base00 :background ,yellow))))
    `(isearch-fail ((t (:weight bold :foreground ,red))))
    ;; `(lazy-highlight ((t (:weight bold
    ;;                       :foreground ,base00

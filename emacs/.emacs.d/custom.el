@@ -24,6 +24,7 @@
  '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)
  '(magit-push-always-verify nil t)
+ '(mu4e-html2text-command "html2text -utf8 -width 72")
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))
  '(org-hide-leading-stars t)
@@ -44,8 +45,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-keyword-face ((t (:foreground "#600b92" :weight semi-light))))
- '(show-paren-match ((t (:background "#f1f2f1" :foreground "#005c4d" :weight bold :underline "blue"))))
  '(sml/git ((t (:foreground "#005c4d" :slant italic))))
  '(sml/minor-modes ((t (:inherit sml/global :slant italic))))
  '(sml/position-percentage ((t (:inherit sml/prefix :slant italic :weight normal))))

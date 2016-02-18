@@ -1122,6 +1122,7 @@ Hiding some IRC messages.
 
 
 
+* Functions
 #+begin_src emacs-lisp
   (require 'cl)
   (defun sluggify (str)

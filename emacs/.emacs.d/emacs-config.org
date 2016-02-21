@@ -225,6 +225,15 @@ Making sure I have the latest /Emacs/.
    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
    (set-display-table-slot standard-display-table
                           'selective-display (string-to-vector "  ••• ")))
+(use-package ob-typescript
+ :config
+ (org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((typescript . t)
+   ))
+)
+
+
 #+END_SRC
 
 ** Html export
@@ -609,31 +618,31 @@ Follow symlinks without asking
 
 ** markdown
 #+BEGIN_SRC emacs-lisp
-
   (use-package markdown-mode
-   :init
-   (require 'livedown)
+    :init
+    (require 'livedown)
+    (evil-define-key 'normal markdown-mode-map
+      "vp" 'livedown:preview)
 
-   :config
-  (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-  (setq markdown-imenu-generic-expression
-        '(("title"  "^\\(.*\\)[\n]=+$" 1)
-          ("h2-"    "^\\(.*\\)[\n]-+$" 1)
-          ("h1"   "^# \\(.*\\)$" 1)
-          ("h2"   "^## \\(.*\\)$" 1)
-          ("h3"   "^### \\(.*\\)$" 1)
-          ("h4"   "^#### \\(.*\\)$" 1)
-          ("h5"   "^##### \\(.*\\)$" 1)
-          ("h6"   "^###### \\(.*\\)$" 1)
-          ("fn"   "^\\[\\^\\(.*\\)\\]" 1)
-          ))
-  (add-hook 'markdown-mode-hook
-            (lambda ()
-              (setq imenu-generic-expression markdown-imenu-generic-expression)
-              ;; (turn-on-flyspell)
-              (livedown:preview)
-              (writegood-mode t))))
+    :config
+    (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+    (setq markdown-imenu-generic-expression
+          '(("title"  "^\\(.*\\)[\n]=+$" 1)
+            ("h2-"    "^\\(.*\\)[\n]-+$" 1)
+            ("h1"   "^# \\(.*\\)$" 1)
+            ("h2"   "^## \\(.*\\)$" 1)
+            ("h3"   "^### \\(.*\\)$" 1)
+            ("h4"   "^#### \\(.*\\)$" 1)
+            ("h5"   "^##### \\(.*\\)$" 1)
+            ("h6"   "^###### \\(.*\\)$" 1)
+            ("fn"   "^\\[\\^\\(.*\\)\\]" 1)
+            ))
+
+    (add-hook 'markdown-mode-hook
+              (lambda ()
+                (setq imenu-generic-expression markdown-imenu-generic-expression)
+                (writegood-mode t))))
 
 
 
@@ -838,7 +847,6 @@ Follow symlinks without asking
    (helm-projectile-on))
 #+END_SRC
 
-
 ** Project-explorer
 
 #+begin_src emacs-lisp
@@ -876,7 +884,6 @@ Follow symlinks without asking
               (add-to-list 'minor-mode-map-alist mykeys))))
   (ad-activate 'load)
 #+END_SRC
-
 
 ** Tmux
 #+BEGIN_SRC emacs-lisp
@@ -917,7 +924,6 @@ Follow symlinks without asking
   (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
   (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
 #+END_SRC
-
 
 ** Bindings
 #+BEGIN_SRC emacs-lisp
@@ -1119,8 +1125,6 @@ Hiding some IRC messages.
                     (set-face-foreground 'mode-line (cdr color)))))
   (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
 #+END_SRC
-
-
 
 * Functions
 #+begin_src emacs-lisp

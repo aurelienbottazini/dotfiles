@@ -23,6 +23,7 @@ brew install offlineimap
 EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-em
 acs --HEAD
 brew install gnutls
+brew install gnu-sed --with-default-names
 
 gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail

@@ -20,6 +20,7 @@
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
  '(global-emojify-mode t t)
+ '(ido-enable-flex-matching t)
  '(js2-basic-offset 2)
  '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)

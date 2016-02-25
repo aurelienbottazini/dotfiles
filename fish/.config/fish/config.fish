@@ -1,4 +1,4 @@
-set -x PATH ~/dotfiles/bin/ ~/.rbenv/shims/ /usr/local/var/rbenv/shims $PATH
+set -x PATH ~/dotfiles/bin /usr/local/sbin $PATH
 rbenv rehash
 
 set -x CDPATH $HOME $HOME/projects $HOME/projects/work

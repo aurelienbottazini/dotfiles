@@ -25,7 +25,6 @@
  '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)
  '(magit-push-always-verify nil t)
- '(mu4e-html2text-command "html2text -utf8 -width 72")
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))
  '(org-hide-leading-stars t)
@@ -40,7 +39,10 @@
  '(smtpmail-smtp-service 587)
  '(tool-bar-mode nil)
  '(typescript-indent-level 2)
- '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow))))
+ '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

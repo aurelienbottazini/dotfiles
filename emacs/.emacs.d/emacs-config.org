@@ -182,6 +182,12 @@
 
 Making sure I have the latest /Emacs/.
 #+BEGIN_SRC emacs-lisp
+  ;; easier completion when refiling org-mode
+  (require 'ido)
+  (setq ido-everywhere t)
+  (ido-mode t)
+
+
   (use-package org
    :config
    (setq org-indent-mode t)
@@ -192,10 +198,12 @@ Making sure I have the latest /Emacs/.
    ;;                          (turn-on-flyspell)
    ;;                          (writegood-mode t)))
    (add-hook 'org-mode-hook 'turn-on-auto-fill)
-  (setq org-refile-use-outline-path t)
+  (setq org-completion-use-ido t)
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-use-outline-path 'file)
   ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
-  (setq org-refile-targets (quote ((nil :maxlevel . 2)
-                                   (org-agenda-files :maxlevel . 2))))
+  (setq org-refile-targets (quote ((nil :maxlevel . 1)
+                                   (org-agenda-files :maxlevel . 1))))
   (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
@@ -219,7 +227,6 @@ Making sure I have the latest /Emacs/.
 
 
 )
-
   (use-package org-bullets
    :config
    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -570,7 +577,7 @@ Follow symlinks without asking
   (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
 
    ;; let's see the 80ish column
-   (setq-default fill-column 80)
+   (setq-default fill-column 72)
    (use-package fill-column-indicator
     :config
     (add-hook 'prog-mode-hook 'turn-on-fci-mode))
@@ -947,18 +954,18 @@ Follow symlinks without asking
 
   ))
         (switch-to-buffer-other-window "*ansi-term*")))
-    (evil-leader/set-key "vs" 'visit-term-buffer)
 
-    (evil-leader/set-key "h" 'helm-mini)
-    (evil-leader/set-key "f" 'helm-projectile-ag)
-    (evil-leader/set-key "e" 'dired-jump)
-    (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+    (evil-leader/set-key "S" 'helm-multi-swoop)
     (evil-leader/set-key "b" 'helm-bookmarks)
+    (evil-leader/set-key "e" 'dired-jump)
+    (evil-leader/set-key "f" 'helm-projectile-ag)
+    (evil-leader/set-key "h" 'helm-mini)
+    (evil-leader/set-key "i" 'helm-imenu)
+    (evil-leader/set-key "m" 'mu4e)
+    (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
     (evil-leader/set-key "p" 'helm-projectile-switch-project)
     (evil-leader/set-key "s" 'helm-swoop)
-    (evil-leader/set-key "S" 'helm-multi-swoop)
-    (evil-leader/set-key "i" 'helm-imenu)
-
+    (evil-leader/set-key "vs" 'visit-term-buffer)
     (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
     (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
     (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
@@ -970,8 +977,10 @@ Follow symlinks without asking
 
     (evil-leader/set-key-for-mode 'org-mode
       "t"  'org-show-todo-tree
+      "i"  'helm-org-in-buffer-headings
       "a"  'org-agenda
-      "c"  'org-archive-subtree
+      "c"  'org-archive-subtree-default
+      "r"  'org-refile
       )
 
     (use-package key-chord
@@ -1402,8 +1411,11 @@ Navigate between windows configurations with C-c Left/Right Arrow
     ;; shortcuts
     (setq mu4e-maildir-shortcuts
         '( ("/fastmail/INBOX"               . ?i)
+           ("/fastmail/INBOX.Clevertech"   . ?c)
            ("/fastmail/INBOX.Archive"   . ?a)
            ("/fastmail/INBOX.Sent Items"   . ?s)
+           ("/fastmail/INBOX.Learn Spam"   . ?j)
+
   ))
 
     ;; something about ourselves
@@ -1449,4 +1461,6 @@ Navigate between windows configurations with C-c Left/Right Arrow
        smtpmail-default-smtp-server "mail.messagingengine.com"
        smtpmail-smtp-server "mail.messagingengine.com"
        smtpmail-smtp-service 587)
+
+(use-package helm-mu)
 #+end_src

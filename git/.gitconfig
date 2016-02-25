@@ -42,8 +42,8 @@
 	prompt = false
 [init]
 	templatedir = ~/.git_template
-[merge]
-        ff = only
+; [merge]
+        ; ff = only
 [fetch]
         prune = true
 [filter "lfs"]

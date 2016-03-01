@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: react_component
+# key: rc
+# --
+class ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {$2};
+  }
+
+  render() {
+    return (
+      $0
+    );
+  }
+}

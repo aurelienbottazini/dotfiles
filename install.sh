@@ -17,6 +17,7 @@ npm install -g livedown
 npm install -g typescript
 npm install -g tslint
 npm install -g less
+npm install -g jsxhint
 
 brew install emacs
 brew install offlineimap

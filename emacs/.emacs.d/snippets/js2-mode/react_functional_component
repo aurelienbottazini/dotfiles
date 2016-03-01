@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: react_functional_component
+# key: rfc
+# --
+const $1 = ($2) => {
+  render() {
+    return (
+      $0
+    );
+  }
+}

@@ -209,8 +209,8 @@ Making sure I have the latest /Emacs/.
     (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
     (setq org-clock-persist 'history)
     (org-clock-persistence-insinuate)
-    ;; (setq org-todo-keywords
-    ;;       '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
+    (setq org-todo-keywords
+      '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
     ;; (setq org-tag-alist '(("next" . ?n)
     ;;                       ("maybe" . ?m)
     ;;                       ("waiting" . ?w)
@@ -736,7 +736,9 @@ Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
    :config
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+   (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode))
+
   (setq js2-highlight-level 3))
 
   (use-package typescript-mode)
@@ -866,6 +868,7 @@ Follow symlinks without asking
   (use-package dockerfile-mode)
 #+end_src
 
+
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
 
@@ -873,12 +876,13 @@ Follow symlinks without asking
   buffer listing your errors next to your code.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package flycheck
-   :config
-   (add-hook 'after-init-hook #'global-flycheck-mode)
-   (require-package 'flycheck-typescript-tslint)
-   (eval-after-load 'flycheck
-     '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup)))
+    (use-package flycheck
+     :config
+     (add-hook 'after-init-hook #'global-flycheck-mode)
+     (require-package 'flycheck-typescript-tslint)
+     (eval-after-load 'flycheck
+       '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
+  )
 
 #+END_SRC
 

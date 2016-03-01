@@ -86,7 +86,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(fringe ((t (:foreground ,foreground :background ,background1))))
    `(region ((t (:background ,yellow))))
 
-   `(show-paren-match ((t (:background ,blue :foreground ,background :weight bold))))
+   `(show-paren-match ((t (:background ,background1 :foreground ,blue :weight bold))))
    `(show-paren-mismatch ((t (:background ,red :foreground ,background))))
 
    `(highlight ((t (:background ,yellow :foreground ,foreground))))

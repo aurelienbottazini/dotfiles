@@ -2,10 +2,12 @@
 # name: react_functional_component
 # key: rfc
 # --
-const $1 = ($2) => {
+const ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} = (${2:props}) => {
   render() {
     return (
       $0
     );
   }
 }
+
+export default $1;

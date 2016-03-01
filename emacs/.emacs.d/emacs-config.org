@@ -868,7 +868,6 @@ Follow symlinks without asking
   (use-package dockerfile-mode)
 #+end_src
 
-
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
 

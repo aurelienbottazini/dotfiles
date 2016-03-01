@@ -2,4 +2,4 @@
 # name: export
 # key: ex
 # --
-export default $0;
+export default ${0:`(capitalize (file-name-sans-extension (buffer-name)))`};

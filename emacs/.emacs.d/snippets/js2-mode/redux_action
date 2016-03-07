@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: redux_action
+# key: rda
+# --
+export function ${1:`(capitalize (file-name-sans-extension (buffer-name)))`}(${2:props}) {
+  return {
+    type: $1,
+    payload: $2
+  };
+}$0

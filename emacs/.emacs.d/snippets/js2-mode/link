@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: link
+# key: lin
+# --
+<Link to="${1:route}" $2>
+  ${3:link text}
+</Link>

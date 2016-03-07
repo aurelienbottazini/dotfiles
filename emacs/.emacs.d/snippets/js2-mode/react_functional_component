@@ -2,6 +2,8 @@
 # name: react_functional_component
 # key: rfc
 # --
+import React from 'react';
+
 const ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} = (${2:props}) => {
   render() {
     return (

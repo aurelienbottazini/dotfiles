@@ -60,4 +60,5 @@
  '(term-color-magenta ((t (:background "#a7a5c9" :foreground "#c1a0da"))))
  '(term-color-red ((t (:background "#e66570" :foreground "#f2827f"))))
  '(term-color-white ((t (:background "#bbbcbc" :foreground "#d9d9d6"))))
- '(term-color-yellow ((t (:background "#ffe980" :foreground "#f8e08e")))))
+ '(term-color-yellow ((t (:background "#ffe980" :foreground "#f8e08e"))))
+ '(variable-pitch ((t (:height 1.2)))))

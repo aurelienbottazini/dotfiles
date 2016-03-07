@@ -1374,23 +1374,30 @@ TODO: add keybindings
    ~projectile-invalidate-cache~ to have a brand new C-p
 
    First thing to do when Emacs starts: ~helm-projectile-switch-project~
-** Autocompletion
+** Completion
 
-  In my setup company provides autocompletion through a popup after
-  two characters are typed. Yasnippets are also available through
-  company. ~M-n~ and ~M-p~ to select candidates. And tab to complete
+#+begin_src emacs-lisp
+  (setq hippie-expand-try-functions-list '(
+                                           try-expand-dabbrev-visible
+                                           try-expand-dabbrev
+                                           try-expand-dabbrev-all-buffers
+                                           try-expand-dabbrev-from-kill
+                                           try-complete-file-name-partially
+                                           try-complete-file-name
+                                           try-expand-all-abbrevs
+                                           try-expand-list
+                                           try-expand-line
+                                           try-complete-lisp-symbol-partially
+                                           try-complete-lisp-symbol))
+#+end_src
 
-  C-n completes in insert mode with hippie expand.
-  ~M-/~ or ~C-n~ for hippie expand
 ** Windows
 Navigate between windows configurations with C-c Left/Right Arrow
 #+begin_src emacs-lisp
   (winner-mode 1)
 #+end_src
 
-
-** Cool buffers
-
+** Cool mode
 *** follow-mode
 *** indirect buffer
 *** Palimpset mode
@@ -1399,7 +1406,21 @@ Navigate between windows configurations with C-c Left/Right Arrow
 #+begin_src emacs-lisp
   (use-package palimpsest)
 #+end_src
+*** writeroom-mode
 
+#+begin_src emacs-lisp
+  (use-package writeroom-mode)
+  (defun writer-toogle ()
+    "switches between writer-mode and normal mode"
+    (interactive)
+    (if (bound-and-true-p variable-pitch-mode)
+        (progn
+          (writeroom-mode -1)
+          (variable-pitch-mode -1))
+      (progn
+        (writeroom-mode t)
+        (variable-pitch-mode t))))
+#+end_src
 ** Magit
    - view buffer history: ~magit-log-buffer-file~
 * Emoji
@@ -1472,6 +1493,7 @@ Navigate between windows configurations with C-c Left/Right Arrow
 #+end_src
 
 ** mu4e
+   Keybindings: http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html
 #+begin_src emacs-lisp
     (require 'mu4e)
     (setq mu4e-maildir "~/.Mail")

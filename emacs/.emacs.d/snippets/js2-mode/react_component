@@ -2,6 +2,8 @@
 # name: react_component
 # key: rc
 # --
+import React, { Component } from 'react';
+
 class ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} extends React.Component {
   constructor(props) {
     super(props);

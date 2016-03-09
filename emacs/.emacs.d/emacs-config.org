@@ -1098,6 +1098,8 @@ Follow symlinks without asking
   ))
         (switch-to-buffer-other-window "*ansi-term*")))
 
+
+    (use-package zoom-window)
     (evil-leader/set-key "S" 'helm-multi-swoop)
     (evil-leader/set-key "b" 'helm-bookmarks)
     (evil-leader/set-key "e" 'dired-jump)
@@ -1109,6 +1111,8 @@ Follow symlinks without asking
     (evil-leader/set-key "p" 'helm-projectile-switch-project)
     (evil-leader/set-key "s" 'helm-swoop)
     (evil-leader/set-key "vs" 'visit-term-buffer)
+    (evil-leader/set-key "z" 'zoom-window-zoom)
+
     (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
     (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
     (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
@@ -1168,6 +1172,8 @@ Follow symlinks without asking
     (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
     (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
+
+
 #+END_SRC
 
 * Dired

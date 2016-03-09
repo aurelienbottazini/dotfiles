@@ -1,5 +1,5 @@
 [user]
-	name = Aurélien Bottazzini
+	name = Aurélien Bottazzini
 	email = aurelien@bottazini.com
 [core]
 	quotepath = false
@@ -22,6 +22,7 @@
 	car = commit --amend --no-edit
 	unstage = reset
 	uncommit = reset --soft HEAD^
+        abortmerge= git reset --hard HEAD
 	mup = !git checkout master && git pull && git checkout -
 	sup = !git checkout staging && git pull && git checkout -
 	ureset = !git upstream && git reset --hard (git upstream)

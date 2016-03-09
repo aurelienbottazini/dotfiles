@@ -14,7 +14,7 @@ class ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} extends Compo
 
   render() {
     return (
-      $0
+      <div>$0</div>
     );
   }
 }

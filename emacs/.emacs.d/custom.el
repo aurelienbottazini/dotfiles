@@ -20,6 +20,8 @@
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
  '(global-emojify-mode t t)
+ '(helm-gtags-highlight-candidate t)
+ '(helm-gtags-use-input-at-cursor t)
  '(ido-enable-flex-matching t)
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)

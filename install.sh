@@ -18,6 +18,8 @@ npm install -g typescript
 npm install -g tslint
 npm install -g less
 npm install -g jsxhint
+npm install -g eslint
+npm install -g js-beautify
 
 brew install emacs
 brew install offlineimap

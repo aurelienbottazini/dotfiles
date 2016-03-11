@@ -20,6 +20,7 @@ npm install -g less
 npm install -g jsxhint
 npm install -g eslint
 npm install -g js-beautify
+npm install -g tern
 
 brew install emacs
 brew install offlineimap

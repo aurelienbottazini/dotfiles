@@ -808,6 +808,7 @@ Follow symlinks without asking
 
   (use-package typescript-mode)
   (use-package json-mode)
+  (use-package web-beautify)
 #+END_SRC
 
 

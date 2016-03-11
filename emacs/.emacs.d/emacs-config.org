@@ -820,7 +820,6 @@ Follow symlinks without asking
   (custom-set-variables '(coffee-tab-width 2)))
 
   (use-package highlight-indentation)
-
 #+END_SRC
 
 ** Ruby
@@ -1148,9 +1147,6 @@ Follow symlinks without asking
     (define-key evil-normal-state-map (kbd "g t") 'other-frame)
 
     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
-
-    (define-key evil-normal-state-map (kbd "C-o") 'previous-buffer)
-    (define-key evil-normal-state-map (kbd "C-i") 'next-buffer)
 
     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)

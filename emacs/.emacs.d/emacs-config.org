@@ -808,7 +808,14 @@ Follow symlinks without asking
 
   (use-package typescript-mode)
   (use-package json-mode)
+  ;; conmmands to _beautify_ js, css and html
   (use-package web-beautify)
+  (use-package js2-refactor
+    :config
+    (js2r-add-keybindings-with-prefix "C-c C-r"))
+  (use-package tern
+    :config
+    (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
 #+END_SRC
 
 

@@ -98,7 +98,7 @@
     + https://github.com/magnars/.emacs.d
     + https://github.com/dimitri/emacs-kicker
 
-* COMMENT Initialization
+* Initialization
 
   Auto-indent
   #+BEGIN_SRC emacs-lisp

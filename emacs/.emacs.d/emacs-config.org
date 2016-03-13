@@ -319,7 +319,6 @@ Whenever an external process changes a file underneath emacs, and there
    (pr-update-menus t))
 #+END_SRC
 
-
  One space after a period makes a sentence. Not two. Allows sentence
  based commands to work properly.
 #+BEGIN_SRC emacs-lisp
@@ -330,16 +329,6 @@ Whenever an external process changes a file underneath emacs, and there
 #+BEGIN_SRC emacs-lisp
   (setq enable-recursive-minibuffers t)
 #+END_SRC
-
-
- When a region selected, certain character like ~"~ and ~(~
- will /wrap/ region between quotes, parenthesis and so on.
-#+BEGIN_SRC emacs-lisp
-  (use-package wrap-region
-   :config
-   (turn-on-wrap-region-mode))
-#+END_SRC
-
 
 Follow symlinks without asking
 #+BEGIN_SRC emacs-lisp

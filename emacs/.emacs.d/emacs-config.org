@@ -73,7 +73,8 @@
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook
             (lambda ()
-              (turn-on-auto-fill)))
+              (turn-on-auto-fill)
+              (electric-pair-mode +1)))
 #+END_SRC
 
 * About
@@ -98,6 +99,14 @@
     + https://github.com/dimitri/emacs-kicker
 
 * Initialization
+
+  Auto-indent
+#+BEGIN_SRC emacs-lisp
+  (electric-indent-mode 1)
+
+#+END_SRC
+
+
 
    Useful variables to know in which environment I am in.
 #+BEGIN_SRC emacs-lisp
@@ -290,12 +299,6 @@ Making sure I have the latest /Emacs/.
 No tabs
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
-#+END_SRC
-
-Auto-indent and Automatic pair insertion and deletion.
-#+BEGIN_SRC emacs-lisp
-  (electric-indent-mode 1)
-  ;; (electric-pair-mode 1)
 #+END_SRC
 
 y and n instead of yes or no

@@ -1,10 +1,10 @@
  -*- coding: utf-8 -*-
-#+PROPERTY: header-args    :results silent
+ #+PROPERTY: header-args    :results silent
 
 * Encoding
 
-   I want UTF-8 everywhere.
-#+BEGIN_SRC emacs-lisp
+  I want UTF-8 everywhere.
+  #+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
   (set-default-coding-systems 'utf-8)
   (set-keyboard-coding-system 'utf-8)
@@ -20,28 +20,29 @@
   (if (boundp 'buffer-file-coding-system)
       (setq-default buffer-file-coding-system 'utf-8)
   (setq default-buffer-file-coding-system 'utf-8))
-#+End_SRC
+  #+End_SRC
 
-   Making sure emacs language environment variables are also
-   specifying UTF-8. When starting Emacs with a GUI, it is not
-   always the case.
-   Great explanation of emacs environment variables [[http://ergoemacs.org/emacs/emacs_env_var_paths.html][here]].
-#+BEGIN_SRC emacs-lisp
+  Making sure emacs language environment variables are also
+  specifying UTF-8. When starting Emacs with a GUI, it is not
+  always the case.
+  Great explanation of emacs environment variables [[http://ergoemacs.org/emacs/emacs_env_var_paths.html][here]].
+  #+BEGIN_SRC emacs-lisp
     (setenv "LANG" "fr_FR.UTF-8")
     (setenv "LC_ALL" "fr_FR.UTF-8")
-#+END_SRC
+  #+END_SRC
 
   Before everything loading my custom setting file
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)
-#+END_SRC
+  #+END_SRC
 
 * Packages
 
   An helper to install missing packages.
 
-#+BEGIN_SRC emacs-lisp
+
+  #+BEGIN_SRC emacs-lisp
 (defun require-package (package &optional min-version)
   "Ask elpa to install given PACKAGE."
   (unless (package-installed-p package min-version)
@@ -60,22 +61,21 @@
 (require-package 'use-package)
 (require 'use-package)
 (setq use-package-always-ensure t)
-#+END_SRC
+  #+END_SRC
 
 * Git
-
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
    (use-package magit)
-#+END_SRC
+  #+END_SRC
 
 * text-mode
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook
             (lambda ()
               (turn-on-auto-fill)
               (electric-pair-mode +1)))
-#+END_SRC
+  #+END_SRC
 
 * About
 
@@ -84,9 +84,9 @@
   Some settings are present in my ~custom.el~. I try to merge them
   into my org-babel file from time to time.
 
-#+BEGIN_SRC emacs-lisp :exports both
+  #+BEGIN_SRC emacs-lisp :exports both
   (emacs-version)
-#+END_SRC
+  #+END_SRC
 
 * Inspiration
 
@@ -98,18 +98,18 @@
     + https://github.com/magnars/.emacs.d
     + https://github.com/dimitri/emacs-kicker
 
-* Initialization
+* COMMENT Initialization
 
   Auto-indent
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (electric-indent-mode 1)
 
-#+END_SRC
+  #+END_SRC
 
 
 
-   Useful variables to know in which environment I am in.
-#+BEGIN_SRC emacs-lisp
+  Useful variables to know in which environment I am in.
+  #+BEGIN_SRC emacs-lisp
   (setq custom-safe-themes t)
 
   (setq *is-a-windows* (eq system-type 'windows-nt))
@@ -119,38 +119,40 @@
   (let ((default-directory  "~/.emacs.d/site-lisp/"))
     (normal-top-level-add-to-load-path '("."))
     (normal-top-level-add-subdirs-to-load-path))
-#+END_SRC
+  #+END_SRC
+
+
 
   Should use default Mac OS X browser on Mac.
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (when *is-a-mac*
     (setq browse-url-browser-function (quote browse-url-default-macosx-browser)))
-#+END_SRC
+  #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Aurelien Bottazini"
       user-mail-address "aurelien@bottazini.com")
-#+END_SRC
+  #+END_SRC
 
   Getting right into the action. No initial message and clean
   scratch buffer.
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
   (setq initial-scratch-message "")
-#+END_SRC
+  #+END_SRC
 
 * Exec path
-   Picking ~PATH~ from shell
-#+BEGIN_SRC emacs-lisp
+  Picking ~PATH~ from shell
+  #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
     :config
     (exec-path-from-shell-initialize)
     (exec-path-from-shell-copy-env "DOCKER_HOST")
     (exec-path-from-shell-copy-env "DOCKER_TLS_VERIFY"))
-#+END_SRC
+  #+END_SRC
 
-   Furthermore, on mac, /path_helper/ is messing with the path. I commented the
-   calls to path helper in /etc/profile/ and /etc/zshenv/
+  Furthermore, on mac, /path_helper/ is messing with the path. I commented the
+  calls to path helper in /etc/profile/ and /etc/zshenv/
 
 * Fonts
   #+BEGIN_SRC emacs-lisp
@@ -168,7 +170,7 @@
   #+END_SRC
 
 * Copy paste
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (defun copy-from-osx ()
     (shell-command-to-string "pbpaste"))
 
@@ -180,7 +182,7 @@
 
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
-#+END_SRC
+  #+END_SRC
 
 * Tabs
 
@@ -189,8 +191,8 @@
 
 * org-mode
 
-Making sure I have the latest /Emacs/.
-#+BEGIN_SRC emacs-lisp
+  Making sure I have the latest /Emacs/.
+  #+BEGIN_SRC emacs-lisp
   ;; (use-package org)
 
   ;; easier completion when refiling org-mode
@@ -198,73 +200,73 @@ Making sure I have the latest /Emacs/.
   (setq ido-everywhere t)
   (ido-mode t)
 
+  (setq org-startup-indented nil)
+  (setq org-indent-mode nil)
+  (setq org-indent-indentation-per-level 2)
+  (setq org-src-fontify-natively t)
 
-    (setq org-indent-mode t)
-    (setq org-indent-indentation-per-level 2)
-    (setq org-src-fontify-natively t)
+  ;;(add-hook 'org-mode-hook '(lambda ()
+  ;;                          (turn-on-flyspell)
+  ;;                          (writegood-mode t)))
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (setq org-completion-use-ido t)
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-use-outline-path 'file)
+  ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
+  (setq org-refile-targets (quote ((nil :maxlevel . 2)
+                                   (org-agenda-files :maxlevel . 2))))
+  (defadvice org-refile (after save-refiled-buffer activate compile)
+    "saves all org buffers after using refile"
+    (org-save-all-org-buffers))
 
-    ;;(add-hook 'org-mode-hook '(lambda ()
-    ;;                          (turn-on-flyspell)
-    ;;                          (writegood-mode t)))
-    (add-hook 'org-mode-hook 'turn-on-auto-fill)
-    (setq org-completion-use-ido t)
-    (setq org-outline-path-complete-in-steps nil)
-    (setq org-refile-use-outline-path 'file)
-    ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
-    (setq org-refile-targets (quote ((nil :maxlevel . 2)
-                                     (org-agenda-files :maxlevel . 2))))
-    (defadvice org-refile (after save-refiled-buffer activate compile)
-      "saves all org buffers after using refile"
-      (org-save-all-org-buffers))
-
-    (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
-    (setq org-clock-persist 'history)
-    (org-clock-persistence-insinuate)
-    (setq org-todo-keywords
-      '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
-    ;; (setq org-tag-alist '(("next" . ?n)
-    ;;                       ("maybe" . ?m)
-    ;;                       ("waiting" . ?w)
-    ;;                       ("read" . ?r)))
-    (setq org-confirm-babel-evaluate nil)
-    (setq org-html-doctype "html5")
-    (setq org-html-html5-fancy t)
-    (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
-    (setq org-html-head-include-default-style nil)
-    (setq org-html-head-extra nil)
-    (setq org-html-head-include-scripts nil)
+  (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
+  ;; (setq org-tag-alist '(("next" . ?n)
+  ;;                       ("maybe" . ?m)
+  ;;                       ("waiting" . ?w)
+  ;;                       ("read" . ?r)))
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-html-doctype "html5")
+  (setq org-html-html5-fancy t)
+  (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
+  (setq org-html-head-include-default-style nil)
+  (setq org-html-head-extra nil)
+  (setq org-html-head-include-scripts nil)
 
 
-    (setq org-html-head "
+  (setq org-html-head "
       <link rel=\"stylesheet\" type=\"text/css\" href=\"http://aurelienbottazini.com/css/org-export.min.css\">
       <script src=\"http://aurelienbottazini.com/js/org-export.min.js\"></script>")
 
-    (require 'ox-publish)
-    (setq org-publish-project-alist
-          '(("org-notes-to-html"
-             :base-directory "~/projects/aurelienbottazini.com/_org/"
-             :base-extension "org"
-             :publishing-directory "~/projects/aurelienbottazini.com/"
-             :recursive t
-             :publishing-function org-html-publish-to-html
-             :headline-levels 4
-             :auto-preamble t
-             :html-extension "html"
-             :with-toc nil
-             :body-only t
-             )
-            ("org-notes-to-pdf"
-             :base-directory "~/projects/aurelienbottazini.com/_org/"
-             :base-extension "org"
-             :publishing-directory "~/projects/aurelienbottazini.com/"
-             :recursive t
-             :publishing-function org-latex-publish-to-pdf
-             :headline-levels 4
-             :auto-preamble t
-             :with-toc nil
-             )
+  (require 'ox-publish)
+  (setq org-publish-project-alist
+        '(("org-notes-to-html"
+           :base-directory "~/projects/aurelienbottazini.com/_org/"
+           :base-extension "org"
+           :publishing-directory "~/projects/aurelienbottazini.com/"
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4
+           :auto-preamble t
+           :html-extension "html"
+           :with-toc nil
+           :body-only t
            )
-     )
+          ("org-notes-to-pdf"
+           :base-directory "~/projects/aurelienbottazini.com/_org/"
+           :base-extension "org"
+           :publishing-directory "~/projects/aurelienbottazini.com/"
+           :recursive t
+           :publishing-function org-latex-publish-to-pdf
+           :headline-levels 4
+           :auto-preamble t
+           :with-toc nil
+           )
+          )
+        )
   (use-package org-bullets
     :config
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -279,65 +281,65 @@ Making sure I have the latest /Emacs/.
     )
 
 
-#+END_SRC
+  #+END_SRC
 
 ** Html export
    For colorized source codes with html export
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package htmlize
    :config
    (setq org-html-htmlize-output-type (quote css)))
-#+END_SRC
+   #+END_SRC
 
 * UI
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
   (column-number-mode)
-#+END_SRC
+  #+END_SRC
 
-No tabs
-#+BEGIN_SRC emacs-lisp
+  No tabs
+  #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
-#+END_SRC
+  #+END_SRC
 
-y and n instead of yes or no
-#+BEGIN_SRC emacs-lisp
+  y and n instead of yes or no
+  #+BEGIN_SRC emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
+  #+END_SRC
 
-Whenever an external process changes a file underneath emacs, and there
- was no unsaved changes in the corresponding buffer, just revert its
- content to reflect what's on-disk.
-#+BEGIN_SRC emacs-lisp
+  Whenever an external process changes a file underneath emacs, and there
+  was no unsaved changes in the corresponding buffer, just revert its
+  content to reflect what's on-disk.
+  #+BEGIN_SRC emacs-lisp
   (global-auto-revert-mode 1)
-#+END_SRC
+  #+END_SRC
 
- This is how you enable errors with a full backtrace:
+  This is how you enable errors with a full backtrace:
 
- Better print menus.
-#+BEGIN_SRC emacs-lisp
+  Better print menus.
+  #+BEGIN_SRC emacs-lisp
   (use-package printing
    :config
    (pr-update-menus t))
-#+END_SRC
+  #+END_SRC
 
- One space after a period makes a sentence. Not two. Allows sentence
- based commands to work properly.
-#+BEGIN_SRC emacs-lisp
+  One space after a period makes a sentence. Not two. Allows sentence
+  based commands to work properly.
+  #+BEGIN_SRC emacs-lisp
   (setq sentence-end-double-space nil)    ; Fix M-e
-#+END_SRC
+  #+END_SRC
 
- To be able to execute commands while in the minibuffer
-#+BEGIN_SRC emacs-lisp
+  To be able to execute commands while in the minibuffer
+  #+BEGIN_SRC emacs-lisp
   (setq enable-recursive-minibuffers t)
-#+END_SRC
+  #+END_SRC
 
-Follow symlinks without asking
-#+BEGIN_SRC emacs-lisp
+  Follow symlinks without asking
+  #+BEGIN_SRC emacs-lisp
   (setq vc-follow-symlinks t)
   ;; (setq vc-follow-symlinks (quote ask))
-#+END_SRC
+  #+END_SRC
 
 * Multiple cursors
 
@@ -349,7 +351,7 @@ Follow symlinks without asking
   $: go to end-of-region
   0/^: go to start-of-region
   gg/G: go to the first/last region
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package evil-multiedit
     :config
     ;; Highlights all matches of the selection in the buffer.
@@ -386,33 +388,33 @@ Follow symlinks without asking
     ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
     (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
     )
-#+end_src
+  #+end_src
 * save, delete & restore
 
-   Delete trailing white-space when saving buffer.
-#+BEGIN_SRC emacs-lisp
+  Delete trailing white-space when saving buffer.
+  #+BEGIN_SRC emacs-lisp
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+END_SRC
+  #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (savehist-mode 1)                       ;saves minibuffer history
   ;; (desktop-save-mode 1)                     ;save opened buffers
                                           ;between emacs sessions
   ;; (setq desktop-restore-eager 5) ; restore only 5 buffers at once
-#+END_SRC
+  #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (autoload 'saveplace "saveplace" "automatically remember last edited place in a file")
   (setq-default save-place t)
   (recentf-mode 1)                        ;remembering recent files
   (setq recentf-max-saved-items 200
         recentf-max-menu-items 50)
-#+END_SRC
+  #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq backup-by-copying t      ; don't clobber symlinks
         backup-directory-alist
         '((".*" . "~/.local/share/emacs-saves"))    ; don't litter my fs tree
@@ -423,19 +425,19 @@ Follow symlinks without asking
 
   (setq auto-save-file-name-transforms
         `((".*" ,"~/.local/share/emacs-saves" t)))
-#+END_SRC
+  #+END_SRC
 
 
-   Deleted files go to OS’s trash folder.
-#+BEGIN_SRC emacs-lisp
+  Deleted files go to OS’s trash folder.
+  #+BEGIN_SRC emacs-lisp
   (setq delete-by-moving-to-trash t)
-#+END_SRC
+  #+END_SRC
 
 
   Updating time-stamp on save if one is present
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (add-hook 'before-save-hook 'time-stamp)
-#+END_SRC
+  #+END_SRC
 
 * Visual interface
   No bell
@@ -452,7 +454,7 @@ Follow symlinks without asking
      (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   #+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
      (when (string-match "apple-darwin" system-configuration)
        ;; on mac, there's always a menu bar drown, don't have it empty
        (when window-system
@@ -489,12 +491,12 @@ Follow symlinks without asking
   #+END_SRC
 
 * guide-key
-   Get a visual aid for key sequences.
-   #+BEGIN_SRC emacs-lisp
+  Get a visual aid for key sequences.
+  #+BEGIN_SRC emacs-lisp
     (use-package which-key
      :config
      (which-key-mode))
-   #+END_SRC
+  #+END_SRC
 
 * Strange functionality
   “Dangerous” functionality enabled (disabled by default or with a warning).
@@ -508,15 +510,15 @@ Follow symlinks without asking
 
 * Better undo
   Supercharge C-x u. Use ~d~ to see a diff
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package undo-tree
    :config
    (global-undo-tree-mode))
-#+end_src
+  #+end_src
 
 * Vim
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
    :config
    (global-evil-leader-mode)
@@ -604,12 +606,12 @@ Follow symlinks without asking
    :config
   (global-evil-matchit-mode 1))
 
-#+END_SRC
+  #+END_SRC
 
 * Registers
   List of frequently visited files. I can access them using
   ~C-x r j <letter>~.
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (dolist
       (r `((?e (file . ,(concat user-emacs-directory "emacs-config.org")))
            (?t (file . ,(expand-file-name "~/.tmux.conf")))
@@ -618,23 +620,23 @@ Follow symlinks without asking
            (?w (file . ,(expand-file-name "~/projects/aurelienbottazini.com/_org")))
            ))
     (set-register (car r) (cadr r)))
-#+END_SRC
+  #+END_SRC
 
 * prog-mode(s)
 
   Hexadecimal strings colored with corresponding colors in certain
   modes
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package rainbow-mode
    :config
    (add-hook 'prog-mode-hook 'rainbow-mode)
    (setq rainbow-html-colors-major-mode-list
      (quote
        (html-mode css-mode php-mode nxml-mode xml-mode less-css-mode scss-mode))))
-#+END_SRC
+  #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq comment-auto-fill-only-comments t)
   (add-hook 'prog-mode-hook
             (lambda ()
@@ -713,11 +715,11 @@ Follow symlinks without asking
 
 
     )
-#+END_SRC
+  #+END_SRC
 
 
 ** CSS
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (defun my-css-mode-setup ()
     (setq imenu-generic-expression
           '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
@@ -727,11 +729,11 @@ Follow symlinks without asking
     (setq css-indent-offset 2)
     (imenu-add-menubar-index))
   (add-hook 'css-mode-hook 'my-css-mode-setup)
-#+END_SRC
+   #+END_SRC
 
 
 ** SASS
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package scss-mode
    :config
    (autoload 'scss-mode "scss-mode")
@@ -739,24 +741,24 @@ Follow symlinks without asking
    (add-hook 'scss-mode-hook 'my-css-mode-setup))
 
   (use-package sass-mode)
-#+END_SRC
+   #+END_SRC
 
 
 ** LESS
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package less-css-mode)
-#+end_src
+   #+end_src
 
 ** shell
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\zshrc$" . shell-script-mode))
   (add-to-list 'auto-mode-alist '("\\zsh$" . shell-script-mode))
 
   (use-package fish-mode)
-#+END_SRC
+   #+END_SRC
 
 ** markdown
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
     :init
     (require 'livedown)
@@ -785,12 +787,12 @@ Follow symlinks without asking
 
 
 
-#+END_SRC
+   #+END_SRC
 
 
 ** JavaScript
 
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
    :config
    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -808,10 +810,10 @@ Follow symlinks without asking
   (use-package tern
     :config
     (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
-#+END_SRC
+   #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package coffee-mode
    :config
   (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
@@ -819,11 +821,11 @@ Follow symlinks without asking
   (custom-set-variables '(coffee-tab-width 2)))
 
   (use-package highlight-indentation)
-#+END_SRC
+   #+END_SRC
 
 ** Ruby
 
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package yaml-mode
    :config
    (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode)))
@@ -896,41 +898,41 @@ Follow symlinks without asking
   (use-package ruby-interpolation)
   (use-package inf-ruby)
 
-#+END_SRC
+   #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package projectile-rails
    :config
    (add-hook 'projectile-mode-hook 'projectile-rails-on))
 
   (use-package rspec-mode)
-#+END_SRC
+   #+END_SRC
 
    Hitting ~M-;~ twice adds an xmpfilter comment.
    Hitting xmp keybinding will put the output in this comment
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package rcodetools
    :load-path "/site-lisp/rcodetools.el"
    :pin manual
    :ensure nil
    :config
    (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp))
-#+end_src
+   #+end_src
 
 
 ** Haml
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
  (use-package haml-mode
   :config
   (add-hook 'haml-mode-hook '(lambda () (highlight-indentation-mode))))
-#+END_SRC
+   #+END_SRC
 
 
 ** Docker
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package dockerfile-mode)
-#+end_src
+   #+end_src
 
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
@@ -938,7 +940,7 @@ Follow symlinks without asking
   On a large screen you can use ~flycheck-list-errors~ to open a
   buffer listing your errors next to your code.
 
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (use-package flycheck
      :config
      (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -947,7 +949,7 @@ Follow symlinks without asking
        '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
   )
 
-#+END_SRC
+  #+END_SRC
 
 
   Don't forget to install:
@@ -973,15 +975,15 @@ Follow symlinks without asking
 
 * Navigation
 ** Helm
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package helm
    :config
    (require 'helm-config))
   (use-package helm-ag)
-#+END_SRC
+   #+END_SRC
 
 ** Projectile
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package ag) ;; ultra fast search
   (use-package projectile
    :config
@@ -994,17 +996,17 @@ Follow symlinks without asking
    :config
    (setq projectile-completion-system 'helm)
    (helm-projectile-on))
-#+END_SRC
+   #+END_SRC
 
 ** Project-explorer
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package project-explorer)
-#+end_src
+   #+end_src
 
 ** Setting it up
-  Adjusting command, control and option keys on mac.
-#+BEGIN_SRC emacs-lisp
+   Adjusting command, control and option keys on mac.
+   #+BEGIN_SRC emacs-lisp
     (when *is-a-mac*
       (setq mac-command-modifier 'meta)
       (setq mac-option-modifier 'none)
@@ -1013,12 +1015,12 @@ Follow symlinks without asking
       (setq mac-right-command-modifier 'super)
       ;;(setq ns-function-modifier 'hyper)
   (setq default-input-method "MacOSX"))
-#+END_SRC
+   #+END_SRC
 
 
 
-  Defining my key-map where I define my keys and give them top priorities.
-#+BEGIN_SRC emacs-lisp
+   Defining my key-map where I define my keys and give them top priorities.
+   #+BEGIN_SRC emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode
     "A minor mode so that my key settings override annoying major modes."
@@ -1032,10 +1034,10 @@ Follow symlinks without asking
               (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
               (add-to-list 'minor-mode-map-alist mykeys))))
   (ad-activate 'load)
-#+END_SRC
+   #+END_SRC
 
 ** Tmux
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
 
   (defun tmux-socket-command-string ()
     (concat "tmux -S "
@@ -1068,14 +1070,10 @@ Follow symlinks without asking
   (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
   (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
   (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
-  (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
-  (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
-  (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
-  (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
-#+END_SRC
+   #+END_SRC
 
 ** Bindings
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     (evil-leader/set-leader "<SPC>")
 
     (evil-leader/set-key "gs" 'magit-status)
@@ -1171,51 +1169,51 @@ Follow symlinks without asking
     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 
 
-#+END_SRC
+   #+END_SRC
 
 
 ** Avy
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package avy)
-#+end_src
+   #+end_src
 * Dired
   buffed up dired (emacs). Dired is for directory listing,
   navigation and manipulation inside emacs.
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (require 'dired-x)
   (setq ls-lisp-use-insert-directory-program t)
   (setq insert-directory-program "gls")   ; --dired option not
                                           ; supported by ls, gnu ls
                                           ; seems better
-#+END_SRC
+  #+END_SRC
 
 * Terminal
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (setq term-default-bg-color "#332f21")
   (setq term-default-fg-color "#d9d9d6")
-#+end_src
+  #+end_src
 
 * Spell Check
-    https://joelkuiper.eu/spellcheck_emacs
+  https://joelkuiper.eu/spellcheck_emacs
 
 ** ~flyspell~
 
-  Requires you to install ~hunspell~ with
-  ~brew install hunspell~ and to download dictionaries for it.
-  https://wiki.openoffice.org/wiki/Dictionaries.
-#+BEGIN_SRC emacs-lisp
+   Requires you to install ~hunspell~ with
+   ~brew install hunspell~ and to download dictionaries for it.
+   https://wiki.openoffice.org/wiki/Dictionaries.
+   #+BEGIN_SRC emacs-lisp
   (when (executable-find "hunspell")
     (setq-default ispell-program-name "hunspell")
     (setq ispell-really-hunspell t)
     ;; making sure I load the correctly dictionary for hunspell
     (setq ispell-dictionary "en_US_aurelien"))
-#+End_SRC
+   #+End_SRC
 
 
 ** ~languagetool~
 
    ~brew install languagetool~
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
 (use-package langtool
  :config
 (setq langtool-language-tool-jar "/usr/local/Cellar/languagetool/2.8/libexec/languagetool-commandline.jar"
@@ -1224,7 +1222,7 @@ Follow symlinks without asking
       langtool-disabled-rules '("WHITESPACE_RULE"
                                 "EN_UNPAIRED_BRACKETS"
                                 "COMMA_PARENTHESIS_WHITESPACE")))
-#+END_SRC
+   #+END_SRC
 
 
 ** ~writegood~
@@ -1239,32 +1237,32 @@ Follow symlinks without asking
 
    Reader's Digest magazine has a readability index of about 65. Time
    magazine scores about 52
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package writegood-mode)
-#+END_SRC
+   #+END_SRC
 
 ** Synonyms
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package synosaurus)
-#+end_src
+   #+end_src
 
 * IRC
-I use ~erc~ to chat on IRC.
+  I use ~erc~ to chat on IRC.
 
-Setting nickname and default IRC server.
-#+BEGIN_SRC emacs-lisp
+  Setting nickname and default IRC server.
+  #+BEGIN_SRC emacs-lisp
   (setq erc-nick "Auray")
   (setq erc-server "irc.freenode.org")
-#+END_SRC
+  #+END_SRC
 
 
-Hiding some IRC messages.
-#+BEGIN_SRC emacs-lisp
+  Hiding some IRC messages.
+  #+BEGIN_SRC emacs-lisp
   (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
-#+END_SRC
+  #+END_SRC
 
 * Mode-line / Powerline / Smart line
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package smart-mode-line
    :config
    (setq sml/no-confirm-load-theme t)
@@ -1284,10 +1282,10 @@ Hiding some IRC messages.
                     (set-face-background 'mode-line (car color))
                     (set-face-foreground 'mode-line (cdr color)))))
   (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
-#+END_SRC
+  #+END_SRC
 
 * Functions
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (require 'cl)
   (defun sluggify (str)
     (replace-regexp-in-string
@@ -1308,23 +1306,23 @@ Hiding some IRC messages.
                          ".md"))
       ))
 
-#+end_src
+  #+end_src
 
 * Autotyping
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
 ** Abbrevs
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (setq abbrev-file-name
         (concat user-emacs-directory "abbrev_defs"))
   (setq save-abbrevs t)
   (setq default-abbrev-mode t)
-#+end_src
+   #+end_src
 
 
 ** Yasnippets
 
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
    :config
   (yas-global-mode 1)
@@ -1334,12 +1332,12 @@ Hiding some IRC messages.
   ;; (define-key yas-minor-mode-map [(tab)]        nil)
   ;; (define-key yas-minor-mode-map (kbd "TAB")    nil)
   ;; (define-key yas-minor-mode-map (kbd "<tab>")  nil)
-#+END_SRC
+   #+END_SRC
 
 
 ** Company
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package company)
   ;; (global-company-mode t)
   ;; (setq company-minimum-prefix-length 2)
@@ -1353,7 +1351,7 @@ Hiding some IRC messages.
     ;; (define-key company-active-map [return] nil)
     ;; (define-key company-active-map (kbd "RET") nil)
    ;; )
-#+end_src
+   #+end_src
 
 * Wiki
   My own personal notes for commands I like/discover/learn.
@@ -1401,16 +1399,16 @@ Hiding some IRC messages.
    + ~Spc a < t~ to see todo view for buffer and ~number r~ to select a type of todo
      ~m~ to mark them and ~B~ to perform an action on them.
 ** Multiple Selections
-You can use Multiple cursors by selecting a region and
-TODO: add keybindings
+   You can use Multiple cursors by selecting a region and
+   TODO: add keybindings
 + ~C-c m a~ to select all identical
 + ~C->~ to select next
 + ~C-<~ to select previous
 
-   Hit ~C-g~ where you are done.
+  Hit ~C-g~ where you are done.
 
-   You can also use rectangles with ~C-x spc~. ~C-x r <letter>~
-   for rectangle actions.
+  You can also use rectangles with ~C-x spc~. ~C-x r <letter>~
+  for rectangle actions.
 
 ** Find and replace
    + rgrep
@@ -1424,16 +1422,16 @@ TODO: add keybindings
      #+END_SRC
 
 
-     After using helm-occur do ~C-c C-a~ to edit results in all buffer
-     You can navigate trough “errors” with previous-error ~M-g p~ and next-error
-     ~M-g n~. You can edit “errors” directly in /all/ buffer.
+   After using helm-occur do ~C-c C-a~ to edit results in all buffer
+   You can navigate trough “errors” with previous-error ~M-g p~ and next-error
+   ~M-g n~. You can edit “errors” directly in /all/ buffer.
    + ~helm-swoop~ and ~helm-multi-swoop~
-      #+begin_src emacs-lisp
+     #+begin_src emacs-lisp
        (require-package 'helm-swoop)
-      #+end_src
+     #+end_src
 
-            Replace occur and all? Search and C-c C-e to edit.
-      All is still usable with swoop by using the regular shortcut ~C-c C-a~
+     Replace occur and all? Search and C-c C-e to edit.
+     All is still usable with swoop by using the regular shortcut ~C-c C-a~
    + ~helm-ag~. Use ~M--~ to add options
 ** Bookmarks
    ~C-x r m~
@@ -1449,7 +1447,7 @@ TODO: add keybindings
    First thing to do when Emacs starts: ~helm-projectile-switch-project~
 ** Completion
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (setq hippie-expand-try-functions-list '(
                                            try-expand-dabbrev-visible
                                            try-expand-dabbrev
@@ -1462,26 +1460,26 @@ TODO: add keybindings
                                            try-expand-line
                                            try-complete-lisp-symbol-partially
                                            try-complete-lisp-symbol))
-#+end_src
+   #+end_src
 
 ** Windows
-Navigate between windows configurations with C-c Left/Right Arrow
-#+begin_src emacs-lisp
+   Navigate between windows configurations with C-c Left/Right Arrow
+   #+begin_src emacs-lisp
   (winner-mode 1)
-#+end_src
+   #+end_src
 
 ** Cool mode
 *** follow-mode
 *** indirect buffer
 *** Palimpset mode
-   C-c C-r send selected text to the bottom
-   C-c C-q send selected text to trash file
-#+begin_src emacs-lisp
+    C-c C-r send selected text to the bottom
+    C-c C-q send selected text to trash file
+    #+begin_src emacs-lisp
   (use-package palimpsest)
-#+end_src
+    #+end_src
 *** writeroom-mode
 
-#+begin_src emacs-lisp
+    #+begin_src emacs-lisp
   (use-package writeroom-mode)
   (defun writer-toogle ()
     "switches between writer-mode and normal mode"
@@ -1493,11 +1491,11 @@ Navigate between windows configurations with C-c Left/Right Arrow
       (progn
         (writeroom-mode t)
         (variable-pitch-mode t))))
-#+end_src
+    #+end_src
 ** Magit
    - view buffer history: ~magit-log-buffer-file~
 * Emoji
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (defun --set-emoji-font (frame)
     "Adjust the font settings of FRAME so Emacs can display emoji properly."
     (if (eq system-type 'darwin)
@@ -1516,10 +1514,10 @@ Navigate between windows configurations with C-c Left/Right Arrow
   ;; (add-hook 'after-init-hook #'global-emojify-mode)
   ;; (require 'company-emoji)
   ;; (add-to-list 'company-backends 'company-emoji)
-#+end_src
+  #+end_src
 
 * Colors
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package rainbow-identifiers
     :config
     (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
@@ -1537,10 +1535,10 @@ Navigate between windows configurations with C-c Left/Right Arrow
                   (load-theme 'pantone t)))
     (load-theme 'pantone t))
   (use-package load-theme-buffer-local)
-#+end_src
+  #+end_src
 
 * Templates
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package yatemplate
    :init
    (auto-insert-mode t)
@@ -1549,11 +1547,11 @@ Navigate between windows configurations with C-c Left/Right Arrow
    (setq auto-insert-alist nil)
    (setq auto-insert-query nil)
    (yatemplate-fill-alist))
-#+end_src
+  #+end_src
 
 * Email
 ** gnus
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (setq nnmail-expiry-target "INBOX.Trash")
   (setq nnmail-expiry-wait 'immediate)
   (setq gnus-select-method
@@ -1563,11 +1561,11 @@ Navigate between windows configurations with C-c Left/Right Arrow
                   (nnimap-authenticator login)
                   (nnimap-expunge-on-close 'never)
                   (nnimap-stream ssl)))
-#+end_src
+   #+end_src
 
 ** mu4e
    Keybindings: http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
     (require 'mu4e)
     (setq mu4e-maildir "~/.Mail")
     (setq mu4e-drafts-folder "/fastmail/INBOX.Drafts")
@@ -1636,4 +1634,4 @@ Navigate between windows configurations with C-c Left/Right Arrow
        smtpmail-smtp-service 587)
 
 (use-package helm-mu)
-#+end_src
+   #+end_src

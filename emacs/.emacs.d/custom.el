@@ -35,6 +35,7 @@
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))
  '(org-hide-leading-stars t)
+ '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(ruby-deep-arglist nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)

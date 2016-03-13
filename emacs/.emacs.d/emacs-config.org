@@ -1105,6 +1105,7 @@ Follow symlinks without asking
     (evil-leader/set-key "f" 'helm-projectile-ag)
     (evil-leader/set-key "h" 'helm-mini)
     (evil-leader/set-key "i" 'helm-imenu)
+    (evil-leader/set-key "j" 'evil-avy-goto-char-2)
     (evil-leader/set-key "m" 'mu4e)
     (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
     (evil-leader/set-key "p" 'helm-projectile-switch-project)
@@ -1172,6 +1173,11 @@ Follow symlinks without asking
 
 #+END_SRC
 
+
+** Avy
+#+begin_src emacs-lisp
+  (use-package avy)
+#+end_src
 * Dired
   buffed up dired (emacs). Dired is for directory listing,
   navigation and manipulation inside emacs.

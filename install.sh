@@ -10,6 +10,11 @@ brew cask install launchrocket
 brew install tree
 brew install node
 brew install hub
+
+# brew version does not work with ruby pdfkit. Need at least version 0.12.3
+# install it using http://wkhtmltopdf.org/downloads.html
+# brew install wkhtmltopdf
+
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli

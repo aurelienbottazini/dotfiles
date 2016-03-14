@@ -10,3 +10,5 @@ dummy/tmp/*
 *.dump
 .vagrant
 .env
+.tern-project
+.tern-port

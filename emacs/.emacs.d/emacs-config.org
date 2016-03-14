@@ -277,6 +277,7 @@
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((typescript . t)
+       (js . t)
        ))
     )
 
@@ -627,10 +628,25 @@
   #+begin_src emacs-lisp
   (use-package emmet-mode
    :config
-  (add-hook 'css-mode-hook  'emmet-mode)
-  (add-hook 'html-mode-hook  'emmet-mode)
-  (add-hook 'js2-jsx-mode-hook  'emmet-mode)
-  (setq emmet-expand-jsx-className? t))
+  (add-hook 'css-mode-hook
+              (lambda ()
+                (emmet-mode)
+                (setq emmet-expand-jsx-className? nil)
+              ))
+
+  (add-hook 'html-mode-hook
+              (lambda ()
+                (emmet-mode)
+                (setq emmet-expand-jsx-className? nil)
+              ))
+
+  (add-hook 'js2-jsx-mode-hook
+              (lambda ()
+                (emmet-mode)
+                (setq emmet-expand-jsx-className? t)
+              ))
+  )
+
 
   #+end_src
   Hexadecimal strings colored with corresponding colors in certain

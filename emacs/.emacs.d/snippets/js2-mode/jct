@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: jest_container_test
+# key: jct
+# --
+const containerPath = '../../../src/$1/containers/${2:`(capitalize (file-name-sans-extension (buffer-name)))`}';
+jest.dontMock(containerPath);
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+
+const $2 = require(containerPath).$2;
+
+describe('$2', () => {
+  it('works', () => {
+    const div = TestUtils.renderIntoDocument(
+      <$2 $0/>
+    );
+
+    const divNode = ReactDOM.findDOMNode(div);
+    expect(divNode.textContent).toEqual('Loading');
+  });
+});

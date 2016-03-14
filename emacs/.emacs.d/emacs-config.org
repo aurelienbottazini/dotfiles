@@ -1,5 +1,5 @@
- -*- coding: utf-8 -*-
- #+PROPERTY: header-args    :results silent
+-*- coding: utf-8 -*-
+#+PROPERTY: header-args    :results silent
 
 * Encoding
 
@@ -624,6 +624,15 @@
 
 * prog-mode(s)
 
+  #+begin_src emacs-lisp
+  (use-package emmet-mode
+   :config
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'html-mode-hook  'emmet-mode)
+  (add-hook 'js2-jsx-mode-hook  'emmet-mode)
+  (setq emmet-expand-jsx-className? t))
+
+  #+end_src
   Hexadecimal strings colored with corresponding colors in certain
   modes
   #+BEGIN_SRC emacs-lisp
@@ -648,7 +657,7 @@
   (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
 
   ;; let's see the 80ish column
-  (setq-default fill-column 72)
+  (setq-default fill-column 100)
   (use-package fill-column-indicator
     :config
     (add-hook 'prog-mode-hook 'turn-on-fci-mode)
@@ -811,7 +820,6 @@
     :config
     (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
    #+END_SRC
-
 
    #+BEGIN_SRC emacs-lisp
   (use-package coffee-mode
@@ -1162,6 +1170,8 @@
     (define-key evil-normal-state-map (kbd "gt") 'helm-gtags-dwim)
 
     (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+    (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+
 
     (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
     (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
@@ -1323,34 +1333,35 @@
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
-  (use-package yasnippet
-   :config
-  (yas-global-mode 1)
-  (setq yas-snippet-dirs
-        '("~/.emacs.d/snippets")))
-  ;; I use company mode for snippets
-  ;; (define-key yas-minor-mode-map [(tab)]        nil)
-  ;; (define-key yas-minor-mode-map (kbd "TAB")    nil)
-  ;; (define-key yas-minor-mode-map (kbd "<tab>")  nil)
+     (use-package yasnippet
+      :config
+     (yas-global-mode 1)
+     (setq yas-snippet-dirs
+           '("~/.emacs.d/snippets")))
+     ;; I use company mode for snippets
+     ;; (define-key yas-minor-mode-map [(tab)]        nil)
+     ;; (define-key yas-minor-mode-map (kbd "TAB")    nil)
+     ;; (define-key yas-minor-mode-map (kbd "<tab>")  nil)
    #+END_SRC
 
 
 ** Company
 
    #+begin_src emacs-lisp
-  (use-package company)
-  ;; (global-company-mode t)
-  ;; (setq company-minimum-prefix-length 2)
-  ;; (setq company-backends '((company-yasnippet company-dabbrev-code company-dabbrev company-keywords company-files)))
-  ;; (with-eval-after-load 'company
-    ;;company tab to complete instead of enter
-    ;; (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-    ;; (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-    ;; (define-key company-active-map [tab] 'company-complete-selection)
-    ;;disable enter
-    ;; (define-key company-active-map [return] nil)
-    ;; (define-key company-active-map (kbd "RET") nil)
-   ;; )
+     (use-package company-tern)
+     (use-package company)
+     (global-company-mode t)
+     (setq company-minimum-prefix-length 2)
+     (setq company-backends '((company-tern)))
+     (with-eval-after-load 'company
+       ;;company tab to complete instead of enter
+       (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+       (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+       (define-key company-active-map [tab] 'company-complete-selection)
+       ;; ;;disable enter
+       (define-key company-active-map [return] nil)
+       (define-key company-active-map (kbd "RET") nil)
+      )
    #+end_src
 
 * Wiki
@@ -1453,13 +1464,9 @@
                                            try-expand-dabbrev
                                            try-expand-dabbrev-all-buffers
                                            try-expand-dabbrev-from-kill
-                                           try-complete-file-name-partially
                                            try-complete-file-name
                                            try-expand-all-abbrevs
-                                           try-expand-list
-                                           try-expand-line
-                                           try-complete-lisp-symbol-partially
-                                           try-complete-lisp-symbol))
+                                           try-expand-list))
    #+end_src
 
 ** Windows

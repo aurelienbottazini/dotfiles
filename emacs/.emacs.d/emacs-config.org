@@ -838,13 +838,20 @@
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-  (use-package coffee-mode
-   :config
-  (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-  (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-  (custom-set-variables '(coffee-tab-width 2)))
+     (use-package coffee-mode
+       :config
+       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+       (custom-set-variables '(coffee-tab-width 2)))
 
-  (use-package highlight-indentation)
+     (use-package highlight-indentation)
+     (use-package babel-repl
+       :config
+       (require 'comint)
+       (add-to-list 'comint-preoutput-filter-functions
+                    (lambda (output)
+                      (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))
+       )
    #+END_SRC
 
 ** Ruby

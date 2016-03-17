@@ -26,6 +26,9 @@ npm install -g jsxhint
 npm install -g eslint
 npm install -g js-beautify
 npm install -g tern
+npm install -g bower
+npm install -g eslint-plugin-jsx-a11y
+npm install -g babel-cli
 
 brew install emacs
 brew install offlineimap

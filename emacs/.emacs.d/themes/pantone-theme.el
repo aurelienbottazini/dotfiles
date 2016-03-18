@@ -93,6 +93,7 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
    `(isearch ((t (:weight bold :foreground ,foreground :background ,yellow))))
    `(evil-search-highlight-persist-highlight-face ((t (:background ,yellow))))
 
+
    ;; `(button ((t (:background ,base00
    ;;               :foreground ,magenta
    ;;               :inherit nil

@@ -1121,10 +1121,10 @@
           (progn
             (split-window-sensibly (selected-window))
             (other-window 1)
-            (load-theme-buffer-local 'pantone-term (ansi-term (getenv "SHELL"))
+            )
 
-  ))
-        (switch-to-buffer-other-window "*ansi-term*")))
+  )
+        (switch-to-buffer-other-window "*ansi-term*"))
 
 
     (use-package zoom-window)

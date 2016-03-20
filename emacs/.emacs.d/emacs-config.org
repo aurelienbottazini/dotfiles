@@ -686,7 +686,7 @@
     (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
 
     ;; let's see the 80ish column
-    (setq-default fill-column 100)
+    (setq-default fill-column 80)
     (use-package fill-column-indicator
       :config
       (add-hook 'after-change-major-mode-hook

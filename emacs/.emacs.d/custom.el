@@ -23,6 +23,7 @@
  '(helm-gtags-highlight-candidate t)
  '(helm-gtags-use-input-at-cursor t)
  '(ido-enable-flex-matching t)
+ '(js-indent-level 2)
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
  '(js2-indent-switch-body t)

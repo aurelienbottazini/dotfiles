@@ -626,26 +626,39 @@
 * prog-mode(s)
 
   #+begin_src emacs-lisp
-  (use-package emmet-mode
-   :config
-  (add-hook 'css-mode-hook
-              (lambda ()
-                (emmet-mode)
-                (setq emmet-expand-jsx-className? nil)
-              ))
+    (use-package emmet-mode
+      :config
+      (progn
+        (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-yas)
+        (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-yas))
 
-  (add-hook 'html-mode-hook
-              (lambda ()
-                (emmet-mode)
-                (setq emmet-expand-jsx-className? nil)
-              ))
+      (add-hook 'css-mode-hook
+                (lambda ()
+                  (emmet-mode)
+                  (setq emmet-expand-jsx-className? nil)
+                  ))
 
-  (add-hook 'js2-jsx-mode-hook
-              (lambda ()
-                (emmet-mode)
-                (setq emmet-expand-jsx-className? t)
-              ))
-  )
+      (add-hook 'sgml-mode-hook
+                (lambda ()
+                  (emmet-mode)
+                  (setq emmet-expand-jsx-className? nil)
+                  ))
+
+      (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+      (add-to-list 'auto-mode-alist '("\\.htm$" . web-mode))
+
+      (add-hook 'web-mode-hook
+                (lambda ()
+                  (emmet-mode)
+                  (setq emmet-expand-jsx-className? nil)
+                  ))
+
+      (add-hook 'js2-jsx-mode-hook
+                (lambda ()
+                  (emmet-mode)
+                  (setq emmet-expand-jsx-className? t)
+                  ))
+      )
 
 
   #+end_src
@@ -1205,7 +1218,6 @@
 
 
    #+END_SRC
-
 
 ** Avy
    #+begin_src emacs-lisp

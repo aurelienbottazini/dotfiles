@@ -29,6 +29,7 @@
  '(js2-mode-show-parse-errors nil)
  '(js2-mode-show-strict-warnings nil)
  '(jscs-command "jscs")
+ '(json-reformat:indent-width 2)
  '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)
  '(magit-push-always-verify nil t)

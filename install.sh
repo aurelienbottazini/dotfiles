@@ -29,6 +29,14 @@ npm install -g tern
 npm install -g bower
 npm install -g eslint-plugin-jsx-a11y
 
+# for org-babel
+npm install --save-dev babel-cli
+npm install --save-dev babel-preset-es2015
+npm install --save-dev babel-preset-stage-0
+npm install --save-dev babel-preset-stage-1
+npm install --save-dev babel-preset-stage-2
+npm install --save-dev babel-preset-stage-3
+npm install --save-dev babel-preset-react
 
 brew install emacs
 brew install offlineimap

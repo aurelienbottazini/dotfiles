@@ -1,6 +1,13 @@
 -*- coding: utf-8 -*-
 #+PROPERTY: header-args    :results silent
-
+#+begin_src emacs-lisp
+  (setenv "NODE_PATH"
+    (concat
+        (getenv "HOME") "/node_modules" ":"
+         (getenv "NODE_PATH")
+    )
+)
+#+end_src
 * Encoding
 
   I want UTF-8 everywhere.

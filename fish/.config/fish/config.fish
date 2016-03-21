@@ -29,7 +29,8 @@ alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .
 
 set --erase fish_greeting
 set -Ux EDITOR 'emacsclient -t -a ""'
-set -Ux fish_color_autosuggestion black
+set -Ux fish_color_autosuggestion "#e9eae8"
+set -UX fish_color_command blue
 set -Ux fish_term24bit 1
 
 set -x GTAGSLABEL pygments

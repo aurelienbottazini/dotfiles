@@ -11,6 +11,7 @@
  '(custom-safe-themes
    (quote
     ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+ '(deft-directory "/Users/aurelienbottazini/Dropbox/org")
  '(electric-pair-mode nil)
  '(elscreen-tab-display-control nil t)
  '(emojify-display-style (quote unicode) t)
@@ -48,6 +49,7 @@
  '(sml/vc-mode-show-backend nil)
  '(smtpmail-smtp-server "mail.messagingengine.com")
  '(smtpmail-smtp-service 587)
+ '(temporary-file-directory "~/emacs_tmp/")
  '(tool-bar-mode nil)
  '(typescript-indent-level 2)
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))

@@ -2,21 +2,19 @@
 # name: jest_container_test
 # key: jct
 # --
-const containerPath = '../../../src/$1/containers/${2:`(capitalize (file-name-sans-extension (buffer-name)))`}';
-jest.dontMock(containerPath);
+jest.unmock('../../../src/$1/containers/${2:`(capitalize (file-name-sans-extension (buffer-name)))`}');
+
+require('jasmine-expect-jsx');
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
-const $2 = require(containerPath).$2;
+const $2 = require('../../../src/$1/containers/$2').${3:$2};
 
 describe('$2', () => {
   it('works', () => {
-    const div = TestUtils.renderIntoDocument(
-      <$2 $0/>
-    );
-
-    const divNode = ReactDOM.findDOMNode(div);
-    expect(divNode.textContent).toEqual('Loading');
+    const renderer = TestUtils.createRenderer();
+    renderer.render(<$2 />);
+    const output = renderer.getRenderOutput();
+    expect(output).toEqualJSX();
   });
 });

@@ -40,7 +40,22 @@ More information on Tron: https://en.wikipedia.org/wiki/Tron")
   (custom-theme-set-faces
    'pantone
 
+   `(context-coloring-level-0-face ((t :foreground ,foreground)))
+   `(context-coloring-level-1-face ((t :foreground ,blue)))
+   `(context-coloring-level-2-face ((t :foreground ,brown)))
+   `(context-coloring-level-3-face ((t :foreground ,red)))
+
+   ;; `(context-coloring-level-2-face ((t :foreground ,zenburn-green+4)))
+   ;; `(context-coloring-level-3-face ((t :foreground ,zenburn-yellow)))
+   ;; `(context-coloring-level-4-face ((t :foreground ,zenburn-orange)))
+   ;; `(context-coloring-level-5-face ((t :foreground ,zenburn-magenta)))
+   ;; `(context-coloring-level-6-face ((t :foreground ,zenburn-blue+1)))
+   ;; `(context-coloring-level-7-face ((t :foreground ,zenburn-green+2)))
+   ;; `(context-coloring-level-8-face ((t :foreground ,zenburn-yellow-2)))
+   ;; `(context-coloring-level-9-face ((t :foreground ,zenburn-red+1)))
+
    `(default ((t (:background ,background :foreground ,foreground))))
+
    `(outline-1 ((t (:foreground ,blue :weight bold))))
    `(outline-2 ((t (:foreground ,violet :weight bold))))
    ;; `(outline-3 ((t (:foreground ,yellow :height 1.05))))

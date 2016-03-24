@@ -1,13 +1,5 @@
 -*- coding: utf-8 -*-
 #+PROPERTY: header-args    :results silent
-#+begin_src emacs-lisp
-  (setenv "NODE_PATH"
-    (concat
-        (getenv "HOME") "/node_modules" ":"
-         (getenv "NODE_PATH")
-    )
-)
-#+end_src
 * Encoding
 
   I want UTF-8 everywhere.
@@ -69,6 +61,17 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
   #+END_SRC
+
+#+begin_src emacs-lisp
+  (setenv "NODE_PATH"
+          (concat
+           (getenv "HOME") "/node_modules" ":"
+           (getenv "NODE_PATH")
+           )
+          )
+
+  (use-package deft)
+#+end_src
 
 * Git
   #+BEGIN_SRC emacs-lisp
@@ -633,6 +636,12 @@
 * prog-mode(s)
 
   #+begin_src emacs-lisp
+    (use-package context-coloring
+      :config
+      (add-hook 'js2-mode-hook #'context-coloring-mode)
+      (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
+      (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
+    )
     (use-package emmet-mode
       :config
       (progn
@@ -843,7 +852,9 @@
   (use-package js2-mode
    :config
    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-   (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode))
+   (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode)
+   (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+)
 
   (setq js2-highlight-level 3))
 
@@ -1382,12 +1393,7 @@
      (yas-global-mode 1)
      (setq yas-snippet-dirs
            '("~/.emacs.d/snippets")))
-     ;; I use company mode for snippets
-     ;; (define-key yas-minor-mode-map [(tab)]        nil)
-     ;; (define-key yas-minor-mode-map (kbd "TAB")    nil)
-     ;; (define-key yas-minor-mode-map (kbd "<tab>")  nil)
    #+END_SRC
-
 
 ** Company
 

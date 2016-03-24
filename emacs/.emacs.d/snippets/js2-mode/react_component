@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: react_component
-# key: rc
+# key: rcp
 # --
 import React, { Component } from 'react';
 

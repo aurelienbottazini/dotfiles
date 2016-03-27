@@ -538,11 +538,13 @@
   (use-package evil
    :config
    (evil-mode 1)
-  (setq evil-emacs-state-cursor  '("#dc4388" box))
-  (setq evil-normal-state-cursor '("#da0039" box))
-  (setq evil-visual-state-cursor '("#8fdcf1" box))
-  (setq evil-insert-state-cursor '("#da0039" bar))
-  (setq evil-motion-state-cursor '("#da0039" box))
+(fset 'evil-visual-update-x-selection 'ignore)
+(setq x-select-enable-clipboard nil)
+  (setq evil-emacs-state-cursor  '("#DC8CC3" box))
+  (setq evil-normal-state-cursor '("#94bff3" box))
+  (setq evil-visual-state-cursor '("#f0dfaf" box))
+  (setq evil-insert-state-cursor '("#94bff3" bar))
+  (setq evil-motion-state-cursor '("#afd8af" box))
 (evil-declare-key 'normal org-mode-map
     "gk" 'outline-up-heading
     "gj" 'outline-next-visible-heading
@@ -1163,6 +1165,7 @@
     (use-package zoom-window)
     (evil-leader/set-key "S" 'helm-multi-swoop)
     (evil-leader/set-key "b" 'helm-bookmarks)
+    (evil-leader/set-key "d" 'deft)
     (evil-leader/set-key "e" 'dired-jump)
     (evil-leader/set-key "f" 'helm-projectile-ag)
     (evil-leader/set-key "h" 'helm-mini)
@@ -1222,8 +1225,13 @@
     (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
     (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
 
-    (require-package 'helm-gtags)
-    (define-key evil-normal-state-map (kbd "gt") 'helm-gtags-dwim)
+    (use-package helm-gtags
+     :config
+    (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
+
+    (use-package elscreen
+     :config
+    (elscreen-start))
 
     (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
     (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
@@ -1328,25 +1336,25 @@
 
 * Mode-line / Powerline / Smart line
   #+BEGIN_SRC emacs-lisp
-  (use-package smart-mode-line
-   :config
-   (setq sml/no-confirm-load-theme t)
-   (setq sml/theme 'respectful)
-   (add-hook 'after-init-hook #'sml/setup)
+    (use-package smart-mode-line
+     :config
+     (setq sml/no-confirm-load-theme t)
+     (setq sml/theme 'respectful)
+     (add-hook 'after-init-hook #'sml/setup)
 
-  ;; change mode-line color by evil state
-  (lexical-let ((default-color (cons (face-background 'mode-line)
-                                     (face-foreground 'mode-line)))))
-  (add-hook 'post-command-hook
-            (lambda ()
-              (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
-                                 ((evil-insert-state-p) '("#a4eddd" . "#212822"))
-                                 ((evil-visual-state-p) '("#ffe863" . "#212822"))
-                                 ((evil-emacs-state-p)  '("#600b92" . "#f1f2f1"))
-                                 (t '("#fff7c7" . "#212822")))))
-                    (set-face-background 'mode-line (car color))
-                    (set-face-foreground 'mode-line (cdr color)))))
-  (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
+    ;; change mode-line color by evil state
+    (lexical-let ((default-color (cons (face-background 'mode-line)
+                                       (face-foreground 'mode-line)))))
+    ;; (add-hook 'post-command-hook
+    ;;           (lambda ()
+    ;;             (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
+    ;;                                ((evil-insert-state-p) '("#a4eddd" . "#212822"))
+    ;;                                ((evil-visual-state-p) '("#ffe863" . "#212822"))
+    ;;                                ((evil-emacs-state-p)  '("#600b92" . "#f1f2f1"))
+    ;;                                (t '("#fff7c7" . "#212822")))))
+    ;;                   (set-face-background 'mode-line (car color))
+    ;;                   (set-face-foreground 'mode-line (cdr color)))))
+    (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
   #+END_SRC
 
 * Functions
@@ -1575,23 +1583,24 @@
 
 * Colors
   #+begin_src emacs-lisp
-  (use-package rainbow-identifiers
-    :config
-    (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+    (use-package rainbow-identifiers
+      :config
+      (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
-  (use-package rainbow-delimiters
-    :config
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+    (use-package rainbow-delimiters
+      :config
+      (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-  (setq custom-theme-directory "~/.emacs.d/themes")
-  (load-theme 'pantone)
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (select-frame frame)
-                  (load-theme 'pantone t)))
-    (load-theme 'pantone t))
-  (use-package load-theme-buffer-local)
+    (setq custom-theme-directory "~/.emacs.d/themes")
+    ;; (use-package zenburn)
+    (load-theme 'zenburn)
+    (if (daemonp)
+        (add-hook 'after-make-frame-functions
+                  (lambda (frame)
+                    (select-frame frame)
+                    (load-theme 'pantone t)))
+      (load-theme 'zenburn t))
+    (use-package load-theme-buffer-local)
   #+end_src
 
 * Templates

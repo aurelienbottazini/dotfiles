@@ -2,13 +2,12 @@
 # name: jest_container_test
 # key: jct
 # --
-jest.unmock('../../../src/$1/containers/${2:`(capitalize (file-name-sans-extension (buffer-name)))`}');
-
+const componentPath = '../../../src/$1/containers/${2:`(capitalize (file-name-sans-extension (buffer-name)))`}';
+jest.unmock(componentPath);
 require('jasmine-expect-jsx');
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-
-const $2 = require('../../../src/$1/containers/$2').${3:$2};
+const $2 = require(componentPath).${3:$2};
 
 describe('$2', () => {
   it('works', () => {

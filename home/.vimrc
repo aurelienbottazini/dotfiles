@@ -174,6 +174,5 @@ hi clear CursorLine
 hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
 
 nmap <leader>i :set list!<CR>
-set listchars=tab:▸\ ,eol:¬,space:∙
 highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10

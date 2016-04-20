@@ -23,6 +23,23 @@
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
  '(global-emojify-mode t t)
+ '(grep-command "grep  -nH -e")
+ '(grep-find-command (quote ("find . -type f -exec grep  -nH -e  {} +" . 35)))
+ '(grep-find-ignored-directories
+   (quote
+    ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules" "vendor")))
+ '(grep-find-ignored-files
+   (quote
+    (".#*" "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc" "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib" "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl" "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl" "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl" "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky" "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs" "*.pyc" "*.pyo" "GTAGS" "GPATH" "GRTAGS")))
+ '(grep-find-template
+   "find <D> <X> -type f <F> -exec grep <C> -nH -e <R> \\{\\} +")
+ '(helm-grep-file-path-style (quote absolute))
+ '(helm-grep-ignored-directories
+   (quote
+    ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".gvfs" "node_modules" "vendor")))
+ '(helm-grep-ignored-files
+   (quote
+    (".#*" "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc" "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib" "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl" "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl" "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl" "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky" "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs" "*.pyc" "*.pyo" "GTAGS" "GPATH" "GRTAGS")))
  '(helm-gtags-highlight-candidate t)
  '(helm-gtags-use-input-at-cursor t)
  '(ido-enable-flex-matching t)
@@ -60,7 +77,8 @@
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2))
+ '(web-mode-markup-indent-offset 2)
+ '(zoom-window-mode-line-color "#366060"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -69,4 +87,7 @@
  '(elscreen-tab-background-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
  '(elscreen-tab-current-screen-face ((t (:background "#6f6f6f" :foreground "#dcdcdc" :weight bold))))
  '(elscreen-tab-other-screen-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "#dc8cc3" :foreground "#2b2b2b"))))
+ '(font-lock-constant-face ((t (:foreground "#BFEBBF" :slant italic))))
+ '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic))))
  '(variable-pitch ((t (:height 1.2)))))

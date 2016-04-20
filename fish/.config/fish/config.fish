@@ -24,6 +24,8 @@ alias tu "tmux -u"
 alias tmux "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
+alias ls "gls --color"
+alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 
 alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor --exclude db/data --exclude db/neo4j (pwd) | xargs -0 -n 1 -I file rsync_sd file"
 
@@ -34,9 +36,6 @@ set -Ux fish_color_command "#94bff3"
 set -Ux fish_color_param "#8cd0d3"
 
 set -Ux fish_term24bit 1
-
-
-
 
 # fish_color_comment	eab700
 # fish_color_cwd	green

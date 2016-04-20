@@ -887,7 +887,9 @@
                     (lambda (output)
                       (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))
 
-       (setq babel-repl-cli-arguments '("--presets=es2015"))
+       (setq babel-repl-cli-arguments '("--presets=es2015"
+                                        ;; "--eval=\"require('repl').start({replMode: require('repl').REPL_MODE_STRICT, ignoreUndefined: true})\""
+       ))
        (setq babel-repl-cli-program "org-babel-node")
        (evil-leader/set-key-for-mode 'js2-mode "x" 'babel-repl-send-buffer)
       )
@@ -896,77 +898,79 @@
 ** Ruby
 
    #+BEGIN_SRC emacs-lisp
-  (use-package yaml-mode
-   :config
-   (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode)))
+          (use-package yaml-mode
+           :config
+           (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode)))
 
-  (use-package enh-ruby-mode
-   :config
-  (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-  (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+          (use-package enh-ruby-mode
+           :config
+          (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+          (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
 
-  (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
-  (eval-after-load 'enh-ruby-mode
-    '(progn
-       (defun ruby-mode-defaults ()
-         (inf-ruby-minor-mode +1)
-         ;; CamelCase aware editing operations
-         (subword-mode +1))))
+          (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
+          (eval-after-load 'enh-ruby-mode
+            '(progn
+               (defun ruby-mode-defaults ()
+                 (inf-ruby-minor-mode +1)
+                 ;; CamelCase aware editing operations
+                 (subword-mode +1))))
 
-  (add-hook 'enh-ruby-mode-hook (lambda ()
-                                  (run-hooks 'ruby-mode-hook)))
+          (add-hook 'enh-ruby-mode-hook (lambda ()
+                                          (run-hooks 'ruby-mode-hook)))
 
-  ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
-  ;; make it easier to work with global gnu tags
-  (define-category ?U "Uppercase")
-  (define-category ?u "Lowercase")
-  (modify-category-entry (cons ?A ?Z) ?U)
-  (modify-category-entry (cons ?a ?z) ?u)
-  (make-variable-buffer-local 'evil-cjk-word-separating-categories)
-  (add-hook 'subword-mode-hook
-            (lambda ()
-              (if subword-mode
-                  (push '(?u . ?U) evil-cjk-word-separating-categories)
-                (setq evil-cjk-word-separating-categories
-                      (default-value 'evil-cjk-word-separating-categories)))))
+          ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
+          ;; make it easier to work with global gnu tags
+          (define-category ?U "Uppercase")
+          (define-category ?u "Lowercase")
+          (modify-category-entry (cons ?A ?Z) ?U)
+          (modify-category-entry (cons ?a ?z) ?u)
+          (make-variable-buffer-local 'evil-cjk-word-separating-categories)
+          (add-hook 'subword-mode-hook
+                    (lambda ()
+                      (if subword-mode
+                          (push '(?u . ?U) evil-cjk-word-separating-categories)
+                        (setq evil-cjk-word-separating-categories
+                              (default-value 'evil-cjk-word-separating-categories)))))
 
-  (eval-after-load 'enh-ruby-mode
-    '(progn
-       ;; use the standard Dired bindings as a base
-       (evil-define-key 'normal enh-ruby-mode-map
-         "[m" 'enh-ruby-beginning-of-defun
-         "]m" 'enh-ruby-end-of-defun
-         )))
+          (eval-after-load 'enh-ruby-mode
+            '(progn
+               ;; use the standard Dired bindings as a base
+               (evil-define-key 'normal enh-ruby-mode-map
+                 "[m" 'enh-ruby-beginning-of-defun
+                 "]m" 'enh-ruby-end-of-defun
+                 )))
 
-  (add-hook 'enh-ruby-mode-hook
-            (lambda ()
-              (set (make-local-variable imenu-generic-expression)
-                   '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
-                     ))))
-  (add-hook 'enh-ruby-mode-hook 'rspec-mode))
+          ;; (add-hook 'enh-ruby-mode-hook
+          ;;          (lambda ()
+          ;;            (set (make-local-variable imenu-generic-expression)
+          ;;                 '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
+          ;;                   ))))
+          ;; ;
+                                             ;(add-hook 'enh-ruby-mode-hook 'rspec-mode)
+     )
 
-  (use-package bundler)
+          (use-package bundler)
 
-  (use-package ruby-interpolation)
-  (use-package inf-ruby)
+          (use-package ruby-interpolation)
+          (use-package inf-ruby)
 
    #+END_SRC
 
@@ -1060,19 +1064,13 @@
    (projectile-global-mode)
    (setq projectile-indexing-method 'alien)
    (setq projectile-enable-caching t)
-   (setq projectile-switch-project-action 'helm-projectile))
+   (setq projectile-switch-project-action 'projectile-dired))
 
   (use-package helm-projectile
    :config
    (setq projectile-completion-system 'helm)
    (helm-projectile-on))
    #+END_SRC
-
-** Project-explorer
-
-   #+begin_src emacs-lisp
-  (use-package project-explorer)
-   #+end_src
 
 ** Setting it up
    Adjusting command, control and option keys on mac.
@@ -1168,7 +1166,7 @@
 
     (use-package zoom-window)
     (evil-leader/set-key "S" 'helm-multi-swoop)
-    (evil-leader/set-key "b" 'helm-bookmarks)
+    (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
     (evil-leader/set-key "d" 'deft)
     (evil-leader/set-key "e" 'dired-jump)
     (evil-leader/set-key "f" 'helm-projectile-ag)
@@ -1177,13 +1175,13 @@
     (evil-leader/set-key "j" 'evil-avy-goto-char-2)
     (evil-leader/set-key "m" 'mu4e)
     (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-    (evil-leader/set-key "p" 'helm-projectile-switch-project)
+    (evil-leader/set-key "p" 'projectile-commander)
     (evil-leader/set-key "s" 'helm-swoop)
     (evil-leader/set-key "vs" 'visit-term-buffer)
     (evil-leader/set-key "z" 'zoom-window-zoom)
 
-    (define-key my-keys-minor-mode-map (kbd "s-\\")    'project-explorer-toggle)
     (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
+    (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
     (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
     (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 

@@ -53,6 +53,9 @@ brew install docker-machine-parallels
 
 brew install stow
 
+brew tap homebrew/dupes
+brew install grep --with-default-names
+
 stow emacs
 stow fish
 stow git

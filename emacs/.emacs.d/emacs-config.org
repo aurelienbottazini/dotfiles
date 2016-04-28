@@ -179,21 +179,6 @@
     (set-default-font "-*-Operator Mono-light-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   #+END_SRC
 
-* Copy paste
-  #+BEGIN_SRC emacs-lisp
-  (defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
-
-  (defun paste-to-osx (text &optional push)
-    (let ((process-connection-type nil))
-      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-        (process-send-string proc text)
-        (process-send-eof proc))))
-
-  (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx)
-  #+END_SRC
-
 * Tabs
 
   Tabs can be reproduced as frames or window configurations. You can

@@ -887,39 +887,39 @@
            :config
            (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode)))
 
-          (use-package enh-ruby-mode
+          (use-package ruby-mode
            :config
-          (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-          (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.cap\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Podfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Berksfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Appraisals\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+          (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
-          (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
-          (eval-after-load 'enh-ruby-mode
+          (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
+          (eval-after-load 'ruby-mode
             '(progn
                (defun ruby-mode-defaults ()
                  (inf-ruby-minor-mode +1)
                  ;; CamelCase aware editing operations
                  (subword-mode +1))))
 
-          (add-hook 'enh-ruby-mode-hook (lambda ()
-                                          (run-hooks 'ruby-mode-hook)))
+          ;; (add-hook 'enh-ruby-mode-hook (lambda ()
+          ;;                                 (run-hooks 'ruby-mode-hook)))
 
           ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
           ;; make it easier to work with global gnu tags
@@ -935,21 +935,21 @@
                         (setq evil-cjk-word-separating-categories
                               (default-value 'evil-cjk-word-separating-categories)))))
 
-          (eval-after-load 'enh-ruby-mode
+          (eval-after-load 'ruby-mode
             '(progn
                ;; use the standard Dired bindings as a base
-               (evil-define-key 'normal enh-ruby-mode-map
-                 "[m" 'enh-ruby-beginning-of-defun
-                 "]m" 'enh-ruby-end-of-defun
+               (evil-define-key 'normal ruby-mode-map
+                 "[m" 'ruby-beginning-of-defun
+                 "]m" 'ruby-end-of-defun
                  )))
 
-          ;; (add-hook 'enh-ruby-mode-hook
+          ;; (add-hook 'ruby-mode-hook
           ;;          (lambda ()
           ;;            (set (make-local-variable imenu-generic-expression)
           ;;                 '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
           ;;                   ))))
           ;; ;
-                                             ;(add-hook 'enh-ruby-mode-hook 'rspec-mode)
+                                             ;(add-hook 'ruby-mode-hook 'rspec-mode)
      )
 
           (use-package bundler)

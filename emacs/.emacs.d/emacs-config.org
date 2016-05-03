@@ -292,6 +292,7 @@
   #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
   (column-number-mode)
+  (global-hl-line-mode)
   #+END_SRC
 
   No tabs
@@ -594,7 +595,9 @@
    (defun better-relative-number-format (offset)
     "Another formatting function"
     (format "%3d " (abs offset)))
+
   (setq relative-line-numbers-format 'better-relative-number-format))
+  (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
 
   (use-package evil-search-highlight-persist
    :config

@@ -1155,6 +1155,8 @@
      (use-package zoom-window)
      (evil-leader/set-key "S" 'helm-multi-swoop)
      (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
+     (use-package col-highlight)
+     (evil-leader/set-key "c" 'flash-column-highlight)
      (evil-leader/set-key "d" 'deft)
      (evil-leader/set-key "e" 'dired-jump)
      (evil-leader/set-key "f" 'helm-projectile-ag)
@@ -1213,6 +1215,8 @@
        :config
        (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
 
+
+     (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
      (define-key evil-normal-state-map (kbd "g t") 'other-frame)
 
      (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)

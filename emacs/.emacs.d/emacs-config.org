@@ -852,9 +852,9 @@
   (use-package js2-refactor
     :config
     (js2r-add-keybindings-with-prefix "C-c C-r"))
-  (use-package tern
-    :config
-    (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
+  ;;(use-package tern
+  ;;  :config
+  ;;  (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -1127,107 +1127,121 @@
 
 ** Bindings
    #+BEGIN_SRC emacs-lisp
-    (evil-leader/set-leader "<SPC>")
+     (evil-leader/set-leader "<SPC>")
 
-    (evil-leader/set-key "gs" 'magit-status)
-    (use-package git-link
-     :config
-     (evil-leader/set-key "gl" 'git-link))
-    (evil-leader/set-key "gh" 'magit-log-buffer-file)
-
-
-    (defun visit-term-buffer ()
-      "Create or visit a terminal buffer."
-      (interactive)
-      (if (not (get-buffer "*ansi-term*"))
-          (progn
-            (split-window-sensibly (selected-window))
-            (other-window 1)
-            )
-
-  )
-        (switch-to-buffer-other-window "*ansi-term*"))
+     (evil-leader/set-key "gs" 'magit-status)
+     (use-package git-link
+       :config
+       (evil-leader/set-key "gl" 'git-link))
+     (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
 
-    (use-package zoom-window)
-    (evil-leader/set-key "S" 'helm-multi-swoop)
-    (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
-    (evil-leader/set-key "d" 'deft)
-    (evil-leader/set-key "e" 'dired-jump)
-    (evil-leader/set-key "f" 'helm-projectile-ag)
-    (evil-leader/set-key "h" 'helm-mini)
-    (evil-leader/set-key "i" 'helm-imenu)
-    (evil-leader/set-key "j" 'evil-avy-goto-char-2)
-    (evil-leader/set-key "m" 'mu4e)
-    (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-    (evil-leader/set-key "p" 'projectile-commander)
-    (evil-leader/set-key "s" 'helm-swoop)
-    (evil-leader/set-key "vs" 'visit-term-buffer)
-    (evil-leader/set-key "z" 'zoom-window-zoom)
+     (defun visit-term-buffer ()
+       "Create or visit a terminal buffer."
+       (interactive)
+       (if (not (get-buffer "*ansi-term*"))
+           (progn
+             (split-window-sensibly (selected-window))
+             (other-window 1)
+             )
 
-    (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
-    (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
-    (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
-    (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
-
-    (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-    (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
-    (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
-
-    (evil-leader/set-key-for-mode 'org-mode
-      "t"  'org-show-todo-tree
-      "i"  'helm-org-in-buffer-headings
-      "a"  'org-agenda
-      "c"  'org-archive-subtree-default
-      "r"  'org-refile
-      )
-
-    (use-package key-chord
-     :config
-     (key-chord-mode 1)
-     (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
-     (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
-
-    (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
-
-    (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
-    (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
-    (use-package windresize
-     :config
-     (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
-
-    (define-key evil-normal-state-map (kbd "g t") 'other-frame)
-
-    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
-
-    (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-    (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-
-    (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
-    (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
-    (define-key evil-normal-state-map (kbd "[e") 'previous-error)
-    (define-key evil-normal-state-map (kbd "]e") 'next-error)
-    (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
-    (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-    (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-    (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
-
-    (use-package helm-gtags
-     :config
-    (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
-
-    (use-package elscreen
-     :config
-    (elscreen-start))
-
-    (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
-    (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+         )
+       (switch-to-buffer-other-window "*ansi-term*"))
 
 
-    (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
-    (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
-    (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
-    (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
+     (use-package zoom-window)
+     (evil-leader/set-key "S" 'helm-multi-swoop)
+     (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
+     (evil-leader/set-key "d" 'deft)
+     (evil-leader/set-key "e" 'dired-jump)
+     (evil-leader/set-key "f" 'helm-projectile-ag)
+     (evil-leader/set-key "h" 'helm-mini)
+     (evil-leader/set-key "i" 'helm-imenu)
+     (evil-leader/set-key "j" 'evil-avy-goto-char-2)
+     (evil-leader/set-key "m" 'mu4e)
+     (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+     (evil-leader/set-key "p" 'projectile-commander)
+     (evil-leader/set-key "s" 'helm-swoop)
+     (evil-leader/set-key "vs" 'visit-term-buffer)
+     (evil-leader/set-key "z" 'zoom-window-zoom)
+
+     (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
+     (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
+     (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
+     (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
+
+     (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
+     (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+     (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
+
+     (setq x-select-enable-clipboard nil)
+     (defun copy-to-clipboard()
+       (interactive)
+       (setq x-select-enable-clipboard t)
+       (kill-ring-save (region-beginning) (region-end))
+       (setq x-select-enable-clipboard nil))
+     (defun paste-from-clipboard ()
+       (interactive)
+       (setq x-select-enable-clipboard t)
+       (yank)
+       (setq x-select-enable-clipboard nil))
+     (define-key my-keys-minor-mode-map (kbd "M-c")     'copy-to-clipboard)
+     (define-key my-keys-minor-mode-map (kbd "M-v")     'paste-from-clipboard)
+
+     (evil-leader/set-key-for-mode 'org-mode
+       "t"  'org-show-todo-tree
+       "i"  'helm-org-in-buffer-headings
+       "a"  'org-agenda
+       "c"  'org-archive-subtree-default
+       "r"  'org-refile
+       )
+
+     (use-package key-chord
+       :config
+       (key-chord-mode 1)
+       (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+       (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
+
+     (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
+
+     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
+     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
+     (use-package windresize
+       :config
+       (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
+
+     (define-key evil-normal-state-map (kbd "g t") 'other-frame)
+
+     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
+
+     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+     (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
+     (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
+     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+     (define-key evil-normal-state-map (kbd "]e") 'next-error)
+     (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+     (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+     (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+     (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+
+     (use-package helm-gtags
+       :config
+       (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
+
+     (use-package elscreen
+       :config
+       (elscreen-start))
+
+     (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+     (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+
+
+     (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
+     (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
+     (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
+     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 
 
    #+END_SRC

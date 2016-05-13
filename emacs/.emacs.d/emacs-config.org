@@ -1266,6 +1266,9 @@
   (setq insert-directory-program "gls")   ; --dired option not
                                           ; supported by ls, gnu ls
                                           ; seems better
+  (defun dired-finder-folder ()
+    (interactive)
+    (shell-command "open ."))
   #+END_SRC
 
 * Terminal
@@ -1698,8 +1701,8 @@
     (add-to-list 'mu4e-view-actions
       '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
-    ;; fetch mail every 10 mins
-    (setq mu4e-update-interval 600)
+    ;; I have a service running that automatically fetches emails
+    (setq mu4e-update-interval nil)
 
   (setq message-send-mail-function 'smtpmail-send-it
        smtpmail-stream-type 'starttls

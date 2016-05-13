@@ -40,6 +40,7 @@ npm install --save-dev babel-preset-react
 
 brew install emacs
 brew install offlineimap
+brew services start offlineimap
 EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-em
 acs --HEAD
 brew install gnutls

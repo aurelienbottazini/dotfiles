@@ -1,5 +1,5 @@
 set -x PATH ~/dotfiles/bin /usr/local/sbin $PATH
-rbenv rehash
+rbenv rehash > /dev/null ^&1
 
 set -x CDPATH $HOME $HOME/projects $HOME/projects/work
 
@@ -30,12 +30,12 @@ alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modu
 alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor --exclude db/data --exclude db/neo4j (pwd) | xargs -0 -n 1 -I file rsync_sd file"
 
 set --erase fish_greeting
-set -Ux EDITOR 'emacsclient -t -a ""'
-set -Ux fish_color_autosuggestion "#6f6f6f"
-set -Ux fish_color_command "#94bff3"
-set -Ux fish_color_param "#8cd0d3"
+set -gx EDITOR 'emacsclient -t -a ""'
+set -gx fish_color_autosuggestion "#6f6f6f"
+set -gx fish_color_command "#94bff3"
+set -gx fish_color_param "#8cd0d3"
 
-set -Ux fish_term24bit 1
+set -gx fish_term24bit 1
 
 # fish_color_comment	eab700
 # fish_color_cwd	green

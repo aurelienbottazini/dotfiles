@@ -686,7 +686,7 @@
               (lambda ()
                 (turn-on-auto-fill)
                 ))
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+    ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
     ;; I want to only check spelling inside comments and doc. Not in strings
     (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
@@ -1051,9 +1051,10 @@
    :config
    (projectile-global-mode)
    (setq projectile-indexing-method 'alien)
-   (setq projectile-enable-caching t)
+   (setq projectile-enable-caching nil)
    (setq projectile-switch-project-action 'projectile-dired))
 
+  (require 'wgrep)
   (use-package helm-projectile
    :config
    (setq projectile-completion-system 'helm)
@@ -1273,7 +1274,7 @@
 
 * Terminal
   #+begin_src emacs-lisp
-  (setq term-default-bg-color "#332f21")
+  (setq term-default-bg-color "#3f3f3f")
   (setq term-default-fg-color "#d9d9d6")
   #+end_src
 

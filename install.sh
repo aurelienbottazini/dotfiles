@@ -39,6 +39,9 @@ npm install --save-dev babel-preset-stage-3
 npm install --save-dev babel-preset-react
 
 brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
+tic -o ~/.terminfo /usr/local/share/emacs/24.5/etc/e/eterm-color.ti
+tic -x ~/xterm-256color.terminfo
+
 brew install offlineimap
 brew services start offlineimap
 EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-em

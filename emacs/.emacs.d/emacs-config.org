@@ -1603,11 +1603,13 @@
     (setq custom-theme-directory "~/.emacs.d/themes")
     (use-package zenburn-theme)
     (load-theme 'zenburn)
+
+
     (if (daemonp)
         (add-hook 'after-make-frame-functions
                   (lambda (frame)
                     (select-frame frame)
-                    (load-theme 'pantone t)))
+                    (load-theme 'zenburn t)))
       (load-theme 'zenburn t))
     (use-package load-theme-buffer-local)
   #+end_src

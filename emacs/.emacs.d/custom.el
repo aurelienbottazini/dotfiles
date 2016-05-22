@@ -88,18 +88,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "#2F2F2F" :foreground "#DCDCCC" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
  '(elscreen-tab-background-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
  '(elscreen-tab-current-screen-face ((t (:background "#6f6f6f" :foreground "#dcdcdc" :weight bold))))
  '(elscreen-tab-other-screen-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#dc8cc3" :foreground "#2b2b2b"))))
  '(flycheck-error ((t (:background "#8c5353" :underline nil))))
- '(font-lock-constant-face ((t (:foreground "#BFEBBF" :slant italic))))
+ '(font-lock-comment-face ((t (:foreground "#2872b2" :slant italic))))
  '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic))))
  '(highlight-indentation-current-column-face ((t (:background "#383838"))))
  '(highlight-indentation-face ((t (:background "#494949"))))
  '(mode-line ((t (:background "#4f4f4f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button)))))
- '(region ((t (:background "#5f5f5f"))))
  '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :foreground "#94bff3" :weight semi-light))))
- '(show-paren-match ((t (:underline t :weight bold))))
  '(term ((t (:inherit default :background "#3f3f3f" :foreground "#d9d9d6"))))
  '(variable-pitch ((t (:height 1.2)))))

@@ -70,6 +70,7 @@ set -gx fish_term24bit 1
 # fish_color_cwd, the color used for the current working directory in the default prompt
 
 set -x GTAGSLABEL pygments
+set -x TERM tmux-256color
 
 if [ -z "$TMUX" ]
   if [ -z "$INSIDE_EMACS" ]

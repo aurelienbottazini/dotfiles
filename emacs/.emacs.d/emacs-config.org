@@ -83,7 +83,7 @@
   #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook
             (lambda ()
-              (turn-on-auto-fill)
+              ;; (turn-on-auto-fill)
               (electric-pair-mode +1)))
   #+END_SRC
 
@@ -682,10 +682,10 @@
 
   #+BEGIN_SRC emacs-lisp
     (setq comment-auto-fill-only-comments t)
-    (add-hook 'prog-mode-hook
-              (lambda ()
-                (turn-on-auto-fill)
-                ))
+    ;; (add-hook 'prog-mode-hook
+    ;;           (lambda ()
+    ;;             ;;(turn-on-auto-fill)
+    ;;             ))
     ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
     ;; I want to only check spelling inside comments and doc. Not in strings
@@ -1003,13 +1003,13 @@
   buffer listing your errors next to your code.
 
   #+BEGIN_SRC emacs-lisp
-    (use-package flycheck
-     :config
-     (add-hook 'after-init-hook #'global-flycheck-mode)
-     (require-package 'flycheck-typescript-tslint)
-     (eval-after-load 'flycheck
-       '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
-  )
+      (use-package flycheck
+       :config
+       (add-hook 'after-init-hook #'global-flycheck-mode)
+       ;; (require-package 'flycheck-typescript-tslint)
+       ;; (eval-after-load 'flycheck
+         ;; '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
+    )
 
   #+END_SRC
 
@@ -1046,19 +1046,19 @@
 
 ** Projectile
    #+BEGIN_SRC emacs-lisp
-  (use-package ag) ;; ultra fast search
-  (use-package projectile
-   :config
-   (projectile-global-mode)
-   (setq projectile-indexing-method 'alien)
-   (setq projectile-enable-caching nil)
-   (setq projectile-switch-project-action 'projectile-dired))
+     (use-package ag) ;; ultra fast search
+     (use-package projectile
+      :config
+      (projectile-global-mode)
+      (setq projectile-indexing-method 'alien)
+      (setq projectile-enable-caching nil)
+      (setq projectile-switch-project-action 'projectile-dired))
 
-  (require 'wgrep)
-  (use-package helm-projectile
-   :config
-   (setq projectile-completion-system 'helm)
-   (helm-projectile-on))
+     (require 'wgrep)
+     (use-package helm-projectile
+      :config
+      (setq projectile-completion-system 'helm)
+      (helm-projectile-on))
    #+END_SRC
 
 ** Setting it up
@@ -1604,7 +1604,7 @@
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
     (setq custom-theme-directory "~/.emacs.d/themes")
-    ;; (use-package zenburn)
+    (use-package zenburn-theme)
     (load-theme 'zenburn)
     (if (daemonp)
         (add-hook 'after-make-frame-functions

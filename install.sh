@@ -38,7 +38,7 @@ npm install --save-dev babel-preset-stage-2
 npm install --save-dev babel-preset-stage-3
 npm install --save-dev babel-preset-react
 
-brew install emacs
+brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
 brew install offlineimap
 brew services start offlineimap
 EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-em

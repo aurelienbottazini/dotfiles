@@ -99,6 +99,7 @@
  '(highlight-indentation-face ((t (:background "#494949"))))
  '(mode-line ((t (:background "#4f4f4f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button)))))
  '(region ((t (:background "#5f5f5f"))))
+ '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :foreground "#94bff3" :weight semi-light))))
  '(show-paren-match ((t (:underline t :weight bold))))
  '(term ((t (:inherit default :background "#3f3f3f" :foreground "#d9d9d6"))))
  '(variable-pitch ((t (:height 1.2)))))

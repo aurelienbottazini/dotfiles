@@ -19,6 +19,7 @@
  '(elscreen-display-tab t)
  '(elscreen-tab-display-control nil)
  '(elscreen-tab-display-kill-screen nil)
+ '(emamux:use-nearest-pane t)
  '(emojify-display-style (quote unicode) t)
  '(evil-toggle-key "C-c e")
  '(exec-path-from-shell-arguments (quote ("-l")))
@@ -82,19 +83,19 @@
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2)
  '(zoom-window-mode-line-color "#4c7073")
- '(zoom-window-use-elscreen t))
+ '(zoom-window-use-elscreen nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#2F2F2F" :foreground "#DCDCCC" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
+ '(default ((t (:inherit nil :stipple nil :background "#303030" :foreground "#DCDCCC" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
  '(elscreen-tab-background-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
  '(elscreen-tab-current-screen-face ((t (:background "#6f6f6f" :foreground "#dcdcdc" :weight bold))))
  '(elscreen-tab-other-screen-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#dc8cc3" :foreground "#2b2b2b"))))
  '(flycheck-error ((t (:background "#8c5353" :underline nil))))
- '(font-lock-comment-face ((t (:foreground "#2872b2" :slant italic))))
+ '(font-lock-comment-face ((t (:slant italic))))
  '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic))))
  '(highlight-indentation-current-column-face ((t (:background "#383838"))))
  '(highlight-indentation-face ((t (:background "#494949"))))

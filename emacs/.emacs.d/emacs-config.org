@@ -178,10 +178,13 @@
   use registers to save windows configurations.
   There is also elscreen available for that
 
+  Although I tend to use emacs directly inside the terminal with tmux,
+  and in that case elscreen is not really useful.
+
   #+begin_src emacs-lisp
-     (use-package elscreen
-       :config
-       (elscreen-start))
+    ;; (use-package elscreen
+    ;;   :config
+    ;;   (elscreen-start))
   #+end_src
 
 * org-mode
@@ -1128,6 +1131,8 @@
   (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
   (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
   (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
+
+  (use-package emamux)
    #+END_SRC
 
 ** Bindings
@@ -1168,8 +1173,10 @@
      (evil-leader/set-key "m" 'mu4e)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
      (evil-leader/set-key "p" 'projectile-commander)
-     (evil-leader/set-key "s" 'helm-swoop)
+     (evil-leader/set-key "sc" 'emamux:run-command)
+     (evil-leader/set-key "x" 'emamux:run-last-command)
      (evil-leader/set-key "vs" 'visit-term-buffer)
+     (evil-leader/set-key "w" 'helm-swoop)
      (evil-leader/set-key "z" 'zoom-window-zoom)
 
      (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)

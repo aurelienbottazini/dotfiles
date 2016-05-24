@@ -1,4 +1,4 @@
-set -x PATH ~/dotfiles/bin /usr/local/sbin $PATH
+set -x PATH ~/dotfiles/bin /usr/local/sbin /usr/local/var/rbenv/shims $PATH
 rbenv rehash > /dev/null ^&1
 
 set -x CDPATH $HOME $HOME/projects $HOME/projects/work
@@ -56,8 +56,7 @@ set -gx fish_term24bit 1
 # fish_color_user	'-o' 'green'
 # fish_color_valid_path	--underline
 # fish_color_normal, the default color
-# fish_color_command, the color for commands
-# fish_color_quote, the color for quoted blocks of text
+# fish_color_command, the color for commands # fish_color_quote, the color for quoted blocks of text
 # fish_color_redirection, the color for IO redirections
 # fish_color_end, the color for process separators like ';' and '&'
 # fish_color_error, the color used to highlight potential errors
@@ -70,7 +69,6 @@ set -gx fish_term24bit 1
 # fish_color_cwd, the color used for the current working directory in the default prompt
 
 set -x GTAGSLABEL pygments
-set -x TERM tmux-256color
 
 if [ -z "$TMUX" ]
   if [ -z "$INSIDE_EMACS" ]

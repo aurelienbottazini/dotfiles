@@ -53,8 +53,9 @@ gem install gem-ctags
 gem install rubocop sass ruby-beautify htmlbeautifier bundler-audit fasterer brakeman mail
 gem install rcodetools fastri
 gem install dotenv
-brew install docker-machine-parallels
+gem install terminal-notifier
 
+brew install docker-machine-parallels
 brew install stow
 
 brew tap homebrew/dupes

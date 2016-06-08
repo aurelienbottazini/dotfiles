@@ -100,6 +100,7 @@
  '(highlight-indentation-current-column-face ((t (:background "#383838"))))
  '(highlight-indentation-face ((t (:background "#494949"))))
  '(mode-line ((t (:background "#4f4f4f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button)))))
+ '(region ((t (:background "#f3e4bd" :foreground "#303030"))))
  '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :foreground "#94bff3" :weight semi-light))))
  '(term ((t (:inherit default :background "#3f3f3f" :foreground "#d9d9d6"))))
  '(variable-pitch ((t (:height 1.2)))))

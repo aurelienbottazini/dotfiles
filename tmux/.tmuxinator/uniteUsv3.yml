@@ -1,7 +1,7 @@
 # ~/.tmuxinator/tmuxinator.yml
 
 name: uniteUs
-root: ~/projects/app-client
+root: ~/projects/work/app-client
 # Optional tmux socket
 # socket_name: foo
 
@@ -18,23 +18,27 @@ root: ~/projects/app-client
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-startup_window: vim
+startup_window: back-office
 
 windows:
   - back-office:
       panes:
-        - cd ~/projects/back-office-app; npm start
-        - cd ~/projects/back-office-app; npm test
+        - cd ~/projects/work/back-office-app; npm start
+        - cd ~/projects/work/back-office-app; npm test
   - appclient:
       layout: main-horizontal
       panes:
-        - cd ~/projects/app-client; npm start
-        - cd ~/projects/app-client; npm test
+        - cd ~/projects/work/app-client; npm start
+        - cd ~/projects/work/app-client; npm test
   - api:
       layout: main-horizontal
       panes:
         - cd ~/projects/work/uniteus-api/; rake uniteus:neo4j:start; bundle exec rails s
         - cd ~/projects/work/uniteus-api/; bundle exec mailcatcher
+  - uniteus-client:
+      layout: main-horizontal
+      panes:
+        - cd ~/projects/work/uniteus-client/
   - elasticsearch:
       panes:
         - cd ~/projects/work/uniteus-api/; elasticsearch

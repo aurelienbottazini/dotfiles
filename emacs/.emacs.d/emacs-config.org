@@ -339,6 +339,13 @@
   ;; (setq vc-follow-symlinks (quote ask))
   #+END_SRC
 
+  Enable integration between terminal emacs and mac clipboard
+  #+begin_src emacs-lisp
+  (use-package pbcopy
+   :config
+   (turn-on-pbcopy))
+  #+end_src
+
 * Multiple cursors
 
   D: clear the region
@@ -518,96 +525,96 @@
 * Vim
 
   #+BEGIN_SRC emacs-lisp
-  (use-package evil-leader
-   :config
-   (global-evil-leader-mode)
-   (setq evil-toggle-key "C-c e"))
+      (use-package evil-leader
+       :config
+       (global-evil-leader-mode)
+       (setq evil-toggle-key "C-c e"))
 
-  (use-package evil
-   :config
-   (evil-mode 1)
-(fset 'evil-visual-update-x-selection 'ignore)
-(setq x-select-enable-clipboard nil)
-  (setq evil-emacs-state-cursor  '("#DC8CC3" box))
-  (setq evil-normal-state-cursor '("#94bff3" box))
-  (setq evil-visual-state-cursor '("#f0dfaf" box))
-  (setq evil-insert-state-cursor '("#94bff3" bar))
-  (setq evil-motion-state-cursor '("#afd8af" box))
-(evil-declare-key 'normal org-mode-map
-    "gk" 'outline-up-heading
-    "gj" 'outline-next-visible-heading
-    "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
-    "L" 'org-end-of-line ; smarter behaviour on headlines etc.
-    "t" 'org-todo ; mark a TODO item as DONE
-    ",c" 'org-cycle
-    (kbd "TAB") 'org-cycle
-    ",e" 'org-export-dispatch
-    ",n" 'outline-next-visible-heading
-    ",p" 'outline-previous-visible-heading
-    ",t" 'org-set-tags-command
-    ",u" 'outline-up-heading
-    "$" 'org-end-of-line ; smarter behaviour on headlines etc.
-    "^" 'org-beginning-of-line ; ditto
-    "-" 'org-ctrl-c-minus ; change bullet style
-    "<" 'org-metaleft ; out-dent
-    ">" 'org-metaright ; indent
+      (use-package evil
+       :config
+       (evil-mode 1)
+    (fset 'evil-visual-update-x-selection 'ignore)
+    (setq x-select-enable-clipboard nil)
+      (setq evil-emacs-state-cursor  '("#DC8CC3" box))
+      (setq evil-normal-state-cursor '("#94bff3" box))
+      (setq evil-visual-state-cursor '("#f0dfaf" box))
+      (setq evil-insert-state-cursor '("#94bff3" bar))
+      (setq evil-motion-state-cursor '("#afd8af" box))
+    (evil-declare-key 'normal org-mode-map
+        "gk" 'outline-up-heading
+        "gj" 'outline-next-visible-heading
+        "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
+        "L" 'org-end-of-line ; smarter behaviour on headlines etc.
+        "t" 'org-todo ; mark a TODO item as DONE
+        ",c" 'org-cycle
+        (kbd "TAB") 'org-cycle
+        ",e" 'org-export-dispatch
+        ",n" 'outline-next-visible-heading
+        ",p" 'outline-previous-visible-heading
+        ",t" 'org-set-tags-command
+        ",u" 'outline-up-heading
+        "$" 'org-end-of-line ; smarter behaviour on headlines etc.
+        "^" 'org-beginning-of-line ; ditto
+        "-" 'org-ctrl-c-minus ; change bullet style
+        "<" 'org-metaleft ; out-dent
+        ">" 'org-metaright ; indent
+        )
+      (evil-ex-define-cmd "W"     'evil-write-all)
+      (defmacro define-and-bind-text-object (key start-regex end-regex)
+        (let ((inner-name (make-symbol "inner-name"))
+              (outer-name (make-symbol "outer-name")))
+          `(progn
+             (evil-define-text-object ,inner-name (count &optional beg end type)
+               (evil-select-paren ,start-regex ,end-regex beg end type count nil))
+             (evil-define-text-object ,outer-name (count &optional beg end type)
+               (evil-select-paren ,start-regex ,end-regex beg end type count t))
+             (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
+             (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
+
+      (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
+
+      (eval-after-load 'dired
+        '(progn
+           ;; use the standard Dired bindings as a base
+           (evil-define-key 'normal dired-mode-map
+             "-" 'dired-up-directory
+             )))
+
     )
-  (evil-ex-define-cmd "W"     'evil-write-all)
-  (defmacro define-and-bind-text-object (key start-regex end-regex)
-    (let ((inner-name (make-symbol "inner-name"))
-          (outer-name (make-symbol "outer-name")))
-      `(progn
-         (evil-define-text-object ,inner-name (count &optional beg end type)
-           (evil-select-paren ,start-regex ,end-regex beg end type count nil))
-         (evil-define-text-object ,outer-name (count &optional beg end type)
-           (evil-select-paren ,start-regex ,end-regex beg end type count t))
-         (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
-         (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
 
-  (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
+      (use-package evil-magit)
+      (use-package evil-surround
+       :config
+       (global-evil-surround-mode 1))
 
-  (eval-after-load 'dired
-    '(progn
-       ;; use the standard Dired bindings as a base
-       (evil-define-key 'normal dired-mode-map
-         "-" 'dired-up-directory
-         )))
+      (use-package evil-commentary
+       :config
+       (evil-commentary-mode))
 
-)
+      (use-package evil-visualstar
+       :config
+       (global-evil-visualstar-mode t))
 
-  (use-package evil-magit)
-  (use-package evil-surround
-   :config
-   (global-evil-surround-mode 1))
+      (use-package evil-indent-plus
+       :config
+       (evil-indent-plus-default-bindings))
 
-  (use-package evil-commentary
-   :config
-   (evil-commentary-mode))
+      (use-package relative-line-numbers
+       :config
+       (defun better-relative-number-format (offset)
+        "Another formatting function"
+        (format "%3d " (abs offset)))
 
-  (use-package evil-visualstar
-   :config
-   (global-evil-visualstar-mode t))
+      (setq relative-line-numbers-format 'better-relative-number-format))
+      ;; (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
 
-  (use-package evil-indent-plus
-   :config
-   (evil-indent-plus-default-bindings))
+      (use-package evil-search-highlight-persist
+       :config
+       (global-evil-search-highlight-persist t))
 
-  (use-package relative-line-numbers
-   :config
-   (defun better-relative-number-format (offset)
-    "Another formatting function"
-    (format "%3d " (abs offset)))
-
-  (setq relative-line-numbers-format 'better-relative-number-format))
-  (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
-
-  (use-package evil-search-highlight-persist
-   :config
-   (global-evil-search-highlight-persist t))
-
-  (use-package evil-matchit
-   :config
-  (global-evil-matchit-mode 1))
+      (use-package evil-matchit
+       :config
+      (global-evil-matchit-mode 1))
 
   #+END_SRC
 
@@ -652,6 +659,8 @@
                   (setq emmet-expand-jsx-className? nil)
                   ))
 
+      (use-package web-mode
+      :config
       (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
       (add-to-list 'auto-mode-alist '("\\.htm$" . web-mode))
 
@@ -660,6 +669,7 @@
                   (emmet-mode)
                   (setq emmet-expand-jsx-className? nil)
                   ))
+      )
 
       (add-hook 'js2-jsx-mode-hook
                 (lambda ()
@@ -673,12 +683,7 @@
   Hexadecimal strings colored with corresponding colors in certain
   modes
   #+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode
-   :config
-   (add-hook 'prog-mode-hook 'rainbow-mode)
-   (setq rainbow-html-colors-major-mode-list
-     (quote
-       (html-mode css-mode php-mode nxml-mode xml-mode less-css-mode scss-mode))))
+  (use-package rainbow-mode)
   #+END_SRC
 
 
@@ -847,9 +852,20 @@
    (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode)
    (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
 )
+(setq-default
+ ;; js2-mode
+ js2-basic-offset 2
+ ;; web-mode
+ css-indent-offset 2
+ web-mode-markup-indent-offset 2
+ web-mode-css-indent-offset 2
+ web-mode-code-indent-offset 2
+ web-mode-attr-indent-offset 2)
 
   (setq js2-highlight-level 3))
 
+  (load-file "~/.emacs.d/site-lisp/sgml-mode-patch.el")
+  (require 'sgml-mode)
   (use-package typescript-mode)
   (use-package json-mode)
   ;; conmmands to _beautify_ js, css and html
@@ -894,26 +910,26 @@
 
           (use-package ruby-mode
            :config
-          (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-          (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rake\\'" ruby-mode))
+          (add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.cap\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Podfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Berksfile\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("Appraisals\\'" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+          (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
           (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
           (eval-after-load 'ruby-mode
@@ -1145,6 +1161,12 @@
        (evil-leader/set-key "gl" 'git-link))
      (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
+     (defun copy-to-clipboard-git-link()
+     (interactive)
+     (setq x-select-enable-clipboard t)
+     (git-link nil nil nil)
+     (setq x-select-enable-clipboard nil))
+
 
      (defun visit-term-buffer ()
        "Create or visit a terminal buffer."
@@ -1174,7 +1196,7 @@
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
      (evil-leader/set-key "p" 'projectile-commander)
      (evil-leader/set-key "sc" 'emamux:run-command)
-     (evil-leader/set-key "x" 'emamux:run-last-command)
+     (evil-leader/set-key "sl" 'emamux:run-last-command)
      (evil-leader/set-key "vs" 'visit-term-buffer)
      (evil-leader/set-key "w" 'helm-swoop)
      (evil-leader/set-key "z" 'zoom-window-zoom)
@@ -1230,6 +1252,7 @@
 
      (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
 
+     (global-visual-line-mode)
      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
@@ -1599,18 +1622,17 @@
 
 * Colors
   #+begin_src emacs-lisp
-    (use-package rainbow-identifiers
-      :config
-      (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+    ;; (use-package rainbow-identifiers
+    ;;   :config
+    ;;   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
-    (use-package rainbow-delimiters
-      :config
-      (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+    ;; (use-package rainbow-delimiters
+    ;;   :config
+    ;;   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
     (setq custom-theme-directory "~/.emacs.d/themes")
     (use-package zenburn-theme)
     (load-theme 'zenburn)
-
 
     (if (daemonp)
         (add-hook 'after-make-frame-functions
@@ -1709,7 +1731,8 @@
       '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
     ;; I have a service running that automatically fetches emails
-    (setq mu4e-update-interval nil)
+    ;; but still need mu4e to be aware of it by updating every 5 minutes
+    (setq mu4e-update-interval 300)
 
   (setq message-send-mail-function 'smtpmail-send-it
        smtpmail-stream-type 'starttls

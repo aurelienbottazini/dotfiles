@@ -582,7 +582,7 @@
 
     )
 
-      (use-package evil-magit)
+      ;; (use-package evil-magit)
       (use-package evil-surround
        :config
        (global-evil-surround-mode 1))
@@ -910,26 +910,26 @@
 
           (use-package ruby-mode
            :config
-          (add-to-list 'auto-mode-alist '("\\.rake\\'" ruby-mode))
-          (add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.cap\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Podfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Berksfile\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("Appraisals\\'" . ruby-mode))
-          (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-          (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rake\\'" enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Rakefile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.ru\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Gemfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Guardfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Capfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.cap\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.thor\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rabl\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Thorfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Podfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.podspec\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Puppetfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Berksfile\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("Appraisals\\'" . enh-ruby-mode))
+          (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+          (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
 
           (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
           (eval-after-load 'ruby-mode
@@ -998,7 +998,7 @@
    :pin manual
    :ensure nil
    :config
-   (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp))
+   (evil-leader/set-key-for-mode 'enh-ruby-mode "x"  'xmp))
    #+end_src
 
 
@@ -1117,6 +1117,7 @@
    #+BEGIN_SRC emacs-lisp
 
   (defun tmux-socket-command-string ()
+    (interactive)
     (concat "tmux -S "
             (replace-regexp-in-string "\n\\'" ""
                                       (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
@@ -1197,6 +1198,7 @@
      (evil-leader/set-key "p" 'projectile-commander)
      (evil-leader/set-key "sc" 'emamux:run-command)
      (evil-leader/set-key "sl" 'emamux:run-last-command)
+     (evil-leader/set-key "t" 'helm-gtags-select)
      (evil-leader/set-key "vs" 'visit-term-buffer)
      (evil-leader/set-key "w" 'helm-swoop)
      (evil-leader/set-key "z" 'zoom-window-zoom)
@@ -1267,7 +1269,7 @@
 
      (use-package helm-gtags
        :config
-       (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
+       (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-tag))
 
      (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
      (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)

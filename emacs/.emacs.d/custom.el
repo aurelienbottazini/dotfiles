@@ -57,7 +57,6 @@
  '(json-reformat:indent-width 2)
  '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)
- '(magit-push-always-verify nil t)
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
  '(org-babel-js-cmd "org-babel-node --presets es2015,react,stage-2")
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))

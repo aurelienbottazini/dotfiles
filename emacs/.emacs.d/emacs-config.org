@@ -644,8 +644,8 @@
     (use-package emmet-mode
       :config
       (progn
-        (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-yas)
-        (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-yas))
+        (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
+        (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
 
       (add-hook 'css-mode-hook
                 (lambda ()
@@ -1199,7 +1199,7 @@
      (evil-leader/set-key "sc" 'emamux:run-command)
      (evil-leader/set-key "sl" 'emamux:run-last-command)
      (evil-leader/set-key "t" 'helm-gtags-select)
-     (evil-leader/set-key "vs" 'visit-term-buffer)
+     (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "w" 'helm-swoop)
      (evil-leader/set-key "z" 'zoom-window-zoom)
 
@@ -1299,6 +1299,7 @@
   (defun dired-finder-folder ()
     (interactive)
     (shell-command "open ."))
+    (add-hook 'dired-mode-hook 'auto-revert-mode)
   #+END_SRC
 
 * Terminal

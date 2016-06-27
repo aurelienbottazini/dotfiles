@@ -635,6 +635,8 @@
 * prog-mode(s)
 
   #+begin_src emacs-lisp
+
+    (add-hook 'prog-mode-hook 'hs-minor-mode)
     (use-package context-coloring
       :config
       (add-hook 'js2-mode-hook #'context-coloring-mode)
@@ -864,7 +866,7 @@
 
   (setq js2-highlight-level 3))
 
-  (load-file "~/.emacs.d/site-lisp/sgml-mode-patch.el")
+  ;;(load-file "~/.emacs.d/site-lisp/sgml-mode-patch.el")
   (require 'sgml-mode)
   (use-package typescript-mode)
   (use-package json-mode)
@@ -1258,10 +1260,14 @@
      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
+     (define-key evil-normal-state-map (kbd "[a") 'hs-hide-all)
+     (define-key evil-normal-state-map (kbd "]a") 'hs-show-all)
      (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
      (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
      (define-key evil-normal-state-map (kbd "[e") 'previous-error)
      (define-key evil-normal-state-map (kbd "]e") 'next-error)
+     (define-key evil-normal-state-map (kbd "[h") 'hs-hide-block)
+     (define-key evil-normal-state-map (kbd "]h") 'hs-show-block)
      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
      (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
@@ -1269,7 +1275,7 @@
 
      (use-package helm-gtags
        :config
-       (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-tag))
+       (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
 
      (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
      (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)

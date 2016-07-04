@@ -23,22 +23,23 @@ startup_window: back-office
 windows:
   - back-office:
       panes:
-        - cd ~/projects/work/back-office-app; npm start
-        - cd ~/projects/work/back-office-app; npm test
+        - cd ~/projects/work/back-office-app; git pull;and npm start
+        - cd ~/projects/work/back-office-app;
   - appclient:
       layout: main-horizontal
       panes:
-        - cd ~/projects/work/app-client; npm start
-        - cd ~/projects/work/app-client; npm test
+        - cd ~/projects/work/app-client; git pull;and npm start
+        - cd ~/projects/work/app-client;
   - api:
       layout: main-horizontal
       panes:
-        - cd ~/projects/work/uniteus-api/; rake uniteus:neo4j:start; bundle exec rails s
-        - cd ~/projects/work/uniteus-api/; bundle exec mailcatcher
+        - cd ~/projects/work/uniteus-api; git pull;and eval (docker-machine env dev);and docker-compose up
+        # - cd ~/projects/work/uniteus-api/; rake uniteus:neo4j:start; bundle exec rails s
+        # - cd ~/projects/work/uniteus-api/; bundle exec mailcatcher
   - uniteus-client:
       layout: main-horizontal
       panes:
         - cd ~/projects/work/uniteus-client/
-  - elasticsearch:
-      panes:
-        - cd ~/projects/work/uniteus-api/; elasticsearch
+  # - elasticsearch:
+  #     panes:
+  #       - cd ~/projects/work/uniteus-api/; elasticsearch

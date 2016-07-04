@@ -1196,6 +1196,17 @@
      (evil-leader/set-key "i" 'helm-imenu)
      (evil-leader/set-key "j" 'evil-avy-goto-char-2)
      (evil-leader/set-key "m" 'mu4e)
+     (use-package neotree
+      :config
+      (add-hook 'neotree-mode-hook
+      (lambda ()
+      (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+      (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
+      (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+      (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+      )
+     (evil-leader/set-key "nt" 'neotree-toggle)
+     (evil-leader/set-key "nf" 'neotree-find)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
      (evil-leader/set-key "p" 'projectile-commander)
      (evil-leader/set-key "sc" 'emamux:run-command)
@@ -1256,7 +1267,6 @@
 
      (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
 
-     (global-visual-line-mode)
      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 

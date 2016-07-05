@@ -13,6 +13,9 @@
     "ASQ": true,
     "Future": true,
     "IO": true,
+    "Bacon": true,
+    "PF": true,
+    "Maybe": true,
     },
   "rules": {
     "camelcase": [0, {"properties": "never"}],

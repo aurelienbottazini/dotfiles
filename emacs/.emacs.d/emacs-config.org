@@ -1184,7 +1184,6 @@
        (switch-to-buffer-other-window "*ansi-term*"))
 
 
-     (use-package zoom-window)
      (evil-leader/set-key "S" 'helm-multi-swoop)
      (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
      (use-package col-highlight)
@@ -1214,7 +1213,8 @@
      (evil-leader/set-key "t" 'helm-gtags-select)
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "w" 'helm-swoop)
-     (evil-leader/set-key "z" 'zoom-window-zoom)
+     (use-package expand-region)
+     (evil-leader/set-key "x" 'er/expand-region)
 
      (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
      (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)

@@ -291,9 +291,12 @@
 * UI
 
   #+BEGIN_SRC emacs-lisp
-  (blink-cursor-mode 0)
-  (column-number-mode)
-  (global-hl-line-mode)
+    (blink-cursor-mode 0)
+    (column-number-mode)
+    (use-package crosshairs
+      :config
+      (crosshairs-mode 1))
+    ;; (global-hl-line-mode)
   #+END_SRC
 
   No tabs

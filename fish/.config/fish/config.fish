@@ -7,7 +7,7 @@ set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376
 set -x DOCKER_TLS_VERIFY 1
 set -x VAGRANT_DEFAULT_PROVIDER parallels
 
-status --is-interactive; and . (rbenv init -|psub)
+# status --is-interactive; and . (rbenv init -|psub)
 
 alias em "emacs_starter.sh"
 alias ec "emacsclient -ta ''"
@@ -24,7 +24,7 @@ alias tu "tmux -u"
 alias tmux "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
-alias ls "gls --color"
+# alias ls "gls --color"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 
 alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor --exclude db/data --exclude db/neo4j (pwd) | xargs -0 -n 1 -I file rsync_sd file"

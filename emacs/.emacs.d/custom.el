@@ -9,6 +9,7 @@
  '(coffee-tab-width 2)
  '(column-number-mode t)
  '(company-idle-delay 0.2)
+ '(crosshairs-mode t)
  '(custom-safe-themes
    (quote
     ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
@@ -69,7 +70,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (expand-region neo-tree wgrep column-highlight-mode column-highlight col-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-mu helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft context-coloring company-tern coffee-mode bundler babel-repl avy all-ext ag)))
+    (flycheck evil-leader pbcopy crosshairs expand-region neo-tree wgrep column-highlight-mode column-highlight col-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-mu helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))
  '(ruby-deep-arglist nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
@@ -94,6 +95,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#303030" :foreground "#DCDCCC" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
+ '(col-highlight ((t (:inherit hl-line))))
  '(elscreen-tab-background-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
  '(elscreen-tab-current-screen-face ((t (:background "#6f6f6f" :foreground "#dcdcdc" :weight bold))))
  '(elscreen-tab-other-screen-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
@@ -103,6 +105,7 @@
  '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic))))
  '(highlight-indentation-current-column-face ((t (:background "#383838"))))
  '(highlight-indentation-face ((t (:background "#494949"))))
+ '(hl-line ((t (:background "#525252"))))
  '(mode-line ((t (:background "#4f4f4f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button)))))
  '(region ((t (:background "#f3e4bd" :foreground "#303030"))))
  '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :foreground "#94bff3" :weight semi-light))))

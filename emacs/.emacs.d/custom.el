@@ -7,6 +7,7 @@
  '(blink-cursor-mode nil)
  '(blink-matching-paren t)
  '(coffee-tab-width 2)
+ '(column-highlight-mode t)
  '(column-number-mode t)
  '(company-idle-delay 0.2)
  '(crosshairs-mode t)
@@ -53,6 +54,7 @@
  '(helm-gtags-use-input-at-cursor t)
  '(ido-enable-flex-matching t)
  '(js-indent-level 2)
+ '(js-switch-indent-offset 2)
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
  '(js2-indent-switch-body t)
@@ -67,7 +69,6 @@
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))
  '(org-hide-leading-stars t)
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
- '(package-check-signature nil)
  '(package-selected-packages
    (quote
     (flycheck evil-leader pbcopy crosshairs expand-region neo-tree wgrep column-highlight-mode column-highlight col-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-mu helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))

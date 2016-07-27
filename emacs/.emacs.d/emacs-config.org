@@ -527,6 +527,8 @@
 
 * Vim
 
+  https://github.com/noctuid/evil-textobj-anyblock
+
   #+BEGIN_SRC emacs-lisp
       (use-package evil-leader
        :config
@@ -585,7 +587,10 @@
 
     )
 
-      ;; (use-package evil-magit)
+      (use-package evil-magit
+      :config
+      (require 'evil-magit))
+
       (use-package evil-surround
        :config
        (global-evil-surround-mode 1))

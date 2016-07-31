@@ -3,8 +3,8 @@ rbenv rehash > /dev/null ^&1
 
 set -x CDPATH $HOME $HOME/projects $HOME/projects/work
 
-set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376
-set -x DOCKER_TLS_VERIFY 1
+# set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376
+# set -x DOCKER_TLS_VERIFY 1
 set -x VAGRANT_DEFAULT_PROVIDER parallels
 
 # status --is-interactive; and . (rbenv init -|psub)

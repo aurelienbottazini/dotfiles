@@ -856,36 +856,36 @@
 ** JavaScript
 
    #+BEGIN_SRC emacs-lisp
-  (use-package js2-mode
-   :config
-   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-   (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode)
-   (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
-)
-(setq-default
- ;; js2-mode
- js2-basic-offset 2
- ;; web-mode
- css-indent-offset 2
- web-mode-markup-indent-offset 2
- web-mode-css-indent-offset 2
- web-mode-code-indent-offset 2
- web-mode-attr-indent-offset 2)
+       (use-package js2-mode
+        :config
+        (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+        (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode)
+        (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+     )
+     (setq-default
+      ;; js2-mode
+      js2-basic-offset 2
+      ;; web-mode
+      css-indent-offset 2
+      web-mode-markup-indent-offset 2
+      web-mode-css-indent-offset 2
+      web-mode-code-indent-offset 2
+      web-mode-attr-indent-offset 2)
 
-  (setq js2-highlight-level 3))
+       (setq js2-highlight-level 3))
 
-  ;;(load-file "~/.emacs.d/site-lisp/sgml-mode-patch.el")
-  (require 'sgml-mode)
-  (use-package typescript-mode)
-  (use-package json-mode)
-  ;; conmmands to _beautify_ js, css and html
-  (use-package web-beautify)
-  (use-package js2-refactor
-    :config
-    (js2r-add-keybindings-with-prefix "C-c C-r"))
-  ;;(use-package tern
-  ;;  :config
-  ;;  (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
+       ;;(load-file "~/.emacs.d/site-lisp/sgml-mode-patch.el")
+       (require 'sgml-mode)
+       (use-package typescript-mode)
+       (use-package json-mode)
+       ;; conmmands to _beautify_ js, css and html
+       (use-package web-beautify)
+       (use-package js2-refactor
+         :config
+         (js2r-add-keybindings-with-prefix "C-c C-r"))
+       (use-package tern
+        :config
+        (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -1173,11 +1173,10 @@
      (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
      (defun copy-to-clipboard-git-link()
-     (interactive)
-     (setq x-select-enable-clipboard t)
-     (git-link nil nil nil)
-     (setq x-select-enable-clipboard nil))
-
+       (interactive)
+       (setq x-select-enable-clipboard t)
+       (git-link nil nil nil)
+       (setq x-select-enable-clipboard nil))
 
      (defun visit-term-buffer ()
        "Create or visit a terminal buffer."
@@ -1203,17 +1202,8 @@
      (evil-leader/set-key "i" 'helm-imenu)
      (evil-leader/set-key "j" 'evil-avy-goto-char-2)
      (evil-leader/set-key "m" 'mu4e)
-     (use-package neotree
-      :config
-      (add-hook 'neotree-mode-hook
-      (lambda ()
-      (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-      (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
-      (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-      (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
-      )
-     (evil-leader/set-key "nt" 'neotree-toggle)
-     (evil-leader/set-key "nf" 'neotree-find)
+     (use-package expand-region)
+     (evil-leader/set-key "n" 'er/expand-region)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
      (evil-leader/set-key "p" 'projectile-commander)
      (evil-leader/set-key "sc" 'emamux:run-command)
@@ -1221,8 +1211,6 @@
      (evil-leader/set-key "t" 'helm-gtags-select)
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "w" 'helm-swoop)
-     (use-package expand-region)
-     (evil-leader/set-key "x" 'er/expand-region)
 
      (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
      (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
@@ -1288,8 +1276,54 @@
      (define-key evil-normal-state-map (kbd "]h") 'hs-show-block)
      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-     (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-     (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+
+     (defun xah-next-user-buffer ()
+       "Switch to the next user buffer.
+     “user buffer” is determined by `xah-user-buffer-q'.
+     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
+     Version 2016-06-19"
+       (interactive)
+       (next-buffer)
+       (let ((i 0))
+         (while (< i 20)
+           (if (not (xah-user-buffer-q))
+               (progn (next-buffer)
+                      (setq i (1+ i)))
+             (progn (setq i 100))))))
+
+     (defun xah-previous-user-buffer ()
+       "Switch to the previous user buffer.
+     “user buffer” is determined by `xah-user-buffer-q'.
+     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
+     Version 2016-06-19"
+       (interactive)
+       (previous-buffer)
+       (let ((i 0))
+         (while (< i 20)
+           (if (not (xah-user-buffer-q))
+               (progn (previous-buffer)
+                      (setq i (1+ i)))
+             (progn (setq i 100))))))
+
+     (defun xah-user-buffer-q ()
+       "Return t if current buffer is a user buffer, else nil.
+     Typically, if buffer name starts with *, it's not considered a user buffer.
+     This function is used by buffer switching command and close buffer command, so that next buffer shown is a user buffer.
+     You can override this function to get your idea of “user buffer”.
+     version 2016-06-18"
+       (interactive)
+       (if (string-equal "*" (substring (buffer-name) 0 1))
+           nil
+         (if (string-equal major-mode "dired-mode")
+             nil
+           (if (strin-equal major-mode "magit-mode")
+               nil
+             t
+             ))))
+
+
+     (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
+     (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
 
      (use-package helm-gtags
        :config
@@ -1458,7 +1492,6 @@
   (setq default-abbrev-mode t)
    #+end_src
 
-
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
@@ -1471,7 +1504,6 @@
    #+END_SRC
 
 ** Company
-
    #+begin_src emacs-lisp
      (use-package company-tern)
      (use-package company)
@@ -1641,23 +1673,10 @@
   ;; Hook for when a frame is created with emacsclient
   ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
   (add-hook 'after-make-frame-functions '--set-emoji-font)
-
-  ;; (require-package 'emojify)
-  ;; (add-hook 'after-init-hook #'global-emojify-mode)
-  ;; (require 'company-emoji)
-  ;; (add-to-list 'company-backends 'company-emoji)
   #+end_src
 
 * Colors
   #+begin_src emacs-lisp
-    ;; (use-package rainbow-identifiers
-    ;;   :config
-    ;;   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
-
-    ;; (use-package rainbow-delimiters
-    ;;   :config
-    ;;   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
     (setq custom-theme-directory "~/.emacs.d/themes")
     (use-package zenburn-theme)
     (load-theme 'zenburn)
@@ -1695,4 +1714,5 @@
                   (nnimap-authenticator login)
                   (nnimap-expunge-on-close 'never)
                   (nnimap-stream ssl)))
+
    #+end_src

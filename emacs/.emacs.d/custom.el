@@ -32,7 +32,6 @@
  '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
- '(flycheck-status-emoji-mode t)
  '(global-emojify-mode t t)
  '(grep-command "grep  -nH -e")
  '(grep-find-command (quote ("find . -type f -exec grep  -nH -e  {} +" . 35)))

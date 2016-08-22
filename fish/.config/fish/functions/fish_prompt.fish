@@ -30,7 +30,7 @@ function _git_ahead_of_upstream
 end
 
 function _git_dirty_status
-  if test (git status 2> /dev/null ^&1 | tail -n1) != "nothing to commit, working directory clean"
+  if test (git status 2> /dev/null ^&1 | tail -n1) != "nothing to commit, working tree clean"
     echo '*'
   else
     echo ' '

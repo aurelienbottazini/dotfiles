@@ -61,6 +61,9 @@ brew install stow
 brew tap homebrew/dupes
 brew install grep --with-default-names
 
+brew tap thoughtbot/formulae
+brew install gitsh
+
 stow emacs
 stow fish
 stow git

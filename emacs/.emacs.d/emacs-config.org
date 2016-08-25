@@ -540,8 +540,8 @@
   https://github.com/noctuid/evil-textobj-anyblock
 
   #+BEGIN_SRC emacs-lisp
-(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
-   (setq evil-emacs-state-modes nil)
+;;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
+ ;;  (setq evil-emacs-state-modes nil)
       (use-package evil-leader
        :config
        (global-evil-leader-mode)
@@ -1178,7 +1178,8 @@
    #+BEGIN_SRC emacs-lisp
      (evil-leader/set-leader "<SPC>")
 
-     (evil-leader/set-key "gs" 'magit-status)
+     ;; problems with hooks and magit. Lost trust in magit...
+     ;; (evil-leader/set-key "gs" 'magit-status)
      (use-package git-link
        :config
        (evil-leader/set-key "gl" 'git-link))

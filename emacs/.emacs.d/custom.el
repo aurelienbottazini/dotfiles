@@ -4,6 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ag-highlight-search t)
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(blink-cursor-mode nil)
  '(blink-matching-paren t)
  '(coffee-tab-width 2)
@@ -29,6 +31,7 @@
  '(emojify-display-style (quote unicode) t)
  '(evil-toggle-key "C-c e")
  '(exec-path-from-shell-arguments (quote ("-l")))
+ '(fci-rule-color "#383838")
  '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
@@ -64,6 +67,9 @@
  '(json-reformat:indent-width 2)
  '(less-css-compile-at-save t)
  '(linum-relative-current-symbol "" t)
+ '(nrepl-message-colors
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
  '(org-babel-js-cmd "org-babel-node --presets es2015,react,stage-2")
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))
@@ -71,7 +77,8 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (dumb-jump flycheck-pos-tip-mode flycheck-status-emoji flycheck-pos-tip flycheck evil-leader pbcopy crosshairs expand-region neo-tree wgrep column-highlight-mode column-highlight col-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-mu helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))
+    (leuven-theme dumb-jump flycheck-pos-tip-mode flycheck-status-emoji flycheck-pos-tip flycheck evil-leader pbcopy crosshairs expand-region neo-tree wgrep column-highlight-mode column-highlight col-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-mu helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))
+ '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(ruby-deep-arglist nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
@@ -84,6 +91,28 @@
  '(temporary-file-directory "~/emacs_tmp/")
  '(tool-bar-mode nil)
  '(typescript-indent-level 2)
+ '(vc-annotate-background "#2B2B2B")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#BC8383")
+     (40 . "#CC9393")
+     (60 . "#DFAF8F")
+     (80 . "#D0BF8F")
+     (100 . "#E0CF9F")
+     (120 . "#F0DFAF")
+     (140 . "#5F7F5F")
+     (160 . "#7F9F7F")
+     (180 . "#8FB28F")
+     (200 . "#9FC59F")
+     (220 . "#AFD8AF")
+     (240 . "#BFEBBF")
+     (260 . "#93E0E3")
+     (280 . "#6CA0A3")
+     (300 . "#7CB8BB")
+     (320 . "#8CD0D3")
+     (340 . "#94BFF3")
+     (360 . "#DC8CC3"))))
+ '(vc-annotate-very-old-color "#DC8CC3")
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
@@ -106,7 +135,8 @@
  '(highlight-indentation-current-column-face ((t (:background "#383838"))))
  '(highlight-indentation-face ((t (:background "#494949"))))
  '(hl-line ((t (:background "#525252"))))
- '(mode-line ((t (:background "#4f4f4f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button) :height 1.0))))
+ '(mode-line ((t (:background "#5f5f5f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button) :height 1.0))))
+ '(mode-line-inactive ((t (:background "#494949" :foreground "#5F7F5F" :inverse-video nil :box (:line-width -1 :style released-button)))))
  '(region ((t (:background "#f3e4bd" :foreground "#303030"))))
  '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :foreground "#94bff3" :weight semi-light))))
  '(term ((t (:inherit default :background "#3f3f3f" :foreground "#d9d9d6"))))

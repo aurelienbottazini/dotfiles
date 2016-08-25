@@ -540,6 +540,8 @@
   https://github.com/noctuid/evil-textobj-anyblock
 
   #+BEGIN_SRC emacs-lisp
+(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
+   (setq evil-emacs-state-modes nil)
       (use-package evil-leader
        :config
        (global-evil-leader-mode)

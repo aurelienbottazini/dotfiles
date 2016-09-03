@@ -77,11 +77,6 @@
   (use-package deft)
 #+end_src
 
-* Git
-  #+BEGIN_SRC emacs-lisp
-   (use-package magit)
-  #+END_SRC
-
 * text-mode
 
   #+BEGIN_SRC emacs-lisp
@@ -197,6 +192,14 @@
     ;;   (elscreen-start))
   #+end_src
 
+* Git
+
+#+begin_src emacs-lisp
+ (use-package magit)
+ (use-package evil-magit
+ :config
+ (require 'evil-magit))
+#+end_src
 * org-mode
 
   Making sure I have the latest /org-mode/.
@@ -303,10 +306,6 @@
   #+BEGIN_SRC emacs-lisp
     (blink-cursor-mode 0)
     (column-number-mode)
-    (use-package crosshairs
-      :config
-      (crosshairs-mode 1))
-    ;; (global-hl-line-mode)
   #+END_SRC
 
   No tabs
@@ -474,10 +473,10 @@
   #+END_SRC
 
   #+BEGIN_SRC emacs-lisp
-     (when (string-match "apple-darwin" system-configuration)
+;;     (when (string-match "apple-darwin" system-configuration)
        ;; on mac, there's always a menu bar drown, don't have it empty
-       (when window-system
-         (menu-bar-mode 1)))
+ ;;      (when window-system
+  ;;       (menu-bar-mode 1)))
   #+END_SRC
 
 
@@ -598,10 +597,6 @@
              )))
 
     )
-
-      (use-package evil-magit
-      :config
-      (require 'evil-magit))
 
       (use-package evil-surround
        :config
@@ -1177,14 +1172,11 @@
 ** Bindings
    #+BEGIN_SRC emacs-lisp
      (evil-leader/set-leader "<SPC>")
-
-     ;; problems with hooks and magit. Lost trust in magit...
-     ;; (evil-leader/set-key "gs" 'magit-status)
+    (evil-leader/set-key "gs" 'magit-status)
      (use-package git-link
        :config
        (evil-leader/set-key "gl" 'git-link))
-     (evil-leader/set-key "gh" 'magit-log-buffer-file)
-
+       (evil-leader/set-key "gh" 'magit-log-buffer-file)
      (defun copy-to-clipboard-git-link()
        (interactive)
        (setq x-select-enable-clipboard t)
@@ -1206,8 +1198,6 @@
 
      (evil-leader/set-key "S" 'helm-multi-swoop)
      (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
-     (use-package col-highlight)
-     (evil-leader/set-key "c" 'flash-column-highlight)
      (evil-leader/set-key "d" 'deft)
      (evil-leader/set-key "e" 'dired-jump)
      (evil-leader/set-key "f" 'helm-projectile-ag)
@@ -1670,8 +1660,6 @@
         (writeroom-mode t)
         (variable-pitch-mode t))))
     #+end_src
-** Magit
-   - view buffer history: ~magit-log-buffer-file~
 * Emoji
   #+begin_src emacs-lisp
   (defun --set-emoji-font (frame)

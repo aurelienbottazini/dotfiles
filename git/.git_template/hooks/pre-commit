@@ -1,20 +1,13 @@
 #!/bin/sh
 
-COMMAND='git grep -n'
-ARGS='-e debugger -e "binding\.pry" -- "./*" ":(exclude).eslintrc"'
-
-if eval "$COMMAND -q $ARGS" ; then
-  echo "\033[0;31mYou have a binding.pry or a debugger in a bad place.\033[0m\n"
-	eval "$COMMAND $ARGS"
-	exit 1
+if eval "git diff --cached | grep 'binding.pry'"; then
+    echo "You have a binding.pry somewhere"
+    exit 1
 fi
 
-ARGS='-e "^<<<<<<< " -e "^>>>>>>> " -e "^=======$"'
-
-if eval "$COMMAND -q $ARGS" ; then
-	echo "\033[0;31mYou have some left over diff artifacts.\033[0m\n"
-	eval "$COMMAND $ARGS"
-	exit 1
+if eval "git diff --cached | grep 'debugger'"; then
+    echo "You have a debugger somewhere"
+    exit 1
 fi
 
 echo "🍬\033[0;32m  Well done young Padawan. Your code seems light enough.\033[0m 🍬"

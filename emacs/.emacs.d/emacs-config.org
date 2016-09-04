@@ -643,6 +643,8 @@
            (?g (file . ,(expand-file-name "~/Dropbox/org/gtd.org")))
            (?i (file . ,(expand-file-name "~/Dropbox/org/inbox.org")))
            (?w (file . ,(expand-file-name "~/projects/aurelienbottazini.com/_org")))
+           (?j (file . ,(expand-file-name "~/projects/training-heaven/src/training.js")))
+           (?s (file . ,(expand-file-name "~/projects/training-heaven/src/training.scss")))
            ))
     (set-register (car r) (cadr r)))
   #+END_SRC
@@ -1320,7 +1322,7 @@
            nil
          (if (string-equal major-mode "dired-mode")
              nil
-           (if (strin-equal major-mode "magit-mode")
+           (if (string-equal major-mode "magit-mode")
                nil
              t
              ))))

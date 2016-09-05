@@ -55,7 +55,6 @@ gem install rcodetools fastri
 gem install dotenv
 gem install terminal-notifier
 
-brew install docker-machine-parallels
 brew install stow
 
 brew tap homebrew/dupes

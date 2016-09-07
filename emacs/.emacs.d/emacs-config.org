@@ -150,8 +150,7 @@
   (use-package exec-path-from-shell
     :config
     (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-env "DOCKER_HOST")
-    (exec-path-from-shell-copy-env "DOCKER_TLS_VERIFY"))
+    )
   #+END_SRC
 
   Furthermore, on mac, /path_helper/ is messing with the path. I commented the
@@ -159,39 +158,8 @@
 
 * Fonts
   #+BEGIN_SRC emacs-lisp
-    ;; -*-Operator Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-light-italic-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-light-normal-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-ultralight-italic-normal-*-*-*-*-*-m-0-iso10646-1
-    ;; -*-Operator Mono-ultralight-normal-normal-*-*-*-*-*-m-0-iso10646-1
-
     (set-default-font "-*-Operator Mono-light-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-    ;; (defun --set-frame-font (frame)
-    ;;   "adjusts frame font"
-    ;;   (set-frame-font "-*-Operator Mono-light-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-    ;;   )
-
-    ;; (add-hook 'after-make-frame-functions '--set-frame-font)
   #+END_SRC
-
-* Tabs
-
-  Tabs can be reproduced as frames or window configurations. You can
-  use registers to save windows configurations.
-  There is also elscreen available for that
-
-  Although I tend to use emacs directly inside the terminal with tmux,
-  and in that case elscreen is not really useful.
-
-  #+begin_src emacs-lisp
-    ;; (use-package elscreen
-    ;;   :config
-    ;;   (elscreen-start))
-  #+end_src
-
 * Git
 
 #+begin_src emacs-lisp
@@ -1045,9 +1013,6 @@
       (use-package flycheck
        :config
        (add-hook 'after-init-hook #'global-flycheck-mode)
-       ;; (require-package 'flycheck-typescript-tslint)
-       ;; (eval-after-load 'flycheck
-         ;; '(add-hook 'flycheck-mode-hook #'flycheck-typescript-tslint-setup))
     )
 
   #+END_SRC
@@ -1357,13 +1322,25 @@
   #+BEGIN_SRC emacs-lisp
     (require 'dired-x)
     (setq ls-lisp-use-insert-directory-program t)
-    ;; (setq insert-directory-program "gls")   ; --dired option not
+    (setq insert-directory-program "gls")   ; --dired option not
                                             ; supported by ls, gnu ls
                                             ; seems better
     (defun dired-finder-folder ()
       (interactive)
       (shell-command "open ."))
-      (add-hook 'dired-mode-hook 'auto-revert-mode)
+    (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+    ;; if window is splitted copy files to split pane as default destination
+    (setq dired-dwim-target t)
+
+    (setq dired-recursive-copies (quote always)) ; “always” means no asking
+    (setq dired-recursive-deletes (quote top)) ; “top” means ask once
+
+    (defun xah-dired-mode-setup ()
+      "to be run as hook for `dired-mode'."
+      (dired-hide-details-mode 1))
+
+    (add-hook 'dired-mode-hook 'xah-dired-mode-setup)
   #+END_SRC
 
 * Terminal
@@ -1460,7 +1437,7 @@
     ;;                                (t '("#fff7c7" . "#212822")))))
     ;;                   (set-face-background 'mode-line (car color))
     ;;                   (set-face-foreground 'mode-line (cdr color)))))
-    (setq rm-blacklist (quote(" FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
+    (setq rm-blacklist (quote(" company" " FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
   #+END_SRC
 
 * Functions
@@ -1719,4 +1696,5 @@
                   (nnimap-expunge-on-close 'never)
                   (nnimap-stream ssl)))
 
+  (require 'mu4e)
    #+end_src

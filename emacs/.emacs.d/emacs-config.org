@@ -157,6 +157,7 @@
   calls to path helper in /etc/profile/ and /etc/zshenv/
 
 * Fonts
+
   #+BEGIN_SRC emacs-lisp
     (set-default-font "-*-Operator Mono-light-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   #+END_SRC
@@ -178,7 +179,7 @@
     (require 'ido)
     (setq ido-everywhere t)
     (ido-mode t)
-
+    (setq org-fontify-whole-heading-line t)
     (setq org-startup-indented nil)
     (setq org-indent-mode nil)
     (setq org-indent-indentation-per-level 2)
@@ -536,6 +537,7 @@
         ",n" 'outline-next-visible-heading
         ",p" 'outline-previous-visible-heading
         ",t" 'org-set-tags-command
+        ",s" 'org-tags-view
         ",u" 'outline-up-heading
         "$" 'org-end-of-line ; smarter behaviour on headlines etc.
         "^" 'org-beginning-of-line ; ditto
@@ -1236,15 +1238,18 @@
      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-     (define-key evil-normal-state-map (kbd "[a") 'hs-hide-all)
-     (define-key evil-normal-state-map (kbd "]a") 'hs-show-all)
+
+     (use-package origami)
+     (global-origami-mode)
+     (define-key evil-normal-state-map (kbd "[a") 'origami-close-all-nodes)
+     (define-key evil-normal-state-map (kbd "]a") 'origami-open-all-nodes)
      (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
      (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
      (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go)
      (define-key evil-normal-state-map (kbd "[e") 'previous-error)
      (define-key evil-normal-state-map (kbd "]e") 'next-error)
-     (define-key evil-normal-state-map (kbd "[h") 'hs-hide-block)
-     (define-key evil-normal-state-map (kbd "]h") 'hs-show-block)
+     (define-key evil-normal-state-map (kbd "[h") 'origami-close-node)
+     (define-key evil-normal-state-map (kbd "]h") 'origami-open-node)
      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
 

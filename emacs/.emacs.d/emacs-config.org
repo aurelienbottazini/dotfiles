@@ -1177,13 +1177,14 @@
 
      (evil-leader/set-key "S" 'helm-multi-swoop)
      (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
+     (evil-leader/set-key "c" 'mu4e)
      (evil-leader/set-key "d" 'deft)
      (evil-leader/set-key "e" 'dired-jump)
      (evil-leader/set-key "f" 'helm-projectile-ag)
      (evil-leader/set-key "h" 'helm-mini)
      (evil-leader/set-key "i" 'helm-imenu)
      (evil-leader/set-key "j" 'evil-avy-goto-char-2)
-     (evil-leader/set-key "m" 'mu4e)
+     (evil-leader/set-key "m" 'evilmi-jump-items)
      (use-package expand-region)
      (evil-leader/set-key "n" 'er/expand-region)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
@@ -1262,8 +1263,6 @@
      (define-key evil-normal-state-map (kbd "]h") 'origami-open-node)
      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-
-     (define-key evil-motion-state-map (kbd "C-m") 'evilmi-jump-items)
 
      (defun xah-next-user-buffer ()
        "Switch to the next user buffer.

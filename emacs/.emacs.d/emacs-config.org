@@ -1012,11 +1012,21 @@
   buffer listing your errors next to your code.
 
   #+BEGIN_SRC emacs-lisp
-      (use-package flycheck
-       :config
-       (add-hook 'after-init-hook #'global-flycheck-mode)
-    )
+    (use-package flycheck
+      :config
+      (add-hook 'after-init-hook #'global-flycheck-mode)
+      )
+    (defun my/use-eslint-from-node-modules ()
+      (let* ((root (locate-dominating-file
+                    (or (buffer-file-name) default-directory)
+                    "node_modules"))
+             (eslint (and root
+                          (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                            root))))
+        (when (and eslint (file-executable-p eslint))
+          (setq-local flycheck-javascript-eslint-executable eslint))))
 
+    (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
   #+END_SRC
 
 
@@ -1252,6 +1262,8 @@
      (define-key evil-normal-state-map (kbd "]h") 'origami-open-node)
      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+
+     (define-key evil-motion-state-map (kbd "C-m") 'evilmi-jump-items)
 
      (defun xah-next-user-buffer ()
        "Switch to the next user buffer.

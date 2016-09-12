@@ -23,20 +23,15 @@ npm install -g typescript
 npm install -g tslint
 npm install -g less
 npm install -g jsxhint
-npm install -g eslint
 npm install -g js-beautify
 npm install -g tern
 npm install -g bower
+npm install -g eslint
 npm install -g eslint-plugin-jsx-a11y
 
-# for org-babel
-npm install --save-dev babel-cli
-npm install --save-dev babel-preset-es2015
-npm install --save-dev babel-preset-stage-0
-npm install --save-dev babel-preset-stage-1
-npm install --save-dev babel-preset-stage-2
-npm install --save-dev babel-preset-stage-3
-npm install --save-dev babel-preset-react
+npm install -g babel-preset-es2015
+npm install -g save-dev babel-preset-react
+npm install -g babel-preset-stage-0
 
 brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
 tic -o ~/.terminfo /usr/local/share/emacs/24.5/etc/e/eterm-color.ti

@@ -687,13 +687,6 @@
     ;; I want to only check spelling inside comments and doc. Not in strings
     (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
 
-    ;; let's see the 80ish column
-    ;; (setq-default fill-column 80)
-    ;; (use-package fill-column-indicator
-    ;;   :config
-    ;;   (add-hook 'after-change-major-mode-hook
-    ;;             (lambda () (if (string= major-mode "web-mode")
-    ;;                            (turn-off-fci-mode) (turn-on-fci-mode))))
       ;; to prevent a bug with some strange character appearing at end of
       ;; line when exporting org files to html with fci-mode installed
       (defun org-html-fontify-code (code lang)
@@ -754,9 +747,6 @@
                 (let* ((beg (and (string-match "\\`<pre[^>]*>\n*" code) (match-end 0)))
                        (end (and beg (string-match "</pre>\\'" code))))
                   (if (and beg end) (substring code beg end) code)))))))))
-
-
-      )
   #+END_SRC
 
 

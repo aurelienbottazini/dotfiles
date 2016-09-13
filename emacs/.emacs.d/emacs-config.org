@@ -1778,10 +1778,3 @@
 
 (use-package helm-mu)
    #+end_src
-* Jekyll
-
-
-#+begin_src emacs-lisp
-(use-package hyde)
-
-#+end_src

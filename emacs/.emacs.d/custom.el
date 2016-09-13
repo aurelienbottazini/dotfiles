@@ -85,6 +85,8 @@
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(ruby-deep-arglist nil)
  '(send-mail-function (quote smtpmail-send-it))
+ '(sgml-attribute-offset 2)
+ '(sgml-basic-offset 0)
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))
  '(sml/mode-width (quote right))

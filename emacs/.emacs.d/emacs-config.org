@@ -1,9 +1,11 @@
 -*- coding: utf-8 -*-
 #+PROPERTY: header-args    :results silent
 
+I have a lot of memory so let's increase the gc limit
 #+begin_src emacs-lisp
   (setq gc-cons-threshold 100000000)
 #+end_src
+
 * Encoding
 
   I want UTF-8 everywhere.
@@ -294,8 +296,6 @@
   (global-auto-revert-mode 1)
   #+END_SRC
 
-  This is how you enable errors with a full backtrace:
-
   Better print menus.
   #+BEGIN_SRC emacs-lisp
   (use-package printing
@@ -393,8 +393,6 @@
 
 
   #+BEGIN_SRC emacs-lisp
-  (autoload 'saveplace "saveplace" "automatically remember last edited place in a file")
-  (setq-default save-place t)
   (recentf-mode 1)                        ;remembering recent files
   (setq recentf-max-saved-items 200
         recentf-max-menu-items 50)
@@ -453,13 +451,6 @@
   #+BEGIN_SRC emacs-lisp
      (setq default-indicate-empty-lines t)
   #+END_SRC
-
-
-  Delete selected text when typing
-  #+BEGIN_SRC emacs-lisp
-     (delete-selection-mode 1)
-  #+END_SRC
-
 
   Different buffer names when a new buffer has the same name as
   an existing one.
@@ -1473,7 +1464,7 @@
     ;;                                (t '("#fff7c7" . "#212822")))))
     ;;                   (set-face-background 'mode-line (car color))
     ;;                   (set-face-foreground 'mode-line (cdr color)))))
-    (setq rm-blacklist (quote("Emmet" " FlyC" " company" " FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
+    (setq rm-blacklist (quote(" ," " Tern" " Context" " Emmet" " FlyC" " company" " FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
   #+END_SRC
 
 * Functions
@@ -1524,16 +1515,6 @@
      (global-company-mode t)
      (setq company-minimum-prefix-length 2)
      (setq company-backends '((company-tern)))
-     ;; it i active tab, it messes up yasnippet
-     ;; (with-eval-after-load 'company
-     ;;   ;;company tab to complete instead of enter
-     ;;   (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-     ;;   (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-     ;;   (define-key company-active-map [tab] 'company-complete-selection)
-     ;;   ;; ;;disable enter
-     ;;   (define-key company-active-map [return] nil)
-     ;;   (define-key company-active-map (kbd "RET") nil)
-     ;;  )
    #+end_src
 
 * Wiki
@@ -1597,19 +1578,14 @@
    + rgrep
    + ~regex-builder~ to visually build your regex
    + ~query-replace-regex~, ~replace-regex~
-   + occur & all
+   + occur
      Find occurrences of a regular expression in your file.
-     #+BEGIN_SRC emacs-lisp
-       (require-package 'all-ext)
-       (require 'all-ext)
-     #+END_SRC
-
-
    After using helm-occur do ~C-c C-a~ to edit results in all buffer
    You can navigate trough “errors” with previous-error ~M-g p~ and next-error
    ~M-g n~. You can edit “errors” directly in /all/ buffer.
    + ~helm-swoop~ and ~helm-multi-swoop~
      #+begin_src emacs-lisp
+        (use-package helm-swoop)
        (require-package 'helm-swoop)
      #+end_src
 
@@ -1671,23 +1647,6 @@
         (writeroom-mode t)
         (variable-pitch-mode t))))
     #+end_src
-* Emoji
-  #+begin_src emacs-lisp
-  (defun --set-emoji-font (frame)
-    "Adjust the font settings of FRAME so Emacs can display emoji properly."
-    (if (eq system-type 'darwin)
-        ;; For NS/Cocoa
-        (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
-      ;; For Linux
-      (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
-
-  ;; For when Emacs is started in GUI mode:
-  (--set-emoji-font nil)
-  ;; Hook for when a frame is created with emacsclient
-  ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
-  (add-hook 'after-make-frame-functions '--set-emoji-font)
-  #+end_src
-
 * Colors
   #+begin_src emacs-lisp
     (setq custom-theme-directory "~/.emacs.d/themes")

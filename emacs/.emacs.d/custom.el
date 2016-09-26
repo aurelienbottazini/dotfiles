@@ -149,4 +149,5 @@
  '(show-paren-match ((t (:weight bold))))
  '(show-paren-mismatch ((t (:weight bold))))
  '(term ((t (:inherit default :background "#3f3f3f" :foreground "#d9d9d6"))))
- '(variable-pitch ((t (:height 1.2)))))
+ '(variable-pitch ((t (:height 1.2))))
+ '(vertical-border ((t (:background "#494949" :foreground "#494949")))))

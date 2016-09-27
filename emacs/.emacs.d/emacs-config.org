@@ -182,103 +182,99 @@ while in the minibuffer for expensive operations like helm
 
   Making sure I have the latest /org-mode/.
   #+BEGIN_SRC emacs-lisp
-    (use-package org)
+      (use-package ido
+        :init
+        (setq ido-everywhere t)
+        :config
+        (ido-mode t))
 
-    ;; easier completion when refiling org-mode
-    (require 'ido)
-    (setq ido-everywhere t)
-    (ido-mode t)
-    (setq org-fontify-whole-heading-line t)
-    (setq org-startup-indented nil)
-    (setq org-indent-mode nil)
-    (setq org-indent-indentation-per-level 2)
-    (setq org-src-fontify-natively t)
+      (use-package org
+        :init
+        ;; easier completion when refiling org-mode
+        (setq org-fontify-whole-heading-line t)
+        (setq org-startup-indented nil)
+        (setq org-indent-mode nil)
+        (setq org-indent-indentation-per-level 2)
+        (setq org-src-fontify-natively t)
+        (setq org-completion-use-ido t)
+        (setq org-outline-path-complete-in-steps nil)
+        (setq org-refile-use-outline-path 'file)
+        (setq org-clock-persist 'history)
+        (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
+        ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
+        (setq org-refile-targets (quote ((nil :maxlevel . 2)
+                                         (org-agenda-files :maxlevel . 2))))
+        (setq org-todo-keywords
+              '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
+        (setq org-tag-alist '(("next" . ?n)
+                              ("maybe" . ?m)
+                              ("waiting" . ?w)
+                              ("read" . ?r)))
+        (setq org-confirm-babel-evaluate nil)
+        (setq org-html-doctype "html5")
+        (setq org-html-html5-fancy t)
+        (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
+        (setq org-html-head-include-default-style nil)
+        (setq org-html-head-extra nil)
+        (setq org-html-head-include-scripts nil)
 
-    ;;(add-hook 'org-mode-hook '(lambda ()
-    ;;                          (turn-on-flyspell)
-    ;;                          (writegood-mode t)))
-    (add-hook 'org-mode-hook 'turn-on-auto-fill)
-    (setq org-completion-use-ido t)
-    (setq org-outline-path-complete-in-steps nil)
-    (setq org-refile-use-outline-path 'file)
-    ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
-    (setq org-refile-targets (quote ((nil :maxlevel . 2)
-                                     (org-agenda-files :maxlevel . 2))))
-    (defadvice org-refile (after save-refiled-buffer activate compile)
-      "saves all org buffers after using refile"
-      (org-save-all-org-buffers))
+        (setq org-html-head "
+          <link rel=\"stylesheet\" type=\"text/css\" href=\"http://aurelienbottazini.com/css/org-export.min.css\">
+          <script src=\"http://aurelienbottazini.com/js/org-export.min.js\"></script>")
+        :config
+        ;;(add-hook 'org-mode-hook '(lambda ()
+        ;;                          (turn-on-flyspell)
+        ;;                          (writegood-mode t)))
+        (add-hook 'org-mode-hook 'turn-on-auto-fill)
+        (defadvice org-refile (after save-refiled-buffer activate compile)
+          "saves all org buffers after using refile"
+          (org-save-all-org-buffers))
+        (org-clock-persistence-insinuate)
+        (require 'ox-publish)
+        (setq org-publish-project-alist
+              '(("org-notes-to-html"
+                 :base-directory "~/projects/aurelienbottazini.com/_org/"
+                 :base-extension "org"
+                 :publishing-directory "~/projects/aurelienbottazini.com/"
+                 :recursive t
+                 :publishing-function org-html-publish-to-html
+                 :headline-levels 4
+                 :auto-preamble t
+                 :html-extension "html"
+                 :with-toc nil
+                 :body-only t
+                 )
+                ("org-notes-to-pdf"
+                 :base-directory "~/projects/aurelienbottazini.com/_org/"
+                 :base-extension "org"
+                 :publishing-directory "~/projects/aurelienbottazini.com/"
+                 :recursive t
+                 :publishing-function org-latex-publish-to-pdf
+                 :headline-levels 4
+                 :auto-preamble t
+                 :with-toc nil
+                 )))
 
-    (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
-    (setq org-clock-persist 'history)
-    (org-clock-persistence-insinuate)
-    (setq org-todo-keywords
-          '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
-    (setq org-tag-alist '(("next" . ?n)
-                          ("maybe" . ?m)
-                          ("waiting" . ?w)
-                          ("read" . ?r)))
-    (setq org-confirm-babel-evaluate nil)
-    (setq org-html-doctype "html5")
-    (setq org-html-html5-fancy t)
-    (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
-    (setq org-html-head-include-default-style nil)
-    (setq org-html-head-extra nil)
-    (setq org-html-head-include-scripts nil)
-
-
-    (setq org-html-head "
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://aurelienbottazini.com/css/org-export.min.css\">
-        <script src=\"http://aurelienbottazini.com/js/org-export.min.js\"></script>")
-
-    (require 'ox-publish)
-    (setq org-publish-project-alist
-          '(("org-notes-to-html"
-             :base-directory "~/projects/aurelienbottazini.com/_org/"
-             :base-extension "org"
-             :publishing-directory "~/projects/aurelienbottazini.com/"
-             :recursive t
-             :publishing-function org-html-publish-to-html
-             :headline-levels 4
-             :auto-preamble t
-             :html-extension "html"
-             :with-toc nil
-             :body-only t
-             )
-            ("org-notes-to-pdf"
-             :base-directory "~/projects/aurelienbottazini.com/_org/"
-             :base-extension "org"
-             :publishing-directory "~/projects/aurelienbottazini.com/"
-             :recursive t
-             :publishing-function org-latex-publish-to-pdf
-             :headline-levels 4
-             :auto-preamble t
-             :with-toc nil
-             )
-            )
+        (use-package org-bullets
+          :config
+          (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+          (set-display-table-slot standard-display-table
+                                  'selective-display (string-to-vector "  ••• ")))
+        (use-package ob-typescript
+          :config
+          (org-babel-do-load-languages
+           'org-babel-load-languages
+           '((typescript . t)
+             (js . t)
+             ))
           )
-    (use-package org-bullets
-      :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-      (set-display-table-slot standard-display-table
-                              'selective-display (string-to-vector "  ••• ")))
-    (use-package ob-typescript
-      :config
-      (org-babel-do-load-languages
-       'org-babel-load-languages
-       '((typescript . t)
-         (js . t)
-         ))
-      )
+
+        ;; For colorized source codes with html export
+        (use-package htmlize
+          :config
+          (setq org-html-htmlize-output-type (quote css)))
+        )
   #+END_SRC
-
-** Html export
-   For colorized source codes with html export
-   #+BEGIN_SRC emacs-lisp
-  (use-package htmlize
-   :config
-   (setq org-html-htmlize-output-type (quote css)))
-   #+END_SRC
-
 * UI
 
   #+BEGIN_SRC emacs-lisp

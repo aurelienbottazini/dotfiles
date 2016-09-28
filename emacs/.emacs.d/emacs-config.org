@@ -504,24 +504,27 @@ while in the minibuffer for expensive operations like helm
   https://github.com/noctuid/evil-textobj-anyblock
 
   #+BEGIN_SRC emacs-lisp
-;;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
- ;;  (setq evil-emacs-state-modes nil)
-      (use-package evil-leader
-       :config
-       (global-evil-leader-mode)
-       (setq evil-toggle-key "C-c e"))
+    ;;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
+    ;;  (setq evil-emacs-state-modes nil)
 
-      (use-package evil
-       :config
-       (evil-mode 1)
-    (fset 'evil-visual-update-x-selection 'ignore)
-    (setq x-select-enable-clipboard nil)
+    (use-package evil
+      :init
       (setq evil-emacs-state-cursor  '("#DC8CC3" box))
       (setq evil-normal-state-cursor '("#94bff3" box))
       (setq evil-visual-state-cursor '("#f0dfaf" box))
       (setq evil-insert-state-cursor '("#94bff3" bar))
       (setq evil-motion-state-cursor '("#afd8af" box))
-    (evil-declare-key 'normal org-mode-map
+      (fset 'evil-visual-update-x-selection 'ignore)
+      (setq x-select-enable-clipboard nil)
+
+      :config
+      (evil-mode 1)
+      (use-package evil-leader
+        :init
+        (setq evil-toggle-key "C-c e")
+        :config
+        (global-evil-leader-mode))
+      (evil-declare-key 'normal org-mode-map
         "gk" 'outline-up-heading
         "gj" 'outline-next-visible-heading
         "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
@@ -541,6 +544,7 @@ while in the minibuffer for expensive operations like helm
         "<" 'org-metaleft ; out-dent
         ">" 'org-metaright ; indent
         )
+
       (evil-ex-define-cmd "W"     'evil-write-all)
       (defmacro define-and-bind-text-object (key start-regex end-regex)
         (let ((inner-name (make-symbol "inner-name"))
@@ -561,41 +565,41 @@ while in the minibuffer for expensive operations like helm
            (evil-define-key 'normal dired-mode-map
              "-" 'dired-up-directory
              )))
-
-    )
-
       (use-package evil-surround
-       :config
-       (global-evil-surround-mode 1))
+        :config
+        (global-evil-surround-mode 1))
 
       (use-package evil-commentary
-       :config
-       (evil-commentary-mode))
+        :config
+        (evil-commentary-mode))
 
       (use-package evil-visualstar
-       :config
-       (global-evil-visualstar-mode t))
+        :config
+        (global-evil-visualstar-mode t))
 
       (use-package evil-indent-plus
-       :config
-       (evil-indent-plus-default-bindings))
+        :config
+        (evil-indent-plus-default-bindings))
 
       (use-package relative-line-numbers
-       :config
-       (defun better-relative-number-format (offset)
-        "Another formatting function"
-        (format "%3d " (abs offset)))
-
-      (setq relative-line-numbers-format 'better-relative-number-format))
-      ;; (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
+        :init
+        (setq relative-line-numbers-format 'better-relative-number-format)
+        :config
+        ;; (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
+        (defun better-relative-number-format (offset)
+          "Another formatting function"
+          (format "%3d " (abs offset)))
+        )
 
       (use-package evil-search-highlight-persist
-       :config
-       (global-evil-search-highlight-persist t))
+        :config
+        (global-evil-search-highlight-persist t))
 
       (use-package evil-matchit
-       :config
-      (global-evil-matchit-mode 1))
+        :config
+        (global-evil-matchit-mode 1))
+      )
+
 
   #+END_SRC
 
@@ -1658,12 +1662,12 @@ while in the minibuffer for expensive operations like helm
     (use-package zenburn-theme)
     (load-theme 'zenburn)
 
-    (if (daemonp)
-        (add-hook 'after-make-frame-functions
-                  (lambda (frame)
-                    (select-frame frame)
-                    (load-theme 'zenburn t)))
-      (load-theme 'zenburn t))
+    ;; (if (daemonp)
+    ;;     (add-hook 'after-make-frame-functions
+    ;;               (lambda (frame)
+    ;;                 (select-frame frame)
+    ;;                 (load-theme 'zenburn t)))
+    ;;   (load-theme 'zenburn t))
     (use-package load-theme-buffer-local)
   #+end_src
 

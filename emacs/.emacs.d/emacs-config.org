@@ -674,7 +674,6 @@ while in the minibuffer for expensive operations like helm
   (use-package rainbow-mode)
   #+END_SRC
 
-
   #+BEGIN_SRC emacs-lisp
     (setq comment-auto-fill-only-comments t)
     ;; (add-hook 'prog-mode-hook
@@ -748,7 +747,6 @@ while in the minibuffer for expensive operations like helm
                   (if (and beg end) (substring code beg end) code)))))))))
   #+END_SRC
 
-
 ** CSS
    #+BEGIN_SRC emacs-lisp
   (defun my-css-mode-setup ()
@@ -762,7 +760,6 @@ while in the minibuffer for expensive operations like helm
   (add-hook 'css-mode-hook 'my-css-mode-setup)
    #+END_SRC
 
-
 ** SASS
    #+BEGIN_SRC emacs-lisp
   (use-package scss-mode
@@ -773,7 +770,6 @@ while in the minibuffer for expensive operations like helm
 
   (use-package sass-mode)
    #+END_SRC
-
 
 ** LESS
    #+begin_src emacs-lisp
@@ -819,7 +815,6 @@ while in the minibuffer for expensive operations like helm
 
 
    #+END_SRC
-
 
 ** JavaScript
 
@@ -979,7 +974,6 @@ while in the minibuffer for expensive operations like helm
    (evil-leader/set-key-for-mode 'enh-ruby-mode "x"  'xmp))
    #+end_src
 
-
 ** Haml
    #+BEGIN_SRC emacs-lisp
  (use-package haml-mode
@@ -987,12 +981,17 @@ while in the minibuffer for expensive operations like helm
   (add-hook 'haml-mode-hook '(lambda () (highlight-indentation-mode))))
    #+END_SRC
 
-
 ** Docker
 
    #+begin_src emacs-lisp
   (use-package dockerfile-mode)
    #+end_src
+
+** Neo4j
+
+#+begin_src emacs-lisp
+  (use-package cypher-mode)
+#+end_src
 
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]

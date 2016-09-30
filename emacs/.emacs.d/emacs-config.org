@@ -280,6 +280,7 @@ while in the minibuffer for expensive operations like helm
 * UI
 
   #+BEGIN_SRC emacs-lisp
+    (global-hl-line-mode 1)
     (blink-cursor-mode 0)
     (column-number-mode)
   #+END_SRC
@@ -327,9 +328,9 @@ while in the minibuffer for expensive operations like helm
 
   Enable integration between terminal emacs and mac clipboard
   #+begin_src emacs-lisp
-  (use-package pbcopy
-   :config
-   (turn-on-pbcopy))
+    ;; (use-package pbcopy
+    ;;  :config
+    ;;  (turn-on-pbcopy))
   #+end_src
 
 * Multiple cursors
@@ -1168,183 +1169,181 @@ while in the minibuffer for expensive operations like helm
 
 ** Bindings
    #+BEGIN_SRC emacs-lisp
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key "gs" 'magit-status)
-     (use-package git-link
-       :config
-       (evil-leader/set-key "gl" 'git-link))
-       (evil-leader/set-key "gh" 'magit-log-buffer-file)
-     (defun copy-to-clipboard-git-link()
-       (interactive)
-       (setq x-select-enable-clipboard t)
-       (git-link nil nil nil)
-       (setq x-select-enable-clipboard nil))
+     (evil-leader/set-leader "<SPC>")
+     (evil-leader/set-key "gs" 'magit-status)
+      (use-package git-link
+        :config
+        (evil-leader/set-key "gl" 'git-link))
+        (evil-leader/set-key "gh" 'magit-log-buffer-file)
+      (defun copy-to-clipboard-git-link()
+        (interactive)
+        (setq x-select-enable-clipboard t)
+        (git-link nil nil nil)
+        (setq x-select-enable-clipboard nil))
 
-     (defun visit-term-buffer ()
-       "Create or visit a terminal buffer."
-       (interactive)
-       (if (not (get-buffer "*ansi-term*"))
-           (progn
-             (split-window-sensibly (selected-window))
-             (other-window 1)
-             )
-
-         )
-       (switch-to-buffer-other-window "*ansi-term*"))
+      (defun visit-term-buffer ()
+        "Create or visit a terminal buffer."
+        (interactive)
+        (if (not (get-buffer "*my-ansi-term*"))
+            (ansi-term "/usr/local/bin/fish" "my-ansi-term")
+          (switch-to-buffer "*my-ansi-term*")
+          ))
 
 
-     (evil-leader/set-key "S" 'helm-multi-swoop)
-     (evil-leader/set-key "a" 'helm-projectile-find-other-file)
-     (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
-     (evil-leader/set-key "c" 'mu4e)
-     (evil-leader/set-key "d" 'deft)
-     (evil-leader/set-key "e" 'dired-jump)
-     (evil-leader/set-key "f" 'helm-projectile-ag)
-     (evil-leader/set-key "h" 'helm-mini)
-     (evil-leader/set-key "i" 'helm-imenu)
-     (evil-leader/set-key "j" 'evil-avy-goto-char-2)
-     (evil-leader/set-key "m" 'evilmi-jump-items)
-     (use-package expand-region)
-     (evil-leader/set-key "n" 'er/expand-region)
-     (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-     (evil-leader/set-key "p" 'projectile-commander)
-     (evil-leader/set-key "sc" 'emamux:run-command)
-     (evil-leader/set-key "sl" 'emamux:run-last-command)
-     (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
-     (evil-leader/set-key "vs" 'yas-describe-tables)
-     (evil-leader/set-key "w" 'helm-swoop)
 
-     (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
-     (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
-     (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
-     (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
+      (evil-leader/set-key "S" 'helm-multi-swoop)
+      (evil-leader/set-key "a" 'helm-projectile-find-other-file)
+      (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
+      (evil-leader/set-key "c" 'mu4e)
+      (evil-leader/set-key "d" 'deft)
+      (evil-leader/set-key "e" 'dired-jump)
+      (evil-leader/set-key "f" 'helm-projectile-ag)
+      (evil-leader/set-key "h" 'helm-mini)
+      (evil-leader/set-key "i" 'helm-imenu)
+      (evil-leader/set-key "j" 'evil-avy-goto-char-2)
+      (evil-leader/set-key "m" 'evilmi-jump-items)
+      (use-package expand-region)
+      (evil-leader/set-key "n" 'er/expand-region)
+      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+      (evil-leader/set-key "p" 'projectile-commander)
+      (evil-leader/set-key "sc" 'emamux:run-command)
+      (evil-leader/set-key "sl" 'emamux:run-last-command)
+      (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
+      (evil-leader/set-key "vs" 'yas-describe-tables)
+      (evil-leader/set-key "vt" 'visit-term-buffer)
+      (evil-leader/set-key "w" 'helm-swoop)
 
-     (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-     (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
-     (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
+      (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
+      (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
+      (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
+      (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-     (setq x-select-enable-clipboard nil)
-     (defun copy-to-clipboard()
-       (interactive)
-       (setq x-select-enable-clipboard t)
-       (kill-ring-save (region-beginning) (region-end))
-       (setq x-select-enable-clipboard nil))
-     (defun paste-from-clipboard ()
-       (interactive)
-       (setq x-select-enable-clipboard t)
-       (yank)
-       (setq x-select-enable-clipboard nil))
-     (define-key my-keys-minor-mode-map (kbd "M-c")     'copy-to-clipboard)
-     (define-key my-keys-minor-mode-map (kbd "M-v")     'paste-from-clipboard)
+      (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
+      (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+      (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
-     (evil-leader/set-key-for-mode 'org-mode
-       "t"  'org-show-todo-tree
-       "i"  'helm-org-in-buffer-headings
-       "a"  'org-agenda
-       "c"  'org-archive-subtree-default
-       "r"  'org-refile
-       )
+      (setq x-select-enable-clipboard nil)
+      (defun copy-to-clipboard()
+        (interactive)
+        (setq x-select-enable-clipboard t)
+        (kill-ring-save (region-beginning) (region-end))
+        (setq x-select-enable-clipboard nil))
+      (defun paste-from-clipboard ()
+        (interactive)
+        (setq x-select-enable-clipboard t)
+        (yank)
+        (setq x-select-enable-clipboard nil))
+      (define-key my-keys-minor-mode-map (kbd "M-c")     'copy-to-clipboard)
+      (define-key my-keys-minor-mode-map (kbd "M-v")     'paste-from-clipboard)
 
-     (use-package key-chord
-       :config
-       (key-chord-mode 1)
-       (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
-       (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
+      (evil-leader/set-key-for-mode 'org-mode
+        "t"  'org-show-todo-tree
+        "i"  'helm-org-in-buffer-headings
+        "a"  'org-agenda
+        "c"  'org-archive-subtree-default
+        "r"  'org-refile
+        )
 
-     (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
+      (use-package key-chord
+        :config
+        (key-chord-mode 1)
+        (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+        (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
 
-     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
-     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
-     (use-package windresize
-       :config
-       (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
+      (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
 
-
-     (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
-     (define-key evil-normal-state-map (kbd "g t") 'other-frame)
-
-     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
-
-     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+      (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
+      (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
+      (use-package windresize
+        :config
+        (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
 
 
-     (use-package origami)
-     (global-origami-mode)
-     (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
-     (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
-     (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go)
-     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
-     (define-key evil-normal-state-map (kbd "]e") 'next-error)
-     (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
-     (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
-     (define-key evil-normal-state-map (kbd "zh") 'origami-close-all-nodes)
-     (define-key evil-normal-state-map (kbd "za") 'origami-open-all-nodes)
-     (define-key evil-normal-state-map (kbd "zc") 'origami-close-node)
-     (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
-     (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
-     (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+      (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
+      (define-key evil-normal-state-map (kbd "g t") 'other-frame)
 
-     (defun xah-next-user-buffer ()
-       "Switch to the next user buffer.
-     “user buffer” is determined by `xah-user-buffer-q'.
-     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
-     Version 2016-06-19"
-       (interactive)
-       (next-buffer)
-       (let ((i 0))
-         (while (< i 20)
-           (if (not (xah-user-buffer-q))
-               (progn (next-buffer)
-                      (setq i (1+ i)))
-             (progn (setq i 100))))))
+      (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
 
-     (defun xah-previous-user-buffer ()
-       "Switch to the previous user buffer.
-     “user buffer” is determined by `xah-user-buffer-q'.
-     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
-     Version 2016-06-19"
-       (interactive)
-       (previous-buffer)
-       (let ((i 0))
-         (while (< i 20)
-           (if (not (xah-user-buffer-q))
-               (progn (previous-buffer)
-                      (setq i (1+ i)))
-             (progn (setq i 100))))))
-
-     (defun xah-user-buffer-q ()
-       "Return t if current buffer is a user buffer, else nil.
-     Typically, if buffer name starts with *, it's not considered a user buffer.
-     This function is used by buffer switching command and close buffer command, so that next buffer shown is a user buffer.
-     You can override this function to get your idea of “user buffer”.
-     version 2016-06-18"
-       (interactive)
-       (if (string-equal "*" (substring (buffer-name) 0 1))
-           nil
-         (if (string-equal major-mode "dired-mode")
-             nil
-           (if (string-equal major-mode "magit-mode")
-               nil
-             t
-             ))))
+      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
 
-     (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
-     (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
+      (use-package origami)
+      (global-origami-mode)
+      (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
+      (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
+      (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go)
+      (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+      (define-key evil-normal-state-map (kbd "]e") 'next-error)
+      (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
+      (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
+      (define-key evil-normal-state-map (kbd "zh") 'origami-close-all-nodes)
+      (define-key evil-normal-state-map (kbd "za") 'origami-open-all-nodes)
+      (define-key evil-normal-state-map (kbd "zc") 'origami-close-node)
+      (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
+      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
 
-     (use-package helm-gtags
-       :config
-       (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
+      (defun xah-next-user-buffer ()
+        "Switch to the next user buffer.
+      “user buffer” is determined by `xah-user-buffer-q'.
+      URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
+      Version 2016-06-19"
+        (interactive)
+        (next-buffer)
+        (let ((i 0))
+          (while (< i 20)
+            (if (not (xah-user-buffer-q))
+                (progn (next-buffer)
+                       (setq i (1+ i)))
+              (progn (setq i 100))))))
 
-     (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
-     (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+      (defun xah-previous-user-buffer ()
+        "Switch to the previous user buffer.
+      “user buffer” is determined by `xah-user-buffer-q'.
+      URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
+      Version 2016-06-19"
+        (interactive)
+        (previous-buffer)
+        (let ((i 0))
+          (while (< i 20)
+            (if (not (xah-user-buffer-q))
+                (progn (previous-buffer)
+                       (setq i (1+ i)))
+              (progn (setq i 100))))))
+
+      (defun xah-user-buffer-q ()
+        "Return t if current buffer is a user buffer, else nil.
+      Typically, if buffer name starts with *, it's not considered a user buffer.
+      This function is used by buffer switching command and close buffer command, so that next buffer shown is a user buffer.
+      You can override this function to get your idea of “user buffer”.
+      version 2016-06-18"
+        (interactive)
+        (if (string-equal "*" (substring (buffer-name) 0 1))
+            nil
+          (if (string-equal major-mode "dired-mode")
+              nil
+            (if (string-equal major-mode "magit-mode")
+                nil
+              t
+              ))))
 
 
-     (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
-     (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
-     (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
-     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
+      (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
+      (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
+
+      (use-package helm-gtags
+        :config
+        (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
+
+      (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+      (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+
+
+      (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
+      (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
+      (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
+      (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 
 
    #+END_SRC
@@ -1479,20 +1478,20 @@ while in the minibuffer for expensive operations like helm
 
 * Functions
   #+begin_src emacs-lisp
-  (require 'cl)
-  (defun sluggify (str)
-  (downcase
-  (replace-regexp-in-string
-  " " "-" str)))
+    (require 'cl)
+    (defun sluggify (str)
+      (downcase
+       (replace-regexp-in-string
+        " " "-" str)))
 
-  (defun new-post (title)
-    (interactive "MTitle: ")
-    (let ((slug (sluggify title))
-          (date (current-time)))
-      (find-file (concat "/Users/aurelienbottazini/projects/aurelienbottazini.com/_posts/"
-                         (format-time-string "%Y-%m-%d") "-" slug
-                         ".md"))
-      ))
+    (defun new-post (title)
+      (interactive "MTitle: ")
+      (let ((slug (sluggify title))
+            (date (current-time)))
+        (find-file (concat "/Users/aurelienbottazini/projects/aurelienbottazini.com/_posts/"
+                           (format-time-string "%Y-%m-%d") "-" slug
+                           ".md"))
+        ))
 
   #+end_src
 
@@ -1660,8 +1659,8 @@ while in the minibuffer for expensive operations like helm
 * Colors
   #+begin_src emacs-lisp
     (setq custom-theme-directory "~/.emacs.d/themes")
-    (use-package zenburn-theme)
-    (load-theme 'zenburn)
+    (use-package color-theme-sanityinc-tomorrow)
+    (load-theme 'sanityinc-tomorrow-eighties)
 
     ;; (if (daemonp)
     ;;     (add-hook 'after-make-frame-functions
@@ -1778,7 +1777,6 @@ while in the minibuffer for expensive operations like helm
 
 (use-package helm-mu)
    #+end_src
-
 
 * Exit setup hook
 

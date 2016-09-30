@@ -328,9 +328,9 @@ while in the minibuffer for expensive operations like helm
 
   Enable integration between terminal emacs and mac clipboard
   #+begin_src emacs-lisp
-    ;; (use-package pbcopy
-    ;;  :config
-    ;;  (turn-on-pbcopy))
+    (use-package pbcopy
+     :config
+     (turn-on-pbcopy))
   #+end_src
 
 * Multiple cursors
@@ -1659,8 +1659,8 @@ while in the minibuffer for expensive operations like helm
 * Colors
   #+begin_src emacs-lisp
     (setq custom-theme-directory "~/.emacs.d/themes")
-    (use-package color-theme-sanityinc-tomorrow)
-    (load-theme 'sanityinc-tomorrow-eighties)
+    (use-package zenburn-theme)
+    (load-theme 'zenburn)
 
     ;; (if (daemonp)
     ;;     (add-hook 'after-make-frame-functions

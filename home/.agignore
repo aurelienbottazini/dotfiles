@@ -11,3 +11,7 @@ log
 .emacs.d/elpa/
 .Trash
 .vagrant.d
+*.min.css
+.node_modules
+bower_components
+elpa

@@ -2,7 +2,7 @@
 #+PROPERTY: header-args    :results silent
 
 I have a lot of memory so let's increase the gc limit
-while in the minibuffer for expensive operations like helm
+while in the minibuffer for expensive operations
 #+begin_src emacs-lisp
 (defun my-minibuffer-gc-setup-hook ()
   (setq gc-cons-threshold most-positive-fixnum))
@@ -232,30 +232,6 @@ while in the minibuffer for expensive operations like helm
           "saves all org buffers after using refile"
           (org-save-all-org-buffers))
         (org-clock-persistence-insinuate)
-        (require 'ox-publish)
-        (setq org-publish-project-alist
-              '(("org-notes-to-html"
-                 :base-directory "~/projects/aurelienbottazini.com/_org/"
-                 :base-extension "org"
-                 :publishing-directory "~/projects/aurelienbottazini.com/"
-                 :recursive t
-                 :publishing-function org-html-publish-to-html
-                 :headline-levels 4
-                 :auto-preamble t
-                 :html-extension "html"
-                 :with-toc nil
-                 :body-only t
-                 )
-                ("org-notes-to-pdf"
-                 :base-directory "~/projects/aurelienbottazini.com/_org/"
-                 :base-extension "org"
-                 :publishing-directory "~/projects/aurelienbottazini.com/"
-                 :recursive t
-                 :publishing-function org-latex-publish-to-pdf
-                 :headline-levels 4
-                 :auto-preamble t
-                 :with-toc nil
-                 )))
 
         (use-package org-bullets
           :config
@@ -280,7 +256,7 @@ while in the minibuffer for expensive operations like helm
 * UI
 
   #+BEGIN_SRC emacs-lisp
-    (global-hl-line-mode 1)
+    ;; (global-hl-line-mode 1)
     (blink-cursor-mode 0)
     (column-number-mode)
   #+END_SRC
@@ -461,8 +437,8 @@ while in the minibuffer for expensive operations like helm
   Different buffer names when a new buffer has the same name as
   an existing one.
   #+BEGIN_SRC emacs-lisp
-     (require 'uniquify)
-      (setq uniquify-buffer-name-style 'forward)
+    ;; (require 'uniquify)
+     (setq uniquify-buffer-name-style 'forward)
   #+END_SRC
 
 
@@ -838,8 +814,6 @@ while in the minibuffer for expensive operations like helm
 
        (setq js2-highlight-level 3))
 
-       ;;(load-file "~/.emacs.d/site-lisp/sgml-mode-patch.el")
-       (require 'sgml-mode)
        (use-package typescript-mode)
        (use-package json-mode)
        ;; conmmands to _beautify_ js, css and html
@@ -957,10 +931,6 @@ while in the minibuffer for expensive operations like helm
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-  (use-package projectile-rails
-   :config
-   (add-hook 'projectile-mode-hook 'projectile-rails-on))
-
   (use-package rspec-mode)
    #+END_SRC
 
@@ -1041,61 +1011,6 @@ while in the minibuffer for expensive operations like helm
     ~Install npm install -g coffeelint~
 
 * Navigation
-** Helm
-   #+BEGIN_SRC emacs-lisp
-  (use-package helm
-   :config
-   (require 'helm-config))
-  (use-package helm-ag)
-   #+END_SRC
-
-** Projectile
-   #+BEGIN_SRC emacs-lisp
-     (use-package ag) ;; ultra fast search
-     (use-package projectile
-       :config
-       (projectile-global-mode)
-       (setq projectile-indexing-method 'alien)
-       (setq projectile-enable-caching nil)
-       (setq projectile-switch-project-action 'projectile-dired))
-     (add-to-list 'projectile-other-file-alist '("jsx" "js")) ;; switch from html -> js
-     (add-to-list 'projectile-other-file-alist '("js" "jsx")) ;; switch from html -> js
-
-     (defun js-jump-to (current from to format-name)
-       (find-file
-        (cl-loop with parts = (reverse current)
-                 with fname = (file-name-sans-extension (cl-first parts))
-                 for (name . rest) on (cl-rest parts)
-                 until (string-equal name from)
-                 collect name into names
-                 finally (cl-return
-                          (mapconcat 'identity
-                                     (nconc (reverse rest)
-                                            (list to)
-                                            (reverse names)
-                                            (list (funcall format-name fname) )) "/" )))))
-
-     (defun js-format-impl-name (fname)
-       (format "%s.jsx" (replace-regexp-in-string "-test" "" fname)))
-
-     (defun js-format-test-name (fname)
-       (format "%s-test.js" fname))
-
-     (defun js-jump-to-implementation-or-test ()
-       (interactive)
-       (let ((current (split-string (buffer-file-name) "/")))
-         (cond
-          ((member "__tests__" current) (js-jump-to current "__tests__" "src" 'js-format-impl-name))
-          ((member "src" current)  (js-jump-to current "src" "__tests__" 'js-format-test-name))
-          (t (error "not within a test or lib directory"))
-          )))
-     (require 'wgrep)
-     (use-package helm-projectile
-       :config
-       (setq projectile-completion-system 'helm)
-       (helm-projectile-on))
-   #+END_SRC
-
 * Setting it up
    Adjusting command, control and option keys on mac.
    #+BEGIN_SRC emacs-lisp
@@ -1165,6 +1080,40 @@ while in the minibuffer for expensive operations like helm
   (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
 
   (use-package emamux)
+     (defun tmux-socket-command-string ()
+       (interactive)
+       (concat "tmux -S "
+               (replace-regexp-in-string "\n\\'" ""
+                                         (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
+
+     (defun tmux-move-left ()
+         (interactive)
+         (condition-case nil
+             (evil-window-left 1)
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil))))
+     (defun tmux-move-down ()
+         (interactive)
+         (condition-case nil
+             (evil-window-down 1)
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil))))
+     (defun tmux-move-up ()
+         (interactive)
+         (condition-case nil
+             (evil-window-up 1)
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil))))
+     (defun tmux-move-right ()
+         (interactive)
+         (condition-case nil
+             (evil-window-right 1)
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil))))
+
+
+     ;; (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
+     ;; (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
+     ;; (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
+     ;; (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
+
+     (use-package emamux)
    #+END_SRC
 
 ** Bindings
@@ -1191,35 +1140,40 @@ while in the minibuffer for expensive operations like helm
 
 
 
-      (evil-leader/set-key "S" 'helm-multi-swoop)
-      (evil-leader/set-key "a" 'helm-projectile-find-other-file)
-      (evil-leader/set-key "b" 'helm-projectile-switch-to-buffer)
+      (use-package counsel)
+      (evil-leader/set-key "S" 'swoop-multi)
       (evil-leader/set-key "c" 'mu4e)
       (evil-leader/set-key "d" 'deft)
       (evil-leader/set-key "e" 'dired-jump)
-      (evil-leader/set-key "f" 'helm-projectile-ag)
-      (evil-leader/set-key "h" 'helm-mini)
-      (evil-leader/set-key "i" 'helm-imenu)
-      (evil-leader/set-key "j" 'evil-avy-goto-char-2)
+      (evil-leader/set-key "f" 'counsel-ag)
+      (evil-leader/set-key "h" 'counsel-recentf)
+      (evil-leader/set-key "i" 'counsel-imenu)
+      (evil-leader/set-key "j" 'evil-avy-goto-char)
+      (evil-leader/set-key "l" 'evil-avy-goto-line)
       (evil-leader/set-key "m" 'evilmi-jump-items)
       (use-package expand-region)
       (evil-leader/set-key "n" 'er/expand-region)
       (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-      (evil-leader/set-key "p" 'projectile-commander)
+      (use-package find-file-in-project
+        :config
+        (evil-leader/set-key "p" 'find-file-in-project)
+      )
       (evil-leader/set-key "sc" 'emamux:run-command)
       (evil-leader/set-key "sl" 'emamux:run-last-command)
       (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
       (evil-leader/set-key "vs" 'yas-describe-tables)
       (evil-leader/set-key "vt" 'visit-term-buffer)
-      (evil-leader/set-key "w" 'helm-swoop)
+      (evil-leader/set-key "w" 'swoop)
 
+
+        (define-key evil-normal-state-map (kbd "C-p") 'counsel-git)
       (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
       (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
       (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
       (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-      (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-      (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+      (define-key my-keys-minor-mode-map (kbd "M-x")     'counsel-M-x)
+      (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'counsel-find-file)
       (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
       (setq x-select-enable-clipboard nil)
@@ -1238,7 +1192,6 @@ while in the minibuffer for expensive operations like helm
 
       (evil-leader/set-key-for-mode 'org-mode
         "t"  'org-show-todo-tree
-        "i"  'helm-org-in-buffer-headings
         "a"  'org-agenda
         "c"  'org-archive-subtree-default
         "r"  'org-refile
@@ -1250,7 +1203,6 @@ while in the minibuffer for expensive operations like helm
         (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
         (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
 
-      (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
 
       (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
       (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
@@ -1332,10 +1284,6 @@ while in the minibuffer for expensive operations like helm
       (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
       (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
 
-      (use-package helm-gtags
-        :config
-        (define-key evil-normal-state-map (kbd "]t") 'helm-gtags-dwim))
-
       (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
       (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
 
@@ -1356,7 +1304,17 @@ while in the minibuffer for expensive operations like helm
   buffed up dired (emacs). Dired is for directory listing,
   navigation and manipulation inside emacs.
   #+BEGIN_SRC emacs-lisp
-    (require 'dired-x)
+    (add-hook 'dired-load-hook
+              (lambda ()
+                (load "dired-x")
+                ;; Set dired-x global variables here.  For example:
+                ;; (setq dired-guess-shell-gnutar "gtar")
+                ;; (setq dired-x-hands-off-my-keys nil)
+                (setq dired-dwim-target t)
+
+                (setq dired-recursive-copies (quote always)) ; “always” means no asking
+                (setq dired-recursive-deletes (quote top)) ; “top” means ask once
+                ))
     (setq ls-lisp-use-insert-directory-program t)
     (setq insert-directory-program "gls")   ; --dired option not
                                             ; supported by ls, gnu ls
@@ -1367,10 +1325,6 @@ while in the minibuffer for expensive operations like helm
     (add-hook 'dired-mode-hook 'auto-revert-mode)
 
     ;; if window is splitted copy files to split pane as default destination
-    (setq dired-dwim-target t)
-
-    (setq dired-recursive-copies (quote always)) ; “always” means no asking
-    (setq dired-recursive-deletes (quote top)) ; “top” means ask once
 
     (defun xah-dired-mode-setup ()
       "to be run as hook for `dired-mode'."
@@ -1462,8 +1416,8 @@ while in the minibuffer for expensive operations like helm
      (add-hook 'after-init-hook #'sml/setup)
 
     ;; change mode-line color by evil state
-    (lexical-let ((default-color (cons (face-background 'mode-line)
-                                       (face-foreground 'mode-line)))))
+    ;; (lexical-let ((default-color (cons (face-background 'mode-line)
+    ;;                                    (face-foreground 'mode-line)))))
     ;; (add-hook 'post-command-hook
     ;;           (lambda ()
     ;;             (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
@@ -1529,7 +1483,6 @@ while in the minibuffer for expensive operations like helm
 * Wiki
   My own personal notes for commands I like/discover/learn.
 
-  helm: space between each words to have matching patterns
   C-x C-z to suspend emacs
   C-z to switch between vim normal state and emacs state
 
@@ -1589,30 +1542,18 @@ while in the minibuffer for expensive operations like helm
    + ~query-replace-regex~, ~replace-regex~
    + occur
      Find occurrences of a regular expression in your file.
-   After using helm-occur do ~C-c C-a~ to edit results in all buffer
    You can navigate trough “errors” with previous-error ~M-g p~ and next-error
    ~M-g n~. You can edit “errors” directly in /all/ buffer.
-   + ~helm-swoop~ and ~helm-multi-swoop~
+   + ~swoop~
      #+begin_src emacs-lisp
-        (use-package helm-swoop)
-       (require-package 'helm-swoop)
+        (use-package swoop)
      #+end_src
 
      Replace occur and all? Search and C-c C-e to edit.
      All is still usable with swoop by using the regular shortcut ~C-c C-a~
-   + ~helm-ag~. Use ~M--~ to add options
 ** Bookmarks
    ~C-x r m~
    ~C-x r b~
-   ~helm-bookmarks~
-** Helm and projectile
-   ~c-t~ to switch between helm window configurations
-   ~c-z~ to perform/unperform first action for helm entry
-   Use ~tab~ to see all actions possible on an entry
-
-   ~projectile-invalidate-cache~ to have a brand new C-p
-
-   First thing to do when Emacs starts: ~helm-projectile-switch-project~
 ** Completion
 
    #+begin_src emacs-lisp
@@ -1661,14 +1602,6 @@ while in the minibuffer for expensive operations like helm
     (setq custom-theme-directory "~/.emacs.d/themes")
     (use-package zenburn-theme)
     (load-theme 'zenburn)
-
-    ;; (if (daemonp)
-    ;;     (add-hook 'after-make-frame-functions
-    ;;               (lambda (frame)
-    ;;                 (select-frame frame)
-    ;;                 (load-theme 'zenburn t)))
-    ;;   (load-theme 'zenburn t))
-    (use-package load-theme-buffer-local)
   #+end_src
 
 * Templates
@@ -1682,101 +1615,6 @@ while in the minibuffer for expensive operations like helm
    (setq auto-insert-query nil)
    (yatemplate-fill-alist))
   #+end_src
-
-* Email
-** gnus
-   #+begin_src emacs-lisp
-  (setq nnmail-expiry-target "INBOX.Trash")
-  (setq nnmail-expiry-wait 'immediate)
-  (setq gnus-select-method
-        '(nnimap "Fastmail" ; primary email
-                  (nnimap-address "mail.messagingengine.com")
-                  (nnimap-server-port 993)
-                  (nnimap-authenticator login)
-                  (nnimap-expunge-on-close 'never)
-                  (nnimap-stream ssl)))
-
-  (require 'mu4e)
-   #+end_src
-
-** mu4e
-  Keybindings: http://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html
-
-  #+begin_src emacs-lisp
-   (require 'mu4e)
-   (setq mu4e-maildir "~/.Mail")
-   (setq mu4e-drafts-folder "/fastmail/INBOX.Drafts")
-   (setq mu4e-sent-folder   "/fastmail/INBOX.Sent Items")
-   (setq mu4e-trash-folder  "/fastmail/INBOX.Trash")
-
-   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this, What
-   ;; about fastmail?
-   ;; (setq mu4e-sent-messages-behavior 'delete)
-
-   ;; allow for updating mail using 'U' in the main view:
-   (setq mu4e-get-mail-command "offlineimap")
-
-   ;; shortcuts
-   (setq mu4e-maildir-shortcuts
-       '( ("/fastmail/INBOX"               . ?i)
-          ("/fastmail/INBOX.Clevertech"   . ?c)
-          ("/fastmail/INBOX.Archive"   . ?a)
-          ("/fastmail/INBOX.Sent Items"   . ?s)
-          ("/fastmail/INBOX.Learn Spam"   . ?j)
-
- ))
-
-   ;; something about ourselves
-   (setq
-      mu4e-compose-signature
-       (concat
-         "Cheers,\n"))
-
-   ;; show images
-   (setq mu4e-show-images t)
-
-   ;; use imagemagick, if available
-   (when (fboundp 'imagemagick-register-types)
-     (imagemagick-register-types))
-
-    ;; use imagemagick, if available
-    (when (fboundp 'imagemagick-register-types)
-      (imagemagick-register-types))
-
-    ;; convert html emails properly
-    ;; Possible options:
-    ;;   - html2text -utf8 -width 72
-    ;;   - textutil -stdin -format html -convert txt -stdout
-    ;;   - html2markdown | grep -v '&nbsp_place_holder;' (Requires html2text pypi)
-    ;;   - w3m -dump -cols 80 -T text/html
-    ;;   - view in browser (provided below)
-    ;; (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
-    (require 'mu4e-contrib)
-    (setq mu4e-html2text-command 'mu4e-shr2text)
-    ;; spell check
-    (add-hook 'mu4e-compose-mode-hook
-            (defun my-do-compose-stuff ()
-               "My settings for message composition."
-               (set-fill-column 72)
-               (flyspell-mode)))
-
-    ;; add option to view html message in a browser
-    ;; `aV` in view to activate
-    (add-to-list 'mu4e-view-actions
-      '("ViewInBrowser" . mu4e-action-view-in-browser) t)
-
-    ;; I have a service running that automatically fetches emails
-    ;; but still need mu4e to be aware of it by updating every 5 minutes
-    (setq mu4e-update-interval 300)
-
-  (setq message-send-mail-function 'smtpmail-send-it
-       smtpmail-stream-type 'starttls
-       smtpmail-default-smtp-server "mail.messagingengine.com"
-       smtpmail-smtp-server "mail.messagingengine.com"
-       smtpmail-smtp-service 587)
-
-(use-package helm-mu)
-   #+end_src
 
 * Exit setup hook
 

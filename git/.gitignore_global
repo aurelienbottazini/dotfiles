@@ -12,3 +12,4 @@ dummy/tmp/*
 .env
 .tern-project
 .tern-port
+jsconfig.json

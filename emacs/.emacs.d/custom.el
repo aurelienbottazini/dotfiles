@@ -6,6 +6,8 @@
  '(ag-highlight-search t)
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(blink-cursor-mode nil)
  '(blink-matching-paren t)
  '(coffee-tab-width 2)
@@ -15,7 +17,7 @@
  '(crosshairs-mode nil)
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("12ced60b9eec2ec25d781a556c1ecf2c582700439f56ca18c281b3fb7670e5e6" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(deft-directory "/Users/aurelienbottazini/Dropbox/org")
  '(deft-recursive t)
  '(deft-use-filename-as-title t)
@@ -74,32 +76,14 @@
  '(temporary-file-directory "~/emacs_tmp/")
  '(tool-bar-mode nil)
  '(typescript-indent-level 2)
+ '(visible-cursor t)
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2)
-)
+ '(web-mode-markup-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(col-highlight ((t (:inherit hl-line))))
- '(elscreen-tab-background-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
- '(elscreen-tab-current-screen-face ((t (:background "#6f6f6f" :foreground "#dcdcdc" :weight bold))))
- '(elscreen-tab-other-screen-face ((t (:background "#4f4f4f" :foreground "#dcdcdc"))))
- '(evil-search-highlight-persist-highlight-face ((t (:background "#dc8cc3" :foreground "#2b2b2b"))))
- '(flycheck-error ((t (:foreground "#dfaf8f" :underline (:color foreground-color :style wave) :weight bold))))
- '(font-lock-comment-face ((t (:slant italic))))
- '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic))))
- '(highlight-indentation-current-column-face ((t (:background "#383838"))))
- '(highlight-indentation-face ((t (:background "#494949"))))
- '(hl-line ((t (:background "#525252"))))
- '(mode-line ((t (:background "#5f5f5f" :foreground "#dcdccc" :inverse-video nil :box (:line-width -1 :style released-button) :height 1.0))))
- '(mode-line-inactive ((t (:background "#494949" :foreground "#5F7F5F" :inverse-video nil :box (:line-width -1 :style released-button)))))
- '(region ((t (:background "#f3e4bd" :foreground "#303030"))))
- '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :foreground "#94bff3" :weight semi-light))))
- '(show-paren-match ((t (:weight bold))))
- '(show-paren-mismatch ((t (:weight bold))))
- '(term ((t (:inherit default :background "#3f3f3f" :foreground "#d9d9d6"))))
- '(vertical-border ((t (:background "#494949" :foreground "#494949")))))
+ '(col-highlight ((t (:inherit hl-line)))))

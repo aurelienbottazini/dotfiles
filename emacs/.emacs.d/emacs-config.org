@@ -1579,7 +1579,10 @@ while in the minibuffer for expensive operations
    ~M-g n~. You can edit “errors” directly in /all/ buffer.
    + ~swoop~
      #+begin_src emacs-lisp
-        (use-package swoop)
+        (use-package swoop
+        :config
+        (require 'swoop)
+        )
      #+end_src
 
      Replace occur and all? Search and C-c C-e to edit.
@@ -1637,6 +1640,7 @@ while in the minibuffer for expensive operations
       (progn
         (use-package zenburn-theme)
         (load-theme 'zenburn)
+        (set-face-attribute 'mode-line-inactive nil :background "#494949")
         (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
         ;; (set-face-attribute 'flycheck-error nil :foreground "#dfaf8f" :underline (:color foreground-color :style wave :weight bold))
         (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")

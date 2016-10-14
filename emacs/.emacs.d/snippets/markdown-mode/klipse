@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: klipse
+# key: klipse
+# --
+<script>
+window.klipse_settings = {
+selector_eval_js: '.kjs',
+selector_eval_rb: '.krb',
+codemirror_options_in: {
+theme: 'zenburnesque'
+}
+};
+</script>
+<script src="/js/klipse_plugin.min.js"></script>

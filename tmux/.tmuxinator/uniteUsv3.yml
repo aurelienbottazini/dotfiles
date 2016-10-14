@@ -18,22 +18,21 @@ root: ~/projects/work/app-client
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-startup_window: back-office
 
 windows:
   - back-office:
       panes:
-        - cd ~/projects/work/back-office-app; git pull;and npm start
+        - cd ~/projects/work/back-office-app;and git checkout master;and git pull;and npm start
         - cd ~/projects/work/back-office-app;
   - appclient:
       layout: main-horizontal
       panes:
-        - cd ~/projects/work/app-client; git pull;and npm start
+        - cd ~/projects/work/app-client;and git checkout master;and git pull;and npm start
         - cd ~/projects/work/app-client;
   - api:
       layout: main-horizontal
       panes:
-        - cd ~/projects/work/uniteus-api; git pull;and eval (docker-machine env dev);and docker-compose up
+        - cd ~/projects/work/uniteus-api;and git checkout master;and git pull;and docker-compose start
         # - cd ~/projects/work/uniteus-api/; rake uniteus:neo4j:start; bundle exec rails s
         # - cd ~/projects/work/uniteus-api/; bundle exec mailcatcher
   - uniteus-client:
@@ -43,3 +42,5 @@ windows:
   # - elasticsearch:
   #     panes:
   #       - cd ~/projects/work/uniteus-api/; elasticsearch
+
+startup_window: back-office

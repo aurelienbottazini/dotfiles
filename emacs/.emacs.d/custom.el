@@ -17,7 +17,7 @@
  '(crosshairs-mode nil)
  '(custom-safe-themes
    (quote
-    ("0e219d63550634bc5b0c214aced55eb9528640377daf486e13fb18a32bf39856" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(deft-directory "/Users/aurelienbottazini/Dropbox/org")
  '(deft-recursive t)
  '(deft-use-filename-as-title t)
@@ -45,6 +45,7 @@
    "find <D> <X> -type f <F> -exec grep <C> -nH -e <R> \\{\\} +")
  '(hl-sexp-background-color "#efebe9")
  '(ido-enable-flex-matching t)
+ '(indicate-buffer-boundaries (quote left))
  '(js-indent-level 2)
  '(js-switch-indent-offset 2)
  '(js2-basic-offset 2)
@@ -67,7 +68,7 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (counsel swoop find-file-in-project zenburn color-theme-sanityinc-tomorrow cypher-mode hyde origami twilight-anti-bright-theme mu4e context-coloring leuven-theme dumb-jump flycheck-pos-tip-mode flycheck-status-emoji flycheck-pos-tip flycheck evil-leader pbcopy expand-region neo-tree wgrep column-highlight-mode column-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))
+    (airline-themes counsel swoop find-file-in-project zenburn color-theme-sanityinc-tomorrow cypher-mode hyde origami twilight-anti-bright-theme mu4e context-coloring leuven-theme dumb-jump flycheck-pos-tip-mode flycheck-status-emoji flycheck-pos-tip flycheck evil-leader pbcopy expand-region neo-tree wgrep column-highlight-mode column-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-gtags helm-ag guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(ruby-deep-arglist nil)
  '(send-mail-function (quote smtpmail-send-it))
@@ -113,5 +114,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(col-highlight ((t (:inherit hl-line))))
- '(mode-line-inactive ((t (:background "#cccccc" :foreground "#5F7F5F" :inverse-video nil :box (:line-width -1 :style released-button))))))
+ '(col-highlight ((t (:inherit hl-line)))))

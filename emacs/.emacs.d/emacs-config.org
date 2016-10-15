@@ -1442,25 +1442,32 @@ while in the minibuffer for expensive operations
 
 * Mode-line / Powerline / Smart line
   #+BEGIN_SRC emacs-lisp
-    (use-package smart-mode-line
-     :config
-     (setq sml/no-confirm-load-theme t)
-     (setq sml/theme 'respectful)
-     (add-hook 'after-init-hook #'sml/setup)
 
-    ;; change mode-line color by evil state
-    ;; (lexical-let ((default-color (cons (face-background 'mode-line)
-    ;;                                    (face-foreground 'mode-line)))))
-    ;; (add-hook 'post-command-hook
-    ;;           (lambda ()
-    ;;             (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
-    ;;                                ((evil-insert-state-p) '("#a4eddd" . "#212822"))
-    ;;                                ((evil-visual-state-p) '("#ffe863" . "#212822"))
-    ;;                                ((evil-emacs-state-p)  '("#600b92" . "#f1f2f1"))
-    ;;                                (t '("#fff7c7" . "#212822")))))
-    ;;                   (set-face-background 'mode-line (car color))
-    ;;                   (set-face-foreground 'mode-line (cdr color)))))
-    (setq rm-blacklist (quote(" ," " Tern" " Context" " Emmet" " FlyC" " company" " FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
+    (use-package airline-themes
+     :config
+     (require 'airline-themes)
+     (load-theme 'airline-light)
+     )
+
+      ;; (use-package smart-mode-line
+      ;;  :config
+      ;;  (setq sml/no-confirm-load-theme t)
+      ;;  (setq sml/theme 'dark)
+      ;;  (add-hook 'after-init-hook #'sml/setup)
+
+      ;; change mode-line color by evil state
+      ;; (lexical-let ((default-color (cons (face-background 'mode-line)
+      ;;                                    (face-foreground 'mode-line)))))
+      ;; (add-hook 'post-command-hook
+      ;;           (lambda ()
+      ;;             (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
+      ;;                                ((evil-insert-state-p) '("#a4eddd" . "#212822"))
+      ;;                                ((evil-visual-state-p) '("#ffe863" . "#212822"))
+      ;;                                ((evil-emacs-state-p)  '("#600b92" . "#f1f2f1"))
+      ;;                                (t '("#fff7c7" . "#212822")))))
+      ;;                   (set-face-background 'mode-line (car color))
+      ;;                   (set-face-foreground 'mode-line (cdr color)))))
+      ;; (setq rm-blacklist (quote(" ," " Tern" " Context" " Emmet" " FlyC" " company" " FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
   #+END_SRC
 
 * Functions
@@ -1654,7 +1661,9 @@ while in the minibuffer for expensive operations
         (progn
           (use-package leuven-theme
             :config
-            (load-theme 'leuven))))
+            (load-theme 'leuven))
+            (set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")))
+
   #+end_src
 
 * Templates

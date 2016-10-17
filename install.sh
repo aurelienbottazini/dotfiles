@@ -36,9 +36,12 @@ npm install -g babel-preset-es2015
 npm install -g save-dev babel-preset-react
 npm install -g babel-preset-stage-0
 
-brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
-tic -o ~/.terminfo /usr/local/share/emacs/24.5/etc/e/eterm-color.ti
-tic -x ~/xterm-256color.terminfo
+# brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
+# tic -o ~/.terminfo /usr/local/share/emacs/24.5/etc/e/eterm-color.ti
+# tic -x ~/xterm-256color.terminfo
+brew tap railwaycat/emacsmacport
+brew install emacs-mac
+brew linkapps emacs-mac
 
 brew install offlineimap
 brew services start offlineimap

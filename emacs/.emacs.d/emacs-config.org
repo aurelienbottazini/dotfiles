@@ -276,6 +276,7 @@ while in the minibuffer for expensive operations
   content to reflect what's on-disk.
   #+BEGIN_SRC emacs-lisp
   (global-auto-revert-mode 1)
+  (diminish 'auto-revert-mode)
   #+END_SRC
 
   Better print menus.
@@ -455,6 +456,7 @@ while in the minibuffer for expensive operations
   Get a visual aid for key sequences.
   #+BEGIN_SRC emacs-lisp
     (use-package which-key
+     :diminish which-key-mode
      :config
      (which-key-mode))
   #+END_SRC
@@ -473,6 +475,7 @@ while in the minibuffer for expensive operations
   Supercharge C-x u. Use ~d~ to see a diff
   #+begin_src emacs-lisp
   (use-package undo-tree
+   :diminish undo-tree-mode
    :config
    (global-undo-tree-mode))
   #+end_src
@@ -548,6 +551,7 @@ while in the minibuffer for expensive operations
         (global-evil-surround-mode 1))
 
       (use-package evil-commentary
+        :diminish evil-commentary-mode
         :config
         (evil-commentary-mode))
 
@@ -573,12 +577,10 @@ while in the minibuffer for expensive operations
         :config
         (global-evil-search-highlight-persist t))
 
-      (use-package evil-matchit
+        (use-package evil-matchit
         :config
         (global-evil-matchit-mode 1))
       )
-
-
   #+END_SRC
 
 * Registers
@@ -1035,6 +1037,7 @@ while in the minibuffer for expensive operations
     "A minor mode so that my key settings override annoying major modes."
     t " my-keys" 'my-keys-minor-mode-map)
   (my-keys-minor-mode 1)
+  (diminish 'my-keys-minor-mode)
 
       (defadvice load (after give-my-keybindings-priority)
         "Try to ensure that my keybindings always have priority."
@@ -1448,26 +1451,6 @@ while in the minibuffer for expensive operations
      (require 'airline-themes)
      (load-theme 'airline-light)
      )
-
-      ;; (use-package smart-mode-line
-      ;;  :config
-      ;;  (setq sml/no-confirm-load-theme t)
-      ;;  (setq sml/theme 'dark)
-      ;;  (add-hook 'after-init-hook #'sml/setup)
-
-      ;; change mode-line color by evil state
-      ;; (lexical-let ((default-color (cons (face-background 'mode-line)
-      ;;                                    (face-foreground 'mode-line)))))
-      ;; (add-hook 'post-command-hook
-      ;;           (lambda ()
-      ;;             (let ((color (cond ((minibufferp) '("#fff7c7" . "#212822"))
-      ;;                                ((evil-insert-state-p) '("#a4eddd" . "#212822"))
-      ;;                                ((evil-visual-state-p) '("#ffe863" . "#212822"))
-      ;;                                ((evil-emacs-state-p)  '("#600b92" . "#f1f2f1"))
-      ;;                                (t '("#fff7c7" . "#212822")))))
-      ;;                   (set-face-background 'mode-line (car color))
-      ;;                   (set-face-foreground 'mode-line (cdr color)))))
-      ;; (setq rm-blacklist (quote(" ," " Tern" " Context" " Emmet" " FlyC" " company" " FlyC-" " yas" " my-keys" " s-/" " Undo-Tree" " WK" " ARev" " Abbrev" " Fill"))))
   #+END_SRC
 
 * Functions
@@ -1498,12 +1481,14 @@ while in the minibuffer for expensive operations
         (concat user-emacs-directory "abbrev_defs"))
   (setq save-abbrevs t)
   (setq default-abbrev-mode t)
+  (diminish 'abbrev-mode)
    #+end_src
 
 ** Yasnippets
 
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
+      :diminish yas-minor-mode
       :config
      (setq yas-snippet-dirs
        '("~/.emacs.d/snippets"))
@@ -1513,11 +1498,14 @@ while in the minibuffer for expensive operations
 
 ** Company
    #+begin_src emacs-lisp
-     (use-package company-tern)
-     (use-package company)
-     (global-company-mode t)
-     (setq company-minimum-prefix-length 2)
-     (setq company-backends '((company-tern)))
+     (use-package company
+      :diminish company-mode
+      :config
+      (use-package company-tern)
+      (global-company-mode t)
+      (setq company-minimum-prefix-length 2)
+      (setq company-backends '((company-tern)))
+     )
    #+end_src
 
 * Wiki

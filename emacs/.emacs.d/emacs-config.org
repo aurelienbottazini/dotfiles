@@ -605,6 +605,7 @@ while in the minibuffer for expensive operations
   (require 'sgml-mode)
 
     (use-package context-coloring
+      :diminish context-coloring-mode
       :config
       (add-hook 'js2-mode-hook #'context-coloring-mode)
       (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
@@ -800,6 +801,7 @@ while in the minibuffer for expensive operations
 ** JavaScript
 
    #+BEGIN_SRC emacs-lisp
+   (diminish 'subword-mode)
        (use-package js2-mode
         :config
         (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -826,6 +828,7 @@ while in the minibuffer for expensive operations
          :config
          (js2r-add-keybindings-with-prefix "C-c C-r"))
        (use-package tern
+        :diminish tern-mode
         :config
         (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
    #+END_SRC

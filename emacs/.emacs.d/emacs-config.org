@@ -602,6 +602,13 @@ while in the minibuffer for expensive operations
 * prog-mode(s)
 
   #+begin_src emacs-lisp
+  (use-package diff-hl
+  :config
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
+  )
+
   (require 'sgml-mode)
 
     (use-package context-coloring
@@ -1127,6 +1134,8 @@ while in the minibuffer for expensive operations
 ** Bindings
    #+BEGIN_SRC emacs-lisp
      (evil-leader/set-leader "<SPC>")
+
+     (evil-leader/set-key "gb" 'magit-blame)
      (evil-leader/set-key "gs" 'magit-status)
       (use-package git-link
         :config
@@ -1146,12 +1155,18 @@ while in the minibuffer for expensive operations
           (switch-to-buffer "*my-ansi-term*")
           ))
 
-      (use-package counsel)
+      (use-package counsel
+       :config
+       (use-package counsel-projectile
+        :config
+        (counsel-projectile-on)
+        )
+       )
       (evil-leader/set-key "S" 'swoop-multi)
       (evil-leader/set-key "c" 'mu4e)
       (evil-leader/set-key "d" 'deft)
       (evil-leader/set-key "e" 'dired-jump)
-      (evil-leader/set-key "f" 'counsel-ag)
+      (evil-leader/set-key "f" 'counsel-projectile-ag)
       (evil-leader/set-key "h" 'counsel-recentf)
       (evil-leader/set-key "i" 'counsel-imenu)
       (evil-leader/set-key "j" 'evil-avy-goto-char)
@@ -1160,9 +1175,9 @@ while in the minibuffer for expensive operations
       (use-package expand-region)
       (evil-leader/set-key "n" 'er/expand-region)
       (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-      (use-package find-file-in-project
-        :config
-        (evil-leader/set-key "p" 'find-file-in-project)
+      (use-package projectile
+       :config
+       (evil-leader/set-key "p" 'projectile-commander)
       )
       (evil-leader/set-key "sc" 'emamux:run-command)
       (evil-leader/set-key "sl" 'emamux:run-last-command)
@@ -1199,10 +1214,15 @@ while in the minibuffer for expensive operations
       (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
       (evil-leader/set-key "vs" 'yas-describe-tables)
       (evil-leader/set-key "vt" 'visit-term-buffer)
-      (evil-leader/set-key "w" 'swoop)
+      (use-package swoop
+       :config
+       (evil-leader/set-key "w" 'swoop))
 
 
-        (define-key evil-normal-state-map (kbd "C-p") 'counsel-git)
+      (use-package find-file-in-project
+        :config
+        (define-key evil-normal-state-map (kbd "C-p") 'find-file-in-project)
+      )
       (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
       (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
       (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)

@@ -583,6 +583,22 @@ while in the minibuffer for expensive operations
       )
   #+END_SRC
 
+* NerdTree || File & Folders
+
+  For icons you need to install fonts available here:
+  https://github.com/domtronn/all-the-icons.el/tree/master/fonts
+#+begin_src emacs-lisp
+(use-package neotree
+:config
+(use-package all-the-icons)
+(evil-leader/set-key "vn" 'neotree-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(setq neo-theme (if window-system 'icons 'arrow))
+)
+#+end_src
 * Registers
   List of frequently visited files. I can access them using
   ~C-x r j <letter>~.
@@ -1024,7 +1040,6 @@ while in the minibuffer for expensive operations
   + Coffee Script
     ~Install npm install -g coffeelint~
 
-* Navigation
 * Setting it up
    Adjusting command, control and option keys on mac.
    #+BEGIN_SRC emacs-lisp
@@ -1218,11 +1233,7 @@ while in the minibuffer for expensive operations
        :config
        (evil-leader/set-key "w" 'swoop))
 
-
-      (use-package find-file-in-project
-        :config
-        (define-key evil-normal-state-map (kbd "C-p") 'find-file-in-project)
-      )
+      (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
       (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
       (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
       (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
@@ -1289,9 +1300,9 @@ while in the minibuffer for expensive operations
       (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
       (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
       (define-key evil-normal-state-map (kbd "zh") 'origami-close-all-nodes)
-      (define-key evil-normal-state-map (kbd "za") 'origami-open-all-nodes)
       (define-key evil-normal-state-map (kbd "zc") 'origami-close-node)
       (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
+      (define-key evil-normal-state-map (kbd "zv") 'origami-open-all-nodes)
       (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
       (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
 

@@ -171,7 +171,7 @@ while in the minibuffer for expensive operations
 * Fonts
 
   #+BEGIN_SRC emacs-lisp
-    (set-default-font "-*-Operator Mono-light-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   #+END_SRC
 * Git
 
@@ -849,7 +849,8 @@ while in the minibuffer for expensive operations
        (use-package web-beautify)
        (use-package js2-refactor
          :config
-         (js2r-add-keybindings-with-prefix "C-c C-r"))
+         (js2r-add-keybindings-with-prefix "<f12>"))
+         (add-hook 'js2-mode-hook 'js2-refactor-mode)
        (use-package tern
         :diminish tern-mode
         :config
@@ -1229,18 +1230,19 @@ while in the minibuffer for expensive operations
       (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
       (evil-leader/set-key "vs" 'yas-describe-tables)
       (evil-leader/set-key "vt" 'visit-term-buffer)
-      (use-package swoop
+      (use-package helm-swoop
        :config
-       (evil-leader/set-key "w" 'swoop))
+       (evil-leader/set-key "w" 'helm-swoop))
 
-      (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
+      (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
       (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
       (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
       (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
       (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-      (define-key my-keys-minor-mode-map (kbd "M-x")     'counsel-M-x)
-      (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'counsel-find-file)
+      (use-package helm-projectile)
+      (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
+      (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
       (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
       (setq x-select-enable-clipboard nil)
@@ -1405,8 +1407,8 @@ while in the minibuffer for expensive operations
 
 * Terminal
   #+begin_src emacs-lisp
-  (setq term-default-bg-color "#3f3f3f")
-  (setq term-default-fg-color "#d9d9d6")
+    ;; (setq term-default-bg-color "#3f3f3f")
+    ;; (setq term-default-fg-color "#d9d9d6")
   #+end_src
 
 * Spell Check

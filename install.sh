@@ -58,6 +58,7 @@ gem install dotenv
 gem install terminal-notifier
 
 brew install stow
+brew install exiftool
 
 brew tap homebrew/dupes
 brew install grep --with-default-names

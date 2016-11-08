@@ -410,6 +410,9 @@ while in the minibuffer for expensive operations
   #+END_SRC
 
 * Visual interface
+  #+begin_src emacs-lisp
+  (global-hl-line-mode)
+  #+end_src
   No bell
   #+BEGIN_SRC emacs-lisp
        (setq ring-bell-function 'ignore)
@@ -849,6 +852,7 @@ while in the minibuffer for expensive operations
        ;; conmmands to _beautify_ js, css and html
        (use-package web-beautify)
        (use-package js2-refactor
+         :diminish js2-refactor-mode
          :config
          (js2r-add-keybindings-with-prefix "<f12>"))
          (add-hook 'js2-mode-hook 'js2-refactor-mode)
@@ -1004,6 +1008,7 @@ while in the minibuffer for expensive operations
 
   #+BEGIN_SRC emacs-lisp
     (use-package flycheck
+      :diminish flycheck-mode
       :config
       (add-hook 'after-init-hook #'global-flycheck-mode)
       )
@@ -1077,41 +1082,6 @@ while in the minibuffer for expensive operations
 
 ** Tmux
    #+BEGIN_SRC emacs-lisp
-
-  (defun tmux-socket-command-string ()
-    (interactive)
-    (concat "tmux -S "
-            (replace-regexp-in-string "\n\\'" ""
-                                      (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
-
-  (defun tmux-move-left ()
-      (interactive)
-      (condition-case nil
-          (evil-window-left 1)
-        (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil))))
-  (defun tmux-move-down ()
-      (interactive)
-      (condition-case nil
-          (evil-window-down 1)
-        (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil))))
-  (defun tmux-move-up ()
-      (interactive)
-      (condition-case nil
-          (evil-window-up 1)
-        (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil))))
-  (defun tmux-move-right ()
-      (interactive)
-      (condition-case nil
-          (evil-window-right 1)
-        (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil))))
-
-
-  (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
-  (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
-  (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
-  (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
-
-  (use-package emamux)
      (defun tmux-socket-command-string ()
        (interactive)
        (concat "tmux -S "
@@ -1119,25 +1089,67 @@ while in the minibuffer for expensive operations
                                          (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
 
      (defun tmux-move-left ()
-         (interactive)
-         (condition-case nil
-             (evil-window-left 1)
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil))))
+       (interactive)
+       (condition-case nil
+           (evil-window-left 1)
+         (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil))))
      (defun tmux-move-down ()
-         (interactive)
-         (condition-case nil
-             (evil-window-down 1)
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil))))
+       (interactive)
+       (condition-case nil
+           (evil-window-down 1)
+         (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil))))
      (defun tmux-move-up ()
-         (interactive)
-         (condition-case nil
-             (evil-window-up 1)
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil))))
+       (interactive)
+       (condition-case nil
+           (evil-window-up 1)
+         (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil))))
      (defun tmux-move-right ()
-         (interactive)
-         (condition-case nil
-             (evil-window-right 1)
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil))))
+       (interactive)
+       (condition-case nil
+           (evil-window-right 1)
+         (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil))))
+
+
+     (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
+     (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
+     (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
+
+     (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
+     (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
+     (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
+     (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
+     (use-package emamux)
+     (defun tmux-socket-command-string ()
+       (interactive)
+       (concat "tmux -S "
+               (replace-regexp-in-string "\n\\'" ""
+                                         (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
+
+     (defun tmux-move-left ()
+       (interactive)
+       (condition-case nil
+           (evil-window-left 1)
+         (unless window-system
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
+     (defun tmux-move-down ()
+       (interactive)
+       (condition-case nil
+           (evil-window-down 1)
+         (unless window-system
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
+     (defun tmux-move-up ()
+       (interactive)
+       (condition-case nil
+           (evil-window-up 1)
+         (unless window-system
+           (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
+     (defun tmux-move-right ()
+       (interactive)
+       (condition-case nil
+           (evil-window-right 1)
+         (unless window-system
+          (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
 
 
      ;; (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
@@ -1172,20 +1184,13 @@ while in the minibuffer for expensive operations
           (switch-to-buffer "*my-ansi-term*")
           ))
 
-      (use-package counsel
-       :config
-       (use-package counsel-projectile
-        :config
-        (counsel-projectile-on)
-        )
-       )
       (evil-leader/set-key "S" 'swoop-multi)
       (evil-leader/set-key "c" 'mu4e)
       (evil-leader/set-key "d" 'deft)
       (evil-leader/set-key "e" 'dired-jump)
-      (evil-leader/set-key "f" 'counsel-projectile-ag)
-      (evil-leader/set-key "h" 'counsel-recentf)
-      (evil-leader/set-key "i" 'counsel-imenu)
+      (evil-leader/set-key "f" 'helm-projectile-ag)
+      (evil-leader/set-key "h" 'helm-recentf)
+      (evil-leader/set-key "i" 'helm-imenu)
       (evil-leader/set-key "j" 'evil-avy-goto-char)
       (evil-leader/set-key "l" 'evil-avy-goto-line)
       (evil-leader/set-key "m" 'evilmi-jump-items)
@@ -1241,7 +1246,14 @@ while in the minibuffer for expensive operations
       (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
       (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
 
-      (use-package helm-projectile)
+      (use-package helm
+       :config
+       (use-package helm-ag)
+       (use-package helm-projectile
+        :config
+        (helm-projectile-on)
+        )
+       )
       (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
       (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
       (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
@@ -1485,26 +1497,26 @@ while in the minibuffer for expensive operations
   http://www.clisp.org/impnotes/char-sets.html
   #+BEGIN_SRC emacs-lisp
 
-    (use-package airline-themes
-     :config
-     (require 'airline-themes)
-     (load-theme 'airline-light)
-     )
+    ;;     (use-package airline-themes
+    ;;      :config
+    ;;      (require 'airline-themes)
+    ;;      (load-theme 'airline-light)
+    ;;      )
 
-        ;;(add-hook 'org-mode-hook '(lambda ()
-        ;;                          (turn-on-flyspell)
-        ;;                          (writegood-mode t)))
-        (add-hook 'after-init-hook '(lambda()
-(setq powerline-utf-8-separator-left       #x20
-       powerline-utf-8-separator-right     #x20
-       airline-utf-glyph-separator-left      #x20
-       airline-utf-glyph-separator-right     #x20
-       airline-utf-glyph-subseparator-left   #x20
-       airline-utf-glyph-subseparator-right  #x20
-       airline-utf-glyph-branch              11104
-       airline-utf-glyph-readonly            #xa0e
-       airline-utf-glyph-linenumber          11105)
-))
+    ;;         ;;(add-hook 'org-mode-hook '(lambda ()
+    ;;         ;;                          (turn-on-flyspell)
+    ;;         ;;                          (writegood-mode t)))
+    ;;         (add-hook 'after-init-hook '(lambda()
+    ;; (setq powerline-utf-8-separator-left       #x20
+    ;;        powerline-utf-8-separator-right     #x20
+    ;;        airline-utf-glyph-separator-left      #x20
+    ;;        airline-utf-glyph-separator-right     #x20
+    ;;        airline-utf-glyph-subseparator-left   #x20
+    ;;        airline-utf-glyph-subseparator-right  #x20
+    ;;        airline-utf-glyph-branch              11104
+    ;;        airline-utf-glyph-readonly            #xa0e
+    ;;        airline-utf-glyph-linenumber          11105)
+    ;; ))
   #+END_SRC
 
 * Functions

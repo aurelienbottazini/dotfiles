@@ -183,7 +183,6 @@ while in the minibuffer for expensive operations
 #+end_src
 * org-mode
 
-  Making sure I have the latest /org-mode/.
   #+BEGIN_SRC emacs-lisp
       (use-package ido
         :init
@@ -191,8 +190,6 @@ while in the minibuffer for expensive operations
         :config
         (ido-mode t))
 
-      (use-package org
-        :init
         ;; easier completion when refiling org-mode
         (setq org-fontify-whole-heading-line t)
         (setq org-startup-indented nil)
@@ -239,20 +236,11 @@ while in the minibuffer for expensive operations
           (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
           (set-display-table-slot standard-display-table
                                   'selective-display (string-to-vector "  ••• ")))
-        (use-package ob-typescript
-          :config
-          (org-babel-do-load-languages
-           'org-babel-load-languages
-           '((typescript . t)
-             (js . t)
-             ))
-          )
 
         ;; For colorized source codes with html export
         (use-package htmlize
           :config
           (setq org-html-htmlize-output-type (quote css)))
-        )
   #+END_SRC
 * UI
 
@@ -1184,6 +1172,7 @@ while in the minibuffer for expensive operations
           (switch-to-buffer "*my-ansi-term*")
           ))
 
+      (evil-leader/set-key "b" 'helm-bookmarks)
       (evil-leader/set-key "S" 'swoop-multi)
       (evil-leader/set-key "c" 'mu4e)
       (evil-leader/set-key "d" 'deft)
@@ -1193,7 +1182,7 @@ while in the minibuffer for expensive operations
       (evil-leader/set-key "i" 'helm-imenu)
       (evil-leader/set-key "j" 'evil-avy-goto-char)
       (evil-leader/set-key "l" 'evil-avy-goto-line)
-      (evil-leader/set-key "m" 'evilmi-jump-items)
+      (evil-leader/set-key "m" 'bookmark-set)
       (use-package expand-region)
       (evil-leader/set-key "n" 'er/expand-region)
       (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)

@@ -2,15 +2,14 @@
 # name: jest_container_test
 # key: jct
 # --
-const componentPath = '../../../src/$1/${2:`(capitalize (file-name-sans-extension (buffer-name)))`}';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-const $2 = require(componentPath).${3:$2};
+import { $1 } from 'src/${2:(file-name-absolute-p (buffer-file-name))}
 
-describe('$2', () => {
+describe('$1', () => {
   const renderer = TestUtils.createRenderer();
   it('works', () => {
-    renderer.render(<$2 />);
+    renderer.render(<$1 />);
     const output = renderer.getRenderOutput();
     expect(output).toMatchSnapshot();
   });

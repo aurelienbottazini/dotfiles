@@ -17,7 +17,25 @@ while in the minibuffer for expensive operations
 (my-minibuffer-gc-setup-hook)
 #+end_src
 
-- Encoding
+Defining my key-map where I define my keys and give them top priorities.
+   #+BEGIN_SRC emacs-lisp
+  (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+  (define-minor-mode my-keys-minor-mode
+    "A minor mode so that my key settings override annoying major modes."
+    t " my-keys" 'my-keys-minor-mode-map)
+  (my-keys-minor-mode 1)
+  (diminish 'my-keys-minor-mode)
+
+      (defadvice load (after give-my-keybindings-priority)
+        "Try to ensure that my keybindings always have priority."
+        (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+            (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+              (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+              (add-to-list 'minor-mode-map-alist mykeys))))
+  (ad-activate 'load)
+   #+END_SRC
+
+* Encoding
 
   I want UTF-8 everywhere.
   #+BEGIN_SRC emacs-lisp
@@ -1049,26 +1067,6 @@ while in the minibuffer for expensive operations
   (setq default-input-method "MacOSX"))
    #+END_SRC
 
-
-
-   Defining my key-map where I define my keys and give them top priorities.
-   #+BEGIN_SRC emacs-lisp
-  (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-  (define-minor-mode my-keys-minor-mode
-    "A minor mode so that my key settings override annoying major modes."
-    t " my-keys" 'my-keys-minor-mode-map)
-  (my-keys-minor-mode 1)
-  (diminish 'my-keys-minor-mode)
-
-      (defadvice load (after give-my-keybindings-priority)
-        "Try to ensure that my keybindings always have priority."
-        (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
-            (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-              (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-              (add-to-list 'minor-mode-map-alist mykeys))))
-  (ad-activate 'load)
-   #+END_SRC
-
 ** Tmux
    #+BEGIN_SRC emacs-lisp
      (defun tmux-socket-command-string ()
@@ -1077,37 +1075,6 @@ while in the minibuffer for expensive operations
                (replace-regexp-in-string "\n\\'" ""
                                          (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
 
-     (defun tmux-move-left ()
-       (interactive)
-       (condition-case nil
-           (evil-window-left 1)
-         (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil))))
-     (defun tmux-move-down ()
-       (interactive)
-       (condition-case nil
-           (evil-window-down 1)
-         (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil))))
-     (defun tmux-move-up ()
-       (interactive)
-       (condition-case nil
-           (evil-window-up 1)
-         (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil))))
-     (defun tmux-move-right ()
-       (interactive)
-       (condition-case nil
-           (evil-window-right 1)
-         (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil))))
-
-
-     (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
-     (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
-     (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
-     (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
-
-     (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
-     (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
-     (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
-     (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
      (use-package emamux)
      (defun tmux-socket-command-string ()
        (interactive)
@@ -1140,13 +1107,16 @@ while in the minibuffer for expensive operations
          (unless window-system
           (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
 
+     (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
+     (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
+     (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
 
-     ;; (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
-     ;; (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
-     ;; (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
-     ;; (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
+     (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
+     (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
+     (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
+     (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
 
-     (use-package emamux)
    #+END_SRC
 
 ** Bindings

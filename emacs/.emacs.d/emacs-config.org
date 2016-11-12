@@ -583,7 +583,8 @@ while in the minibuffer for expensive operations
 (use-package neotree
 :config
 (use-package all-the-icons)
-(evil-leader/set-key "vn" 'neotree-toggle)
+(define-key my-keys-minor-mode-map (kbd "M-\\") 'neotree-toggle)
+(define-key my-keys-minor-mode-map (kbd "M-|") 'neotree-find)
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)

@@ -54,6 +54,7 @@ Defining my key-map where I define my keys and give them top priorities.
   (if (boundp 'buffer-file-coding-system)
       (setq-default buffer-file-coding-system 'utf-8)
   (setq default-buffer-file-coding-system 'utf-8))
+  (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
   #+End_SRC
 
   Making sure emacs language environment variables are also
@@ -74,7 +75,6 @@ Defining my key-map where I define my keys and give them top priorities.
 * Packages
 
   An helper to install missing packages.
-
 
   #+BEGIN_SRC emacs-lisp
 (defun require-package (package &optional min-version)
@@ -1452,33 +1452,6 @@ Defining my key-map where I define my keys and give them top priorities.
   (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
   #+END_SRC
 
-* Mode-line / Powerline / Smart line
-
-  http://www.clisp.org/impnotes/char-sets.html
-  #+BEGIN_SRC emacs-lisp
-
-    ;;     (use-package airline-themes
-    ;;      :config
-    ;;      (require 'airline-themes)
-    ;;      (load-theme 'airline-light)
-    ;;      )
-
-    ;;         ;;(add-hook 'org-mode-hook '(lambda ()
-    ;;         ;;                          (turn-on-flyspell)
-    ;;         ;;                          (writegood-mode t)))
-    ;;         (add-hook 'after-init-hook '(lambda()
-    ;; (setq powerline-utf-8-separator-left       #x20
-    ;;        powerline-utf-8-separator-right     #x20
-    ;;        airline-utf-glyph-separator-left      #x20
-    ;;        airline-utf-glyph-separator-right     #x20
-    ;;        airline-utf-glyph-subseparator-left   #x20
-    ;;        airline-utf-glyph-subseparator-right  #x20
-    ;;        airline-utf-glyph-branch              11104
-    ;;        airline-utf-glyph-readonly            #xa0e
-    ;;        airline-utf-glyph-linenumber          11105)
-    ;; ))
-  #+END_SRC
-
 * Functions
   #+begin_src emacs-lisp
     (require 'cl)
@@ -1656,30 +1629,30 @@ Defining my key-map where I define my keys and give them top priorities.
     #+end_src
 * Colors
   #+begin_src emacs-lisp
-        (setq custom-theme-directory "~/.emacs.d/themes")
-        ;; (unless window-system
-        ;;   (progn
-        ;;     (use-package zenburn-theme)
-        ;;     (load-theme 'zenburn)
-        ;;     (set-face-attribute 'mode-line-inactive nil :background "#494949")
-        ;;     (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
-        ;;     ;; (set-face-attribute 'flycheck-error nil :foreground "#dfaf8f" :underline (:color foreground-color :style wave :weight bold))
-        ;;     (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")
-        ;;     (set-face-attribute 'highlight-indentation-face nil :background "#494949")
-        ;;     ;; (set-face-attribute 'relative-line-numbers-current-line nil :inherit relative-line-numbers :foreground "#94bff3" :weight semi-light)
-        ;;     ;; (set-face-attribute 'term nil :background "#3f3f3f" :foreground "#d9d9d6")
-        ;;     (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
-        ;;   )
-    (use-package leuven-theme
-                :config
-                (load-theme 'leuven))
-(set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")
-        ;; (if window-system
-        ;;     (progn
-        ;;       (use-package leuven-theme
-        ;;         :config
-        ;;         (load-theme 'leuven))
-        ;;         (set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")))
+    (setq custom-theme-directory "~/.emacs.d/themes")
+    ;; (unless window-system
+    ;;   (progn
+    (use-package zenburn-theme
+      :config
+      (load-theme 'zenburn)
+      (set-face-attribute 'mode-line-inactive nil :background "#494949")
+      (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
+      ;; (set-face-attribute 'flycheck-error nil :foreground "#dfaf8f" :underline (:color foreground-color :style wave :weight bold))
+      (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")
+      (set-face-attribute 'highlight-indentation-face nil :background "#494949")
+      ;; (set-face-attribute 'relative-line-numbers-current-line nil :inherit relative-line-numbers :foreground "#94bff3" :weight semi-light)
+      ;; (set-face-attribute 'term nil :background "#3f3f3f" :foreground "#d9d9d6")
+      (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
+    ;; (use-package leuven-theme
+    ;;   :config
+    ;;   (load-theme 'leuven))
+    ;; (set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")
+    ;; (if window-system
+    ;;     (progn
+    ;;       (use-package leuven-theme
+    ;;         :config
+    ;;         (load-theme 'leuven))
+    ;;         (set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")))
 
   #+end_src
 

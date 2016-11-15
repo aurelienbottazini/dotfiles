@@ -6,8 +6,6 @@
  '(ag-highlight-search t)
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(blink-cursor-mode nil)
  '(blink-matching-paren t)
  '(coffee-tab-width 2)
@@ -29,7 +27,6 @@
  '(emmet-move-cursor-between-quotes t)
  '(evil-toggle-key "C-c e")
  '(exec-path-from-shell-arguments (quote ("-l")))
- '(fci-rule-color "#383838")
  '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
@@ -60,9 +57,6 @@
  '(magit-git-executable "/usr/local/bin/git")
  '(neo-window-fixed-size nil)
  '(neo-window-width 50)
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(org-agenda-files (quote ("~/Dropbox/org/gtd.org")))
  '(org-babel-js-cmd "org-babel-node --presets es2015,react,stage-2")
  '(org-bullets-bullet-list (quote ("•" "†" "‡")))
@@ -72,7 +66,6 @@
  '(package-selected-packages
    (quote
     (magit helm-ag all-the-icons diff-hl counsel-projectile unicode-fonts smart-mode-line-powerline airline-themes counsel swoop find-file-in-project zenburn color-theme-sanityinc-tomorrow cypher-mode hyde origami twilight-anti-bright-theme mu4e context-coloring leuven-theme dumb-jump flycheck-pos-tip-mode flycheck-status-emoji flycheck-pos-tip flycheck evil-leader pbcopy expand-region neo-tree wgrep column-highlight-mode column-highlight elscreen zenburn-theme zoom-window yatemplate yaml-mode writeroom-mode writegood-mode wrap-region windresize which-key web-mode web-beautify use-package typescript-mode synosaurus smart-mode-line-powerline-theme scss-mode sass-mode ruby-interpolation rspec-mode relative-line-numbers rainbow-mode rainbow-identifiers rainbow-delimiters projectile-rails project-explorer palimpsest org-bullets ob-typescript neotree markdown-mode load-theme-buffer-local less-css-mode langtool key-chord json-mode js3-mode js2-refactor htmlize highlight-indentation helm-swoop helm-projectile helm-gtags guide-key git-link ggtags flycheck-typescript-tslint fish-mode fill-column-indicator exec-path-from-shell evil-visualstar evil-surround evil-search-highlight-persist evil-org evil-multiedit evil-matchit evil-magit evil-indent-plus evil-commentary enh-ruby-mode emmet-mode dockerfile-mode deft company-tern coffee-mode bundler babel-repl avy all-ext ag)))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(powerline-default-separator (quote utf-8))
  '(powerline-utf-8-separator-left 2039)
  '(powerline-utf-8-separator-right 2039)
@@ -88,28 +81,6 @@
  '(temporary-file-directory "~/emacs_tmp/")
  '(tool-bar-mode nil)
  '(typescript-indent-level 2)
- '(vc-annotate-background "#2B2B2B")
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#BC8383")
-     (40 . "#CC9393")
-     (60 . "#DFAF8F")
-     (80 . "#D0BF8F")
-     (100 . "#E0CF9F")
-     (120 . "#F0DFAF")
-     (140 . "#5F7F5F")
-     (160 . "#7F9F7F")
-     (180 . "#8FB28F")
-     (200 . "#9FC59F")
-     (220 . "#AFD8AF")
-     (240 . "#BFEBBF")
-     (260 . "#93E0E3")
-     (280 . "#6CA0A3")
-     (300 . "#7CB8BB")
-     (320 . "#8CD0D3")
-     (340 . "#94BFF3")
-     (360 . "#DC8CC3"))))
- '(vc-annotate-very-old-color "#DC8CC3")
  '(visible-cursor t)
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
  '(web-mode-code-indent-offset 2)
@@ -120,13 +91,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(airline-normal-center ((t (:background "#a8ceee" :foreground "black"))))
- '(airline-normal-inner ((t (:background "#56a7ee" :foreground "#000087"))))
- '(airline-normal-outer ((t (:background "#278fea" :foreground "#ffffff"))))
- '(col-highlight ((t (:inherit hl-line))))
- '(context-coloring-level-1-face ((t (:foreground "blue1"))))
- '(context-coloring-level-2-face ((t (:foreground "darkgreen"))))
- '(flycheck-fringe-error ((t (:inherit error :background "red"))))
- '(flycheck-fringe-info ((t (:inherit success :background "green"))))
- '(flycheck-fringe-warning ((t (:background "orange" :foreground "orange"))))
- '(helm-selection ((t (:background "#E4F1F9" :foreground "black" :weight bold)))))
+ '(col-highlight ((t (:inherit hl-line)))))

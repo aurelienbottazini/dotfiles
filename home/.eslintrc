@@ -31,6 +31,7 @@
     "jsx-a11y"
   ],
   "parserOptions": {
+    "ecmaversion": "8",
     "ecmaFeatures": {
         "experimentalObjectRestSpread": true
     }

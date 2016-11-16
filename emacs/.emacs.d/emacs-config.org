@@ -1084,39 +1084,29 @@ Defining my key-map where I define my keys and give them top priorities.
 
      (defun tmux-move-left ()
        (interactive)
-       (condition-case nil
+       (if window-system
            (evil-window-left 1)
-         (unless window-system
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
+         (shell-command (concat (tmux-socket-command-string) " select-pane -L"))))
      (defun tmux-move-down ()
        (interactive)
-       (condition-case nil
+       (if window-system
            (evil-window-down 1)
-         (unless window-system
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
+         (shell-command (concat (tmux-socket-command-string) " select-pane -D"))))
      (defun tmux-move-up ()
        (interactive)
-       (condition-case nil
+       (if window-system
            (evil-window-up 1)
-         (unless window-system
-           (error (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
+           (shell-command (concat (tmux-socket-command-string) " select-pane -U"))))
      (defun tmux-move-right ()
        (interactive)
-       (condition-case nil
+       (if window-system
            (evil-window-right 1)
-         (unless window-system
-          (error (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
+           (shell-command (concat (tmux-socket-command-string) " select-pane -R"))))
 
      (define-key evil-normal-state-map (kbd "C-h") 'tmux-move-left)
      (define-key evil-normal-state-map (kbd "C-j") 'tmux-move-down)
      (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
      (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
-
-     (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
-     (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
-     (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
-     (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
-
    #+END_SRC
 
 ** Bindings

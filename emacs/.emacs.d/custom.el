@@ -91,4 +91,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(col-highlight ((t (:inherit hl-line)))))
+ '(col-highlight ((t (:inherit hl-line))))
+ '(hl-line ((t (:background "#4f4f4f"))))
+ '(relative-line-numbers ((t (:inherit linum :background "#494949"))))
+ '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :background "#94BFF3" :foreground "#2b2b2b")))))

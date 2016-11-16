@@ -492,6 +492,21 @@ Defining my key-map where I define my keys and give them top priorities.
   #+end_src
 
 * Vim
+  #+begin_src emacs-lisp
+    (lexical-let ((default-color (cons (face-background 'mode-line)
+                                       (face-foreground 'mode-line))))
+      (add-hook 'post-command-hook
+                (lambda ()
+                  (let ((color (cond ((minibufferp) default-color)
+                                     ((evil-insert-state-p) '("#f0dfaf" . "#2b2b2b"))
+                                     ((evil-emacs-state-p)  '("#dc8cc3" . "#2b2b2b"))
+                                     ((evil-visual-state-p)  '("#94bff3" . "#2b2b2b"))
+                                     ((buffer-modified-p)   '("#ac7373" . "#2b2b2b"))
+                                     (t default-color))))
+                    (set-face-background 'mode-line (car color))
+                    (set-face-foreground 'mode-line (cdr color))))))
+
+  #+end_src
 
   https://github.com/noctuid/evil-textobj-anyblock
 

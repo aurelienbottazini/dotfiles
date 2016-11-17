@@ -24,7 +24,7 @@ Defining my key-map where I define my keys and give them top priorities.
     "A minor mode so that my key settings override annoying major modes."
     t " my-keys" 'my-keys-minor-mode-map)
   (my-keys-minor-mode 1)
-  (diminish 'my-keys-minor-mode)
+  ;;(diminish 'my-keys-minor-mode)
 
       (defadvice load (after give-my-keybindings-priority)
         "Try to ensure that my keybindings always have priority."
@@ -264,7 +264,6 @@ Defining my key-map where I define my keys and give them top priorities.
 
   #+BEGIN_SRC emacs-lisp
     (global-hl-line-mode 1)
-    (global-relative-line-numbers-mode 1)
     (blink-cursor-mode 0)
     (column-number-mode)
   #+END_SRC
@@ -609,23 +608,6 @@ Defining my key-map where I define my keys and give them top priorities.
       )
   #+END_SRC
 
-* NerdTree || File & Folders
-
-  For icons you need to install fonts available here:
-  https://github.com/domtronn/all-the-icons.el/tree/master/fonts
-#+begin_src emacs-lisp
-(use-package neotree
-:config
-(use-package all-the-icons)
-(define-key my-keys-minor-mode-map (kbd "M-\\") 'neotree-toggle)
-(define-key my-keys-minor-mode-map (kbd "M-|") 'neotree-find)
-(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-(setq neo-theme (if window-system 'icons 'arrow))
-)
-#+end_src
 * Registers
   List of frequently visited files. I can access them using
   ~C-x r j <letter>~.
@@ -1681,6 +1663,16 @@ Defining my key-map where I define my keys and give them top priorities.
    (setq auto-insert-query nil)
    (yatemplate-fill-alist))
   #+end_src
+
+
+* Paredit
+
+#+BEGIN_SRC emacs-lisp
+(use-package paredit)
+;; (use-package evil-paredit)
+;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
+(add-hook 'prog-mode-hook 'paredit-mode)
+#+END_SRC
 
 * Exit setup hook
 

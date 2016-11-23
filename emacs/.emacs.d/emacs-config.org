@@ -190,15 +190,9 @@ Defining my key-map where I define my keys and give them top priorities.
 * Fonts
 
   #+BEGIN_SRC emacs-lisp
-    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+   (when window-system
+    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
   #+END_SRC
-* Git
-
-#+begin_src emacs-lisp
-  (use-package magit
-    :config
-    (use-package evil-magit))
-#+end_src
 * org-mode
 
   #+BEGIN_SRC emacs-lisp
@@ -1374,12 +1368,6 @@ Defining my key-map where I define my keys and give them top priorities.
     (add-hook 'dired-mode-hook 'xah-dired-mode-setup)
   #+END_SRC
 
-* Terminal
-  #+begin_src emacs-lisp
-    ;; (setq term-default-bg-color "#3f3f3f")
-    ;; (setq term-default-fg-color "#d9d9d6")
-  #+end_src
-
 * Spell Check
   https://joelkuiper.eu/spellcheck_emacs
 
@@ -1639,17 +1627,6 @@ Defining my key-map where I define my keys and give them top priorities.
       ;; (set-face-attribute 'relative-line-numbers-current-line nil :inherit relative-line-numbers :foreground "#94bff3" :weight semi-light)
       ;; (set-face-attribute 'term nil :background "#3f3f3f" :foreground "#d9d9d6")
       (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
-    ;; (use-package leuven-theme
-    ;;   :config
-    ;;   (load-theme 'leuven))
-    ;; (set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")
-    ;; (if window-system
-    ;;     (progn
-    ;;       (use-package leuven-theme
-    ;;         :config
-    ;;         (load-theme 'leuven))
-    ;;         (set-face-attribute 'fringe nil :background "white" :foreground "#6e93d3")))
-
   #+end_src
 
 * Templates
@@ -1668,12 +1645,20 @@ Defining my key-map where I define my keys and give them top priorities.
 * Paredit
 
 #+BEGIN_SRC emacs-lisp
-(use-package paredit)
+;;(use-package paredit)
 ;; (use-package evil-paredit)
 ;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
-(add-hook 'prog-mode-hook 'paredit-mode)
+;;(add-hook 'prog-mode-hook 'paredit-mode)
 #+END_SRC
 
+* magit
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+ :config
+ (use-package evil-magit)
+)
+#+END_SRC
 * Exit setup hook
 
 #+BEGIN_SRC emacs-lisp

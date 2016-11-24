@@ -798,7 +798,7 @@ Defining my key-map where I define my keys and give them top priorities.
     :init
     (require 'livedown)
     (evil-define-key 'normal markdown-mode-map
-      "vp" 'livedown:preview)
+      (kbd "C-c p") 'livedown:preview)
 
     :config
     (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
@@ -1135,7 +1135,7 @@ Defining my key-map where I define my keys and give them top priorities.
 
       (evil-leader/set-key "b" 'helm-bookmarks)
       (evil-leader/set-key "S" 'swoop-multi)
-      (evil-leader/set-key "c" 'mu4e)
+      (evil-leader/set-key "c" 'shell-command)
       (evil-leader/set-key "d" 'deft)
       (evil-leader/set-key "e" 'dired-jump)
       (evil-leader/set-key "f" 'helm-projectile-ag)
@@ -1223,10 +1223,10 @@ Defining my key-map where I define my keys and give them top priorities.
       (define-key my-keys-minor-mode-map (kbd "M-v")     'paste-from-clipboard)
 
       (evil-leader/set-key-for-mode 'org-mode
-        "t"  'org-show-todo-tree
-        "a"  'org-agenda
-        "c"  'org-archive-subtree-default
-        "r"  'org-refile
+        (kbd "C-c t")  'org-show-todo-tree
+        (kbd "C-c a")  'org-agenda
+        (kbd "C-c c")  'org-archive-subtree-default
+        (kbd "C-c r")  'org-refile
         )
 
       (use-package key-chord
@@ -1645,10 +1645,11 @@ Defining my key-map where I define my keys and give them top priorities.
 * Paredit
 
 #+BEGIN_SRC emacs-lisp
-;;(use-package paredit)
-;; (use-package evil-paredit)
-;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
-;;(add-hook 'prog-mode-hook 'paredit-mode)
+  (use-package paredit
+   :config
+  (add-hook 'lisp-mode-hook 'paredit-mode))
+  ;; (use-package evil-paredit)
+  ;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
 #+END_SRC
 
 * magit

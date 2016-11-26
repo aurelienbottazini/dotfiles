@@ -100,8 +100,8 @@
  ;; If there is more than one, they won't work right.
  '(col-highlight ((t (:inherit hl-line))))
  '(hl-line ((t (:background "#4f4f4f"))))
- '(mode-line ((t (:background "#656555" :foreground "#2b2b2b" :box (:line-width -1 :style released-button)))))
- '(mode-line-buffer-id ((t (:foreground "#2b2b2b" :slant italic :weight bold))))
+ '(mode-line ((t (:background "#656555" :foreground "#dcdcc" :box (:line-width -1 :style released-button)))))
+ '(mode-line-buffer-id ((t (:slant italic :weight bold))))
  '(mode-line-inactive ((t (:background "#4f4f4f" :foreground "#5F7F5F" :box (:line-width -1 :style released-button)))))
  '(region ((t (:background "#94bff3y" :foreground "#2b2b2b"))))
  '(relative-line-numbers ((t (:inherit linum :background "#494949"))))

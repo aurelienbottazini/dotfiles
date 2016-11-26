@@ -25,6 +25,7 @@
  '(emmet-indent-after-insert t)
  '(emmet-move-cursor-after-expanding t)
  '(emmet-move-cursor-between-quotes t)
+ '(evil-mode-line-format (quote (after)))
  '(evil-toggle-key "C-c e")
  '(exec-path-from-shell-arguments (quote ("-l")))
  '(flycheck-indication-mode (quote left-fringe))

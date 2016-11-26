@@ -103,6 +103,6 @@
  '(mode-line ((t (:background "#656555" :foreground "#dcdcc" :box (:line-width -1 :style released-button)))))
  '(mode-line-buffer-id ((t (:slant italic :weight bold))))
  '(mode-line-inactive ((t (:background "#4f4f4f" :foreground "#5F7F5F" :box (:line-width -1 :style released-button)))))
- '(region ((t (:background "#94bff3y" :foreground "#2b2b2b"))))
+ '(region ((t (:background "#94bff3" :foreground "#2b2b2b"))))
  '(relative-line-numbers ((t (:inherit linum :background "#494949"))))
  '(relative-line-numbers-current-line ((t (:inherit relative-line-numbers :background "#94BFF3" :foreground "#2b2b2b")))))

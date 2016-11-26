@@ -1,4 +1,3 @@
-
 {
   "extends": "airbnb",
   "env": {
@@ -31,7 +30,7 @@
     "jsx-a11y"
   ],
   "parserOptions": {
-    "ecmaversion": "8",
+    "ecmaVersion": 8,
     "ecmaFeatures": {
         "experimentalObjectRestSpread": true
     }

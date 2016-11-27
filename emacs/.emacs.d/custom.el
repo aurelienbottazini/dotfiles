@@ -11,7 +11,6 @@
  '(coffee-tab-width 2)
  '(column-highlight-mode nil)
  '(column-number-mode t)
- '(company-backends (quote ((company-tern company-dabbrev-code company-files))))
  '(company-idle-delay 0.2)
  '(crosshairs-mode nil)
  '(custom-safe-themes

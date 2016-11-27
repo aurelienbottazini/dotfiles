@@ -1432,8 +1432,16 @@ while in the minibuffer for expensive operations
       (use-package company-tern)
       (global-company-mode t)
       (setq company-minimum-prefix-length 2)
-      (setq company-backends '((company-tern)))
+      (setq company-backends '((company-dabbrev-code company-files)))
      )
+
+     (add-hook 'css-mode-hook
+            (lambda ()
+              (set (make-local-variable 'company-backends) '(company-css company-dabbrev-code company-files))))
+
+     (add-hook 'js2-mode-hook
+            (lambda ()
+              (set (make-local-variable 'company-backends) '(company-tern company-dabbrev-code company-files))))
    #+end_src
 ** Templates
    #+begin_src emacs-lisp

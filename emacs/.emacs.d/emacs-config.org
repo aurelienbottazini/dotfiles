@@ -625,6 +625,10 @@ while in the minibuffer for expensive operations
     (setq comment-auto-fill-only-comments t)
   #+end_src
 
+** beautify code
+#+begin_src emacs-lisp
+  (use-package web-beautify)
+#+end_src
 ** See diff in fringe
 #+begin_src emacs-lisp
   (use-package diff-hl
@@ -783,10 +787,7 @@ while in the minibuffer for expensive operations
 
        (setq js2-highlight-level 3))
 
-       (use-package typescript-mode)
-       (use-package json-mode)
        ;; conmmands to _beautify_ js, css and html
-       (use-package web-beautify)
        (use-package js2-refactor
          :diminish js2-refactor-mode
          :config
@@ -799,13 +800,6 @@ while in the minibuffer for expensive operations
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-     (use-package coffee-mode
-       :config
-       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-       (custom-set-variables '(coffee-tab-width 2)))
-
-     (use-package highlight-indentation)
      (use-package babel-repl
        :config
        (require 'comint)
@@ -821,6 +815,26 @@ while in the minibuffer for expensive operations
       )
    #+END_SRC
 
+** JSON
+
+#+begin_src emacs-lisp
+ (use-package json-mode)
+#+end_src
+
+** Coffeescript
+#+begin_src emacs-lisp
+  (use-package coffee-mode
+    :config
+    (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+    (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+    (custom-set-variables '(coffee-tab-width 2)))
+
+  (use-package highlight-indentation)
+#+end_src
+** Typescript
+   #+begin_src emacs-lisp
+   (use-package typescript-mode)
+   #+end_src
 ** JSX
   #+begin_src emacs-lisp
     (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
@@ -949,6 +963,7 @@ while in the minibuffer for expensive operations
 #+begin_src emacs-lisp
   (use-package cypher-mode)
 #+end_src
+
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
 

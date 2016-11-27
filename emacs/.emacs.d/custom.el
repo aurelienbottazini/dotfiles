@@ -71,6 +71,9 @@
  '(powerline-default-separator (quote utf-8))
  '(powerline-utf-8-separator-left 2039)
  '(powerline-utf-8-separator-right 2039)
+ '(rainbow-html-colors-major-mode-list
+   (quote
+    (html-mode css-mode php-mode nxml-mode xml-modei scss-mode web-mode)))
  '(ruby-deep-arglist nil)
  '(safe-local-variable-values
    (quote

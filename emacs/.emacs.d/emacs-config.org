@@ -693,11 +693,6 @@ while in the minibuffer for expensive operations
 
 
   #+end_src
-  Hexadecimal strings colored with corresponding colors in certain
-  modes
-  #+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode)
-  #+END_SRC
 
   #+BEGIN_SRC emacs-lisp
     (setq comment-auto-fill-only-comments t)
@@ -1551,6 +1546,20 @@ while in the minibuffer for expensive operations
                     (set-face-foreground 'mode-line (cdr color))))))
 
   #+end_src
+
+** Rainbow mode
+  Hexadecimal strings colored with corresponding colors in certain
+  modes
+  #+BEGIN_SRC emacs-lisp
+    (use-package rainbow-mode
+      :config
+      (add-hook 'scss-mode-hook 'rainbow-mode)
+      (add-hook 'css-mode-hook 'rainbow-mode)
+      (add-hook 'web-mode-hook 'rainbow-mode)
+      (add-hook 'less-mode-hook 'rainbow-mode)
+      (add-hook 'html-mode-hook 'rainbow-mode)
+      )
+  #+END_SRC
 
 * Paredit
 

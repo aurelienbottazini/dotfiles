@@ -17,22 +17,26 @@ while in the minibuffer for expensive operations
 (my-minibuffer-gc-setup-hook)
 #+end_src
 
-Defining my key-map where I define my keys and give them top priorities.
-   #+BEGIN_SRC emacs-lisp
-  (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-  (define-minor-mode my-keys-minor-mode
-    "A minor mode so that my key settings override annoying major modes."
-    t " my-keys" 'my-keys-minor-mode-map)
-  (my-keys-minor-mode 1)
+* About
 
-      (defadvice load (after give-my-keybindings-priority)
-        "Try to ensure that my keybindings always have priority."
-        (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
-            (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-              (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-              (add-to-list 'minor-mode-map-alist mykeys))))
-  (ad-activate 'load)
-   #+END_SRC
+  *Feel free to copy anything you want.*
+
+  Some settings are present in my ~custom.el~. I try to merge them
+  into my org-babel file from time to time.
+
+  #+BEGIN_SRC emacs-lisp :exports both
+  (emacs-version)
+  #+END_SRC
+
+** Inspiration
+
+     + https://github.com/eschulte/emacs24-starter-kit
+     + https://github.com/sachac/.emacs.d/
+     + https://github.com/purcell/emacs.d
+     + https://github.com/bbatsov/prelude
+     + https://github.com/cjohansen/.emacs.d
+     + https://github.com/magnars/.emacs.d
+     + https://github.com/dimitri/emacs-kicker
 
 * Encoding
 
@@ -96,46 +100,6 @@ Defining my key-map where I define my keys and give them top priorities.
 (setq use-package-always-ensure t)
   #+END_SRC
 
-#+begin_src emacs-lisp
-  (setenv "NODE_PATH"
-          (concat
-           (getenv "HOME") "/node_modules" ":"
-           (getenv "NODE_PATH")
-           )
-          )
-
-  (use-package deft)
-#+end_src
-
-* text-mode
-
-  #+BEGIN_SRC emacs-lisp
-  (add-hook 'text-mode-hook
-            (lambda ()
-              (electric-pair-mode +1)))
-  #+END_SRC
-
-* About
-
-  *Feel free to copy anything you want.*
-
-  Some settings are present in my ~custom.el~. I try to merge them
-  into my org-babel file from time to time.
-
-  #+BEGIN_SRC emacs-lisp :exports both
-  (emacs-version)
-  #+END_SRC
-
-* Inspiration
-
-    + https://github.com/eschulte/emacs24-starter-kit
-    + https://github.com/sachac/.emacs.d/
-    + https://github.com/purcell/emacs.d
-    + https://github.com/bbatsov/prelude
-    + https://github.com/cjohansen/.emacs.d
-    + https://github.com/magnars/.emacs.d
-    + https://github.com/dimitri/emacs-kicker
-
 * Initialization
 
   Auto-indent
@@ -173,8 +137,63 @@ Defining my key-map where I define my keys and give them top priorities.
   (setq inhibit-startup-message t)
   (setq initial-scratch-message "")
   #+END_SRC
+** save, delete & restore
 
-* Exec path
+   Delete trailing white-space when saving buffer.
+   #+BEGIN_SRC emacs-lisp
+   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+   #+END_SRC
+
+
+   #+BEGIN_SRC emacs-lisp
+   (savehist-mode 1)                       ;saves minibuffer history
+   ;; (desktop-save-mode 1)                     ;save opened buffers
+                                           ;between emacs sessions
+   ;; (setq desktop-restore-eager 5) ; restore only 5 buffers at once
+   #+END_SRC
+
+
+   #+BEGIN_SRC emacs-lisp
+   (recentf-mode 1)                        ;remembering recent files
+   (setq recentf-max-saved-items 200
+         recentf-max-menu-items 50)
+   #+END_SRC
+
+
+   #+BEGIN_SRC emacs-lisp
+   (setq backup-by-copying t      ; don't clobber symlinks
+         backup-directory-alist
+         '((".*" . "~/.local/share/emacs-saves"))    ; don't litter my fs tree
+         delete-old-versions t
+         kept-new-versions 6
+         kept-old-versions 2
+         version-control t) ; use versioned backups
+
+   (setq auto-save-file-name-transforms
+         `((".*" ,"~/.local/share/emacs-saves" t)))
+   #+END_SRC
+
+   Deleted files go to OS’s trash folder.
+   #+BEGIN_SRC emacs-lisp
+   (setq delete-by-moving-to-trash t)
+   #+END_SRC
+
+   Updating time-stamp on save if one is present
+   #+BEGIN_SRC emacs-lisp
+   (add-hook 'before-save-hook 'time-stamp)
+   #+END_SRC
+
+** Env variables and Exec path
+
+#+begin_src emacs-lisp
+  (setenv "NODE_PATH"
+          (concat
+           (getenv "HOME") "/node_modules" ":"
+           (getenv "NODE_PATH")
+           )
+          )
+#+end_src
+
   Picking ~PATH~ from shell
   #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
@@ -186,73 +205,120 @@ Defining my key-map where I define my keys and give them top priorities.
   Furthermore, on mac, /path_helper/ is messing with the path. I commented the
   calls to path helper in /etc/profile/ and /etc/zshenv/
 
-* Fonts
+** Strange functionality
+   “Dangerous” functionality enabled (disabled by default or with a warning).
+   #+BEGIN_SRC emacs-lisp
+     (put 'narrow-to-region 'disabled nil)
+     (put 'upcase-region 'disabled nil)
+     (put 'dired-find-alternate-file 'disabled nil)
+     (put 'downcase-region 'disabled nil)
+     (put 'set-goal-column 'disabled nil)
+   #+END_SRC
+* Custom Functions
+  #+begin_src emacs-lisp
+    (require 'cl)
+    (defun sluggify (str)
+      (downcase
+       (replace-regexp-in-string
+        " " "-" str)))
 
-  #+BEGIN_SRC emacs-lisp
-   (when window-system
-    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
-  #+END_SRC
-* org-mode
+    (defun new-post (title)
+      (interactive "MTitle: ")
+      (let ((slug (sluggify title))
+            (date (current-time)))
+        (find-file (concat "/Users/aurelienbottazini/projects/aurelienbottazini.com/_posts/"
+                           (format-time-string "%Y-%m-%d") "-" slug
+                           ".md"))
+        ))
 
-  #+BEGIN_SRC emacs-lisp
-      (use-package ido
-        :init
-        (setq ido-everywhere t)
-        :config
-        (ido-mode t))
+     (defun copy-to-clipboard-git-link()
+       (interactive)
+       (setq x-select-enable-clipboard t)
+       (git-link nil nil nil)
+       (setq x-select-enable-clipboard nil))
 
-        ;; easier completion when refiling org-mode
-        (setq org-fontify-whole-heading-line t)
-        (setq org-startup-indented nil)
-        (setq org-indent-mode nil)
-        (setq org-indent-indentation-per-level 2)
-        (setq org-src-fontify-natively t)
-        (setq org-completion-use-ido t)
-        (setq org-outline-path-complete-in-steps nil)
-        (setq org-refile-use-outline-path 'file)
-        (setq org-clock-persist 'history)
-        (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
-        ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
-        (setq org-refile-targets (quote ((nil :maxlevel . 2)
-                                         (org-agenda-files :maxlevel . 2))))
-        (setq org-todo-keywords
-              '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
-        (setq org-tag-alist '(("next" . ?n)
-                              ("maybe" . ?m)
-                              ("waiting" . ?w)
-                              ("read" . ?r)))
-        (setq org-confirm-babel-evaluate nil)
-        (setq org-html-doctype "html5")
-        (setq org-html-html5-fancy t)
-        (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
-        (setq org-html-head-include-default-style nil)
-        (setq org-html-head-extra nil)
-        (setq org-html-head-include-scripts nil)
+     (defun visit-term-buffer ()
+       "Create or visit a terminal buffer."
+       (interactive)
+       (if (not (get-buffer "*my-ansi-term*"))
+           (ansi-term "/usr/local/bin/fish" "my-ansi-term")
+         (switch-to-buffer "*my-ansi-term*")
+         ))
 
-        (setq org-html-head "
-          <link rel=\"stylesheet\" type=\"text/css\" href=\"http://aurelienbottazini.com/css/org-export.min.css\">
-          <script src=\"http://aurelienbottazini.com/js/org-export.min.js\"></script>")
-        :config
-        ;;(add-hook 'org-mode-hook '(lambda ()
-        ;;                          (turn-on-flyspell)
-        ;;                          (writegood-mode t)))
-        (add-hook 'org-mode-hook 'turn-on-auto-fill)
-        (defadvice org-refile (after save-refiled-buffer activate compile)
-          "saves all org buffers after using refile"
-          (org-save-all-org-buffers))
-        (org-clock-persistence-insinuate)
 
-        (use-package org-bullets
-          :config
-          (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-          (set-display-table-slot standard-display-table
-                                  'selective-display (string-to-vector "  ••• ")))
+    (defun js-jump-to (current from to format-name)
+      (find-file
+       (cl-loop with parts = (reverse current)
+                with fname = (file-name-sans-extension (cl-first parts))
+                for (name . rest) on (cl-rest parts)
+                until (string-equal name from)
+                collect name into names
+                finally (cl-return
+                         (mapconcat 'identity
+                                    (nconc (reverse rest)
+                                           (list to)
+                                           (reverse names)
+                                           (list (funcall format-name fname) )) "/" )))))
 
-        ;; For colorized source codes with html export
-        (use-package htmlize
-          :config
-          (setq org-html-htmlize-output-type (quote css)))
-  #+END_SRC
+    (defun js-format-impl-name (fname)
+      (format "%s.jsx" (replace-regexp-in-string "-test" "" fname)))
+
+    (defun js-format-test-name (fname)
+      (format "%s-test.js" fname))
+
+    (defun js-jump-to-implementation-or-test ()
+      (interactive)
+      (let ((current (split-string (buffer-file-name) "/")))
+        (cond
+         ((member "__tests__" current) (js-jump-to current "__tests__" "src" 'js-format-impl-name))
+         ((member "src" current)  (js-jump-to current "src" "__tests__" 'js-format-test-name))
+         (t (error "not within a test or lib directory"))
+         )))
+
+     (defun xah-next-user-buffer ()
+       "Switch to the next user buffer.
+     “user buffer” is determined by `xah-user-buffer-q'.
+     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
+     Version 2016-06-19"
+       (interactive)
+       (next-buffer)
+       (let ((i 0))
+         (while (< i 20)
+           (if (not (xah-user-buffer-q))
+               (progn (next-buffer)
+                      (setq i (1+ i)))
+             (progn (setq i 100))))))
+
+     (defun xah-previous-user-buffer ()
+       "Switch to the previous user buffer.
+     “user buffer” is determined by `xah-user-buffer-q'.
+     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
+     Version 2016-06-19"
+       (interactive)
+       (previous-buffer)
+       (let ((i 0))
+         (while (< i 20)
+           (if (not (xah-user-buffer-q))
+               (progn (previous-buffer)
+                      (setq i (1+ i)))
+             (progn (setq i 100))))))
+
+     (defun xah-user-buffer-q ()
+       "Return t if current buffer is a user buffer, else nil.
+     Typically, if buffer name starts with *, it's not considered a user buffer.
+     This function is used by buffer switching command and close buffer command, so that next buffer shown is a user buffer.
+     You can override this function to get your idea of “user buffer”.
+     version 2016-06-18"
+       (interactive)
+       (if (string-equal "*" (substring (buffer-name) 0 1))
+           nil
+         (if (string-equal major-mode "dired-mode")
+             nil
+           (if (string-equal major-mode "magit-mode")
+               nil
+             t
+             ))))
+  #+end_src
 * UI
 
   #+BEGIN_SRC emacs-lisp
@@ -312,6 +378,143 @@ Defining my key-map where I define my keys and give them top priorities.
     (turn-on-pbcopy)))
   #+end_src
 
+** Fonts
+
+   #+BEGIN_SRC emacs-lisp
+    (when window-system
+     (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+   #+END_SRC
+
+** Visual interface
+  #+begin_src emacs-lisp
+  (global-hl-line-mode)
+  #+end_src
+  No bell
+  #+BEGIN_SRC emacs-lisp
+       (setq ring-bell-function 'ignore)
+  #+END_SRC
+
+
+  I want to hide extra bars. I like my Emacs clean. I don't use the
+  mouse and I want to do everything through the keyboard
+  #+BEGIN_SRC emacs-lisp
+     (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+     (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+     (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+;;     (when (string-match "apple-darwin" system-configuration)
+       ;; on mac, there's always a menu bar drown, don't have it empty
+ ;;      (when window-system
+  ;;       (menu-bar-mode 1)))
+  #+END_SRC
+
+
+  Show end of buffer with /q/ left fringe.
+  #+BEGIN_SRC emacs-lisp
+     (setq default-indicate-empty-lines t)
+  #+END_SRC
+
+  Different buffer names when a new buffer has the same name as
+  an existing one.
+  #+BEGIN_SRC emacs-lisp
+    ;; (require 'uniquify)
+     (setq uniquify-buffer-name-style 'forward)
+  #+END_SRC
+
+
+  File path in frame title.
+  #+BEGIN_SRC emacs-lisp
+     (setq frame-title-format
+           '((:eval (if (buffer-file-name)
+                        (abbreviate-file-name (buffer-file-name))
+                      "%b"))))
+  #+END_SRC
+* Registers
+  List of frequently visited files. I can access them using
+  ~C-x r j <letter>~.
+  #+BEGIN_SRC emacs-lisp
+  (dolist
+      (r `((?e (file . ,(concat user-emacs-directory "emacs-config.org")))
+           (?t (file . ,(expand-file-name "~/.tmux.conf")))
+           (?g (file . ,(expand-file-name "~/Dropbox/org/gtd.org")))
+           (?i (file . ,(expand-file-name "~/Dropbox/org/inbox.org")))
+           (?w (file . ,(expand-file-name "~/projects/aurelienbottazini.com/_org")))
+           (?j (file . ,(expand-file-name "~/projects/training-heaven/src/training.js")))
+           (?s (file . ,(expand-file-name "~/projects/training-heaven/src/training.scss")))
+           ))
+    (set-register (car r) (cadr r)))
+  #+END_SRC
+* text-mode
+
+  #+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook
+            (lambda ()
+              (electric-pair-mode +1)))
+  #+END_SRC
+* org-mode
+
+  #+BEGIN_SRC emacs-lisp
+
+        ;; easier completion when refiling org-mode
+        (setq org-fontify-whole-heading-line t)
+        (setq org-startup-indented nil)
+        (setq org-indent-mode nil)
+        (setq org-indent-indentation-per-level 2)
+        (setq org-src-fontify-natively t)
+        (setq org-completion-use-ido t)
+        (setq org-outline-path-complete-in-steps nil)
+        (setq org-refile-use-outline-path 'file)
+        (setq org-clock-persist 'history)
+        (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
+        ;; Targets include current file and any file contributing to the agenda - up to 2 levels deep
+        (setq org-refile-targets (quote ((nil :maxlevel . 2)
+                                         (org-agenda-files :maxlevel . 2))))
+        (setq org-todo-keywords
+              '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
+        (setq org-tag-alist '(("next" . ?n)
+                              ("maybe" . ?m)
+                              ("waiting" . ?w)
+                              ("read" . ?r)))
+        (setq org-confirm-babel-evaluate nil)
+        (setq org-html-doctype "html5")
+        (setq org-html-html5-fancy t)
+        (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
+        (setq org-html-head-include-default-style nil)
+        (setq org-html-head-extra nil)
+        (setq org-html-head-include-scripts nil)
+
+        (setq org-html-head "
+          <link rel=\"stylesheet\" type=\"text/css\" href=\"http://aurelienbottazini.com/css/org-export.min.css\">
+          <script src=\"http://aurelienbottazini.com/js/org-export.min.js\"></script>")
+        :config
+        ;;(add-hook 'org-mode-hook '(lambda ()
+        ;;                          (turn-on-flyspell)
+        ;;                          (writegood-mode t)))
+        (add-hook 'org-mode-hook 'turn-on-auto-fill)
+        (defadvice org-refile (after save-refiled-buffer activate compile)
+          "saves all org buffers after using refile"
+          (org-save-all-org-buffers))
+        (org-clock-persistence-insinuate)
+
+        (use-package org-bullets
+          :config
+          (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+          (set-display-table-slot standard-display-table
+                                  'selective-display (string-to-vector "  ••• ")))
+
+        ;; For colorized source codes with html export
+        (use-package htmlize
+          :config
+          (setq org-html-htmlize-output-type (quote css)))
+  #+END_SRC
+
+* Deft: Notes management
+#+begin_src emacs-lisp
+  (use-package deft)
+#+end_src
+
 * Multiple cursors
 
   D: clear the region
@@ -361,128 +564,6 @@ Defining my key-map where I define my keys and give them top priorities.
     (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
     )
   #+end_src
-* save, delete & restore
-
-  Delete trailing white-space when saving buffer.
-  #+BEGIN_SRC emacs-lisp
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  #+END_SRC
-
-
-  #+BEGIN_SRC emacs-lisp
-  (savehist-mode 1)                       ;saves minibuffer history
-  ;; (desktop-save-mode 1)                     ;save opened buffers
-                                          ;between emacs sessions
-  ;; (setq desktop-restore-eager 5) ; restore only 5 buffers at once
-  #+END_SRC
-
-
-  #+BEGIN_SRC emacs-lisp
-  (recentf-mode 1)                        ;remembering recent files
-  (setq recentf-max-saved-items 200
-        recentf-max-menu-items 50)
-  #+END_SRC
-
-
-  #+BEGIN_SRC emacs-lisp
-  (setq backup-by-copying t      ; don't clobber symlinks
-        backup-directory-alist
-        '((".*" . "~/.local/share/emacs-saves"))    ; don't litter my fs tree
-        delete-old-versions t
-        kept-new-versions 6
-        kept-old-versions 2
-        version-control t) ; use versioned backups
-
-  (setq auto-save-file-name-transforms
-        `((".*" ,"~/.local/share/emacs-saves" t)))
-  #+END_SRC
-
-
-  Deleted files go to OS’s trash folder.
-  #+BEGIN_SRC emacs-lisp
-  (setq delete-by-moving-to-trash t)
-  #+END_SRC
-
-
-  Updating time-stamp on save if one is present
-  #+BEGIN_SRC emacs-lisp
-  (add-hook 'before-save-hook 'time-stamp)
-  #+END_SRC
-
-* Visual interface
-  #+begin_src emacs-lisp
-  (global-hl-line-mode)
-  #+end_src
-  No bell
-  #+BEGIN_SRC emacs-lisp
-       (setq ring-bell-function 'ignore)
-  #+END_SRC
-
-
-  I want to hide extra bars. I like my Emacs clean. I don't use the
-  mouse and I want to do everything through the keyboard
-  #+BEGIN_SRC emacs-lisp
-     (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-     (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-     (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-;;     (when (string-match "apple-darwin" system-configuration)
-       ;; on mac, there's always a menu bar drown, don't have it empty
- ;;      (when window-system
-  ;;       (menu-bar-mode 1)))
-  #+END_SRC
-
-
-  Show end of buffer with /q/ left fringe.
-  #+BEGIN_SRC emacs-lisp
-     (setq default-indicate-empty-lines t)
-  #+END_SRC
-
-  Different buffer names when a new buffer has the same name as
-  an existing one.
-  #+BEGIN_SRC emacs-lisp
-    ;; (require 'uniquify)
-     (setq uniquify-buffer-name-style 'forward)
-  #+END_SRC
-
-
-  File path in frame title.
-  #+BEGIN_SRC emacs-lisp
-     (setq frame-title-format
-           '((:eval (if (buffer-file-name)
-                        (abbreviate-file-name (buffer-file-name))
-                      "%b"))))
-  #+END_SRC
-
-* guide-key
-  Get a visual aid for key sequences.
-  #+BEGIN_SRC emacs-lisp
-    (use-package which-key
-     :diminish which-key-mode
-     :config
-     (which-key-mode))
-  #+END_SRC
-
-* Strange functionality
-  “Dangerous” functionality enabled (disabled by default or with a warning).
-  #+BEGIN_SRC emacs-lisp
-    (put 'narrow-to-region 'disabled nil)
-    (put 'upcase-region 'disabled nil)
-    (put 'dired-find-alternate-file 'disabled nil)
-    (put 'downcase-region 'disabled nil)
-    (put 'set-goal-column 'disabled nil)
-  #+END_SRC
-
-* Better undo
-  Supercharge C-x u. Use ~d~ to see a diff
-  #+begin_src emacs-lisp
-  (use-package undo-tree
-   :diminish undo-tree-mode
-   :config
-   (global-undo-tree-mode))
-  #+end_src
 
 * Vim
 
@@ -504,33 +585,6 @@ Defining my key-map where I define my keys and give them top priorities.
 
       :config
       (evil-mode 1)
-      (use-package evil-leader
-        :init
-        (setq evil-toggle-key "C-c e")
-        :config
-        (global-evil-leader-mode))
-      (evil-declare-key 'normal org-mode-map
-        "gk" 'outline-up-heading
-        "gj" 'outline-next-visible-heading
-        "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
-        "L" 'org-end-of-line ; smarter behaviour on headlines etc.
-        "t" 'org-todo ; mark a TODO item as DONE
-        ",c" 'org-cycle
-        (kbd "TAB") 'org-cycle
-        ",e" 'org-export-dispatch
-        ",n" 'outline-next-visible-heading
-        ",p" 'outline-previous-visible-heading
-        ",t" 'org-set-tags-command
-        ",s" 'org-tags-view
-        ",u" 'outline-up-heading
-        "$" 'org-end-of-line ; smarter behaviour on headlines etc.
-        "^" 'org-beginning-of-line ; ditto
-        "-" 'org-ctrl-c-minus ; change bullet style
-        "<" 'org-metaleft ; out-dent
-        ">" 'org-metaright ; indent
-        )
-
-      (evil-ex-define-cmd "W"     'evil-write-all)
       (defmacro define-and-bind-text-object (key start-regex end-regex)
         (let ((inner-name (make-symbol "inner-name"))
               (outer-name (make-symbol "outer-name")))
@@ -544,12 +598,6 @@ Defining my key-map where I define my keys and give them top priorities.
 
       (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
 
-      (eval-after-load 'dired
-        '(progn
-           ;; use the standard Dired bindings as a base
-           (evil-define-key 'normal dired-mode-map
-             "-" 'dired-up-directory
-             )))
       (use-package evil-surround
         :config
         (global-evil-surround-mode 1))
@@ -567,15 +615,6 @@ Defining my key-map where I define my keys and give them top priorities.
         :config
         (evil-indent-plus-default-bindings))
 
-      (use-package relative-line-numbers
-        :init
-        (setq relative-line-numbers-format 'better-relative-number-format)
-        :config
-        ;; (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
-        (defun better-relative-number-format (offset)
-          "Another formatting function"
-          (format "%3d " (abs offset)))
-        )
 
       (use-package evil-search-highlight-persist
         :config
@@ -587,25 +626,18 @@ Defining my key-map where I define my keys and give them top priorities.
       )
   #+END_SRC
 
-* Registers
-  List of frequently visited files. I can access them using
-  ~C-x r j <letter>~.
-  #+BEGIN_SRC emacs-lisp
-  (dolist
-      (r `((?e (file . ,(concat user-emacs-directory "emacs-config.org")))
-           (?t (file . ,(expand-file-name "~/.tmux.conf")))
-           (?g (file . ,(expand-file-name "~/Dropbox/org/gtd.org")))
-           (?i (file . ,(expand-file-name "~/Dropbox/org/inbox.org")))
-           (?w (file . ,(expand-file-name "~/projects/aurelienbottazini.com/_org")))
-           (?j (file . ,(expand-file-name "~/projects/training-heaven/src/training.js")))
-           (?s (file . ,(expand-file-name "~/projects/training-heaven/src/training.scss")))
-           ))
-    (set-register (car r) (cadr r)))
-  #+END_SRC
-
 * prog-mode(s)
 
   #+begin_src emacs-lisp
+      (use-package relative-line-numbers
+        :init
+        (setq relative-line-numbers-format 'better-relative-number-format)
+        :config
+        (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
+        (defun better-relative-number-format (offset)
+          "Another formatting function"
+          (format "%3d " (abs offset)))
+        )
   (use-package diff-hl
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
@@ -983,7 +1015,6 @@ Defining my key-map where I define my keys and give them top priorities.
 #+begin_src emacs-lisp
   (use-package cypher-mode)
 #+end_src
-
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
 
@@ -1031,19 +1062,237 @@ Defining my key-map where I define my keys and give them top priorities.
   + Coffee Script
     ~Install npm install -g coffeelint~
 
-* Setting it up
-   Adjusting command, control and option keys on mac.
+* Bindings
+
+** Mac Adjustements
+  Adjusting command, control and option keys on mac.
+  #+BEGIN_SRC emacs-lisp
+   (when *is-a-mac*
+     (setq mac-command-modifier 'meta)
+     (setq mac-option-modifier 'none)
+     (setq mac-right-control-modifier 'hyper)
+     (setq mac-right-option-modifier 'none)
+     (setq mac-right-command-modifier 'super)
+     ;;(setq ns-function-modifier 'hyper)
+ (setq default-input-method "MacOSX"))
+  #+END_SRC
+
+** my-keys-minor-mode
+
+  Defining my key-map where I define my keys and give them top priorities.
+  #+BEGIN_SRC emacs-lisp
+ (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+ (define-minor-mode my-keys-minor-mode
+   "A minor mode so that my key settings override annoying major modes."
+   t " my-keys" 'my-keys-minor-mode-map)
+ (my-keys-minor-mode 1)
+
+     (defadvice load (after give-my-keybindings-priority)
+       "Try to ensure that my keybindings always have priority."
+       (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+           (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+             (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+             (add-to-list 'minor-mode-map-alist mykeys))))
+ (ad-activate 'load)
+  #+END_SRC
+
+#+begin_src emacs-lisp
+  (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
+  (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
+  (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
+  (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
+  (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
+  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
+
+     (setq x-select-enable-clipboard nil)
+     (defun copy-to-clipboard()
+       (interactive)
+       (setq x-select-enable-clipboard t)
+       (kill-ring-save (region-beginning) (region-end))
+       (setq x-select-enable-clipboard nil))
+     (defun paste-from-clipboard ()
+       (interactive)
+       (setq x-select-enable-clipboard t)
+       (yank)
+       (setq x-select-enable-clipboard nil))
+     (define-key my-keys-minor-mode-map (kbd "M-c")     'copy-to-clipboard)
+     (define-key my-keys-minor-mode-map (kbd "M-v")     'paste-from-clipboard)
+
+
+     (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
+     (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
+     (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
+     (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
+#+end_src
+** guide-key
+   Get a visual aid for key sequences.
    #+BEGIN_SRC emacs-lisp
-    (when *is-a-mac*
-      (setq mac-command-modifier 'meta)
-      (setq mac-option-modifier 'none)
-      (setq mac-right-control-modifier 'hyper)
-      (setq mac-right-option-modifier 'none)
-      (setq mac-right-command-modifier 'super)
-      ;;(setq ns-function-modifier 'hyper)
-  (setq default-input-method "MacOSX"))
+     (use-package which-key
+      :diminish which-key-mode
+      :config
+      (which-key-mode))
    #+END_SRC
 
+** Better undo
+   Supercharge C-x u. Use ~d~ to see a diff
+   #+begin_src emacs-lisp
+   (use-package undo-tree
+    :diminish undo-tree-mode
+    :config
+    (global-undo-tree-mode))
+   #+end_src
+** Vim commands
+   #+begin_src emacs-lisp
+      (evil-ex-define-cmd "W"     'evil-write-all)
+   #+end_src
+** Vim normal mode
+#+begin_src emacs-lisp
+
+   (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
+
+     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
+     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
+     (use-package windresize
+       :config
+       (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
+
+
+     (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
+     (define-key evil-normal-state-map (kbd "g t") 'other-frame)
+
+     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
+
+     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+
+     (use-package origami)
+     (global-origami-mode)
+     (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
+     (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
+     (use-package dumb-jump
+     :config
+     (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go))
+
+     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+     (define-key evil-normal-state-map (kbd "]e") 'next-error)
+     (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
+     (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
+     (define-key evil-normal-state-map (kbd "zh") 'origami-close-all-nodes)
+     (define-key evil-normal-state-map (kbd "zc") 'origami-close-node)
+     (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
+     (define-key evil-normal-state-map (kbd "zv") 'origami-open-all-nodes)
+
+     (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+     (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+     (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
+     (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
+#+end_src
+
+*** dired-mode-map
+#+begin_src emacs-lisp
+  (eval-after-load 'dired
+    '(progn
+       ;; use the standard Dired bindings as a base
+       (evil-define-key 'normal dired-mode-map
+         "-" 'dired-up-directory
+         )))
+#+end_src
+*** org-mode-map
+    #+begin_src emacs-lisp
+       (evil-declare-key 'normal org-mode-map
+         "gk" 'outline-up-heading
+         "gj" 'outline-next-visible-heading
+         "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
+         "L" 'org-end-of-line ; smarter behaviour on headlines etc.
+         "t" 'org-todo ; mark a TODO item as DONE
+         ",c" 'org-cycle
+         (kbd "TAB") 'org-cycle
+         ",e" 'org-export-dispatch
+         ",n" 'outline-next-visible-heading
+         ",p" 'outline-previous-visible-heading
+         ",t" 'org-set-tags-command
+         ",s" 'org-tags-view
+         ",u" 'outline-up-heading
+         "$" 'org-end-of-line ; smarter behaviour on headlines etc.
+         "^" 'org-beginning-of-line ; ditto
+         "-" 'org-ctrl-c-minus ; change bullet style
+         "<" 'org-metaleft ; out-dent
+         ">" 'org-metaright ; indent
+         )
+
+     (evil-leader/set-key-for-mode 'org-mode
+       (kbd "C-c t")  'org-show-todo-tree
+       (kbd "C-c a")  'org-agenda
+       (kbd "C-c c")  'org-archive-subtree-default
+       (kbd "C-c r")  'org-refile
+       )
+    #+end_src
+** Vim insert mode
+#+begin_src emacs-lisp
+     (use-package key-chord
+       :config
+       (key-chord-mode 1)
+       (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+       (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
+     (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+     (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+#+end_src
+** Vim Leader
+   #+begin_src emacs-lisp
+     (use-package helm
+      :config
+      (use-package helm-ag)
+      (use-package helm-projectile
+       :config
+       (helm-projectile-on)
+       )
+      )
+
+      (use-package evil-leader
+        :init
+        (setq evil-toggle-key "C-c e")
+        :config
+        (global-evil-leader-mode))
+    (evil-leader/set-leader "<SPC>")
+
+    (evil-leader/set-key "gb" 'magit-blame)
+    (evil-leader/set-key "gs" 'magit-status)
+     (use-package git-link
+       :config
+       (evil-leader/set-key "gl" 'git-link))
+
+       (evil-leader/set-key "gh" 'magit-log-buffer-file)
+     (evil-leader/set-key "b" 'helm-bookmarks)
+     (evil-leader/set-key "S" 'swoop-multi)
+     (evil-leader/set-key "c" 'shell-command)
+     (evil-leader/set-key "d" 'deft)
+     (evil-leader/set-key "e" 'dired-jump)
+     (evil-leader/set-key "f" 'helm-projectile-ag)
+     (evil-leader/set-key "h" 'helm-recentf)
+     (evil-leader/set-key "i" 'helm-imenu)
+     (evil-leader/set-key "j" 'evil-avy-goto-char)
+     (evil-leader/set-key "l" 'evil-avy-goto-line)
+     (evil-leader/set-key "m" 'bookmark-set)
+     (use-package expand-region)
+     (evil-leader/set-key "n" 'er/expand-region)
+     (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+     (use-package projectile
+      :config
+      (evil-leader/set-key "p" 'projectile-commander)
+     )
+     (evil-leader/set-key "sc" 'emamux:run-command)
+     (evil-leader/set-key "sl" 'emamux:run-last-command)
+
+     (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
+     (evil-leader/set-key "vs" 'yas-describe-tables)
+     (evil-leader/set-key "vt" 'visit-term-buffer)
+
+     (use-package helm-swoop
+      :config
+      (evil-leader/set-key "w" 'helm-swoop))
+   #+end_src
 ** Tmux
    #+BEGIN_SRC emacs-lisp
      (defun tmux-socket-command-string ()
@@ -1093,233 +1342,10 @@ Defining my key-map where I define my keys and give them top priorities.
      (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
      (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
    #+END_SRC
-
-** Bindings
-   #+BEGIN_SRC emacs-lisp
-     (evil-leader/set-leader "<SPC>")
-
-     (evil-leader/set-key "gb" 'magit-blame)
-     (evil-leader/set-key "gs" 'magit-status)
-      (use-package git-link
-        :config
-        (evil-leader/set-key "gl" 'git-link))
-        (evil-leader/set-key "gh" 'magit-log-buffer-file)
-      (defun copy-to-clipboard-git-link()
-        (interactive)
-        (setq x-select-enable-clipboard t)
-        (git-link nil nil nil)
-        (setq x-select-enable-clipboard nil))
-
-      (defun visit-term-buffer ()
-        "Create or visit a terminal buffer."
-        (interactive)
-        (if (not (get-buffer "*my-ansi-term*"))
-            (ansi-term "/usr/local/bin/fish" "my-ansi-term")
-          (switch-to-buffer "*my-ansi-term*")
-          ))
-
-      (evil-leader/set-key "b" 'helm-bookmarks)
-      (evil-leader/set-key "S" 'swoop-multi)
-      (evil-leader/set-key "c" 'shell-command)
-      (evil-leader/set-key "d" 'deft)
-      (evil-leader/set-key "e" 'dired-jump)
-      (evil-leader/set-key "f" 'helm-projectile-ag)
-      (evil-leader/set-key "h" 'helm-recentf)
-      (evil-leader/set-key "i" 'helm-imenu)
-      (evil-leader/set-key "j" 'evil-avy-goto-char)
-      (evil-leader/set-key "l" 'evil-avy-goto-line)
-      (evil-leader/set-key "m" 'bookmark-set)
-      (use-package expand-region)
-      (evil-leader/set-key "n" 'er/expand-region)
-      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
-      (use-package projectile
-       :config
-       (evil-leader/set-key "p" 'projectile-commander)
-      )
-      (evil-leader/set-key "sc" 'emamux:run-command)
-      (evil-leader/set-key "sl" 'emamux:run-last-command)
-
-     (defun js-jump-to (current from to format-name)
-       (find-file
-        (cl-loop with parts = (reverse current)
-                 with fname = (file-name-sans-extension (cl-first parts))
-                 for (name . rest) on (cl-rest parts)
-                 until (string-equal name from)
-                 collect name into names
-                 finally (cl-return
-                          (mapconcat 'identity
-                                     (nconc (reverse rest)
-                                            (list to)
-                                            (reverse names)
-                                            (list (funcall format-name fname) )) "/" )))))
-
-     (defun js-format-impl-name (fname)
-       (format "%s.jsx" (replace-regexp-in-string "-test" "" fname)))
-
-     (defun js-format-test-name (fname)
-       (format "%s-test.js" fname))
-
-     (defun js-jump-to-implementation-or-test ()
-       (interactive)
-       (let ((current (split-string (buffer-file-name) "/")))
-         (cond
-          ((member "__tests__" current) (js-jump-to current "__tests__" "src" 'js-format-impl-name))
-          ((member "src" current)  (js-jump-to current "src" "__tests__" 'js-format-test-name))
-          (t (error "not within a test or lib directory"))
-          )))
-
-      (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
-      (evil-leader/set-key "vs" 'yas-describe-tables)
-      (evil-leader/set-key "vt" 'visit-term-buffer)
-      (use-package helm-swoop
-       :config
-       (evil-leader/set-key "w" 'helm-swoop))
-
-      (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
-      (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
-      (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
-      (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
-      (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
-
-      (use-package helm
-       :config
-       (use-package helm-ag)
-       (use-package helm-projectile
-        :config
-        (helm-projectile-on)
-        )
-       )
-      (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-      (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
-      (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
-
-      (setq x-select-enable-clipboard nil)
-      (defun copy-to-clipboard()
-        (interactive)
-        (setq x-select-enable-clipboard t)
-        (kill-ring-save (region-beginning) (region-end))
-        (setq x-select-enable-clipboard nil))
-      (defun paste-from-clipboard ()
-        (interactive)
-        (setq x-select-enable-clipboard t)
-        (yank)
-        (setq x-select-enable-clipboard nil))
-      (define-key my-keys-minor-mode-map (kbd "M-c")     'copy-to-clipboard)
-      (define-key my-keys-minor-mode-map (kbd "M-v")     'paste-from-clipboard)
-
-      (evil-leader/set-key-for-mode 'org-mode
-        (kbd "C-c t")  'org-show-todo-tree
-        (kbd "C-c a")  'org-agenda
-        (kbd "C-c c")  'org-archive-subtree-default
-        (kbd "C-c r")  'org-refile
-        )
-
-      (use-package key-chord
-        :config
-        (key-chord-mode 1)
-        (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
-        (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
-
-
-      (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
-      (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
-      (use-package windresize
-        :config
-        (define-key evil-normal-state-map (kbd "C-w r") 'windresize))
-
-
-      (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
-      (define-key evil-normal-state-map (kbd "g t") 'other-frame)
-
-      (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
-
-      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-
-
-      (use-package origami)
-      (global-origami-mode)
-      (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
-      (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
-      (use-package dumb-jump
-      :config
-      (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go))
-
-      (define-key evil-normal-state-map (kbd "[e") 'previous-error)
-      (define-key evil-normal-state-map (kbd "]e") 'next-error)
-      (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
-      (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
-      (define-key evil-normal-state-map (kbd "zh") 'origami-close-all-nodes)
-      (define-key evil-normal-state-map (kbd "zc") 'origami-close-node)
-      (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
-      (define-key evil-normal-state-map (kbd "zv") 'origami-open-all-nodes)
-      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
-      (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-
-      (defun xah-next-user-buffer ()
-        "Switch to the next user buffer.
-      “user buffer” is determined by `xah-user-buffer-q'.
-      URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
-      Version 2016-06-19"
-        (interactive)
-        (next-buffer)
-        (let ((i 0))
-          (while (< i 20)
-            (if (not (xah-user-buffer-q))
-                (progn (next-buffer)
-                       (setq i (1+ i)))
-              (progn (setq i 100))))))
-
-      (defun xah-previous-user-buffer ()
-        "Switch to the previous user buffer.
-      “user buffer” is determined by `xah-user-buffer-q'.
-      URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
-      Version 2016-06-19"
-        (interactive)
-        (previous-buffer)
-        (let ((i 0))
-          (while (< i 20)
-            (if (not (xah-user-buffer-q))
-                (progn (previous-buffer)
-                       (setq i (1+ i)))
-              (progn (setq i 100))))))
-
-      (defun xah-user-buffer-q ()
-        "Return t if current buffer is a user buffer, else nil.
-      Typically, if buffer name starts with *, it's not considered a user buffer.
-      This function is used by buffer switching command and close buffer command, so that next buffer shown is a user buffer.
-      You can override this function to get your idea of “user buffer”.
-      version 2016-06-18"
-        (interactive)
-        (if (string-equal "*" (substring (buffer-name) 0 1))
-            nil
-          (if (string-equal major-mode "dired-mode")
-              nil
-            (if (string-equal major-mode "magit-mode")
-                nil
-              t
-              ))))
-
-
-      (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
-      (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
-
-      (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
-      (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
-
-
-      (define-key my-keys-minor-mode-map (kbd "<f5>") 'revert-buffer)
-      (define-key my-keys-minor-mode-map (kbd "<f6>") 'langtool-check)
-      (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
-      (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
-
-
-   #+END_SRC
-
-** Avy
-   #+begin_src emacs-lisp
-   (use-package avy)
-   #+end_src
+* Jumping Around: Avy
+  #+begin_src emacs-lisp
+  (use-package avy)
+  #+end_src
 * Dired
   buffed up dired (emacs). Dired is for directory listing,
   navigation and manipulation inside emacs.
@@ -1405,7 +1431,6 @@ Defining my key-map where I define my keys and give them top priorities.
    #+begin_src emacs-lisp
   (use-package synosaurus)
    #+end_src
-
 * IRC
   I use ~erc~ to chat on IRC.
 
@@ -1421,27 +1446,17 @@ Defining my key-map where I define my keys and give them top priorities.
   (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
   #+END_SRC
 
-* Functions
-  #+begin_src emacs-lisp
-    (require 'cl)
-    (defun sluggify (str)
-      (downcase
-       (replace-regexp-in-string
-        " " "-" str)))
-
-    (defun new-post (title)
-      (interactive "MTitle: ")
-      (let ((slug (sluggify title))
-            (date (current-time)))
-        (find-file (concat "/Users/aurelienbottazini/projects/aurelienbottazini.com/_posts/"
-                           (format-time-string "%Y-%m-%d") "-" slug
-                           ".md"))
-        ))
-
-  #+end_src
-
+* ido
+#+begin_src emacs-lisp
+  (use-package ido
+    :init
+    (setq ido-everywhere t)
+    :config
+    (ido-mode t))
+#+end_src
 * Autotyping
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
+
 ** Abbrevs
 
    #+begin_src emacs-lisp
@@ -1475,6 +1490,70 @@ Defining my key-map where I define my keys and give them top priorities.
       (setq company-backends '((company-tern)))
      )
    #+end_src
+** Templates
+   #+begin_src emacs-lisp
+   (use-package yatemplate
+    :init
+    (auto-insert-mode t)
+    (setq auto-insert t)
+    :config
+    (setq auto-insert-alist nil)
+    (setq auto-insert-query nil)
+    (yatemplate-fill-alist))
+   #+end_src
+* Colors
+  #+begin_src emacs-lisp
+    (setq custom-theme-directory "~/.emacs.d/themes")
+    ;; (unless window-system
+    ;;   (progn
+    (use-package zenburn-theme
+      :config
+      (load-theme 'zenburn)
+      (set-face-attribute 'mode-line-inactive nil :background "#494949")
+      (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
+      ;; (set-face-attribute 'flycheck-error nil :foreground "#dfaf8f" :underline (:color foreground-color :style wave :weight bold))
+      (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")
+      (set-face-attribute 'highlight-indentation-face nil :background "#494949")
+      ;; (set-face-attribute 'relative-line-numbers-current-line nil :inherit relative-line-numbers :foreground "#94bff3" :weight semi-light)
+      ;; (set-face-attribute 'term nil :background "#3f3f3f" :foreground "#d9d9d6")
+      (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (lexical-let ((default-color (cons (face-background 'mode-line)
+                                       (face-foreground 'mode-line))))
+      (add-hook 'post-command-hook
+                (lambda ()
+                  (let ((color (cond ((minibufferp) default-color)
+                                     ((evil-insert-state-p) '("#f0dfaf" . "#2b2b2b"))
+                                     ((evil-emacs-state-p)  '("#dc8cc3" . "#2b2b2b"))
+                                     ((evil-visual-state-p)  '("#94bff3" . "#2b2b2b"))
+                                     ((buffer-modified-p)   '("#ac7373" . "#2b2b2b"))
+                                     (t default-color))))
+                    (set-face-background 'mode-line (car color))
+                    (set-face-foreground 'mode-line-buffer-id (cdr color))
+                    (set-face-foreground 'mode-line (cdr color))))))
+
+  #+end_src
+
+* Paredit
+
+#+BEGIN_SRC emacs-lisp
+  (use-package paredit
+   :config
+  (add-hook 'lisp-mode-hook 'paredit-mode))
+  ;; (use-package evil-paredit)
+  ;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
+#+END_SRC
+
+* magit
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+ :config
+ (use-package evil-magit)
+)
+#+END_SRC
 
 * Wiki
   My own personal notes for commands I like/discover/learn.
@@ -1596,70 +1675,6 @@ Defining my key-map where I define my keys and give them top priorities.
         (writeroom-mode t)
         (variable-pitch-mode t))))
     #+end_src
-* Colors
-  #+begin_src emacs-lisp
-    (setq custom-theme-directory "~/.emacs.d/themes")
-    ;; (unless window-system
-    ;;   (progn
-    (use-package zenburn-theme
-      :config
-      (load-theme 'zenburn)
-      (set-face-attribute 'mode-line-inactive nil :background "#494949")
-      (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
-      ;; (set-face-attribute 'flycheck-error nil :foreground "#dfaf8f" :underline (:color foreground-color :style wave :weight bold))
-      (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")
-      (set-face-attribute 'highlight-indentation-face nil :background "#494949")
-      ;; (set-face-attribute 'relative-line-numbers-current-line nil :inherit relative-line-numbers :foreground "#94bff3" :weight semi-light)
-      ;; (set-face-attribute 'term nil :background "#3f3f3f" :foreground "#d9d9d6")
-      (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
-  #+end_src
-
-  #+begin_src emacs-lisp
-    (lexical-let ((default-color (cons (face-background 'mode-line)
-                                       (face-foreground 'mode-line))))
-      (add-hook 'post-command-hook
-                (lambda ()
-                  (let ((color (cond ((minibufferp) default-color)
-                                     ((evil-insert-state-p) '("#f0dfaf" . "#2b2b2b"))
-                                     ((evil-emacs-state-p)  '("#dc8cc3" . "#2b2b2b"))
-                                     ((evil-visual-state-p)  '("#94bff3" . "#2b2b2b"))
-                                     ((buffer-modified-p)   '("#ac7373" . "#2b2b2b"))
-                                     (t default-color))))
-                    (set-face-background 'mode-line (car color))
-                    (set-face-foreground 'mode-line-buffer-id (cdr color))
-                    (set-face-foreground 'mode-line (cdr color))))))
-
-  #+end_src
-* Templates
-  #+begin_src emacs-lisp
-  (use-package yatemplate
-   :init
-   (auto-insert-mode t)
-   (setq auto-insert t)
-   :config
-   (setq auto-insert-alist nil)
-   (setq auto-insert-query nil)
-   (yatemplate-fill-alist))
-  #+end_src
-
-* Paredit
-
-#+BEGIN_SRC emacs-lisp
-  (use-package paredit
-   :config
-  (add-hook 'lisp-mode-hook 'paredit-mode))
-  ;; (use-package evil-paredit)
-  ;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
-#+END_SRC
-
-* magit
-
-#+BEGIN_SRC emacs-lisp
-(use-package magit
- :config
- (use-package evil-magit)
-)
-#+END_SRC
 * Exit setup hook
 
 #+BEGIN_SRC emacs-lisp

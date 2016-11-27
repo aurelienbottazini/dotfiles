@@ -1125,7 +1125,7 @@ while in the minibuffer for expensive operations
      (define-key my-keys-minor-mode-map (kbd "<f7>") 'langtool-correct-buffer)
      (define-key my-keys-minor-mode-map (kbd "<f8>") 'ispell-buffer)
 #+end_src
-** guide-key
+** which-key
    Get a visual aid for key sequences.
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
@@ -1288,10 +1288,15 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "vt" 'visit-term-buffer)
+     (evil-leader/set-key "x" 'helm-M-x)
 
      (use-package helm-swoop
       :config
       (evil-leader/set-key "w" 'helm-swoop))
+
+
+     (evil-leader/set-key "1" 'shell-command)
+     (evil-leader/set-key "5" 'evilmi-jump-items)
    #+end_src
 ** Tmux
    #+BEGIN_SRC emacs-lisp

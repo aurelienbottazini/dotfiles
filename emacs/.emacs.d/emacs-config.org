@@ -1267,6 +1267,11 @@ while in the minibuffer for expensive operations
 
        (evil-leader/set-key "gh" 'magit-log-buffer-file)
      (evil-leader/set-key "b" 'helm-bookmarks)
+
+        (use-package swoop
+        :config
+        (require 'swoop)
+        )
      (evil-leader/set-key "S" 'swoop-multi)
      (evil-leader/set-key "c" 'shell-command)
      (evil-leader/set-key "d" 'deft)
@@ -1294,7 +1299,7 @@ while in the minibuffer for expensive operations
 
      (use-package helm-swoop
       :config
-      (evil-leader/set-key "w" 'helm-swoop))
+      (evil-leader/set-key "w" 'swoop))
 
 
      (evil-leader/set-key "1" 'shell-command)
@@ -1402,7 +1407,6 @@ while in the minibuffer for expensive operations
     (setq ispell-dictionary "en_US_aurelien"))
    #+End_SRC
 
-
 ** ~languagetool~
 
    ~brew install languagetool~
@@ -1416,7 +1420,6 @@ while in the minibuffer for expensive operations
                                 "EN_UNPAIRED_BRACKETS"
                                 "COMMA_PARENTHESIS_WHITESPACE")))
    #+END_SRC
-
 
 ** ~writegood~
 
@@ -1443,7 +1446,7 @@ while in the minibuffer for expensive operations
 
   Setting nickname and default IRC server.
   #+BEGIN_SRC emacs-lisp
-  (setq erc-nick "Auray")
+  (setq erc-nick "Aurel")
   (setq erc-server "irc.freenode.org")
   #+END_SRC
 
@@ -1461,9 +1464,10 @@ while in the minibuffer for expensive operations
     :config
     (ido-mode t))
 #+end_src
-* Autotyping
+* Autotyping / Completion
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
 
+  ab
 ** Abbrevs
 
    #+begin_src emacs-lisp
@@ -1507,6 +1511,16 @@ while in the minibuffer for expensive operations
     (setq auto-insert-alist nil)
     (setq auto-insert-query nil)
     (yatemplate-fill-alist))
+   #+end_src
+** Hippie expand
+   #+begin_src emacs-lisp
+  (setq hippie-expand-try-functions-list '(
+                                           try-expand-dabbrev-visible
+                                           try-expand-dabbrev
+                                           try-expand-dabbrev-from-kill
+                                           try-complete-file-name
+                                           try-expand-dabbrev-all-buffers
+                                           try-expand-list))
    #+end_src
 * Colors
   #+begin_src emacs-lisp
@@ -1563,17 +1577,6 @@ while in the minibuffer for expensive operations
 #+END_SRC
 
 * Wiki
-  My own personal notes for commands I like/discover/learn.
-
-  C-x C-z to suspend emacs
-  C-z to switch between vim normal state and emacs state
-
-  rgrep to search/replace with C-x C-q like dired to live edit
-
-  to surround word with double quotes with evil-surround: ysiw"
-
-  Emacs Help is accessible with ~F1~
-
 ** Org Tips
    +[[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][ List of Code block arguments]]
    + [[http://orgmode.org/worg/org-contrib/babel/header-args.html][Header Args]]
@@ -1606,53 +1609,14 @@ while in the minibuffer for expensive operations
      S-Right item date forward
    + ~Spc a < t~ to see todo view for buffer and ~number r~ to select a type of todo
      ~m~ to mark them and ~B~ to perform an action on them.
-** Multiple Selections
-   You can use Multiple cursors by selecting a region and
-   TODO: add keybindings
-+ ~C-c m a~ to select all identical
-+ ~C->~ to select next
-+ ~C-<~ to select previous
-
-  Hit ~C-g~ where you are done.
-
-  You can also use rectangles with ~C-x spc~. ~C-x r <letter>~
-  for rectangle actions.
-
 ** Find and replace
    + rgrep
    + ~regex-builder~ to visually build your regex
    + ~query-replace-regex~, ~replace-regex~
-   + occur
-     Find occurrences of a regular expression in your file.
-   You can navigate trough “errors” with previous-error ~M-g p~ and next-error
-   ~M-g n~. You can edit “errors” directly in /all/ buffer.
-   + ~swoop~
-     #+begin_src emacs-lisp
-        (use-package swoop
-        :config
-        (require 'swoop)
-        )
-     #+end_src
-
-     Replace occur and all? Search and C-c C-e to edit.
-     All is still usable with swoop by using the regular shortcut ~C-c C-a~
-** Bookmarks
-   ~C-x r m~
-   ~C-x r b~
-** Completion
-
-   #+begin_src emacs-lisp
-  (setq hippie-expand-try-functions-list '(
-                                           try-expand-dabbrev-visible
-                                           try-expand-dabbrev
-                                           try-expand-dabbrev-all-buffers
-                                           try-expand-dabbrev-from-kill
-                                           try-complete-file-name
-                                           try-expand-all-abbrevs
-                                           try-expand-list))
-   #+end_src
-
-** Windows
+   + Errors
+     You can navigate trough “errors” with previous-error ~M-g p~ and next-error
+     ~M-g n~. You can edit “errors” directly in /all/ buffer.
+** Windows configurations
    Navigate between windows configurations with C-c Left/Right Arrow
    #+begin_src emacs-lisp
   (winner-mode 1)

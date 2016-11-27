@@ -1427,21 +1427,31 @@ while in the minibuffer for expensive operations
 ** Company
    #+begin_src emacs-lisp
      (use-package company
-      :diminish company-mode
-      :config
-      (use-package company-tern)
-      (global-company-mode t)
-      (setq company-minimum-prefix-length 2)
-      (setq company-backends '((company-dabbrev-code company-files)))
-     )
+       :diminish company-mode
+       :config
+       (use-package company-tern)
+       (use-package company-web)
 
-     (add-hook 'css-mode-hook
-            (lambda ()
-              (set (make-local-variable 'company-backends) '(company-css company-dabbrev-code company-files))))
+       (global-company-mode t)
+       (setq company-minimum-prefix-length 2)
+       (setq company-backends '((company-dabbrev-code company-files)))
 
-     (add-hook 'js2-mode-hook
-            (lambda ()
-              (set (make-local-variable 'company-backends) '(company-tern company-dabbrev-code company-files))))
+       (add-hook 'css-mode-hook
+                 (lambda ()
+                   (set (make-local-variable 'company-backends) '(company-css company-dabbrev-code company-files))))
+
+       (add-hook 'js2-mode-hook
+                 (lambda ()
+                   (set (make-local-variable 'company-backends) '(company-tern company-dabbrev-code company-files))))
+       (add-hook 'web-mode-hook
+                 (lambda ()
+                   (set (make-local-variable 'company-backends) '(company-tern))))
+
+       (add-hook 'html-mode-hook
+                 (lambda ()
+                   (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev-code company-files))))
+       )
+
    #+end_src
 ** Templates
    #+begin_src emacs-lisp

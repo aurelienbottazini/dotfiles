@@ -674,6 +674,7 @@ while in the minibuffer for expensive operations
 
       (use-package web-mode
       :config
+      (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
       (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
       (add-to-list 'auto-mode-alist '("\\.htm$" . web-mode))
 
@@ -1026,6 +1027,7 @@ while in the minibuffer for expensive operations
       :diminish flycheck-mode
       :config
       (add-hook 'after-init-hook #'global-flycheck-mode)
+      (flycheck-add-mode 'javascript-eslint 'web-mode)
       )
     (defun my/use-eslint-from-node-modules ()
       (let* ((root (locate-dominating-file

@@ -574,11 +574,6 @@ while in the minibuffer for expensive operations
 
     (use-package evil
       :init
-      (setq evil-emacs-state-cursor  '("#DC8CC3" box))
-      (setq evil-normal-state-cursor '("#94bff3" box))
-      (setq evil-visual-state-cursor '("#f0dfaf" box))
-      (setq evil-insert-state-cursor '("#94bff3" bar))
-      (setq evil-motion-state-cursor '("#afd8af" box))
       (fset 'evil-visual-update-x-selection 'ignore)
       (setq x-select-enable-clipboard nil)
 
@@ -673,7 +668,6 @@ while in the minibuffer for expensive operations
 
       (use-package web-mode
       :config
-      (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
       (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
       (add-to-list 'auto-mode-alist '("\\.htm$" . web-mode))
 
@@ -684,11 +678,6 @@ while in the minibuffer for expensive operations
                   ))
       )
 
-      (add-hook 'js2-jsx-mode-hook
-                (lambda ()
-                  (emmet-mode)
-                  (setq emmet-expand-jsx-className? t)
-                  ))
       )
 
 
@@ -839,9 +828,8 @@ while in the minibuffer for expensive operations
        (use-package js2-mode
         :config
         (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-        (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode)
         (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
-     )
+
      (setq-default
       ;; js2-mode
       js2-basic-offset 2
@@ -892,6 +880,20 @@ while in the minibuffer for expensive operations
       )
    #+END_SRC
 
+** JSX
+  #+begin_src emacs-lisp
+    (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+    (defun my-jsx-hook ()
+      "My Hook for JSX Files"
+      (interactive)
+      (web-mode)
+      (web-mode-set-content-type "jsx")
+      (flycheck-select-checker 'javascript-eslint)
+      (emmet-mode)
+      (setq emmet-expand-jsx-className? t)
+      (tern-mode t))
+
+  #+end_src
 ** Ruby
 
    #+BEGIN_SRC emacs-lisp
@@ -1457,7 +1459,6 @@ while in the minibuffer for expensive operations
 * Autotyping / Completion
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
 
-  ab
 ** Abbrevs
 
    #+begin_src emacs-lisp
@@ -1513,6 +1514,17 @@ while in the minibuffer for expensive operations
                                            try-expand-list))
    #+end_src
 * Colors
+
+** Vim
+#+begin_src emacs-lisp
+ (setq evil-emacs-state-cursor  '("#DC8CC3" box))
+ (setq evil-normal-state-cursor '("#94bff3" box))
+ (setq evil-visual-state-cursor '("#f0dfaf" box))
+ (setq evil-insert-state-cursor '("#94bff3" bar))
+ (setq evil-motion-state-cursor '("#afd8af" box))
+#+end_src
+
+** Theme
   #+begin_src emacs-lisp
     (setq custom-theme-directory "~/.emacs.d/themes")
     ;; (unless window-system

@@ -24,11 +24,12 @@ Plug 'tpope/vim-repeat' " better . support for plugins
 Plug 'tpope/vim-commentary' " gc to comment
 Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner' " send commands from vim to tmux
-Plug 'altercation/vim-colors-solarized' " color theme
+Plug 'jnurmine/Zenburn' " color theme
 Plug 'tpope/vim-rake' " use rails.vim commands in non rails projects
 Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
-Plug 'bling/vim-airline' " better status and tab line
+Plug 'vim-airline/vim-airline' " better status and tab line
+Plug 'vim-airline/vim-airline-themes' " better status and tab line
 Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
@@ -112,10 +113,11 @@ set background=dark
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+let g:airline_theme='bubblegum'
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
 noremap <Leader>f :Ag<Space>
@@ -166,8 +168,8 @@ endfunction
 
 set guifont=Monoid-Retina:h12
 set cursorline
-set cursorcolumn
-set colorcolumn=80
+" set cursorcolumn
+" set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
 hi clear CursorLine

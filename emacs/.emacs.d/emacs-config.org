@@ -1460,7 +1460,7 @@ while in the minibuffer for expensive operations
                    (set (make-local-variable 'company-backends) '(company-tern company-dabbrev-code company-files))))
        (add-hook 'web-mode-hook
                  (lambda ()
-                   (set (make-local-variable 'company-backends) '(company-tern))))
+                   (set (make-local-variable 'company-backends) '(company-tern company-web-html company-dabbrev-code company-files))))
 
        (add-hook 'html-mode-hook
                  (lambda ()

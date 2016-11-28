@@ -30,7 +30,7 @@ alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modu
 alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor --exclude db/data --exclude db/neo4j (pwd) | xargs -0 -n 1 -I file rsync_sd file"
 
 set --erase fish_greeting
-set -gx EDITOR 'emacsclient -t -a ""'
+set -gx EDITOR 'vim'
 set -gx fish_color_autosuggestion "#6f6f6f"
 set -gx fish_color_command "#94bff3"
 set -gx fish_color_param "#8cd0d3"

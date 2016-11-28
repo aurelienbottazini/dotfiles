@@ -14,8 +14,8 @@ while in the minibuffer for expensive operations
 (add-hook 'minibuffer-exit-hook #'my-minibuffer-gc-exit-hook)
 
 (my-minibuffer-gc-setup-hook)
-#+end_src
 
+#+end_src
 * About
 
   *Feel free to copy anything you want.*
@@ -380,8 +380,11 @@ while in the minibuffer for expensive operations
 ** Fonts
 
    #+BEGIN_SRC emacs-lisp
-    (when window-system
-     (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+         (when window-system
+          ;; (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+          (set-default-font "-*-PragmataPro-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+     )
+
    #+END_SRC
 
 ** Visual interface
@@ -811,7 +814,7 @@ while in the minibuffer for expensive operations
                                         ;; "--eval=\"require('repl').start({replMode: require('repl').REPL_MODE_STRICT, ignoreUndefined: true})\""
        ))
        (setq babel-repl-cli-program "org-babel-node")
-       (evil-leader/set-key-for-mode 'js2-mode "x" 'babel-repl-send-buffer)
+       ;; (evil-leader/set-key-for-mode 'js2-mode "x" 'babel-repl-send-buffer)
       )
    #+END_SRC
 

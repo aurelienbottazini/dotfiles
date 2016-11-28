@@ -103,6 +103,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(col-highlight ((t (:inherit hl-line))))
+ '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic))))
  '(hl-line ((t (:background "#4f4f4f"))))
  '(mode-line ((t (:background "#656555" :foreground "#dcdcc" :box (:line-width -1 :style released-button)))))
  '(mode-line-buffer-id ((t (:slant italic :weight bold))))

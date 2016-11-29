@@ -1182,13 +1182,29 @@ while in the minibuffer for expensive operations
     #+end_src
 ** Vim insert mode
 #+begin_src emacs-lisp
-     (use-package key-chord
-       :config
-       (key-chord-mode 1)
-       (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
-       (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
-     (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
-     (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+  (use-package key-chord
+    :config
+    (key-chord-mode 1)
+    (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
+  (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+
+  (defun my-expand-lines ()
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-expand-line)))
+      (call-interactively 'hippie-expand)))
+
+  (define-key evil-insert-state-map (kbd "C-x C-l") 'my-expand-lines)
+  (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+
+  (defun my-expand-files ()
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-complete-file-name)))
+      (call-interactively 'hippie-expand)))
+
+  (define-key evil-insert-state-map (kbd "C-x C-f") 'my-expand-files)
 #+end_src
 ** Vim Leader
    #+begin_src emacs-lisp
@@ -1298,10 +1314,6 @@ while in the minibuffer for expensive operations
      (define-key evil-normal-state-map (kbd "C-k") 'tmux-move-up)
      (define-key evil-normal-state-map (kbd "C-l") 'tmux-move-right)
 
-     (define-key evil-insert-state-map (kbd "C-h") 'tmux-move-left)
-     (define-key evil-insert-state-map (kbd "C-j") 'tmux-move-down)
-     (define-key evil-insert-state-map (kbd "C-k") 'tmux-move-up)
-     (define-key evil-insert-state-map (kbd "C-l") 'tmux-move-right)
    #+END_SRC
 * Jumping Around:
 ** Avy

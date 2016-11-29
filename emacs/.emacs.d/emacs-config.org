@@ -776,6 +776,7 @@ while in the minibuffer for expensive operations
      (use-package js2-mode
        :config
        (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+       (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
        (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
 
        (setq-default

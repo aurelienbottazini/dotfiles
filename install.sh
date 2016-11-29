@@ -5,7 +5,7 @@ brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
 brew install htop rbenv rbenv-ctags
-brew install global --with-exuberant-ctags --with-pygments
+brew install global --with-ctags --with-pygments
 brew cask install launchrocket
 brew install tree
 brew install node

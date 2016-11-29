@@ -1441,7 +1441,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "f" 'helm-projectile-ag)
      (evil-leader/set-key "h" 'helm-recentf)
      (evil-leader/set-key "i" 'helm-imenu)
-     (evil-leader/set-key "j" 'evil-avy-goto-char)
+     (evil-leader/set-key "j" 'evil-avy-goto-char-2)
      (evil-leader/set-key "l" 'evil-avy-goto-line)
      (evil-leader/set-key "m" 'bookmark-set)
      (use-package expand-region)

@@ -31,9 +31,9 @@ alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .
 
 set --erase fish_greeting
 set -gx EDITOR 'vim'
-set -gx fish_color_autosuggestion "#6f6f6f"
-set -gx fish_color_command "#94bff3"
-set -gx fish_color_param "#8cd0d3"
+set -gx fish_color_autosuggestion "yellow"
+set -gx fish_color_command "green"
+set -gx fish_color_param "blue"
 
 set -gx fish_term24bit 1
 

@@ -844,13 +844,15 @@ while in the minibuffer for expensive operations
 
 ** context-coloring
 #+begin_src emacs-lisp
-    (use-package context-coloring
-      :diminish context-coloring-mode
-      :config
-      (add-hook 'js2-mode-hook #'context-coloring-mode)
-      (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
-      (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-    )
+  ;; (use-package context-coloring
+  ;;   :diminish context-coloring-mode
+  ;;   :config
+  ;;   (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
+  ;; )
+  (require 'context-coloring-javascript)
+  (add-hook 'js2-mode-hook #'context-coloring-mode)
+  (require 'context-coloring-emacs-lisp)
+  (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
 #+end_src
 ** relative-line-numbers
 #+begin_src emacs-lisp

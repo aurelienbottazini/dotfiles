@@ -578,6 +578,10 @@ while in the minibuffer for expensive operations
           #'add-pragmatapro-prettify-symbols-alist)
 (add-hook 'text-mode-hook
           #'add-pragmatapro-prettify-symbols-alist)
+(add-hook 'text-mode-hook
+          #'add-pragmatapro-prettify-symbols-alist)
+(add-hook 'term-mode-hook
+          #'add-pragmatapro-prettify-symbols-alist)
 
 (global-prettify-symbols-mode +1)
 #+END_SRC
@@ -1659,6 +1663,8 @@ while in the minibuffer for expensive operations
      (setq yas-snippet-dirs
        '("~/.emacs.d/snippets"))
      (yas-global-mode 1)
+     (add-hook 'term-mode-hook (lambda()
+        (yas-minor-mode -1)))
      )
    #+END_SRC
 

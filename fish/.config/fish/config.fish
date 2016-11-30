@@ -71,9 +71,7 @@ set -gx fish_term24bit 1
 set -x GTAGSLABEL pygments
 
 if [ -z "$TMUX" ]
-  if [ -n "$INSIDE_EMACS" ]
-    if [ -n "$EMACS" ]
-      tat
-    end
+  if [ -z "$INSIDE_EMACS" ]
+     tat
   end
 end

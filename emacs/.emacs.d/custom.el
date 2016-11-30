@@ -70,6 +70,8 @@
  '(powerline-default-separator (quote utf-8))
  '(powerline-utf-8-separator-left 2039)
  '(powerline-utf-8-separator-right 2039)
+ '(projectile-tags-backend (quote ggtags))
+ '(projectile-tags-command "git ls-files | gtags --gtagslabel pygments")
  '(rainbow-html-colors-major-mode-list
    (quote
     (html-mode css-mode php-mode nxml-mode xml-modei scss-mode web-mode)))

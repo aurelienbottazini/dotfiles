@@ -1449,6 +1449,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
      (use-package projectile
       :config
+      (setq projectile-switch-project-action 'projectile-dired)
       (evil-leader/set-key "p" 'projectile-commander)
      )
      (evil-leader/set-key "sc" 'emamux:run-command)

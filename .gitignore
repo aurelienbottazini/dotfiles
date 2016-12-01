@@ -17,3 +17,4 @@ emacs/.emacs.d/.mc-lists.el
 emacs/.emacs.d/url
 emacs/.emacs.d/eshell
 emacs/.terminfo
+/emacs/.emacs.d/.litable-lists.el

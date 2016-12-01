@@ -327,11 +327,12 @@ while in the minibuffer for expensive operations
 
   #+begin_src emacs-lisp
   (use-package aggressive-indent
+   :diminish aggressive-indent-mode
    :config
    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
    (add-hook 'css-mode-hook #'aggressive-indent-mode)
    (add-hook 'scss-mode-hook #'aggressive-indent-mode)
-   (add-hook 'javascript-mode-hook #'aggressive-indent-mode))
+   (add-hook 'js2-mode-hook #'aggressive-indent-mode))
   #+end_src
 
 * UI
@@ -388,6 +389,11 @@ while in the minibuffer for expensive operations
     :config
     (turn-on-pbcopy)))
   #+end_src
+
+  In insert mode, typing while a text is selected will replace that text
+#+begin_src emacs-lisp
+  (pending-delete-mode 1)
+#+end_src
 
 ** Fonts
 
@@ -865,6 +871,7 @@ while in the minibuffer for expensive operations
   (add-hook 'js2-mode-hook #'context-coloring-mode)
   (require 'context-coloring-emacs-lisp)
   (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
+  (diminish 'context-coloring-mode)
 #+end_src
 ** relative-line-numbers
 #+begin_src emacs-lisp
@@ -918,6 +925,11 @@ while in the minibuffer for expensive operations
       )
 
   #+end_src
+** Lisp
+   On the fly lisp evaluation
+#+begin_src emacs-lisp
+(use-package litable)
+#+end_src
 ** CSS
    #+BEGIN_SRC emacs-lisp
   (defun my-css-mode-setup ()
@@ -986,12 +998,13 @@ while in the minibuffer for expensive operations
 ** JavaScript
 
    #+BEGIN_SRC emacs-lisp
-     (diminish 'subword-mode)
      (use-package js2-mode
        :config
        (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
        (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
-       (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+       (add-hook 'js2-mode-hook (lambda() (subword-mode t)
+         (diminish 'subword-mode)
+        ))
 
        (setq-default
         ;; js2-mode
@@ -1269,8 +1282,8 @@ while in the minibuffer for expensive operations
   (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
   (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
   (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
-  (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key my-keys-minor-mode-map (kbd "M-x")     'counsel-M-x)
+  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'counsel-find-file)
   (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
      (setq x-select-enable-clipboard nil)
@@ -1317,7 +1330,8 @@ while in the minibuffer for expensive operations
 ** Vim normal mode
 #+begin_src emacs-lisp
 
-   (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
+   (use-package counsel-projectile)
+   (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
 
      (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
      (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
@@ -1446,21 +1460,21 @@ while in the minibuffer for expensive operations
        (evil-leader/set-key "gl" 'git-link))
 
        (evil-leader/set-key "gh" 'magit-log-buffer-file)
-     (evil-leader/set-key "b" 'helm-buffers-list)
+     (evil-leader/set-key "b" 'ivy-switch-buffer)
 
         (use-package swoop
         :config
         (require 'swoop)
         )
+     (use-package counsel)
      (evil-leader/set-key "S" 'swoop-multi)
      (evil-leader/set-key "c" 'shell-command)
      (evil-leader/set-key "d" 'deft)
      (evil-leader/set-key "e" 'dired-jump)
-     (evil-leader/set-key "f" 'helm-projectile-ag)
-     (evil-leader/set-key "h" 'helm-recentf)
-     (evil-leader/set-key "i" 'helm-imenu)
-     (evil-leader/set-key "j" 'evil-avy-goto-char-2)
-     (evil-leader/set-key "l" 'evil-avy-goto-line)
+     (evil-leader/set-key "f" 'counsel-projectile-ag)
+     (evil-leader/set-key "h" 'counsel-recentf)
+     (evil-leader/set-key "i" 'imenu)
+     (evil-leader/set-key "j" 'evil-avy-goto-char-timer)
      (evil-leader/set-key "m" 'bookmark-set)
      (use-package expand-region)
      (evil-leader/set-key "n" 'er/expand-region)
@@ -1476,11 +1490,9 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "vt" 'visit-term-buffer)
-     (evil-leader/set-key "x" 'helm-M-x)
+     (evil-leader/set-key "x" 'counsel-M-x)
 
-     (use-package helm-swoop
-      :config
-      (evil-leader/set-key "w" 'swoop))
+      (evil-leader/set-key "w" 'swoop)
 
 
      (evil-leader/set-key "1" 'shell-command)
@@ -1539,6 +1551,7 @@ while in the minibuffer for expensive operations
 ** ggtags
 #+begin_src emacs-lisp
   (use-package ggtags
+   :diminish ggtags-mode
    :config
    (add-hook 'prog-mode-hook 'ggtags-mode)
   )
@@ -1632,6 +1645,11 @@ while in the minibuffer for expensive operations
    #+begin_src emacs-lisp
   (use-package synosaurus)
    #+end_src
+* Rest client mode
+  To debug/test APIs!
+#+begin_src emacs-lisp
+(use-package restclient)
+#+end_src
 * IRC
   I use ~erc~ to chat on IRC.
 
@@ -1654,9 +1672,28 @@ while in the minibuffer for expensive operations
     (setq ido-everywhere t)
     :config
     (ido-mode t))
+
+  ;; Push mark when using ido-imenu
+  (defvar push-mark-before-goto-char nil)
+
+  (defadvice goto-char (before push-mark-first activate)
+    (when push-mark-before-goto-char
+      (push-mark)))
+
+  (defun ido-imenu-push-mark ()
+    (interactive)
+    (let ((push-mark-before-goto-char t))
+      (ido-imenu)))
 #+end_src
 * Autotyping / Completion
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
+
+** Ivy
+   ivy-mode ensures that any Emacs command using completing-read-function uses ivy for completion.
+#+begin_src emacs-lisp
+(use-package ivy)
+(ivy-mode t)
+#+end_src
 
 ** Abbrevs
 

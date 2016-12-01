@@ -72,6 +72,6 @@ set -x GTAGSLABEL pygments
 
 if [ -z "$TMUX" ]
   if [ -z "$INSIDE_EMACS" ]
-     tat
+#     tat
   end
 end

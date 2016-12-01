@@ -1691,7 +1691,9 @@ while in the minibuffer for expensive operations
 ** Ivy
    ivy-mode ensures that any Emacs command using completing-read-function uses ivy for completion.
 #+begin_src emacs-lisp
-(use-package ivy)
+(use-package ivy
+ :diminish ivy-mode
+)
 (ivy-mode t)
 #+end_src
 

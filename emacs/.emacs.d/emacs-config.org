@@ -337,6 +337,14 @@ while in the minibuffer for expensive operations
 
 * UI
 
+  Keeps the cursor at a reasonable place when scrolling
+#+BEGIN_SRC emacs-lisp
+(use-package smooth-scrolling
+ :config
+ (smooth-scrolling-mode t)
+)
+#+END_SRC
+
   #+BEGIN_SRC emacs-lisp
     (diminish 'my-keys-minor-mode)
     (global-hl-line-mode 1)
@@ -400,7 +408,7 @@ while in the minibuffer for expensive operations
 #+BEGIN_SRC emacs-lisp
   (when window-system
     ;; (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-    (set-default-font "-*-PragmataPro-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+    (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
     )
 
 (setq prettify-symbols-unprettify-at-point t)
@@ -1000,8 +1008,11 @@ while in the minibuffer for expensive operations
    #+BEGIN_SRC emacs-lisp
      (use-package js2-mode
        :config
+       ;;(require 'js2-imenu-extras)
+       ;;(js2-imenu-extras-setup +1)
        (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
        (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
+       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
        (add-hook 'js2-mode-hook (lambda() (subword-mode t)
          (diminish 'subword-mode)
         ))

@@ -659,6 +659,7 @@ while in the minibuffer for expensive operations
                         (abbreviate-file-name (buffer-file-name))
                       "%b"))))
   #+END_SRC
+
 * Registers
   List of frequently visited files. I can access them using
   ~C-x r j <letter>~.
@@ -700,7 +701,7 @@ while in the minibuffer for expensive operations
         (setq org-refile-targets (quote ((nil :maxlevel . 2)
                                          (org-agenda-files :maxlevel . 2))))
         (setq org-todo-keywords
-              '((sequence "TODO(t)" "WAITING(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
+              '((sequence "TODO(t)" "MAYBE(m)"  "WAITING(w!)" "|" "DONE(d!)")))
         (setq org-tag-alist '(("next" . ?n)
                               ("maybe" . ?m)
                               ("waiting" . ?w)
@@ -1445,6 +1446,9 @@ while in the minibuffer for expensive operations
       (call-interactively 'hippie-expand)))
 
   (define-key evil-insert-state-map (kbd "C-x C-f") 'my-expand-files)
+
+  (define-key evil-insert-state-map "{" 'paredit-open-curly)
+  (define-key evil-insert-state-map "}" 'paredit-close-curly)
 #+end_src
 ** Vim Leader
    #+begin_src emacs-lisp
@@ -1485,7 +1489,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "f" 'counsel-projectile-ag)
      (evil-leader/set-key "h" 'counsel-recentf)
      (evil-leader/set-key "i" 'imenu)
-     (evil-leader/set-key "j" 'evil-avy-goto-char-timer)
+     (evil-leader/set-key "j" 'avy-goto-char-timer)
      (evil-leader/set-key "m" 'bookmark-set)
      (use-package expand-region)
      (evil-leader/set-key "n" 'er/expand-region)
@@ -1495,6 +1499,7 @@ while in the minibuffer for expensive operations
       (setq projectile-switch-project-action 'projectile-dired)
       (evil-leader/set-key "p" 'projectile-commander)
      )
+     (evil-leader/set-key "r" 'jump-to-register)
      (evil-leader/set-key "sc" 'emamux:run-command)
      (evil-leader/set-key "sl" 'emamux:run-last-command)
 
@@ -1847,9 +1852,8 @@ while in the minibuffer for expensive operations
 #+BEGIN_SRC emacs-lisp
   (use-package paredit
    :config
-  (add-hook 'lisp-mode-hook 'paredit-mode))
-  ;; (use-package evil-paredit)
-  ;; (add-hook 'prog-mode-hook 'evil-paredit-mode)
+  (add-hook 'lisp-mode-hook 'paredit-mode)
+  (add-hook 'prog-mode-hook 'paredit-mode))
 #+END_SRC
 
 * magit

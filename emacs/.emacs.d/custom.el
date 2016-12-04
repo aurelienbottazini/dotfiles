@@ -106,7 +106,8 @@
  ;; If there is more than one, they won't work right.
  '(col-highlight ((t (:inherit hl-line))))
  '(column-marker-1 ((t (:background "red" :foreground "black"))))
- '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic))))
+ '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic :family "Operator Mono"))))
+ '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic :family "Operator Mono"))))
  '(hl-line ((t (:background "#4f4f4f"))))
  '(mode-line ((t (:background "#656555" :foreground "#dcdcc" :box (:line-width 1 :style released-button)))))
  '(mode-line-buffer-id ((t (:foreground "#dcdcc" :slant italic :weight bold :family "Operator Mono"))))

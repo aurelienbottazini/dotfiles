@@ -1852,8 +1852,16 @@ while in the minibuffer for expensive operations
 #+BEGIN_SRC emacs-lisp
   (use-package paredit
    :config
-  (add-hook 'lisp-mode-hook 'paredit-mode)
-  (add-hook 'prog-mode-hook 'paredit-mode))
+;; Enable paredit for a couple for non lisp modes; tweak
+;; paredit-space-for-delimiter-predicates to avoid inserting spaces
+;; before open parens.
+(dolist (mode '(prog))
+  (add-hook (intern (format "%s-mode-hook" mode))
+            '(lambda ()
+               (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)
+                            (lambda (_ _) nil))
+               (enable-paredit-mode))))
+  (add-hook 'lisp-mode-hook 'paredit-mode))
 #+END_SRC
 
 * magit

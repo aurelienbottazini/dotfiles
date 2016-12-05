@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 14,
+    fontSize: 16,
 
     // font family with optional fallbacks
     fontFamily: 'PragmataPro, "OperatorMono-Medium", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
@@ -91,7 +91,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ['hyper-blink'],
+  plugins: [],
 
   // in development, you can create a directory under
   // `~/.hyperterm_plugins/local/` and include it here

@@ -16,6 +16,7 @@ while in the minibuffer for expensive operations
 (my-minibuffer-gc-setup-hook)
 
 #+end_src
+
 * About
 
   *Feel free to copy anything you want.*
@@ -1200,6 +1201,11 @@ while in the minibuffer for expensive operations
    #+begin_src emacs-lisp
   (use-package dockerfile-mode)
    #+end_src
+
+** Elm
+#+begin_src emacs-lisp
+  (use-package elm-mode)
+#+end_src
 
 ** Neo4j
 

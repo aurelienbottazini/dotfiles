@@ -740,11 +740,6 @@ while in the minibuffer for expensive operations
           (setq org-html-htmlize-output-type (quote css)))
   #+END_SRC
 
-* Deft: Notes management
-#+begin_src emacs-lisp
-  (use-package deft)
-#+end_src
-
 * Multiple cursors
 
   D: clear the region
@@ -1459,38 +1454,45 @@ while in the minibuffer for expensive operations
 ** Vim Leader
    #+begin_src emacs-lisp
      (use-package helm
-      :config
-      (use-package helm-ag)
-      (use-package helm-projectile
        :config
-       (helm-projectile-on)
+       (use-package helm-ag)
+       (use-package helm-projectile
+         :config
+         (helm-projectile-on)
+         )
        )
-      )
 
-      (use-package evil-leader
-        :init
-        (setq evil-toggle-key "C-c e")
-        :config
-        (global-evil-leader-mode))
-    (evil-leader/set-leader "<SPC>")
+     (use-package evil-leader
+       :init
+       (setq evil-toggle-key "C-c e")
+       :config
+       (global-evil-leader-mode))
+     (evil-leader/set-leader "<SPC>")
 
-    (evil-leader/set-key "gb" 'magit-blame)
-    (evil-leader/set-key "gs" 'magit-status)
+     (evil-leader/set-key "gb" 'magit-blame)
+     (evil-leader/set-key "gs" 'magit-status)
      (use-package git-link
        :config
        (evil-leader/set-key "gl" 'git-link))
 
-       (evil-leader/set-key "gh" 'magit-log-buffer-file)
+     (evil-leader/set-key "gh" 'magit-log-buffer-file)
      (evil-leader/set-key "b" 'ivy-switch-buffer)
 
-        (use-package swoop
-        :config
-        (require 'swoop)
-        )
+     (use-package swoop
+       :config
+       (require 'swoop)
+       )
      (use-package counsel)
      (evil-leader/set-key "S" 'swoop-multi)
      (evil-leader/set-key "c" 'shell-command)
-     (evil-leader/set-key "d" 'deft)
+     (defun browse-lodash-docs ()
+       (interactive)
+       (browse-url "https://lodash.com/docs"))
+     (evil-leader/set-key "dl" 'browse-lodash-docs)
+     (defun browse-ramdajs-docs ()
+       (interactive)
+       (browse-url "http://ramdajs.com/docs"))
+     (evil-leader/set-key "dr" 'browse-ramdajs-docs)
      (evil-leader/set-key "e" 'dired-jump)
      (evil-leader/set-key "f" 'counsel-projectile-ag)
      (evil-leader/set-key "h" 'counsel-recentf)
@@ -1501,10 +1503,10 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "n" 'er/expand-region)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
      (use-package projectile
-      :config
-      (setq projectile-switch-project-action 'projectile-dired)
-      (evil-leader/set-key "p" 'projectile-commander)
-     )
+       :config
+       (setq projectile-switch-project-action 'projectile-dired)
+       (evil-leader/set-key "p" 'projectile-commander)
+       )
      (evil-leader/set-key "r" 'jump-to-register)
      (evil-leader/set-key "sc" 'emamux:run-command)
      (evil-leader/set-key "sl" 'emamux:run-last-command)
@@ -1514,7 +1516,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "vt" 'visit-term-buffer)
      (evil-leader/set-key "x" 'counsel-M-x)
 
-      (evil-leader/set-key "w" 'swoop)
+     (evil-leader/set-key "w" 'swoop)
 
 
      (evil-leader/set-key "1" 'shell-command)
@@ -1748,7 +1750,6 @@ while in the minibuffer for expensive operations
      (use-package company
        :diminish company-mode
        :config
-       (use-package company-tern)
        (use-package company-web)
 
        (global-company-mode t)
@@ -1757,20 +1758,19 @@ while in the minibuffer for expensive operations
 
        (add-hook 'css-mode-hook
                  (lambda ()
-                   (set (make-local-variable 'company-backends) '(company-css company-dabbrev-code company-files))))
+                   (set (make-local-variable 'company-backends) '(company-css company-dabbrev-code company-files company-gtags))))
 
        (add-hook 'js2-mode-hook
                  (lambda ()
-                   (set (make-local-variable 'company-backends) '(company-tern company-dabbrev-code company-files))))
+                   (set (make-local-variable 'company-backends) '(company-dabbrev-code company-files company-gtags))))
        (add-hook 'web-mode-hook
                  (lambda ()
-                   (set (make-local-variable 'company-backends) '(company-tern company-web-html company-dabbrev-code company-files))))
+                   (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev-code company-files company-gtags))))
 
        (add-hook 'html-mode-hook
                  (lambda ()
-                   (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev-code company-files))))
+                   (set (make-local-variable 'company-backends) '(company-web-html company-dabbrev-code company-files company-gtags))))
        )
-
    #+end_src
 ** Templates
    #+begin_src emacs-lisp

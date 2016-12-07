@@ -1160,6 +1160,7 @@ while in the minibuffer for expensive operations
 ** emmet-mode
    #+begin_src emacs-lisp
     (use-package emmet-mode
+      :diminish emmet-mode
       :config
       (progn
         (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)

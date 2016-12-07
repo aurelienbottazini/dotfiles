@@ -80,24 +80,24 @@ while in the minibuffer for expensive operations
   An helper to install missing packages.
 
   #+BEGIN_SRC emacs-lisp
-(defun require-package (package &optional min-version)
-  "Ask elpa to install given PACKAGE."
-  (unless (package-installed-p package min-version)
-    (package-install package)))
+    (defun require-package (package &optional min-version)
+      "Ask elpa to install given PACKAGE."
+      (unless (package-installed-p package min-version)
+        (package-install package)))
 
-(setq package-archives
-      '(("gnu"         . "http://elpa.gnu.org/packages/")
-        ("org"         . "http://orgmode.org/elpa/")
-        ("marmalade"   . "http://marmalade-repo.org/packages/")
-        ("melpa"       . "http://melpa.milkbox.net/packages/")))
-(setq package-user-dir (concat user-emacs-directory "elpa"))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+    (setq package-archives
+          '(
+            ("org"         . "http://orgmode.org/elpa/")
+            ("melpa"       . "http://melpa.milkbox.net/packages/")
+            ("gnu"         . "http://elpa.gnu.org/packages/")))
+    (setq package-user-dir (concat user-emacs-directory "elpa"))
+    (package-initialize)
+    (unless package-archive-contents
+      (package-refresh-contents))
 
-(require-package 'use-package)
-(require 'use-package)
-(setq use-package-always-ensure t)
+    (require-package 'use-package)
+    (require 'use-package)
+    (setq use-package-always-ensure t)
   #+END_SRC
 
 * Initialization
@@ -599,7 +599,7 @@ while in the minibuffer for expensive operations
 
 (add-hook 'prog-mode-hook
           #'add-pragmatapro-prettify-symbols-alist)
-(add-hook 'js2-mode-hook
+(add-hook 'js-mode-hook
           #'add-pragmatapro-prettify-symbols-alist)
 (add-hook 'text-mode-hook
           #'add-pragmatapro-prettify-symbols-alist)
@@ -862,56 +862,6 @@ while in the minibuffer for expensive operations
   (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
   )
 #+end_src
-
-** context-coloring
-#+begin_src emacs-lisp
-  ;; (use-package context-coloring
-  ;;   :diminish context-coloring-mode
-  ;;   :config
-  ;;   (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-  ;; )
-  (require 'context-coloring-javascript)
-  (add-hook 'js2-mode-hook #'context-coloring-mode)
-  (require 'context-coloring-emacs-lisp)
-  (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
-  (diminish 'context-coloring-mode)
-#+end_src
-** relative-line-numbers
-#+begin_src emacs-lisp
-      (use-package relative-line-numbers
-        :init
-        (setq relative-line-numbers-format 'better-relative-number-format)
-        :config
-        (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
-        (defun better-relative-number-format (offset)
-          "Another formatting function"
-          (format "%3d " (abs offset)))
-        )
-#+end_src
-
-** emmet-mode
-   #+begin_src emacs-lisp
-    (use-package emmet-mode
-      :config
-      (progn
-        (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
-        (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
-
-      (add-hook 'css-mode-hook
-                (lambda ()
-                  (emmet-mode)
-                  (setq emmet-expand-jsx-className? nil)
-                  ))
-
-      (add-hook 'sgml-mode-hook
-                (lambda ()
-                  (emmet-mode)
-                  (setq emmet-expand-jsx-className? nil)
-                  ))
-
-
-      )
-   #+end_src
 ** web-mode
   #+begin_src emacs-lisp
 
@@ -1179,7 +1129,8 @@ while in the minibuffer for expensive operations
    :pin manual
    :ensure nil
    :config
-   (evil-leader/set-key-for-mode 'enh-ruby-mode "x"  'xmp))
+ ;;(evil-leader/set-key-for-mode 'enh-ruby-mode "x"  'xmp)
+   )
    #+end_src
 
 ** Haml
@@ -1204,6 +1155,56 @@ while in the minibuffer for expensive operations
 
 #+begin_src emacs-lisp
   (use-package cypher-mode)
+#+end_src
+
+** emmet-mode
+   #+begin_src emacs-lisp
+    (use-package emmet-mode
+      :config
+      (progn
+        (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
+        (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
+
+      (add-hook 'css-mode-hook
+                (lambda ()
+                  (emmet-mode)
+                  (setq emmet-expand-jsx-className? nil)
+                  ))
+
+      (add-hook 'sgml-mode-hook
+                (lambda ()
+                  (emmet-mode)
+                  (setq emmet-expand-jsx-className? nil)
+                  ))
+
+
+      )
+   #+end_src
+** relative-line-numbers
+#+begin_src emacs-lisp
+      (use-package relative-line-numbers
+        :init
+        (setq relative-line-numbers-format 'better-relative-number-format)
+        :config
+        (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
+        (defun better-relative-number-format (offset)
+          "Another formatting function"
+          (format "%3d " (abs offset)))
+        )
+#+end_src
+
+** context-coloring
+#+begin_src emacs-lisp
+  ;; (use-package context-coloring
+  ;;   :diminish context-coloring-mode
+  ;;   :config
+  ;;   (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
+  ;; )
+  (require 'context-coloring-javascript)
+  (add-hook 'js2-mode-hook #'context-coloring-mode)
+  (require 'context-coloring-emacs-lisp)
+  (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
+  (diminish 'context-coloring-mode)
 #+end_src
 
 * Code checker
@@ -1392,33 +1393,33 @@ while in the minibuffer for expensive operations
 #+end_src
 *** org-mode-map
     #+begin_src emacs-lisp
-       (evil-declare-key 'normal org-mode-map
-         "gk" 'outline-up-heading
-         "gj" 'outline-next-visible-heading
-         "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
-         "L" 'org-end-of-line ; smarter behaviour on headlines etc.
-         "t" 'org-todo ; mark a TODO item as DONE
-         ",c" 'org-cycle
-         (kbd "TAB") 'org-cycle
-         ",e" 'org-export-dispatch
-         ",n" 'outline-next-visible-heading
-         ",p" 'outline-previous-visible-heading
-         ",t" 'org-set-tags-command
-         ",s" 'org-tags-view
-         ",u" 'outline-up-heading
-         "$" 'org-end-of-line ; smarter behaviour on headlines etc.
-         "^" 'org-beginning-of-line ; ditto
-         "-" 'org-ctrl-c-minus ; change bullet style
-         "<" 'org-metaleft ; out-dent
-         ">" 'org-metaright ; indent
-         )
+        (evil-declare-key 'normal org-mode-map
+          "gk" 'outline-up-heading
+          "gj" 'outline-next-visible-heading
+          "H" 'org-beginning-of-line ; smarter behaviour on headlines etc.
+          "L" 'org-end-of-line ; smarter behaviour on headlines etc.
+          "t" 'org-todo ; mark a TODO item as DONE
+          ",c" 'org-cycle
+          (kbd "TAB") 'org-cycle
+          ",e" 'org-export-dispatch
+          ",n" 'outline-next-visible-heading
+          ",p" 'outline-previous-visible-heading
+          ",t" 'org-set-tags-command
+          ",s" 'org-tags-view
+          ",u" 'outline-up-heading
+          "$" 'org-end-of-line ; smarter behaviour on headlines etc.
+          "^" 'org-beginning-of-line ; ditto
+          "-" 'org-ctrl-c-minus ; change bullet style
+          "<" 'org-metaleft ; out-dent
+          ">" 'org-metaright ; indent
+          )
 
-     (evil-leader/set-key-for-mode 'org-mode
-       (kbd "C-c t")  'org-show-todo-tree
-       (kbd "C-c a")  'org-agenda
-       (kbd "C-c c")  'org-archive-subtree-default
-       (kbd "C-c r")  'org-refile
-       )
+      ;; (evil-leader/set-key-for-mode 'org-mode
+      ;;   (kbd "C-c t")  'org-show-todo-tree
+      ;;   (kbd "C-c a")  'org-agenda
+      ;;   (kbd "C-c c")  'org-archive-subtree-default
+      ;;   (kbd "C-c r")  'org-refile
+      ;;   )
     #+end_src
 ** Vim insert mode
 #+begin_src emacs-lisp

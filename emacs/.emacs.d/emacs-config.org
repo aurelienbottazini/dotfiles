@@ -621,7 +621,6 @@ while in the minibuffer for expensive operations
        (setq ring-bell-function 'ignore)
   #+END_SRC
 
-
   I want to hide extra bars. I like my Emacs clean. I don't use the
   mouse and I want to do everything through the keyboard
   #+BEGIN_SRC emacs-lisp
@@ -1495,6 +1494,9 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "dr" 'browse-ramdajs-docs)
      (evil-leader/set-key "e" 'dired-jump)
      (evil-leader/set-key "f" 'counsel-projectile-ag)
+     (use-package ag
+      :config
+     (evil-leader/set-key "F" 'ag))
      (evil-leader/set-key "h" 'counsel-recentf)
      (evil-leader/set-key "i" 'imenu)
      (evil-leader/set-key "j" 'avy-goto-char-timer)
@@ -1512,12 +1514,12 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "sl" 'emamux:run-last-command)
 
      (evil-leader/set-key "t" 'js-jump-to-implementation-or-test)
+     (evil-leader/set-key "u" 'universal-argument)
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "vt" 'visit-term-buffer)
      (evil-leader/set-key "x" 'counsel-M-x)
 
      (evil-leader/set-key "w" 'swoop)
-
 
      (evil-leader/set-key "1" 'shell-command)
      (evil-leader/set-key "5" 'evilmi-jump-items)

@@ -95,12 +95,18 @@
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
+ '(web-mode-enable-auto-indentation nil)
+ '(web-mode-enable-auto-quoting nil)
  '(web-mode-markup-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(avy-lead-face ((t (:background "#3f3f3f" :foreground "#93e0e3" :inverse-video t :weight bold))))
+ '(avy-lead-face-0 ((t (:background "#3F3F3F" :foreground "#AFD8AF" :inverse-video t :weight bold))))
+ '(avy-lead-face-1 ((t (:background "#3F3F3F" :foreground "#F0DFAF" :inverse-video t :weight bold))))
+ '(avy-lead-face-2 ((t (:background "#3F3F3F" :foreground "#DCA3A3" :inverse-video t :weight bold))))
  '(col-highlight ((t (:inherit hl-line))))
  '(column-marker-1 ((t (:background "red" :foreground "black"))))
  '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic :family "Operator Mono"))))

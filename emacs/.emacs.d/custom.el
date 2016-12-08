@@ -109,6 +109,7 @@
  '(avy-lead-face-2 ((t (:background "#3F3F3F" :foreground "#DCA3A3" :inverse-video t :weight bold))))
  '(col-highlight ((t (:inherit hl-line))))
  '(column-marker-1 ((t (:background "red" :foreground "black"))))
+ '(flycheck-error ((t (:inherit nil :background "#bc8383" :foreground "#222"))))
  '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic :family "Operator Mono"))))
  '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic :family "Operator Mono"))))
  '(hl-line ((t (:background "#4f4f4f"))))

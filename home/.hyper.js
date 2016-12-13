@@ -26,7 +26,7 @@ module.exports = {
     css: '.term_fit { padding: 0.1em 0.1em !important }',
 
     // custom css to embed in the terminal window
-    termCSS: '.cursor-node[focus=false] { background-color: transparent !important} x-screen x-row { font-variant-ligatures: initial } span[style="color: rgb(186, 144, 189);"], span[style*="italic"]{ font-style: italic;}',
+    termCSS: '.cursor-node[focus=false] { background-color: transparent !important} x-screen x-row { font-variant-ligatures: initial } span[style="color: rgb(186, 144, 189);"], span[style*="italic"]{ font-family: "Operator Mono"; font-style: italic;}',
 
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: '12px 14px',

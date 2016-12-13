@@ -67,7 +67,7 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+    (helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
  '(projectile-tags-backend (quote ggtags))
  '(projectile-tags-command "git ls-files | gtags --gtagslabel pygments")
  '(rainbow-html-colors-major-mode-list

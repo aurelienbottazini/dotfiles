@@ -117,6 +117,7 @@
  '(flycheck-warning ((t (:inherit nil :foreground "#F0DFAF" :inverse-video t :underline nil))))
  '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic :family "Operator Mono"))))
  '(font-lock-string-face ((t (:foreground "#CC9393" :slant italic :family "Operator Mono"))))
+ '(helm-selection ((t (:background "#4F4F4F" :underline t :slant italic :family "Operator Mono"))))
  '(hl-line ((t (:background "#4f4f4f"))))
  '(ivy-current-match ((t (:foreground "#F0DFAF" :underline t :slant italic :weight bold :family "Operator Mono"))))
  '(js2-error ((t (:foreground "#CC9393" :inverse-video t :weight bold))))

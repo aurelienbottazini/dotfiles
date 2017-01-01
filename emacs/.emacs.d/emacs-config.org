@@ -684,8 +684,9 @@ while in the minibuffer for expensive operations
                 (lambda ()
                   (emmet-mode)
                   (setq emmet-expand-jsx-className? nil)
+                  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
                   ))
-      )
+     )
 
   #+end_src
 ** Lisp
@@ -693,6 +694,7 @@ while in the minibuffer for expensive operations
 #+begin_src emacs-lisp
 (use-package litable)
 #+end_src
+
 ** CSS
    #+BEGIN_SRC emacs-lisp
   (defun my-css-mode-setup ()
@@ -815,7 +817,10 @@ while in the minibuffer for expensive operations
 ** JSON
 
 #+begin_src emacs-lisp
- (use-package json-mode)
+  (use-package json-mode
+   :config
+    (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+    (add-to-list 'auto-mode-alist '("\\.eslintrc\\'" . json-mode)))
 #+end_src
 
 ** Coffeescript
@@ -1260,8 +1265,8 @@ while in the minibuffer for expensive operations
 
   (define-key evil-insert-state-map (kbd "C-x C-f") 'my-expand-files)
 
-  (define-key evil-insert-state-map "{" 'paredit-open-curly)
-  (define-key evil-insert-state-map "}" 'paredit-close-curly)
+  ;;(define-key evil-insert-state-map "{" 'paredit-open-curly)
+  ;;(define-key evil-insert-state-map "}" 'paredit-close-curly)
 #+end_src
 ** Vim Leader
    #+begin_src emacs-lisp
@@ -1486,7 +1491,9 @@ while in the minibuffer for expensive operations
 * Rest client mode
   To debug/test APIs!
 #+begin_src emacs-lisp
-(use-package restclient)
+(use-package restclient
+ :config
+ (add-to-list 'auto-mode-alist '("\\.rest" . restclient-mode)))
 #+end_src
 * IRC
   I use ~erc~ to chat on IRC.
@@ -1661,7 +1668,7 @@ while in the minibuffer for expensive operations
 ;; Enable paredit for a couple for non lisp modes; tweak
 ;; paredit-space-for-delimiter-predicates to avoid inserting spaces
 ;; before open parens.
-(dolist (mode '(prog))
+(dolist (mode '(emacs-lisp lisp javascript js2))
   (add-hook (intern (format "%s-mode-hook" mode))
             '(lambda ()
                (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)

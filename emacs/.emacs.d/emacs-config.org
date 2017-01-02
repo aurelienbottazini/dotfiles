@@ -817,6 +817,30 @@ while in the minibuffer for expensive operations
       )
    #+END_SRC
 
+#+begin_src emacs-lisp
+  (setq javascript-common-imenu-regex-list
+      '(
+        ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
+        ("OnChange" "[ \t]*\$(['\"]\\([^'\"]*\\)['\"]).*\.change *( *function" 1)
+        ("OnClick" "[ \t]*\$([ \t]*['\"]\\([^'\"]*\\)['\"]).*\.click *( *function" 1)
+        ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+        ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+        ;; {{ es6 beginning
+        ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
+        ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
+        ;; }}
+        ))
+
+(defun auray-js-imenu-make-index ()
+  (save-excursion
+    (imenu--generic-function javascript-common-imenu-regex-list)))
+
+(defun auray-js-mode-hook ()
+  (setq imenu-create-index-function 'auray-js-imenu-make-index))
+
+(add-hook 'js-mode-hook 'auray-js-mode-hook)
+(add-hook 'js2-mode-hook 'auray-js-mode-hook)
+#+end_src
 ** JSON
 
 #+begin_src emacs-lisp
@@ -848,6 +872,7 @@ while in the minibuffer for expensive operations
       (interactive)
       (web-mode)
       (web-mode-set-content-type "jsx")
+      (setq imenu-create-index-function 'auray-js-imenu-make-index)
       (flycheck-select-checker 'javascript-eslint)
       (emmet-mode)
       (setq emmet-expand-jsx-className? t)

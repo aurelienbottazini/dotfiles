@@ -1,6 +1,0 @@
-*-autoloads.el
-*-pkg.el
-*.elc
-.cask/
-/benchmark/
-/coverage/

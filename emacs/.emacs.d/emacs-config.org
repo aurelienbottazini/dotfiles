@@ -487,9 +487,9 @@ while in the minibuffer for expensive operations
 * text-mode
 
   #+BEGIN_SRC emacs-lisp
-  (add-hook 'text-mode-hook
-            (lambda ()
-              (electric-pair-mode +1)))
+    (add-hook 'text-mode-hook
+              (lambda ()
+                (electric-pair-mode +1)))
   #+END_SRC
 * org-mode
 
@@ -784,7 +784,8 @@ while in the minibuffer for expensive operations
         web-mode-code-indent-offset 2
         web-mode-attr-indent-offset 2)
 
-       (setq js2-highlight-level 3))
+       (setq js2-highlight-level 3)
+)
 
      ;; conmmands to _beautify_ js, css and html
      (use-package js2-refactor
@@ -810,6 +811,8 @@ while in the minibuffer for expensive operations
                                         ;; "--eval=\"require('repl').start({replMode: require('repl').REPL_MODE_STRICT, ignoreUndefined: true})\""
        ))
        (setq babel-repl-cli-program "org-babel-node")
+  ;;(define-key evil-insert-state-map "{" 'paredit-open-curly)
+  ;;(define-key evil-insert-state-map "}" 'paredit-close-curly)
        ;; (evil-leader/set-key-for-mode 'js2-mode "x" 'babel-repl-send-buffer)
       )
    #+END_SRC
@@ -1011,16 +1014,13 @@ while in the minibuffer for expensive operations
 
 ** context-coloring
 #+begin_src emacs-lisp
-  ;; (use-package context-coloring
-  ;;   :diminish context-coloring-mode
-  ;;   :config
-  ;;   (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-  ;; )
-  (require 'context-coloring-javascript)
-  (add-hook 'js2-mode-hook #'context-coloring-mode)
-  (require 'context-coloring-emacs-lisp)
-  (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
-  (diminish 'context-coloring-mode)
+  (use-package context-coloring
+    :diminish context-coloring-mode
+    :config
+    (add-hook 'js2-mode-hook #'context-coloring-mode)
+    (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
+    (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
+  )
 #+end_src
 
 * Code checker
@@ -1246,7 +1246,6 @@ while in the minibuffer for expensive operations
     (key-chord-mode 1)
     (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
     (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state))
-  (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
 
   (defun my-expand-lines ()
     (interactive)
@@ -1264,9 +1263,6 @@ while in the minibuffer for expensive operations
       (call-interactively 'hippie-expand)))
 
   (define-key evil-insert-state-map (kbd "C-x C-f") 'my-expand-files)
-
-  ;;(define-key evil-insert-state-map "{" 'paredit-open-curly)
-  ;;(define-key evil-insert-state-map "}" 'paredit-close-curly)
 #+end_src
 ** Vim Leader
    #+begin_src emacs-lisp
@@ -1659,22 +1655,45 @@ while in the minibuffer for expensive operations
       )
   #+END_SRC
 
-* Paredit
+* Smartparens | Paredit
 
 #+BEGIN_SRC emacs-lisp
-  (use-package paredit
-   :diminish paredit-mode
-   :config
-;; Enable paredit for a couple for non lisp modes; tweak
-;; paredit-space-for-delimiter-predicates to avoid inserting spaces
-;; before open parens.
-(dolist (mode '(emacs-lisp lisp javascript js2))
-  (add-hook (intern (format "%s-mode-hook" mode))
-            '(lambda ()
-               (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)
-                            (lambda (_ _) nil))
-               (enable-paredit-mode))))
-  (add-hook 'lisp-mode-hook 'paredit-mode))
+  (use-package smartparens
+    :diminish smartparens-strict-mode
+    :config
+    (use-package evil-smartparens)
+    (add-hook 'prog-mode-hook 'smartparens-strict-mode)
+    (add-hook 'prog-mode-hook 'evil-smartparens-mode)
+    (require 'smartparens-config)
+    (defun my-web-mode-hook ()
+      (setq web-mode-enable-auto-pairing nil))
+
+    (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+    (defun sp-web-mode-is-code-context (id action context)
+      (and (eq action 'insert)
+           (not (or (get-text-property (point) 'part-side)
+                    (get-text-property (point) 'block-side)))))
+
+    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
+    (define-key evil-normal-state-map (kbd "C-(") 'sp-backward-slurp-sexp)
+    (define-key evil-normal-state-map (kbd "C-)") 'sp-forward-slurp-sexp)
+    (define-key evil-normal-state-map (kbd "C-{") 'sp-backward-barf-sexp)
+    (define-key evil-normal-state-map (kbd "C-}") 'sp-forward-barf-sexp)
+    )
+  ;; (use-package paredit
+  ;;   :diminish paredit-mode
+  ;;   :config
+  ;;   ;; Enable paredit for a couple for non lisp modes; tweak
+  ;;   ;; paredit-space-for-delimiter-predicates to avoid inserting spaces
+  ;;   ;; before open parens.
+  ;;   (dolist (mode '(emacs-lisp lisp javascript js2))
+  ;;     (add-hook (intern (format "%s-mode-hook" mode))
+  ;;               '(lambda ()
+  ;;                  (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)
+  ;;                               (lambda (_ _) nil))
+  ;;                  (enable-paredit-mode))))
+  ;;   (add-hook 'lisp-mode-hook 'paredit-mode))
 #+END_SRC
 
 * magit

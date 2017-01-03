@@ -1207,7 +1207,8 @@ while in the minibuffer for expensive operations
     (global-origami-mode)
     (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
-    (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go)
+    (define-key evil-normal-state-map (kbd "[d") 'dumb-jump-go)
+    (define-key evil-normal-state-map (kbd "]d") 'dumb-jump-go-other-window)
 
     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
     (define-key evil-normal-state-map (kbd "]e") 'next-error)
@@ -1341,7 +1342,10 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "m" 'bookmark-set)
      (use-package expand-region)
      (evil-leader/set-key "n" 'er/expand-region)
+     (evil-leader/set-key "oc" 'context-coloring-mode)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+     (evil-leader/set-key "ol" 'linum-mode)
+     (evil-leader/set-key "or" 'relative-line-numbers-mode)
      (use-package projectile
        :config
        (setq projectile-switch-project-action 'projectile-dired)
@@ -1422,7 +1426,9 @@ while in the minibuffer for expensive operations
 #+end_src
 ** dumb jump
 #+begin_src emacs-lisp
-  (use-package dumb-jump)
+  (use-package dumb-jump
+   :config (setq dumb-jump-selector 'helm)
+   )
 #+end_src
 * Dired
   buffed up dired (emacs). Dired is for directory listing,

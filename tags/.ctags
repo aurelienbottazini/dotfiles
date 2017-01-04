@@ -3,8 +3,6 @@
 --exclude=log
 --exclude=tmp
 
---languages=-javascript,sql
-
 --langdef=js
 --langmap=js:.js
 --langmap=js:+.jsx

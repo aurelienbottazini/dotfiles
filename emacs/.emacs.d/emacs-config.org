@@ -1134,6 +1134,7 @@ while in the minibuffer for expensive operations
   (define-key my-keys-minor-mode-map (kbd "C-c n")   'evil-normal-state)
   (define-key my-keys-minor-mode-map (kbd "C-c e")   'evil-emacs-state)
   (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
+  (define-key my-keys-minor-mode-map (kbd "C-c t")   'transpose-chars)
   (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
   (use-package helm)
   (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)

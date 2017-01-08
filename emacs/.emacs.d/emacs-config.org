@@ -967,13 +967,13 @@ while in the minibuffer for expensive operations
    Hitting ~M-;~ twice adds an xmpfilter comment.
    Hitting xmp keybinding will put the output in this comment
    #+begin_src emacs-lisp
-  (use-package rcodetools
-   :load-path "/site-lisp/rcodetools.el"
-   :pin manual
-   :ensure nil
-   :config
- ;;(evil-leader/set-key-for-mode 'enh-ruby-mode "x"  'xmp)
-   )
+      (use-package rcodetools
+       :load-path "/site-lisp/rcodetools.el"
+       :pin manual
+       :ensure nil
+       :config
+     (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp)
+       )
    #+end_src
 
 ** Haml

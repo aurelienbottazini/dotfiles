@@ -1316,7 +1316,6 @@ while in the minibuffer for expensive operations
        (evil-leader/set-key "gl" 'git-link))
 
      (evil-leader/set-key "gh" 'magit-log-buffer-file)
-     (evil-leader/set-key "b" 'ivy-switch-buffer)
 
      (use-package swoop
        :config
@@ -1340,7 +1339,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "h" 'helm-recentf)
      (evil-leader/set-key "i" 'helm-imenu)
      (evil-leader/set-key "j" 'avy-goto-char-timer)
-     (evil-leader/set-key "m" 'bookmark-set)
+     (evil-leader/set-key "m" 'helm-bookmarks)
      (use-package expand-region)
      (evil-leader/set-key "n" 'er/expand-region)
      (evil-leader/set-key "oc" 'context-coloring-mode)
@@ -1690,42 +1689,65 @@ while in the minibuffer for expensive operations
 * Smartparens | Paredit
 
 #+BEGIN_SRC emacs-lisp
-  (use-package smartparens
-    :diminish smartparens-strict-mode
-    :config
-    (use-package evil-smartparens)
-    (add-hook 'prog-mode-hook 'smartparens-strict-mode)
-    (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
-    (require 'smartparens-config)
-    (defun my-web-mode-hook ()
-      (setq web-mode-enable-auto-pairing nil))
-
-    (add-hook 'web-mode-hook  'my-web-mode-hook)
-
-    (defun sp-web-mode-is-code-context (id action context)
-      (and (eq action 'insert)
-           (not (or (get-text-property (point) 'part-side)
-                    (get-text-property (point) 'block-side)))))
-
-    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
-    (define-key evil-normal-state-map (kbd "C-(") 'sp-backward-slurp-sexp)
-    (define-key evil-normal-state-map (kbd "C-)") 'sp-forward-slurp-sexp)
-    (define-key evil-normal-state-map (kbd "C-{") 'sp-backward-barf-sexp)
-    (define-key evil-normal-state-map (kbd "C-}") 'sp-forward-barf-sexp)
-    )
-  ;; (use-package paredit
-  ;;   :diminish paredit-mode
+  ;; (use-package smartparens
+  ;;   :diminish smartparens-strict-mode
   ;;   :config
-  ;;   ;; Enable paredit for a couple for non lisp modes; tweak
-  ;;   ;; paredit-space-for-delimiter-predicates to avoid inserting spaces
-  ;;   ;; before open parens.
-  ;;   (dolist (mode '(emacs-lisp lisp javascript js2))
-  ;;     (add-hook (intern (format "%s-mode-hook" mode))
-  ;;               '(lambda ()
-  ;;                  (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)
-  ;;                               (lambda (_ _) nil))
-  ;;                  (enable-paredit-mode))))
-  ;;   (add-hook 'lisp-mode-hook 'paredit-mode))
+  ;;   (use-package evil-smartparens)
+  ;;   (add-hook 'prog-mode-hook 'smartparens-strict-mode)
+  ;;   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  ;;   (require 'smartparens-config)
+  ;;   (defun my-web-mode-hook ()
+  ;;     (setq web-mode-enable-auto-pairing nil))
+
+  ;;   (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+  ;;   (defun sp-web-mode-is-code-context (id action context)
+  ;;     (and (eq action 'insert)
+  ;;          (not (or (get-text-property (point) 'part-side)
+  ;;                   (get-text-property (point) 'block-side)))))
+
+  ;;   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
+  ;;   (define-key evil-normal-state-map (kbd "C-(") 'sp-backward-slurp-sexp)
+  ;;   (define-key evil-normal-state-map (kbd "C-)") 'sp-forward-slurp-sexp)
+  ;;   (define-key evil-normal-state-map (kbd "C-{") 'sp-backward-barf-sexp)
+  ;;   (define-key evil-normal-state-map (kbd "C-}") 'sp-forward-barf-sexp)
+  ;;   (define-key evil-insert-state-map (kbd "C-(") 'sp-backward-slurp-sexp)
+  ;;   (define-key evil-insert-state-map (kbd "C-)") 'sp-forward-slurp-sexp)
+  ;;   (define-key evil-insert-state-map (kbd "C-{") 'sp-backward-barf-sexp)
+  ;;   (define-key evil-insert-state-map (kbd "C-}") 'sp-forward-barf-sexp)
+
+  ;;   (sp-with-modes 'js2-mode
+  ;;     (sp-local-pair "{" nil :pre-handlers '(sp-javascript-pre-slurp-handler))
+  ;;     (sp-local-pair "(" nil :pre-handlers '(sp-javascript-pre-slurp-handler))
+  ;;     (sp-local-pair "[" nil :pre-handlers '(sp-javascript-pre-slurp-handler))
+  ;;     )
+  ;;   (defun sp-javascript-pre-slurp-handler (id action context)
+  ;;     (when (eq action 'slurp-forward)
+  ;;       ;; If there was no space before, we shouldn't add on.
+  ;;       ;; ok = enclosing, next-thing one being slurped into
+  ;;       ;; (variables let-bound in `sp-forward-slurp-sexp').
+  ;;       (save-excursion
+  ;;         (when (and (= (sp-get ok :end) (sp-get next-thing :beg))
+  ;;                    (equal (sp-get ok :op) (sp-get next-thing :op)))
+  ;;           (goto-char (sp-get ok :end))
+  ;;           (when (looking-back " ")
+  ;;             (delete-char -1))
+  ;;           ))))
+  ;;   )
+
+  (use-package paredit
+    :diminish paredit-mode
+    :config
+    ;; Enable paredit for a couple for non lisp modes; tweak
+    ;; paredit-space-for-delimiter-predicates to avoid inserting spaces
+    ;; before open parens.
+    (dolist (mode '(emacs-lisp lisp javascript js2))
+      (add-hook (intern (format "%s-mode-hook" mode))
+                '(lambda ()
+                   (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)
+                                (lambda (_ _) nil))
+                   (enable-paredit-mode))))
+    (add-hook 'lisp-mode-hook 'paredit-mode))
 #+END_SRC
 
 * magit

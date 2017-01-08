@@ -29,8 +29,8 @@
  '(evil-toggle-key "C-c e")
  '(exec-path-from-shell-arguments (quote ("-l")))
  '(flycheck-indication-mode (quote left-fringe))
- '(flycheck-ruby-executable "/usr/local/var/rbenv/shims/ruby")
- '(flycheck-ruby-rubocop-executable "/usr/local/var/rbenv/shims/rubocop")
+ '(flycheck-ruby-executable "/Users/aurelienbottazini/.rbenv/shims/ruby")
+ '(flycheck-ruby-rubocop-executable "/Users/aurelienbottazini/.rbenv/shims/rubocop")
  '(grep-command "grep  -nH -e")
  '(grep-find-command (quote ("find . -type f -exec grep  -nH -e  {} +" . 35)))
  '(grep-find-ignored-directories

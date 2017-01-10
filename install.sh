@@ -11,6 +11,7 @@ brew install tree
 brew install node
 brew install hub
 brew install ifstat
+brew install ngrep
 
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags

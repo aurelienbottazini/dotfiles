@@ -1359,7 +1359,6 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "u" 'universal-argument)
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "vt" 'visit-term-buffer)
-     (evil-leader/set-key "x" 'counsel-M-x)
 
      (evil-leader/set-key "w" 'swoop)
 

@@ -972,8 +972,7 @@ while in the minibuffer for expensive operations
        :pin manual
        :ensure nil
        :config
-     (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp)
-       )
+     (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp))
    #+end_src
 
 ** Haml
@@ -1602,7 +1601,7 @@ while in the minibuffer for expensive operations
             ))
        (global-company-mode t)
        (setq company-minimum-prefix-length 2)
-       (setq company-backends '((company-dabbrev-code company-yasnippet company-tern company-restclient company-css company-web-html company-files))))
+       (setq company-backends '((company-files company-yasnippet company-tern company-restclient company-css company-web-html ))))
    #+end_src
 ** Templates
    #+begin_src emacs-lisp

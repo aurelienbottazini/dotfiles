@@ -1235,6 +1235,13 @@ while in the minibuffer for expensive operations
          "-" 'dired-up-directory
          )))
 #+end_src
+
+*** lisp-mode map
+#+begin_src emacs-lisp
+  (evil-declare-key 'normal lisp-mode-map
+(kbd "C-x C-e") 'eval-last-sexp
+)
+#+end_src
 *** org-mode-map
     #+begin_src emacs-lisp
         (evil-declare-key 'normal org-mode-map

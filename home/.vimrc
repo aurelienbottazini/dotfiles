@@ -41,6 +41,8 @@ Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 call plug#end()
 
+
+colors zenburn
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column
 " set grepprg=ag

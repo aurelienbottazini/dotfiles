@@ -10,7 +10,7 @@
 		}
 	},
   "rules": {
-    "no-console": ["error", { allow: ["warn", "error"] }]
+    "no-console": ["error", { "allow": ["warn", "error"] }]
     "camelcase": [0, {"properties": "never"}],
 		"no-underscore-dangle": ["error", { "allow": ["_meta", "_type"] }],
 		"react/prefer-stateless-function": 0,

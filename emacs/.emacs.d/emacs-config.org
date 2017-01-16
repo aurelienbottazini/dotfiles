@@ -351,7 +351,7 @@ while in the minibuffer for expensive operations
 
   #+BEGIN_SRC emacs-lisp
     (add-hook 'after-init-hook '(lambda () (diminish 'my-keys-minor-mode)))
-    (global-hl-line-mode 1)
+    # (global-hl-line-mode 1)
     (blink-cursor-mode 0)
     (column-number-mode)
   #+END_SRC
@@ -414,11 +414,13 @@ while in the minibuffer for expensive operations
       ;; (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
       (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
      )
+    (add-to-list 'default-frame-alist
+             '(font . "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
 #+END_SRC
 
    custom symbols for pragmata pro
    #+begin_src emacs-lisp
-     (load "pragmatapro-prettify-symbols" )
+     ;; (load "pragmatapro-prettify-symbols" )
    #+end_src
 
 
@@ -1025,15 +1027,16 @@ while in the minibuffer for expensive operations
    #+end_src
 ** relative-line-numbers
 #+begin_src emacs-lisp
-      (use-package relative-line-numbers
-        :init
-        (setq relative-line-numbers-format 'better-relative-number-format)
-        :config
-        (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
-        (defun better-relative-number-format (offset)
-          "Another formatting function"
-          (format "%3d " (abs offset)))
-        )
+  (add-hook 'prog-mode-hook 'linum-mode)
+  (use-package relative-line-numbers
+    :init
+    (setq relative-line-numbers-format 'better-relative-number-format)
+    :config
+    ;; (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
+    (defun better-relative-number-format (offset)
+      "Another formatting function"
+      (format "%3d " (abs offset)))
+    )
 #+end_src
 
 ** context-coloring

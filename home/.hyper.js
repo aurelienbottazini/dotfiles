@@ -1,13 +1,13 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 16,
+    fontSize: 14,
 
     // font family with optional fallbacks
-    fontFamily: 'PragmataPro, "OperatorMono-Medium", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+    fontFamily: '"OperatorMono-Medium", PragmataPro, Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(148, 191, 243, 1)',
+    cursorColor: 'rgba(148, 191, 243, 0.7)',
     // cursorColor: 'transparent',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
@@ -76,7 +76,7 @@ module.exports = {
     // for advanced config flags please refer to https://hyperterm.org/#cfg
 
     modifierKeys: {
-      cmdIsMeta: false,
+      cmdIsMeta: true,
       altIsMeta: false,
     },
 

@@ -12,6 +12,7 @@
  '(column-highlight-mode nil)
  '(column-number-mode t)
  '(company-idle-delay 0.2)
+ '(context-coloring-syntactic-comments nil)
  '(crosshairs-mode nil)
  '(custom-safe-themes
    (quote
@@ -121,6 +122,7 @@
  '(hl-line ((t (:background "#4f4f4f"))))
  '(ivy-current-match ((t (:foreground "#F0DFAF" :underline t :slant italic :weight bold :family "Operator Mono"))))
  '(js2-error ((t (:foreground "#CC9393" :inverse-video t :weight bold))))
+ '(linum ((t (:background "#4F4F4F" :foreground "#9FC59F"))))
  '(mode-line ((t (:background "#656555" :foreground "#dcdcc" :box (:line-width 1 :style released-button)))))
  '(mode-line-buffer-id ((t (:foreground "#dcdcc" :slant italic :weight bold :family "Operator Mono"))))
  '(mode-line-inactive ((t (:background "#494949" :foreground "#5F7F5F" :box (:line-width 1 :style released-button)))))

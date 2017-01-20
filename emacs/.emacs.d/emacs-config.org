@@ -351,7 +351,7 @@ while in the minibuffer for expensive operations
 
   #+BEGIN_SRC emacs-lisp
     (add-hook 'after-init-hook '(lambda () (diminish 'my-keys-minor-mode)))
-    # (global-hl-line-mode 1)
+    ;; (global-hl-line-mode 1)
     (blink-cursor-mode 0)
     (column-number-mode)
   #+END_SRC
@@ -410,12 +410,12 @@ while in the minibuffer for expensive operations
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp
-    (when window-system
-      ;; (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-      (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-     )
-    (add-to-list 'default-frame-alist
-             '(font . "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
+  (when window-system
+    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+   )
+  (add-to-list 'default-frame-alist
+           '(font . "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
 #+END_SRC
 
    custom symbols for pragmata pro
@@ -1027,7 +1027,6 @@ while in the minibuffer for expensive operations
    #+end_src
 ** relative-line-numbers
 #+begin_src emacs-lisp
-  (add-hook 'prog-mode-hook 'linum-mode)
   (use-package relative-line-numbers
     :init
     (setq relative-line-numbers-format 'better-relative-number-format)
@@ -1353,6 +1352,9 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "n" 'er/expand-region)
      (evil-leader/set-key "oc" 'context-coloring-mode)
      (evil-leader/set-key "oh" 'evil-search-highlight-persist-remove-all)
+     (use-package hlinum
+      :config
+      (hlinum-activate))
      (evil-leader/set-key "ol" 'linum-mode)
      (evil-leader/set-key "or" 'relative-line-numbers-mode)
      (use-package projectile

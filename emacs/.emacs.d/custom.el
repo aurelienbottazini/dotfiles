@@ -12,7 +12,7 @@
  '(column-highlight-mode nil)
  '(column-number-mode t)
  '(company-idle-delay 0.2)
- '(context-coloring-syntactic-comments nil)
+ '(context-coloring-syntactic-comments t)
  '(crosshairs-mode nil)
  '(custom-safe-themes
    (quote
@@ -68,7 +68,7 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+    (hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
  '(projectile-tags-backend (quote ggtags))
  '(projectile-tags-command "git ls-files | gtags --gtagslabel pygments")
  '(rainbow-html-colors-major-mode-list
@@ -123,6 +123,7 @@
  '(ivy-current-match ((t (:foreground "#F0DFAF" :underline t :slant italic :weight bold :family "Operator Mono"))))
  '(js2-error ((t (:foreground "#CC9393" :inverse-video t :weight bold))))
  '(linum ((t (:background "#4F4F4F" :foreground "#9FC59F"))))
+ '(linum-highlight-face ((t (:inherit fringe :background "#94bff3" :foreground "#2b2b2b"))))
  '(mode-line ((t (:background "#656555" :foreground "#dcdcc" :box (:line-width 1 :style released-button)))))
  '(mode-line-buffer-id ((t (:foreground "#dcdcc" :slant italic :weight bold :family "Operator Mono"))))
  '(mode-line-inactive ((t (:background "#494949" :foreground "#5F7F5F" :box (:line-width 1 :style released-button)))))

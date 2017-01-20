@@ -1274,6 +1274,24 @@ while in the minibuffer for expensive operations
       ;;   (kbd "C-c r")  'org-refile
       ;;   )
     #+end_src
+** key-chord
+   #+begin_src emacs-lisp
+  (use-package key-chord
+    :config
+    (key-chord-mode 1)
+    (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map  "))" 'paredit-forward-slurp-sexp)
+    (key-chord-define evil-normal-state-map  "))" 'paredit-forward-slurp-sexp)
+    (key-chord-define evil-insert-state-map  "((" 'paredit-backward-slurp-sexp)
+    (key-chord-define evil-normal-state-map  "((" 'paredit-backward-slurp-sexp)
+    (key-chord-define evil-insert-state-map  "}}" 'paredit-forward-barf-sexp)
+    (key-chord-define evil-normal-state-map  "}}" 'paredit-forward-barf-sexp)
+    (key-chord-define evil-insert-state-map  "{{" 'paredit-backward-barf-sexp)
+    (key-chord-define evil-normal-state-map  "{{" 'paredit-backward-barf-sexp)
+)
+   #+end_src
+
 ** Vim insert mode
 #+begin_src emacs-lisp
   (use-package key-chord

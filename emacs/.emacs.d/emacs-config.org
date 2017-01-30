@@ -229,8 +229,7 @@ while in the minibuffer for expensive operations
             (date (current-time)))
         (find-file (concat "/Users/aurelienbottazini/projects/aurelienbottazini.com/_posts/"
                            (format-time-string "%Y-%m-%d") "-" slug
-                           ".md"))
-        ))
+                           ".md"))))
 
      (defun copy-to-clipboard-git-link()
        (interactive)
@@ -245,7 +244,6 @@ while in the minibuffer for expensive operations
            (ansi-term "/usr/local/bin/fish" "my-ansi-term")
          (switch-to-buffer "*my-ansi-term*")
          ))
-
 
     (defun js-jump-to (current from to format-name)
       (find-file

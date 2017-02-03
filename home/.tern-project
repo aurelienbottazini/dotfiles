@@ -1,0 +1,17 @@
+{
+  "libs": [
+    "browser",
+    "ecma6",
+    "jquery",
+    "underscore"
+  ],
+  "plugins": {
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    },
+    "es_modules": {},
+    "node": {},
+    "webpack": {}
+  }
+}

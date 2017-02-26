@@ -811,8 +811,6 @@ while in the minibuffer for expensive operations
                                         ;; "--eval=\"require('repl').start({replMode: require('repl').REPL_MODE_STRICT, ignoreUndefined: true})\""
        ))
        (setq babel-repl-cli-program "org-babel-node")
-  ;;(define-key evil-insert-state-map "{" 'paredit-open-curly)
-  ;;(define-key evil-insert-state-map "}" 'paredit-close-curly)
        ;; (evil-leader/set-key-for-mode 'js2-mode "x" 'babel-repl-send-buffer)
       )
    #+END_SRC
@@ -958,6 +956,7 @@ while in the minibuffer for expensive operations
           (use-package ruby-interpolation)
           (use-package inf-ruby)
 
+          (use-package ruby-end)
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -1136,8 +1135,8 @@ while in the minibuffer for expensive operations
   (define-key my-keys-minor-mode-map (kbd "C-c t")   'transpose-chars)
   (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
   (use-package helm)
-  (define-key my-keys-minor-mode-map (kbd "M-x")     'helm-M-x)
-  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key my-keys-minor-mode-map (kbd "M-x")     'counsel-M-x)
+  (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'counsel-find-file)
   (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
      (setq x-select-enable-clipboard nil)
@@ -1184,8 +1183,7 @@ while in the minibuffer for expensive operations
 ** Vim normal mode
 #+begin_src emacs-lisp
 
-  (use-package helm-projectile)
-  (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
+  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
 
     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
@@ -1314,6 +1312,8 @@ while in the minibuffer for expensive operations
       (call-interactively 'hippie-expand)))
 
   (define-key evil-insert-state-map (kbd "C-x C-f") 'my-expand-files)
+  (define-key evil-insert-state-map "{" 'paredit-open-curly)
+  (define-key evil-insert-state-map "}" 'paredit-close-curly)
 #+end_src
 ** Vim Leader
    #+begin_src emacs-lisp
@@ -1356,14 +1356,14 @@ while in the minibuffer for expensive operations
        (browse-url "http://ramdajs.com/docs"))
      (evil-leader/set-key "dr" 'browse-ramdajs-docs)
      (evil-leader/set-key "e" 'dired-jump)
-     (evil-leader/set-key "f" 'helm-projectile-ag)
      (use-package ag
       :config
+     (evil-leader/set-key "f" 'counsel-projectile-ag)
      (evil-leader/set-key "F" 'ag))
-     (evil-leader/set-key "h" 'helm-recentf)
-     (evil-leader/set-key "i" 'helm-imenu)
+     (evil-leader/set-key "h" 'counsel-recentf)
+     (evil-leader/set-key "i" 'counsel-imenu)
      (evil-leader/set-key "j" 'avy-goto-char-timer)
-     (evil-leader/set-key "m" 'helm-bookmarks)
+     (evil-leader/set-key "m" 'counsel-bookmark)
      (use-package expand-region)
      (evil-leader/set-key "n" 'er/expand-region)
      (evil-leader/set-key "oc" 'context-coloring-mode)
@@ -1628,7 +1628,7 @@ while in the minibuffer for expensive operations
             (define-key company-active-map (kbd "C-n") 'company-select-next)
             ))
        (global-company-mode t)
-       (setq company-minimum-prefix-length 1)
+       (setq company-minimum-prefix-length 0)
        (setq company-backends '((company-files company-yasnippet company-tern company-restclient company-css company-web-html ))))
    #+end_src
 ** Templates
@@ -1642,6 +1642,7 @@ while in the minibuffer for expensive operations
     (setq auto-insert-query nil)
     (yatemplate-fill-alist))
    #+end_src
+
 ** Hippie expand
    #+begin_src emacs-lisp
   (setq hippie-expand-try-functions-list '(
@@ -1715,52 +1716,6 @@ while in the minibuffer for expensive operations
 * Smartparens | Paredit
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package smartparens
-  ;;   :diminish smartparens-strict-mode
-  ;;   :config
-  ;;   (use-package evil-smartparens)
-  ;;   (add-hook 'prog-mode-hook 'smartparens-strict-mode)
-  ;;   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
-  ;;   (require 'smartparens-config)
-  ;;   (defun my-web-mode-hook ()
-  ;;     (setq web-mode-enable-auto-pairing nil))
-
-  ;;   (add-hook 'web-mode-hook  'my-web-mode-hook)
-
-  ;;   (defun sp-web-mode-is-code-context (id action context)
-  ;;     (and (eq action 'insert)
-  ;;          (not (or (get-text-property (point) 'part-side)
-  ;;                   (get-text-property (point) 'block-side)))))
-
-  ;;   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
-  ;;   (define-key evil-normal-state-map (kbd "C-(") 'sp-backward-slurp-sexp)
-  ;;   (define-key evil-normal-state-map (kbd "C-)") 'sp-forward-slurp-sexp)
-  ;;   (define-key evil-normal-state-map (kbd "C-{") 'sp-backward-barf-sexp)
-  ;;   (define-key evil-normal-state-map (kbd "C-}") 'sp-forward-barf-sexp)
-  ;;   (define-key evil-insert-state-map (kbd "C-(") 'sp-backward-slurp-sexp)
-  ;;   (define-key evil-insert-state-map (kbd "C-)") 'sp-forward-slurp-sexp)
-  ;;   (define-key evil-insert-state-map (kbd "C-{") 'sp-backward-barf-sexp)
-  ;;   (define-key evil-insert-state-map (kbd "C-}") 'sp-forward-barf-sexp)
-
-  ;;   (sp-with-modes 'js2-mode
-  ;;     (sp-local-pair "{" nil :pre-handlers '(sp-javascript-pre-slurp-handler))
-  ;;     (sp-local-pair "(" nil :pre-handlers '(sp-javascript-pre-slurp-handler))
-  ;;     (sp-local-pair "[" nil :pre-handlers '(sp-javascript-pre-slurp-handler))
-  ;;     )
-  ;;   (defun sp-javascript-pre-slurp-handler (id action context)
-  ;;     (when (eq action 'slurp-forward)
-  ;;       ;; If there was no space before, we shouldn't add on.
-  ;;       ;; ok = enclosing, next-thing one being slurped into
-  ;;       ;; (variables let-bound in `sp-forward-slurp-sexp').
-  ;;       (save-excursion
-  ;;         (when (and (= (sp-get ok :end) (sp-get next-thing :beg))
-  ;;                    (equal (sp-get ok :op) (sp-get next-thing :op)))
-  ;;           (goto-char (sp-get ok :end))
-  ;;           (when (looking-back " ")
-  ;;             (delete-char -1))
-  ;;           ))))
-  ;;   )
-
   (use-package paredit
     :diminish paredit-mode
     :config

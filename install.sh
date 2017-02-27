@@ -12,6 +12,8 @@ brew install node
 brew install hub
 brew install ifstat
 brew install ngrep
+brew install elm-format
+ln -sf /usr/local/bin/elm-format-0.18  /usr/local/bin/elm-format
 
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
@@ -19,6 +21,7 @@ brew install --HEAD universal-ctags
 # install it using http://wkhtmltopdf.org/downloads.html
 # brew install wkhtmltopdf
 
+npm install -g elm elm-test elm-css elm-live@2.6.1
 npm install -g jshint
 npm install -g coffeelint
 npm install -g grunt-cli

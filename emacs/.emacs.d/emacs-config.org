@@ -624,7 +624,7 @@ while in the minibuffer for expensive operations
              (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
              (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
 
-      (define-and-bind-text-object "r" "\\(^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
+      (define-and-bind-text-object "r" "\\(^\s*module .*\\|^\s*class .*\\|^\s*def .*\\|^.* do.*\\)\n" "^\s*end\n")
 
       (use-package evil-surround
         :config

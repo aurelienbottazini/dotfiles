@@ -22,6 +22,7 @@
  '(deft-use-filename-as-title t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(electric-pair-mode nil)
+ '(elm-format-on-save t)
  '(emamux:use-nearest-pane nil)
  '(emmet-indent-after-insert t)
  '(emmet-move-cursor-after-expanding t)

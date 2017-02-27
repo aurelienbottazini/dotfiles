@@ -14,6 +14,8 @@ brew install ifstat
 brew install ngrep
 brew install elm-format
 ln -sf /usr/local/bin/elm-format-0.18  /usr/local/bin/elm-format
+brew install fish
+brew install tmux
 
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags

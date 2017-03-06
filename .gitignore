@@ -19,3 +19,4 @@ emacs/.emacs.d/eshell
 emacs/.terminfo
 /emacs/.emacs.d/.litable-lists.el
 /emacs/.emacs.d/company-statistics-cache.el
+/emacs/.emacs.d/ac-comphist.dat

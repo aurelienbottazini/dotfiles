@@ -322,6 +322,7 @@ while in the minibuffer for expensive operations
   No tabs
   #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
+  (setq tab-always-indent 'complete)
   #+END_SRC
 
   Auto-indent
@@ -1610,49 +1611,19 @@ while in the minibuffer for expensive operations
      )
    #+END_SRC
 
-** Company
-   #+begin_src emacs-lisp
-     (use-package company
-       :diminish company-mode
-       :config
-       (use-package company-web)
-       (use-package company-tern)
-       (use-package company-restclient)
-       (use-package company-statistics
-        :config
-        (add-hook 'after-init-hook 'company-statistics-mode))
-       (eval-after-load 'company
-         '(progn
-            (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-            (define-key company-active-map (kbd "C-p") 'company-select-previous)
-            (define-key company-active-map (kbd "C-n") 'company-select-next)
-            ))
-       (global-company-mode t)
-       (setq company-minimum-prefix-length 0)
-       (setq company-backends '((company-files company-yasnippet company-tern company-restclient company-css company-web-html ))))
-   #+end_src
-** Templates
-   #+begin_src emacs-lisp
-   (use-package yatemplate
-    :init
-    (auto-insert-mode t)
-    (setq auto-insert t)
-    :config
-    (setq auto-insert-alist nil)
-    (setq auto-insert-query nil)
-    (yatemplate-fill-alist))
-   #+end_src
+** Autocomplete
 
-** Hippie expand
-   #+begin_src emacs-lisp
-  (setq hippie-expand-try-functions-list '(
-                                           try-expand-dabbrev-visible
-                                           try-expand-dabbrev
-                                           try-expand-dabbrev-from-kill
-                                           try-complete-file-name
-                                           try-expand-dabbrev-all-buffers
-                                           try-expand-list))
-   #+end_src
+#+begin_src emacs-lisp
+  (use-package auto-complete
+   :config
+   (ac-config-default)
+   (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
+   (define-key ac-complete-mode-map "\t" 'ac-complete)
+   (define-key ac-complete-mode-map [tab] 'ac-complete)
+   ;; (define-key ac-complete-mode-map "\r" 'ac-complete)
+   ;;
+   (global-auto-complete-mode t))
+#+end_src
 * Colors
 
 ** Vim

@@ -1201,9 +1201,10 @@ while in the minibuffer for expensive operations
     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
+    (use-package swiper)
+    (define-key evil-normal-state-map (kbd "/") 'swiper)
 
-    (use-package origami)
-    (global-origami-mode)
+
     (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
     (define-key evil-normal-state-map (kbd "[d") 'dumb-jump-go)
@@ -1214,6 +1215,9 @@ while in the minibuffer for expensive operations
     (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
     (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
     (define-key evil-normal-state-map (kbd "]t") 'helm-etags-select)
+
+    (use-package origami)
+    (global-origami-mode)
     (define-key evil-normal-state-map (kbd "zh") 'origami-close-all-nodes)
     (define-key evil-normal-state-map (kbd "zc") 'origami-close-node)
     (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
@@ -1304,7 +1308,7 @@ while in the minibuffer for expensive operations
       (call-interactively 'hippie-expand)))
 
   (define-key evil-insert-state-map (kbd "C-x C-l") 'my-expand-lines)
-  (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+  (define-key evil-insert-state-map (kbd "C-x C-o") 'auto-complete)
 
   (defun my-expand-files ()
     (interactive)

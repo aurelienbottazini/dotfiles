@@ -1622,10 +1622,14 @@ while in the minibuffer for expensive operations
    :config
    (ac-config-default)
    (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
+   (setq ac-use-menu-map t)
+   (define-key ac-menu-map "\C-n" 'ac-next)
+   (define-key ac-menu-map "\C-p" 'ac-previous)
    (define-key ac-complete-mode-map "\t" 'ac-complete)
    (define-key ac-complete-mode-map [tab] 'ac-complete)
-   ;; (define-key ac-complete-mode-map "\r" 'ac-complete)
-   ;;
+   (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+   (use-package tern-auto-complete)
+   (tern-ac-setup)
    (global-auto-complete-mode t))
 #+end_src
 * Colors

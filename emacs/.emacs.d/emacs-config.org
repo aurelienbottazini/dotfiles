@@ -1649,11 +1649,8 @@ while in the minibuffer for expensive operations
       (load-theme 'zenburn)
       (set-face-attribute 'mode-line-inactive nil :background "#494949")
       (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
-      ;; (set-face-attribute 'flycheck-error nil :foreground "#dfaf8f" :underline (:color foreground-color :style wave :weight bold))
       (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")
       (set-face-attribute 'highlight-indentation-face nil :background "#494949")
-      ;; (set-face-attribute 'relative-line-numbers-current-line nil :inherit relative-line-numbers :foreground "#94bff3" :weight semi-light)
-      ;; (set-face-attribute 'term nil :background "#3f3f3f" :foreground "#d9d9d6")
       (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
   #+end_src
 

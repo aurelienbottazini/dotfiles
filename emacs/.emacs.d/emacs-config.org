@@ -470,6 +470,13 @@ while in the minibuffer for expensive operations
                       "%b"))))
   #+END_SRC
 
+#+begin_src emacs-lisp
+  (use-package column-enforce-mode
+    :config
+    (add-hook 'prog-mode-hook 'column-enforce-mode)
+  )
+#+end_src
+
 * Registers
   List of frequently visited files. I can access them using
   ~C-x r j <letter>~.
@@ -597,6 +604,9 @@ while in the minibuffer for expensive operations
     ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
     (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
     )
+    (use-package multiple-cursors
+     :ensure t
+    :bind (("C-S-<mouse-1>" . mc/add-cursor-on-click)))
   #+end_src
 
 * Vim
@@ -786,9 +796,12 @@ while in the minibuffer for expensive operations
         web-mode-attr-indent-offset 2)
 
        (setq js2-highlight-level 3)
+       (require 'prettier-js)
+       (add-hook 'js2-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'prettier-before-save)))
 )
 
-     ;; conmmands to _beautify_ js, css and html
      (use-package js2-refactor
        :diminish js2-refactor-mode
        :config

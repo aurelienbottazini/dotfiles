@@ -72,7 +72,8 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+    (aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+ '(prettier-target-mode "js2-mode")
  '(projectile-tags-backend (quote ggtags))
  '(projectile-tags-command "git ls-files | gtags --gtagslabel pygments")
  '(rainbow-html-colors-major-mode-list
@@ -99,6 +100,24 @@
  '(typescript-indent-level 2)
  '(visible-cursor t)
  '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
+ '(vue-modes
+   (quote
+    ((:type template :name nil :mode web-mode)
+     (:type template :name html :mode html-mode)
+     (:type template :name jade :mode jade-mode)
+     (:type template :name pug :mode pug-mode)
+     (:type script :name nil :mode js2-mode)
+     (:type script :name js :mode js2-mode)
+     (:type script :name es6 :mode js2-mode)
+     (:type script :name babel :mode js2-mode)
+     (:type script :name coffee :mode coffee-mode)
+     (:type script :name typescript :mode typescript-mode)
+     (:type style :name nil :mode css-mode)
+     (:type style :name css :mode css-mode)
+     (:type style :name stylus :mode stylus-mode)
+     (:type style :name less :mode less-css-mode)
+     (:type style :name scss :mode scss-mode)
+     (:type style :name sass :mode sass-mode))))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
@@ -115,7 +134,7 @@
  '(avy-lead-face-2 ((t (:background "#3F3F3F" :foreground "#DCA3A3" :inverse-video t :weight bold))))
  '(col-highlight ((t (:inherit hl-line))))
  '(column-marker-1 ((t (:background "red" :foreground "black"))))
- '(flycheck-error ((t (:inherit nil :background "#bc8383" :foreground "#222" :underline nil))))
+ '(flycheck-error ((t (:inherit nil :underline (:color "#bc8383" :style wave)))))
  '(flycheck-fringe-error ((t (:foreground "#BC8383" :inverse-video t :weight bold))))
  '(flycheck-fringe-warning ((t (:background "#F0DFAF" :foreground "#F0DFAF"))))
  '(flycheck-info ((t (:foreground "#93e0e3" :inverse-video t))))

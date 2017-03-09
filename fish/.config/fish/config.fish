@@ -1,4 +1,4 @@
-set -x PATH ~/dotfiles/bin /usr/local/sbin ~/.rbenv/shims $PATH
+set -x PATH ~/dotfiles/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) $PATH
 status --is-interactive; and source (rbenv init -|psub)
 # rbenv rehash > /dev/null ^&1
 

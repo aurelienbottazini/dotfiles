@@ -23,25 +23,27 @@ brew install --HEAD universal-ctags
 # install it using http://wkhtmltopdf.org/downloads.html
 # brew install wkhtmltopdf
 
-npm install -g elm elm-test elm-css elm-live@2.6.1
-npm install -g jshint
-npm install -g coffeelint
-npm install -g grunt-cli
-npm install -g livedown
-npm install -g typescript
-npm install -g tslint
-npm install -g less
-npm install -g jsxhint
-npm install -g js-beautify
-npm install -g tern
-npm install -g bower
-npm install -g eslint
-npm install -g eslint-plugin-jsx-a11y
+brew install yarn
+yarn global add elm elm-test elm-css elm-live@2.6.1
+yarn global add jshint
+yarn global add coffeelint
+yarn global add grunt-cli
+yarn global add livedown
+yarn global add typescript
+yarn global add tslint
+yarn global add less
+yarn global add jsxhint
+yarn global add js-beautify
+yarn global add tern
+yarn global add bower
+yarn global add eslint
+yarn global add eslint-plugin-jsx-a11y
+yarn global add prettier
 
-npm install -g babel-cli
-npm install -g babel-preset-es2015
-npm install -g save-dev babel-preset-react
-npm install -g babel-preset-stage-0
+yarn global add babel-cli
+yarn global add babel-preset-es2015
+yarn global add save-dev babel-preset-react
+yarn global add babel-preset-stage-0
 
 # brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
 # tic -o ~/.terminfo /usr/local/share/emacs/24.5/etc/e/eterm-color.ti

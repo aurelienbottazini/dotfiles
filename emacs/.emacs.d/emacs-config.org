@@ -796,6 +796,8 @@ while in the minibuffer for expensive operations
         web-mode-attr-indent-offset 2)
 
        (setq js2-highlight-level 3)
+       (use-package import-js)
+
        (require 'prettier-js)
        (add-hook 'js2-mode-hook
           (lambda ()
@@ -1214,10 +1216,6 @@ while in the minibuffer for expensive operations
     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-    (use-package swiper)
-    (define-key evil-normal-state-map (kbd "/") 'swiper)
-
-
     (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
     (define-key evil-normal-state-map (kbd "[d") 'dumb-jump-go)
@@ -1288,6 +1286,13 @@ while in the minibuffer for expensive operations
       ;;   (kbd "C-c r")  'org-refile
       ;;   )
     #+end_src
+*** js2-mode-map
+#+begin_src emacs-lisp
+  (evil-declare-key 'normal js2-mode-map
+    (kbd "[ g") 'import-js-goto
+    (kbd "[ i") 'import-js-import
+    (kbd "] i") 'import-js-fix)
+#+end_src
 ** key-chord
    #+begin_src emacs-lisp
   (use-package key-chord
@@ -1335,15 +1340,6 @@ while in the minibuffer for expensive operations
 #+end_src
 ** Vim Leader
    #+begin_src emacs-lisp
-     (use-package helm
-       :config
-       (use-package helm-ag)
-       (use-package helm-projectile
-         :config
-         (helm-projectile-on)
-         )
-       )
-
      (use-package evil-leader
        :init
        (setq evil-toggle-key "C-c e")
@@ -1393,6 +1389,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "or" 'relative-line-numbers-mode)
      (use-package projectile
        :config
+       (projectile-mode)
        (setq projectile-switch-project-action 'projectile-dired)
        (evil-leader/set-key "p" 'projectile-commander)
        )

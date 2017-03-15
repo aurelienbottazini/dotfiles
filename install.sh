@@ -39,6 +39,7 @@ yarn global add bower
 yarn global add eslint
 yarn global add eslint-plugin-jsx-a11y
 yarn global add prettier
+yarn global add import-js
 
 yarn global add babel-cli
 yarn global add babel-preset-es2015

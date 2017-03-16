@@ -72,7 +72,7 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (slim-mode 0blayout import-js aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+    (highlight-indent-guides highlight-ident-guides highlight-ident dired-subtree slim-mode 0blayout import-js aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
  '(prettier-target-mode "js2-mode")
  '(projectile-completion-system (quote ivy))
  '(projectile-enable-caching t)
@@ -135,6 +135,7 @@
  '(avy-lead-face-1 ((t (:background "#3F3F3F" :foreground "#F0DFAF" :inverse-video t :weight bold))))
  '(avy-lead-face-2 ((t (:background "#3F3F3F" :foreground "#DCA3A3" :inverse-video t :weight bold))))
  '(col-highlight ((t (:inherit hl-line))))
+ '(column-enforce-face ((t (:underline (:color foreground-color :style wave)))))
  '(column-marker-1 ((t (:background "red" :foreground "black"))))
  '(flycheck-error ((t (:inherit nil :underline (:color "#bc8383" :style wave)))))
  '(flycheck-fringe-error ((t (:foreground "#BC8383" :inverse-video t :weight bold))))

@@ -1,0 +1,15 @@
+name: Doximity
+root: ~/projects/work/doximity
+
+windows:
+  - dev:
+      layout: main-horizontal
+      panes:
+        - ec .
+        - bundle exec rails c
+  - servers:
+      layout: main-horizontal
+      panes:
+        - bundle exec rails s webrick -p 5000
+        - foreman start -c web=0,all=1
+        - redis-server

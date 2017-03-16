@@ -670,6 +670,13 @@ while in the minibuffer for expensive operations
     (setq comment-auto-fill-only-comments t)
   #+end_src
 
+** highlight identation
+#+begin_src emacs-lisp
+  (use-package highlight-indent-guides
+    :config
+    (setq highlight-indent-guides-method 'character)
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+#+end_src
 ** beautify code
 #+begin_src emacs-lisp
   (use-package web-beautify)
@@ -799,9 +806,9 @@ while in the minibuffer for expensive operations
        (use-package import-js)
 
        (require 'prettier-js)
-       (add-hook 'js2-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'prettier-before-save)))
+       ;;(add-hook 'js2-mode-hook
+        ;;  (lambda ()
+         ;;   (add-hook 'before-save-hook 'prettier-before-save)))
 )
 
      (use-package js2-refactor
@@ -893,6 +900,10 @@ while in the minibuffer for expensive operations
       (setq emmet-expand-jsx-className? t)
       (tern-mode t))
   #+end_src
+** Slim
+#+begin_src emacs-lisp
+  (use-package slim-mode)
+#+end_src
 ** Ruby
 
    #+BEGIN_SRC emacs-lisp
@@ -952,7 +963,6 @@ while in the minibuffer for expensive operations
 
           (eval-after-load 'ruby-mode
             '(progn
-               ;; use the standard Dired bindings as a base
                (evil-define-key 'normal ruby-mode-map
                  "[m" 'ruby-beginning-of-defun
                  "]m" 'ruby-end-of-defun
@@ -1044,7 +1054,7 @@ while in the minibuffer for expensive operations
     :init
     (setq relative-line-numbers-format 'better-relative-number-format)
     :config
-    ;; (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
+    (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
     (defun better-relative-number-format (offset)
       "Another formatting function"
       (format "%3d " (abs offset)))
@@ -1055,10 +1065,6 @@ while in the minibuffer for expensive operations
 #+begin_src emacs-lisp
   (use-package context-coloring
     :diminish context-coloring-mode
-    :config
-    (add-hook 'js2-mode-hook #'context-coloring-mode)
-    (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
-    (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
   )
 #+end_src
 
@@ -1199,6 +1205,7 @@ while in the minibuffer for expensive operations
 ** Vim normal mode
 #+begin_src emacs-lisp
 
+  (use-package helm-projectile)
   (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
 
     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
@@ -1242,11 +1249,14 @@ while in the minibuffer for expensive operations
 
 *** dired-mode-map
 #+begin_src emacs-lisp
+  (use-package dired-subtree)
   (eval-after-load 'dired
     '(progn
        ;; use the standard Dired bindings as a base
        (evil-define-key 'normal dired-mode-map
          "-" 'dired-up-directory
+         "i" 'dired-subtree-insert
+         "I" 'dired-subtree-remove
          )))
 #+end_src
 
@@ -1355,11 +1365,7 @@ while in the minibuffer for expensive operations
 
      (evil-leader/set-key "gh" 'magit-log-buffer-file)
 
-     (use-package swoop
-       :config
-       (require 'swoop)
-       )
-     (evil-leader/set-key "S" 'swoop-multi)
+     (evil-leader/set-key "S" 'swiper-multi)
      (evil-leader/set-key "c" 'shell-command)
      (defun browse-lodash-docs ()
        (interactive)
@@ -1402,7 +1408,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "vt" 'visit-term-buffer)
 
-     (evil-leader/set-key "w" 'swoop)
+     (evil-leader/set-key "w" 'swiper)
 
      (evil-leader/set-key "1" 'shell-command)
      (evil-leader/set-key "5" 'evilmi-jump-items)

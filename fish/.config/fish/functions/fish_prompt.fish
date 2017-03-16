@@ -88,15 +88,15 @@ function fish_prompt
 
   _print_in_color "\n"(_pwd_with_tilde) blue
 
-  if _in_git_directory
-    if _no_commits
-      _print_in_color " "(_git_branch_name_or_revision) magenta
-      _print_in_color " "(git rev-parse --short HEAD) green
-      _print_in_color " "(_git_upstream_status) cyan
+  # if _in_git_directory
+  #   if _no_commits
+  #     _print_in_color " "(_git_branch_name_or_revision) magenta
+  #     _print_in_color " "(git rev-parse --short HEAD) green
+  #     _print_in_color " "(_git_upstream_status) cyan
 
-      _print_in_color (_git_dirty_status) red
-    end
-  end
+  #     _print_in_color (_git_dirty_status) red
+  #   end
+  # end
 
   _print_in_color "\n=> " (_prompt_color_for_status $last_status)
 end

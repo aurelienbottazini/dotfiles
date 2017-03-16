@@ -1156,9 +1156,10 @@ while in the minibuffer for expensive operations
   (define-key my-keys-minor-mode-map (kbd "C-c m")   'evil-motion-state)
   (define-key my-keys-minor-mode-map (kbd "C-c t")   'transpose-chars)
   (define-key my-keys-minor-mode-map (kbd "M-/")     'hippie-expand)
-  (use-package helm)
+
   (define-key my-keys-minor-mode-map (kbd "M-x")     'counsel-M-x)
   (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'counsel-find-file)
+  (define-key my-keys-minor-mode-map (kbd "C-x b") 'ivy-switch-buffer)
   (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
      (setq x-select-enable-clipboard nil)
@@ -1204,9 +1205,7 @@ while in the minibuffer for expensive operations
    #+end_src
 ** Vim normal mode
 #+begin_src emacs-lisp
-
-  (use-package helm-projectile)
-  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
+  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile)
 
     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
@@ -1357,6 +1356,7 @@ while in the minibuffer for expensive operations
        (global-evil-leader-mode))
      (evil-leader/set-leader "<SPC>")
 
+     (evil-leader/set-key "b" 'ivy-switch-buffer)
      (evil-leader/set-key "gb" 'magit-blame)
      (evil-leader/set-key "gs" 'magit-status)
      (use-package git-link
@@ -1408,6 +1408,7 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "vs" 'yas-describe-tables)
      (evil-leader/set-key "vt" 'visit-term-buffer)
 
+     (evil-leader/set-key "y" 'counsel-yank-pop)
      (evil-leader/set-key "w" 'swiper)
 
      (evil-leader/set-key "1" 'shell-command)

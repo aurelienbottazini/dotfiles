@@ -4,6 +4,9 @@ brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
 brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
+brew tap universal-ctags/universal-ctags
+brew install --HEAD universal-ctags
+
 brew install htop rbenv rbenv-ctags
 brew install global --with-ctags --with-pygments
 brew cask install launchrocket
@@ -17,8 +20,6 @@ ln -sf /usr/local/bin/elm-format-0.18  /usr/local/bin/elm-format
 brew install fish
 brew install tmux
 
-brew tap universal-ctags/universal-ctags
-brew install --HEAD universal-ctags
 # brew version does not work with ruby pdfkit. Need at least version 0.12.3
 # install it using http://wkhtmltopdf.org/downloads.html
 # brew install wkhtmltopdf

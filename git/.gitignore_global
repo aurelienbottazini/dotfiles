@@ -15,3 +15,5 @@ dummy/tmp/*
 .tern-port
 jsconfig.json
 .projectile
+.vscode
+.idea

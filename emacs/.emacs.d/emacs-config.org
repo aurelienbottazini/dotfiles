@@ -143,9 +143,9 @@ while in the minibuffer for expensive operations
 
    #+BEGIN_SRC emacs-lisp
    (savehist-mode 1)                       ;saves minibuffer history
-   ;; (desktop-save-mode 1)                     ;save opened buffers
+   ;;(desktop-save-mode 1)                     ;save opened buffers
                                            ;between emacs sessions
-   ;; (setq desktop-restore-eager 5) ; restore only 5 buffers at once
+   (setq desktop-restore-eager 5) ; restore only 5 buffers at once
    #+END_SRC
 
 
@@ -410,19 +410,24 @@ while in the minibuffer for expensive operations
 
 #+BEGIN_SRC emacs-lisp
   (when window-system
-    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-    ;; (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+    (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
    )
   (add-to-list 'default-frame-alist
-           '(font . "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
+           ;;'(font . "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+           '(font . "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+)
 #+END_SRC
 
    custom symbols for pragmata pro
    #+begin_src emacs-lisp
-     ;; (load "pragmatapro-prettify-symbols" )
+     (load "pragmatapro-prettify-symbols" )
    #+end_src
 
-
+** Icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons)
+#+end_src
 ** Visual interface
 
   #+begin_src emacs-lisp
@@ -471,10 +476,9 @@ while in the minibuffer for expensive operations
   #+END_SRC
 
 #+begin_src emacs-lisp
-  (use-package column-enforce-mode
+  (use-package fill-column-indicator
     :config
-    (add-hook 'prog-mode-hook 'column-enforce-mode)
-  )
+    (add-hook 'prog-mode-hook 'fci-mode))
 #+end_src
 
 * Registers
@@ -940,8 +944,9 @@ while in the minibuffer for expensive operations
                (defun ruby-mode-defaults ()
                  (inf-ruby-minor-mode +1)
                  ;; CamelCase aware editing operations
-                 (subword-mode +1))))
+                 )))
 
+          (add-hook 'ruby-mode-hook 'subword-mode)
           ;; (use-package enh-ruby-mode
           ;; :config
           ;; (add-hook 'enh-ruby-mode-hook (lambda ()
@@ -974,7 +979,6 @@ while in the minibuffer for expensive operations
                           '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
                             ))))
           ;
-          ;(add-hook 'ruby-mode-hook 'rspec-mode)
      )
 
           (use-package bundler)
@@ -1160,6 +1164,8 @@ while in the minibuffer for expensive operations
   (define-key my-keys-minor-mode-map (kbd "M-x")     'counsel-M-x)
   (define-key my-keys-minor-mode-map (kbd "C-x C-f") 'counsel-find-file)
   (define-key my-keys-minor-mode-map (kbd "C-x b") 'ivy-switch-buffer)
+  (use-package switch-window)
+  (define-key my-keys-minor-mode-map (kbd "C-x o") 'switch-window)
   (define-key my-keys-minor-mode-map (kbd "M-?")     'help-command)
 
      (setq x-select-enable-clipboard nil)
@@ -1205,7 +1211,7 @@ while in the minibuffer for expensive operations
    #+end_src
 ** Vim normal mode
 #+begin_src emacs-lisp
-  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile)
+  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
 
     (define-key evil-normal-state-map (kbd "C-w t") 'make-frame-command)
     (define-key evil-normal-state-map (kbd "C-w x") 'delete-frame)
@@ -1232,6 +1238,8 @@ while in the minibuffer for expensive operations
     (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
     (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
     (define-key evil-normal-state-map (kbd "]t") 'helm-etags-select)
+    (define-key evil-normal-state-map (kbd "[w") 'persp-previous)
+    (define-key evil-normal-state-map (kbd "]w") 'persp-next)
 
     (use-package origami)
     (global-origami-mode)
@@ -1393,6 +1401,7 @@ while in the minibuffer for expensive operations
       (hlinum-activate))
      (evil-leader/set-key "ol" 'linum-mode)
      (evil-leader/set-key "or" 'relative-line-numbers-mode)
+     (evil-leader/set-key "ow" 'persp-switch)
      (use-package projectile
        :config
        (projectile-mode)
@@ -1412,7 +1421,10 @@ while in the minibuffer for expensive operations
      (evil-leader/set-key "w" 'swiper)
 
      (evil-leader/set-key "1" 'shell-command)
+     (evil-leader/set-key "2" 'neotree-toggle)
      (evil-leader/set-key "5" 'evilmi-jump-items)
+
+
    #+end_src
 ** Tmux
    #+BEGIN_SRC emacs-lisp
@@ -1982,6 +1994,21 @@ while in the minibuffer for expensive operations
 )
 #+END_SRC
 
+* Neotree / NerdTree
+#+begin_src emacs-lisp
+  (use-package neotree
+    :config
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+#+end_src
+
+* Persp mode
+#+begin_src emacs-lisp
+  (use-package persp-mode
+    :config
+    (setq wg-morph-on nil) ;; switch off animation
+    (setq persp-autokill-buffer-on-remove 'kill-weak)
+    (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
+#+end_src
 * Wiki
 ** Org Tips
    +[[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][ List of Code block arguments]]

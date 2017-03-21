@@ -119,7 +119,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='bubblegum'
+let g:airline_theme='wombat'
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
 noremap <Leader>f :Ag<Space>
@@ -168,7 +168,7 @@ function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
 
-set guifont=Monoid-Retina:h12
+set guifont=PragmataPro:h14
 set cursorline
 " set cursorcolumn
 " set colorcolumn=80

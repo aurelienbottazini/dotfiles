@@ -8,7 +8,7 @@ end
 
 
 function _git_branch_name_or_revision
-  set -l branch (git symbolic-ref HEAD ^ /dev/null | sed -e 's|^refs/heads/||')
+  set -l branch (git rev-parse --abbrev-ref HEAD)
   set -l revision (git rev-parse HEAD ^ /dev/null | cut -b 1-7)
 
   if test (count $branch) -gt 0
@@ -23,7 +23,7 @@ function _git_upstream_configured
 end
 
 function _no_commits
-  git log > /dev/null 2>&1
+  git log -1 > /dev/null 2>&1
 end
 
 function _git_behind_upstream
@@ -88,15 +88,15 @@ function fish_prompt
 
   _print_in_color "\n"(_pwd_with_tilde) blue
 
-  # if _in_git_directory
-  #   if _no_commits
-  #     _print_in_color " "(_git_branch_name_or_revision) magenta
-  #     _print_in_color " "(git rev-parse --short HEAD) green
-  #     _print_in_color " "(_git_upstream_status) cyan
+  if _in_git_directory
+   if _no_commits
+     _print_in_color " "(_git_branch_name_or_revision) magenta
+     _print_in_color " "(git rev-parse --short HEAD) green
+     _print_in_color " "(_git_upstream_status) cyan
 
-  #     _print_in_color (_git_dirty_status) red
-  #   end
-  # end
+      _print_in_color (_git_dirty_status) red
+   end
+  end
 
   _print_in_color "\n=> " (_prompt_color_for_status $last_status)
 end

@@ -13,6 +13,7 @@ brew cask install launchrocket
 brew install tree
 brew install node
 brew install hub
+brew install vim
 brew install ifstat
 brew install ngrep
 brew install elm-format

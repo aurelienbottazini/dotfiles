@@ -147,7 +147,7 @@
  '(flycheck-warning ((t (:inherit nil :foreground "#F0DFAF" :inverse-video t :underline nil))))
  '(font-lock-comment-face ((t (:foreground "#7F9F7F" :slant italic))))
  '(font-lock-string-face ((t (:slant italic))))
- '(fringe ((t (:background "#3F3F3F" :foreground "#6f6f6f"))))
+ '(fringe ((t (:background "#4F4F4F" :foreground "#6f6f6f"))))
  '(helm-selection ((t (:background "#4F4F4F" :underline t :slant italic))))
  '(hl-line ((t (:background "#4f4f4f"))))
  '(ivy-current-match ((t (:foreground "#F0DFAF" :underline t :slant italic :weight bold))))

@@ -16,6 +16,7 @@
  '(company-idle-delay nil)
  '(company-minimum-prefix-length 0)
  '(context-coloring-syntactic-comments t)
+ '(context-coloring-syntactic-strings nil)
  '(crosshairs-mode nil)
  '(custom-safe-themes
    (quote
@@ -34,6 +35,7 @@
  '(evil-toggle-key "C-c e")
  '(exec-path-from-shell-arguments (quote ("-l")))
  '(fill-column 80)
+ '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc)))
  '(flycheck-indication-mode (quote left-fringe))
  '(flycheck-ruby-executable "/Users/aurelienbottazini/.rbenv/shims/ruby")
  '(flycheck-ruby-rubocop-executable "/Users/aurelienbottazini/.rbenv/shims/rubocop")
@@ -73,7 +75,7 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (persp-mode fill-column-indicator all-the-icons neotree switch-window highlight-indent-guides highlight-ident-guides highlight-ident dired-subtree slim-mode 0blayout import-js aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+    (counsel ivy persp-mode fill-column-indicator all-the-icons neotree switch-window highlight-indent-guides highlight-ident-guides highlight-ident dired-subtree slim-mode 0blayout import-js aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
  '(prettier-target-mode "js2-mode")
  '(projectile-completion-system (quote ivy))
  '(projectile-enable-caching t)

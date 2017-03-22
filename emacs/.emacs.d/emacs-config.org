@@ -330,14 +330,6 @@ while in the minibuffer for expensive operations
   (electric-indent-mode 1)
   #+END_SRC
 
-  (use-package aggressive-indent
-   :diminish aggressive-indent-mode
-   :config
-   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-   (add-hook 'css-mode-hook #'aggressive-indent-mode)
-   (add-hook 'scss-mode-hook #'aggressive-indent-mode)
-   (add-hook 'js2-mode-hook #'aggressive-indent-mode))
-
 * UI
 
   Keeps the cursor at a reasonable place when scrolling
@@ -446,14 +438,6 @@ while in the minibuffer for expensive operations
      (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   #+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
-;;     (when (string-match "apple-darwin" system-configuration)
-       ;; on mac, there's always a menu bar drown, don't have it empty
- ;;      (when window-system
-  ;;       (menu-bar-mode 1)))
-  #+END_SRC
-
-
   Show end of buffer with /q/ left fringe.
   #+BEGIN_SRC emacs-lisp
      (setq default-indicate-empty-lines t)
@@ -529,6 +513,7 @@ while in the minibuffer for expensive operations
                               ("read" . ?r)))
         (setq org-confirm-babel-evaluate nil)
         (setq org-html-doctype "html5")
+        (setq org-src-tab-acts-natively t)
         (setq org-html-html5-fancy t)
         (setq org-html-allow-name-attribute-in-anchors nil) ; does not validate with wc3 validator
         (setq org-html-head-include-default-style nil)
@@ -676,10 +661,10 @@ while in the minibuffer for expensive operations
 
 ** highlight identation
 #+begin_src emacs-lisp
-  (use-package highlight-indent-guides
-    :config
-    (setq highlight-indent-guides-method 'character)
-    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+  ;;(use-package highlight-indent-guides
+  ;;  :config
+  ;;  (setq highlight-indent-guides-method 'character)
+  ;;  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 #+end_src
 ** beautify code
 #+begin_src emacs-lisp
@@ -1069,6 +1054,8 @@ while in the minibuffer for expensive operations
 #+begin_src emacs-lisp
   (use-package context-coloring
     :diminish context-coloring-mode
+    :config
+    (add-hook 'js2-mode-hook 'context-coloring-mode)
   )
 #+end_src
 
@@ -1207,7 +1194,7 @@ while in the minibuffer for expensive operations
    #+end_src
 ** Vim commands
    #+begin_src emacs-lisp
-      (evil-ex-define-cmd "W"     'evil-write-all)
+     (evil-ex-define-cmd "W" 'evil-write-all)
    #+end_src
 ** Vim normal mode
 #+begin_src emacs-lisp
@@ -1238,8 +1225,6 @@ while in the minibuffer for expensive operations
     (define-key evil-normal-state-map (kbd "[p") 'evilmi-jump-items)
     (define-key evil-normal-state-map (kbd "]p") 'evilmi-jump-items)
     (define-key evil-normal-state-map (kbd "]t") 'helm-etags-select)
-    (define-key evil-normal-state-map (kbd "[w") 'persp-previous)
-    (define-key evil-normal-state-map (kbd "]w") 'persp-next)
 
     (use-package origami)
     (global-origami-mode)
@@ -1401,7 +1386,6 @@ while in the minibuffer for expensive operations
       (hlinum-activate))
      (evil-leader/set-key "ol" 'linum-mode)
      (evil-leader/set-key "or" 'relative-line-numbers-mode)
-     (evil-leader/set-key "ow" 'persp-switch)
      (use-package projectile
        :config
        (projectile-mode)
@@ -1476,18 +1460,10 @@ while in the minibuffer for expensive operations
   #+begin_src emacs-lisp
   (use-package avy)
   #+end_src
-** ggtags
-#+begin_src emacs-lisp
-  ;; (use-package ggtags
-  ;;  :diminish ggtags-mode
-  ;;  :config
-  ;;  ;;(add-hook 'prog-mode-hook 'ggtags-mode)
-  ;; )
-#+end_src
 ** dumb jump
 #+begin_src emacs-lisp
   (use-package dumb-jump
-   :config (setq dumb-jump-selector 'helm)
+   :config (setq dumb-jump-selector 'ivy)
    )
 #+end_src
 * Dired
@@ -1619,7 +1595,12 @@ while in the minibuffer for expensive operations
 #+end_src
 * Autotyping / Completion
   https://www.gnu.org/software/emacs/manual/html_node/autotype/
-
+** Ivy
+#+begin_src emacs-lisp
+ (use-package ivy)
+ (use-package counsel)
+ (use-package counsel-projectile)
+#+end_src
 ** Abbrevs
 
    #+begin_src emacs-lisp
@@ -1648,6 +1629,7 @@ while in the minibuffer for expensive operations
 
 #+begin_src emacs-lisp
   (use-package auto-complete
+   :diminish auto-complete-mode
    :config
    (ac-config-default)
    (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
@@ -1924,8 +1906,6 @@ while in the minibuffer for expensive operations
 ** Theme
   #+begin_src emacs-lisp
     (setq custom-theme-directory "~/.emacs.d/themes")
-    ;; (unless window-system
-    ;;   (progn
     (use-package zenburn-theme
       :config
       (load-theme 'zenburn)
@@ -1973,10 +1953,7 @@ while in the minibuffer for expensive operations
   (use-package paredit
     :diminish paredit-mode
     :config
-    ;; Enable paredit for a couple for non lisp modes; tweak
-    ;; paredit-space-for-delimiter-predicates to avoid inserting spaces
-    ;; before open parens.
-    (dolist (mode '(emacs-lisp lisp javascript js2))
+    (dolist (mode '(emacs-lisp lisp))
       (add-hook (intern (format "%s-mode-hook" mode))
                 '(lambda ()
                    (add-to-list (make-local-variable 'paredit-space-for-delimiter-predicates)
@@ -2001,14 +1978,6 @@ while in the minibuffer for expensive operations
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 #+end_src
 
-* Persp mode
-#+begin_src emacs-lisp
-  (use-package persp-mode
-    :config
-    (setq wg-morph-on nil) ;; switch off animation
-    (setq persp-autokill-buffer-on-remove 'kill-weak)
-    (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
-#+end_src
 * Wiki
 ** Org Tips
    +[[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][ List of Code block arguments]]

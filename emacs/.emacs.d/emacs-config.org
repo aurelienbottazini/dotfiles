@@ -402,18 +402,18 @@ while in the minibuffer for expensive operations
 
 #+BEGIN_SRC emacs-lisp
   (when window-system
-    ;; (set-default-font "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-    (set-default-font "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;;    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+    (set-default-font "-*-PragmataPro-normal-normal-*-14-*-*-*-m-0-iso10646-1")
    )
   (add-to-list 'default-frame-alist
-           ;;'(font . "-*-Operator Mono-Medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-           '(font . "-*-PragmataPro-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+ ;;       '(font . "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+           '(font . "-*-PragmataPro-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 )
 #+END_SRC
 
    custom symbols for pragmata pro
    #+begin_src emacs-lisp
-     (load "pragmatapro-prettify-symbols" )
+;;     (load "pragmatapro-prettify-symbols" )
    #+end_src
 
 ** Icons
@@ -421,6 +421,12 @@ while in the minibuffer for expensive operations
   (use-package all-the-icons)
 #+end_src
 ** Visual interface
+
+#+begin_src emacs-lisp
+  (use-package emojify
+   :config
+   (add-hook 'after-init-hook #'global-emojify-mode))
+#+end_src
 
   #+begin_src emacs-lisp
   (global-hl-line-mode)
@@ -1418,7 +1424,7 @@ while in the minibuffer for expensive operations
                (replace-regexp-in-string "\n\\'" ""
                                          (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
 
-     (use-package emamux)
+    (use-package emamux)
      (defun tmux-socket-command-string ()
        (interactive)
        (concat "tmux -S "

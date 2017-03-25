@@ -162,6 +162,9 @@ function! EchoPath()
     echo join(split(&path, ","), "\n")
 endfunction
 
+" highlight matching words under cursor
+" autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
 " Easier to see which tag files are used. One tag file per line
 command! TagFiles :call EchoTags()
 function! EchoTags()

@@ -17,6 +17,7 @@ brew install vim
 brew install ifstat
 brew install ngrep
 brew install elm-format
+brew install Emacs --with-cocoa --with-imagemagick@6
 ln -sf /usr/local/bin/elm-format-0.18  /usr/local/bin/elm-format
 brew install fish
 brew install tmux

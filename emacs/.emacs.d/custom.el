@@ -27,7 +27,7 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(electric-pair-mode nil)
  '(elm-format-on-save t)
- '(emamux:use-nearest-pane nil)
+ '(emamux:use-nearest-pane t)
  '(emmet-indent-after-insert t)
  '(emmet-move-cursor-after-expanding t)
  '(emmet-move-cursor-between-quotes t)
@@ -75,7 +75,7 @@
  '(org-indent-mode-turns-off-org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (counsel ivy persp-mode fill-column-indicator all-the-icons neotree switch-window highlight-indent-guides highlight-ident-guides highlight-ident dired-subtree slim-mode 0blayout import-js aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
+    (emojify emacs-emojify counsel ivy persp-mode fill-column-indicator all-the-icons neotree switch-window highlight-indent-guides highlight-ident-guides highlight-ident dired-subtree slim-mode 0blayout import-js aggressive-indent column-enforce-mode tern-auto-complete auto-complete ruby-end vue-mode hlinum evil-smartparens smartparens helm-gtags company-restclient company-tern helm-projectile helm ag writeroom-mode palimpsest evil-magit magit paredit rainbow-mode origami windresize counsel-projectile which-key flycheck cypher-mode elm-mode dockerfile-mode haml-mode rspec-mode ruby-interpolation bundler enh-ruby-mode yaml-mode typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor markdown-mode fish-mode less-css-mode litable web-mode emmet-mode relative-line-numbers js2-mode diff-hl web-beautify evil-matchit evil-search-highlight-persist evil-indent-plus evil-visualstar evil-commentary evil-surround evil-multiedit htmlize org-bullets smooth-scrolling exec-path-from-shell use-package)))
  '(prettier-target-mode "js2-mode")
  '(projectile-completion-system (quote ivy))
  '(projectile-enable-caching t)

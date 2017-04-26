@@ -14,7 +14,6 @@ while in the minibuffer for expensive operations
 (add-hook 'minibuffer-exit-hook #'my-minibuffer-gc-exit-hook)
 
 (my-minibuffer-gc-setup-hook)
-
 #+end_src
 
 * About
@@ -356,12 +355,6 @@ while in the minibuffer for expensive operations
   #+BEGIN_SRC emacs-lisp
   (dolist
       (r `((?e (file . ,(concat user-emacs-directory "emacs-config.org")))
-           (?t (file . ,(expand-file-name "~/.tmux.conf")))
-           (?g (file . ,(expand-file-name "~/Dropbox/org/gtd.org")))
-           (?i (file . ,(expand-file-name "~/Dropbox/org/inbox.org")))
-           (?w (file . ,(expand-file-name "~/projects/aurelienbottazini.com/_org")))
-           (?j (file . ,(expand-file-name "~/projects/training-heaven/src/training.js")))
-           (?s (file . ,(expand-file-name "~/projects/training-heaven/src/training.scss")))
            ))
     (set-register (car r) (cadr r)))
   #+END_SRC
@@ -1407,6 +1400,23 @@ while in the minibuffer for expensive operations
    #+END_SRC
 
 * Colors
+
+** modeline
+  #+begin_src emacs-lisp
+    (lexical-let ((default-color (cons (face-background 'mode-line)
+                                       (face-foreground 'mode-line))))
+      (add-hook 'post-command-hook
+                (lambda ()
+                  (let ((color (cond ((minibufferp) default-color)
+                                     ((evil-insert-state-p) '("#f0dfaf" . "#2b2b2b"))
+                                     ((evil-emacs-state-p)  '("#dc8cc3" . "#2b2b2b"))
+                                     ((evil-visual-state-p)  '("#94bff3" . "#2b2b2b"))
+                                     ((buffer-modified-p)   '("#ac7373" . "#2b2b2b"))
+                                     (t default-color))))
+                    (set-face-background 'mode-line (car color))
+                    (set-face-foreground 'mode-line-buffer-id (cdr color))
+                    (set-face-foreground 'mode-line (cdr color))))))
+  #+end_src
 ** Vim
 #+begin_src emacs-lisp
  (setq evil-emacs-state-cursor  '("#DC8CC3" box))

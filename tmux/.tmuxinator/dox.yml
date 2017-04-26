@@ -13,3 +13,7 @@ windows:
         - brew services restart dox-auth-api 
         - foreman start -c web=0,all=1
         - redis-server
+  - activities:
+      layout: main-horizontal
+      panes:
+        - cd ~/projects/work/activities ;and bundle exec rails s webrick -p 5150

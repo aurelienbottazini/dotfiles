@@ -214,110 +214,6 @@ while in the minibuffer for expensive operations
      (put 'downcase-region 'disabled nil)
      (put 'set-goal-column 'disabled nil)
    #+END_SRC
-* Custom Functions
-
-  #+begin_src emacs-lisp
-    (require 'cl)
-    (defun sluggify (str)
-      (downcase
-       (replace-regexp-in-string
-        " " "-" str)))
-
-    (defun new-post (title)
-      (interactive "MTitle: ")
-      (let ((slug (sluggify title))
-            (date (current-time)))
-        (find-file (concat "/Users/aurelienbottazini/projects/aurelienbottazini.com/_posts/"
-                           (format-time-string "%Y-%m-%d") "-" slug
-                           ".md"))))
-
-     (defun copy-to-clipboard-git-link()
-       (interactive)
-       (setq x-select-enable-clipboard t)
-       (git-link nil nil nil)
-       (setq x-select-enable-clipboard nil))
-
-     (defun visit-term-buffer ()
-       "Create or visit a terminal buffer."
-       (interactive)
-       (if (not (get-buffer "*my-ansi-term*"))
-           (ansi-term "/usr/local/bin/fish" "my-ansi-term")
-         (switch-to-buffer "*my-ansi-term*")
-         ))
-
-    (defun js-jump-to (current from to format-name)
-      (find-file
-       (cl-loop with parts = (reverse current)
-                with fname = (file-name-sans-extension (cl-first parts))
-                for (name . rest) on (cl-rest parts)
-                until (string-equal name from)
-                collect name into names
-                finally (cl-return
-                         (mapconcat 'identity
-                                    (nconc (reverse rest)
-                                           (list to)
-                                           (reverse names)
-                                           (list (funcall format-name fname) )) "/" )))))
-
-    (defun js-format-impl-name (fname)
-      (format "%s.jsx" (replace-regexp-in-string "-test" "" fname)))
-
-    (defun js-format-test-name (fname)
-      (format "%s-test.js" fname))
-
-    (defun js-jump-to-implementation-or-test ()
-      (interactive)
-      (let ((current (split-string (buffer-file-name) "/")))
-        (cond
-         ((member "__tests__" current) (js-jump-to current "__tests__" "src" 'js-format-impl-name))
-         ((member "src" current)  (js-jump-to current "src" "__tests__" 'js-format-test-name))
-         (t (error "not within a test or lib directory"))
-         )))
-
-     (defun xah-next-user-buffer ()
-       "Switch to the next user buffer.
-     “user buffer” is determined by `xah-user-buffer-q'.
-     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
-     Version 2016-06-19"
-       (interactive)
-       (next-buffer)
-       (let ((i 0))
-         (while (< i 20)
-           (if (not (xah-user-buffer-q))
-               (progn (next-buffer)
-                      (setq i (1+ i)))
-             (progn (setq i 100))))))
-
-     (defun xah-previous-user-buffer ()
-       "Switch to the previous user buffer.
-     “user buffer” is determined by `xah-user-buffer-q'.
-     URL `http://ergoemacs.org/emacs/elisp_next_prev_user_buffer.html'
-     Version 2016-06-19"
-       (interactive)
-       (previous-buffer)
-       (let ((i 0))
-         (while (< i 20)
-           (if (not (xah-user-buffer-q))
-               (progn (previous-buffer)
-                      (setq i (1+ i)))
-             (progn (setq i 100))))))
-
-     (defun xah-user-buffer-q ()
-       "Return t if current buffer is a user buffer, else nil.
-     Typically, if buffer name starts with *, it's not considered a user buffer.
-     This function is used by buffer switching command and close buffer command, so that next buffer shown is a user buffer.
-     You can override this function to get your idea of “user buffer”.
-     version 2016-06-18"
-       (interactive)
-       (if (string-equal "*" (substring (buffer-name) 0 1))
-           nil
-         (if (string-equal major-mode "dired-mode")
-             nil
-           (if (string-equal major-mode "magit-mode")
-               nil
-             t
-             ))))
-  #+end_src
 * Indent
   No tabs
   #+BEGIN_SRC emacs-lisp
@@ -345,6 +241,7 @@ while in the minibuffer for expensive operations
     ;; (global-hl-line-mode 1)
     (blink-cursor-mode 0)
     (column-number-mode)
+    (global-linum-mode)
   #+END_SRC
 
 
@@ -402,32 +299,14 @@ while in the minibuffer for expensive operations
 
 #+BEGIN_SRC emacs-lisp
   (when window-system
-;;    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-    (set-default-font "-*-PragmataPro-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+    (set-default-font "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
    )
   (add-to-list 'default-frame-alist
- ;;       '(font . "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-           '(font . "-*-PragmataPro-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+        '(font . "-*-Operator Mono-Medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 )
 #+END_SRC
 
-   custom symbols for pragmata pro
-   #+begin_src emacs-lisp
-;;     (load "pragmatapro-prettify-symbols" )
-   #+end_src
-
-** Icons
-#+begin_src emacs-lisp
-  (use-package all-the-icons)
-#+end_src
 ** Visual interface
-
-#+begin_src emacs-lisp
-  (use-package emojify
-   :config
-   (add-hook 'after-init-hook #'global-emojify-mode))
-#+end_src
-
   #+begin_src emacs-lisp
   (global-hl-line-mode)
   #+end_src
@@ -526,13 +405,6 @@ while in the minibuffer for expensive operations
         (setq org-html-head-extra nil)
         (setq org-html-head-include-scripts nil)
 
-        (setq org-html-head "
-          <link rel=\"stylesheet\" type=\"text/css\" href=\"http://aurelienbottazini.com/css/org-export.min.css\">
-          <script src=\"http://aurelienbottazini.com/js/org-export.min.js\"></script>")
-        :config
-        ;;(add-hook 'org-mode-hook '(lambda ()
-        ;;                          (turn-on-flyspell)
-        ;;                          (writegood-mode t)))
         (add-hook 'org-mode-hook 'turn-on-auto-fill)
         (defadvice org-refile (after save-refiled-buffer activate compile)
           "saves all org buffers after using refile"
@@ -545,10 +417,6 @@ while in the minibuffer for expensive operations
           (set-display-table-slot standard-display-table
                                   'selective-display (string-to-vector "  ••• ")))
 
-        ;; For colorized source codes with html export
-        (use-package htmlize
-          :config
-          (setq org-html-htmlize-output-type (quote css)))
   #+END_SRC
 
 * Multiple cursors
@@ -665,26 +533,6 @@ while in the minibuffer for expensive operations
     (setq comment-auto-fill-only-comments t)
   #+end_src
 
-** highlight identation
-#+begin_src emacs-lisp
-  ;;(use-package highlight-indent-guides
-  ;;  :config
-  ;;  (setq highlight-indent-guides-method 'character)
-  ;;  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
-#+end_src
-** beautify code
-#+begin_src emacs-lisp
-  (use-package web-beautify)
-#+end_src
-** See diff in fringe
-#+begin_src emacs-lisp
-  (use-package diff-hl
-  :config
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
-  )
-#+end_src
 ** web-mode
   #+begin_src emacs-lisp
 
@@ -702,12 +550,6 @@ while in the minibuffer for expensive operations
      )
 
   #+end_src
-** Lisp
-   On the fly lisp evaluation
-#+begin_src emacs-lisp
-(use-package litable)
-#+end_src
-
 ** CSS
    #+BEGIN_SRC emacs-lisp
   (defun my-css-mode-setup ()
@@ -938,11 +780,6 @@ while in the minibuffer for expensive operations
                  )))
 
           (add-hook 'ruby-mode-hook 'subword-mode)
-          ;; (use-package enh-ruby-mode
-          ;; :config
-          ;; (add-hook 'enh-ruby-mode-hook (lambda ()
-          ;; (run-hooks 'ruby-mode-hook))))
-
           ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
           ;; make it easier to work with global gnu tags
           (define-category ?U "Uppercase")
@@ -1043,28 +880,6 @@ while in the minibuffer for expensive operations
 
       )
    #+end_src
-** relative-line-numbers
-#+begin_src emacs-lisp
-  (use-package relative-line-numbers
-    :init
-    (setq relative-line-numbers-format 'better-relative-number-format)
-    :config
-    (add-hook 'prog-mode-hook 'relative-line-numbers-mode)
-    (defun better-relative-number-format (offset)
-      "Another formatting function"
-      (format "%3d " (abs offset)))
-    )
-#+end_src
-
-** context-coloring
-#+begin_src emacs-lisp
-  (use-package context-coloring
-    :diminish context-coloring-mode
-    :config
-    (add-hook 'js2-mode-hook 'context-coloring-mode)
-  )
-#+end_src
-
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
 
@@ -1239,23 +1054,9 @@ while in the minibuffer for expensive operations
     (define-key evil-normal-state-map (kbd "zo") 'origami-open-node)
     (define-key evil-normal-state-map (kbd "zv") 'origami-open-all-nodes)
 
+    (winner-mode 1)
     (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
     (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-    (define-key evil-normal-state-map (kbd "]b") 'xah-next-user-buffer)
-    (define-key evil-normal-state-map (kbd "[b") 'xah-previous-user-buffer)
-#+end_src
-
-*** dired-mode-map
-#+begin_src emacs-lisp
-  (use-package dired-subtree)
-  (eval-after-load 'dired
-    '(progn
-       ;; use the standard Dired bindings as a base
-       (evil-define-key 'normal dired-mode-map
-         "-" 'dired-up-directory
-         "i" 'dired-subtree-insert
-         "I" 'dired-subtree-remove
-         )))
 #+end_src
 
 *** lisp-mode map
@@ -1286,13 +1087,6 @@ while in the minibuffer for expensive operations
           "<" 'org-metaleft ; out-dent
           ">" 'org-metaright ; indent
           )
-
-      ;; (evil-leader/set-key-for-mode 'org-mode
-      ;;   (kbd "C-c t")  'org-show-todo-tree
-      ;;   (kbd "C-c a")  'org-agenda
-      ;;   (kbd "C-c c")  'org-archive-subtree-default
-      ;;   (kbd "C-c r")  'org-refile
-      ;;   )
     #+end_src
 *** js2-mode-map
 #+begin_src emacs-lisp
@@ -1462,10 +1256,6 @@ while in the minibuffer for expensive operations
 
    #+END_SRC
 * Jumping Around:
-** Avy
-  #+begin_src emacs-lisp
-  (use-package avy)
-  #+end_src
 ** dumb jump
 #+begin_src emacs-lisp
   (use-package dumb-jump
@@ -1498,11 +1288,11 @@ while in the minibuffer for expensive operations
 
     ;; if window is splitted copy files to split pane as default destination
 
-    (defun xah-dired-mode-setup ()
+    (defun my-dired-mode-setup ()
       "to be run as hook for `dired-mode'."
       (dired-hide-details-mode 1))
 
-    (add-hook 'dired-mode-hook 'xah-dired-mode-setup)
+    (add-hook 'dired-mode-hook 'my-dired-mode-setup)
   #+END_SRC
 
 * Spell Check
@@ -1564,21 +1354,6 @@ while in the minibuffer for expensive operations
  :config
  (add-to-list 'auto-mode-alist '("\\.rest" . restclient-mode)))
 #+end_src
-* IRC
-  I use ~erc~ to chat on IRC.
-
-  Setting nickname and default IRC server.
-  #+BEGIN_SRC emacs-lisp
-  (setq erc-nick "Aurel")
-  (setq erc-server "irc.freenode.org")
-  #+END_SRC
-
-
-  Hiding some IRC messages.
-  #+BEGIN_SRC emacs-lisp
-  (setq erc-hide-list (quote ("JOIN" "QUIT" "left")))
-  #+END_SRC
-
 * ido
 #+begin_src emacs-lisp
   (use-package ido
@@ -1631,275 +1406,7 @@ while in the minibuffer for expensive operations
      )
    #+END_SRC
 
-** Autocomplete
-
-#+begin_src emacs-lisp
-  (use-package auto-complete
-   :diminish auto-complete-mode
-   :config
-   (ac-config-default)
-   (setq-default ac-sources (push 'ac-source-yasnippet ac-sources))
-   (setq ac-use-menu-map t)
-   (define-key ac-menu-map "\C-n" 'ac-next)
-   (define-key ac-menu-map "\C-p" 'ac-previous)
-   (define-key ac-complete-mode-map "\t" 'ac-complete)
-   (define-key ac-complete-mode-map [tab] 'ac-complete)
-   (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-   (use-package tern-auto-complete)
-   (tern-ac-setup)
-   (global-auto-complete-mode t))
-#+end_src
-
-
-#+begin_src emacs-lisp
-  (ac-define-source ramda-abo
-    '((candidates . (list
-                     "__"
-                     "add"
-                     "addIndex"
-                     "adjust"
-                     "all"
-                     "allPass"
-                     "always"
-                     "and"
-                     "any"
-                     "anyPass"
-                     "ap"
-                     "aperture"
-                     "append"
-                     "apply"
-                     "applySpec"
-                     "ascend"
-                     "assoc"
-                     "assocPath"
-                     "binary"
-                     "bind"
-                     "both"
-                     "call"
-                     "chain"
-                     "clamp"
-                     "clone"
-                     "comparator"
-                     "complement"
-                     "compose"
-                     "composeK"
-                     "composeP"
-                     "concat"
-                     "cond"
-                     "construct"
-                     "constructN"
-                     "contains"
-                     "converge"
-                     "countBy"
-                     "curry"
-                     "curryN"
-                     "dec"
-                     "defaultTo"
-                     "descend"
-                     "difference"
-                     "differenceWith"
-                     "dissoc"
-                     "dissocPath"
-                     "divide"
-                     "drop"
-                     "dropLast"
-                     "dropLastWhile"
-                     "dropRepeats"
-                     "dropRepeatsWith"
-                     "dropWhile"
-                     "either"
-                     "empty"
-                     "eqBy"
-                     "eqProps"
-                     "equals"
-                     "evolve"
-                     "F"
-                     "filter"
-                     "find"
-                     "findIndex"
-                     "findLast"
-                     "findLastIndex"
-                     "flatten"
-                     "flip"
-                     "forEach"
-                     "forEachObjIndexed"
-                     "fromPairs"
-                     "groupBy"
-                     "groupWith"
-                     "gt"
-                     "gte"
-                     "has"
-                     "hasIn"
-                     "head"
-                     "identical"
-                     "identity"
-                     "ifElse"
-                     "inc"
-                     "indexBy"
-                     "indexOf"
-                     "init"
-                     "insert"
-                     "insertAll"
-                     "intersection"
-                     "intersectionWith"
-                     "intersperse"
-                     "into"
-                     "invert"
-                     "invertObj"
-                     "invoker"
-                     "is"
-                     "isArrayLike"
-                     "isEmpty"
-                     "isNil"
-                     "join"
-                     "juxt"
-                     "keys"
-                     "keysIn"
-                     "last"
-                     "lastIndexOf"
-                     "length"
-                     "lens"
-                     "lensIndex"
-                     "lensPath"
-                     "lensProp"
-                     "lift"
-                     "liftN"
-                     "lt"
-                     "lte"
-                     "map"
-                     "mapAccum"
-                     "mapAccumRight"
-                     "mapObjIndexed"
-                     "match"
-                     "mathMod"
-                     "max"
-                     "maxBy"
-                     "mean"
-                     "median"
-                     "memoize"
-                     "merge"
-                     "mergeAll"
-                     "mergeWith"
-                     "mergeWithKey"
-                     "min"
-                     "minBy"
-                     "modulo"
-                     "multiply"
-                     "nAry"
-                     "negate"
-                     "none"
-                     "not"
-                     "nth"
-                     "nthArg"
-                     "objOf"
-                     "of"
-                     "omit"
-                     "once"
-                     "or"
-                     "over"
-                     "pair"
-                     "partial"
-                     "partialRight"
-                     "partition"
-                     "path"
-                     "pathEq"
-                     "pathOr"
-                     "pathSatisfies"
-                     "pick"
-                     "pickAll"
-                     "pickBy"
-                     "pipe"
-                     "pipeK"
-                     "pipeP"
-                     "pluck"
-                     "prepend"
-                     "product"
-                     "project"
-                     "prop"
-                     "propEq"
-                     "propIs"
-                     "propOr"
-                     "props"
-                     "propSatisfies"
-                     "range"
-                     "reduce"
-                     "reduceBy"
-                     "reduced"
-                     "reduceRight"
-                     "reduceWhile"
-                     "reject"
-                     "remove"
-                     "repeat"
-                     "replace"
-                     "reverse"
-                     "scan"
-                     "sequence"
-                     "set"
-                     "slice"
-                     "sort"
-                     "sortBy"
-                     "sortWith"
-                     "split"
-                     "splitAt"
-                     "splitEvery"
-                     "splitWhen"
-                     "subtract"
-                     "sum"
-                     "symmetricDifference"
-                     "symmetricDifferenceWith"
-                     "T"
-                     "tail"
-                     "take"
-                     "takeLast"
-                     "takeLastWhile"
-                     "takeWhile"
-                     "tap"
-                     "test"
-                     "times"
-                     "toLower"
-                     "toPairs"
-                     "toPairsIn"
-                     "toString"
-                     "toUpper"
-                     "transduce"
-                     "transpose"
-                     "traverse"
-                     "trim"
-                     "tryCatch"
-                     "type"
-                     "unapply"
-                     "unary"
-                     "uncurryN"
-                     "unfold"
-                     "union"
-                     "unionWith"
-                     "uniq"
-                     "uniqBy"
-                     "uniqWith"
-                     "unless"
-                     "unnest"
-                     "until"
-                     "update"
-                     "useWith"
-                     "values"
-                     "valuesIn"
-                     "view"
-                     "when"
-                     "where"
-                     "whereEq"
-                     "without"
-                     "xprod"
-                     "zip"
-                     "zipObj"
-                     "zipWith"
-                     ))
-      (prefix . "R\.\\(.*\\)")))
-  (setq-default ac-sources (push 'ac-source-ramda-abo ac-sources))
-
-
-#+end_src
 * Colors
-
 ** Vim
 #+begin_src emacs-lisp
  (setq evil-emacs-state-cursor  '("#DC8CC3" box))
@@ -1908,36 +1415,6 @@ while in the minibuffer for expensive operations
  (setq evil-insert-state-cursor '("#94bff3" bar))
  (setq evil-motion-state-cursor '("#afd8af" box))
 #+end_src
-
-** Theme
-  #+begin_src emacs-lisp
-    (setq custom-theme-directory "~/.emacs.d/themes")
-    (use-package zenburn-theme
-      :config
-      (load-theme 'zenburn)
-      (set-face-attribute 'mode-line-inactive nil :background "#494949")
-      (set-face-attribute 'evil-search-highlight-persist-highlight-face nil :background "#dc8cc3" :foreground "#2b2b2b")
-      (set-face-attribute 'highlight-indentation-current-column-face nil :background "#383838")
-      (set-face-attribute 'highlight-indentation-face nil :background "#494949")
-      (set-face-attribute 'vertical-border nil :background "#494949" :foreground "#494949"))
-  #+end_src
-
-  #+begin_src emacs-lisp
-    (lexical-let ((default-color (cons (face-background 'mode-line)
-                                       (face-foreground 'mode-line))))
-      (add-hook 'post-command-hook
-                (lambda ()
-                  (let ((color (cond ((minibufferp) default-color)
-                                     ((evil-insert-state-p) '("#f0dfaf" . "#2b2b2b"))
-                                     ((evil-emacs-state-p)  '("#dc8cc3" . "#2b2b2b"))
-                                     ((evil-visual-state-p)  '("#94bff3" . "#2b2b2b"))
-                                     ((buffer-modified-p)   '("#ac7373" . "#2b2b2b"))
-                                     (t default-color))))
-                    (set-face-background 'mode-line (car color))
-                    (set-face-foreground 'mode-line-buffer-id (cdr color))
-                    (set-face-foreground 'mode-line (cdr color))))))
-
-  #+end_src
 
 ** Rainbow mode
   Hexadecimal strings colored with corresponding colors in certain
@@ -1976,13 +1453,6 @@ while in the minibuffer for expensive operations
  (use-package evil-magit)
 )
 #+END_SRC
-
-* Neotree / NerdTree
-#+begin_src emacs-lisp
-  (use-package neotree
-    :config
-    (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-#+end_src
 
 * Wiki
 ** Org Tips
@@ -2024,12 +1494,6 @@ while in the minibuffer for expensive operations
    + Errors
      You can navigate trough “errors” with previous-error ~M-g p~ and next-error
      ~M-g n~. You can edit “errors” directly in /all/ buffer.
-** Windows configurations
-   Navigate between windows configurations with C-c Left/Right Arrow
-   #+begin_src emacs-lisp
-  (winner-mode 1)
-   #+end_src
-
 ** Cool mode
 *** follow-mode
 *** indirect buffer

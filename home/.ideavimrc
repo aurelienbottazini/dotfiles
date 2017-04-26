@@ -24,6 +24,7 @@ map <leader>a :action GotoAction<CR>
 map <leader>d :action Debug<CR>
 map <leader>g :action Vcs.QuickListPopupAction<CR>
 map <leader>o :action GotoFile<CR>
+map <leader>p :action ManageProjects<CR>
 map <leader>r :action Run<CR>
 map <leader>v :action VimVisualToggleBlockMode<CR>
 map <leader>z :action MaximizeToolWindow<CR>

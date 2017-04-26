@@ -6,7 +6,7 @@ set -x CDPATH $HOME $HOME/projects $HOME/projects/work
 
 # set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376
 # set -x DOCKER_TLS_VERIFY 1
-set -x VAGRANT_DEFAULT_PROVIDER parallels
+# set -x VAGRANT_DEFAULT_PROVIDER parallels
 
 # status --is-interactive; and . (rbenv init -|psub)
 
@@ -74,7 +74,10 @@ set -x GTAGSLABEL pygments
 if [ -z "$TMUX" ]
   if [ "$TERM" != "dumb" ]
    if [ -z "$INSIDE_EMACS" ]
-     tat
-    end
+     if [ -z "$XDG_CONFIG_HOME" ] # inside intellij
+       tat
+     end
+   end
   end
 end
+

@@ -873,6 +873,12 @@ while in the minibuffer for expensive operations
 
       )
    #+end_src
+** Clojure
+#+begin_src emacs-lisp
+  (use-package clojure-mode)
+  (use-package clojure-mode-extra-font-locking)
+  (use-package cider)
+#+end_src
 * Code checker
   On the fly code checking with [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html][FlyCheck]]
 

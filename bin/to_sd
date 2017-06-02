@@ -1,2 +1,0 @@
-#!/usr/bin/env zsh
-rsync -rhvlz --exclude db/data --exclude db/neo4j --exclude=vendor --exclude=public/uploads --exclude=tmp --exclude=.git --exclude=log/ --exclude=Gemfile.lock --exclude=db/structure.sql --delete . sd:$(pwd)

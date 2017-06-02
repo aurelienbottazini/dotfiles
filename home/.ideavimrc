@@ -3,6 +3,8 @@ set scrolloff=5
 
 set surround
 set incsearch
+set hls
+set ignorecase
 
 " Insert line above.
 nnoremap [<space> O<esc>0C<esc>j
@@ -24,8 +26,9 @@ map <leader>a :action GotoAction<CR>
 map <leader>d :action Debug<CR>
 map <leader>g :action Vcs.QuickListPopupAction<CR>
 map <leader>o :action GotoFile<CR>
-map <leader>p :action ManageProjects<CR>
+map <leader>p :action RecentProjectListGroup<CR>
 map <leader>r :action Run<CR>
-map <leader>v :action VimVisualToggleBlockMode<CR>
 map <leader>z :action MaximizeToolWindow<CR>
+map <leader>i :action GotoAction<CR>Open<space>Recent
+map <leader>oh :nohlsearch<CR>
 

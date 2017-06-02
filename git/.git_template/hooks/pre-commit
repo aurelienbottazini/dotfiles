@@ -10,4 +10,4 @@ if eval "git diff --cached | grep 'debugger'"; then
     exit 1
 fi
 
-echo "🍬\033[0;32m  Well done young Padawan. Your code seems light enough.\033[0m 🍬"
+echo "\033[0;32m  Well done young Padawan. Your code seems light enough.\033[0m"

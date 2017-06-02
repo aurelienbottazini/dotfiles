@@ -74,7 +74,7 @@ set -x GTAGSLABEL pygments
 if [ -z "$TMUX" ]
   if [ "$TERM" != "dumb" ]
    if [ -z "$INSIDE_EMACS" ]
-     if [ -z "$XDG_CONFIG_HOME" ] # inside intellij
+     if not string match -r \^com.jetbrains.intellij. $XPC_SERVICE_NAME
        tat
      end
    end

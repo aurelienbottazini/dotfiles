@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-rsync -av -f"+ */" -f"- *" . ks:$(pwd)
-scp -r $1 ks:$1

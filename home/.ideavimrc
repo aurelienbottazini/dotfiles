@@ -25,10 +25,10 @@ let mapleader = " "
 map <leader>a :action GotoAction<CR>
 map <leader>d :action Debug<CR>
 map <leader>g :action Vcs.QuickListPopupAction<CR>
-map <leader>o :action GotoFile<CR>
 map <leader>p :action RecentProjectListGroup<CR>
 map <leader>r :action Run<CR>
 map <leader>z :action MaximizeToolWindow<CR>
-map <leader>i :action GotoAction<CR>Open<space>Recent
+map <leader>t :action GotoTest<CR>
+
 map <leader>oh :nohlsearch<CR>
 

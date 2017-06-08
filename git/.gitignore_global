@@ -14,8 +14,8 @@ dummy/tmp/*
 .tern-project
 .tern-port
 jsconfig.json
-.projectile
 .vscode
 .idea
 *.iml
 projectile.cache
+.projectile

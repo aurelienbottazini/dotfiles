@@ -88,6 +88,7 @@ set -gx EDITOR 'vim'
 set -gx fish_color_autosuggestion "#949494"
 set -gx fish_color_command "#008700"
 set -gx fish_color_param "#0000d7"
+set -gx fish_color_search_match	"#c82829"
 
 set -gx fish_term24bit 1
 
@@ -95,7 +96,6 @@ set -gx fish_term24bit 1
 # fish_color_cwd	green
 # fish_color_cwd_root	red
 # fish_color_end	8959a8
-# fish_color_error	c82829
 # fish_color_escape	cyan
 # fish_color_history_current	cyan
 # fish_color_host	'-o' 'cyan'

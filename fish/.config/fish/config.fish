@@ -1,3 +1,4 @@
+# set -g TERM xterm-256color-italic
 set -gx PATH ~/dotfiles/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) ~/.cargo/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
 # rbenv rehash > /dev/null ^&1
@@ -80,4 +81,3 @@ if [ -z "$TMUX" ]
    end
   end
 end
-

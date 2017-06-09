@@ -69,7 +69,7 @@ end
 
 function _prompt_color_for_status
   if test $argv[1] -eq 0
-    echo green
+    echo "#008700"
   else
     echo red
   end
@@ -91,7 +91,7 @@ function fish_prompt
   if _in_git_directory
    if _no_commits
      _print_in_color " "(_git_branch_name_or_revision) magenta
-     _print_in_color " "(git rev-parse --short HEAD) green
+     _print_in_color " "(git rev-parse --short HEAD) "#008700"
      _print_in_color " "(_git_upstream_status) cyan
 
       _print_in_color (_git_dirty_status) red

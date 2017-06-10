@@ -75,6 +75,12 @@ function _prompt_color_for_status
   end
 end
 
+function _prompt_last_status
+  if test $argv[1] -eq 0
+    _print_in_color "✘" red
+  end
+end
+
 function g --wraps git
   if count $argv > /dev/null
     git $argv
@@ -98,5 +104,9 @@ function fish_prompt
    end
   end
 
-  _print_in_color "\n-> " (_prompt_color_for_status $last_status)
+  printf "\n"
+# _prompt_last_status $last_status
+  _print_in_color "❱" red
+  _print_in_color "❱" "#ff8700"
+  _print_in_color "❱ " green
 end

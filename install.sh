@@ -21,6 +21,7 @@ brew install Emacs --with-cocoa --with-imagemagick@6
 ln -sf /usr/local/bin/elm-format-0.18  /usr/local/bin/elm-format
 brew install fish
 brew install tmux
+brew install mobile-shell
 
 # brew version does not work with ruby pdfkit. Need at least version 0.12.3
 # install it using http://wkhtmltopdf.org/downloads.html

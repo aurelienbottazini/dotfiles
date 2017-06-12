@@ -1,3 +1,7 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Emacs init file
+;;; Code:
 (defun require-package (package &optional min-version)
   "Ask elpa to install given PACKAGE."
   (unless (package-installed-p package min-version)
@@ -16,16 +20,7 @@
 (require-package 'use-package)
 (require 'use-package)
 (setq use-package-always-ensure t)
-;;; package --- Summary
-;;; Commentary:
-;;; Emacs init file
-;;; Code:
 
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (package-initialize)
 
 (let ((file-name-handler-alist nil))

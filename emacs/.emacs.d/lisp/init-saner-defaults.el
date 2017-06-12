@@ -5,6 +5,9 @@
 (setq-default indent-tabs-mode nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(setq tags-add-tables nil)
+(setq vc-follow-symlinks t)
+
 (electric-pair-mode 1)
 
 ;; ediff in same frame

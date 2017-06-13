@@ -7,8 +7,8 @@
 
 (blink-cursor-mode 0)
 (column-number-mode)
-(global-linum-mode)
-(setq linum-format "%d ")
+;; (global-linum-mode)
+(setq linum-format "%3d ")
 
 ;; file path in frame title
 (setq frame-title-format

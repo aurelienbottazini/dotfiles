@@ -75,18 +75,22 @@
       (imenu--generic-function javascript-common-imenu-regex-list)))
 
   (require 'prettier-js)
+  (setq prettier-args '(
+                           "--trailing-comma" "es5"
+                           "--single-quote" "true"
+                           ))
   (defun auray-js-mode-hook ()
     (tern-mode t)
     (set (make-local-variable 'company-backends)
            '((company-dabbrev-code company-yasnippet company-tern)))
-    (add-hook 'before-save-hook 'prettier-before-save)
-
     (setq imenu-create-index-function 'auray-js-imenu-make-index)
+    (add-hook 'before-save-hook 'prettier)
     )
   )
 
 (add-hook 'js-mode-hook 'auray-js-mode-hook)
 (add-hook 'js2-mode-hook 'auray-js-mode-hook)
+
 
 (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
 (defun my-jsx-hook ()

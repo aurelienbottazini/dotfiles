@@ -84,7 +84,7 @@
     (set (make-local-variable 'company-backends)
            '((company-dabbrev-code company-yasnippet company-tern)))
     (setq imenu-create-index-function 'auray-js-imenu-make-index)
-    (add-hook 'before-save-hook 'prettier)
+    (add-hook 'before-save-hook 'prettier nil 'local)
     )
   )
 

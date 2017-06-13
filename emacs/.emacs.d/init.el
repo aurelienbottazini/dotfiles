@@ -80,8 +80,7 @@
   (require 'init-clojure)
   (require 'init-markdown)
   (require 'init-css)
-  (require 'init-html)
-  )
+  (require 'init-html))
 
   (provide 'init)
 ;;; init.el ends here

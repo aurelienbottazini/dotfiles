@@ -39,6 +39,8 @@ activate)
   )
 
 (use-package projectile
+  :init
+  (setq projectile-enable-caching t)
   :bind (:map my-leader-map
               ("p" . projectile-commander))
   :init

@@ -1,3 +1,5 @@
+(require 'dired)
+(define-key dired-mode-map "-" 'dired-up-directory)
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")
@@ -26,11 +28,7 @@
      (define-key dired-mode-map (kbd "SPC") nil)
      ))
 (add-hook 'dired-mode-hook 'my-dired-mode-setup)
-  (eval-after-load
-      "dired"
-    '(lambda ()
-       (progn
-         (define-key dired-mode-map "-" 'dired-up-directory))))
+
 (autoload 'dired-jump "dired-x"
   "Jump to Dired buffer corresponding to current buffer." t)
 

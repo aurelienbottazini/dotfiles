@@ -81,9 +81,8 @@
 
   (use-package emamux
     :bind (:map my-leader-map
-                ("sc" . emamux:run-command)
-                ("sl" . emamux:run-last-command))
-    )
+                ("sc" . emamux:send-command)
+                ("sl" . emamux:run-last-command)))
   (defun tmux-socket-command-string ()
     (interactive)
     (concat "tmux -S "
@@ -91,17 +90,17 @@
                                       (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
 
 
+   (defun tmux-move-right ()
+    (interactive)
+    (condition-case nil
+        (evil-window-right 1)
+      (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
+
   (defun tmux-move-left ()
     (interactive)
     (condition-case nil
         (evil-window-left 1)
       (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
-
-  (defun tmux-move-right ()
-    (interactive)
-    (condition-case nil
-        (evil-window-right 1)
-      (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
 
   (defun tmux-move-up ()
     (interactive)

@@ -35,7 +35,7 @@ activate)
 
 (use-package counsel-projectile
   :config
-  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile)
+  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
   )
 
 (use-package projectile

@@ -25,7 +25,7 @@
   (use-package company-tern
     :diminish tern-mode
     )
-  (setq company-backends '(company-capf company-files (company-dabbrev-code company-yasnippet company-tern)))
+  (setq company-backends '(company-files (company-capf company-dabbrev-code company-yasnippet company-tern)))
   )
 
 (provide 'init-completion)

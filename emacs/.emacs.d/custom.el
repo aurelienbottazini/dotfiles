@@ -5,11 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(blink-matching-paren (quote jump))
  '(coffee-tab-width 2)
- '(company-backends
-   (quote
-    (company-files
-     (company-dabbrev-code company-yasnippet company-tern)
-     company-capf)))
  '(company-minimum-prefix-length 2)
  '(context-coloring-syntactic-comments nil)
  '(context-coloring-syntactic-strings nil)

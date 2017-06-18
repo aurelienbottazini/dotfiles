@@ -33,6 +33,12 @@ activate)
   (use-package ivy-hydra)
   )
 
+ (use-package find-file-in-project
+   :config
+   (add-to-list 'ffip-prune-patterns "*/target/*")
+   (add-to-list 'ffip-prune-patterns "*/coverage/*")
+   (define-key evil-normal-state-map (kbd "C-P") 'ffip))
+
 (use-package counsel-projectile
   :config
   (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)

@@ -12,6 +12,7 @@
   :mode "\\.scss\\'"
   :config
   (add-hook 'scss-mode-hook 'my-css-mode-setup)
+  (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
   )
 
 (use-package sass-mode

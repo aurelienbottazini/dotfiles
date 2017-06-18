@@ -5,6 +5,11 @@
  ;; If there is more than one, they won't work right.
  '(blink-matching-paren (quote jump))
  '(coffee-tab-width 2)
+ '(company-backends
+   (quote
+    (company-files
+     (company-dabbrev-code company-yasnippet company-tern)
+     company-capf)))
  '(company-minimum-prefix-length 2)
  '(context-coloring-syntactic-comments nil)
  '(context-coloring-syntactic-strings nil)
@@ -12,9 +17,8 @@
  '(neo-window-width 75)
  '(package-selected-packages
    (quote
-    (undo-tree markdown-mode evil-lispy ivy-hydra evil-snipe aggressive-indent aggressive-indent-mode highlight-indent-guides sass-mode rainbow-mode less-css-mode scss-mode drag-stuff move-text web-beautify yatemplate fullframe web-mode vue-mode context-coloring-mode highlight-parentheses highlight-parenthesis company-tern company evil-magit find-file-in-project neotree tern-auto-complete auto-complete exec-path-from-shell highlight-thing highlight-symbol context-coloring typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor import-js js2-mode yasnippet synosaurus writegood-mode langtool which-key cider clojure-mode-extra-font-locking clojure-mode flycheck dockerfile-mode emmet-mode rspec-mode ruby-end ruby-interpolation bundler yaml-mode paredit magit counsel-projectile emamux dumb-jump origami windresize hlinum expand-region ag git-link evil-leader projectile evil-search-highlight-persist fill-column-indicator evil-matchit evil-indent-plus evil-visualstar evil-commentary evil-surround counsel ivy evil use-package)))
- '(projectile-completion-system (quote ivy))
- )
+    (web-mode-hook undo-tree markdown-mode evil-lispy ivy-hydra evil-snipe aggressive-indent aggressive-indent-mode highlight-indent-guides sass-mode rainbow-mode less-css-mode scss-mode drag-stuff move-text web-beautify yatemplate fullframe web-mode vue-mode context-coloring-mode highlight-parentheses highlight-parenthesis company-tern company evil-magit find-file-in-project neotree tern-auto-complete auto-complete exec-path-from-shell highlight-thing highlight-symbol context-coloring typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor import-js js2-mode yasnippet synosaurus writegood-mode langtool which-key cider clojure-mode-extra-font-locking clojure-mode flycheck dockerfile-mode emmet-mode rspec-mode ruby-end ruby-interpolation bundler yaml-mode paredit magit counsel-projectile emamux dumb-jump origami windresize hlinum expand-region ag git-link evil-leader projectile evil-search-highlight-persist fill-column-indicator evil-matchit evil-indent-plus evil-visualstar evil-commentary evil-surround counsel ivy evil use-package)))
+ '(projectile-completion-system (quote ivy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

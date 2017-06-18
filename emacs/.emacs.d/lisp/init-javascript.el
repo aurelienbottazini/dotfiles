@@ -5,7 +5,6 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-script-padding 2)
-  (add-hook 'web-mode-hook '(lambda () (fci-mode -1)))
   )
 
 (setq js-indent-level 2)

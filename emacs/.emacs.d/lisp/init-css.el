@@ -1,4 +1,5 @@
 (defun my-css-mode-setup ()
+  ;; todo adjust for sass
   (setq imenu-generic-expression
         '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
   (setq imenu-case-fold-search nil)

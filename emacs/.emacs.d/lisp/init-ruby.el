@@ -74,7 +74,8 @@
     :ensure nil
     :config
      ;;todo change binding
-    (evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp))
+    ;;(evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp)
+)
   )
 
 

@@ -1,11 +1,4 @@
 (use-package emmet-mode
-  :mode "\\.vue\\'"
-  :mode "\\.html\\'"
-  :mode "\\.htm\\'"
-  :mode "\\.css\\'"
-  :mode "\\.scss\\'"
-  :mode "\\.sass\\'"
-  :mode "\\.jsx\\'"
   :diminish emmet-mode
   :config
   (progn
@@ -24,7 +17,7 @@
               (setq emmet-expand-jsx-className? nil)
               ))
 
-
+  (add-hook 'web-mode-hook '(emmet-mode))
   )
 
 (provide 'init-emmet)

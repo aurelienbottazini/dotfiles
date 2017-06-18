@@ -9,11 +9,8 @@
 (add-hook 'css-mode-hook 'my-css-mode-setup)
 
 (use-package scss-mode
-  :mode "\\.scss\\'"
   :config
-  (add-hook 'scss-mode-hook 'my-css-mode-setup)
-  (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-  )
+  (add-hook 'scss-mode-hook 'my-css-mode-setup))
 
 (use-package sass-mode
   :mode "\\.sass\\'"

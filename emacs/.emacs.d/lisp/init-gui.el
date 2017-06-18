@@ -21,15 +21,15 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-(use-package fill-column-indicator
-:config
-(add-hook 'prog-mode-hook 'fci-mode)
-(add-hook 'customize-mode-hook '(fci-mode nil))
-(use-package web-mode-hook
-  :config
-  (add-hook 'web-mode-hook '(fci-mode nil))
-  )
-)
+;; (use-package fill-column-indicator
+;; :config
+;; (add-hook 'prog-mode-hook 'fci-mode)
+;; (add-hook 'customize-mode-hook '(fci-mode nil))
+;; (use-package web-mode-hook
+;;   :config
+;;   (add-hook 'web-mode-hook '(fci-mode nil))
+;;   )
+;; )
 
 (use-package which-key
  :diminish which-key-mode

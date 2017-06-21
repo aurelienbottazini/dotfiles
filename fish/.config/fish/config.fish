@@ -75,7 +75,7 @@ alias delete_docker_containers 'docker rm (docker ps -a -q)'
 alias delete_docker_images 'docker rmi (docker images -q)'
 
 alias tu "tmux -u"
-alias tmux "tmux -u"
+# alias tmux "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
 alias ls "gls --color"

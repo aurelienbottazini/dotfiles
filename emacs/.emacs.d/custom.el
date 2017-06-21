@@ -18,7 +18,30 @@
  '(package-selected-packages
    (quote
     (web-mode-hook undo-tree markdown-mode evil-lispy ivy-hydra evil-snipe aggressive-indent aggressive-indent-mode highlight-indent-guides sass-mode rainbow-mode less-css-mode scss-mode drag-stuff move-text web-beautify yatemplate fullframe web-mode vue-mode context-coloring-mode highlight-parentheses highlight-parenthesis company-tern company evil-magit find-file-in-project neotree tern-auto-complete auto-complete exec-path-from-shell highlight-thing highlight-symbol context-coloring typescript-mode highlight-indentation coffee-mode json-mode babel-repl tern js2-refactor import-js js2-mode yasnippet synosaurus writegood-mode langtool which-key cider clojure-mode-extra-font-locking clojure-mode flycheck dockerfile-mode emmet-mode rspec-mode ruby-end ruby-interpolation bundler yaml-mode paredit magit counsel-projectile emamux dumb-jump origami windresize hlinum expand-region ag git-link evil-leader projectile evil-search-highlight-persist fill-column-indicator evil-matchit evil-indent-plus evil-visualstar evil-commentary evil-surround counsel ivy evil use-package)))
- '(projectile-completion-system (quote ivy)))
+ '(projectile-completion-system (quote ivy))
+ '(projectile-indexing-method (quote alien))
+ '(projectile-other-file-alist
+   (quote
+    (("cpp" "h" "hpp" "ipp")
+     ("ipp" "h" "hpp" "cpp")
+     ("hpp" "h" "ipp" "cpp" "cc")
+     ("cxx" "h" "hxx" "ixx")
+     ("ixx" "h" "hxx" "cxx")
+     ("hxx" "h" "ixx" "cxx")
+     ("c" "h")
+     ("m" "h")
+     ("mm" "h")
+     ("h" "c" "cc" "cpp" "ipp" "hpp" "cxx" "ixx" "hxx" "m" "mm")
+     ("cc" "h" "hh" "hpp")
+     ("hh" "cc")
+     ("vert" "frag")
+     ("frag" "vert")
+     (nil "lock" "gpg")
+     ("lock" "")
+     ("gpg" "")
+     ("vue" "spec.js")
+     ("spec.js" "vue" "js" "page.vue")
+     ("page.vue" "spec.js")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

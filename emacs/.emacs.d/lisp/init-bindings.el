@@ -37,7 +37,12 @@ activate)
    :config
    (add-to-list 'ffip-prune-patterns "*/target/*")
    (add-to-list 'ffip-prune-patterns "*/coverage/*")
-   (define-key evil-normal-state-map (kbd "C-P") 'ffip))
+   (add-to-list 'ffip-prune-patterns "*/.idea/*")
+   (add-to-list 'ffip-prune-patterns "*/.vagrant/*")
+   (add-to-list 'ffip-prune-patterns "*/vendor/*")
+   (add-to-list 'ffip-prune-patterns "*/tmp/*")
+   (add-to-list 'ffip-prune-patterns "*/log/*")
+   (define-key evil-normal-state-map (kbd "C-f") 'ffip))
 
 (use-package counsel-projectile
   :config

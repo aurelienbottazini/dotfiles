@@ -17,7 +17,10 @@
               (setq emmet-expand-jsx-className? nil)
               ))
 
-  (add-hook 'web-mode-hook '(emmet-mode))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (emmet-mode)
+              ))
   )
 
 (provide 'init-emmet)

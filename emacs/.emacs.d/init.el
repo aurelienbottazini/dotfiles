@@ -80,7 +80,10 @@
   (require 'init-clojure)
   (require 'init-markdown)
   (require 'init-css)
-  (require 'init-html))
+  (require 'init-html)
+  )
 
+
+  (put 'narrow-to-region 'disabled nil)
   (provide 'init)
 ;;; init.el ends here

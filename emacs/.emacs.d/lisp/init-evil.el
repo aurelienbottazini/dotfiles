@@ -44,6 +44,8 @@
   (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
   (define-key my-leader-map (kbd "ol") 'linum-mode)
   (define-key my-leader-map (kbd "r") 'jump-to-register)
+  (require 'ab-find-alternate-file)
+  (define-key my-leader-map (kbd "t") 'ab-find-alternate-file)
   (define-key my-leader-map (kbd "u") 'universal-argument)
 
   (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)

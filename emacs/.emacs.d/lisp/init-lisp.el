@@ -1,9 +1,8 @@
 (use-package paredit
   :diminish paredit-mode
   :config
-  (use-package evil-lispy
-    :config
-    (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
-    (add-hook 'clojure-mode-hook #'evil-lispy-mode)))
+    (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+    (add-hook 'clojure-mode-hook #'paredit-mode))
+
 
 (provide 'init-lisp)

@@ -8,10 +8,6 @@
   (use-package clojure-mode-extra-font-locking)
   (use-package cider)
 
-  (use-package evil-lispy
-    :config
-    (add-hook 'clojure-mode-hook #'evil-lispy-mode))
-
   (use-package aggressive-indent
     :config
     (add-hook 'clojure-mode-hook #'aggressive-indent-mode))

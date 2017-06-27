@@ -19,21 +19,21 @@ activate)
           (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
             (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
             (add-to-list 'minor-mode-map-alist mykeys))))
-(ad-activate 'load)
+  (ad-activate 'load)
 
 
-(use-package ivy
+  (use-package ivy
   :diminish ivy-mode
   :bind (:map my-keys-minor-mode-map
               ("C-x b" . ivy-switch-buffer))
   :bind (:map my-leader-map
-              ("b" . ivy-switch-buffer))
+              ("b" . ivy-switch-buffer)
+              ("<SPC>" . avy-goto-char-timer))
   :config
   (ivy-mode 1)
-  (use-package ivy-hydra)
-  )
+  (use-package ivy-hydra))
 
- (use-package find-file-in-project
+   (use-package find-file-in-project
    :config
    (add-to-list 'ffip-prune-patterns "*/target/*")
    (add-to-list 'ffip-prune-patterns "*/coverage/*")
@@ -67,9 +67,7 @@ activate)
               ("m" . counsel-bookmark)
               ("y" . counsel-yank-pop)
               ("w" . swiper))
-  :config
-
-  )
+  :config)
 
 (use-package windresize
   :bind (:map evil-normal-state-map

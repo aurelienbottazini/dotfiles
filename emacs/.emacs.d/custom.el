@@ -56,7 +56,6 @@
  '(font-lock-string-face ((t (:slant italic))))
  '(fringe ((t (:background "#d0d0d0"))))
  '(highlight-thing ((t (:background "#d7d7ff"))))
- '(hl-line ((t (:background "#fffae2"))))
  '(isearch ((t (:background "#0000d7" :foreground "#ffffff" :weight bold))))
  '(ivy-current-match ((t (:background "#d7d7ff" :foreground "black"))))
  '(ivy-minibuffer-match-face-2 ((t (:background "#ffff00" :weight bold))))

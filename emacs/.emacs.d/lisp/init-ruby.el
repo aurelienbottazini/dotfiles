@@ -69,6 +69,8 @@
 
   ;; Hitting M-; twice adds an xmpfilter comment. Hitting xmp keybinding will put the output in this comment
   (use-package rcodetools
+    :bind (:map my-leader-map
+                ("x" . xmp))
     :load-path "/site-lisp/rcodetools.el"
     :pin manual
     :ensure nil

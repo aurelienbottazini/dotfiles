@@ -1,12 +1,14 @@
-name: Doximity vue
+name: doxvue
 root: ~/projects/work/doximity-client-vue
 
 windows:
   - dev:
-      layout: main-horizontal
+      layout: main-vertical
       panes:
-        - yarn run jest
+        - ec .
+        - yarn run unit:watch
   - servers:
       layout: main-horizontal
       panes:
-        - docker-compose up
+        - yarn run mock:dev
+        - yarn run mock:graphql

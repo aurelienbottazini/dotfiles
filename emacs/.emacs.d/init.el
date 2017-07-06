@@ -27,6 +27,8 @@
   (setq ad-redefinition-action 'accept)
   (setq exec-path-from-shell-check-startup-files nil)
 
+  (setq x-select-enable-clipboard t
+      x-select-enable-primary t)
   (defconst aurelienbottazini/initial-gc-cons-threshold gc-cons-threshold
     "Initial value of `gc-cons-threshold' at start-up time.")
   (setq gc-cons-threshold (* 128 1024 1024))
@@ -48,6 +50,20 @@
 
   (setq *is-a-windows* (eq system-type 'windows-nt))
   (setq *is-a-mac* (eq system-type 'darwin))
+
+  ;;copy paste from/to terminal emacs from/to osx clipboard
+  (when *is-a-mac*
+    (progn
+      (defun copy-from-osx ()
+        (shell-command-to-string "pbpaste"))
+      (defun paste-to-osx (text &optional push)
+        (let ((process-connection-type nil))
+          (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+            (process-send-string proc text)
+            (process-send-eof proc))))
+
+      (setq interprogram-cut-function 'paste-to-osx)
+      (setq interprogram-paste-function 'copy-from-osx)))
 
   (use-package drag-stuff
    :diminish drag-stuff-mode

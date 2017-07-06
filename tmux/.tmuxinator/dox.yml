@@ -5,15 +5,17 @@ windows:
   - dev:
       layout: main-horizontal
       panes:
-        - bundle exec rails s webrick -p 5000
+        - ec .
         - bundle exec rails c
   - servers:
       layout: main-horizontal
       panes:
-        - brew services restart dox-auth-api 
-        - foreman start -c web=0,all=1
-        - redis-server
+        - docker-compose up
+        - bundle exec rails s webrick -p 5000
+        # - brew services restart dox-auth-api
+        # - foreman start -c web=0,all=1
+        # - redis-server
   - activities:
       layout: main-horizontal
-      panes:
-        - cd ~/projects/work/activities ;and bundle exec rails s webrick -p 5150
+      # panes:
+        # - cd ~/projects/work/activities ;and bundle exec rails s webrick -p 5150

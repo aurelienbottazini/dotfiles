@@ -5,7 +5,7 @@ windows:
   - dev:
       layout: main-vertical
       panes:
-        - ec .
+        - emacs
         - yarn run unit:watch
   - servers:
       layout: main-horizontal

@@ -27,8 +27,6 @@
   (setq ad-redefinition-action 'accept)
   (setq exec-path-from-shell-check-startup-files nil)
 
-  (setq x-select-enable-clipboard t
-      x-select-enable-primary t)
   (defconst aurelienbottazini/initial-gc-cons-threshold gc-cons-threshold
     "Initial value of `gc-cons-threshold' at start-up time.")
   (setq gc-cons-threshold (* 128 1024 1024))
@@ -63,7 +61,11 @@
             (process-send-eof proc))))
 
       (setq interprogram-cut-function 'paste-to-osx)
-      (setq interprogram-paste-function 'copy-from-osx)))
+
+      ;; breaks evil paste so disabling it.
+      ;; Use "+y to copy to osx clipboard
+      ;; (setq interprogram-paste-function 'copy-from-osx)
+      ))
 
   (use-package drag-stuff
    :diminish drag-stuff-mode

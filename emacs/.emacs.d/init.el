@@ -101,7 +101,6 @@
   (require 'init-html)
   )
 
-
   (put 'narrow-to-region 'disabled nil)
   (provide 'init)
 ;;; init.el ends here

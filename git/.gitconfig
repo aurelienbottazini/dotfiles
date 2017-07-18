@@ -10,6 +10,7 @@
 	user = aurelienbottazzini
 	tooken = dafc10e4f7c66a933baba52b1f50bc2e
 [alias]
+        s = status
         cm = !git-cm
         df = diff --word-diff --color-words
         co = checkout

@@ -1,0 +1,16 @@
+{
+    "indent_size": 2,
+    "wrap-line-length": 80,
+    "wrap_attributes": "force",
+    "html": {
+        "end_with_newline": true,
+        "js": {
+        },
+        "css": {
+        }
+    },
+    "css": {
+    },
+    "js": {
+    }
+}

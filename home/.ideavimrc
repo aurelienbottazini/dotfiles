@@ -15,6 +15,10 @@ nnoremap <space>[ i<space><esc>l
 " Insert space after in normal mode.
 nnoremap <space>] a<space><esc>h
 
+nnoremap <C-h> :action TabShiftActions.MoveFocusLeft<CR>
+nnoremap <C-j> :action TabShiftActions.MoveFocusDown<CR>
+nnoremap <C-k> :action TabShiftActions.MoveFocusUp<CR>
+nnoremap <C-l> :action TabShiftActions.MoveFocusRight<CR>
 
 " Previous method.
 nnoremap [m :action MethodUp<cr>
@@ -29,6 +33,6 @@ map <leader>p :action RecentProjectListGroup<CR>
 map <leader>r :action Run<CR>
 map <leader>z :action MaximizeToolWindow<CR>
 map <leader>t :action GotoTest<CR>
+map <leader>v :source ~/.ideavimrc<CR>
 
 map <leader>oh :nohlsearch<CR>
-

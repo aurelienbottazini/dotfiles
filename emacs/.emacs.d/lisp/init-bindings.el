@@ -97,7 +97,7 @@ activate)
 
 (use-package neotree
     :bind (:map my-leader-map
-                ("2" . neotree-find-project-root))
+                ("1" . neotree-find-project-root))
     :init
     (setq neo-smart-open t)
     :config

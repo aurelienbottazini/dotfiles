@@ -44,7 +44,23 @@
       (find-file (concat unit-test-specs-dir file-relative-path spec-filename)))
      (t (message "could not match file")))))
 
-(split-string "foo/bar/file.spec.js" "/")
+(defun alternate-file-name (name)
+  "Return a list of possible alternate file-names for NAME."
+  (cond
+   ((string-suffix-p ".spec.js" name) (list
+                                       (concat (car (split-string name ".spec.js")) ".vue")
+                                       (concat (car (split-string name ".spec.js")) ".js"))
+    )
+   ((string-suffix-p ".js" name) (list (concat (car (split-string name ".js")) ".spec.js")))
+   ((string-suffix-p ".vue" name) (list (concat (car (split-string name ".vue")) ".spec.js")))
+  ))
+
+(ert-deftest alternate-file-name ()
+  "tests alternate-file-name"
+  (should (equal (alternate-file-name "foo.js") '("foo.spec.js")))
+  (should (equal (alternate-file-name "foo.vue") '("foo.spec.js")))
+  (should (equal (alternate-file-name "foo.spec.js") '("foo.vue" "foo.js")))
+  )
 
 (provide 'ab-find-alternate-file)
 ;;; ab-find-alternate-file ends here

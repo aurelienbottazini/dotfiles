@@ -36,7 +36,7 @@
 
 
   (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC")
-  (define-key my-leader-map (kbd "1") 'shell-command)
+  (define-key my-leader-map (kbd "2") 'shell-command)
 
   (define-key my-leader-map (kbd "e") 'dired-jump)
   (define-key my-leader-map (kbd "dl") 'browse-lodash-docs)

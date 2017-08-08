@@ -44,6 +44,17 @@
       (find-file (concat unit-test-specs-dir file-relative-path spec-filename)))
      (t (message "could not match file")))))
 
+(defun file-name-without-path (name)
+  "Return a file NAME without the path."
+  (car (last (split-string name "/"))))
+
+
+(ert-deftest file-name-without-path ()
+  "tests for cleaned-buffer-name"
+    (should (equal (file-name-without-path "foo.js") "foo.js"))
+    (should (equal (file-name-without-path "src/foo.js") "foo.js"))
+  )
+
 (defun alternate-file-name (name)
   "Return a list of possible alternate file-names for NAME."
   (cond

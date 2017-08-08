@@ -1,5 +1,5 @@
 (when window-system
-  (set-default-font "-*-PragmataPro Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+  (set-default-font "-*-PragmataPro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
 
 (setq ring-bell-function 'ignore)
 

@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Emacs init file
 ;;; Code:
+
 (defun require-package (package &optional min-version)
   "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
   (unless (package-installed-p package min-version)
@@ -22,6 +23,7 @@
 (setq use-package-always-ensure t)
 
 (package-initialize)
+
 
 (let ((file-name-handler-alist nil))
   (setq ad-redefinition-action 'accept)
@@ -101,6 +103,9 @@
   (require 'init-html)
   )
 
-  (put 'narrow-to-region 'disabled nil)
-  (provide 'init)
+(if (fboundp 'mac-auto-operator-composition-mode)
+    (mac-auto-operator-composition-mode))
+
+(put 'narrow-to-region 'disabled nil)
+(provide 'init)
 ;;; init.el ends here

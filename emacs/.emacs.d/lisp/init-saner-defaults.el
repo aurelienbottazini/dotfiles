@@ -10,6 +10,9 @@
 
 (electric-pair-mode 1)
 
+(prefer-coding-system 'utf-8)
+(modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
+
 ;; ediff in same frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 

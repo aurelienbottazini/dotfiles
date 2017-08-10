@@ -53,28 +53,26 @@
   (defvar *is-a-windows*)
   (setq *is-a-windows* (eq system-type 'windows-nt))
 
-  (eval-when-compile
-    (defvar *is-a-mac*)
-    )
+  (defvar *is-a-mac*)
   (setq *is-a-mac* (eq system-type 'darwin))
 
   ;;copy paste from/to terminal emacs from/to osx clipboard
-  (when *is-a-mac*
-    (progn
-      (defun copy-from-osx ()
-        (shell-command-to-string "pbpaste"))
-      (defun paste-to-osx (text &optional push)
-        (let ((process-connection-type nil))
-          (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-            (process-send-string proc text)
-            (process-send-eof proc))))
+  ;; (when *is-a-mac*
+  ;;   (progn
+  ;;     (defun copy-from-osx ()
+  ;;       (shell-command-to-string "pbpaste"))
+  ;;     (defun paste-to-osx (text &optional push)
+  ;;       (let ((process-connection-type nil))
+  ;;         (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+  ;;           (process-send-string proc text)
+  ;;           (process-send-eof proc))))
 
-      (setq interprogram-cut-function 'paste-to-osx)
+  ;;     (setq interprogram-cut-function 'paste-to-osx)
 
-      ;; breaks evil paste so disabling it.
-      ;; Use "+y to copy to osx clipboard
-      ;; (setq interprogram-paste-function 'copy-from-osx)
-      ))
+  ;;     ;; breaks evil paste so disabling it.
+  ;;     ;; Use "+y to copy to osx clipboard
+  ;;     ;; (setq interprogram-paste-function 'copy-from-osx)
+  ;;     ))
 
 
  (use-package undo-tree

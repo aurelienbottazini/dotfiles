@@ -28,9 +28,7 @@
 (let ((file-name-handler-alist nil))
   (setq ad-redefinition-action 'accept)
 
-  (eval-when-compile
-    (defvar exec-path-from-shell-check-startup-files)
-    )
+  (defvar exec-path-from-shell-check-startup-files)
   (setq exec-path-from-shell-check-startup-files nil)
 
   (defconst aurelienbottazini/initial-gc-cons-threshold gc-cons-threshold
@@ -52,9 +50,7 @@
     (normal-top-level-add-to-load-path '("."))
     (normal-top-level-add-subdirs-to-load-path))
 
-  (eval-when-compile
-    (defvar *is-a-windows*)
-    )
+  (defvar *is-a-windows*)
   (setq *is-a-windows* (eq system-type 'windows-nt))
 
   (eval-when-compile

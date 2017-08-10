@@ -1,5 +1,11 @@
+(use-package drag-stuff
+  :diminish drag-stuff-mode
+  :config
+  (drag-stuff-global-mode)
+  (drag-stuff-define-keys))
+
 (when window-system
-  (set-default-font "-*-PragmataPro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+  (set-frame-font "-*-PragmataPro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
 
 (setq ring-bell-function 'ignore)
 
@@ -32,9 +38,9 @@
 ;; )
 
 (use-package which-key
- :diminish which-key-mode
- :config
- (which-key-mode))
+  :diminish which-key-mode
+  :config
+  (which-key-mode))
 
 (use-package highlight-thing
   :diminish highlight-thing-mode

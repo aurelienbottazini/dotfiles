@@ -27,6 +27,10 @@
 
 (let ((file-name-handler-alist nil))
   (setq ad-redefinition-action 'accept)
+
+  (eval-when-compile
+    (defvar exec-path-from-shell-check-startup-files)
+    )
   (setq exec-path-from-shell-check-startup-files nil)
 
   (defconst aurelienbottazini/initial-gc-cons-threshold gc-cons-threshold
@@ -48,7 +52,14 @@
     (normal-top-level-add-to-load-path '("."))
     (normal-top-level-add-subdirs-to-load-path))
 
+  (eval-when-compile
+    (defvar *is-a-windows*)
+    )
   (setq *is-a-windows* (eq system-type 'windows-nt))
+
+  (eval-when-compile
+    (defvar *is-a-mac*)
+    )
   (setq *is-a-mac* (eq system-type 'darwin))
 
   ;;copy paste from/to terminal emacs from/to osx clipboard
@@ -69,11 +80,6 @@
       ;; (setq interprogram-paste-function 'copy-from-osx)
       ))
 
-  (use-package drag-stuff
-   :diminish drag-stuff-mode
-   :config
-   (drag-stuff-global-mode)
-   (drag-stuff-define-keys))
 
  (use-package undo-tree
    :diminish undo-tree-mode)

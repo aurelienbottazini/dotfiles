@@ -21,8 +21,9 @@ activate)
             (add-to-list 'minor-mode-map-alist mykeys))))
   (ad-activate 'load)
 
+(diminish 'my-keys-minor-mode)
 
-  (use-package ivy
+(use-package ivy
   :diminish ivy-mode
   :bind (:map my-keys-minor-mode-map
               ("C-x b" . ivy-switch-buffer))
@@ -74,7 +75,7 @@ activate)
   :init
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg)
- )
+  )
 
 
 (use-package origami
@@ -92,24 +93,24 @@ activate)
               ("n" . er/expand-region)))
 
 (use-package context-coloring
-    :bind (:map my-leader-map
-                ("oc" . context-coloring-mode)))
+  :bind (:map my-leader-map
+              ("oc" . context-coloring-mode)))
 
 (use-package neotree
-    :bind (:map my-leader-map
-                ("1" . neotree-find-project-root))
-    :init
-    (setq neo-smart-open t)
-    :config
-    (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-    (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-    (defun neotree-find-project-root ()
-      (interactive)
-      (if (neo-global--window-exists-p)
-          (neotree-hide)
-        (let ((origin-buffer-file-name (buffer-file-name)))
-          (neotree-find (projectile-project-root))
-          (neotree-find origin-buffer-file-name))))
-    )
+  :bind (:map my-leader-map
+              ("1" . neotree-find-project-root))
+  :init
+  (setq neo-smart-open t)
+  :config
+  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+  (defun neotree-find-project-root ()
+    (interactive)
+    (if (neo-global--window-exists-p)
+        (neotree-hide)
+      (let ((origin-buffer-file-name (buffer-file-name)))
+        (neotree-find (projectile-project-root))
+        (neotree-find origin-buffer-file-name))))
+  )
 (provide 'init-bindings)

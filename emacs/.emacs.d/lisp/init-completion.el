@@ -1,17 +1,8 @@
 (use-package company
+  :diminish company-mode
   :init
   (add-hook 'after-init-hook 'global-company-mode)
   :config
-
-  ;; (use-package fill-column-indicator
-  ;;   :config
-  ;;   (defun on-off-fci-before-company(command)
-  ;;     (when (string= "show" command)
-  ;;       (turn-off-fci-mode))
-  ;;     (when (string= "hide" command)
-  ;;       (turn-on-fci-mode))))
-
-  ;; (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
 
   (let ((map company-active-map))
     (define-key map (kbd "C-n") 'company-select-next)

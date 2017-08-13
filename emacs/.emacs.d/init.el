@@ -56,6 +56,7 @@
   (defvar *is-a-mac*)
   (setq *is-a-mac* (eq system-type 'darwin))
 
+  ;; TODO: only enable this in terminal
   ;;copy paste from/to terminal emacs from/to osx clipboard
   ;; (when *is-a-mac*
   ;;   (progn
@@ -76,7 +77,9 @@
 
 
  (use-package undo-tree
-   :diminish undo-tree-mode)
+   :diminish undo-tree-mode
+   :bind ("C-x u" . undo-tree-visualize)
+   )
 
   (require 'init-gui)
   (require 'init-saner-defaults)

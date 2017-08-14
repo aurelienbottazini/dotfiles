@@ -39,7 +39,8 @@
   (define-key my-leader-map (kbd "2") 'shell-command)
 
   (define-key my-leader-map (kbd "e") 'dired-jump)
-  (define-key my-leader-map (kbd "k") 'compile)
+  (require 'ab-compile-in-project)
+  (define-key my-leader-map (kbd "k") 'ab-compile-in-project)
   (define-key my-leader-map (kbd "dl") 'browse-lodash-docs)
   (define-key my-leader-map (kbd "dr") 'browse-ramdajs-docs)
   (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)

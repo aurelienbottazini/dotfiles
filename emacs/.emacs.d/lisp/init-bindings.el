@@ -1,13 +1,3 @@
-(global-set-key (kbd "C-M-u") #'paredit-backward-up)
-(global-set-key (kbd "C-M-n") #'paredit-forward-up)
-;; This one's surpisingly useful for writing prose.
-(global-set-key "\M-S"
-  #'paredit-splice-sexp-killing-backward)
-(global-set-key "\M-R" #'paredit-raise-sexp)
-(global-set-key "\M-(" #'paredit-wrap-round)
-(global-set-key "\M-[" #'paredit-wrap-square)
-(global-set-key "\M-{" #'paredit-wrap-curly)
-
 (defadvice terminal-init-xterm (after map-S-up-escape-sequence
 activate)
   (define-key input-decode-map "\e[1;40" (kbd "C-("))
@@ -64,7 +54,7 @@ activate)
               ("M-x" . counsel-M-x)
               ("C-x C-f" . counsel-find-file))
   :bind (:map my-leader-map
-              ("S" . swiper-multi)
+              ("W" . swiper-multi)
               ("h" . counsel-recentf)
               ("i" . counsel-imenu)
               ("m" . counsel-bookmark)

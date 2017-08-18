@@ -19,6 +19,14 @@
   (add-hook 'js2-mode-hook (lambda() (subword-mode t)
 			     (diminish 'subword-mode)
 			     ))
+(defun my-paredit-nonlisp ()
+  "Turn on paredit mode for non-lisps."
+  (interactive)
+  (set (make-local-variable 'paredit-space-for-delimiter-predicates)
+       '((lambda (endp delimiter) nil)))
+  (paredit-mode 1))
+
+(add-hook 'js2-mode-hook 'my-paredit-nonlisp)
 
   (setq-default
    ;; js2-mode

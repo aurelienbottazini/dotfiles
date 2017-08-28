@@ -47,8 +47,8 @@
   cmd = emacsclient -ta \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [init]
 	templatedir = ~/.git_template
-; [merge]
-        ; ff = only
+[merge]
+#        ff = only
 [fetch]
         prune = true
 [filter "lfs"]

@@ -23,6 +23,7 @@ activate)
 
 (diminish 'my-keys-minor-mode)
 
+(define-key my-keys-minor-mode-map (kbd "C-x o") 'ace-window)
 (use-package ivy
   :diminish ivy-mode
   :bind (:map my-keys-minor-mode-map

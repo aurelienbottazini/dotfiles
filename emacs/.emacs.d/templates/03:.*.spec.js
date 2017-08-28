@@ -1,30 +1,37 @@
 import { createVM, destroyVM } from '~test/unit/specs/utils';
-import ${1:`(file-name-nondirectory (car (split-string (buffer-file-name) ".spec.js")))`} from '~src${2:`(cadr (split-string (file-name-directory (buffer-file-name)) "/packages"))`$1}.vue';
-
-$0
+import ${1:`(file-name-nondirectory (car (split-string (buffer-file-name) ".spec.js")))`} from '~src/packages${2:`(cadr (split-string (file-name-directory (buffer-file-name)) "/packages"))`$1}.vue';
 
 describe('$1', () => {
-  let vm;
 
-  afterEach(() => {
-    destroyVM(vm);
+  it('is defined', () => {
+    expect($1).to.be.an('object');
   });
 
-  function getRootElement() {
-    return vm.$el;
-  }
+  describe('rendered component', () => {
+    let vm;
 
-  describe('without Props', () => {
-    it('renders', () => {
-      vm = createVM({
-        template: \`
-<$1>
-</$1>
-        \`,
+    afterEach(() => {
+      destroyVM(vm);
+    });
+
+    function get$1() {
+      return vm.$el;
+    }
+
+    function create$1(template) {
+      return createVM({
+        template,
         components: { $1 },
       });
+    }
 
-      expect(getRootElement()).to.not.be.null;
+    function get$1() {
+      return vm.$el;
+    }
+
+    it('renders', () => {
+      vm = create$1('<$1></$1>');
+      expect(getRootElement()).to.be.defined;
     });
   });
 });

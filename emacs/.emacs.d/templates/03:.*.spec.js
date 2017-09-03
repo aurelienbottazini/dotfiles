@@ -25,13 +25,9 @@ describe('$1', () => {
       });
     }
 
-    function get$1() {
-      return vm.$el;
-    }
-
     it('renders', () => {
       vm = create$1('<$1></$1>');
-      expect(getRootElement()).to.be.defined;
+      expect(get$1()).to.be.defined;
     });
   });
 });

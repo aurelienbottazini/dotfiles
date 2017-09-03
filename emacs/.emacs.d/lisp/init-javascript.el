@@ -19,7 +19,6 @@
   (add-hook 'js2-mode-hook (lambda() (subword-mode t)
 			     (diminish 'subword-mode)
 			     ))
-
   (use-package smartparens
     :config
     (require 'smartparens-config)

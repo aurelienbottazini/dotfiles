@@ -10,7 +10,7 @@
   (drag-stuff-define-keys))
 
 (when window-system
-  (set-frame-font "-*-PragmataPro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+  (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
 
 (setq ring-bell-function 'ignore)
 
@@ -20,7 +20,7 @@
 (column-number-mode)
 ;; (global-linum-mode)
 (defvar linum-format)
-(setq linum-format "%3d ")
+(setq linum-format "%3d")
 
 ;; file path in frame title
 (setq frame-title-format

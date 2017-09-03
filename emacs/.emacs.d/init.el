@@ -28,7 +28,7 @@
 (setq use-package-always-ensure t)
 
 (package-initialize)
-
+(use-package linum-relative)
 
 (let ((file-name-handler-alist nil))
   (setq ad-redefinition-action 'accept)

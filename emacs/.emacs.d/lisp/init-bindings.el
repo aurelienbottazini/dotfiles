@@ -23,6 +23,51 @@ activate)
 
 (diminish 'my-keys-minor-mode)
 
+(defun tmux-socket-command-string ()
+  (interactive)
+  (concat "tmux -S "
+          (replace-regexp-in-string "\n\\'" ""
+                                    (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
+
+(use-package emamux
+  :bind (:map my-leader-map
+              ("sc" . emamux:send-command)
+              ("sl" . emamux:run-last-command)))
+(defun tmux-socket-command-string ()
+  (interactive)
+  (concat "tmux -S "
+          (replace-regexp-in-string "\n\\'" ""
+                                    (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
+
+
+(defun tmux-move-right ()
+  (interactive)
+  (condition-case nil
+      (evil-window-right 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
+
+(defun tmux-move-left ()
+  (interactive)
+  (condition-case nil
+      (evil-window-left 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
+
+(defun tmux-move-up ()
+  (interactive)
+  (condition-case nil
+      (evil-window-up 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
+
+(defun tmux-move-down ()
+  (interactive)
+  (condition-case nil
+      (evil-window-down 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
+(define-key my-keys-minor-mode-map (kbd "C-h") 'tmux-move-left)
+(define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
+(define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
+(define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+
 (define-key my-keys-minor-mode-map (kbd "C-x o") 'ace-window)
 (use-package ivy
   :diminish ivy-mode

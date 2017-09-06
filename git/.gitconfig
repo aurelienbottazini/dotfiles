@@ -12,6 +12,7 @@
 [alias]
         s = status
         cm = !git-cm
+        d = diff -w
         df = diff --word-diff --color-words
         co = checkout
         b = branch
@@ -37,6 +38,10 @@
         find-commits-for-file = log --all --
         po = !git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)
 	praise = blame
+        leaderboard = shortlog -sn --all --no-merges
+        recent-branches = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+        recap = log --all --oneline --no-merges --author=aurelien@bottazini.com
+        today = log --since=00:00:00 --all --no-merges --oneline --author=aurelien@bottazini.com
 [credential]
 	helper = osxkeychain
 [difftool]

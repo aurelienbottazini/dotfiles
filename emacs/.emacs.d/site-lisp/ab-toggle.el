@@ -10,21 +10,37 @@
 (defun ab-replace-it ()
   "Replace it with it.only and it.only with describe."
   (interactive)
-  (save-excursion (progn (search-backward "it(") (replace-match "it.only("))))
+  (save-excursion (progn
+                    (re-search-backward "^[\s]*it(")
+                    (search-forward "it(")
+                    (replace-match "it.only(")
+                    )))
 
 (defun ab-replace-it-only ()
   "Replace it with it.only and it.only with describe."
   (interactive)
-  (save-excursion (progn (search-backward "it.only(") (replace-match "it("))))
+  (save-excursion (progn
+                    (re-search-backward "^[\s]*it.only(")
+                    (search-forward "it.only(")
+                    (replace-match "it(")
+                    )))
 
 (defun ab-replace-describe ()
   "Replace describe with describe.only and describe.only with describe."
   (interactive)
-  (save-excursion (progn (search-backward "describe(") (replace-match "describe.only("))))
+  (save-excursion (progn
+                    (re-search-backward "^[\s]*describe(")
+                    (search-forward "describe(")
+                    (replace-match "describe.only(")
+                    )))
 
 (defun ab-replace-describe-only ()
   "Replace describe with describe.only and describe.only with describe."
   (interactive)
-  (save-excursion (progn (search-backward "describe.only(") (replace-match "describe("))))
+  (save-excursion (progn
+                    (re-search-backward "^[\s]*describe.only(")
+                    (search-forward "describe.only(")
+                    (replace-match "describe(")
+                    )))
 (provide 'ab-toggle)
 ;;; ab-toggle.el ends here

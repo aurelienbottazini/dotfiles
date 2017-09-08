@@ -116,8 +116,8 @@ activate)
 (use-package dumb-jump
   :bind (:map evil-normal-state-map
               ("gd" . dumb-jump-go)
-              ("[d" . dumb-jump-go)
-              ("]d" . dumb-jump-go-other-window))
+              ("gD" . dumb-jump-go-other-window)
+              )
   :init
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg)

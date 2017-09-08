@@ -4,6 +4,7 @@
 ;;; Code:
 
 (defun sort-lines-nocase ()
+  "Sort selected lines ignoring case."
   (interactive)
   (let ((sort-fold-case t))
     (call-interactively 'sort-lines)))

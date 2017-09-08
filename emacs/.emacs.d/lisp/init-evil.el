@@ -59,6 +59,11 @@
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
+  (require 'ab-toggle)
+  (define-key evil-normal-state-map (kbd "[d") 'ab-replace-describe)
+  (define-key evil-normal-state-map (kbd "]d") 'ab-replace-describe-only)
+  (define-key evil-normal-state-map (kbd "[i") 'ab-replace-it)
+  (define-key evil-normal-state-map (kbd "]i") 'ab-replace-it-only)
   (define-key evil-normal-state-map (kbd "[s") 'flycheck-previous-error)
   (define-key evil-normal-state-map (kbd "]s") 'flycheck-next-error)
   (define-key evil-normal-state-map (kbd "[e") 'previous-error)

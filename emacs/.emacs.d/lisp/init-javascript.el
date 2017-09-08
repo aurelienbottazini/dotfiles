@@ -17,8 +17,12 @@
   ;;(js2-imenu-extras-setup +1)
   (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
   (add-hook 'js2-mode-hook (lambda() (subword-mode t)
-			     (diminish 'subword-mode)
-			     ))
+                             (diminish 'subword-mode)
+                             )
+            )
+
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
   (use-package smartparens
     :config
     (require 'smartparens-config)

@@ -29,7 +29,9 @@
 (setq use-package-always-ensure t)
 
 (package-initialize)
-(use-package linum-relative)
+(use-package linum-relative
+  :config
+  (add-hook 'prog-mode-hook 'linum-relative-mode))
 
 (let ((file-name-handler-alist nil))
   (setq ad-redefinition-action 'accept)

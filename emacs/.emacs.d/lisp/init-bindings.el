@@ -77,7 +77,7 @@ activate)
               ("b" . ivy-switch-buffer)
               ("f" . counsel-projectile-rg)
               ("F" . counsel-rg)
-              ("<SPC>" . avy-goto-char-timer))
+              ("<SPC>" . avy-goto-word-1))
   :config
   (ivy-mode 1)
   (use-package ivy-hydra))

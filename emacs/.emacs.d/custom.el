@@ -15,6 +15,17 @@
  '(context-coloring-syntactic-comments t)
  '(context-coloring-syntactic-strings nil)
  '(fill-column 80)
+ '(hl-paren-attributes
+   (list
+    (quote
+     (:weight bold))
+    (quote
+     (:weight bold))
+    (quote
+     (:weight bold))
+    (quote
+     (:weight bold))))
+ '(hl-paren-colors (quote ("firebrick1" "darkgreen" "purple" "brown")))
  '(neo-window-width 75)
  '(package-selected-packages
    (quote

@@ -68,29 +68,6 @@ activate)
 (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
 (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
 
-(defmacro save-column (&rest body)
-  `(let ((column (current-column)))
-     (unwind-protect
-         (progn ,@body)
-       (move-to-column column))))
-(put 'save-column 'lisp-indent-function 0)
-
-(defun move-line-up ()
-  (interactive)
-  (save-column
-    (transpose-lines 1)
-    (forward-line -2)))
-
-(defun move-line-down ()
-  (interactive)
-  (save-column
-    (forward-line 1)
-    (transpose-lines 1)
-    (forward-line -1)))
-
-(define-key my-keys-minor-mode-map (kbd "M-p") 'move-line-up)
-(define-key my-keys-minor-mode-map (kbd "M-n") 'move-line-down)
-
 (define-key my-keys-minor-mode-map (kbd "C-x o") 'ace-window)
 (use-package ivy
   :diminish ivy-mode

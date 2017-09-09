@@ -7,6 +7,10 @@ Usage:
 
 - Run install.sh
 
+Emacs:
+
+- For neotree icons, install the fonts in the .emacs/fonts subdirectory
+
 Scripts Notes:
 
 - bin/sendmail.rb

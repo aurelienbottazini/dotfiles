@@ -106,7 +106,9 @@ activate)
               ("m" . counsel-bookmark)
               ("y" . counsel-yank-pop)
               ("w" . swiper))
-  :config)
+  :config
+  ;; with smex installed, counsel place recently used commands at the top
+  (use-package smex))
 
 (use-package windresize
   :bind (:map evil-normal-state-map

@@ -97,7 +97,6 @@
     )
   )
 
-(add-hook 'js-mode-hook 'auray-js-mode-hook)
 (add-hook 'js2-mode-hook 'auray-js-mode-hook)
 
 

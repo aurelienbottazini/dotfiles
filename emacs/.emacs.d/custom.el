@@ -57,7 +57,7 @@
  '(fringe ((t (:background "#ededed"))))
  '(highlight-thing ((t (:background "#d7d7ff"))))
  '(hl-line ((t (:background "#eee"))))
- '(isearch ((t (:background "#0000d7" :foreground "#ffffff" :weight bold))))
+ '(isearch ((t (:background "yellow" :slant italic :weight bold))))
  '(ivy-current-match ((t (:background "#d7d7ff" :foreground "black"))))
  '(ivy-minibuffer-match-face-2 ((t (:background "#ffff00" :weight bold))))
  '(ivy-prompt-match ((t (:background "#fffae2"))))

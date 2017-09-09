@@ -21,6 +21,7 @@
 ;; (global-linum-mode)
 (defvar linum-format)
 (setq linum-format "%3d")
+(global-visual-line-mode)
 
 ;; file path in frame title
 (setq frame-title-format

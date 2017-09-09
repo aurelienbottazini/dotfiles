@@ -11,6 +11,13 @@
   (use-package fullframe
     :config
     (fullframe magit-status magit-mode-quit-window))
+
+  (use-package diff-hl
+    :config
+    (add-hook 'prog-mode-hook 'diff-hl-mode)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    )
+
   )
 
 (vc-mode-line t)

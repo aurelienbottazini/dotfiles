@@ -23,6 +23,16 @@ activate)
 
 (diminish 'my-keys-minor-mode)
 
+(use-package drag-stuff
+  :diminish drag-stuff-mode
+  :bind (:map my-keys-minor-mode-map
+              ("M-p" . drag-stuff-up)
+              ("M-n" . drag-stuff-down)
+              ("M-<right>" . drag-stuff-right)
+              ("M-<left>" . drag-stuff-left))
+  :config
+  (drag-stuff-global-mode))
+
 (defun tmux-socket-command-string ()
   (interactive)
   (concat "tmux -S "

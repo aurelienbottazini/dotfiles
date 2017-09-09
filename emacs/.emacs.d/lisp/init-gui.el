@@ -3,17 +3,6 @@
 ;;; GUI adjustements
 ;;; Code:
 
-(use-package drag-stuff
-  :diminish drag-stuff-mode
-  :bind (:map my-keys-minor-mode-map
-              ("M-p" . drag-stuff-up)
-              ("M-n" . drag-stuff-down)
-              ("M-<right>" . drag-stuff-right)
-              ("M-<left>" . drag-stuff-left))
-  :config
-  (drag-stuff-global-mode)
-  )
-
 (when window-system
   (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
 

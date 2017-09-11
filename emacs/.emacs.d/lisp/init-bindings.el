@@ -77,6 +77,7 @@ activate)
 (define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
 (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
 (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+(define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
 
 (define-key my-keys-minor-mode-map (kbd "C-x o") 'ace-window)
 (use-package ivy

@@ -28,6 +28,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package ert-modeline
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'ert-modeline-mode)
+  )
+
 (package-initialize)
 (use-package linum-relative
   :config

@@ -28,6 +28,18 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(defun check-large-file-hook ()
+  "If a file is over a given size, turn off minor modes."
+  (when (> (buffer-size) (* 1024 100)) ;; 100K
+    (fundamental-mode)
+    (font-lock-mode -1)
+    (linum-mode -1)
+    (highlight-thing-mode -1)
+    (setq buffer-read-only t)
+    (buffer-disable-undo)
+    ))
+
+(add-hook 'find-file-hooks 'check-large-file-hook)
 (use-package ert-modeline
   :config
   (add-hook 'emacs-lisp-mode-hook 'ert-modeline-mode)

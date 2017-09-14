@@ -108,4 +108,9 @@
                   (set-face-foreground 'mode-line (cdr color))))))
   )
 
+(use-package evil-multiedit
+  :bind (:map my-keys-minor-mode-map
+              ("C-<" . evil-multiedit-match-and-previous)
+              ("C->" . evil-multiedit-match-and-next)))
+
 (provide 'init-evil)

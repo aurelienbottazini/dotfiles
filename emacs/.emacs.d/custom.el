@@ -64,6 +64,7 @@
  '(context-coloring-level-1-face ((t (:foreground "#008700"))))
  '(context-coloring-level-2-face ((t (:foreground "#af0000"))))
  '(context-coloring-level-3-face ((t (:foreground "#8700d7"))))
+ '(ertml-failing-face ((t (:inherit error :foreground "firebrick"))))
  '(font-lock-comment-face ((t (:foreground "grey" :slant italic))))
  '(font-lock-string-face ((t (:foreground "forest green" :slant italic))))
  '(fringe ((t (:background "#ededed"))))

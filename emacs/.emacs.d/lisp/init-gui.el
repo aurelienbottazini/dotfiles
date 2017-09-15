@@ -13,6 +13,10 @@
 (blink-cursor-mode 0)
 (column-number-mode)
 ;; (global-linum-mode)
+(use-package linum-relative
+  :config
+  (add-hook 'prog-mode-hook 'linum-relative-mode))
+
 (defvar linum-format)
 (setq linum-format "%3d")
 (global-visual-line-mode)
@@ -93,5 +97,10 @@
       scroll-down-aggressively 0.01)
 (setq-default scroll-up-aggressively 0.01
               scroll-down-aggressively 0.01)
+
+ (use-package undo-tree
+   :diminish undo-tree-mode
+   :bind ("C-x u" . undo-tree-visualize)
+   )
 
 (provide 'init-gui)

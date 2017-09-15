@@ -66,6 +66,7 @@
  '(context-coloring-level-3-face ((t (:foreground "#8700d7"))))
  '(ertml-failing-face ((t (:inherit error :foreground "firebrick"))))
  '(font-lock-comment-face ((t (:foreground "grey" :slant italic))))
+ '(font-lock-function-name-face ((t (:foreground "Blue1" :weight bold))))
  '(font-lock-string-face ((t (:foreground "forest green" :slant italic))))
  '(fringe ((t (:background "#ededed"))))
  '(highlight-thing ((t (:background "#d7d7ff" :foreground "purple4" :weight bold))))

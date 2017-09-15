@@ -28,27 +28,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(defun check-large-file-hook ()
-  "If a file is over a given size, turn off minor modes."
-  (when (> (buffer-size) (* 1024 100)) ;; 100K
-    (fundamental-mode)
-    (font-lock-mode -1)
-    (linum-mode -1)
-    (highlight-thing-mode -1)
-    (setq buffer-read-only t)
-    (buffer-disable-undo)
-    ))
-
-(add-hook 'find-file-hooks 'check-large-file-hook)
-(use-package ert-modeline
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'ert-modeline-mode)
-  )
-
 (package-initialize)
-(use-package linum-relative
-  :config
-  (add-hook 'prog-mode-hook 'linum-relative-mode))
 
 (let ((file-name-handler-alist nil))
   (setq ad-redefinition-action 'accept)
@@ -80,31 +60,6 @@
 
   (defvar *is-a-mac*)
   (setq *is-a-mac* (eq system-type 'darwin))
-
-  ;; TODO: only enable this in terminal
-  ;;copy paste from/to terminal emacs from/to osx clipboard
-  ;; (when *is-a-mac*
-  ;;   (progn
-  ;;     (defun copy-from-osx ()
-  ;;       (shell-command-to-string "pbpaste"))
-  ;;     (defun paste-to-osx (text &optional push)
-  ;;       (let ((process-connection-type nil))
-  ;;         (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-  ;;           (process-send-string proc text)
-  ;;           (process-send-eof proc))))
-
-  ;;     (setq interprogram-cut-function 'paste-to-osx)
-
-  ;;     ;; breaks evil paste so disabling it.
-  ;;     ;; Use "+y to copy to osx clipboard
-  ;;     ;; (setq interprogram-paste-function 'copy-from-osx)
-  ;;     ))
-
-
- (use-package undo-tree
-   :diminish undo-tree-mode
-   :bind ("C-x u" . undo-tree-visualize)
-   )
 
   (require 'init-gui)
   (require 'init-saner-defaults)

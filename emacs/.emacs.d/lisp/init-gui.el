@@ -6,6 +6,10 @@
 (when window-system
   (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
 
+(use-package smart-cursor-color
+  :config
+  (smart-cursor-color-mode +1))
+
 (setq ring-bell-function 'ignore)
 
 (global-hl-line-mode)

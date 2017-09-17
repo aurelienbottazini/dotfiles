@@ -111,6 +111,7 @@ activate)
   (use-package counsel-projectile))
 (use-package counsel
   :bind (:map my-keys-minor-mode-map
+              ("C-s" . swiper)
               ("M-x" . counsel-M-x)
               ("C-x C-f" . counsel-find-file))
   :bind (:map my-leader-map

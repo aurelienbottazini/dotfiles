@@ -7,8 +7,8 @@
 
   (use-package evil-numbers
     :bind (:map evil-normal-state-map
-                   ("C-a" . evil-number/inc-at-pt)
-                   ("C-c -" . evil-number/inc-at-pt)))
+                   ("C-a" . evil-numbers/inc-at-pt)
+                   ("C-c -" . evil-numbers/inc-at-pt)))
 
   (use-package evil-surround
     :config

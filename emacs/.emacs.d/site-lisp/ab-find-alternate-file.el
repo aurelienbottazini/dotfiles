@@ -27,17 +27,21 @@
                "src/packages/"
                package-name
                "/pages/"
-               (s-replace ".spec.js" ".vue" (mapconcat 'identity  (cddr (split-string  (cadr split-file-path) "/")) "/"))))
+               (s-replace ".spec.js" ".page.vue"
+                          (s-replace ".page.spec.js" ".spec.js"
+                                     (mapconcat 'identity  (cddr (split-string  (cadr split-file-path) "/")) "/")))
+               ))
      ))
    (t (message "can not find an alternate path"))))
-
 
 (ert-deftest ab-alternate-path ()
   "tests alternate-path"
   (should (equal (ab-alternate-path "foo/src/profiles/foo.js") '("foo/test/unit/specs/profiles/foo.spec.js")))
   (should (equal (ab-alternate-path "foo/src/profiles/foo.vue") '("foo/test/unit/specs/profiles/foo.spec.js")))
   (should (equal (ab-alternate-path "foo/test/unit/specs/profiles/foo.spec.js") '("foo/src/profiles/foo.js" "foo/src/profiles/foo.vue")))
-  (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.page.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue"))))
+  (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.page.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue")))
+  (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue")))
+  )
 
 
 (split-string "foo/test/webdriver/specs/profiles/bar/foo.page.spec.js" "test/webdriver/specs")

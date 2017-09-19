@@ -1,6 +1,8 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
+(setq apropos-sort-by-scores t)
+
 (setq delete-by-moving-to-trash t)
 (setq-default indent-tabs-mode nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

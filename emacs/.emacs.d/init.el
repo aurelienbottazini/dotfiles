@@ -9,6 +9,14 @@
   (let ((sort-fold-case t))
     (call-interactively 'sort-lines)))
 
+(defun sudo ()
+  "Use TRAMP to `sudo' the current buffer"
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+             buffer-file-name))))
+
 (defun require-package (package &optional min-version)
   "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
   (unless (package-installed-p package min-version)

@@ -1,9 +1,14 @@
 (use-package evil
-  :init
+ :init
   (setq evil-toggle-key "C-`")
   (setq evil-mode-line-format nil)
   :config
   (evil-mode 1)
+
+  (use-package evil-numbers
+    :bind (:map evil-normal-state-map
+                   ("C-a" . evil-number/inc-at-pt)
+                   ("C-c -" . evil-number/inc-at-pt)))
 
   (use-package evil-surround
     :config
@@ -41,7 +46,8 @@
 
   (define-key my-leader-map (kbd "e") 'dired-jump)
   (require 'ab-in-project)
-  (define-key my-leader-map (kbd "k") 'ab-compile-in-project)
+  (define-key my-leader-map (kbd "k") 'recompile)
+  (define-key my-leader-map (kbd "K") 'ab-compile-in-project)
   (define-key my-leader-map (kbd "dl") 'browse-lodash-docs)
   (define-key my-leader-map (kbd "dr") 'browse-ramdajs-docs)
   (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
@@ -60,6 +66,8 @@
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
+  (define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
+  (define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
   (require 'ab-toggle)
   (define-key evil-normal-state-map (kbd "[d") 'ab-replace-describe)
   (define-key evil-normal-state-map (kbd "]d") 'ab-replace-describe-only)

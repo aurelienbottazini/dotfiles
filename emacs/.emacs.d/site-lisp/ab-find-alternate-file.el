@@ -54,7 +54,9 @@
 (defun ab-open-first-existing-file (aexp)
   "Open the first existing file from the given AEXP."
   (cond
-   ((null aexp) (message "Could not find a file to open"))
+   ((null (cadr aexp)) (progn
+                         (message "Could not find file, so creating one")
+                         (find-file (car aexp))))
    ((file-exists-p (car aexp)) (find-file (car aexp)))
    (t (ab-open-first-existing-file (cdr aexp)))))
 

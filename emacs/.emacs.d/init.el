@@ -98,5 +98,13 @@
     (mac-auto-operator-composition-mode))
 
 (put 'narrow-to-region 'disabled nil)
+
+(defun my-paste-indent (orig-fun &rest args)
+  (progn
+    (message "indenting")
+    (indent-region (region-beginning) (region-end) nil)))
+
+(advice-add 'evil-paste-after :after #'my-paste-indent)
+
 (provide 'init)
 ;;; init.el ends here

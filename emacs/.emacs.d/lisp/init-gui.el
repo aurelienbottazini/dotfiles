@@ -12,6 +12,7 @@
 
 (setq ring-bell-function 'ignore)
 
+(electric-indent-mode t)
 (electric-pair-mode t)
 (electric-layout-mode t)
 (setq electric-layout-rules '((?\{ . around) (?\} . around)))

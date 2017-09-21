@@ -12,6 +12,10 @@
 
 (setq ring-bell-function 'ignore)
 
+(electric-pair-mode t)
+(electric-layout-mode t)
+(setq electric-layout-rules '((?\{ . around) (?\} . around)))
+
 (global-hl-line-mode)
 
 (blink-cursor-mode 0)

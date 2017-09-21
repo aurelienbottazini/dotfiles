@@ -23,12 +23,6 @@
 
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
-  (use-package smartparens
-    :config
-    (require 'smartparens-config)
-    (sp-use-paredit-bindings)
-    (add-hook 'js-mode-hook #'smartparens-mode)
-    )
 
   (setq-default
    ;; js2-mode
@@ -149,9 +143,6 @@
                            "--single-quote" "true"
                            ))
   (defun auray-js-mode-hook ()
-    (tern-mode t)
-    (set (make-local-variable 'company-backends)
-           '((company-dabbrev-code company-yasnippet company-tern)))
     (setq imenu-create-index-function 'auray-js-imenu-make-index)
     (add-hook 'before-save-hook 'prettier nil 'local)
     )

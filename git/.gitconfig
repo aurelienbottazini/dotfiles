@@ -62,3 +62,5 @@
 	required = true
 [diff "exif"]
 	textconv = exiftool
+[magit]
+	hideCampaign = true

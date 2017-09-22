@@ -5,10 +5,9 @@ windows:
   - dev:
       layout: main-vertical
       panes:
-        - emacs .
         - yarn run unit:watch
   - servers:
       layout: main-horizontal
       panes:
         - yarn run mock:dev
-        - yarn run mock:graphql
+        - yarn run mock:endpoints

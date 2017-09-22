@@ -2,10 +2,6 @@ name: dox
 root: ~/projects/work/doximity
 
 windows:
-  - dev:
-      layout: main-horizontal
-      panes:
-        - emacs .
   - servers:
       layout: main-horizontal
       panes:

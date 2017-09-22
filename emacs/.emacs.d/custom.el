@@ -13,7 +13,7 @@
  '(company-minimum-prefix-length 2)
  '(context-coloring-javascript-block-scopes t)
  '(context-coloring-syntactic-comments t)
- '(context-coloring-syntactic-strings nil)
+ '(context-coloring-syntactic-strings t)
  '(fill-column 80)
  '(hl-paren-attributes
    (list

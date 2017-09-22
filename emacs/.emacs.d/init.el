@@ -34,6 +34,11 @@
 
 (require-package 'use-package)
 (require 'use-package)
+
+(use-package paredit-everywhere
+  :config
+  (add-hook 'prog-mode-hook 'paredit-everywhere-mode))
+
 (setq use-package-always-ensure t)
 
 (package-initialize)
@@ -99,12 +104,13 @@
 
 (put 'narrow-to-region 'disabled nil)
 
-(defun my-paste-indent (orig-fun &rest args)
+(defun my-evil-paste-indent-advice (orig-fun &rest args)
+  "Indent text pasted with evil. Takes default arguments for an adive Function: ORIG-FUN and rest ARGS."
   (progn
     (message "indenting")
     (indent-region (region-beginning) (region-end) nil)))
 
-(advice-add 'evil-paste-after :after #'my-paste-indent)
+(advice-add 'evil-paste-after :after #'my-evil-paste-indent-advice)
 
 (provide 'init)
 ;;; init.el ends here

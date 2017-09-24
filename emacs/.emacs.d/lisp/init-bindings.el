@@ -77,6 +77,7 @@ activate)
 (define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
 (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
 (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+(define-key my-keys-minor-mode-map (kbd "C-w") 'backward-kill-word)
 (define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
 (use-package iedit
   :bind (:map my-keys-minor-mode-map

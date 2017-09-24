@@ -42,7 +42,7 @@ Plug 'bronson/vim-visual-star-search' " seach current selection with *
 call plug#end()
 
 
-colors zenburn
+" colors zenburn
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column
 " set grepprg=ag
@@ -111,15 +111,13 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-set background=dark
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='wombat'
+let g:airline_theme='papercolor'
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
 noremap <Leader>f :Ag<Space>
@@ -178,7 +176,7 @@ set cursorline
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
 hi clear CursorLine
-hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
+hi CursorLine term=underline ctermbg=15 cterm=underline gui=underline
 
 nmap <leader>i :set list!<CR>
 highlight NonText ctermbg=NONE ctermfg=10

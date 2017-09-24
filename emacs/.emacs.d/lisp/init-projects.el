@@ -1,6 +1,7 @@
 (use-package projectile
+  :init
+  (setq projectile-switch-project-action 'projectile-dired)
   :config
-  (projectile-mode)
-  (setq projectile-switch-project-action 'projectile-dired))
+  (projectile-mode))
 
 (provide 'init-projects)

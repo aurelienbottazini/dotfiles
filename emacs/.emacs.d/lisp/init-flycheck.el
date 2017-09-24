@@ -1,14 +1,10 @@
 (use-package flycheck
   :diminish flycheck-mode
-  :config
+  :init
   (setq flycheck-indication-mode nil)
+  :config
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (use-package flycheck-pos-tip
-    :config
-    ;; (with-eval-after-load 'flycheck
-    ;;   (flycheck-pos-tip-mode))
-    )
 
   (defun my/use-eslint-from-node-modules ()
     (let* ((root (locate-dominating-file

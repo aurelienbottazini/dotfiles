@@ -3,12 +3,20 @@
   (setq evil-toggle-key "C-`")
   (setq evil-mode-line-format nil)
   :config
+  (defun my-evil-paste-indent-advice (orig-fun &rest args)
+    "Indent text pasted with evil. Takes default arguments for an adive Function: ORIG-FUN and rest ARGS."
+    (progn
+      (message "indenting")
+      (indent-region (region-beginning) (region-end) nil)))
+
+  (advice-add 'evil-paste-after :after #'my-evil-paste-indent-advice)
+
   (evil-mode 1)
 
   (use-package evil-numbers
     :bind (:map evil-normal-state-map
-                   ("C-a" . evil-numbers/inc-at-pt)
-                   ("C-c -" . evil-numbers/dec-at-pt)))
+                ("C-a" . evil-numbers/inc-at-pt)
+                ("C-c -" . evil-numbers/dec-at-pt)))
 
   (use-package evil-surround
     :config

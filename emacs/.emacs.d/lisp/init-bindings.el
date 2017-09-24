@@ -79,16 +79,18 @@ activate)
 (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
 (define-key my-keys-minor-mode-map (kbd "C-w") 'backward-kill-word)
 (define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
+
 (use-package iedit
   :bind (:map my-keys-minor-mode-map
               ("<f6>". iedit-mode)))
 
 (define-key my-keys-minor-mode-map (kbd "C-x o") 'ace-window)
+
 (use-package ivy
   :diminish ivy-mode
   :bind (:map my-keys-minor-mode-map
-              ("C-x b" . ivy-switch-buffer))
-  :bind (:map my-leader-map
+              ("C-x b" . ivy-switch-buffer)
+              :map my-leader-map
               ("b" . ivy-switch-buffer)
               ("f" . counsel-projectile-rg)
               ("F" . counsel-rg)
@@ -100,47 +102,41 @@ activate)
 
 (use-package counsel-projectile
   :config
-  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
-  )
+  (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file))
 
 (use-package projectile
   :init
   (setq projectile-enable-caching t)
   :bind (:map my-leader-map
-              ("p" . projectile-commander))
-  :init
-  (use-package counsel-projectile))
+              ("p" . projectile-commander)))
+
 (use-package counsel
-  :bind (:map my-keys-minor-mode-map
-              ("C-s" . swiper)
-              ("M-x" . counsel-M-x)
-              ("C-x C-f" . counsel-find-file))
-  :bind (:map my-leader-map
-              ("W" . swiper-multi)
-              ("h" . counsel-recentf)
-              ("i" . counsel-imenu)
-              ("m" . counsel-bookmark)
-              ("y" . counsel-yank-pop)
-              ("w" . swiper))
+  :bind ( :map my-keys-minor-mode-map
+         ("C-s" . swiper)
+         ("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         :map my-leader-map
+         ("W" . swiper-multi)
+         ("h" . counsel-recentf)
+         ("i" . counsel-imenu)
+         ("m" . counsel-bookmark)
+         ("y" . counsel-yank-pop)
+         ("w" . swiper))
   :config
   ;; with smex installed, counsel place recently used commands at the top
   (use-package smex))
 
 (use-package windresize
   :bind (:map evil-normal-state-map
-              ("C-w r" . windresize))
-  )
+              ("C-w r" . windresize)))
 
 (use-package dumb-jump
   :bind (:map evil-normal-state-map
               ("gd" . dumb-jump-go)
-              ("gD" . dumb-jump-go-other-window)
-              )
+              ("gD" . dumb-jump-go-other-window))
   :init
   (setq dumb-jump-selector 'ivy)
-  (setq dumb-jump-force-searcher 'rg)
-  )
-
+  (setq dumb-jump-force-searcher 'rg))
 
 (use-package origami
   :bind (:map evil-normal-state-map
@@ -149,8 +145,7 @@ activate)
               ("zo" . origami-open-node)
               ("zv" . origami-open-all-nodes))
   :config
-  (global-origami-mode)
-  )
+  (global-origami-mode))
 
 (use-package expand-region
   :bind (:map my-leader-map
@@ -167,7 +162,7 @@ activate)
   (setq neo-smart-open t)
   :config
   (use-package all-the-icons
-    :config
+    :init
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)

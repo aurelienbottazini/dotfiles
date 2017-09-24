@@ -7,7 +7,7 @@
  (setq flyspell-prog-text-faces '(font-lock-comment-face font-lock-doc-face))
 
 (use-package langtool
- :config
+ :init
 (setq langtool-language-tool-jar "/usr/local/Cellar/languagetool/2.8/libexec/languagetool-commandline.jar"
       langtool-mother-tongue "en"
       ;; rules: https://www.languagetool.org/languages/

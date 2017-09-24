@@ -52,13 +52,6 @@
 	 "]m" 'ruby-end-of-defun
 	 )))
 
-  ;; (add-hook 'ruby-mode-hook
-  ;; 	    (lambda ()
-  ;; 	      (set (make-local-variable imenu-generic-expression)
-  ;; 		   '(("Methods"  "^\\( *\\(def\\) +.+\\)"          1)
-  ;; 		     ))))
-					;
-
   (use-package bundler)
 
   (use-package ruby-interpolation)
@@ -69,14 +62,9 @@
 
   ;; Hitting M-; twice adds an xmpfilter comment. Hitting xmp keybinding will put the output in this comment
   (use-package rcodetools
-    :bind (:map my-leader-map
-                ("x" . xmp))
     :load-path "/site-lisp/rcodetools.el"
     :pin manual
     :ensure nil
-    :config
-     ;;todo change binding
-    ;;(evil-leader/set-key-for-mode 'ruby-mode "x"  'xmp)
 )
   )
 

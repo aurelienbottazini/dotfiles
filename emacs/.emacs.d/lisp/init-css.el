@@ -14,6 +14,7 @@
 (add-hook 'css-mode-hook 'my-css-mode-setup)
 
 (use-package scss-mode
+  :mode "\\.scss\\'"
   :config
   (add-hook 'scss-mode-hook '(lambda ()
                                (setq imenu-generic-expression
@@ -31,7 +32,7 @@
             )
 
   (use-package highlight-indent-guides
-    :config
+    :init
     (setq highlight-indent-guides-method 'character))
   (add-hook 'sass-mode-hook 'my-css-mode-setup)
   (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))

@@ -83,5 +83,5 @@
  '(mode-line-buffer-id ((t (:foreground "#2b2b2b" :slant italic :weight bold))))
  '(mode-line-inactive ((t (:inherit mode-line :background "#ededed" :foreground "#2b2b2b" :box (:line-width 2 :color "#e4e4e4") :weight light))))
  '(outline-1 ((t (:inherit font-lock-function-name-face :weight bold :height 1.2))))
- '(region ((t (:background "lightgoldenrod2"))))
+ '(region ((t (:background "#ffd787"))))
  '(vertical-border ((t (:background "#d0d0d0" :foreground "#d0d0d0")))))

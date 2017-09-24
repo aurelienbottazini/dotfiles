@@ -104,7 +104,7 @@
   (setq evil-normal-state-cursor '("#2b2b2b" box))
   (setq evil-emacs-state-cursor  '("#ffafff" box))
   (setq evil-visual-state-cursor '("#ffd787" box))
-  (setq evil-insert-state-cursor '("#2b2b2b" bar))
+  (setq evil-insert-state-cursor '("#00cc00" bar))
   (setq evil-motion-state-cursor '("#afd8af" box))
 
   (lexical-let ((default-color (cons (face-background 'mode-line)
@@ -114,7 +114,7 @@
                 (let ((color (cond ((minibufferp) default-color)
                                    ((evil-emacs-state-p)  '("#ffafff" . "#2b2b2b"))
                                    ((evil-visual-state-p) '("#ffd787" . "#2b2b2b"))
-                                   ((evil-insert-state-p)  '("#ffff00" . "#2b2b2b"))
+                                   ((evil-insert-state-p)  '("#00cc00" . "#2b2b2b"))
                                    ((buffer-modified-p)   '("#f38220" . "#2b2b2b"))
                                    (t default-color)))
                       )

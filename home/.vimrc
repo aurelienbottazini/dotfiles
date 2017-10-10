@@ -169,7 +169,7 @@ function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
 
-set guifont=PragmataPro:h14
+set guifont=OperatorMono:h14
 set cursorline
 " set cursorcolumn
 " set colorcolumn=80

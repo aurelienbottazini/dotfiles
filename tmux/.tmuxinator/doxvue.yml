@@ -5,7 +5,7 @@ windows:
   - dev:
       layout: main-vertical
       panes:
-        - yarn run unit:watch
+        - yarn run unit
   - servers:
       layout: main-horizontal
       panes:

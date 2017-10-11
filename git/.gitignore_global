@@ -19,3 +19,5 @@ jsconfig.json
 *.iml
 projectile.cache
 .projectile
+.idea
+.vscode

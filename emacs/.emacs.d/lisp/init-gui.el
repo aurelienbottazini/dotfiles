@@ -20,9 +20,6 @@
 (global-hl-line-mode)
 (blink-cursor-mode 0)
 (column-number-mode)
-(use-package linum-relative
-  :config
-  (add-hook 'prog-mode-hook 'linum-relative-mode))
 
 (defvar linum-format)
 (setq linum-format "%3d")

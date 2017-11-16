@@ -1,3 +1,4 @@
+" :actionlist to know what to bind to shortcuts
 imap jk <Esc>
 set scrolloff=5
 
@@ -19,6 +20,8 @@ nnoremap <C-h> :action TabShiftActions.MoveFocusLeft<CR>
 nnoremap <C-j> :action TabShiftActions.MoveFocusDown<CR>
 nnoremap <C-k> :action TabShiftActions.MoveFocusUp<CR>
 nnoremap <C-l> :action TabShiftActions.MoveFocusRight<CR>
+
+nnoremap <M-p> :action SearchEverywhere<CR>
 
 " Previous method.
 nnoremap [m :action MethodUp<cr>

@@ -48,8 +48,8 @@
 (recentf-mode 1)
 
 (when *is-a-mac*
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'none)
+  ;; (setq mac-command-modifier 'meta)
+  ;; (setq mac-option-modifier 'none)
   (setq mac-right-control-modifier 'hyper)
   (setq mac-right-option-modifier 'none)
   (setq mac-right-command-modifier 'super)

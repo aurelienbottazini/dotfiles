@@ -23,6 +23,7 @@ brew install fish
 brew install tmux
 brew install mobile-shell
 brew install ripgrep
+brew install wordnet
 
 # brew version does not work with ruby pdfkit. Need at least version 0.12.3
 # install it using http://wkhtmltopdf.org/downloads.html

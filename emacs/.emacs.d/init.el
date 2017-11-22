@@ -84,7 +84,7 @@
   (require 'init-git)
   (require 'init-emmet)
   (require 'init-flycheck)
-  (require 'init-spellcheck)
+  (require 'init-write)
   (require 'init-snippets)
   (require 'init-completion)
   (require 'init-templates)

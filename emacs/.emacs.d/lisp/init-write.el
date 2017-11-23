@@ -47,4 +47,6 @@
 (define-key my-keys-minor-mode-map (kbd "C-c w t") 'palimpsest-move-region-to-trash)
 (add-hook 'org-mode-hook 'palimpsest-mode)
 
+(define-key org-mode-map (kbd "RET") #'newline-and-indent)
+
 (provide 'init-write)

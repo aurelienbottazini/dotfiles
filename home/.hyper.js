@@ -1,10 +1,13 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 14,
+    // normal
+    // fontSize: 14,
+    // presentation
+    fontSize: 20,
 
     // font family with optional fallbacks
-    fontFamily: '"OperatorMono-Medium", PragmataPro, Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+    fontFamily: 'PragmataPro, "OperatorMono-Medium", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(148, 191, 243, 0.7)',
@@ -14,10 +17,10 @@ module.exports = {
     cursorShape: 'BLOCK',
 
     // color of the text
-    foregroundColor: '#f8f5ed',
+    foregroundColor: '#000000',
 
     // terminal background color
-    backgroundColor: '#3d3d3d',
+    backgroundColor: '#ffffff',
 
     // border color (window, tabs)
     borderColor: '#777',
@@ -26,7 +29,7 @@ module.exports = {
     css: '.term_fit { padding: 0.1em 0.1em !important }',
 
     // custom css to embed in the terminal window
-    termCSS: '.terms_terms {margin-top: 0 !important};.cursor-node[focus=false] { background-color: transparent !important} x-screen x-row { font-variant-ligatures: initial } span[style="color: rgb(186, 144, 189);"], span[style*="italic"]{ font-family: "Operator Mono"; font-style: italic;}',
+    termCSS: '.terms_terms {margin-top: 0 !important};.cursor-node[focus=false] { background-color: transparent !important} span[style="color: rgb(186, 144, 189);"], span[style*="italic"]{ font-family: "Operator Mono"; font-style: italic;}',
 
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: '12px 14px',
@@ -36,21 +39,21 @@ module.exports = {
     // an array here instead of a color map object
     colors: {
       black: '#505050',
-      red: '#d7a5a4',
-      green: '#91ad91',
-      yellow: '#e8d7b9',
-      blue: '#c6eaff',
-      magenta: '#ba90bd',
-      cyan: '#96ad6d9',
-      white: '#f3f1d9',
-      lightBlack: '#7f7f7f',
-      lightRed: '#e4b3b2',
-      lightGreen: '#d4e894',
-      lightYellow: '#eff0a5',
-      lightBlue: '#6996bf',
-      lightMagenta: '#dcbecd',
-      lightCyan: '#9ad6d9',
-      lightWhite: '#f8f5ed'
+      red: '#c91b00',
+      green: '#00c200',
+      yellow: '#c7c400',
+      blue: '#0225c7',
+      magenta: '#ca30c7',
+      cyan: '#00c5c7',
+      white: '#c7c7c7',
+      lightBlack: '#686868',
+      lightRed: '#ff6e67',
+      lightGreen: '#4ac250',
+      lightYellow: '#ffa94a',
+      lightBlue: '#6871ff',
+      lightMagenta: '#ff77ff',
+      lightCyan: '#3c9e9f',
+      lightWhite: '#ffffff',
     },
 
     // ffffff shell to run when spawning a new session (i.e. /usr/local/bin/fish)

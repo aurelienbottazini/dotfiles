@@ -79,7 +79,6 @@
     (fundamental-mode)
     (font-lock-mode -1)
     (linum-mode -1)
-    (highlight-thing-mode -1)
     (setq buffer-read-only t)
     (buffer-disable-undo)
     ))

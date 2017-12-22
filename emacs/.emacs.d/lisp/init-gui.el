@@ -4,7 +4,7 @@
 ;;; Code:
 
 (when window-system
-  (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+  (set-frame-font "-*-PragmataPro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
 
 (use-package smart-cursor-color
   :config
@@ -40,11 +40,6 @@
   :diminish which-key-mode
   :config
   (which-key-mode))
-
-(use-package highlight-thing
-  :diminish highlight-thing-mode
-  :config
-  (global-highlight-thing-mode))
 
 (use-package diminish
   :config

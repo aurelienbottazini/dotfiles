@@ -7,7 +7,7 @@ export ZSH=/Users/aurelienbottazini/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="theunraveler"
+ZSH_THEME="theunraveler-forked"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -113,6 +113,7 @@ alias screen="screen -U"
 alias pd="psql -p 5432 -h localhost -d "
 # alias ls="gls --color"
 alias grep="grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
+alias y="yarn"
 
 eval "$(rbenv init -)"
 

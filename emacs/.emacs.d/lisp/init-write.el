@@ -47,6 +47,10 @@
 (define-key my-keys-minor-mode-map (kbd "C-c w t") 'palimpsest-move-region-to-trash)
 (add-hook 'org-mode-hook 'palimpsest-mode)
 
-(define-key org-mode-map (kbd "RET") #'newline-and-indent)
+(eval-after-load 'org-mode
+  '(define-key org-mode-map (kbd "RET") #'newline-and-indent)
+  )
 
+(add-hook 'org-mode-hook (lambda () (auto-fill-mode 1)))
+(setq org-src-fontify-natively t)
 (provide 'init-write)

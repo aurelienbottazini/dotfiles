@@ -27,7 +27,7 @@
     :config
     (evil-commentary-mode))
 
-  (use-package evil-visualstar
+ (use-package evil-visualstar
     :config
     (global-evil-visualstar-mode t))
 
@@ -67,8 +67,6 @@
 
   (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
   (define-key evil-normal-state-map (kbd "g t") 'other-frame)
-
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
 
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)

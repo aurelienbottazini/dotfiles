@@ -158,8 +158,8 @@ activate)
               ("oc" . context-coloring-mode)))
 
 (use-package neotree
-  :bind (:map my-leader-map
-              ("1" . neotree-find-project-root))
+  :bind (:map my-keys-minor-mode-map
+              ("s-1" . neotree-find-project-root))
   :init
   (setq neo-smart-open t)
   :config

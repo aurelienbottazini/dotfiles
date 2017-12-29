@@ -26,6 +26,7 @@
     (quote
      (:weight bold))))
  '(hl-paren-colors (quote ("firebrick1" "darkgreen" "purple" "brown")))
+ '(neo-show-hidden-files t)
  '(neo-window-width 75)
  '(overflow-newline-into-fringe t)
  '(package-selected-packages

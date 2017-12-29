@@ -92,11 +92,10 @@ activate)
   :diminish ivy-mode
   :bind (:map my-keys-minor-mode-map
               ("C-x b" . ivy-switch-buffer)
+              ("C-;" . avy-goto-word-1)
               :map my-leader-map
-              ("b" . ivy-switch-buffer)
               ("f" . counsel-projectile-rg)
-              ("F" . counsel-rg)
-              ("<SPC>" . avy-goto-word-1))
+              ("F" . counsel-rg))
   :config
   (ivy-mode 1)
   (use-package ivy-hydra))

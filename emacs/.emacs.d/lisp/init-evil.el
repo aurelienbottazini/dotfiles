@@ -64,7 +64,6 @@
   (define-key my-leader-map (kbd "S") 'ab-eshell-in-project)
   (require 'ab-find-alternate-file)
   (define-key my-leader-map (kbd "t") 'ab-find-alternate-file)
-  (define-key my-leader-map (kbd "u") 'universal-argument)
 
   (define-key evil-normal-state-map (kbd "M-a") 'mark-whole-buffer)
   (define-key evil-normal-state-map (kbd "g t") 'other-frame)

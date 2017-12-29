@@ -92,6 +92,7 @@ activate)
   :diminish ivy-mode
   :bind (:map my-keys-minor-mode-map
               ("C-x b" . ivy-switch-buffer)
+              ("C-c C-r" . ivy-resume)
               ("C-;" . avy-goto-word-1)
               :map my-leader-map
               ("f" . counsel-projectile-rg)

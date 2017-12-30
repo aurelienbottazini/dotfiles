@@ -3,7 +3,7 @@
 brew tap Goles/battery
 brew install caskroom/cask/brew-cask
 brew install Caskroom/cask/xquartz
-brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 hunspell languagetool
+brew install reattach-to-user-namespace battery fzf coreutils git the_silver_searcher binutils findutils libtool npm tidy-html5 aspell languagetool
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
 
@@ -86,3 +86,4 @@ stow git
 stow home
 stow tmux
 stow vagrant
+stow dictionaries

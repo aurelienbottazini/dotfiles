@@ -1,19 +1,5 @@
-;; S-:
-(when (executable-find "hunspell")
-  (setq-default ispell-program-name "hunspell")
-  (setq ispell-really-hunspell t)
-  ;; making sure I load the correctly dictionary for hunspell
-  (add-to-list 'ispell-local-dictionary-alist '("en_US_aurelien"
-                                                "[[:alpha:]]"
-                                                "[^[:alpha:]]"
-                                                "[']"
-                                                t
-                                                ("-d" "en_US_aurelien")
-                                                nil
-                                                iso-8859-1))
-  (setq ispell-dictionary "en_US_aurelien")
-  (add-hook 'org-mode-hook 'ispell-minor-mode)
-  )
+(setq ispell-program-name "aspell")
+(setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
 ;; langtool check
 (use-package langtool

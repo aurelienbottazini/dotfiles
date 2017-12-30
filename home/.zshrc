@@ -93,6 +93,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=~/dotfiles/bin/:/usr/local/sbin:(yarn global bin):$PATH
 export EDITOR="vim"
+export DICPATH=~/dictionaries
 
 setopt auto_cd
 cdpath=($HOME $HOME/projects $HOME/projects/work)

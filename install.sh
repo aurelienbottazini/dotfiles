@@ -9,7 +9,10 @@ brew install --HEAD universal-ctags
 
 brew install htop rbenv rbenv-ctags
 brew install global --with-ctags --with-pygments
+brew install ranger
+
 brew cask install launchrocket
+
 brew install tree
 brew install node
 brew install hub

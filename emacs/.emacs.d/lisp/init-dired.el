@@ -1,5 +1,7 @@
 (require 'dired)
 (define-key dired-mode-map "-" 'dired-up-directory)
+(define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
+
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")

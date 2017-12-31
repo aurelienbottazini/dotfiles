@@ -26,8 +26,7 @@
     (quote
      (:weight bold))))
  '(hl-paren-colors (quote ("firebrick1" "darkgreen" "purple" "brown")))
- '(ispell-alternate-dictionary
-   "/Users/aurelienbottazini/dictionaries/.hunspell_en_US_aurelien")
+ '(ispell-alternate-dictionary "/Users/aurelienbottazini/dictionaries/.en_US_aurelien")
  '(ispell-dictionary "en_US")
  '(ispell-local-dictionary "en_US")
  '(neo-show-hidden-files t)

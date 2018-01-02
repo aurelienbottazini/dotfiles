@@ -7,12 +7,26 @@
   "Return an alternate PATH."
   (interactive)
   (cond
+   ((string-match-p ".*/__tests__/.*" path)
+    (let
+        ((filename (car (last (split-string path "/")))))
+      (list (s-replace ".spec.js" ".vue" (s-replace "__tests__/" "" path))
+            (s-replace ".spec.js" ".js" (s-replace "__tests__/" "" path)))
+      ))
    ((string-match-p ".*/src/.*" path)
     (cond
      ((string-suffix-p ".js" path)
-      (list (s-replace ".js" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path))))
+      (let
+          ((filename (car (last (split-string path "/")))))
+        (list (s-replace ".js" ".spec.js" (s-replace filename (concat "__tests__/" filename) path))
+              (s-replace ".js" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path))
+                )))
      ((string-suffix-p ".vue" path)
-      (list (s-replace ".vue" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path))))
+      (let
+          ((filename (car (last (split-string path "/")))))
+          (list
+           (s-replace ".vue" ".spec.js" (s-replace filename (concat "__tests__/" filename) path))
+           (s-replace ".vue" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path)))))
      ))
    ((string-match-p ".*/test/unit/.*" path)
     (let ((goodPathBadFilename  (s-replace "/test/unit/specs/" "/src/" path)))
@@ -36,11 +50,13 @@
 
 (ert-deftest ab-alternate-path ()
   "tests alternate-path"
-  (should (equal (ab-alternate-path "foo/src/profiles/foo.js") '("foo/test/unit/specs/profiles/foo.spec.js")))
-  (should (equal (ab-alternate-path "foo/src/profiles/foo.vue") '("foo/test/unit/specs/profiles/foo.spec.js")))
+  (should (equal (ab-alternate-path "foo/src/profiles/foo.js") '("foo/src/profiles/__tests__/foo.spec.js" "foo/test/unit/specs/profiles/foo.spec.js")))
+  (should (equal (ab-alternate-path "foo/src/profiles/foo.vue") '("foo/src/profiles/__tests__/foo.spec.js" "foo/test/unit/specs/profiles/foo.spec.js")))
   (should (equal (ab-alternate-path "foo/test/unit/specs/profiles/foo.spec.js") '("foo/src/profiles/foo.js" "foo/src/profiles/foo.vue")))
   (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.page.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue")))
   (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue")))
+  (should (equal (ab-alternate-path "foo/__tests__/bar.spec.js")
+                 '("foo/bar.js" "foo/bar.vue")))
   )
 
 

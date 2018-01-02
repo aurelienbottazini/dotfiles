@@ -43,6 +43,7 @@ activate)
   :bind (:map my-leader-map
               ("sc" . emamux:send-command)
               ("sl" . emamux:run-last-command)))
+
 (defun tmux-socket-command-string ()
   (interactive)
   (concat "tmux -S "

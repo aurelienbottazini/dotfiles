@@ -84,6 +84,7 @@
   :diminish context-coloring-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-hook 'js-mode-hook #'context-coloring-mode)
   (add-hook 'js2-mode-hook #'context-coloring-mode))
 
 (use-package json-mode

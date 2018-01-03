@@ -18,15 +18,17 @@
      ((string-suffix-p ".js" path)
       (let
           ((filename (car (last (split-string path "/")))))
-        (list (s-replace ".js" ".spec.js" (s-replace filename (concat "__tests__/" filename) path))
-              (s-replace ".js" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path))
-                )))
+        (list
+         (s-replace ".js" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path))
+         (s-replace ".js" ".spec.js" (s-replace filename (concat "__tests__/" filename) path))
+         )))
      ((string-suffix-p ".vue" path)
       (let
           ((filename (car (last (split-string path "/")))))
           (list
-           (s-replace ".vue" ".spec.js" (s-replace filename (concat "__tests__/" filename) path))
-           (s-replace ".vue" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path)))))
+           (s-replace ".vue" ".spec.js" (s-replace "/src/" "/test/unit/specs/" path))
+           (s-replace ".vue" ".spec.js" (s-replace filename (concat "__tests__/" filename) path)))
+          ))
      ))
    ((string-match-p ".*/test/unit/.*" path)
     (let ((goodPathBadFilename  (s-replace "/test/unit/specs/" "/src/" path)))
@@ -56,11 +58,9 @@
   (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.page.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue")))
   (should (equal (ab-alternate-path "foo/test/webdriver/specs/profiles/bar/foo.spec.js") '("foo/src/packages/profiles/pages/bar/foo.page.vue")))
   (should (equal (ab-alternate-path "foo/__tests__/bar.spec.js")
-                 '("foo/bar.js" "foo/bar.vue")))
+                 '("foo/bar.vue" "foo/bar.js")))
   )
 
-
-(split-string "foo/test/webdriver/specs/profiles/bar/foo.page.spec.js" "test/webdriver/specs")
 
 (defun ab-find-alternate-file ()
   "Find alternate file for current buffer."

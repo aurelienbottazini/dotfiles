@@ -51,7 +51,7 @@ ZSH_THEME="theunraveler-forked"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(tmux)
+plugins=(tmux zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -130,5 +130,8 @@ g() {
 
 # Complete g like git
 compdef g=git
+
+# select first option for autocompletion on tab
+setopt menu_complete
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

@@ -20,4 +20,5 @@ jsconfig.json
 projectile.cache
 .projectile
 .idea
-.vscode
+.vscodnse
+graphql.config.json

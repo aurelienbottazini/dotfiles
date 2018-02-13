@@ -22,3 +22,4 @@ projectile.cache
 .idea
 .vscodnse
 graphql.config.json
+wallaby.js

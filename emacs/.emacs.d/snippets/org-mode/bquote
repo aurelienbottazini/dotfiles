@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: begin_quote
-# key: bquote
-# --
-#+BEGIN_QUOTE
-  $0
-#+END_QUOTE

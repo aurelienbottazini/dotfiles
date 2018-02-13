@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: klipse-ruby
-# key: krb
-# --
-<pre>
-<code class="krb">
-$0
-</code>
-</pre>

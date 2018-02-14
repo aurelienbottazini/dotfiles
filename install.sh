@@ -55,6 +55,8 @@ yarn global add babel-preset-es2015
 yarn global add save-dev babel-preset-react
 yarn global add babel-preset-stage-0
 
+yarn global add pure-prompt
+
 # brew install emacs --srgb ---with-imagemagick --with-librsvg --with-mailutils --with-dbus --with-cocoa
 # tic -o ~/.terminfo /usr/local/share/emacs/24.5/etc/e/eterm-color.ti
 # tic -x ~/xterm-256color.terminfo

@@ -11,6 +11,7 @@ export PATH=~/dotfiles/bin/:/usr/local/sbin:(yarn global bin):/usr/local/opt/go/
 export GOPATH=/usr/local/opt/go/libexec/bin
 export EDITOR="vim"
 export DICPATH=~/dictionaries
+export ITERM_24BIT=1
 
 setopt auto_cd
 cdpath=($HOME $HOME/projects $HOME/projects/work)

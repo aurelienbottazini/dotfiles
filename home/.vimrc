@@ -15,6 +15,14 @@ nmap <C-s> :w<cr>
 imap jk <esc>
 imap kj <esc>
 
+set t_ut=                " fix 256 colors in tmux http://sunaku.github.io/vim-256color-bce.html
+
+if has("termguicolors")  " set true colors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim' " quickly find files
 Plug 'tpope/vim-sensible' " base set of configurations

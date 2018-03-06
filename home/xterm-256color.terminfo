@@ -8,6 +8,10 @@
 #
 #   export TERM=xterm-256color-italic
 #
+tmux-256color|tmux with 256 colors,
+  ritm=\E[23m, rmso=\E[27m, sitm=\E[3m, smso=\E[7m,
+  use=xterm-256color, use=screen-256color,
+
 xterm-256color-italic|xterm with 256 colors and italic,
-	sitm=\E[3m, ritm=\E[23m,
-	use=xterm-256color,
+  sitm=\E[3m, ritm=\E[23m,
+  use=xterm-256color,

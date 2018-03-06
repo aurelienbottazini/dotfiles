@@ -38,4 +38,7 @@ map <leader>z :action MaximizeToolWindow<CR>
 map <leader>t :action GotoTest<CR>
 map <leader>v :source ~/.ideavimrc<CR>
 
+map <leader>cT :action :cursive.testing.actions/run-ns-tests<CR>
+map <leader>ct :action :cursive.testing.actions/rerun-last-test<CR> 
+
 map <leader>oh :nohlsearch<CR>

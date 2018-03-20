@@ -15,6 +15,7 @@ brew cask install launchrocket
 
 brew install tree
 brew install node
+brew install ag
 brew install hub
 brew install vim
 brew install ifstat

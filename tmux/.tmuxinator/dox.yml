@@ -16,3 +16,7 @@ windows:
       panes:
         - cd ~/projects/work/doximity-client-vue && yarn run mock:endpoints
         - cd ~/projects/work/doximity-client-vue && yarn run mock:dev
+  - webpacker:
+      layout: main-horizontal
+      panes:
+        - ./bin/webpack-dev-server

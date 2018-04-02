@@ -13,6 +13,7 @@ brew install ranger
 
 brew cask install launchrocket
 
+brew install jump
 brew install tree
 brew install node
 brew install ag

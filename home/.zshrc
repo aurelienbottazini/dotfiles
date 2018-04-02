@@ -7,6 +7,8 @@ compinit
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+eval "$(jump shell)"
+
 export PATH=~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:$PATH
 export GOPATH=/usr/local/opt/go/libexec/bin
 export EDITOR="vim"

@@ -23,3 +23,4 @@ projectile.cache
 .vscodnse
 graphql.config.json
 yarn-error.log
+.#*

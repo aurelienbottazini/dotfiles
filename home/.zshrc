@@ -24,8 +24,8 @@ alias ef="tmux display-message -p '#S' | xargs -J % emacsclient -s % -ncq -a ''"
 
 alias db='docker-compose build'
 alias dr='docker-compose run'
-alias delete_docker_containers='docker rm (docker ps -a -q)'
-alias delete_docker_images='docker rmi (docker images -q)'
+alias delete_docker_containers='docker rm $(docker ps -a -q)'
+alias delete_docker_images='docker rmi $(docker images -q)'
 
 #alias tmux="tmux -u"
 alias screen="screen -U"
@@ -33,6 +33,7 @@ alias pd="psql -p 5432 -h localhost -d "
 # alias ls="gls --color"
 alias grep="grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 alias y="yarn"
+alias ctags="/usr/local/bin/ctags"
 
 eval "$(rbenv init -)"
 

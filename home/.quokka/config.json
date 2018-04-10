@@ -1,0 +1,9 @@
+{
+  "pro":true,
+   "plugins": [
+        "quokka-mocha-bdd"
+    ],
+    "quokka-mocha-bdd": {
+        "interface": <bdd|tdd|qunit>
+    }
+}

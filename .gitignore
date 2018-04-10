@@ -22,3 +22,4 @@ emacs/.terminfo
 /emacs/.emacs.d/ac-comphist.dat
 home/.npmrc
 home/.npmrc
+home/.quokka/node_modules

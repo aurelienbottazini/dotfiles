@@ -45,14 +45,9 @@
         recent-branches = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
         recap = log --all --oneline --no-merges --author=aurelien@bottazini.com
         today = log --since=00:00:00 --all --no-merges --oneline --author=aurelien@bottazini.com
+	vdf = difftool
 [credential]
 	helper = osxkeychain
-[difftool]
-	prompt = false
-[merge]
-  tool = ediff
-[mergetool "ediff"]
-  cmd = emacsclient -ta \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [init]
 	templatedir = ~/.git_template
 [merge]
@@ -63,7 +58,7 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[diff "exif"]
-	textconv = exiftool
 [magit]
 	hideCampaign = true
+[diff]
+	tool = vimdiff

@@ -9,7 +9,10 @@ brew install --HEAD universal-ctags
 
 brew install htop rbenv rbenv-ctags
 brew install global --with-ctags --with-pygments
+brew install mc
 brew install ranger
+brew tap thoughtbot/formulae
+brew install gitsh
 
 brew cask install launchrocket
 

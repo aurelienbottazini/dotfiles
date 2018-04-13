@@ -17,6 +17,7 @@
         df = diff --word-diff --color-words
         co = checkout
         b = branch
+	set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
         ignore-tracked = update-index --assume-unchanged
 	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep

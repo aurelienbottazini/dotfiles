@@ -7,6 +7,7 @@ brew install reattach-to-user-namespace battery fzf coreutils git the_silver_sea
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
 
+
 brew install htop rbenv rbenv-ctags
 brew install global --with-ctags --with-pygments
 brew install mc
@@ -69,10 +70,11 @@ brew tap railwaycat/emacsmacport
 brew install emacs-mac
 brew linkapps emacs-mac
 
-brew install offlineimap
-brew services start offlineimap
-EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-em
-acs --HEAD
+brew install isync
+brew services start isync
+brew install mu --with-emacs
+# EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-emacs --HEAD
+brew install w3m
 brew install gnutls
 brew install gnu-sed --with-default-names
 brew install clisp

@@ -24,3 +24,4 @@ projectile.cache
 graphql.config.json
 yarn-error.log
 .#*
+.ignore

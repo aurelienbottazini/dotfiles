@@ -18,6 +18,7 @@ export ITERM_24BIT=1
 setopt auto_cd
 cdpath=($HOME $HOME/projects $HOME/projects/work)
 
+alias em="emacs"
 alias ec="emacsclient -s % -ta ''"
 alias ef="emacsclient -s % -ncq -a ''"
 

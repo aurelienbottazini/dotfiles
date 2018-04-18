@@ -25,8 +25,8 @@ brew install hub
 brew install vim
 brew install ifstat
 brew install ngrep
+brew install emacs --with-imagemagick@6 --devel --with-mailutils
 brew install elm-format
-brew install Emacs --with-cocoa --with-imagemagick@6
 ln -sf /usr/local/bin/elm-format-0.18  /usr/local/bin/elm-format
 brew install fish
 brew install tmux
@@ -73,7 +73,6 @@ brew linkapps emacs-mac
 brew install isync
 brew services start isync
 brew install mu --with-emacs
-# EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs brew install mu --with-emacs --HEAD
 brew install w3m
 brew install gnutls
 brew install gnu-sed --with-default-names

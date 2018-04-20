@@ -38,7 +38,6 @@ Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-airline/vim-airline' " better status and tab line
 Plug 'vim-airline/vim-airline-themes' " better status and tab line
-Plug 'bling/vim-bufferline'
 Plug 'mkitt/tabline.vim'
 Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
@@ -145,9 +144,9 @@ command! Q q " Bind Q to q since sometimes I hold shift too long
 imap <c-e> <c-o>$
 imap <c-a> <c-o>^
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 map <leader>lo :lopen<cr>
 map <leader>lc :lcl<cr>

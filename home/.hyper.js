@@ -4,14 +4,14 @@ module.exports = {
     // normal
     // fontSize: 14,
     // presentation
-    fontSize: 13,
+    fontSize: 12,
 
     // font family with optional fallbacks
     fontFamily:
-      'OperatorMono, PragmataPro, "OperatorMono-Medium", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+      '"Operator Mono", PragmataPro, Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: "rgba(148, 191, 243, 0.7)",
+    // cursorColor: "rgba(148, 191, 243, 0.7)",
     // cursorColor: 'transparent',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █

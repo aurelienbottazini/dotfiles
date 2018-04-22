@@ -19,8 +19,8 @@ setopt auto_cd
 cdpath=($HOME $HOME/projects $HOME/projects/work)
 
 alias em="emacs"
-alias ec="emacsclient -s % -ta ''"
-alias ef="emacsclient -s % -ncq -a ''"
+alias ec="tmux display-message -p '#S' | xargs -J % emacsclient -s % -ta ''"
+alias ef="tmux display-message -p '#S' | xargs -J % emacsclient -s % -ncq -a ''"
 
 alias db='docker-compose build'
 alias dr='docker-compose run'

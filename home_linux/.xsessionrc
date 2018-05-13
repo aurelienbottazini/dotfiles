@@ -1,0 +1,2 @@
+xrandr --output HDMI-3 --left-of HDMI-2
+feh --bg-scale ~/Pictures/VG2UvcY.jpg

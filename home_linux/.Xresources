@@ -4,7 +4,9 @@ Xft.hinting: true
 Xft.hintstyle: true
 Xft.rgba: rgb
 
-URxvt*font: xft:Operator Mono Medium:size=12
+URxvt*font: xft:Operator Mono Medium:size=12,\
+	    xft:DejaVu Sans Mono:size=12,\
+	    xft:Ubuntu Mono:size=12
 URxvt*boldFont: xft:Operator Mono Bold:size=12
 URxvt*boldItalicFont: xft:Operator Mono Bold:italic:size=12
 

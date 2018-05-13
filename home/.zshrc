@@ -7,16 +7,13 @@ compinit
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-eval "$(jump shell)"
-
 export PATH=~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:$PATH
 export GOPATH=/usr/local/opt/go/libexec/bin
 export EDITOR="vim"
 export DICPATH=~/dictionaries
-export ITERM_24BIT=1
 
 setopt auto_cd
-cdpath=($HOME $HOME/projects $HOME/projects/work)
+cdpath=($HOME $HOME/projects $HOME/work)
 
 alias em="emacs"
 alias ec="tmux rename-window 'emacs' && tmux display-message -p '#S' | xargs -J % emacsclient -s % -ta ''"
@@ -33,7 +30,6 @@ alias pd="psql -p 5432 -h localhost -d "
 # alias ls="gls --color"
 alias grep="grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 alias y="yarn"
-alias ctags="/usr/local/bin/ctags"
 
 eval "$(rbenv init -)"
 

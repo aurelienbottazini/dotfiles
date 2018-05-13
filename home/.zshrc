@@ -1,6 +1,3 @@
-autoload -U promptinit; promptinit
-prompt pure
-
 autoload -Uz compinit
 compinit
 

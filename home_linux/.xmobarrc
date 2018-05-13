@@ -5,7 +5,7 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
         , fgColor = "black"
         , position = TopW L 100 
         , commands = [ 
-	Run Wireless "wlp3s0" ["-t","<essid>" ] 10
+	Run Wireless "wlx00c0ca967db2" ["-t","<essid>" ] 10
 	, Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
 	, Run Memory ["-t","Mem: <usedratio>%"] 10
 	, Run Date "%a %b %_d %y %H:%M" "date" 10
@@ -14,5 +14,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %cpu% | %memory% }{ Vol: %myvolume% | %wlp3s0wi% | <fc=#3a499c><action=`emacs`>%date%</action></fc> "
+	, template = " %StdinReader% | %cpu% | %memory% }{ Vol: %myvolume% | %wlx00c0ca967db2wi% | <fc=#3a499c><action=`emacs`>%date%</action></fc> "
 }

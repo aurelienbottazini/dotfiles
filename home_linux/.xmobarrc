@@ -10,9 +10,10 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	, Run Memory ["-t","Mem: <usedratio>%"] 10
 	, Run Date "%a %b %_d %y %H:%M" "date" 10
 	, Run Com "/home/aurelienbottazini/bin/getVolume.sh" [] "myvolume" 10
+	, Run Com "/home/aurelienbottazini/bin/dropboxStatus.sh" [] "mydropbox" 10
 	, Run StdinReader
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %cpu% | %memory% }{ Vol: %myvolume% | %wlx00c0ca967db2wi% | <fc=#3a499c><action=`emacs`>%date%</action></fc> "
+	, template = " %StdinReader% | %cpu% | %memory% }{ Db: %mydropbox% | Vol: %myvolume% | %wlx00c0ca967db2wi% | <fc=#3a499c><action=`emacs`>%date%</action></fc> "
 }

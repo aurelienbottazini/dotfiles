@@ -23,3 +23,8 @@ emacs/.terminfo
 home/.npmrc
 home/.npmrc
 home/.quokka/node_modules
+/home_linux/.xmonad/xmonad-x86_64-linux
+/home_linux/.xmonad/xmonad.errors
+/home_linux/.xmonad/xmonad.hi
+/home_linux/.xmonad/xmonad.o
+/home_linux/.xmonad/xmonad.state

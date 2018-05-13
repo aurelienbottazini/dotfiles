@@ -47,13 +47,13 @@ main = do
         manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = avoidStruts $ mylayoutHook
 	, terminal = "urxvt"
-	, focusedBorderColor = "#7ab1e8"
+	, focusedBorderColor = "#bc3e33"
 	, normalBorderColor = "#c5c5c5"
 	, borderWidth = 10
 	, focusFollowsMouse = myFocusFollowsMouse
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
 				, ppCurrent = xmobarColor "#3a499c"  "" . wrap "[" "]"
-					, ppTitle = xmobarColor "#bc3e33" "" . shorten 50
+					, ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         }
         } `additionalKeys` myKeys

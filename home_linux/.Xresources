@@ -5,6 +5,7 @@ Xft.hintstyle: true
 Xft.rgba: rgb
 
 URxvt*font: xft:Operator Mono Medium:size=12,\
+            xft:Noto Emoji:size=12:antialias=true,\
 	    xft:DejaVu Sans Mono:size=12,\
 	    xft:Ubuntu Mono:size=12
 URxvt*boldFont: xft:Operator Mono Bold:size=12

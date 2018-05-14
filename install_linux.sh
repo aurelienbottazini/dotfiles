@@ -29,3 +29,5 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 apt install rbenv
 
+apt install deluge
+apt install htop tig git-sh ranger

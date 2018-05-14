@@ -1,4 +1,4 @@
-Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
+Config { font = "xft:Gotham HTF Black:size=12:antialias=true,xft:Noto Emoji:size=12:antialias=true"
         , borderColor = "#97d88a"
         , border = TopB
         , bgColor = "#97d88a"
@@ -6,7 +6,7 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
         , position = TopW L 100 
         , commands = [ 
 	Run Wireless "wlx00c0ca967db2" ["-t","<essid>" ] 10
-	, Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+	, Run Cpu ["-L","3","-H","50","--normal","#3a499c","--high","#bc3e44"] 10
 	, Run Memory ["-t","Mem: <usedratio>%"] 10
 	, Run Date "%a %b %_d %y %H:%M" "date" 10
 	, Run Com "/home/aurelienbottazini/bin/getVolume.sh" [] "myvolume" 10

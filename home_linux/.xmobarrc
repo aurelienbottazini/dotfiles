@@ -1,4 +1,5 @@
-Config { font = "xft:Gotham HTF Black:size=12:antialias=true,xft:Noto Emoji:size=12:antialias=true"
+Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
+        , additionalFonts = ["xft:Noto Emoji:size=10"]
         , borderColor = "#97d88a"
         , border = TopB
         , bgColor = "#97d88a"
@@ -8,12 +9,14 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true,xft:Noto Emoji:size
 	Run Wireless "wlx00c0ca967db2" ["-t","<essid>" ] 10
 	, Run Cpu ["-L","3","-H","50","--normal","#3a499c","--high","#bc3e44"] 10
 	, Run Memory ["-t","Mem: <usedratio>%"] 10
-	, Run Date "%a %b %_d %y %H:%M" "date" 10
-	, Run Com "/home/aurelienbottazini/bin/getVolume.sh" [] "myvolume" 10
-	, Run Com "/home/aurelienbottazini/bin/dropboxStatus.sh" [] "mydropbox" 10
+	, Run Date "%a %b %_d" "date" 10
+	, Run Com "date" ["+%H:%M"] "localtime" 10
+	, Run Com "./bin/sanFranciscoTime.sh" [] "sftime" 10
+	, Run Com "./bin/getVolume.sh" [] "myvolume" 10
+	, Run Com "./bin/dropboxStatus.sh" [] "mydropbox" 10
 	, Run StdinReader
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %cpu% | %memory% }{ Db: %mydropbox% | Vol: %myvolume% | %wlx00c0ca967db2wi% | <fc=#3a499c><action=`emacs`>%date%</action></fc> "
+	, template = " %StdinReader% | %cpu% | %memory% }{ <fn=1>📁</fn>%mydropbox%  <fn=1>🔉</fn>%myvolume%  <fn=1>📡</fn>%wlx00c0ca967db2wi%  <fn=1>📅</fn>%date% <fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime% "
 }

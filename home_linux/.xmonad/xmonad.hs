@@ -46,7 +46,7 @@ main = do
         {
         manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = avoidStruts $ mylayoutHook
-	, terminal = "urxvt"
+	, terminal = "st"
 	, focusedBorderColor = "#bc3e33"
 	, normalBorderColor = "#c5c5c5"
 	, borderWidth = 10

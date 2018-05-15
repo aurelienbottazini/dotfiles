@@ -11,9 +11,9 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	, Run Memory ["-t","Mem: <usedratio>%"] 10
 	, Run Date "%a %b %_d" "date" 10
 	, Run Com "date" ["+%H:%M"] "localtime" 10
-	, Run Com "./bin/sanFranciscoTime.sh" [] "sftime" 10
-	, Run Com "./bin/getVolume.sh" [] "myvolume" 10
-	, Run Com "./bin/dropboxStatus.sh" [] "mydropbox" 10
+	, Run Com "./dotfiles/bin/sanFranciscoTime.sh" [] "sftime" 10
+	, Run Com "./dotfiles/bin/getVolume.sh" [] "myvolume" 10
+	, Run Com "./dotfiles/bin/dropboxStatus.sh" [] "mydropbox" 10
 	, Run StdinReader
 	]
 	, sepChar = "%"

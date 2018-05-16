@@ -15,7 +15,7 @@ apt install mu4e
 apt install silversearcher-ag
 apt install ruby ruby-bundler
 
-apt install tmux
+apt install tmux xclip
 apt install zsh
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
@@ -31,3 +31,4 @@ apt install rbenv
 
 apt install deluge
 apt install htop tig git-sh ranger
+ranger --copy-config=scope

@@ -32,3 +32,9 @@ apt install rbenv
 apt install deluge
 apt install htop tig git-sh ranger
 ranger --copy-config=scope
+
+apt install espeak
+
+cd ~/Downloads
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
+dpkg -i ./ripgrep_0.8.1_amd64.deb

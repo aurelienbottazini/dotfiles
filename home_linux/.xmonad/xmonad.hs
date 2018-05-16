@@ -6,20 +6,31 @@ import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
 import XMonad.Layout.Gaps
 import XMonad.Layout.Tabbed
-import XMonad.Layout.Accordion
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Maximize
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.NoFrillsDecoration
+import XMonad.Layout.ThreeColumns
 
 import XMonad.Actions.CycleWS
 
 import System.IO
 
-mySpacing = 2
+mySpacing = 7 
 
-mylayoutHook = maximize ((spacing mySpacing $ toggleLayouts (noBorders Full) (Tall 1 (3/100) (1/2)) ||| noBorders Full ||| noBorders (tabbed shrinkText def) |||  (spacing mySpacing $ Accordion)))
+myTabTheme = def {
+  fontName = "xft:Gotham HTF Black:size=12",
+  decoHeight = 40,
+  activeColor = "#fff166",
+  activeBorderColor = "#fff166",
+  activeTextColor = "#000000",
+  inactiveColor = "#dad9d6",
+  inactiveBorderColor = "#dad9d6",
+  inactiveTextColor = "#000000"
+}
+
+mylayoutHook = maximize ((  toggleLayouts (noBorders $ tabbed shrinkText myTabTheme) (spacing mySpacing $ Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ))
 myFocusFollowsMouse = False
 myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
 	, ((mod4Mask, xK_o), swapNextScreen)

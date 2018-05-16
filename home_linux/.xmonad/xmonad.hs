@@ -41,7 +41,7 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
 	, ((mod4Mask, xK_u), spawn "amixer set Master 2+ unmute")
 	, ((mod4Mask, xK_d), spawn "amixer set Master 2- unmute")
 	, ((mod4Mask, xK_z), sendMessage ToggleLayout)
-        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
+        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Pictures/screenshots/'" )
         , ((0, xK_Print), spawn "scrot")
         ]
         ++

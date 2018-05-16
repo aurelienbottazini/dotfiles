@@ -1,4 +1,4 @@
-apt install xmonad dmenu rxvt-unicode chromium-browser emacs xscreensaver
+apt install xmonad dmenu rxvt-unicode chromium-browser emacs xscreensaver scrot
 apt install git-core git-lfs
 
 sudo apt install apt-transport-https ca-certificates curl software-properties-common

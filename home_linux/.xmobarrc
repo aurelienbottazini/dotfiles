@@ -18,5 +18,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %cpu% | %memory% }{ <fn=1>📁</fn>%mydropbox%  <fn=1>🔉</fn>%myvolume%  <fn=1>📡</fn>%wlx00c0ca967db2wi%  <fn=1>📅</fn><action=firefox --new-window https://www.fastmail.com/calendar/>%date%</action> <fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime% "
+	, template = " %StdinReader% | %cpu% | %memory% }{ <fn=1>📁</fn>%mydropbox%  <fn=1>🔉</fn>%myvolume%  <fn=1>📡</fn>%wlx00c0ca967db2wi%  <fn=1>📅</fn><action=firefox --new-window https://www.fastmail.com/calendar/>%date%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> "
 }

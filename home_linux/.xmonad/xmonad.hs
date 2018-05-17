@@ -46,12 +46,16 @@ prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ] 
 
 mylayoutHook = maximize ((  toggleLayouts (noBorders $ tabbed shrinkText myTabTheme) (spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) )))
 myFocusFollowsMouse = False
 myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
+        , ((mod4Mask, xK_r), namedScratchpadAction scratchpads "ranger")
         , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
+        , ((mod4Mask, xK_v), namedScratchpadAction scratchpads "vlc")
         , ((mod4Mask, xK_o), swapNextScreen)
         , ((mod4Mask .|. controlMask, xK_Right), prevScreen)
         , ((mod4Mask .|. controlMask, xK_Left),  nextScreen)
@@ -70,7 +74,7 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
 
 ws1GEN = "1:gen"
 ws2GEN = "2:gen"
-ws3WRK = "3:wrk0"
+ws3WRK = "3:wrk"
 ws4WRK = "4:wrk"
 ws5MY = "5:my"
 ws6MY = "6:my"

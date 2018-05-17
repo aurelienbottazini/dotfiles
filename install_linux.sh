@@ -14,6 +14,8 @@ apt install feh
 apt install mu4e
 apt install silversearcher-ag
 apt install ruby ruby-bundler
+apt install rbenv
+gem install rubocop
 
 apt install tmux xclip
 apt install zsh
@@ -27,7 +29,6 @@ nvm install v8.11.1
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-apt install rbenv
 
 apt install deluge
 apt install htop tig git-sh ranger

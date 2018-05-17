@@ -45,21 +45,21 @@ prefix (x:xs) [] = False
 prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
 scratchpads =
-    [   (NS "email" "chromium-browser --new-window --name=foo --class=yo --app=https://www.fastmail.com" (className =? "yo") defaultFloating)
+    [   (NS "spotify" "spotify --force-device-scale-factor=2" (className =? "Spotify") defaultFloating)
     ] 
 
 mylayoutHook = maximize ((  toggleLayouts (noBorders $ tabbed shrinkText myTabTheme) (spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) )))
 myFocusFollowsMouse = False
 myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
-	, ((mod4Mask, xK_h), namedScratchpadAction scratchpads "email")
-	, ((mod4Mask, xK_o), swapNextScreen)
+        , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "spotify")
+        , ((mod4Mask, xK_o), swapNextScreen)
         , ((mod4Mask .|. controlMask, xK_Right), prevScreen)
-	, ((mod4Mask .|. controlMask, xK_Left),  nextScreen)
-	, ((mod4Mask .|. controlMask, xK_o),  shiftNextScreen)
-	, ((mod4Mask, xK_m), withFocused (sendMessage . maximizeRestore))
-	, ((mod4Mask, xK_u), spawn "amixer set Master 2+ unmute")
-	, ((mod4Mask, xK_d), spawn "amixer set Master 2- unmute")
-	, ((mod4Mask, xK_z), sendMessage ToggleLayout)
+        , ((mod4Mask .|. controlMask, xK_Left),  nextScreen)
+        , ((mod4Mask .|. controlMask, xK_o),  shiftNextScreen)
+        , ((mod4Mask, xK_m), withFocused (sendMessage . maximizeRestore))
+        , ((mod4Mask, xK_u), spawn "amixer set Master 2+ unmute")
+        , ((mod4Mask, xK_d), spawn "amixer set Master 2- unmute")
+        , ((mod4Mask, xK_z), sendMessage ToggleLayout)
         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Pictures/screenshots/'" )
         , ((0, xK_Print), spawn "scrot")
         ]
@@ -68,24 +68,28 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
             | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2] -- was [0..] *** change to match your screen order ***
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-wsGEN0 = "GEN0"
-wsGEN1 = "GEN1"
-wsWRK0 = "WRK0"
-wsWRK1 = "WRK1"
-wsMY1 = "MY1"
-wsMY2 = "MY2"
-wsMON = "MON"
-wsTMP = "TMP"
-wsMAIL = "MAIL"
+ws1GEN = "1gen"
+ws2GEN = "2gen"
+ws3WRK = "3wrk0"
+ws4WRK = "4wrk"
+ws5MY = "5my"
+ws6MY = "6my"
+ws7TMP = "7tmp"
+ws8MSG = "8msg"
+ws9MAIL = "9mail"
   
-myWorkspaces = [wsGEN0, wsGEN1, wsWRK0, wsWRK1, wsMY1, wsMY2, wsMON, wsTMP, wsMAIL]
+myWorkspaces = [ws1GEN, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7TMP, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 myProjects =
-   [ Project { projectName = wsMAIL
+   [ Project { projectName = ws9MAIL
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn wsMAIL "chromium-browser --new-window --app=https://www.fastmail.com"
-                                            spawnOn wsMAIL "chromium-browser --new-window --app=https://www.fastmail.com/calendar"
-             }]
+             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
+                                            spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com/calendar"
+             },
+     Project { projectName = ws8MSG
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
+   ]
 
 main :: IO()
 main = do
@@ -95,19 +99,19 @@ main = do
     xmonad
         $ dynamicProjects myProjects
         $ docks
-	$ def
+        $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
         , layoutHook = avoidStruts $ mylayoutHook
-	, terminal = "st"
-	, focusedBorderColor = "#bc3e33"
-	, normalBorderColor = "#c5c5c5"
-	, borderWidth = 10
+        , terminal = "st"
+        , focusedBorderColor = "#bc3e33"
+        , normalBorderColor = "#c5c5c5"
+        , borderWidth = 10
         , workspaces = myWorkspaces
-	, focusFollowsMouse = myFocusFollowsMouse
+        , focusFollowsMouse = myFocusFollowsMouse
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-				, ppCurrent = xmobarColor "#3a499c"  "" . wrap "[" "]"
-					, ppTitle = xmobarColor "#3a499c" "" . shorten 50
+                        , ppCurrent = xmobarColor "#3a499c"  "" . wrap "[" "]"
+                        , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         }
         } `additionalKeys` myKeys

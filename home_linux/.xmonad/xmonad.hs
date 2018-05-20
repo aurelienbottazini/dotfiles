@@ -100,6 +100,10 @@ myProjects =
              , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
    ]
 
+myStartupHook = do
+    spawn "xrandr --dpi 183 --fb 7860x4320 --output HDMI-3 --primary --mode 3840x2160 --pos 3840x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --mode 1920x1080 --scale 2x2 --pos 0x0 --rotate normal"
+    spawn "feh --bg-scale ~/Pictures/IMG_3696.jpg"
+
 main :: IO()
 main = do
 
@@ -111,6 +115,7 @@ main = do
         $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
+        , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
         , terminal = "st"
         , focusedBorderColor = "#bc3e33"

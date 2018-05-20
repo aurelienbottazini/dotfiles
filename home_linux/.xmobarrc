@@ -19,5 +19,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %cpu% | %memory% }{ <action=st ranger ~/Dropbox><fn=2></fn> %mydropbox%</action>  <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %mywifistrengh% %wlx00c0ca967db2wi%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%date%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> <action=./dotfiles/bin/oneScreen.sh><fn=2></fn> | </action><action=./dotfiles/bin/twoScreens.sh><fn=2></fn></action>"
+	, template = " %StdinReader% | %cpu% | %memory% }{ <action=st ranger ~/Dropbox><fn=2></fn> %mydropbox%</action>  <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %mywifistrengh% %wlx00c0ca967db2wi%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%date%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> <action=./dotfiles/bin/toggleScreens.sh><fn=2></fn></action> "
 }

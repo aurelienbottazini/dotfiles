@@ -111,7 +111,7 @@ main = do
         $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
-        , layoutHook = avoidStruts $ mylayoutHook
+        , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
         , terminal = "st"
         , focusedBorderColor = "#bc3e33"
         , normalBorderColor = "#c5c5c5"

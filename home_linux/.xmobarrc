@@ -14,9 +14,10 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	, Run Com "./dotfiles/bin/sanFranciscoTime.sh" [] "sftime" 10
 	, Run Com "./dotfiles/bin/getVolume.sh" [] "myvolume" 10
 	, Run Com "./dotfiles/bin/dropboxStatus.sh" [] "mydropbox" 10
+	, Run Com "./dotfiles/bin/wifiStrengh.sh" [] "mywifistrengh" 10
 	, Run StdinReader
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %cpu% | %memory% }{ <action=st ranger ~/Dropbox><fn=2></fn> %mydropbox%</action>  <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %wlx00c0ca967db2wi%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%date%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> "
+	, template = " %StdinReader% | <fn=2></fn>%cpu% | %memory% }{ <action=st ranger ~/Dropbox><fn=2></fn> %mydropbox%</action>  <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %mywifistrengh% %wlx00c0ca967db2wi%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%date%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> "
 }

@@ -53,8 +53,9 @@ scratchpads =
 mylayoutHook = maximize ((  toggleLayouts (noBorders $ tabbed shrinkText myTabTheme) (spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) )))
 myFocusFollowsMouse = False
 myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
-        , ((mod4Mask, xK_r), namedScratchpadAction scratchpads "ranger")
-        , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
+         , ((mod4Mask .|. shiftMask, xK_t), sendMessage ToggleStruts)
+         , ((mod4Mask, xK_r), namedScratchpadAction scratchpads "ranger")
+         , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
         , ((mod4Mask, xK_v), namedScratchpadAction scratchpads "vlc")
         , ((mod4Mask, xK_BackSpace), kill)
         , ((mod4Mask, xK_o), swapNextScreen)

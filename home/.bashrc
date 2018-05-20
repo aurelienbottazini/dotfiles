@@ -136,7 +136,7 @@ g() {
 }
 
 export PATH=~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:$PATH
-export CDPATH=.:~/projects:~/work
+export CDPATH=.:~/:~/projects:~/work
 export PROMPT_COMMAND='__git_ps1 "\e[1m\e[32m\u\e[0m:\e[1m\e[34m\w\e[0m" "\n "'
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

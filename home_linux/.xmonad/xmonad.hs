@@ -46,6 +46,7 @@ scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ] 
 
 mylayoutHook = maximize ((  toggleLayouts (noBorders $ tabbed shrinkText myTabTheme) (spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) )))
@@ -81,11 +82,11 @@ ws3WRK = "3:wrk"
 ws4WRK = "4:wrk"
 ws5MY = "5:my"
 ws6MY = "6:my"
-ws7TMP = "7:tmp"
+ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
   
-myWorkspaces = [ws1GEN, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7TMP, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GEN, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 myProjects =
    [ Project { projectName = ws9MAIL
@@ -95,7 +96,11 @@ myProjects =
              },
      Project { projectName = ws8MSG
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
+             , projectStartHook = Just $ do spawnOn ws8MSG "slack" },
+     Project { projectName = ws7MUSIC
+             , projectDirectory = "media/aurelienbottazini/Files/music"
+             , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"
+             }
    ]
 
 myStartupHook = do

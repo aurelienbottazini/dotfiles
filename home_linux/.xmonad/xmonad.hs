@@ -4,13 +4,11 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
-import XMonad.Layout.Gaps
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Maximize
 import XMonad.Layout.ToggleLayouts
-import XMonad.Layout.NoFrillsDecoration
 import XMonad.Layout.ThreeColumns
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.CycleWS
@@ -101,7 +99,7 @@ myProjects =
    ]
 
 myStartupHook = do
-    spawn "feh --bg-scale ~/Pictures/IMG_3696.jpg"
+    spawn "feh --bg-scale ~/Pictures/background.jpg"
 
 main :: IO()
 main = do

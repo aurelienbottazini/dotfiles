@@ -139,4 +139,6 @@ export PATH=~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/s
 export CDPATH=.:~/:~/projects:~/work
 export PROMPT_COMMAND='__git_ps1 "\e[1m\e[32m\u\e[0m:\e[1m\e[34m\w\e[0m" "\n "'
 
+\. /usr/share/autojump/autojump.sh
+
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

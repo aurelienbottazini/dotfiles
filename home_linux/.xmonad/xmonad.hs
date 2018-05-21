@@ -77,7 +77,7 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
             | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2] -- was [0..] *** change to match your screen order ***
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-ws1GEN = "1:gen"
+ws1GTD = "1:gtd"
 ws2GEN = "2:gen"
 ws3WRK = "3:wrk"
 ws4WRK = "4:wrk"
@@ -87,13 +87,17 @@ ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
   
-myWorkspaces = [ws1GEN, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GTD, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 myProjects =
    [ Project { projectName = ws9MAIL
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
                                             spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com/calendar"
+             },
+     Project { projectName = ws1GTD
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.trello.com"
              },
      Project { projectName = ws8MSG
              , projectDirectory = "~/"

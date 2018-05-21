@@ -14,6 +14,7 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.SpawnOn
+import XMonad.Hooks.SetWMName
 
 import System.IO
 
@@ -104,6 +105,7 @@ myProjects =
    ]
 
 myStartupHook = do
+    setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "feh --bg-scale ~/Pictures/background.jpg"
 
 main :: IO()

@@ -1,12 +1,9 @@
 xcape -e "Control_L=Escape"
 
 spare_modifier="Hyper_L"
-xmodmap -e "keycode 65 = $spare_modifier"
-# Map space to an unused keycode (to keep it around for xcape to
-# use).
-xmodmap -e "keycode any = space"
-# Finally use xcape to cause the space bar to generate a space when tapped.
-xcape -e "$spare_modifier=space"
+xmodmap -e "keycode 51 = $spare_modifier"
+xmodmap -e "keycode any = backslash"
+xcape -e "$spare_modifier=backslah"
 
 xrandr --dpi 183 --fb 7860x4320 --output HDMI-3 --primary --mode 3840x2160 --pos 3840x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --mode 1920x1080 --scale 2x2 --pos 0x0 --rotate normal
 dropbox start

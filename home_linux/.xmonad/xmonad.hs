@@ -138,7 +138,8 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#3a499c"  "" . wrap "[" "]"
-                        , ppLayout = xmobarColor "#ffffff" ""
+                        -- , ppLayout = xmobarColor "#ffffff" ""
+                        , ppLayout = const ""
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
                         }

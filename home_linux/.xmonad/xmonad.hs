@@ -15,6 +15,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.SetWMName
+import XMonad.Util.WorkspaceCompare
 
 import System.IO
 
@@ -63,20 +64,27 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask .|. controlMask, xK_Left),  nextScreen)
         , ((mod4Mask .|. controlMask, xK_o),  shiftNextScreen)
         , ((mod4Mask, xK_Tab),  toggleWS)
-        , ((mod4Mask, xK_bracketleft),  prevWS)
-        , ((mod4Mask, xK_bracketright),  nextWS)
+        , ((mod4Mask, xK_bracketleft),  prevNonEmptyWS)
+        , ((mod4Mask, xK_bracketright),  nextNonEmptyWS)
         , ((mod4Mask, xK_m), withFocused (sendMessage . maximizeRestore))
         , ((mod4Mask, xK_equal), spawn "amixer set Master 2+ unmute")
         , ((mod4Mask, xK_minus), spawn "amixer set Master 2- unmute")
         , ((mod4Mask, xK_z), sendMessage ToggleLayout)
         , ((mod4Mask, xK_t), spawn "st")
-        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Pictures/screenshots/'" )
+        , ((controlMask, xK_Print), spawn "shutter" )
         , ((0, xK_Print), spawn "scrot")
         ]
         ++
         [((m .|. mod1Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.
             | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2] -- was [0..] *** change to match your screen order ***
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
+        >>= \t -> (windows . W.view $ t)
+prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1
+        >>= \t -> (windows . W.view $ t)
+getSortByIndexNoSP =
+       fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
 
 ws1GTD = "1:gtd"
 ws2GEN = "2:gen"

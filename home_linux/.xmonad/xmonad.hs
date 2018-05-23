@@ -18,7 +18,7 @@ import XMonad.Hooks.SetWMName
 
 import System.IO
 
-mySpacing = 7 
+mySpacing = 7
 
 myTabTheme = def {
   fontName = "xft:Gotham HTF Black:size=12",
@@ -48,7 +48,7 @@ scratchpads =
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ] 
+    ]
 
 mylayoutHook = maximize ((  toggleLayouts (noBorders $ tabbed shrinkText myTabTheme) (spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) )))
 myFocusFollowsMouse = False
@@ -69,6 +69,7 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask, xK_u), spawn "amixer set Master 2+ unmute")
         , ((mod4Mask, xK_d), spawn "amixer set Master 2- unmute")
         , ((mod4Mask, xK_z), sendMessage ToggleLayout)
+        , ((mod4Mask, xK_a), sendMessage NextLayout)
         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Pictures/screenshots/'" )
         , ((0, xK_Print), spawn "scrot")
         ]
@@ -86,7 +87,7 @@ ws6MY = "6:my"
 ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
-  
+
 myWorkspaces = [ws1GTD, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 myProjects =
@@ -123,6 +124,7 @@ main = do
         $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
+        , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
         , terminal = "st"

@@ -13,8 +13,11 @@ su - ${USER}
 apt install feh
 apt install mu4e
 apt install silversearcher-ag
+
 apt install ruby ruby-bundler
 apt install rbenv
+mkdir -p "$(rbenv root)"/plugins
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 gem install rubocop
 
 apt install tmux xclip

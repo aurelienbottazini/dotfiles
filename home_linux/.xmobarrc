@@ -1,11 +1,12 @@
 Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
         , additionalFonts = ["xft:Noto Emoji:size=10", "xft:PragmataPro:size=12"]
-        , borderColor = "#97d88a"
-        , border = TopB
-        , bgColor = "#97d88a"
+        , borderColor = "#939598"
+        , border = BottomB
+	, borderWidth = 3
+        , bgColor = "#dad9d6"
         , fgColor = "black"
-        , position = TopW L 100 
-        , commands = [ 
+        , position = TopW L 100
+        , commands = [
 	Run Wireless "wlx00c0ca967db2" ["-t","<essid>" ] 10
 	, Run Cpu ["-L","3","-H","50","--normal","#3a499c","--high","#bc3e44"] 10
 	, Run Memory ["-t","Mem: <usedratio>%"] 10

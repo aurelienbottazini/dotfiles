@@ -113,6 +113,8 @@ myStartupHook = do
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "feh --bg-scale ~/Pictures/background.jpg"
 
+noScratchPad ws = if ws == "NSP" then "" else ws
+
 main :: IO()
 main = do
 
@@ -136,6 +138,8 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#3a499c"  "" . wrap "[" "]"
+                        , ppLayout = xmobarColor "#ffffff" ""
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
+                        , ppHidden = noScratchPad
                         }
         } `additionalKeys` myKeys

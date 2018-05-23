@@ -45,3 +45,6 @@ dpkg -i ./ripgrep_0.8.1_amd64.deb
 
 apt install cmus
 apt install autojump
+
+apt install isync
+apt install libssl-dev

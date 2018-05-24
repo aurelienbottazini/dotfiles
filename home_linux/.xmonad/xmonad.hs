@@ -16,6 +16,7 @@ import XMonad.Actions.DynamicProjects
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.SetWMName
 import XMonad.Util.WorkspaceCompare
+import XMonad.Actions.Navigation2D
 
 import System.IO
 
@@ -59,12 +60,21 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
          , ((mod4Mask, xK_r), namedScratchpadAction scratchpads "ranger")
          , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
         , ((mod4Mask, xK_v), namedScratchpadAction scratchpads "vlc")
+
+        , ((mod4Mask .|. controlMask, xK_l), windowGo R False)
+        , ((mod4Mask .|. controlMask, xK_h), windowGo L False)
+        , ((mod4Mask .|. controlMask, xK_k), windowGo U False)
+        , ((mod4Mask .|. controlMask, xK_j), windowGo D False)
+
+        , ((mod4Mask, xK_Right), windowGo R False)
+        , ((mod4Mask, xK_Left), windowGo L False)
+        , ((mod4Mask, xK_Up), windowGo U False)
+        , ((mod4Mask, xK_Down), windowGo D False)
+
         , ((mod4Mask, xK_BackSpace), kill)
-        , ((mod4Mask, xK_o), swapNextScreen)
-        , ((mod4Mask .|. controlMask, xK_Right), prevScreen)
-        , ((mod4Mask .|. controlMask, xK_Left),  nextScreen)
-        , ((mod4Mask .|. controlMask, xK_o),  shiftNextScreen)
-        , ((mod4Mask, xK_Tab),  toggleWS)
+        , ((mod4Mask, xK_o), nextScreen)
+        , ((mod4Mask .|. controlMask, xK_o),  swapNextScreen)
+        , ((mod4Mask, xK_backslash),  toggleWS)
         , ((mod4Mask, xK_bracketleft),  prevNonEmptyWS)
         , ((mod4Mask, xK_bracketright),  nextNonEmptyWS)
         , ((mod4Mask, xK_m), withFocused (sendMessage . maximizeRestore))
@@ -133,6 +143,7 @@ main = do
     xmonad
         $ dynamicProjects myProjects
         $ docks
+        $ withNavigation2DConfig def
         $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads

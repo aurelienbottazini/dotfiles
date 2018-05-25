@@ -1,3 +1,4 @@
+-- http://web.mit.edu/kevinr/Public/xmonad.hs
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -69,6 +70,8 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask, xK_bracketleft), sendMessage Shrink)
         , ((mod4Mask, xK_bracketright), sendMessage Expand)
 
+        , ((mod1Mask, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+
         , ((mod4Mask, xK_BackSpace), kill)
         , ((mod4Mask .|. controlMask, xK_backslash), swapNextScreen)
         , ((mod4Mask, xK_backslash),  toggleWS)
@@ -110,10 +113,6 @@ myProjects =
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
                                             spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com/calendar"
-             },
-     Project { projectName = ws1GTD
-             , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.trello.com"
              },
      Project { projectName = ws8MSG
              , projectDirectory = "~/"

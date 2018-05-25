@@ -48,3 +48,6 @@ apt install autojump
 
 apt install isync
 apt install libssl-dev
+apt install mail-utils
+apt install guile-2.0-dev html2text xdg-utils
+apt install libwebkitgtk-dev

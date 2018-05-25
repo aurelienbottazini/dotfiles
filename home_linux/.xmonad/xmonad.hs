@@ -50,7 +50,7 @@ scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "shutter" "shutter" (className =? "Shutter") (customFloating $ W.RationalRect (1/6) (1/6) (4/5) (4/5)))
+    ,(NS "shutter" "shutter" (className =? "Shutter") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
 
@@ -61,6 +61,8 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
          , ((mod4Mask, xK_r), namedScratchpadAction scratchpads "ranger")
          , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
         , ((mod4Mask, xK_v), namedScratchpadAction scratchpads "vlc")
+        , ((controlMask, xK_Print), namedScratchpadAction scratchpads "shutter" )
+        , ((0, xK_Print), spawn "scrot")
 
         , ((mod4Mask, xK_l), windowGo R True)
         , ((mod4Mask, xK_h), windowGo L True)
@@ -81,8 +83,6 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask, xK_minus), spawn "amixer set Master 2- unmute")
         , ((mod4Mask, xK_z), sendMessage ToggleLayout)
         , ((mod4Mask, xK_t), spawn "st")
-        , ((controlMask, xK_Print), spawn "shutter" )
-        , ((0, xK_Print), spawn "scrot")
         ]
         ++
         [((m .|. mod1Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.

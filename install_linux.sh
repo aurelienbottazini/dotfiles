@@ -51,3 +51,11 @@ apt install libssl-dev
 apt install mail-utils
 apt install guile-2.0-dev html2text xdg-utils
 apt install libwebkitgtk-dev
+
+# for Alfa Network AWUS036 ACH
+mkdir -p
+cd ~/projects
+git clone https://github.com/kimocoder/rtl8812au
+cd rtl8812au
+make
+make install

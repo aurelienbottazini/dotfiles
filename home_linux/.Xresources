@@ -6,13 +6,13 @@ Xft.hinting: true
 Xft.hintstyle: true
 Xft.rgba: rgb
 
-URxvt*font: xft:Operator Mono Medium:size=12,\
+URxvt*font: xft:PramagtaPro:size=12,\
             xft:Noto Emoji:size=12,\
-	    xft:DejaVu Sans Mono:size=12,\
+	    xft:PramataPro:size=12,\
 	    xft:Ubuntu Mono:size=12
-URxvt*boldFont: xft:Operator Mono Bold:size=12,\
+URxvt*boldFont: xft:PragmataPro:size=12,\
  		xft:Noto Emoji:size=12
-URxvt*boldItalicFont: xft:Operator Mono Bold:italic:size=12,\
+URxvt*boldItalicFont: xft:PragmataPro:italic:size=12,\
 		      xft:Noto Emoji:size=12
 
 URxvt*saveLines: 10000
@@ -26,7 +26,7 @@ URxvt*background: #ffffff
 
 
 !! colors: dark/light
-!! black 
+!! black
 URxvt*color0: #4c4e56
 URxvt*color8: #69615f
 
@@ -63,4 +63,3 @@ URxvt.resize-font.smaller: C-M-Down
 URxvt.resize-font.bigger: C-M-Up
 URxvt.resize-font.reset: C-M-0
 URxvt.resize-font.show: C-M-question
-

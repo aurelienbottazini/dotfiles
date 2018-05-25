@@ -20,9 +20,21 @@ import XMonad.Hooks.SetWMName
 import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.WindowGo
+import XMonad.Hooks.UrgencyHook
+import XMonad.Util.NamedWindows
+import XMonad.Util.Run
+
+import qualified XMonad.StackSet as W
 
 import System.IO
 
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name     <- getName w
+        Just idx <- fmap (W.findTag w) $ gets windowset
+
+        safeSpawn "notify-send" [show name, "workspace " ++ idx]
 mySpacing = 7
 
 myTabTheme = def {
@@ -132,7 +144,7 @@ myStartupHook = do
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "xsetroot -cursor_name left_ptr"
     spawn "feh --bg-scale ~/Pictures/background.jpg"
-    spawn "xrandr --dpi 183 --fb 7860x4320 --output HDMI-3 --primary --mode 3840x2160 --pos 3840x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --mode 1920x1080 --scale 2x2 --pos 0x0 --rotate normal"
+    -- spawn "xrandr --dpi 183 --fb 7860x4320 --output HDMI-3 --primary --mode 3840x2160 --pos 3840x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --mode 1920x1080 --scale 2x2 --pos 0x0 --rotate normal"
 
 noScratchPad ws = if ws == "NSP" then "" else ws
 
@@ -142,6 +154,7 @@ main = do
     xmproc <- spawnPipe "xmobar"
 
     xmonad
+        $ withUrgencyHook LibNotifyUrgencyHook
         $ dynamicProjects myProjects
         $ docks
         $ withNavigation2DConfig def

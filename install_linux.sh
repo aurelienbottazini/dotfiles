@@ -59,3 +59,5 @@ git clone https://github.com/kimocoder/rtl8812au
 cd rtl8812au
 make
 make install
+
+apt install notify-osd

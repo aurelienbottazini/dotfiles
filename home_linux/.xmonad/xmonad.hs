@@ -1,4 +1,6 @@
 -- http://web.mit.edu/kevinr/Public/xmonad.hs
+-- https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
+
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -8,7 +10,6 @@ import qualified XMonad.StackSet as W
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
-import XMonad.Layout.Maximize
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.ThreeColumns
 import XMonad.Util.NamedScratchpad
@@ -18,6 +19,7 @@ import XMonad.Actions.SpawnOn
 import XMonad.Hooks.SetWMName
 import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.Navigation2D
+import XMonad.Actions.WindowGo
 
 import System.IO
 
@@ -62,6 +64,8 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
          , ((mod4Mask, xK_r), namedScratchpadAction scratchpads "ranger")
          , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
         , ((mod4Mask, xK_v), namedScratchpadAction scratchpads "vlc")
+        , ((mod4Mask, xK_b), runOrRaiseNext "firefox" (className =? "Firefox"))
+        , ((mod4Mask, xK_m), runOrRaiseNext "emacs" (className =? "Emacs"))
         , ((controlMask, xK_Print), namedScratchpadAction scratchpads "shutter" )
         , ((0, xK_Print), spawn "scrot")
 
@@ -83,7 +87,7 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask, xK_equal), spawn "amixer set Master 2+ unmute")
         , ((mod4Mask, xK_minus), spawn "amixer set Master 2- unmute")
         , ((mod4Mask, xK_z), sendMessage ToggleLayout)
-        , ((mod4Mask, xK_t), spawn "st")
+        , ((mod4Mask, xK_t), runOrRaiseNext "st" (className =? "st-256color"))
         ]
         ++
         [((m .|. mod1Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.
@@ -112,8 +116,8 @@ myProjects :: [Project]
 myProjects =
    [ Project { projectName = ws9MAIL
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
-                                            spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com/calendar"
+             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com/calendar"
+                                            spawnOn ws9MAIL "emacs -f mu4e"
              },
      Project { projectName = ws8MSG
              , projectDirectory = "~/"

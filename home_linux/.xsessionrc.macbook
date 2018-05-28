@@ -1,0 +1,11 @@
+xcape -e "Control_L=Escape"
+
+# tab to Hyper_L when used as modifier
+spare_modifier="Hyper_L"
+xmodmap -e "keycode 23 = $spare_modifier"
+xmodmap -e "keycode any = Tab"
+xcape -e "$spare_modifier=Tab"
+
+setxkbmap -option "ctrl:swapcaps"
+
+dropbox start

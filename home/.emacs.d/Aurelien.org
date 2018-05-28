@@ -1,7 +1,153 @@
 #+TITLE: Aurelien Bottazini's Emacs configuration
 #+OPTIONS: toc:4 h:4
+#+PROPERTY: header-args :results silent
 
+Load custom settings before anything else.  It is important to load
+those first as it can impact the loading of other packages
 #+begin_src emacs-lisp
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 #+end_src
+
+* Initialize Packages
+#+begin_src emacs-lisp
+(setq package-archives
+      '(("melpa"       . "http://melpa.milkbox.net/packages/")
+	("gnu"         . "http://elpa.gnu.org/packages/")))
+
+(setq package-user-dir (concat user-emacs-directory "elpa"))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(defun require-package (package &optional min-version)
+  "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
+  (unless (package-installed-p package min-version)
+    (package-install package)))
+
+(require-package 'use-package)
+(require 'use-package)
+
+(setq use-package-always-ensure t)
+
+(defun sanityinc/time-subtract-millis (b a)
+  (* 1000.0 (float-time (time-subtract b a))))
+
+(defvar sanityinc/require-times nil
+  "A list of (FEATURE . LOAD-DURATION).
+LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
+
+(defadvice require (around sanityinc/build-require-times (feature &optional filename noerror) activate)
+  "Note in `sanityinc/require-times' the time taken to require each feature."
+  (let* ((already-loaded (memq feature features))
+         (require-start-time (and (not already-loaded) (current-time))))
+    (prog1
+        ad-do-it
+      (when (and (not already-loaded) (memq feature features))
+        (let ((time (sanityinc/time-subtract-millis (current-time) require-start-time)))
+          (add-to-list 'sanityinc/require-times
+                       (cons feature time)
+                       t))))))
+
+(defun sanityinc/show-init-time ()
+  (message "init completed in %.2fms"
+           (sanityinc/time-subtract-millis after-init-time before-init-time)))
+
+(add-hook 'after-init-hook 'sanityinc/show-init-time)
+#+end_src
+
+* Vim
+#+begin_src emacs-lisp
+;; https://github.com/noctuid/evil-guide
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-toggle-key "C-`")
+  (setq evil-mode-line-format nil)
+  :config
+
+  (defun my-evil-paste-indent-advice (orig-fun &rest args)
+    "Indent text pasted with evil. Takes default arguments for an advice Function: ORIG-FUN and rest ARGS."
+    (progn
+      (message "indenting")
+      (indent-region (region-beginning) (region-end) nil)))
+
+  (advice-add 'evil-paste-after :after #'my-evil-paste-indent-advice)
+
+  (evil-mode 1)
+
+  (use-package evil-surround
+    :config
+    (global-evil-surround-mode 1))
+
+  (use-package evil-commentary
+    :diminish evil-commentary-mode
+    :config
+    (evil-commentary-mode))
+
+  (use-package evil-visualstar
+    :config
+    (global-evil-visualstar-mode t))
+
+  (use-package evil-indent-plus
+    :config
+    (evil-indent-plus-default-bindings))
+  (use-package evil-matchit
+    :config
+    (global-evil-matchit-mode 1))
+  (use-package evil-search-highlight-persist
+    :config
+    (global-evil-search-highlight-persist t)))
+
+(bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC")
+
+(evil-set-initial-state 'git-commit-mode 'insert)
+(evil-set-initial-state 'deft-mode 'insert)
+
+(evil-ex-define-cmd "W" 'save-buffer)
+#+end_src
+  
+* VCS / Git
+  
+#+begin_src emacs-lisp
+;; ediff in same frame
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+(add-hook 'git-commit-mode-hook 'evil-insert-state)
+
+(use-package magit
+  :bind (:map my-leader-map
+	      ("gb" . magit-blame)
+	      ("gs" . magit-status)
+	      ("gh" . magit-log-buffer-file))
+  :config
+  (use-package fullframe
+    :config
+    (fullframe magit-status magit-mode-quit-window))
+
+  (use-package evil-magit)
+
+  (use-package diff-hl
+    :config
+    (add-hook 'prog-mode-hook 'diff-hl-mode)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    )
+
+  )
+
+(use-package git-link)
+(define-key my-leader-map (kbd "gl") 'git-link)
+
+(use-package git-timemachine)
+(define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
+
+(defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+  "when entering git-timemachine mode, change evil normal state to emacs state"
+  (if (evil-normal-state-p)
+      (evil-emacs-state)
+    (evil-normal-state)))
+
+(ad-activate 'git-timemachine-mode)
+#+end_src
+

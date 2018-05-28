@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: react_component
+# key: rcp
+# --
+import React, { Component } from 'react';
+
+class ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {$2};
+  }
+
+  render() {
+    return (
+      $0
+    );
+  }
+}
+
+export default $1;

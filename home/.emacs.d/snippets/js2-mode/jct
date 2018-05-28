@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: jest_container_test
+# key: jct
+# --
+import React from 'react';
+import { shallow } from 'enzyme';
+import { ${1:`(car (split-string (file-name-sans-extension (buffer-name)) "-test"))`} } from '$2'
+
+describe('$1', () => {
+  it('renders', () => {
+    shallow(
+      <$1
+        $0
+      />
+    );
+  });
+});

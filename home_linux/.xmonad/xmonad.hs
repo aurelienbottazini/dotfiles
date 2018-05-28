@@ -81,10 +81,10 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((controlMask, xK_Print), namedScratchpadAction scratchpads "shutter" )
         , ((0, xK_Print), spawn "scrot")
 
-        , ((mod4Mask, xK_l), windowGo R True)
-        , ((mod4Mask, xK_h), windowGo L True)
-        , ((mod4Mask, xK_k), windowGo U True)
-        , ((mod4Mask, xK_j), windowGo D True)
+        , ((mod4Mask, xK_l), windows W.focusDown)
+        , ((mod4Mask, xK_h), windows W.focusUp)
+        -- , ((mod4Mask, xK_k), windowGo U True)
+        -- , ((mod4Mask, xK_j), windowGo D True)
 
         , ((mod4Mask, xK_bracketleft), sendMessage Shrink)
         , ((mod4Mask, xK_bracketright), sendMessage Expand)

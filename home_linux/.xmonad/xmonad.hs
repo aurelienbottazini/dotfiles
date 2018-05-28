@@ -40,8 +40,8 @@ mySpacing = 7
 myTabTheme = def {
   fontName = "xft:Gotham HTF Black:size=12",
   decoHeight = 40,
-  activeColor = "#fff166",
-  activeBorderColor = "#fff166",
+  activeColor = "#fccf61",
+  activeBorderColor = "#fccf61",
   activeTextColor = "#000000",
   inactiveColor = "#dad9d6",
   inactiveBorderColor = "#dad9d6",

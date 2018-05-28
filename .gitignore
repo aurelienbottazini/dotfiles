@@ -1,5 +1,6 @@
 *~
 .DS_Store
+.idea
 emacs/.emacs.d/.emacs.desktop
 emacs/.emacs.d/.emacs.desktop.lock
 emacs/.emacs.d/elpa/

@@ -1,0 +1,7 @@
+#+TITLE: Aurelien Bottazini's Emacs configuration
+#+OPTIONS: toc:4 h:4
+
+#+begin_src emacs-lisp
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+#+end_src

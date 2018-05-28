@@ -14,6 +14,27 @@ those first as it can impact the loading of other packages
 (let ((default-directory  "~/.emacs.d/site-lisp/"))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
+
+(defun sudo ()
+  "Use TRAMP to `sudo' the current buffer."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+	     buffer-file-name))))
+
+(defun beautify-json ()
+  (interactive)
+  (let ((b (if mark-active (min (point) (mark)) (point-min)))
+        (e (if mark-active (max (point) (mark)) (point-max))))
+    (shell-command-on-region b e
+                             "python -mjson.tool" (current-buffer) t)))
+
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t " my-keys" 'my-keys-minor-mode-map)
+(my-keys-minor-mode 1)
 #+end_src
 
 * Initialize Packages
@@ -66,6 +87,8 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 * Better Defaults
 #+begin_src emacs-lisp
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (setenv "PATH" (concat "/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/:" "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/:" (getenv "HOME") "/.rbenv/shims:" (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
 
 (setq exec-path '("/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/" "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/" "/Users/aurelienbottazini/.rbenv/bin/" "/Users/aurelienbottazini/.rbenv/shims/" "/Users/aurelienbottazini/dotfiles/bin/" "/usr/local/bin/" "/usr/local/sbin/" "/usr/bin/" "/bin/" "/usr/sbin/" "/sbin/"))
@@ -176,11 +199,11 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (evil-ex-define-cmd "W" 'save-buffer)
 #+end_src
-  
+
 * Dired
 
 #+begin_src emacs-lisp
-
+(put 'dired-find-alternate-file 'disabled nil)
 (setq dired-dwim-target t)
 (add-hook 'dired-load-hook
 	  (lambda ()
@@ -258,7 +281,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (which-key-mode))
 #+end_src
 ** Colors
- 
+
 #+begin_src emacs-lisp
   (lexical-let ((default-color (cons (face-background 'mode-line)
 				   (face-foreground 'mode-line))))
@@ -346,6 +369,73 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (diminish 'which-key-mode)
   (diminish 'visual-line-mode))
 #+end_src
+* Navigation
+#+begin_src emacs-lisp
+
+(use-package dash-at-point)
+(define-key my-leader-map (kbd "d") 'dash-at-point)
+
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode t)
+  (define-key my-keys-minor-mode-map (kbd "C-a n") 'eyebrowse-next-window-config)
+  (define-key my-keys-minor-mode-map (kbd "C-a p") 'eyebrowse-prev-window-config)
+  (define-key my-keys-minor-mode-map (kbd "C-a c") 'eyebrowse-create-window-config)
+  (define-key my-keys-minor-mode-map (kbd "C-a k") 'eyebrowse-close-window-config)
+  (define-key my-keys-minor-mode-map (kbd "C-a 1") 'eyebrowse-switch-to-window-config-1)
+  (define-key my-keys-minor-mode-map (kbd "C-a 2") 'eyebrowse-switch-to-window-config-2)
+  (define-key my-keys-minor-mode-map (kbd "C-a 3") 'eyebrowse-switch-to-window-config-3)
+  (define-key my-keys-minor-mode-map (kbd "C-a 4") 'eyebrowse-switch-to-window-config-4)
+  (define-key my-keys-minor-mode-map (kbd "C-a 5") 'eyebrowse-switch-to-window-config-5)
+  (define-key my-keys-minor-mode-map (kbd "C-a 6") 'eyebrowse-switch-to-window-config-6)
+  (define-key my-keys-minor-mode-map (kbd "C-a 7") 'eyebrowse-switch-to-window-config-7)
+  (define-key my-keys-minor-mode-map (kbd "C-a 8") 'eyebrowse-switch-to-window-config-8)
+  (define-key my-keys-minor-mode-map (kbd "C-a 9") 'eyebrowse-switch-to-window-config-9)
+  (define-key my-keys-minor-mode-map (kbd "C-a 0") 'eyebrowse-switch-to-window-config-0))
+
+(use-package counsel
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-rg)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
+
+(use-package ivy
+  :diminish ivy-mode
+  :config
+  (use-package ivy-hydra)
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume))
+
+(dolist
+    (r `(
+	 (?e (file . ,(concat user-emacs-directory "init.el")))
+	 ))
+  (set-register (car r) (cadr r)))
+
+(use-package projectile
+  :init
+  (setq projectile-switch-project-action 'projectile-dired)
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'ivy)
+  :bind (:map my-leader-map
+              ("p" . projectile-commander))
+  :config
+  (use-package counsel-projectile)
+  (projectile-mode)
+  )
+#+end_src
 * AutoCompletions
 #+begin_src emacs-lisp
 (use-package company
@@ -385,7 +475,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (yatemplate-fill-alist))
 #+end_src
 * VCS / Git
-  
+
 #+begin_src emacs-lisp
 ;; ediff in same frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -441,10 +531,75 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-  
+
+#+end_src
+* Email
+#+begin_src emacs-lisp
+(when *is-mac*
+  (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
+  (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
+  (add-to-list 'load-path (expand-file-name "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e")))
+
+(when *is-linux*
+  (setq mu4e-html2text-command "/usr/bin/w3m -T text/html")
+  (setq mu4e-get-mail-command "/usr/bin/mbsync -a")
+  )
+
+(require 'epa-file)
+(epa-file-enable)
+(require 'mu4e)
+
+(add-to-list 'mu4e-view-actions '("Browser View" . mu4e-action-view-in-browser) t)
+
+(define-key my-leader-map (kbd "e") 'mu4e)
+
+(setq mu4e-maildir (expand-file-name "~/Maildir/fastmail"))
+(setq mu4e-sent-messages-behavior 'sent)
+(setq mu4e-sent-folder "/Sent Items"
+      mu4e-drafts-folder "/Drafts"
+      mu4e-trash-folder "/Trash"
+      mu4e-refile-folder "/Archive")
+
+(setq mu4e-maildir-shortcuts
+      '(("/INBOX" . ?i)
+	("/@Action" . ?a)
+	("/@waiting" . ?w)
+	("/Sent Items" . ?s)))
+
+(setq mu4e-change-filenames-when-moving t)
+
+(setq message-send-mail-function 'smtpmail-send-it
+      starttls-use-gnutls t
+      smtpmail-starttls-credentials
+      '(("mail.messagingengine.com" 587 nil nil))
+      smtpmail-default-smtp-server "mail.messagingengine.com"
+      smtpmail-smtp-server "mail.messagingengine.com"
+      ;; smtpmail-auth-credentials
+      ;; command to encrypt authinfo, you can delete authinfo after that:
+      ;; gpg --output ~/.authinfo.gpg --symmetric ~/.authinfo
+      ;; (expand-file-name "~/.authinfo.gpg")
+      smtpmail-smtp-service 587)
+
+(setq user-mail-address "aurelien@bottazini.com")
+
+(setq mu4e-view-show-images t)
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+
+(defun my-browse-url-chromium-new-app (url &optional new-window)
+  "Open URL in app mode in chromium."
+  (interactive (browse-url-interactive-arg "URL: "))
+  (unless
+      (string= ""
+               (shell-command-to-string
+                (concat "chromium-browser --new-window --app=" url)))
+    (message "Starting chromium...")))
+
+(setq browse-url-browser-function 'my-browse-url-chromium-new-app)
 #+end_src
 * Notes
- 
+
 #+begin_src emacs-lisp
 (use-package deft
   :config
@@ -459,4 +614,529 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 #+begin_src emacs-lisp
   (use-package dockerfile-mode
   :mode "\\Dockerfile\\'")
+
+(add-to-list 'auto-mode-alist '("\\.xsessionrc\\'" . shell-script-mode))
+
+(use-package haskell-mode)
+(use-package graphql-mode)
+#+end_src
+
+** Clojure
+#+begin_src emacs-lisp
+(use-package clojure-mode
+  :mode "\\.clj\\'"
+  :config
+  (add-hook 'clojure-mode-hook #'subword-mode)
+
+  (use-package evil-lispy
+    :diminish evil-lispy-mode
+    :config
+    (add-hook 'clojure-mode-hook #'evil-lispy-mode)
+    )
+  (use-package cider))
+#+end_src
+
+** CSS
+#+begin_src emacs-lisp
+  (defun imenu-setup ()
+  (progn
+    (setq imenu-case-fold-search nil)
+    (setq imenu-auto-rescan t)
+    (setq imenu-space-replacement " ")
+    (setq css-indent-offset 2)
+    (imenu-add-menubar-index)
+    ))
+(defun my-css-mode-setup ()
+  (setq imenu-generic-expression
+        '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
+  (imenu-setup))
+
+(add-hook 'css-mode-hook 'my-css-mode-setup)
+
+(use-package scss-mode
+  :mode "\\.scss\\'"
+  :config
+  (add-hook 'scss-mode-hook '(lambda ()
+                               (setq imenu-generic-expression
+                                     '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
+                               (imenu-setup))))
+
+(use-package sass-mode
+  :mode "\\.sass\\'"
+  :config
+  (add-hook 'sass-mode-hook
+            '(lambda ()
+               (setq imenu-generic-expression
+                     '(("Imports" "@import\\(.*[^ ]\\)" 1)))
+               (imenu-setup)))
+  (add-hook 'sass-mode-hook 'my-css-mode-setup)
+  (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))
+
+(use-package less-css-mode
+  :mode "\\.less\\'"
+  )
+#+end_src
+
+** Javascript
+#+begin_src emacs-lisp
+  (use-package web-mode
+  :mode "\\.vue\\'"
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-script-padding 2)
+  )
+
+(setq js-indent-level 2)
+
+(use-package indium
+  :config
+  (add-hook 'js2-mode-hook #'indium-interaction-mode)
+  )
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :mode "\\.jsx\\'"
+  :init
+
+  (use-package context-coloring
+    :config
+    (add-hook 'js2-mode-hook #'context-coloring-mode))
+
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
+
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+
+  (setq js2-highlight-level 3)
+  :config
+  (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+
+  (use-package import-js)
+
+  (setq javascript-common-imenu-regex-list
+	'(
+	  ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
+	  ("Describe" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+	  ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+	  ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+	  ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
+	  ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+	  ;; {{ es6 beginning
+	  ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
+	  ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
+	  ;; }}
+	  ))
+
+  (defun auray-js-imenu-make-index ()
+    (save-excursion
+      (imenu--generic-function javascript-common-imenu-regex-list)))
+
+  (use-package prettier-js
+    :config
+    (setq prettier-args '(
+			  "--trailing-comma" "es5"
+			  "--single-quote" "true"
+			  ))
+
+    (add-hook 'js2-mode-hook 'prettier-js-mode))
+
+  (defun auray-js-mode-hook ()
+    (setq imenu-create-index-function 'auray-js-imenu-make-index)
+    )
+  )
+
+(add-hook 'js2-mode-hook 'auray-js-mode-hook)
+
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+      (funcall (cdr my-pair)))))
+
+(add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.jsx?\\'" . prettier-js-mode))))
+
+(add-hook 'web-mode-hook #'(lambda ()
+			     (enable-minor-mode
+			      '("\\.vue?\\'" . prettier-js-mode))))
+
+(add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+(defun my-jsx-hook ()
+  "My Hook for JSX Files"
+  (interactive)
+  (web-mode)
+  (web-mode-set-content-type "jsx")
+  (setq imenu-create-index-function 'auray-js-imenu-make-index)
+  (flycheck-select-checker 'javascript-eslint)
+  (emmet-mode)
+  (setq emmet-expand-jsx-className? t)
+  (tern-mode t))
+
+(use-package context-coloring
+  :diminish context-coloring-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-hook 'js-mode-hook #'context-coloring-mode)
+  (add-hook 'js2-mode-hook #'context-coloring-mode))
+
+(use-package json-mode
+  :mode "\\.json\\'"
+  :mode "\\.eslintrc\\'"
+  )
+
+(use-package coffee-mode
+  :mode "\\.coffee\\'"
+  :config
+  (use-package highlight-indentation)
+  (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+  (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+  (custom-set-variables '(coffee-tab-width 2)))
+
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  )
+#+end_src
+
+** Ruby
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+  :mode "\\.ya?ml\\'"
+  )
+
+(use-package ruby-mode
+  :mode "\\.rake\\'"
+  :mode "Rakefile\\'"
+  :mode "\\.gemspec\\'"
+  :mode "\\.ru\\'"
+  :mode "Gemfile\\'"
+  :mode "Guardfile\\'" :mode "Capfile\\'"
+  :mode "\\.cap\\'"
+  :mode "\\.thor\\'"
+  :mode "\\.rabl\\'"
+  :mode "Thorfile\\'"
+  :mode "Vagrantfile\\'"
+  :mode "\\.jbuilder\\'"
+  :mode "Podfile\\'"
+  :mode "\\.podspec\\'"
+  :mode "Puppetfile\\'"
+  :mode "Berksfile\\'"
+  :mode "Appraisals\\'"
+  :mode "\\.rb$"
+  :mode "ruby"
+  :config
+
+  (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
+  (eval-after-load 'ruby-mode
+    '(progn
+       (defun ruby-mode-defaults ()
+	 )))
+
+  (add-hook 'ruby-mode-hook 'subword-mode)
+  ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
+  ;; make it easier to work with global gnu tags
+  (define-category ?U "Uppercase")
+  (define-category ?u "Lowercase")
+  (modify-category-entry (cons ?A ?Z) ?U)
+  (modify-category-entry (cons ?a ?z) ?u)
+  (make-variable-buffer-local 'evil-cjk-word-separating-categories)
+  (add-hook 'subword-mode-hook
+	    (lambda ()
+	      (if subword-mode
+		  (push '(?u . ?U) evil-cjk-word-separating-categories)
+		(setq evil-cjk-word-separating-categories
+		      (default-value 'evil-cjk-word-separating-categories)))))
+
+  (eval-after-load 'ruby-mode
+    '(progn
+       (evil-define-key 'normal ruby-mode-map
+	 "[m" 'ruby-beginning-of-defun
+	 "]m" 'ruby-end-of-defun
+	 )))
+
+  (use-package bundler)
+
+  (use-package ruby-interpolation)
+  (use-package inf-ruby)
+
+  (use-package ruby-end)
+  (use-package rspec-mode)
+
+  ;; Hitting M-; twice adds an xmpfilter comment. Hitting xmp keybinding will put the output in this comment
+  (use-package rcodetools
+    :load-path "/site-lisp/rcodetools.el"
+    :pin manual
+    :ensure nil
+)
+  )
+#+end_src
+
+** Html
+#+begin_src emacs-lisp
+(use-package web-mode
+  :mode "\\.html\\'")
+
+(use-package emmet-mode
+  :diminish emmet-mode
+  :config
+  (progn
+    (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
+
+  (add-hook 'css-mode-hook
+            (lambda ()
+              (emmet-mode)
+              (setq emmet-expand-jsx-className? nil)
+              ))
+
+  (add-hook 'sgml-mode-hook
+            (lambda ()
+              (emmet-mode)
+              (setq emmet-expand-jsx-className? nil)
+              ))
+
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (emmet-mode)
+              )))
+#+end_src
+
+** Tests
+#+begin_src emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package coverlay
+  :config
+  (define-key my-leader-map (kbd "cc") 'coverlay-mode)
+  (define-key my-leader-map (kbd "cl") 'coverlay-load-file)
+  (define-key my-leader-map (kbd "cr") 'coverlay-reload-file)
+  (define-key my-leader-map (kbd "cw") 'coverlay-watch-file)
+  (define-key my-leader-map (kbd "cs") 'coverlay-display-stats)
+  (define-key my-leader-map (kbd "ct") 'coverlay-toggle-overlays))
+#+end_src
+* Bindings
+#+begin_src emacs-lisp
+(use-package wgrep)
+  (use-package paredit-everywhere
+  :config
+  (add-hook 'prog-mode-hook 'paredit-everywhere-mode))
+
+(use-package paredit
+  :diminish paredit-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'paredit-mode))
+
+(defadvice terminal-init-xterm (after map-S-up-escape-sequence
+				      activate)
+  (define-key input-decode-map "\e[1;40" (kbd "C-("))
+  (define-key input-decode-map "\e[1;41" (kbd "C-)"))
+  (define-key input-decode-map "\e[1;42" (kbd "C-;"))
+
+  (define-key input-decode-map "\e[1;123" (kbd "C-{"))
+  (define-key input-decode-map "\e[1;125" (kbd "C-}")))
+
+
+(defadvice load (after give-my-keybindings-priority)
+  "Try to ensure that my keybindings always have priority."
+  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+	(assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+	(add-to-list 'minor-mode-map-alist mykeys))))
+(ad-activate 'load)
+
+(use-package emamux
+  :bind (:map my-leader-map
+              ("cc" . emamux:send-command)
+              ("cl" . emamux:run-last-command)))
+
+(defun tmux-socket-command-string ()
+  (interactive)
+  (concat "tmux -S "
+          (replace-regexp-in-string "\n\\'" ""
+                                    (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
+
+(defun tmux-move-right ()
+  (interactive)
+  (condition-case nil
+      (evil-window-right 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
+
+(defun tmux-move-left ()
+  (interactive)
+  (condition-case nil
+      (evil-window-left 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
+
+(defun tmux-move-up ()
+  (interactive)
+  (condition-case nil
+      (evil-window-up 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
+
+(defun tmux-move-down ()
+  (interactive)
+  (condition-case nil
+      (evil-window-down 1)
+    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
+
+(define-key my-keys-minor-mode-map (kbd "C-h") 'tmux-move-left)
+(define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
+(define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
+(define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+
+(define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1)
+(define-key my-keys-minor-mode-map (kbd "s-p") 'counsel-projectile)
+(define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
+(define-key my-leader-map (kbd "u") 'universal-argument)
+
+(define-key my-leader-map (kbd "1") 'projectile-run-async-shell-command-in-root)
+(define-key my-leader-map (kbd "b") 'counsel-ibuffer)
+
+(use-package expand-region
+  :config
+  (define-key my-leader-map (kbd "SPC") 'er/expand-region))
+
+(define-key my-leader-map (kbd "r") 'counsel-recentf)
+(define-key my-leader-map (kbd "f") 'counsel-projectile-rg)
+(define-key my-leader-map (kbd "j") 'dired-jump)
+(define-key my-leader-map (kbd "i") 'counsel-imenu)
+(define-key my-leader-map (kbd "m") 'counsel-bookmark)
+(define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)
+(define-key my-leader-map (kbd "t") 'counsel-projectile-find-file)
+
+(define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
+(use-package iedit
+  :config
+  (define-key my-keys-minor-mode-map (kbd "<f6>") 'iedit-mode))
+(use-package evil-mc
+  :diminish
+  :config
+  (global-evil-mc-mode 1)
+  (defhydra hydra-cursors (global-map "<f7>")
+    "multiple cursors"
+    ("m" evil-mc-make-and-goto-next-match)
+    ("s" evil-mc-skip-and-goto-next-match)
+    ("a" evil-mc-make-all-cursors)
+    ("u" evil-mc-undo-all-cursors)
+    ("h" evil-mc-cursor-here)
+    ("p" evil-mc-pause-cursors)
+    ("r" evil-mc-resume-cursors)))
+(define-key my-keys-minor-mode-map (kbd "<f8>") 'deft)
+(use-package drag-stuff
+  :diminish drag-stuff-mode
+  :config
+  (defhydra hydra-drag-stuff (global-map "<f9>")
+    "drag-stuff"
+    ("k" drag-stuff-up)
+    ("j" drag-stuff-down)
+    ("h" drag-stuff-right)
+    ("l" drag-stuff-left)))
+
+(use-package evil-multiedit
+  :config
+  ;; Highlights all matches of the selection in the buffer.
+  (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+
+  ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
+  ;; incrementally add the next unmatched match.
+  (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+  ;; Match selected region.
+  (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+  ;; Insert marker at point
+  (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+
+  ;; Same as M-d but in reverse.
+  (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+  (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-and-prev)
+
+  ;; OPTIONAL: If you prefer to grab symbols rather than words, use
+  ;; `evil-multiedit-match-symbol-and-next` (or prev).
+
+  ;; Restore the last group of multiedit regions.
+  (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
+
+  ;; RET will toggle the region under the cursor
+  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+  ;; ...and in visual mode, RET will disable all fields outside the selected region
+  (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+  ;; For moving between edit regions
+  (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
+  (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
+  (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
+  (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
+
+  ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
+  (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
+
+(define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
+(define-key my-leader-map (kbd "or") 'rainbow-mode)
+(define-key my-leader-map (kbd "ol") 'linum-mode)
+(define-key my-leader-map (kbd "ow") 'visual-line-mode)
+
+(define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+(define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+(define-key evil-normal-state-map (kbd "]e") 'next-error)
+(define-key evil-normal-state-map (kbd "[e") 'previous-error)
+
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+  (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+  )
+
+(use-package origami
+  :bind (:map evil-normal-state-map
+              ("zh" . origami-close-all-nodes)
+              ("zc" . origami-close-node)
+              ("zo" . origami-open-node)
+              ("zv" . origami-open-all-nodes))
+  :config
+  (global-origami-mode))
+
+(use-package dumb-jump
+  :bind (:map evil-normal-state-map
+              ("gd" . dumb-jump-go)
+              ("gD" . dumb-jump-go-other-window))
+    :init
+    (setq dumb-jump-selector 'ivy))
+
+(use-package windresize
+  :bind (:map evil-normal-state-map
+              ("C-w r" . windresize)))
+
+(defun run-for-mode ()
+    "jumps to beginning of line in all modes except org mode, where it cycles"
+    (interactive)
+    (cond
+     ((equal major-mode 'ruby-mode)
+      (xmp))
+     ((equal major-mode 'clojure-mode)
+      (cider-eval-defun-at-point))
+     ((equal major-mode 'emacs-lisp-mode)
+      (eval-defun nil))
+     ((equal major-mode 'js2-mode)
+      (indium-eval-defun))
+     (t (error "No run command for that mode"))))
+
+(define-key my-leader-map (kbd "x") 'run-for-mode)
+
+
+
+(add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 #+end_src

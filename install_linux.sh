@@ -38,3 +38,4 @@ apt install guile-2.0-dev html2text xdg-utils
 apt install libwebkitgtk-dev
 
 apt install notify-osd
+apt install xmobar

@@ -21,7 +21,7 @@ those first as it can impact the loading of other packages
   (when buffer-file-name
     (find-alternate-file
      (concat "/sudo:root@localhost:"
-	     buffer-file-name))))
+             buffer-file-name))))
 
 (defun beautify-json ()
   (interactive)
@@ -41,7 +41,7 @@ those first as it can impact the loading of other packages
 #+begin_src emacs-lisp
 (setq package-archives
       '(("melpa"       . "http://melpa.milkbox.net/packages/")
-	("gnu"         . "http://elpa.gnu.org/packages/")))
+        ("gnu"         . "http://elpa.gnu.org/packages/")))
 
 (setq package-user-dir (concat user-emacs-directory "elpa"))
 
@@ -206,14 +206,14 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 (put 'dired-find-alternate-file 'disabled nil)
 (setq dired-dwim-target t)
 (add-hook 'dired-load-hook
-	  (lambda ()
-	    (load "dired-x")
-	    ;; Set dired-x global variables here.  For example:
-	    ;; (setq dired-guess-shell-gnutar "gtar")
-	    ;; (setq dired-x-hands-off-my-keys nil)
-	    (setq dired-recursive-copies (quote always)) ; “always” means no asking
-	    (setq dired-recursive-deletes (quote top)) ; “top” means ask once
-	    ))
+          (lambda ()
+            (load "dired-x")
+            ;; Set dired-x global variables here.  For example:
+            ;; (setq dired-guess-shell-gnutar "gtar")
+            ;; (setq dired-x-hands-off-my-keys nil)
+            (setq dired-recursive-copies (quote always)) ; “always” means no asking
+            (setq dired-recursive-deletes (quote top)) ; “top” means ask once
+            ))
 
 (setq ls-lisp-use-insert-directory-program t)
 
@@ -284,22 +284,22 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 #+begin_src emacs-lisp
   (lexical-let ((default-color (cons (face-background 'mode-line)
-				   (face-foreground 'mode-line))))
+                                   (face-foreground 'mode-line))))
   (add-hook 'post-command-hook
-	    (lambda ()
-	      (let ((color (cond ((minibufferp) default-color)
-				 ((bound-and-true-p lispy-mode) '("#9d7ad2" . "#4c4e56"))
-				 ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
-				 ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
-				 ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
-				 ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
-				 (t default-color)))
-  		    )
+            (lambda ()
+              (let ((color (cond ((minibufferp) default-color)
+                                 ((bound-and-true-p lispy-mode) '("#9d7ad2" . "#4c4e56"))
+                                 ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
+                                 ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
+                                 ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
+                                 ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
+                                 (t default-color)))
+                    )
 
-		(set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
-		(set-face-background 'mode-line (car color))
-		(set-face-foreground 'mode-line-buffer-id (cdr color))
-		(set-face-foreground 'mode-line (cdr color))))))
+                (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
+                (set-face-background 'mode-line (car color))
+                (set-face-foreground 'mode-line-buffer-id (cdr color))
+                (set-face-foreground 'mode-line (cdr color))))))
 
 (use-package rainbow-mode)
 
@@ -420,8 +420,8 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (dolist
     (r `(
-	 (?e (file . ,(concat user-emacs-directory "init.el")))
-	 ))
+         (?e (file . ,(concat user-emacs-directory "init.el")))
+         ))
   (set-register (car r) (cadr r)))
 
 (use-package projectile
@@ -484,9 +484,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (use-package magit
   :bind (:map my-leader-map
-	      ("gb" . magit-blame)
-	      ("gs" . magit-status)
-	      ("gh" . magit-log-buffer-file))
+              ("gb" . magit-blame)
+              ("gs" . magit-status)
+              ("gh" . magit-log-buffer-file))
   :config
   (use-package fullframe
     :config
@@ -562,9 +562,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (setq mu4e-maildir-shortcuts
       '(("/INBOX" . ?i)
-	("/@Action" . ?a)
-	("/@waiting" . ?w)
-	("/Sent Items" . ?s)))
+        ("/@Action" . ?a)
+        ("/@waiting" . ?w)
+        ("/Sent Items" . ?s)))
 
 (setq mu4e-change-filenames-when-moving t)
 
@@ -725,18 +725,18 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (use-package import-js)
 
   (setq javascript-common-imenu-regex-list
-	'(
-	  ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
-	  ("Describe" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-	  ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-	  ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
-	  ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
-	  ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-	  ;; {{ es6 beginning
-	  ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
-	  ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
-	  ;; }}
-	  ))
+        '(
+          ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
+          ("Describe" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+          ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+          ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+          ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
+          ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+          ;; {{ es6 beginning
+          ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
+          ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
+          ;; }}
+          ))
 
   (defun auray-js-imenu-make-index ()
     (save-excursion
@@ -745,9 +745,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (use-package prettier-js
     :config
     (setq prettier-args '(
-			  "--trailing-comma" "es5"
-			  "--single-quote" "true"
-			  ))
+                          "--trailing-comma" "es5"
+                          "--single-quote" "true"
+                          ))
 
     (add-hook 'js2-mode-hook 'prettier-js-mode))
 
@@ -769,8 +769,8 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
                              '("\\.jsx?\\'" . prettier-js-mode))))
 
 (add-hook 'web-mode-hook #'(lambda ()
-			     (enable-minor-mode
-			      '("\\.vue?\\'" . prettier-js-mode))))
+                             (enable-minor-mode
+                              '("\\.vue?\\'" . prettier-js-mode))))
 
 (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
 (defun my-jsx-hook ()
@@ -841,7 +841,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (eval-after-load 'ruby-mode
     '(progn
        (defun ruby-mode-defaults ()
-	 )))
+         )))
 
   (add-hook 'ruby-mode-hook 'subword-mode)
   ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
@@ -852,18 +852,18 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (modify-category-entry (cons ?a ?z) ?u)
   (make-variable-buffer-local 'evil-cjk-word-separating-categories)
   (add-hook 'subword-mode-hook
-	    (lambda ()
-	      (if subword-mode
-		  (push '(?u . ?U) evil-cjk-word-separating-categories)
-		(setq evil-cjk-word-separating-categories
-		      (default-value 'evil-cjk-word-separating-categories)))))
+            (lambda ()
+              (if subword-mode
+                  (push '(?u . ?U) evil-cjk-word-separating-categories)
+                (setq evil-cjk-word-separating-categories
+                      (default-value 'evil-cjk-word-separating-categories)))))
 
   (eval-after-load 'ruby-mode
     '(progn
        (evil-define-key 'normal ruby-mode-map
-	 "[m" 'ruby-beginning-of-defun
-	 "]m" 'ruby-end-of-defun
-	 )))
+         "[m" 'ruby-beginning-of-defun
+         "]m" 'ruby-end-of-defun
+         )))
 
   (use-package bundler)
 
@@ -941,7 +941,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (add-hook 'clojure-mode-hook #'paredit-mode))
 
 (defadvice terminal-init-xterm (after map-S-up-escape-sequence
-				      activate)
+                                      activate)
   (define-key input-decode-map "\e[1;40" (kbd "C-("))
   (define-key input-decode-map "\e[1;41" (kbd "C-)"))
   (define-key input-decode-map "\e[1;42" (kbd "C-;"))
@@ -954,8 +954,8 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   "Try to ensure that my keybindings always have priority."
   (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
       (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-	(assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-	(add-to-list 'minor-mode-map-alist mykeys))))
+        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+        (add-to-list 'minor-mode-map-alist mykeys))))
 (ad-activate 'load)
 
 (use-package emamux

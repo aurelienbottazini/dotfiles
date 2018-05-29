@@ -29,3 +29,6 @@ home/.quokka/node_modules
 /home_linux/.xmonad/xmonad.hi
 /home_linux/.xmonad/xmonad.o
 /home_linux/.xmonad/xmonad.state
+home/.emacs.d/elpa
+/home/.emacs.d/recentf
+home/.quokka/data

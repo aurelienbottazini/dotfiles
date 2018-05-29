@@ -6,7 +6,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
-import qualified XMonad.StackSet as W
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
@@ -17,12 +16,14 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ICCCMFocus
 import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.WindowGo
 import XMonad.Hooks.UrgencyHook
 import XMonad.Util.NamedWindows
 import XMonad.Util.Run
+import XMonad.Actions.UpdatePointer
 
 import qualified XMonad.StackSet as W
 
@@ -84,12 +85,12 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask, xK_l), windows W.focusDown)
         , ((mod4Mask, xK_h), windows W.focusUp)
         -- , ((mod4Mask, xK_k), windowGo U True)
-        -- , ((mod4Mask, xK_j), windowGo D True)
+        -- , (( mod4Mask, xK_j), windowGo D True)
 
         , ((mod4Mask, xK_bracketleft), sendMessage Shrink)
         , ((mod4Mask, xK_bracketright), sendMessage Expand)
 
-        , ((mod1Mask, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+        , ((mod4Mask, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
 
         , ((mod4Mask, xK_BackSpace), kill)
         , ((mod4Mask .|. controlMask, xK_backslash), swapNextScreen)
@@ -141,6 +142,7 @@ myProjects =
    ]
 
 myStartupHook = do
+    -- https://wiki.haskell.org/Xmonad/Frequently_asked_questions#Problems_with_Java_applications.2C_Applet_java_console
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "xsetroot -cursor_name left_ptr"
     spawn "feh --bg-scale ~/Dropbox/Pictures/background.jpg"
@@ -173,9 +175,8 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"
-                        -- , ppLayout = xmobarColor "#ffffff" ""
                         , ppLayout = const ""
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
-                        }
+                        } >> updatePointer (0.99, 0.99) (0, 0) >> takeTopFocus
         } `additionalKeys` myKeys

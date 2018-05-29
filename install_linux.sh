@@ -39,3 +39,4 @@ apt install libwebkitgtk-dev
 
 apt install notify-osd
 apt install xmobar
+apt install stalonetray

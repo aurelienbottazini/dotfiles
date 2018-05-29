@@ -8,4 +8,6 @@ xmodmap -e "keycode 23 = $spare_modifier"
 xmodmap -e "keycode any = Tab"
 xcape -e "$spare_modifier=Tab"
 
+stalonetray
 dropbox start
+

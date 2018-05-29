@@ -1,1 +1,4 @@
-{"pro":true}
+{
+  "pro":true,
+  "node": "/home/aurelien/.nvm/versions/node/v8.11.1/bin/node"
+}

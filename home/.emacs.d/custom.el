@@ -59,7 +59,7 @@
  '(font-lock-comment-face ((t (:foreground "#939598" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#69615f"))))
  '(font-lock-function-name-face ((t (:weight bold))))
- '(font-lock-keyword-face ((t (:foreground "#4c4e56" :weight bold :family "Operator Mono Book"))))
+ '(font-lock-keyword-face ((t (:foreground "#4c4e56" :weight bold))))
  '(font-lock-string-face ((t (:slant italic))))
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))

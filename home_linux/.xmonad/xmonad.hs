@@ -94,10 +94,10 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod1Mask, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
 
         , ((mod4Mask, xK_BackSpace), kill)
-        , ((mod4Mask .|. controlMask, xK_backslash), swapNextScreen)
         , ((mod4Mask, xK_backslash),  toggleWS)
         , ((mod4Mask, xK_i),  prevNonEmptyWS)
         , ((mod4Mask, xK_o),  nextNonEmptyWS)
+        , ((mod4Mask .|. controlMask, xK_o), swapNextScreen)
         , ((mod4Mask, xK_equal), spawn "amixer set Master 2+ unmute")
         , ((mod4Mask, xK_minus), spawn "amixer set Master 2- unmute")
         , ((mod4Mask, xK_z), sendMessage ToggleLayout)

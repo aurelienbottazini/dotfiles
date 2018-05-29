@@ -43,7 +43,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil))))
+ '(default ((t (:inherit nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :height 111 :family "Operator Mono Book"))))
  '(context-coloring-level-1-face ((t (:foreground "#4c4e56"))))
  '(context-coloring-level-2-face ((t (:foreground "#3a499c"))))
  '(context-coloring-level-3-face ((t (:foreground "#bc3e44"))))
@@ -71,8 +71,10 @@
  '(line-number-current-line ((t (:background "#f1f2f1" :foreground "black"))))
  '(linum ((t (:background "#dad9d6" :foreground "#4c4e56"))))
  '(mode-line ((t (:background "#fccf61"))))
+ '(mode-line-buffer-id ((t (:slant italic :weight bold))))
  '(mode-line-inactive ((t (:background "#dad9d6" :foreground "#4c4e56"))))
  '(org-block ((t (:background "#f1f2f1"))))
+ '(org-document-title ((t (:foreground "midnight blue" :weight bold))))
  '(org-level-1 ((t (:inherit outline-1 :weight extra-bold :height 1.3 :family "Gotham HTF"))))
  '(org-level-2 ((t (:inherit outline-2 :weight bold :height 1.0))))
  '(region ((t (:background "#adcff1"))))

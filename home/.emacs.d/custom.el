@@ -43,7 +43,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :height 111 :family "Operator Mono Book"))))
+ '(default ((t (:inherit nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :height 111 :family "Operator Mono Book"))))
  '(context-coloring-level-1-face ((t (:foreground "#4c4e56"))))
  '(context-coloring-level-2-face ((t (:foreground "#3a499c"))))
  '(context-coloring-level-3-face ((t (:foreground "#bc3e44"))))
@@ -59,11 +59,12 @@
  '(font-lock-comment-face ((t (:foreground "#939598" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#69615f"))))
  '(font-lock-function-name-face ((t (:weight bold))))
- '(font-lock-keyword-face ((t (:foreground "#4c4e56" :slant normal :weight bold))))
+ '(font-lock-keyword-face ((t (:foreground "#4c4e56" :weight bold :family "Operator Mono Book"))))
  '(font-lock-string-face ((t (:slant italic))))
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(fringe ((t (:background "#f1f2f1"))))
+ '(haskell-keyword-face ((t (:inherit font-lock-keyword-face))))
  '(hl-line ((t (:background "#f1f2f1"))))
  '(iedit-occurrence ((t (:background "#ffaaff"))))
  '(isearch ((t (:background "#fccf61" :foreground "#4c4e56"))))

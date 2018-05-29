@@ -6,9 +6,6 @@ Xft.hinting: true
 Xft.hintstyle: true
 Xft.rgba: rgb
 
-Emacs.FontBackend: xft,x
-Emacs.font: Operator Mono Book:size=16
-
 URxvt*font: xft:Operator Mono Book:size=12,\
             xft:PragmataPro:size=12,\
             xft:Noto Emoji:size=12,\

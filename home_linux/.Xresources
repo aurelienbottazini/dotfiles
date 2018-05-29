@@ -6,14 +6,16 @@ Xft.hinting: true
 Xft.hintstyle: true
 Xft.rgba: rgb
 
-URxvt*font: xft:PramagtaPro:size=12,\
+URxvt*font: xft:Operator Mono Book:size=12,\
+            xft:PragmataPro:size=12,\
             xft:Noto Emoji:size=12,\
-	    xft:PramataPro:size=12,\
 	    xft:Ubuntu Mono:size=12
-URxvt*boldFont: xft:PragmataPro:size=12,\
- 		xft:Noto Emoji:size=12
-URxvt*boldItalicFont: xft:PragmataPro:italic:size=12,\
-		      xft:Noto Emoji:size=12
+URxvt*boldFont: xft:Operator Mono Book:bold:size=12,\
+                xft:PragmataPro:bold:size=12,\
+  		xft:Noto Emoji:size=12
+URxvt*boldItalicFont: xft:Operator Mono Book:italic:size=12,\
+                     xft:PragmataPro:italic:size=12,\
+ 		      xft:Noto Emoji:size=12 *
 
 URxvt*saveLines: 10000
 URxvt*scrollBar: false

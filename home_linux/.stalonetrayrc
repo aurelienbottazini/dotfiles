@@ -1,5 +1,17 @@
-geometry 5x1-800+0
+geometry 5x1-1300+0
 icon_size 36
-transparent false
 background "#dad9d6"
 
+decorations none
+transparent false
+dockapp_mode none
+max_geometry 5x1-325-10
+kludges force_icons_size
+grow_gravity NE
+icon_gravity NE
+sticky true
+#window_strut none
+window_type dock
+window_layer bottom
+#no_shrink false
+skip_taskbar true

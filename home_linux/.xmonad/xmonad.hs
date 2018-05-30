@@ -92,6 +92,7 @@ myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xs
         , ((mod4Mask, xK_bracketright), sendMessage Expand)
 
         , ((mod1Mask, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+        , ((mod4Mask, xK_f ), withFocused $ windows . W.sink)
 
         , ((mod4Mask, xK_BackSpace), kill)
         , ((mod4Mask, xK_o),  toggleWS)
@@ -116,19 +117,28 @@ getSortByIndexNoSP =
        fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
 
 ws1GTD = "1:gtd"
-ws2GEN = "2:gen"
-ws3WRK = "3:wrk"
-ws4WRK = "4:wrk"
+ws2WWW = "2:www"
+ws3CODE = "3:code"
+ws4CODE = "4:code"
 ws5MY = "5:my"
 ws6MY = "6:my"
 ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
 
-myWorkspaces = [ws1GTD, ws2GEN, ws3WRK, ws4WRK, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GTD, ws2WWW, ws3CODE, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 myProjects =
-   [ Project { projectName = ws9MAIL
+   [
+     Project { projectName = ws1GTD
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws9MAIL "emacs ~/Dropbox/org/GTD.org"
+             },
+     Project { projectName = ws2WWW
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws9MAIL "firefox"
+             },
+     Project { projectName = ws9MAIL
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"
                                             spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"

@@ -12,7 +12,7 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	, Run Com "./dotfiles/bin/sanFranciscoTime.sh" [] "sftime" 10
 	, Run Com "./dotfiles/bin/getVolume.sh" [] "myvolume" 10
 	, Run Com "./dotfiles/bin/dropboxStatus.sh" [] "mydropbox" 10
-	, Run Com "./dotfiles/bin/wifiStrengh.sh" [] "mywifistrengh" 10
+	, Run Com "./dotfiles/bin/wifiStrengh.sh" ["wlx00c0ca967db2"] "mywifistrengh" 10
 	, Run StdinReader
 	]
 	, sepChar = "%"

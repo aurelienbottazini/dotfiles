@@ -32,3 +32,7 @@ home/.quokka/node_modules
 home/.emacs.d/elpa
 /home/.emacs.d/recentf
 home/.quokka/data
+/home/.emacs.d/Aurelien.el
+/home/.emacs.d/bookmarks
+/home/.emacs.d/projectile-bookmarks.eld
+/home/.emacs.d/projectile.cache

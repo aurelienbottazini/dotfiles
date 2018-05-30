@@ -87,6 +87,7 @@
  '(org-level-1 ((t (:inherit outline-1 :slant italic :weight normal :height 1.2))))
  '(org-level-2 ((t (:inherit outline-2 :slant italic :weight normal :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :slant italic :weight normal))))
+ '(org-tag ((t (:weight normal))))
  '(region ((t (:background "#adcff1"))))
  '(show-paren-match ((t (:background "#97d88a" :foreground "#4c4e56"))))
  '(show-paren-mismatch ((t (:background "#f65058")))))

@@ -241,39 +241,44 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 * GUI
 #+begin_src emacs-lisp
-(when window-system
-  (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))
+  (when window-system
+    (when *is-linux*
+      (set-frame-font "-*-Operator Mono-normal-normal-normal-*-28-*-*-*-m-0-iso10646-1")
+    )
+    (when *is-mac*
+      (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+    (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))
 
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-(global-hl-line-mode)
-(blink-cursor-mode 0)
-(column-number-mode)
+  (global-hl-line-mode)
+  (blink-cursor-mode 0)
+  (column-number-mode)
 
-(electric-indent-mode t)
-(electric-pair-mode t)
+  (electric-indent-mode t)
+  (electric-pair-mode t)
 
-;; wrap lines when they reach the end of buffer
-;; trying to toggle this only manually to see if i like it
-;; (global-visual-line-mode)
+  ;; wrap lines when they reach the end of buffer
+  ;; trying to toggle this only manually to see if i like it
+  ;; (global-visual-line-mode)
 
-;; file path in frame title
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
+  ;; file path in frame title
+  (setq frame-title-format
+        '((:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                   "%b"))))
 
-(show-paren-mode 1)
+  (show-paren-mode 1)
 
-(fringe-mode 20)
+  (fringe-mode 20)
 
-(set-default 'truncate-lines t)
+  (set-default 'truncate-lines t)
 
-(use-package which-key
-  :config
-  (which-key-mode))
+  (use-package which-key
+    :config
+    (which-key-mode))
 #+end_src
 ** Colors
 

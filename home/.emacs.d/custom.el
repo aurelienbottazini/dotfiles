@@ -43,7 +43,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :height 111 :family "Operator Mono Book"))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight semi-light :height 111 :width normal :foundry "H&Co" :family "Operator Mono"))))
+ '(bold ((t (:weight semi-light))))
  '(context-coloring-level-1-face ((t (:foreground "#4c4e56"))))
  '(context-coloring-level-2-face ((t (:foreground "#3a499c"))))
  '(context-coloring-level-3-face ((t (:foreground "#bc3e44"))))

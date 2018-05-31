@@ -13,7 +13,9 @@
  '(custom-safe-themes
    (quote
     ("cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "3e335d794ed3030fefd0dbd7ff2d3555e29481fe4bbb0106ea11c660d6001767" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
- '(deft-new-file-format "%Y-%m-%dT%H:%M.org")
+ '(deft-new-file-format "%Y-%m-%dT%H:%M")
+ '(deft-use-filename-as-title nil)
+ '(deft-use-filter-string-for-filename t)
  '(display-line-numbers (quote relative))
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher nil)
@@ -29,7 +31,7 @@
  '(org-bullets-bullet-list (quote ("🎯" "👼" "👍" "🍷")))
  '(package-selected-packages
    (quote
-    (org-bullets web-beautify graphql-mode haskell-mode flycheck drag-stuff col-highlight crosshairs rg eacl highlight-indentation evil-multiedit coverlay coverage coverage-mode evil-collection eyebrowse telephone-line magithub git-timemachine dash-at-point diminish yaml-mode lispyville x-clip xclip evil-mc multiple-cursors evil-lispy lispy windresize dumb-jump expand-region origami company-dict ac-js2 auto-complete indium less-css-mode sass-mode scss-mode dockerfile-mode emmet-mode yatemplate yasnippet company deft cider clojure-mode which-key wgrep rainbow-mode minimal-theme rspec-mode ruby-end ruby-interpolation bundler paredit-everywhere spacemacs-theme ivy-hydra hydra counsel-projectile ace-window iedit emamux typescript-mode coffee-mode json-mode context-coloring prettier-js import-js js2-mode web-mode diff-hl fullframe evil-magit git-link magit highlight-parentheses projectile evil-search-highlight-persist evil-matchit evil-indent-plus evil-visualstar evil-commentary evil-surround evil-numbers evil exec-path-from-shell counsel use-package)))
+    (avy org-bullets web-beautify graphql-mode haskell-mode flycheck drag-stuff col-highlight crosshairs rg eacl highlight-indentation evil-multiedit coverlay coverage coverage-mode evil-collection eyebrowse telephone-line magithub git-timemachine dash-at-point diminish yaml-mode lispyville x-clip xclip evil-mc multiple-cursors evil-lispy lispy windresize dumb-jump expand-region origami company-dict ac-js2 auto-complete indium less-css-mode sass-mode scss-mode dockerfile-mode emmet-mode yatemplate yasnippet company deft cider clojure-mode which-key wgrep rainbow-mode minimal-theme rspec-mode ruby-end ruby-interpolation bundler paredit-everywhere spacemacs-theme ivy-hydra hydra counsel-projectile ace-window iedit emamux typescript-mode coffee-mode json-mode context-coloring prettier-js import-js js2-mode web-mode diff-hl fullframe evil-magit git-link magit highlight-parentheses projectile evil-search-highlight-persist evil-matchit evil-indent-plus evil-visualstar evil-commentary evil-surround evil-numbers evil exec-path-from-shell counsel use-package)))
  '(prettier-js-command
    "/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/prettier")
  '(projectile-tags-command "git ls-files | /usr/local/bin/ctags -e -L -")
@@ -75,10 +77,16 @@
  '(line-number ((t (:background "#f1f2f1" :foreground "#939598"))))
  '(line-number-current-line ((t (:background "#f1f2f1" :foreground "black"))))
  '(linum ((t (:background "#dad9d6" :foreground "#4c4e56"))))
+ '(magit-branch-current ((t (:inherit magit-branch-local :box 1 :weight normal))))
+ '(magit-branch-local ((t (:foreground "SkyBlue4" :weight normal))))
+ '(magit-branch-remote ((t (:foreground "DarkOliveGreen4" :weight normal))))
+ '(magit-branch-remote-head ((t (:inherit magit-branch-remote :box 1 :weight normal))))
  '(magit-diff-file-heading ((t (:weight normal))))
  '(magit-section-heading ((t (:foreground "DarkGoldenrod4" :weight normal))))
+ '(magit-section-highlight ((t (:background "grey95"))))
  '(magit-section-secondary-heading ((t (:weight normal))))
  '(magit-signature-bad ((t (:foreground "red" :weight normal))))
+ '(magit-tag ((t (:foreground "Goldenrod4" :weight normal))))
  '(mode-line ((t (:background "#fccf61"))))
  '(mode-line-buffer-id ((t (:slant italic :weight normal))))
  '(mode-line-emphasis ((t (:weight normal))))

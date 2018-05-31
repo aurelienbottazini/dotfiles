@@ -602,12 +602,14 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 * Notes
 
 #+begin_src emacs-lisp
-(use-package deft
-  :config
-  (setq deft-extensions '("txt" "tex" "org"))
-  (setq deft-directory "~/Dropbox/org/")
-  (setq deft-use-filename-as-title t)
-  (setq deft-recursive t))
+  (use-package deft
+    :config
+    (setq deft-extensions '("txt" "tex" "org"))
+    (setq deft-directory "~/Dropbox/org/")
+    (setq deft-use-filename-as-title nil)
+    (setq deft-use-filter-string-for-filename t)
+    (setq deft-default-extension "org")
+    (setq deft-recursive t))
 #+end_src
 
 * Modes
@@ -930,216 +932,216 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 #+end_src
 * Bindings
 #+begin_src emacs-lisp
-(use-package wgrep)
-  (use-package paredit-everywhere
-  :config
-  (add-hook 'prog-mode-hook 'paredit-everywhere-mode))
+  (use-package wgrep)
+    (use-package paredit-everywhere
+    :config
+    (add-hook 'prog-mode-hook 'paredit-everywhere-mode))
 
-(use-package paredit
-  :diminish paredit-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'paredit-mode))
+  (use-package paredit
+    :diminish paredit-mode
+    :config
+    (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+    (add-hook 'clojure-mode-hook #'paredit-mode))
 
-(defadvice terminal-init-xterm (after map-S-up-escape-sequence
-                                      activate)
-  (define-key input-decode-map "\e[1;40" (kbd "C-("))
-  (define-key input-decode-map "\e[1;41" (kbd "C-)"))
-  (define-key input-decode-map "\e[1;42" (kbd "C-;"))
+  (defadvice terminal-init-xterm (after map-S-up-escape-sequence
+                                        activate)
+    (define-key input-decode-map "\e[1;40" (kbd "C-("))
+    (define-key input-decode-map "\e[1;41" (kbd "C-)"))
+    (define-key input-decode-map "\e[1;42" (kbd "C-;"))
 
-  (define-key input-decode-map "\e[1;123" (kbd "C-{"))
-  (define-key input-decode-map "\e[1;125" (kbd "C-}")))
-
-
-(defadvice load (after give-my-keybindings-priority)
-  "Try to ensure that my keybindings always have priority."
-  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
-      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-        (add-to-list 'minor-mode-map-alist mykeys))))
-(ad-activate 'load)
-
-(use-package emamux
-  :bind (:map my-leader-map
-              ("cc" . emamux:send-command)
-              ("cl" . emamux:run-last-command)))
-
-(defun tmux-socket-command-string ()
-  (interactive)
-  (concat "tmux -S "
-          (replace-regexp-in-string "\n\\'" ""
-                                    (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
-
-(defun tmux-move-right ()
-  (interactive)
-  (condition-case nil
-      (evil-window-right 1)
-    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
-
-(defun tmux-move-left ()
-  (interactive)
-  (condition-case nil
-      (evil-window-left 1)
-    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
-
-(defun tmux-move-up ()
-  (interactive)
-  (condition-case nil
-      (evil-window-up 1)
-    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
-
-(defun tmux-move-down ()
-  (interactive)
-  (condition-case nil
-      (evil-window-down 1)
-    (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
-
-(define-key my-keys-minor-mode-map (kbd "C-h") 'tmux-move-left)
-(define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
-(define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
-(define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
-(define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+    (define-key input-decode-map "\e[1;123" (kbd "C-{"))
+    (define-key input-decode-map "\e[1;125" (kbd "C-}")))
 
 
-(define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1)
-(define-key my-keys-minor-mode-map (kbd "s-p") 'counsel-projectile)
-(define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
-(define-key my-leader-map (kbd "u") 'universal-argument)
+  (defadvice load (after give-my-keybindings-priority)
+    "Try to ensure that my keybindings always have priority."
+    (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+        (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+          (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+          (add-to-list 'minor-mode-map-alist mykeys))))
+  (ad-activate 'load)
 
-(define-key my-leader-map (kbd "1") 'projectile-run-async-shell-command-in-root)
-(define-key my-leader-map (kbd "b") 'counsel-ibuffer)
+  (use-package emamux
+    :bind (:map my-leader-map
+                ("cc" . emamux:send-command)
+                ("cl" . emamux:run-last-command)))
 
-(use-package expand-region
-  :config
-  (define-key my-leader-map (kbd "SPC") 'er/expand-region))
-
-(define-key my-leader-map (kbd "r") 'counsel-recentf)
-(define-key my-leader-map (kbd "f") 'counsel-projectile-rg)
-(define-key my-leader-map (kbd "j") 'dired-jump)
-(define-key my-leader-map (kbd "i") 'counsel-imenu)
-(define-key my-leader-map (kbd "m") 'counsel-bookmark)
-(define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)
-(define-key my-leader-map (kbd "t") 'counsel-projectile-find-file)
-
-(define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
-(use-package iedit
-  :config
-  (define-key my-keys-minor-mode-map (kbd "<f6>") 'iedit-mode))
-(use-package evil-mc
-  :diminish
-  :config
-  (global-evil-mc-mode 1)
-  (defhydra hydra-cursors (global-map "<f7>")
-    "multiple cursors"
-    ("m" evil-mc-make-and-goto-next-match)
-    ("s" evil-mc-skip-and-goto-next-match)
-    ("a" evil-mc-make-all-cursors)
-    ("u" evil-mc-undo-all-cursors)
-    ("h" evil-mc-cursor-here)
-    ("p" evil-mc-pause-cursors)
-    ("r" evil-mc-resume-cursors)))
-(define-key my-keys-minor-mode-map (kbd "<f8>") 'deft)
-(use-package drag-stuff
-  :diminish drag-stuff-mode
-  :config
-  (defhydra hydra-drag-stuff (global-map "<f9>")
-    "drag-stuff"
-    ("k" drag-stuff-up)
-    ("j" drag-stuff-down)
-    ("h" drag-stuff-right)
-    ("l" drag-stuff-left)))
-
-(use-package evil-multiedit
-  :config
-  ;; Highlights all matches of the selection in the buffer.
-  (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-
-  ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
-  ;; incrementally add the next unmatched match.
-  (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-  ;; Match selected region.
-  (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-  ;; Insert marker at point
-  (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
-
-  ;; Same as M-d but in reverse.
-  (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-  (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-and-prev)
-
-  ;; OPTIONAL: If you prefer to grab symbols rather than words, use
-  ;; `evil-multiedit-match-symbol-and-next` (or prev).
-
-  ;; Restore the last group of multiedit regions.
-  (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
-
-  ;; RET will toggle the region under the cursor
-  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-  ;; ...and in visual mode, RET will disable all fields outside the selected region
-  (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-  ;; For moving between edit regions
-  (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
-  (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
-  (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
-  (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
-
-  ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-  (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
-
-(define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
-(define-key my-leader-map (kbd "or") 'rainbow-mode)
-(define-key my-leader-map (kbd "ol") 'linum-mode)
-(define-key my-leader-map (kbd "ow") 'visual-line-mode)
-
-(define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-(define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
-(define-key evil-normal-state-map (kbd "]e") 'next-error)
-(define-key evil-normal-state-map (kbd "[e") 'previous-error)
-
-(when (fboundp 'winner-mode)
-  (winner-mode 1)
-  (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
-  (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
-  )
-
-(use-package origami
-  :bind (:map evil-normal-state-map
-              ("zh" . origami-close-all-nodes)
-              ("zc" . origami-close-node)
-              ("zo" . origami-open-node)
-              ("zv" . origami-open-all-nodes))
-  :config
-  (global-origami-mode))
-
-(use-package dumb-jump
-  :bind (:map evil-normal-state-map
-              ("gd" . dumb-jump-go)
-              ("gD" . dumb-jump-go-other-window))
-    :init
-    (setq dumb-jump-selector 'ivy))
-
-(use-package windresize
-  :bind (:map evil-normal-state-map
-              ("C-w r" . windresize)))
-
-(defun run-for-mode ()
-    "jumps to beginning of line in all modes except org mode, where it cycles"
+  (defun tmux-socket-command-string ()
     (interactive)
-    (cond
-     ((equal major-mode 'ruby-mode)
-      (xmp))
-     ((equal major-mode 'clojure-mode)
-      (cider-eval-defun-at-point))
-     ((equal major-mode 'emacs-lisp-mode)
-      (eval-defun nil))
-     ((equal major-mode 'js2-mode)
-      (indium-eval-defun))
-     (t (error "No run command for that mode"))))
+    (concat "tmux -S "
+            (replace-regexp-in-string "\n\\'" ""
+                                      (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
 
-(define-key my-leader-map (kbd "x") 'run-for-mode)
+  (defun tmux-move-right ()
+    (interactive)
+    (condition-case nil
+        (evil-window-right 1)
+      (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
+
+  (defun tmux-move-left ()
+    (interactive)
+    (condition-case nil
+        (evil-window-left 1)
+      (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
+
+  (defun tmux-move-up ()
+    (interactive)
+    (condition-case nil
+        (evil-window-up 1)
+      (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
+
+  (defun tmux-move-down ()
+    (interactive)
+    (condition-case nil
+        (evil-window-down 1)
+      (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
+
+  (define-key my-keys-minor-mode-map (kbd "C-h") 'tmux-move-left)
+  (define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
+  (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
+  (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+  (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+
+  (use-package avy)
+  (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1)
+  (define-key my-keys-minor-mode-map (kbd "s-p") 'counsel-projectile)
+  (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
+  (define-key my-leader-map (kbd "u") 'universal-argument)
+
+  (define-key my-leader-map (kbd "1") 'projectile-run-async-shell-command-in-root)
+  (define-key my-leader-map (kbd "b") 'counsel-ibuffer)
+
+  (use-package expand-region
+    :config
+    (define-key my-leader-map (kbd "SPC") 'er/expand-region))
+
+  (define-key my-leader-map (kbd "r") 'counsel-recentf)
+  (define-key my-leader-map (kbd "f") 'counsel-projectile-rg)
+  (define-key my-leader-map (kbd "j") 'dired-jump)
+  (define-key my-leader-map (kbd "i") 'counsel-imenu)
+  (define-key my-leader-map (kbd "m") 'counsel-bookmark)
+  (define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)
+  (define-key my-leader-map (kbd "t") 'counsel-projectile-find-file)
+
+  (define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
+  (use-package iedit
+    :config
+    (define-key my-keys-minor-mode-map (kbd "<f6>") 'iedit-mode))
+  (use-package evil-mc
+    :diminish
+    :config
+    (global-evil-mc-mode 1)
+    (defhydra hydra-cursors (global-map "<f7>")
+      "multiple cursors"
+      ("m" evil-mc-make-and-goto-next-match)
+      ("s" evil-mc-skip-and-goto-next-match)
+      ("a" evil-mc-make-all-cursors)
+      ("u" evil-mc-undo-all-cursors)
+      ("h" evil-mc-cursor-here)
+      ("p" evil-mc-pause-cursors)
+      ("r" evil-mc-resume-cursors)))
+  (define-key my-keys-minor-mode-map (kbd "<f8>") 'deft)
+  (use-package drag-stuff
+    :diminish drag-stuff-mode
+    :config
+    (defhydra hydra-drag-stuff (global-map "<f9>")
+      "drag-stuff"
+      ("k" drag-stuff-up)
+      ("j" drag-stuff-down)
+      ("h" drag-stuff-right)
+      ("l" drag-stuff-left)))
+
+  (use-package evil-multiedit
+    :config
+    ;; Highlights all matches of the selection in the buffer.
+    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+
+    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
+    ;; incrementally add the next unmatched match.
+    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+    ;; Match selected region.
+    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+    ;; Insert marker at point
+    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+
+    ;; Same as M-d but in reverse.
+    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-and-prev)
+
+    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
+    ;; `evil-multiedit-match-symbol-and-next` (or prev).
+
+    ;; Restore the last group of multiedit regions.
+    (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
+
+    ;; RET will toggle the region under the cursor
+    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+    ;; ...and in visual mode, RET will disable all fields outside the selected region
+    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+    ;; For moving between edit regions
+    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
+    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
+    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
+    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
+
+    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
+    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
+
+  (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
+  (define-key my-leader-map (kbd "or") 'rainbow-mode)
+  (define-key my-leader-map (kbd "ol") 'linum-mode)
+  (define-key my-leader-map (kbd "ow") 'visual-line-mode)
+
+  (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+  (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+  (define-key evil-normal-state-map (kbd "]e") 'next-error)
+  (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+
+  (when (fboundp 'winner-mode)
+    (winner-mode 1)
+    (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
+    (define-key evil-normal-state-map (kbd "[w") 'winner-undo)
+    )
+
+  (use-package origami
+    :bind (:map evil-normal-state-map
+                ("zh" . origami-close-all-nodes)
+                ("zc" . origami-close-node)
+                ("zo" . origami-open-node)
+                ("zv" . origami-open-all-nodes))
+    :config
+    (global-origami-mode))
+
+  (use-package dumb-jump
+    :bind (:map evil-normal-state-map
+                ("gd" . dumb-jump-go)
+                ("gD" . dumb-jump-go-other-window))
+      :init
+      (setq dumb-jump-selector 'ivy))
+
+  (use-package windresize
+    :bind (:map evil-normal-state-map
+                ("C-w r" . windresize)))
+
+  (defun run-for-mode ()
+      "jumps to beginning of line in all modes except org mode, where it cycles"
+      (interactive)
+      (cond
+       ((equal major-mode 'ruby-mode)
+        (xmp))
+       ((equal major-mode 'clojure-mode)
+        (cider-eval-defun-at-point))
+       ((equal major-mode 'emacs-lisp-mode)
+        (eval-defun nil))
+       ((equal major-mode 'js2-mode)
+        (indium-eval-defun))
+       (t (error "No run command for that mode"))))
+
+  (define-key my-leader-map (kbd "x") 'run-for-mode)
 
 
 
-(add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
+  (add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 #+end_src

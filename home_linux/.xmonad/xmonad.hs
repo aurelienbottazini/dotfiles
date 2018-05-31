@@ -76,27 +76,27 @@ myFocusFollowsMouse = False
 myKeys = [
         -- ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
         ("M-S-t", sendMessage ToggleStruts)
-        , ("M-r", namedScratchpadAction scratchpads "ranger")
-        , ("M-s", namedScratchpadAction scratchpads "cmus")
-        , ("M-v", namedScratchpadAction scratchpads "vlc")
-        , ("M-w", runOrRaiseNext "firefox" (className =? "Firefox"))
-        , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))
-        , ("M-p", namedScratchpadAction scratchpads "shutter" )
+        , ("M4-r", namedScratchpadAction scratchpads "ranger")
+        , ("M4-s", namedScratchpadAction scratchpads "cmus")
+        , ("M4-v", namedScratchpadAction scratchpads "vlc")
+        , ("M4-w", runOrRaiseNext "firefox" (className =? "Firefox"))
+        , ("M4-e", runOrRaiseNext "emacs" (className =? "Emacs"))
+        , ("M4-p", namedScratchpadAction scratchpads "shutter" )
         , ("M-S-p", spawn "scrot")
-        , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+        , ("M-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M-S-f", withFocused $ windows . W.sink)
         , ("M-<Backspace>", kill)
-        , ("M-o",  toggleWS)
-        , ("M-\\",  toggleWS)
-        , ("M-S-n",  prevNonEmptyWS)
-        , ("M-n",  nextNonEmptyWS)
-        , ("M-C-o", swapNextScreen)
-        , ("M-=", spawn "amixer set Master 2+ unmute")
-        , ("M--", spawn "amixer set Master 2- unmute")
-        , ("M-z", sendMessage ToggleLayout)
-        , ("M-t", runOrRaiseNext "st" (className =? "st-256color"))
-        , ("M-[", onPrevNeighbour W.view)
-        , ("M-]", onNextNeighbour W.view)
+        , ("M4-o",  toggleWS)
+        , ("M4-\\",  toggleWS)
+        , ("M4-b",  prevNonEmptyWS)
+        , ("M4-n",  nextNonEmptyWS)
+        , ("M4-M-o", swapNextScreen)
+        , ("M4-=", spawn "amixer set Master 2+ unmute")
+        , ("M4--", spawn "amixer set Master 2- unmute")
+        , ("M4-z", sendMessage ToggleLayout)
+        , ("M4-t", runOrRaiseNext "st" (className =? "st-256color"))
+        , ("M4-[", onPrevNeighbour W.view)
+        , ("M4-]", onNextNeighbour W.view)
         ]
 
 nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
@@ -168,7 +168,7 @@ main = do
         $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
-        , modMask = mod4Mask
+        -- , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
         , terminal = "st"

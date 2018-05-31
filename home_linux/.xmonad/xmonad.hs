@@ -24,6 +24,7 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Util.NamedWindows
 import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.PhysicalScreens
 
 import qualified XMonad.StackSet as W
 
@@ -72,42 +73,31 @@ scratchpads =
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
 myFocusFollowsMouse = False
-myKeys = [((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
-         , ((mod4Mask .|. shiftMask, xK_t), sendMessage ToggleStruts)
-         , ((mod4Mask, xK_y), namedScratchpadAction scratchpads "ranger")
-         , ((mod4Mask, xK_s), namedScratchpadAction scratchpads "cmus")
-        , ((mod4Mask, xK_v), namedScratchpadAction scratchpads "vlc")
-        , ((mod4Mask, xK_b), runOrRaiseNext "firefox" (className =? "Firefox"))
-        , ((mod4Mask, xK_m), runOrRaiseNext "emacs" (className =? "Emacs"))
-        , ((controlMask, xK_Print), namedScratchpadAction scratchpads "shutter" )
-        , ((0, xK_Print), spawn "scrot")
-
-        , ((mod4Mask, xK_u), windows W.focusUp)
-        , ((mod4Mask, xK_h), windowGo L True)
-        , ((mod4Mask, xK_l), windowGo R True)
-        , ((mod4Mask, xK_k), windowGo U True)
-        , (( mod4Mask, xK_j), windowGo D True)
-
-        , ((mod4Mask, xK_bracketleft), sendMessage Shrink)
-        , ((mod4Mask, xK_bracketright), sendMessage Expand)
-
-        , ((mod1Mask, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-        , ((mod4Mask, xK_f ), withFocused $ windows . W.sink)
-
-        , ((mod4Mask, xK_BackSpace), kill)
-        , ((mod4Mask, xK_o),  toggleWS)
-        , ((mod4Mask .|. shiftMask, xK_n),  prevNonEmptyWS)
-        , ((mod4Mask, xK_n),  nextNonEmptyWS)
-        , ((mod4Mask .|. controlMask, xK_o), swapNextScreen)
-        , ((mod4Mask, xK_equal), spawn "amixer set Master 2+ unmute")
-        , ((mod4Mask, xK_minus), spawn "amixer set Master 2- unmute")
-        , ((mod4Mask, xK_z), sendMessage ToggleLayout)
-        , ((mod4Mask, xK_t), runOrRaiseNext "st" (className =? "st-256color"))
+myKeys = [
+        -- ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
+        ("M-S-t", sendMessage ToggleStruts)
+        , ("M-r", namedScratchpadAction scratchpads "ranger")
+        , ("M-s", namedScratchpadAction scratchpads "cmus")
+        , ("M-v", namedScratchpadAction scratchpads "vlc")
+        , ("M-w", runOrRaiseNext "firefox" (className =? "Firefox"))
+        , ("M-e", runOrRaiseNext "emacs" (className =? "Emacs"))
+        , ("M-p", namedScratchpadAction scratchpads "shutter" )
+        , ("M-S-p", spawn "scrot")
+        , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+        , ("M-S-f", withFocused $ windows . W.sink)
+        , ("M-<Backspace>", kill)
+        , ("M-o",  toggleWS)
+        , ("M-\\",  toggleWS)
+        , ("M-S-n",  prevNonEmptyWS)
+        , ("M-n",  nextNonEmptyWS)
+        , ("M-C-o", swapNextScreen)
+        , ("M-=", spawn "amixer set Master 2+ unmute")
+        , ("M--", spawn "amixer set Master 2- unmute")
+        , ("M-z", sendMessage ToggleLayout)
+        , ("M-t", runOrRaiseNext "st" (className =? "st-256color"))
+        , ("M-[", onPrevNeighbour W.view)
+        , ("M-]", onNextNeighbour W.view)
         ]
-        ++
-        [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.
-            | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2] -- was [0..] *** change to match your screen order ***
-            , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
@@ -194,4 +184,4 @@ main = do
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
                         } >> updatePointer (0.99, 0.99) (0, 0) >> takeTopFocus
-        } `additionalKeys` myKeys
+        } `additionalKeysP` myKeys

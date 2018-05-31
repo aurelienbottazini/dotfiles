@@ -39,3 +39,4 @@ apt install libwebkitgtk-dev
 apt install notify-osd
 
 apt install clojure leiningen
+apt install anki

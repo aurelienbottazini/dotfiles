@@ -84,13 +84,13 @@ myKeys = [
         , ("M4-p", namedScratchpadAction scratchpads "shutter" )
         , ("M-S-p", spawn "scrot")
         , ("M-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-        , ("M-S-f", withFocused $ windows . W.sink)
+        , ("M4-,", withFocused $ windows . W.sink)
         , ("M-<Backspace>", kill)
         , ("M4-o",  toggleWS)
         , ("M4-\\",  toggleWS)
         , ("M4-b",  prevNonEmptyWS)
         , ("M4-n",  nextNonEmptyWS)
-        , ("M4-M-o", swapNextScreen)
+        , ("M4-M1-o", swapNextScreen)
         , ("M4-=", spawn "amixer set Master 2+ unmute")
         , ("M4--", spawn "amixer set Master 2- unmute")
         , ("M4-z", sendMessage ToggleLayout)
@@ -168,7 +168,7 @@ main = do
         $ def
         {
         manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
-        -- , modMask = mod4Mask
+        , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
         , terminal = "st"

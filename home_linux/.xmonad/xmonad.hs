@@ -95,8 +95,10 @@ myKeys = [
         , ("M4--", spawn "amixer set Master 2- unmute")
         , ("M4-z", sendMessage ToggleLayout)
         , ("M4-t", runOrRaiseNext "st" (className =? "st-256color"))
-        , ("M4-[", onPrevNeighbour W.view)
-        , ("M4-]", onNextNeighbour W.view)
+        , ("M4-[", sendMessage Shrink)
+        , ("M4-]", sendMessage Expand)
+        , ("M4-h", windows W.focusDown)
+        , ("M4-l", windows W.focusUp)
         ]
 
 nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1

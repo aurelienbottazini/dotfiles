@@ -41,3 +41,6 @@ apt install notify-osd
 apt install clojure leiningen
 apt install anki
 apt install ubuntu-restricted-extras
+apt install python-pip
+
+pip install awscli --upgrade --user

@@ -83,7 +83,7 @@ myKeys = [
         , ("M4-e", runOrRaiseNext "emacs" (className =? "Emacs"))
         , ("M4-p", namedScratchpadAction scratchpads "shutter" )
         , ("M-S-p", spawn "scrot")
-        , ("M-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+        , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M4-,", withFocused $ windows . W.sink)
         , ("M-<Backspace>", kill)
         , ("M4-o",  toggleWS)

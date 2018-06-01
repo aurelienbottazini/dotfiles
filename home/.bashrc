@@ -142,4 +142,10 @@ export PROMPT_COMMAND='__git_ps1 "\e[3m\e[1m\e[32m\w\e[0m" "\n🎯 "'
 
 \. /usr/share/autojump/autojump.sh
 
+alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \
+    --publish=7474:7474 --publish=7687:7687 \
+    --volume=$HOME/neo4j/data:/data \
+    --volume=$HOME/neo4j/logs:/logs \
+    neo4j:3.0"
+
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

@@ -438,41 +438,41 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 #+end_src
 * AutoCompletions
 #+begin_src emacs-lisp
-(use-package company
-  :diminish company-mode
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (let ((map company-active-map))
-    (define-key map (kbd "C-n") 'company-select-next)
-    (define-key map (kbd "C-p") 'company-select-previous)
-    (define-key map (kbd "C-f") 'company-complete-selection)
-    (define-key map (kbd "TAB") 'company-complete-selection)
-    (define-key map (kbd "<tab>") 'company-complete-selection))
-
-  (setq company-backends '(company-files company-capf (company-dabbrev-code company-yasnippet)))
-  (use-package company-dict
+  (use-package company
+    :diminish company-mode
+    :init
+    (add-hook 'after-init-hook 'global-company-mode)
     :config
-    (setq company-dict-dir (concat user-emacs-directory "dict/"))
-    (add-to-list 'company-backends 'company-dict))
-  )
+    (let ((map company-active-map))
+      (define-key map (kbd "C-n") 'company-select-next)
+      (define-key map (kbd "C-p") 'company-select-previous)
+      (define-key map (kbd "C-f") 'company-complete-selection)
+      (define-key map (kbd "TAB") 'company-complete-selection)
+      (define-key map (kbd "<tab>") 'company-complete-selection))
 
-(use-package yasnippet
-  :bind (:map my-leader-map
-              ("vs" . yas-describe-tables))
- :diminish yas-minor-mode
- :init
- (setq yas-snippet-dirs
-       '("~/.emacs.d/snippets"))
- :config
- (yas-global-mode 1)
- (add-hook 'term-mode-hook (lambda()
-                             (yas-minor-mode -1))))
+    (setq company-backends '(company-files company-css company-capf (company-dabbrev-code company-yasnippet)))
+    (use-package company-dict
+      :config
+      (setq company-dict-dir (concat user-emacs-directory "dict/"))
+      (add-to-list 'company-backends 'company-dict))
+    )
 
-(use-package yatemplate
-  :config
-  (auto-insert-mode t)
-  (yatemplate-fill-alist))
+  (use-package yasnippet
+    :bind (:map my-leader-map
+                ("vs" . yas-describe-tables))
+   :diminish yas-minor-mode
+   :init
+   (setq yas-snippet-dirs
+         '("~/.emacs.d/snippets"))
+   :config
+   (yas-global-mode 1)
+   (add-hook 'term-mode-hook (lambda()
+                               (yas-minor-mode -1))))
+
+  (use-package yatemplate
+    :config
+    (auto-insert-mode t)
+    (yatemplate-fill-alist))
 #+end_src
 * VCS / Git
 

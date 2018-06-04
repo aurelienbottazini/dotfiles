@@ -106,7 +106,5 @@ function fish_prompt
 
   printf "\n"
 # _prompt_last_status $last_status
-  _print_in_color "❱" red
-  _print_in_color "❱" "#ff8700"
-  _print_in_color "❱ " green
+  _print_in_color "🎯 " black
 end

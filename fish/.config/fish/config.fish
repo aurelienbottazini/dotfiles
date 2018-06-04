@@ -1,9 +1,7 @@
-# set -g TERM xterm-256color-italic
-set -gx PATH ~/dotfiles/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) ~/.cargo/bin $PATH
+set -gx PATH ~/dotfiles/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) $PATH
 status --is-interactive; and source (rbenv init -|psub)
-# rbenv rehash > /dev/null ^&1
 
-set -x CDPATH $HOME $HOME/projects $HOME/projects/work
+set -x CDPATH $HOME $HOME/projects $HOME/work
 
 
 # Effects
@@ -78,7 +76,7 @@ alias tu "tmux -u"
 # alias tmux "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
-alias ls "gls --color"
+alias ls "ls --color"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 
 alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor --exclude db/data --exclude db/neo4j (pwd) | xargs -0 -n 1 -I file rsync_sd file"

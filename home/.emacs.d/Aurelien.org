@@ -372,69 +372,71 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 * Navigation
 #+begin_src emacs-lisp
 
-(use-package dash-at-point)
-(define-key my-leader-map (kbd "d") 'dash-at-point)
+  (use-package dash-at-point)
+  (define-key my-leader-map (kbd "d") 'dash-at-point)
 
-(use-package eyebrowse
-  :config
-  (eyebrowse-mode t)
-  (define-key my-keys-minor-mode-map (kbd "C-a n") 'eyebrowse-next-window-config)
-  (define-key my-keys-minor-mode-map (kbd "C-a p") 'eyebrowse-prev-window-config)
-  (define-key my-keys-minor-mode-map (kbd "C-a c") 'eyebrowse-create-window-config)
-  (define-key my-keys-minor-mode-map (kbd "C-a k") 'eyebrowse-close-window-config)
-  (define-key my-keys-minor-mode-map (kbd "C-a 1") 'eyebrowse-switch-to-window-config-1)
-  (define-key my-keys-minor-mode-map (kbd "C-a 2") 'eyebrowse-switch-to-window-config-2)
-  (define-key my-keys-minor-mode-map (kbd "C-a 3") 'eyebrowse-switch-to-window-config-3)
-  (define-key my-keys-minor-mode-map (kbd "C-a 4") 'eyebrowse-switch-to-window-config-4)
-  (define-key my-keys-minor-mode-map (kbd "C-a 5") 'eyebrowse-switch-to-window-config-5)
-  (define-key my-keys-minor-mode-map (kbd "C-a 6") 'eyebrowse-switch-to-window-config-6)
-  (define-key my-keys-minor-mode-map (kbd "C-a 7") 'eyebrowse-switch-to-window-config-7)
-  (define-key my-keys-minor-mode-map (kbd "C-a 8") 'eyebrowse-switch-to-window-config-8)
-  (define-key my-keys-minor-mode-map (kbd "C-a 9") 'eyebrowse-switch-to-window-config-9)
-  (define-key my-keys-minor-mode-map (kbd "C-a 0") 'eyebrowse-switch-to-window-config-0))
+  (use-package eyebrowse
+    :config
+    (eyebrowse-mode t)
+    (define-key my-keys-minor-mode-map (kbd "C-a n") 'eyebrowse-next-window-config)
+    (define-key my-keys-minor-mode-map (kbd "C-a p") 'eyebrowse-prev-window-config)
+    (define-key my-keys-minor-mode-map (kbd "C-a c") 'eyebrowse-create-window-config)
+    (define-key my-keys-minor-mode-map (kbd "C-a k") 'eyebrowse-close-window-config)
+    (define-key my-keys-minor-mode-map (kbd "C-a 1") 'eyebrowse-switch-to-window-config-1)
+    (define-key my-keys-minor-mode-map (kbd "C-a 2") 'eyebrowse-switch-to-window-config-2)
+    (define-key my-keys-minor-mode-map (kbd "C-a 3") 'eyebrowse-switch-to-window-config-3)
+    (define-key my-keys-minor-mode-map (kbd "C-a 4") 'eyebrowse-switch-to-window-config-4)
+    (define-key my-keys-minor-mode-map (kbd "C-a 5") 'eyebrowse-switch-to-window-config-5)
+    (define-key my-keys-minor-mode-map (kbd "C-a 6") 'eyebrowse-switch-to-window-config-6)
+    (define-key my-keys-minor-mode-map (kbd "C-a 7") 'eyebrowse-switch-to-window-config-7)
+    (define-key my-keys-minor-mode-map (kbd "C-a 8") 'eyebrowse-switch-to-window-config-8)
+    (define-key my-keys-minor-mode-map (kbd "C-a 9") 'eyebrowse-switch-to-window-config-9)
+    (define-key my-keys-minor-mode-map (kbd "C-a 0") 'eyebrowse-switch-to-window-config-0))
 
-(use-package counsel
-  :config
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-  (global-set-key (kbd "<f1> l") 'counsel-find-library)
-  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-  (global-set-key (kbd "C-c g") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  (global-set-key (kbd "C-c k") 'counsel-rg)
-  (global-set-key (kbd "C-x l") 'counsel-locate)
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
+  (use-package counsel
+    :config
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+    (global-set-key (kbd "<f1> l") 'counsel-find-library)
+    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+    (global-set-key (kbd "C-c g") 'counsel-git)
+    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+    (global-set-key (kbd "C-c k") 'counsel-rg)
+    (global-set-key (kbd "C-x l") 'counsel-locate)
+    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
 
-(use-package ivy
-  :diminish ivy-mode
-  :config
-  (use-package ivy-hydra)
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (global-set-key "\C-s" 'swiper)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume))
+  (use-package ivy
+    :diminish ivy-mode
+    :config
+    (use-package ivy-hydra)
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t)
+    (global-set-key "\C-s" 'swiper)
+    (setq ivy-re-builders-alist
+       '((t . ivy--regex-fuzzy)))
+    (global-set-key (kbd "C-c C-r") 'ivy-resume))
 
-(dolist
-    (r `(
-         (?e (file . ,(concat user-emacs-directory "Aurelien.org")))
-         ))
-  (set-register (car r) (cadr r)))
+  (dolist
+      (r `(
+           (?e (file . ,(concat user-emacs-directory "Aurelien.org")))
+           ))
+    (set-register (car r) (cadr r)))
 
-(use-package projectile
-  :init
-  (setq projectile-switch-project-action 'projectile-dired)
-  (setq projectile-enable-caching t)
-  (setq projectile-completion-system 'ivy)
-  :bind (:map my-leader-map
-              ("p" . projectile-commander))
-  :config
-  (use-package counsel-projectile)
-  (projectile-mode)
-  )
+  (use-package projectile
+    :init
+    (setq projectile-switch-project-action 'projectile-dired)
+    (setq projectile-enable-caching t)
+    (setq projectile-completion-system 'ivy)
+    :bind (:map my-leader-map
+                ("p" . projectile-commander))
+    :config
+    (use-package counsel-projectile)
+    (projectile-mode)
+    )
 #+end_src
 * AutoCompletions
 #+begin_src emacs-lisp
@@ -818,7 +820,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   :mode "\\.ya?ml\\'"
   )
 
-(use-package ruby-mode
+(use-package enh-ruby-mode
   :mode "\\.rake\\'"
   :mode "Rakefile\\'"
   :mode "\\.gemspec\\'"
@@ -841,12 +843,12 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   :config
 
   (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
-  (eval-after-load 'ruby-mode
+  (eval-after-load 'enh-ruby-mode
     '(progn
        (defun ruby-mode-defaults ()
          )))
 
-  (add-hook 'ruby-mode-hook 'subword-mode)
+  (add-hook 'enh-ruby-mode-hook 'subword-mode)
   ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
   ;; make it easier to work with global gnu tags
   (define-category ?U "Uppercase")
@@ -861,9 +863,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
                 (setq evil-cjk-word-separating-categories
                       (default-value 'evil-cjk-word-separating-categories)))))
 
-  (eval-after-load 'ruby-mode
+  (eval-after-load 'enh-ruby-mode
     '(progn
-       (evil-define-key 'normal ruby-mode-map
+       (evil-define-key 'normal enh-ruby-mode-map
          "[m" 'ruby-beginning-of-defun
          "]m" 'ruby-end-of-defun
          )))

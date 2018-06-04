@@ -122,6 +122,10 @@ set -gx fish_term24bit 1
 
 set -x GTAGSLABEL pygments
 
+if test -e ~/work/dox-compose/helpers.bash
+  bass source ~/work/dox-compose/helpers.bash
+end
+
 if [ -z "$TMUX" ]
   if [ "$TERM" != "dumb" ]
    if [ -z "$INSIDE_EMACS" ]

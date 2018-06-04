@@ -43,5 +43,7 @@ apt install anki
 apt install ubuntu-restricted-extras
 apt install python-pip
 
-pip install awscli --upgrade --user
+apt install awscli
 apt install fish
+curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
+ficher edc/bass

@@ -19,13 +19,3 @@ sudo dpkg -i ./ripgrep_0.8.1_amd64.deb
 cd ~/projects
 git clone git://git.suckless.org/st
 git clone https://git.suckless.org/dmenu
-
-
-
-# for Alfa Network AWUS036 ACH
-#mkdir -p ~/projects
-#cd ~/projects
-#git clone https://github.com/kimocoder/rtl8812au
-#cd rtl8812au
-#make
-#make install

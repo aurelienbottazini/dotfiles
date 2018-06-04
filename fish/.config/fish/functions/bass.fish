@@ -1,0 +1,1 @@
+/home/aurelien/.config/fisherman/bass/functions/bass.fish

@@ -138,7 +138,11 @@ g() {
 export PATH=~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$PATH
 export CDPATH=.:~/:~/projects:~/work
 
-export PROMPT_COMMAND='__git_ps1 "\e[3m\e[1m\e[32m\w\e[0m" "\n🎯 "'
+function evil_git_dirty {
+    [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"
+}
+
+export PROMPT_COMMAND='__git_ps1 "\e[3m\e[1m\e[32m\w\e[0m" "$(evil_git_dirty)\n🎯 "'
 
 \. /usr/share/autojump/autojump.sh
 

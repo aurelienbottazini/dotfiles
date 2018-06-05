@@ -14,8 +14,8 @@ su - ${USER}
 apt install feh
 apt install silversearcher-ag
 
-apt install ruby ruby-bundler
 apt install rbenv
+rbenv global 2.4.4
 gem install rubocop
 
 apt install tmux xclip

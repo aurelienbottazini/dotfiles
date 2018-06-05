@@ -14,7 +14,7 @@
    (quote
     ("cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "3e335d794ed3030fefd0dbd7ff2d3555e29481fe4bbb0106ea11c660d6001767" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(deft-new-file-format "%Y-%m-%dT%H:%M")
- '(deft-use-filename-as-title nil)
+ '(deft-use-filename-as-title t)
  '(deft-use-filter-string-for-filename t)
  '(display-line-numbers (quote relative))
  '(display-line-numbers-type (quote visual))

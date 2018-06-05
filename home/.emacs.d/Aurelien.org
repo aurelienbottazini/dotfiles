@@ -534,11 +534,6 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
-
-  (use-package org-bullets
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
 #+end_src
 * Email
 #+begin_src emacs-lisp

@@ -92,7 +92,7 @@ end
 function fish_prompt
   set -l last_status $status
 
-  set_color -i
+  set_color -i -o
   _print_in_color "\n"(_pwd_with_tilde) blue
 
   if _in_git_directory

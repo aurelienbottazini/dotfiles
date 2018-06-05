@@ -281,6 +281,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 ** Colors
 
 #+begin_src emacs-lisp
+(setq default-frame-alist
+      '((background-color . "#ffffff")
+        (foreground-color . "#000000")))
+
   (lexical-let ((default-color (cons (face-background 'mode-line)
                                    (face-foreground 'mode-line))))
   (add-hook 'post-command-hook

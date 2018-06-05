@@ -51,3 +51,6 @@ ficher edc/bass
 
 # for emacs compilation
 apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-dev mailutils
+
+# wifi tools
+apt install wicd-gtk wicd-cli

@@ -54,3 +54,5 @@ apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-de
 
 # wifi tools
 apt install wicd-gtk wicd-cli
+
+apt install vlc

@@ -19,3 +19,7 @@ sudo dpkg -i ./ripgrep_0.8.1_amd64.deb
 cd ~/projects
 git clone git://git.suckless.org/st
 git clone https://git.suckless.org/dmenu
+
+cd ~/projects
+git clone -b master git://git.sv.gnu.org/emacs.git
+git checkout -b 26.1 emacs-26.1

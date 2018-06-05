@@ -44,6 +44,10 @@ apt install ubuntu-restricted-extras
 apt install python-pip
 
 apt install awscli
+
 apt install fish
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 ficher edc/bass
+
+# for emacs compilation
+apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-dev mailutils

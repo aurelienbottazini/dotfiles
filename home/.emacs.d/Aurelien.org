@@ -536,68 +536,70 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 #+end_src
 * Email
 #+begin_src emacs-lisp
-(when *is-mac*
-  (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
-  (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
-  (add-to-list 'load-path (expand-file-name "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e")))
+  (when *is-mac*
+    (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
+    (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
+    (add-to-list 'load-path (expand-file-name "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e"))
+    )
 
-(when *is-linux*
-  (setq mu4e-html2text-command "/usr/bin/w3m -T text/html")
-  (setq mu4e-get-mail-command "/usr/bin/mbsync -a")
-  )
+  (when *is-linux*
+    (setq mu4e-html2text-command "/usr/bin/w3m -T text/html")
+    (setq mu4e-get-mail-command "/usr/bin/mbsync -a")
+    (add-to-list 'load-path (expand-file-name "/usr/share/emacs/site-lisp/mu4e"))
+    )
 
-(require 'epa-file)
-(epa-file-enable)
-(require 'mu4e)
+  (require 'epa-file)
+  (epa-file-enable)
+  (require 'mu4e)
 
-(add-to-list 'mu4e-view-actions '("Browser View" . mu4e-action-view-in-browser) t)
+  (add-to-list 'mu4e-view-actions '("Browser View" . mu4e-action-view-in-browser) t)
 
-(define-key my-leader-map (kbd "e") 'mu4e)
+  (define-key my-leader-map (kbd "e") 'mu4e)
 
-(setq mu4e-maildir (expand-file-name "~/Maildir/fastmail"))
-(setq mu4e-sent-messages-behavior 'sent)
-(setq mu4e-sent-folder "/Sent Items"
-      mu4e-drafts-folder "/Drafts"
-      mu4e-trash-folder "/Trash"
-      mu4e-refile-folder "/Archive")
+  (setq mu4e-maildir (expand-file-name "~/Maildir/fastmail"))
+  (setq mu4e-sent-messages-behavior 'sent)
+  (setq mu4e-sent-folder "/Sent Items"
+        mu4e-drafts-folder "/Drafts"
+        mu4e-trash-folder "/Trash"
+        mu4e-refile-folder "/Archive")
 
-(setq mu4e-maildir-shortcuts
-      '(("/INBOX" . ?i)
-        ("/@Action" . ?a)
-        ("/@waiting" . ?w)
-        ("/Sent Items" . ?s)))
+  (setq mu4e-maildir-shortcuts
+        '(("/INBOX" . ?i)
+          ("/@Action" . ?a)
+          ("/@waiting" . ?w)
+          ("/Sent Items" . ?s)))
 
-(setq mu4e-change-filenames-when-moving t)
+  (setq mu4e-change-filenames-when-moving t)
 
-(setq message-send-mail-function 'smtpmail-send-it
-      starttls-use-gnutls t
-      smtpmail-starttls-credentials
-      '(("mail.messagingengine.com" 587 nil nil))
-      smtpmail-default-smtp-server "mail.messagingengine.com"
-      smtpmail-smtp-server "mail.messagingengine.com"
-      ;; smtpmail-auth-credentials
-      ;; command to encrypt authinfo, you can delete authinfo after that:
-      ;; gpg --output ~/.authinfo.gpg --symmetric ~/.authinfo
-      ;; (expand-file-name "~/.authinfo.gpg")
-      smtpmail-smtp-service 587)
+  (setq message-send-mail-function 'smtpmail-send-it
+        starttls-use-gnutls t
+        smtpmail-starttls-credentials
+        '(("mail.messagingengine.com" 587 nil nil))
+        smtpmail-default-smtp-server "mail.messagingengine.com"
+        smtpmail-smtp-server "mail.messagingengine.com"
+        ;; smtpmail-auth-credentials
+        ;; command to encrypt authinfo, you can delete authinfo after that:
+        ;; gpg --output ~/.authinfo.gpg --symmetric ~/.authinfo
+        ;; (expand-file-name "~/.authinfo.gpg")
+        smtpmail-smtp-service 587)
 
-(setq user-mail-address "aurelien@bottazini.com")
+  (setq user-mail-address "aurelien@bottazini.com")
 
-(setq mu4e-view-show-images t)
-;; use imagemagick, if available
-(when (fboundp 'imagemagick-register-types)
-  (imagemagick-register-types))
+  (setq mu4e-view-show-images t)
+  ;; use imagemagick, if available
+  (when (fboundp 'imagemagick-register-types)
+    (imagemagick-register-types))
 
-(defun my-browse-url-chromium-new-app (url &optional new-window)
-  "Open URL in app mode in chromium."
-  (interactive (browse-url-interactive-arg "URL: "))
-  (unless
-      (string= ""
-               (shell-command-to-string
-                (concat "chromium-browser --new-window --app=" url)))
-    (message "Starting chromium...")))
+  (defun my-browse-url-chromium-new-app (url &optional new-window)
+    "Open URL in app mode in chromium."
+    (interactive (browse-url-interactive-arg "URL: "))
+    (unless
+        (string= ""
+                 (shell-command-to-string
+                  (concat "chromium-browser --new-window --app=" url)))
+      (message "Starting chromium...")))
 
-(setq browse-url-browser-function 'my-browse-url-chromium-new-app)
+  (setq browse-url-browser-function 'my-browse-url-chromium-new-app)
 #+end_src
 * Notes
 

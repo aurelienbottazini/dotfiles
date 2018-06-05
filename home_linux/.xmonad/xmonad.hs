@@ -1,5 +1,6 @@
 -- http://web.mit.edu/kevinr/Public/xmonad.hs
 -- https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
+-- https://github.com/windelicato/dotfiles/blob/master/.xmonad/xmonad.hs
 
 import XMonad
 import XMonad.Hooks.DynamicLog

@@ -135,7 +135,7 @@ g() {
     fi
 }
 
-export PATH=~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$PATH
+export PATH=~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$PATH
 export CDPATH=.:~/:~/projects:~/work
 
 function evil_git_dirty {

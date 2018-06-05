@@ -164,6 +164,11 @@ myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), (
                            , unmappedWindowRect = [("Full", singleWindowRect)]
                            }
 
+myLayoutPrinter :: String -> String
+myLayoutPrinter "Spacing 7 ThreeCol" = "ThreeCol"
+myLayoutPrinter "Spacing 7 Tall" = "Tall"
+myLayoutPrinter x = x
+
 main :: IO()
 main = do
 
@@ -189,7 +194,7 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"
-                        -- , ppLayout = const ""
+                        , ppLayout = myLayoutPrinter
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
                         } >> updatePointer (0.99, 0.99) (0, 0) >> takeTopFocus

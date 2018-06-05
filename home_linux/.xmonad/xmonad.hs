@@ -25,6 +25,7 @@ import XMonad.Util.NamedWindows
 import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.PhysicalScreens
+import XMonad.Actions.CopyWindow
 
 import qualified XMonad.StackSet as W
 
@@ -99,9 +100,14 @@ myKeys = [
         , ("M4-s r", namedScratchpadAction scratchpads "ranger")
         , ("M4-s s", namedScratchpadAction scratchpads "shutter" )
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
+        , ("M4-t a", toggleCopyToAll)
         , ("M4-z", sendMessage ToggleLayout)
-        ]
+        ] where
 
+
+toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
+                                                  [] -> windows copyToAll
+                                                  _ -> killAllOtherCopies
 nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
 prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1

@@ -83,9 +83,9 @@ myKeys = [
         , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M4-,", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 2- unmute")
-        , ("M4-<Space> e", runOrRaiseNext "st" (className =? "Emacs"))
-        , ("M4-<Space> t", runOrRaiseNext "st" (className =? "st-256color"))
-        , ("M4-<Space> w", runOrRaiseNext "st" (className =? "Firefox"))
+        , ("M4-l e", runOrRaiseNext "st" (className =? "Emacs"))
+        , ("M4-l t", runOrRaiseNext "st" (className =? "st-256color"))
+        , ("M4-l w", runOrRaiseNext "st" (className =? "Firefox"))
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 2+ unmute")
         , ("M4-M1-o", swapNextScreen)
@@ -101,9 +101,9 @@ myKeys = [
         , ("M4-s s", namedScratchpadAction scratchpads "shutter" )
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-t a", toggleCopyToAll)
+
         , ("M4-z", sendMessage ToggleLayout)
         ] where
-
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
                                                   [] -> windows copyToAll
@@ -189,7 +189,7 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"
-                        , ppLayout = const ""
+                        -- , ppLayout = const ""
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
                         } >> updatePointer (0.99, 0.99) (0, 0) >> takeTopFocus

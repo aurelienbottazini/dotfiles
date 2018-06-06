@@ -1094,7 +1094,24 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
   (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
   (define-key my-leader-map (kbd "or") 'rainbow-mode)
-  (define-key my-leader-map (kbd "ol") 'linum-mode)
+
+  (defun hide-line-numbers ()
+      (interactive)
+    (setq display-line-numbers (quote nil)))
+
+  (defun show-line-numbers ()
+    (interactive)
+    (setq display-line-numbers (quote absolute)))
+
+  (defun relative-line-numbers ()
+    (interactive)
+    (setq display-line-numbers (quote relative)))
+
+  (define-key my-leader-map (kbd "olh") 'hide-line-numbers)
+  (define-key my-leader-map (kbd "olr") 'relative-line-numbers)
+  (define-key my-leader-map (kbd "oll") 'show-line-numbers)
+
+
   (define-key my-leader-map (kbd "ow") 'visual-line-mode)
   (define-key my-leader-map (kbd "of") 'auto-fill-mode)
 

@@ -32,9 +32,8 @@ apt install autojump
 apt install mu4e
 apt install isync
 apt install libssl-dev
-apt install mail-utils
 apt install guile-2.0-dev html2text xdg-utils
-apt install libxapian-dev libgmime-2.6-dev libwebkitgtk-3-0.dev
+apt install libxapian-dev libgmime-2.6-dev libwebkitgtk-3.0-dev
 
 apt install notify-osd
 

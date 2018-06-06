@@ -534,6 +534,14 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+  (require 'org-mu4e)
+  ;;store link to message if in header view, not to header query
+  (setq org-mu4e-link-query-in-headers-mode nil)
+
+  (setq org-capture-templates
+  '(("t" "todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
+  "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
 #+end_src
 * Email
 #+begin_src emacs-lisp

@@ -23,3 +23,11 @@ git clone https://git.suckless.org/dmenu
 cd ~/projects
 git clone -b master git://git.sv.gnu.org/emacs.git
 git checkout -b 26.1 emacs-26.1
+
+cd ~/projects
+curl -OL hhttps://github.com/djcb/mu/archive/v1.0.tar.gz
+tar -zxf mu-1.0
+rm v1.0.tar.gz
+cd ./mu-1.0
+./autogen.sh
+sudo make install

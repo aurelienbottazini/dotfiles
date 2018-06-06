@@ -486,6 +486,14 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (add-hook 'git-commit-mode-hook 'evil-insert-state)
 
+
+(defun ab-run-tig ()
+"Start tig in current projectile project. Uses st as a terminal."
+  (interactive)
+  (projectile-with-default-dir (projectile-project-root)
+    (start-process "tig" nil "st" "-c tig" "tig")))
+(define-key my-leader-map (kbd "gg") 'ab-run-tig)
+
 (use-package magit
   :bind (:map my-leader-map
               ("gb" . magit-blame)
@@ -522,7 +530,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 #+end_src
 
 * Org
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (setq org-directory (expand-file-name "~/Dropbox/org"))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (define-key my-keys-minor-mode-map "\C-cc" 'org-capture)
@@ -542,9 +550,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (setq org-capture-templates
   '(("t" "todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
   "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
-#+end_src
+  #+end_src
 * Email
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (when *is-mac*
     (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
     (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
@@ -609,10 +617,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
       (message "Starting chromium...")))
 
   (setq browse-url-browser-function 'my-browse-url-chromium-new-app)
-#+end_src
+  #+end_src
 * Notes
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package deft
     :config
     (setq deft-extensions '("txt" "tex" "org"))
@@ -621,11 +629,11 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     (setq deft-use-filter-string-for-filename t)
     (setq deft-default-extension "org")
     (setq deft-recursive t))
-#+end_src
+  #+end_src
 
 * Modes
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package dockerfile-mode
   :mode "\\Dockerfile\\'")
 
@@ -633,10 +641,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (use-package haskell-mode)
 (use-package graphql-mode)
-#+end_src
+  #+end_src
 
 ** Clojure
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 (use-package clojure-mode
   :mode "\\.clj\\'"
   :config
@@ -648,10 +656,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     (add-hook 'clojure-mode-hook #'evil-lispy-mode)
     )
   (use-package cider))
-#+end_src
+   #+end_src
 
 ** CSS
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (defun imenu-setup ()
   (progn
     (setq imenu-case-fold-search nil)
@@ -689,10 +697,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 (use-package less-css-mode
   :mode "\\.less\\'"
   )
-#+end_src
+   #+end_src
 
 ** Javascript
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package web-mode
   :mode "\\.vue\\'"
   :config
@@ -821,10 +829,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 (use-package typescript-mode
   :mode "\\.ts\\'"
   )
-#+end_src
+   #+end_src
 
 ** Ruby
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package yaml-mode
   :mode "\\.ya?ml\\'"
   )
@@ -894,10 +902,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     :ensure nil
 )
   )
-#+end_src
+   #+end_src
 
 ** Html
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 (use-package web-mode
   :mode "\\.html\\'")
 
@@ -924,10 +932,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
             (lambda ()
               (emmet-mode)
               )))
-#+end_src
+   #+end_src
 
 ** Tests
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
@@ -940,9 +948,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   (define-key my-leader-map (kbd "cw") 'coverlay-watch-file)
   (define-key my-leader-map (kbd "cs") 'coverlay-display-stats)
   (define-key my-leader-map (kbd "ct") 'coverlay-toggle-overlays))
-#+end_src
+   #+end_src
 * Bindings
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
   (use-package wgrep)
     (use-package paredit-everywhere
     :config
@@ -1173,4 +1181,4 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 
   (add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
-#+end_src
+  #+end_src

@@ -73,6 +73,7 @@ scratchpads =
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
 
+
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
 
@@ -82,7 +83,7 @@ myKeysP = [
         , ("M-S-p", spawn "scrot")
         , ("M-S-t", sendMessage ToggleStruts)
         , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-        , ("M4-,", withFocused $ windows . W.sink)
+        , ("M4-<ArrowDown", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 2- unmute")
         , ("M4-a e", runOrRaiseNext "st" (className =? "Emacs"))
         , ("M4-a t", runOrRaiseNext "st" (className =? "st-256color"))
@@ -184,7 +185,7 @@ myStartupHook = do
 
 noScratchPad ws = if ws == "NSP" then "" else ws
 
-myNavigation2DConfig = def { layoutNavigation   = [("Full", hybridNavigation), ("Tall", hybridNavigation)]
+myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), ("Spacing 7 Tall", centerNavigation)]
                            , unmappedWindowRect = [("Full", singleWindowRect)]
                            }
 

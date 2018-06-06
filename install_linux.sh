@@ -34,7 +34,7 @@ apt install isync
 apt install libssl-dev
 apt install mail-utils
 apt install guile-2.0-dev html2text xdg-utils
-apt install libwebkitgtk-dev
+apt install libxapian-dev libgmime-2.6-dev libwebkitgtk-3-0.dev
 
 apt install notify-osd
 
@@ -56,3 +56,5 @@ apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-de
 apt install wicd-gtk wicd-cli
 
 apt install vlc
+
+apt install webalizer

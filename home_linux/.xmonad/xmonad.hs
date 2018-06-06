@@ -77,7 +77,7 @@ mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
 
 myFocusFollowsMouse = False
-myKeys = [
+myKeysP = [
         ("M-<Backspace>", kill)
         , ("M-S-p", spawn "scrot")
         , ("M-S-t", sendMessage ToggleStruts)
@@ -104,7 +104,22 @@ myKeys = [
         , ("M4-t a", toggleCopyToAll)
 
         , ("M4-z", sendMessage ToggleLayout)
-        ] where
+        ]
+
+myKeys = [
+        -- kept as examples
+        --
+        -- , ((mod4Mask, xK_BackSpace), kill)
+        -- , ((mod4Mask .|. shiftMask, xK_n),  prevNonEmptyWS)
+        -- , ((mod4Mask .|. controlMask, xK_o), swapNextScreen)
+        -- , ((mod4Mask, xK_minus), spawn "amixer set Master 2- unmute")
+        -- , ((mod4Mask, xK_z), sendMessage ToggleLayout)
+        -- , ((mod4Mask, xK_t), runOrRaiseNext "st" (className =? "st-256color"))
+        ]
+        ++
+        [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f)) -- Replace 'mod1Mask' with your mod key of choice.
+            | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2] -- was [0..] *** change to match your screen order ***
+            , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
                                                   [] -> windows copyToAll
@@ -199,4 +214,5 @@ main = do
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
                         } >> updatePointer (0.99, 0.99) (0, 0) >> takeTopFocus
-        } `additionalKeysP` myKeys
+        } `additionalKeysP` myKeysP
+          `additionalKeys` myKeys

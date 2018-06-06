@@ -58,3 +58,5 @@ apt install wicd-gtk wicd-cli
 apt install vlc
 
 apt install webalizer
+
+apt install hunspell hunspell-fr-modern hunspell-en-us

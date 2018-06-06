@@ -21,6 +21,7 @@
  '(flycheck-indication-mode nil)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
+ '(ispell-program-name "/usr/bin/hunspell")
  '(mu4e-update-interval 900)
  '(mu4e-use-fancy-chars t)
  '(org-agenda-files
@@ -55,6 +56,7 @@
  '(context-coloring-level-5-face ((t (:foreground "#885a61"))))
  '(context-coloring-level-6-face ((t (:foreground "#65428a"))))
  '(context-coloring-level-7-face ((t (:foreground "#4982cf"))))
+ '(cursor ((t (:background "#f56d9e"))))
  '(custom-variable-tag ((t (:foreground "blue1" :weight normal))))
  '(diff-hl-change ((t (:background "#adcff1" :foreground "#3a499c"))))
  '(diff-hl-delete ((t (:background "#ffcfd8" :foreground "#bc3e44"))))

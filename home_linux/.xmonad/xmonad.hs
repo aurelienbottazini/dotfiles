@@ -95,8 +95,10 @@ myKeysP = [
         , ("M4-]", sendMessage Expand)
         , ("M4-b",  prevNonEmptyWS)
         , ("M4-o",  windows W.focusUp)
-        , ("M4-l",  windows W.focusUp)
-        , ("M4-h",  windows W.focusDown)
+        , ("M4-l",  windowGo R True)
+        , ("M4-j",  windowGo D True)
+        , ("M4-k",  windowGo U True)
+        , ("M4-h",  windowGo L True)
         , ("M4-p", windows W.focusDown)
         , ("M4-s m", namedScratchpadAction scratchpads "cmus")
         , ("M4-s r", namedScratchpadAction scratchpads "ranger")
@@ -177,7 +179,7 @@ myStartupHook = do
 
 noScratchPad ws = if ws == "NSP" then "" else ws
 
-myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), ("Tall", centerNavigation)]
+myNavigation2DConfig = def { layoutNavigation   = [("Full", hybridNavigation), ("Tall", hybridNavigation)]
                            , unmappedWindowRect = [("Full", singleWindowRect)]
                            }
 

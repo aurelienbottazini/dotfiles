@@ -73,7 +73,6 @@ scratchpads =
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
 
-
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
 

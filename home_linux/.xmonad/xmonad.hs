@@ -70,6 +70,7 @@ scratchpads =
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "shutter" "shutter" (className =? "Shutter") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "htop" "st -c htop htop" (className =? "htop") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
+    ,(NS "tig" "st -c tig tig" (className =? "tig") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
 

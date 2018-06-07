@@ -1048,6 +1048,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     :config
     (define-key my-leader-map (kbd "SPC") 'er/expand-region))
 
+  (define-key my-leader-map (kbd "a") 'org-agenda)
   (define-key my-leader-map (kbd "r") 'counsel-recentf)
   (define-key my-leader-map (kbd "f") 'counsel-projectile-rg)
   (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)

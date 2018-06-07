@@ -535,6 +535,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     (setq org-default-notes-file (concat org-directory "/inbox.org"))
     (define-key my-keys-minor-mode-map "\C-cc" 'org-capture)
     (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
+    (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
 
     (setq org-refile-targets '((nil :maxlevel . 9)
                                (org-agenda-files :maxlevel . 9)))
@@ -559,6 +560,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     (kbd "M-h") 'org-shiftmetaleft
     (kbd "M-k") 'org-move-subtree-up
     (kbd "M-j") 'org-move-subtree-down
+    "<" 'org-clock-in
+    ">" 'org-clock-out
+    "4" 'org-archive-subtree
     "t" 'org-todo)
   #+end_src
 * Email
@@ -1046,7 +1050,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
   (define-key my-leader-map (kbd "r") 'counsel-recentf)
   (define-key my-leader-map (kbd "f") 'counsel-projectile-rg)
-  (define-key my-leader-map (kbd "j") 'dired-jump)
+  (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
+  (define-key my-leader-map (kbd "jj") 'dired-jump)
+  (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
   (define-key my-leader-map (kbd "i") 'counsel-imenu)
   (define-key my-leader-map (kbd "m") 'counsel-bookmark)
   (define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)

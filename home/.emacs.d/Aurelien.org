@@ -550,7 +550,11 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
     (setq org-capture-templates
     '(("t" "todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
+    "* TODO %?\n")
+    ("l" "todo with links" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
     "* TODO %?\n  %a\n")))
+
+    (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
     (setq org-use-speed-commands nil)
 

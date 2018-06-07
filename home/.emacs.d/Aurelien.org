@@ -533,7 +533,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
   #+begin_src emacs-lisp
     (setq org-directory (expand-file-name "~/Dropbox/org"))
     (setq org-default-notes-file (concat org-directory "/inbox.org"))
-    (define-key my-keys-minor-mode-map "\C-cc" 'org-capture)
+    (define-key my-keys-minor-mode-map "\C-cc" 'counsel-org-capture)
     (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
     (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
 

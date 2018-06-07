@@ -116,6 +116,7 @@
  '(org-agenda-structure ((t (:foreground "#4982cf"))))
  '(org-block ((t (:background "#f1f2f1"))))
  '(org-column-title ((t (:background "grey90" :underline t :weight normal))))
+ '(org-date ((t (:foreground "#65428a" :underline t :slant italic))))
  '(org-document-title ((t (:foreground "midnight blue" :weight normal))))
  '(org-done ((t (:foreground "#34855b" :weight normal))))
  '(org-drawer ((t (:foreground "#3a499c"))))

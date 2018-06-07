@@ -531,25 +531,33 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 * Org
   #+begin_src emacs-lisp
-  (setq org-directory (expand-file-name "~/Dropbox/org"))
-  (setq org-default-notes-file (concat org-directory "/inbox.org"))
-  (define-key my-keys-minor-mode-map "\C-cc" 'org-capture)
-  (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
+    (setq org-directory (expand-file-name "~/Dropbox/org"))
+    (setq org-default-notes-file (concat org-directory "/inbox.org"))
+    (define-key my-keys-minor-mode-map "\C-cc" 'org-capture)
+    (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
 
-  (setq org-refile-targets '((nil :maxlevel . 9)
-                             (org-agenda-files :maxlevel . 9)))
-  (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-  (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9)))
+    (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+    (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
-  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+    (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
-  (require 'org-mu4e)
-  ;;store link to message if in header view, not to header query
-  (setq org-mu4e-link-query-in-headers-mode nil)
+    (require 'org-mu4e)
+    ;;store link to message if in header view, not to header query
+    (setq org-mu4e-link-query-in-headers-mode nil)
 
-  (setq org-capture-templates
-  '(("t" "todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-  "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
+    (setq org-capture-templates
+    '(("t" "todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
+    "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
+
+    (setq org-use-speed-commands nil)
+
+    (evil-define-key 'normal org-mode-map
+    (kbd "TAB") 'org-cycle
+    ">" 'org-shiftmetaright
+    "<" 'org-shiftmetaleft
+    "t" 'org-todo)
   #+end_src
 * Email
   #+begin_src emacs-lisp
@@ -1163,7 +1171,7 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
                 ("C-w r" . windresize)))
 
   (defun run-for-mode ()
-      "jumps to beginning of line in all modes except org mode, where it cycles"
+      "Run interactive command for the current buffer programming mode"
       (interactive)
       (cond
        ((equal major-mode 'ruby-mode)

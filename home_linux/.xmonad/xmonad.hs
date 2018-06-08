@@ -165,6 +165,7 @@ myProjects =
      Project { projectName = ws3SHARE
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws3SHARE "chromium-browser --new-window --app=https://tweetdeck.twitter.com"
+                                            spawnOn ws3SHARE "chromium-browser --new-window --app=https://analytics.twitter.com"
              },
      Project { projectName = ws7MUSIC
              , projectDirectory = "media/aurelienbottazini/Files/music"

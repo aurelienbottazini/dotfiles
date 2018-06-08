@@ -1,8 +1,5 @@
 All my Dotfiles managed with gnu stow
 
-To test if your terminal uses 256 colors:
-$ perl dotfiles/bin/colortest -w
-
 * Usage
 
   I have some install scripts that help me installing softwares on my
@@ -25,6 +22,9 @@ $ perl dotfiles/bin/colortest -w
 
   The bin directory contains scripts that I use from time to time.
 
-  There are scripts to get the local time in San Francisco, to launch
-  tmux sessions (/tat/), to test colors in the terminal (/colortest/),
-  to get the dropbox status, to change the brigthness on my laptop (/brightness).
+  There are scripts to
+  - get the local time in San Francisco
+  - launch tmux sessions /tat/
+  - test colors in the terminal /colortest/
+  - get the dropbox status /dropboxStatus/
+  - change the brigthness on my laptop /brightness/.

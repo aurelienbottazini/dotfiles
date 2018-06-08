@@ -1,22 +1,38 @@
-All my Dotfiles managed with gnu stow
+All my Dotfiles managed with [[https://www.gnu.org/software/stow/][GNU Stow]]
+
+Includes config files for:
+ - Emacs
+ - Vim
+ - Fish
+ - Xmonad
+ - Xmobar
+ - bash
+ - git
+ - st
+ - dmenu
 
 * Usage
 
-  I have some install scripts that help me installing softwares on my
-  different computers.
+  There are two parts to my dotfiles:
 
-  I split my dotfiles in different directories and I use stow to
-  symlink those directories on my machines.
+  1. Install scripts: they help me to install softwares on my
+  different computers. Those are named /install_computer_type.sh/.
+  On a fresh install I use them but they also serve as documentation
+  when I switch between computers. It makes it easier to remember
+  which software I need.
+  2. All the directories are meant to be used with stow. I split my
+     config files depending on usage and importance of the software.
+     For example Emacs as a dedicated folder even though It could have
+     been included inside the ~home~ directory.
 
   Example Usage:
 
-  - run /install_linux.sh/
-  - run /stow <directory-name>/ commands to symlink directories
+  - run ~install_linux.sh~
+  - run ~stow <directory-name>~ commands to symlink directories
     For example on my linux desktop machine I run:
-    /stow home/
-    /stow home_linux/
-    /stow_home_linux_desktop/
-
+    ~stow home~
+    ~stow home_linux~
+    ~stow_home_linux_desktop~
 
 * bin
 

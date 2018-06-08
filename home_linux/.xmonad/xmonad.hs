@@ -142,7 +142,7 @@ getSortByIndexNoSP =
 
 ws1GTD = "1:gtd"
 ws2WWW = "2:www"
-ws3CODE = "3:code"
+ws3SHARE = "3:share"
 ws4CODE = "4:code"
 ws5MY = "5:my"
 ws6MY = "6:my"
@@ -150,29 +150,33 @@ ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
 
-myWorkspaces = [ws1GTD, ws2WWW, ws3CODE, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GTD, ws2WWW, ws3SHARE, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 myProjects =
    [
      Project { projectName = ws1GTD
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws9MAIL "emacs ~/Dropbox/org/GTD.org"
+             , projectStartHook = Just $ do spawnOn ws1GTD "emacs ~/Dropbox/org/GTD.org"
              },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws9MAIL "firefox"
+             , projectStartHook = Just $ do spawnOn ws2WWW "firefox"
              },
-     Project { projectName = ws9MAIL
+     Project { projectName = ws3SHARE
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"
-                                            spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
+             , projectStartHook = Just $ do spawnOn ws3SHARE "chromium-browser --new-window --app=https://tweetdeck.twitter.com"
+             },
+     Project { projectName = ws7MUSIC
+             , projectDirectory = "media/aurelienbottazini/Files/music"
+             , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"
              },
      Project { projectName = ws8MSG
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws8MSG "slack" },
-     Project { projectName = ws7MUSIC
-             , projectDirectory = "media/aurelienbottazini/Files/music"
-             , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"
+     Project { projectName = ws9MAIL
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"
+                                            spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
              }
    ]
 
@@ -181,7 +185,6 @@ myStartupHook = do
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "xsetroot -cursor_name left_ptr"
     spawn "feh --bg-scale ~/Dropbox/Pictures/background.jpg"
-    -- spawn "xrandr --dpi 183 --fb 7860x4320 --output HDMI-3 --primary --mode 3840x2160 --pos 3840x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --mode 1920x1080 --scale 2x2 --pos 0x0 --rotate normal"
 
 noScratchPad ws = if ws == "NSP" then "" else ws
 

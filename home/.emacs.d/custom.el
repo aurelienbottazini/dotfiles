@@ -121,7 +121,7 @@
  '(org-done ((t (:foreground "#34855b" :weight normal))))
  '(org-drawer ((t (:foreground "#3a499c"))))
  '(org-footnote ((t (:foreground "#65428a" :underline t))))
- '(org-level-1 ((t (:inherit outline-1 :slant italic :weight normal :height 1.2))))
+ '(org-level-1 ((t (:inherit outline-1 :foreground "#bc3e44" :slant italic :weight normal :height 1.3))))
  '(org-level-2 ((t (:inherit outline-2 :slant italic :weight normal :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :slant italic :weight normal))))
  '(org-list-dt ((t (:weight normal))))

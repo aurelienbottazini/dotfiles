@@ -1,3 +1,4 @@
+#!/bin/sh
 # for Alfa Network AWUS036 ACH
 mkdir -p ~/projects
 cd ~/projects

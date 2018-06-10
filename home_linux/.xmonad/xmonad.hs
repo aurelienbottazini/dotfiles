@@ -226,6 +226,6 @@ main = do
                         , ppLayout = myLayoutPrinter
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
-                        } >> updatePointer (0.99, 0.99) (0, 0) >> takeTopFocus
+                        } >> updatePointer (0.5, 0.5) (0, 0) >> takeTopFocus
         } `additionalKeysP` myKeysP
           `additionalKeys` myKeys

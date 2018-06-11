@@ -3,7 +3,7 @@
 	email = aurelien@bottazini.com
 [core]
 	quotepath = false
-	excludesfile = /Users/aurelienbottazini/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 [push]
 	default = current
@@ -21,7 +21,7 @@
         ignore-tracked = update-index --assume-unchanged
 	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep
-# removes locally any already merged branch in master 
+# removes locally any already merged branch in master
 	cu = !git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d
 	sla = log --oneline --decorate --graph --all
 	car = commit --amend --no-edit
@@ -68,4 +68,4 @@
 	cursor		= red	default underline
 	# UI colors
 	title-blur	= white	black
-	title-focus	= white	blue	
+	title-focus	= white	blue

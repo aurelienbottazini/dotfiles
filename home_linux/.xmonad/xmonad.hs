@@ -111,7 +111,7 @@ myKeysP = [
         , ("M4-s s", namedScratchpadAction scratchpads "shutter" )
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-t a", toggleCopyToAll)
-
+        , ("<XF86AudioMute>", spawn "amixer -q -D pulse sset Master toggle")
         , ("M4-z", sendMessage ToggleLayout)
         ]
 

@@ -506,52 +506,59 @@ It makes it harder for major modes to minor modes trying to override my personal
     (yatemplate-fill-alist))
   #+end_src
 * VCS / Git
-
+  I don't like popup windows when resolving merge conflicts.
+  This prevents windows to popup and keeps everything in the same frame.
   #+begin_src emacs-lisp
-  ;; ediff in same frame
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-  (defun ab-run-tig ()
-  "Start tig in current projectile project. Use st as a terminal."
-    (interactive)
-    (projectile-with-default-dir (projectile-project-root)
-      (start-process "tig" nil "st" "-c" "tig" "tig")))
-  (define-key my-leader-map (kbd "gg") 'ab-run-tig)
-
-  (use-package magit
-    :bind (:map my-leader-map
-                ("gb" . magit-blame)
-                ("gs" . magit-status)
-                ("gh" . magit-log-buffer-file))
-    :config
-    (use-package fullframe
-      :config
-      (fullframe magit-status magit-mode-quit-window))
-
-    (use-package evil-magit)
-
-    (use-package diff-hl
-      :config
-      (add-hook 'prog-mode-hook 'diff-hl-mode)
-      (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-      )
-
-    )
-
-  (use-package git-link)
-  (define-key my-leader-map (kbd "gl") 'git-link)
-
-  (use-package git-timemachine)
-  (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
-
-  (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
-    "when entering git-timemachine mode, change evil normal state to emacs state"
-    (if (evil-normal-state-p)
-        (evil-emacs-state)
-      (evil-normal-state)))
-
-  (ad-activate 'git-timemachine-mode)
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
   #+end_src
+
+** Tig
+   Tig is a terminal ncurses based viewer for Git. You can even commit
+   from it, navigate history, add custom commands...
+   It is *extremely fast*.
+   #+begin_src emacs-lisp
+   (defun ab-run-tig ()
+   "Start tig in current projectile project. Use st as a terminal."
+     (interactive)
+     (projectile-with-default-dir (projectile-project-root)
+       (start-process "tig" nil "st" "-c" "tig" "tig")))
+   (define-key my-leader-map (kbd "gg") 'ab-run-tig)
+
+   #+end_src
+
+** Magit
+   #+begin_src emacs-lisp
+   (use-package magit
+     :bind (:map my-leader-map
+                 ("gb" . magit-blame)
+                 ("gs" . magit-status)
+                 ("gh" . magit-log-buffer-file))
+     :config
+     (use-package fullframe
+       :config
+       (fullframe magit-status magit-mode-quit-window))
+
+     (use-package evil-magit)
+
+     (use-package diff-hl
+       :config
+       (add-hook 'prog-mode-hook 'diff-hl-mode)
+       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+
+   (use-package git-link)
+   (define-key my-leader-map (kbd "gl") 'git-link)
+
+   (use-package git-timemachine)
+   (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
+
+   (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+     "when entering git-timemachine mode, change evil normal state to emacs state"
+     (if (evil-normal-state-p)
+         (evil-emacs-state)
+       (evil-normal-state)))
+
+   (ad-activate 'git-timemachine-mode)
+   #+end_src
 
 * Org
   #+begin_src emacs-lisp

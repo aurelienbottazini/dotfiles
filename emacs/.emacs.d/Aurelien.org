@@ -185,10 +185,8 @@ It makes it harder for major modes to minor modes trying to override my personal
         (evil-commentary-mode))
 
       (use-package evil-fringe-mark
-        :diminish global-evil-fringe-mark-mode
         :config
-        (setq-default evil-fringe-mark-show-special t)
-        (global-evil-fringe-mark-mode))
+        (setq-default evil-fringe-mark-show-special t))
 
       (use-package evil-visualstar
         :config

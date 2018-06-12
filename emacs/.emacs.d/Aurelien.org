@@ -168,11 +168,14 @@ It makes it harder for major modes to minor modes trying to override my personal
    In addition I have ~whitespace-mode~ because sometimes when copy pasting code from
    external sources those external sources have tabs.
 
+   I don't use the ~global-whitespace-mode~ because some emacs mode
+   like ~magit~ use tabs.
+
    You can remove all tabs from your buffer with ~untabify~
    #+begin_src emacs-lisp
      (setq-default indent-tabs-mode nil)     ;no tabs
-     (global-whitespace-mode t)
      (setq-default whitespace-style '(face trailing tabs tab-mark))
+     (add-hook 'prog-mode-hook 'whitespace-mode)
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 

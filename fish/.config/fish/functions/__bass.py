@@ -1,1 +1,0 @@
-/home/aurelienbottazini/.config/fisherman/bass/functions/__bass.py

@@ -51,7 +51,7 @@ sudo apt install awscli
 
 sudo apt install fish
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
-ficher edc/bass
+fisher edc/bass
 
 # for emacs compilation
 sudo apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-dev mailutils

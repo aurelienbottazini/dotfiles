@@ -1,1 +1,0 @@
-/home/aurelienbottazini/.config/fisherman/bass/functions/bass.fish

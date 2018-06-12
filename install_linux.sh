@@ -104,3 +104,7 @@ rm v1.0.tar.gz
 cd ./mu-1.0
 ./autogen.sh
 sudo make install
+
+git clone https://github.com/Ventto/lux.git
+cd lux
+sudo make install

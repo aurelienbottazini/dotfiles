@@ -5,7 +5,7 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	, borderWidth = 3
         , bgColor = "#dad9d6"
         , fgColor = "black"
-        , position = TopW L 100
+        , position = TopW L 95
         , commands = [
 	Run Date "%a %b %_d" "theDate" 10
         , Run BatteryP ["BAT0"]
@@ -23,5 +23,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <action=st ranger ~/Dropbox><fn=2></fn> %mydropbox%</action>  <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %mywifistrengh%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> %battery% "
+        , template = " %StdinReader% }{ <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %mywifistrengh%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> %battery% "
         }

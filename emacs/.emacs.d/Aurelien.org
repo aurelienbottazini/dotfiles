@@ -176,6 +176,7 @@ It makes it harder for major modes to minor modes trying to override my personal
      (setq-default indent-tabs-mode nil)     ;no tabs
      (setq-default whitespace-style '(face trailing tabs tab-mark))
      (add-hook 'prog-mode-hook 'whitespace-mode)
+     (add-hook 'org-mode-hook 'whitespace-mode)
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 
@@ -710,7 +711,8 @@ It makes it harder for major modes to minor modes trying to override my personal
     (add-to-list 'auto-mode-alist '("\\.xsessionrc\\'" . shell-script-mode))
 
     (use-package haskell-mode)
-    (use-package graphql-mode)
+    (use-package graphql-mode
+      :mode "\\.gql\\")
   #+end_src
 
   Keep emacs fast with large files.

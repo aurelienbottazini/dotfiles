@@ -116,7 +116,6 @@ myKeysP = [
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5+ unmute")
         , ("<XF86MonBrightnessDown>", spawn "/home/aurelien/bin/brightness -10")
         , ("<XF86MonBrightnessUp>", spawn "/home/aurelien/bin/brightness +10")
-        , ("M4-=", spawn "amixer set Master 2+ unmute")
         , ("M4-z", sendMessage ToggleLayout)
         ]
 

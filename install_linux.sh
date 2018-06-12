@@ -65,7 +65,7 @@ sudo apt install webalizer
 
 sudo apt install hunspell hunspell-fr-modern hunspell-en-us
 
-sudo apt install tree
+sudo apt install tree kazam
 
 #######################################
 ## Compile from source

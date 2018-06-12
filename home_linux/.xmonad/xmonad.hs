@@ -83,8 +83,6 @@ scratchpads =
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
 
-myFocusFollowsMouse = False
-
 -- I have two variables to hold my bindings: myKeysP and myKeys.
 -- They use a different syntax and the two are combined in my config.
 -- Sometimes I prefer a syntax over another that's why I keep the two.
@@ -238,7 +236,7 @@ main = do
         , normalBorderColor = "#c5c5c5"
         , borderWidth = 15
         , workspaces = myWorkspaces
-        , focusFollowsMouse = myFocusFollowsMouse
+        , focusFollowsMouse = False
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"

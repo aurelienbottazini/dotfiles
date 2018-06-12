@@ -1,3 +1,4 @@
+-- Reference files:
 -- http://web.mit.edu/kevinr/Public/xmonad.hs
 -- https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
 -- https://github.com/windelicato/dotfiles/blob/master/.xmonad/xmonad.hs
@@ -39,8 +40,9 @@ instance UrgencyHook LibNotifyUrgencyHook where
         Just idx <- fmap (W.findTag w) $ gets windowset
 
         safeSpawn "notify-send" [show name, "workspace " ++ idx]
-mySpacing = 7
 
+
+mySpacing = 7
 myTabTheme = def {
   fontName = "xft:Gotham HTF Black:size=12",
   decoHeight = 40,
@@ -64,6 +66,9 @@ prefix [] ys = True
 prefix (x:xs) [] = False
 prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
+-- Scratchpads are windows I can hide / show on demand. When Hidden
+-- they are waiting on a special scratchpad workspace. When shown they
+-- are displayed on the current workspace
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -74,10 +79,13 @@ scratchpads =
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
 
+
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
 
-myFocusFollowsMouse = False
+-- I have two variables to hold my bindings: myKeysP and myKeys.
+-- They use a different syntax and the two are combined in my config.
+-- Sometimes I prefer a syntax over another that's why I keep the two.
 myKeysP = [
         ("M-<Backspace>", kill)
         , ("M-S-p", spawn "scrot")
@@ -85,9 +93,9 @@ myKeysP = [
         , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M4-<ArrowDown", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 5- unmute")
-        , ("M4-a e", runOrRaiseNext "st" (className =? "Emacs"))
-        , ("M4-a t", runOrRaiseNext "st" (className =? "st-256color"))
-        , ("M4-a w", runOrRaiseNext "st" (className =? "Firefox"))
+        , ("M4-<Space> e", runOrRaiseNext "st" (className =? "Emacs"))
+        , ("M4-<Space> t", runOrRaiseNext "st" (className =? "st-256color"))
+        , ("M4-<Space> w", runOrRaiseNext "st" (className =? "Firefox"))
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)
@@ -105,6 +113,7 @@ myKeysP = [
         , ("M4-M1-k",  windowSwap U True)
         , ("M4-M1-w",  screenGo L True)
         , ("M4-M1-e",  screenGo R True)
+        , ("M4-n", sendMessage NextLayout)
         , ("M4-p", windows W.focusDown)
         , ("M4-s m", namedScratchpadAction scratchpads "cmus")
         , ("M4-s r", namedScratchpadAction scratchpads "ranger")
@@ -156,6 +165,9 @@ ws9MAIL = "9:mail"
 
 myWorkspaces = [ws1GTD, ws2WWW, ws3SHARE, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
+
+-- Projects are predefined workspace. When you switch to a workspace
+-- and that workspace is empty, the preconfigured windows are launched / created.
 myProjects =
    [
      Project { projectName = ws1GTD
@@ -223,7 +235,7 @@ main = do
         , normalBorderColor = "#c5c5c5"
         , borderWidth = 15
         , workspaces = myWorkspaces
-        , focusFollowsMouse = myFocusFollowsMouse
+        , focusFollowsMouse = False
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"

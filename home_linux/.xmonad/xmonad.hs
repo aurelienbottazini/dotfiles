@@ -1,3 +1,4 @@
+-- Reference files:
 -- http://web.mit.edu/kevinr/Public/xmonad.hs
 -- https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
 -- https://github.com/windelicato/dotfiles/blob/master/.xmonad/xmonad.hs
@@ -39,8 +40,9 @@ instance UrgencyHook LibNotifyUrgencyHook where
         Just idx <- fmap (W.findTag w) $ gets windowset
 
         safeSpawn "notify-send" [show name, "workspace " ++ idx]
-mySpacing = 7
 
+
+mySpacing = 7
 myTabTheme = def {
   fontName = "xft:Gotham HTF Black:size=12",
   decoHeight = 40,
@@ -64,6 +66,9 @@ prefix [] ys = True
 prefix (x:xs) [] = False
 prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
+-- Scratchpads are windows I can hide / show on demand. When Hidden
+-- they are waiting on a special scratchpad workspace. When shown they
+-- are displayed on the current workspace
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -73,6 +78,7 @@ scratchpads =
     ,(NS "tig" "st -c tig tig" (className =? "tig") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
+
 
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
@@ -158,6 +164,9 @@ ws9MAIL = "9:mail"
 
 myWorkspaces = [ws1GTD, ws2WWW, ws3SHARE, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
+
+-- Projects are predefined workspace. When you switch to a workspace
+-- and that workspace is empty, the preconfigured windows are launched / created.
 myProjects =
    [
      Project { projectName = ws1GTD

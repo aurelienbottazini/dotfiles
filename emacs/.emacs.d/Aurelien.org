@@ -2,7 +2,7 @@
 #+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
-Load settings from ~custom.el~ before anything else.  It is important to load
+It is important to load
 those first as it can impact the loading of other packages
 #+begin_src emacs-lisp
   (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -121,12 +121,12 @@ It makes it harder for major modes to minor modes trying to override my personal
   #+end_src
 
   #+begin_src emacs-lisp
-    (add-hook 'before-save-hook 'delete-trailing-whitespace)
     (setq inhibit-startup-message t)
     (setq delete-by-moving-to-trash t)
-    (setq-default indent-tabs-mode nil)     ;no tabs
+
     ;; show end of buffer on left fringe
-    (setq default-indicate-empty-lines nil)
+    (setq-default default-indicate-empty-lines nil)
+
     (defalias 'yes-or-no-p 'y-or-n-p)
     (setq ring-bell-function 'ignore)
 
@@ -162,6 +162,20 @@ It makes it harder for major modes to minor modes trying to override my personal
         :config
         (xclip-mode 1)))
   #+end_src
+
+** tabs and whitespace
+   By default I disable tabs.
+   In addition I have ~whitespace-mode~ because sometimes when copy pasting code from
+   external sources those external sources have tabs.
+
+   You can remove all tabs from your buffer with ~untabify~
+   #+begin_src emacs-lisp
+     (setq-default indent-tabs-mode nil)     ;no tabs
+     (global-whitespace-mode t)
+     (setq-default whitespace-style '(face trailing tabs tab-mark))
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+   #+end_src
+
 * Vim / Evil
 
   Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]

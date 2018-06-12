@@ -712,7 +712,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (use-package haskell-mode)
     (use-package graphql-mode
-      :mode "\\.gql\\")
+      :mode "\\.gql\\'")
   #+end_src
 
   Keep emacs fast with large files.

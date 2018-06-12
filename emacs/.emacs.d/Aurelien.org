@@ -222,6 +222,7 @@ It makes it harder for major modes to minor modes trying to override my personal
         :config
         (global-evil-search-highlight-persist t))
 
+      (evil-set-initial-state 'git-commit-mode 'insert)
       (evil-set-initial-state 'deft-mode 'insert)
 
       (evil-ex-define-cmd "W" 'save-buffer)

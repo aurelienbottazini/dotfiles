@@ -65,6 +65,8 @@ sudo apt install webalizer
 
 sudo apt install hunspell hunspell-fr-modern hunspell-en-us
 
+sudo apt install tree
+
 #######################################
 ## Compile from source
 #######################################

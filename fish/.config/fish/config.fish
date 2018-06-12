@@ -1,5 +1,5 @@
-# set -gx PATH ~/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) $PATH
-set -gx PATH ~/bin /usr/local/sbin ~/.rbenv/shims $PATH
+bass source ~/.nvm/nvm.sh
+set -gx PATH ~/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) $PATH
 status --is-interactive; and source (rbenv init -|psub)
 
 set -x CDPATH $HOME $HOME/projects $HOME/work

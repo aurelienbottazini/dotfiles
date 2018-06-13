@@ -457,12 +457,12 @@ It makes it harder for major modes to minor modes trying to override my personal
        :config
        (use-package ivy-hydra)
        (ivy-mode 1)
+       (define-key my-keys-minor-mode-map (kbd "C-c C-r") 'ivy-resume)
        (setq ivy-use-virtual-buffers t)
        (setq enable-recursive-minibuffers t)
        (global-set-key "\C-s" 'swiper)
        (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy)))
-       (global-set-key (kbd "C-c C-r") 'ivy-resume))
+          '((t . ivy--regex-fuzzy))))
    #+end_src
 
 ** Project navigation
@@ -1045,9 +1045,17 @@ It makes it harder for major modes to minor modes trying to override my personal
 
   #+end_src
 
+  Combined with C-M-c (exit-recursive-edit) allows to stop doing
+  something, do something else and come back to it later.
+  #+begin_src emacs-lisp
+    (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
+  #+end_src
+
   #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep)
+
+
 
     (use-package paredit
       :diminish paredit-mode
@@ -1258,6 +1266,8 @@ It makes it harder for major modes to minor modes trying to override my personal
          "Run interactive command for the current buffer programming mode"
          (interactive)
          (cond
+          ((equal major-mode 'org-mode)
+           (org-babel-execute-src-block))
           ((equal major-mode 'ruby-mode)
            (xmp))
           ((equal major-mode 'clojure-mode)

@@ -261,9 +261,9 @@ It makes it harder for major modes to minor modes trying to override my personal
       '(progn
          (define-key dired-mode-map "-" 'dired-up-directory)
          (define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
+         (define-key dired-mode-map (kbd "SPC") nil)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
-           (kbd "SPC") nil                  ; SPC is my evil leader key. This keep it working inside Dired.
            "^" '(lambda () (interactive) (find-alternate-file ".."))
            (kbd "RET") 'dired-find-alternate-file)))
   #+end_src

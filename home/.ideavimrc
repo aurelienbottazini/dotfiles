@@ -33,10 +33,11 @@ map <leader>a :action GotoAction<CR>
 map <leader>d :action Debug<CR>
 map <leader>g :action Vcs.QuickListPopupAction<CR>
 map <leader>p :action OpenProjectWindows<CR>
-map <leader>r :action Run<CR>
-map <leader>z :action MaximizeToolWindow<CR>
+map <leader>r :action RecentFiles<CR>
 map <leader>t :action GotoTest<CR>
 map <leader>v :source ~/.ideavimrc<CR>
+map <leader>x :action Run<CR>
+map <leader>z :action MaximizeToolWindow<CR>
 
 map <leader>cT :action :cursive.testing.actions/run-ns-tests<CR>
 map <leader>ct :action :cursive.testing.actions/rerun-last-test<CR> 
@@ -119,7 +120,7 @@ map <leader>oh :nohlsearch<CR>
 " AceWordAction                                     
 " AceWordBackwardsAction                            
 " AceWordForwardAction                              
-" Actions.ActionsPlugin.GenerateToString            
+" Actions.ActionsPlugin.GenerateToString
 " ActivateCargoToolWindow                           
 " ActivateDebugToolWindow                            <M-5>
 " ActivateDesignerToolWindow                        

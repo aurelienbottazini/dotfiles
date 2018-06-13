@@ -21,7 +21,7 @@ sudo apt install silversearcher-ag
 
 sudo apt install rbenv
 rbenv global 2.4.4
-sudo gem install rubocop
+sudo gem install rubocop rcodetools fastri
 
 sudo apt install tmux xclip
 sudo apt install zsh
@@ -66,6 +66,9 @@ sudo apt install webalizer
 sudo apt install hunspell hunspell-fr-modern hunspell-en-us
 
 sudo apt install tree kazam
+
+sudo apt install linux-common-tools linux-tools-4.15.0-22-generic
+
 
 #######################################
 ## Compile from source

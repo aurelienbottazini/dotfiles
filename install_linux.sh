@@ -56,8 +56,8 @@ fisher edc/bass
 # for emacs compilation
 sudo apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-dev mailutils
 
-# wifi tools
-sudo apt install wicd-gtk wicd-cli
+# wifi tools -> interferes with default ubuntu tool
+# sudo apt install wicd-gtk wicd-cli
 
 sudo apt install vlc
 

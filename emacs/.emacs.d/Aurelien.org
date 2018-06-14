@@ -1270,6 +1270,8 @@ It makes it harder for major modes to minor modes trying to override my personal
            (org-babel-execute-src-block))
           ((equal major-mode 'ruby-mode)
            (xmp))
+          ((equal major-mode 'enh-ruby-mode)
+           (xmp))
           ((equal major-mode 'clojure-mode)
            (cider-eval-defun-at-point))
           ((equal major-mode 'emacs-lisp-mode)

@@ -72,7 +72,7 @@ sudo apt install linux-common-tools linux-tools-4.15.0-22-generic
 
 # twitter
 sudo apt install corebird
-
+mkdir -p ~/Pictures/Screenshots
 
 #######################################
 ## Compile from source

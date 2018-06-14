@@ -67,7 +67,11 @@ sudo apt install hunspell hunspell-fr-modern hunspell-en-us
 
 sudo apt install tree kazam flameshot
 
+# for perf
 sudo apt install linux-common-tools linux-tools-4.15.0-22-generic
+
+# twitter
+sudo apt install corebird
 
 
 #######################################

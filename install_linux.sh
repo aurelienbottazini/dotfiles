@@ -65,7 +65,7 @@ sudo apt install webalizer
 
 sudo apt install hunspell hunspell-fr-modern hunspell-en-us
 
-sudo apt install tree kazam
+sudo apt install tree kazam flameshot
 
 sudo apt install linux-common-tools linux-tools-4.15.0-22-generic
 

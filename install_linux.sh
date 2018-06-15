@@ -53,6 +53,9 @@ sudo apt install fish
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 fisher edc/bass
 
+sudo add-apt-repository ppa:mkropat/ppa
+sudo apt-get install jumpapp
+
 # for emacs compilation
 sudo apt install texinfo libgnutls28-dev libxpm-dev libjpeg-dev libgif-dev libtiff-dev mailutils
 

@@ -115,3 +115,5 @@ sudo make install
 git clone https://github.com/Ventto/lux.git
 cd lux
 sudo make install
+
+mkdir ~/.quokka

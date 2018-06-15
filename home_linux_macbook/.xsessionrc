@@ -1,4 +1,4 @@
-setxkbmap -option ctrl:swapcaps -option altwin:swap_alt_win
+setxkbmap -option ctrl:swapcaps #-option altwin:swap_alt_win
 
 # xcape -e "Control_L=Escape"
 

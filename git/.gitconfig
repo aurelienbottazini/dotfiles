@@ -1,5 +1,5 @@
 [user]
-	name = Aurélien Bottazzini
+	name = Aurélien Bottazini
 	email = aurelien@bottazini.com
 [core]
 	quotepath = false
@@ -7,9 +7,6 @@
 	editor = vim
 [push]
 	default = current
-[github]
-	user = aurelienbottazzini
-	tooken = dafc10e4f7c66a933baba52b1f50bc2e
 [alias]
         s = status
         cm = !git-cm

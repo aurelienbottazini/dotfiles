@@ -1,2 +1,2 @@
 #!/bin/bash
-st -c cmus cmus
+st -c cmus cmus &

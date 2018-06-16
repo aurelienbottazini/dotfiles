@@ -84,10 +84,11 @@ alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .
 set --erase fish_greeting
 set -gx EDITOR 'vim'
 set -gx fish_color_autosuggestion "#939598"
-set -gx fish_color_command "#34855b"
+set -gx fish_color_command "-o" "#3a499c"
 set -gx fish_color_param "#3a499c"
 set -gx fish_color_search_match	"#000000" "--background=#fff166"
 set -gx fish_color_operator "-o" "#65428a"
+set -gx fish_color_quote "-i" "#34855b"
 
 set -gx fish_term24bit 1
 
@@ -109,7 +110,8 @@ set -gx fish_term24bit 1
 # fish_color_user	'-o' 'green'
 # fish_color_valid_path	--underline
 # fish_color_normal, the default color
-# fish_color_command, the color for commands # fish_color_quote, the color for quoted blocks of text
+# fish_color_command, the color for commands 
+# fish_color_quote, the color for quoted blocks of text
 # fish_color_redirection, the color for IO redirections
 # fish_color_end, the color for process separators like ';' and '&'
 # fish_color_error, the color used to highlight potential errors

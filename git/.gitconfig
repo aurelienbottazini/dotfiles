@@ -60,9 +60,3 @@
 	hideCampaign = true
 [diff]
 	tool = vimdiff
-[tig "color"]
-	# A strange looking cursor line
-	cursor		= red	default underline
-	# UI colors
-	title-blur	= white	black
-	title-focus	= white	blue

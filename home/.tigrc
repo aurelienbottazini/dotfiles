@@ -1,14 +1,14 @@
 # https://github.com/jonas/tig/blob/master/tigrc
 
 color "---"     blue  default
-color "diff --"     yellow  default
-color "--- "      yellow  default
-color "+++ "      yellow  default
+color "diff --"     black default underline
+color "--- "      red  default
+color "+++ "      green  default
 color "@@"      magenta default
-color "+"     green default
-color " +"      green default
-color "-"     red default
-color " -"      red default
+color "+"     white color10
+color " +"    white color10
+color "-"     white red
+color " -"    white red
 color "index "      blue  default
 color "old file mode "    yellow  default
 color "new file mode "    yellow  default
@@ -42,7 +42,7 @@ color "    Acked-by"    yellow  default
 color "    Tested-by"   yellow  default
 color "    Reviewed-by"   yellow  default
 color default     default default normal
-color cursor      white green bold
+color cursor      black color7 bold
 color status      green default
 color delimiter     magenta default
 color date      blue  default
@@ -56,8 +56,8 @@ color file      default default
 color grep.file     blue  default
 color file-size     default default
 color line-number   cyan  default
-color title-blur    white blue
-color title-focus   white blue  bold
+color title-blur    black color7
+color title-focus   black yellow  bold
 color main-commit   default default
 color main-tag      magenta default bold
 color main-local-tag    magenta default

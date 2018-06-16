@@ -83,25 +83,26 @@ alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .
 
 set --erase fish_greeting
 set -gx EDITOR 'vim'
-set -gx fish_color_autosuggestion "#949494"
-set -gx fish_color_command "#008700"
-set -gx fish_color_param "#0000d7"
-set -gx fish_color_search_match	"#c82829"
+set -gx fish_color_autosuggestion "#939598"
+set -gx fish_color_command "#34855b"
+set -gx fish_color_param "#3a499c"
+set -gx fish_color_search_match	"#000000" "--background=#fff166"
+set -gx fish_color_operator "-o" "#65428a"
 
 set -gx fish_term24bit 1
 
-# fish_color_comment	eab700
+# fish_color_comment	#eab700
 # fish_color_cwd	green
 # fish_color_cwd_root	red
-# fish_color_end	8959a8
+# fish_color_end	#8959a8
 # fish_color_escape	cyan
 # fish_color_history_current	cyan
 # fish_color_host	'-o' 'cyan'
 # fish_color_match	cyan
 # fish_color_normal	normal
 # fish_color_operator	cyan
-# fish_color_quote	718c00
-# fish_color_redirection	3e999f
+# fish_color_quote	#718c00
+# fish_color_redirection	#3e999f
 # fish_color_search_match	'--background=#3d3935'
 # fish_color_selection	red
 # fish_color_status	red

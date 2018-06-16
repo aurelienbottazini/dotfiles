@@ -5,10 +5,10 @@ color "diff --"     black default underline
 color "--- "      red  default
 color "+++ "      green  default
 color "@@"      magenta default
-color "+"     white color10
-color " +"    white color10
-color "-"     white red
-color " -"    white red
+color "+"     color10 default
+color " +"    color10 default
+color "-"     red default
+color " -"    red default
 color "index "      blue  default
 color "old file mode "    yellow  default
 color "new file mode "    yellow  default
@@ -28,7 +28,7 @@ color "Date: "      magenta  default
 color "AuthorDate: "    magenta  default
 color "CommitDate: "    magenta  default
 color "TaggerDate: "    magenta  default
-color "Refs: "      red default
+color "Refs: "      magenta default bold
 color "Reflog: "    red default
 color "Reflog message: "  yellow  default
 color "stash@{"     magenta default

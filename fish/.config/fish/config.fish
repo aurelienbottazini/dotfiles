@@ -55,10 +55,6 @@ tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01
 ;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc
 =00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
 
-# set -x DOCKER_HOST tcp://ns351672.ip-91-121-70.eu:2376
-# set -x DOCKER_TLS_VERIFY 1
-# set -x VAGRANT_DEFAULT_PROVIDER parallels
-
 # status --is-interactive; and . (rbenv init -|psub)
 
 alias em "emacs_starter.sh"
@@ -79,7 +75,11 @@ alias pd "psql -p 5432 -h localhost -d "
 alias ls "ls --color"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 
-alias watch_projects "fswatch -0 -r --exclude '\.#' --exclude vendor --exclude .git --exclude Gemfile.lock --exclude GPATH --exclude GRTAGS --exclude GTAGS --exclude tmp --exclude vendor --exclude db/data --exclude db/neo4j (pwd) | xargs -0 -n 1 -I file rsync_sd file"
+alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 and; docker run \
+    --publish=7474:7474 --publish=7687:7687 \
+    --volume=$HOME/neo4j/data:/data \
+    --volume=$HOME/neo4j/logs:/logs \
+    neo4j:3.0"
 
 set --erase fish_greeting
 set -gx EDITOR 'vim'
@@ -110,7 +110,7 @@ set -gx fish_term24bit 1
 # fish_color_user	'-o' 'green'
 # fish_color_valid_path	--underline
 # fish_color_normal, the default color
-# fish_color_command, the color for commands 
+# fish_color_command, the color for commands
 # fish_color_quote, the color for quoted blocks of text
 # fish_color_redirection, the color for IO redirections
 # fish_color_end, the color for process separators like ';' and '&'

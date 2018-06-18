@@ -1,3 +1,4 @@
+# keyboard hacks also doable with gnome-tweak-tools with ubuntu
 xcape -e "Control_L=Escape"
 
 # tab to Hyper_L when used as modifier

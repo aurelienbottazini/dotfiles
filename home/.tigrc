@@ -2,6 +2,11 @@
 
 bind status P !git push origin
 
+# you can still refresh with F5
+bind status R !git rebase -i %(commit)^
+bind main R !git rebase -i %(commit)^
+bind diff R !git rebase -i %(commit)^
+
 
 color "---"     blue  default
 color "diff --"     black default underline

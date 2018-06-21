@@ -73,6 +73,9 @@ sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt-get update
 sudo apt-get install obs-studio
 
+# gif recording
+sudo apt instal peek
+
 # for perf
 sudo apt install linux-common-tools linux-tools-4.15.0-22-generic
 

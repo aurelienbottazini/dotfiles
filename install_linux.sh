@@ -68,7 +68,7 @@ sudo apt install webalizer
 
 sudo apt install hunspell hunspell-fr-modern hunspell-en-us
 
-sudo apt install tree flameshot
+sudo apt install tree
 sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt-get update
 sudo apt-get install obs-studio
@@ -130,3 +130,11 @@ cd lux
 sudo make install
 
 mkdir ~/.quokka
+
+cd ~/projects
+cd flameshot
+git clone git@github.com:lupoDharkael/flameshot.git
+sudo apt install  qt5-qmake qt5-default qttools5-dev-tools
+qmake
+make
+sudo make install

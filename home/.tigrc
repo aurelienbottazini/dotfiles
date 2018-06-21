@@ -1,5 +1,8 @@
 # https://github.com/jonas/tig/blob/master/tigrc
 
+bind status P !git push origin
+
+
 color "---"     blue  default
 color "diff --"     black default underline
 color "--- "      red  default

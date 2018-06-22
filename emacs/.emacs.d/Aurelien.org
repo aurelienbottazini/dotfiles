@@ -1090,7 +1090,6 @@ It makes it harder for major modes to minor modes trying to override my personal
     (define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)
     (define-key my-leader-map (kbd "t") 'counsel-projectile-find-file)
 
-    (define-key my-keys-minor-mode-map (kbd "<f5>") 'toggle-frame-fullscreen)
     (use-package drag-stuff
       :diminish drag-stuff-mode
       :config

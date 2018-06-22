@@ -1,22 +1,14 @@
 name: dox
-root: ~/projects/work/doximity
+root: ~/work/doximity
 
 windows:
-  - doximity:
+  - docker:
       layout: main-horizontal
       panes:
-        - docker-compose up
-        - bundle exec rails s webrick -p 5000
-  - colleagues:
+        - dox-dc up auth-api
+        - dox-dc up doximity
+        - dox-dc up activities
+  - tests:
       layout: main-horizontal
       panes:
-        - cd ~/projects/work/colleagues && bundle exec rails s webrick -p 5100
-  - vue:
-      layout: main-horizontal
-      panes:
-        - cd ~/projects/work/doximity-client-vue && yarn run mock:endpoints
-        - cd ~/projects/work/doximity-client-vue && yarn run mock:dev
-  - webpacker:
-      layout: main-horizontal
-      panes:
-        - ./bin/webpack-dev-server
+        -

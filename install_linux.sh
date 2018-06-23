@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# I use gnome-tweaks to change special keys.
 #######################################
 ## packages
 #######################################

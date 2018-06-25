@@ -1,2 +1,2 @@
 #!/bin/bash
-st -c ranger ranger
+st -g 150x50 -c ranger ranger

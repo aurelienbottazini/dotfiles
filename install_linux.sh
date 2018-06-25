@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# I use gnome-tweaks to change special keys.
 #######################################
 ## packages
 #######################################
@@ -74,6 +75,8 @@ sudo apt-get update
 sudo apt-get install obs-studio
 
 # gif recording
+sudo add-apt-repository ppa:peek-developers/stable
+sudo apt-get update
 sudo apt instal peek
 
 # for perf
@@ -135,9 +138,11 @@ sudo make install
 mkdir ~/.quokka
 
 cd ~/projects
-cd flameshot
 git clone git@github.com:lupoDharkael/flameshot.git
-sudo apt install  qt5-qmake qt5-default qttools5-dev-tools
+cd flameshot
+sudo apt install qt5-qmake qt5-default qttools5-dev-tools
 qmake
 make
 sudo make install
+
+curl https://sh.rustup.rs -sSf | sh

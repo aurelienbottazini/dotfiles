@@ -4,7 +4,19 @@ status --is-interactive; and source (rbenv init -|psub)
 
 set -x CDPATH $HOME $HOME/projects $HOME/work
 
-set -gx FZF_DEFAULT_OPTS "--color fg:240,bg:-1,hl:3,fg+:-1,bg+:3,hl+:11 --color info:4,prompt:4,pointer:9,marker:166,spinner:4"
+# fg Text
+# bg Background
+# hl Highlighted substrings
+# fg+ Text (current line)
+# bg+ Background (current line)
+# hl+ Highlighted substrings (current line)
+# info Info
+# prompt Prompt
+# pointer Pointer to the current line
+# marker Multi-select marker
+# spinner Streaming input indicator
+# header Header
+set -gx FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:1,fg+:-1,bg+:3,hl+:1 --color info:4,prompt:4,pointer:9,marker:166,spinner:4,header:1"
 
 # Effects
 # 00	Default colour

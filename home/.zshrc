@@ -48,3 +48,5 @@ setopt menu_complete
 zstyle ':completion:*' menu select
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

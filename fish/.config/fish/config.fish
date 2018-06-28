@@ -4,6 +4,8 @@ status --is-interactive; and source (rbenv init -|psub)
 
 set -x CDPATH $HOME $HOME/projects $HOME/work
 
+set -gx FZF_DEFAULT_OPTS "--color fg:240,bg:-1,hl:3,fg+:-1,bg+:3,hl+:11 --color info:4,prompt:4,pointer:9,marker:166,spinner:4"
+
 # Effects
 # 00	Default colour
 # 01	Bold

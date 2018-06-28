@@ -153,3 +153,5 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
     neo4j:3.0"
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

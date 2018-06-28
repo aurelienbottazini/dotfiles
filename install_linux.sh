@@ -44,7 +44,7 @@ sudo apt install libxapian-dev libgmime-2.6-dev libwebkitgtk-3.0-dev
 sudo apt install notify-osd
 
 sudo apt install clojure leiningen
-sudo apt install anki
+sudo apt install anki mplayer
 sudo apt install ubuntu-restricted-extras
 sudo apt install python-pip
 

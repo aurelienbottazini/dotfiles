@@ -1,3 +1,5 @@
+set fish_greeting "Liberty > Empathy > Integrity > Courage > Protect your time"
+
 bass source ~/.nvm/nvm.sh
 set -gx PATH ~/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) $PATH
 status --is-interactive; and source (rbenv init -|psub)
@@ -95,7 +97,6 @@ alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 an
     --volume=$HOME/neo4j/logs:/logs \
     neo4j:3.0"
 
-set --erase fish_greeting
 
 set -gx EDITOR 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color

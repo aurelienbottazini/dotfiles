@@ -9,13 +9,13 @@ bind diff R !git rebase -i %(commit)^
 
 
 color "---"     blue  default
-color "diff --"     black default underline
+color "diff --"     white black underline
 color "--- "      red  default
 color "+++ "      green  default
-color "@@"      magenta default
-color "+"     color10 default
-color " +"    color10 default
-color "-"     red default
+color "@@"      white magenta
+color "+"     white color10 
+color " +"    white color10
+color "-"     white red
 color " -"    red default
 color "index "      blue  default
 color "old file mode "    yellow  default

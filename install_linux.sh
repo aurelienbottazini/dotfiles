@@ -94,6 +94,8 @@ sudo apt install suckless-tools
 # command i have in my shortcuts to run dmenu
 # dmenu_run -fn "Gotham HTF Black:size=13" -nb "#fff166" -nf "#000000" -sb "#fccf61" -sf "#000000"
 
+sudo apt install golang
+
 #######################################
 ## Compile from source
 #######################################

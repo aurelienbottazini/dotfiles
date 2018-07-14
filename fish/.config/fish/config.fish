@@ -75,7 +75,7 @@ tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01
 
 alias em "emacs_starter.sh"
 alias ec "emacsclient -ta ''"
-alias ef "emacsclient -ncq -a ''"
+alias ef "emacsclient -ncq -a '' -e '(select-frame-set-input-focus (selected-frame))'"
 
 alias db 'docker-compose build'
 alias dr 'docker-compose run'
@@ -90,7 +90,6 @@ alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
 alias ls "ls --color"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
-
 alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 and; docker run \
     --publish=7474:7474 --publish=7687:7687 \
     --volume=$HOME/neo4j/data:/data \

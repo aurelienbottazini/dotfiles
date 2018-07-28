@@ -76,6 +76,7 @@ tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01
 alias em "emacs_starter.sh"
 alias ec "emacsclient -ta ''"
 alias ef "emacsclient -ncq -a '' -e '(select-frame-set-input-focus (selected-frame))'"
+alias eg "ef -e '(magit-status)'"
 
 alias db 'docker-compose build'
 alias dr 'docker-compose run'

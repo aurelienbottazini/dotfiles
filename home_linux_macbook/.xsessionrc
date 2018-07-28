@@ -1,3 +1,6 @@
+# fn keys and not special keys by default
+echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
+#
 #setxkbmap -option ctrl:swapcaps #-option altwin:swap_alt_win
 
 # xcape -e "Control_L=Escape"

@@ -13,10 +13,10 @@ color "diff --"     white black underline
 color "--- "      red  default
 color "+++ "      green  default
 color "@@"      white magenta
-color "+"     white color10 
-color " +"    white color10
-color "-"     white red
-color " -"    red default
+color "+"     green color10 
+color " +"    green color10
+color "-"     black color9
+color " -"    black color9
 color "index "      blue  default
 color "old file mode "    yellow  default
 color "new file mode "    yellow  default

@@ -23,6 +23,8 @@ sudo apt install silversearcher-ag
 sudo apt install rbenv
 rbenv global 2.4.4
 sudo gem install rubocop rcodetools fastri
+# for sponge, this is to work with xmpfilter and mimic in place editing.
+sudo apt install moreutils
 
 sudo apt install tmux xclip
 sudo apt install zsh
@@ -95,6 +97,7 @@ sudo apt install suckless-tools
 # dmenu_run -fn "Gotham HTF Black:size=13" -nb "#fff166" -nf "#000000" -sb "#fccf61" -sf "#000000"
 
 sudo apt install golang
+
 
 #######################################
 ## Compile from source

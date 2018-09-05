@@ -59,6 +59,14 @@ It makes it harder for major modes to minor modes trying to override my personal
             (e (if mark-active (max (point) (mark)) (point-max))))
         (shell-command-on-region b e
                                  "python -mjson.tool" (current-buffer) t)))
+
+    (defun org-strike-header ()
+      (interactive)
+      (beginning-of-line)
+      (re-search-forward "\*+ ")
+      (insert "+")
+      (end-of-line)
+      (insert "+"))
   #+end_src
 
 * Initialize Packages
@@ -1125,6 +1133,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     (define-key my-leader-map (kbd "oll") 'show-line-numbers)
     (define-key my-leader-map (kbd "ow") 'visual-line-mode)
     (define-key my-leader-map (kbd "of") 'auto-fill-mode)
+    (define-key my-leader-map (kbd "os") 'org-strike-header)
     ;; gives each line only one visual line and don't show a continuation on next line
     (set-default 'truncate-lines t)
     (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)

@@ -11,6 +11,6 @@ setxkbmap -option ctrl:swapcaps #-option altwin:swap_alt_win
 # xmodmap -e "keycode any = Tab"
 # xcape -e "$spare_modifier=Tab"
 
-stalonetray &
+# stalonetray &
 
 dropbox start

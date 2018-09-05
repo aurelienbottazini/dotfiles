@@ -5,7 +5,7 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
 	, borderWidth = 3
         , bgColor = "#dad9d6"
         , fgColor = "black"
-        , position = TopW L 95
+        , position = TopW L 100
         , commands = [
 	Run Date "%a %b %_d" "theDate" 10
         , Run BatteryP ["BAT0"]

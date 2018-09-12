@@ -100,14 +100,14 @@ alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 an
 
 set -gx EDITOR 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color
-set -gx fish_color_autosuggestion "#939598"
-set -gx fish_color_command "-o" "#3a499c"
-set -gx fish_color_param "#3a499c"
-set -gx fish_color_search_match	"#000000" "--background=#fccf61"
-set -gx fish_color_operator "-o" "#65428a"
-set -gx fish_color_quote "-i" "#34855b"
-set -gx fish_color_match "--background=#34855b"
-set -gx fish_pager_color_prefix "-i" "#3a499c"
+set -gx fish_color_autosuggestion "#93a1a1"
+set -gx fish_color_command "-o" "#268bd2"
+set -gx fish_color_param "#268bd2"
+set -gx fish_color_search_match	"#073642" "--background=#fccf61"
+set -gx fish_color_operator "-o" "#6c71c4"
+set -gx fish_color_quote "-i" "#859900"
+set -gx fish_color_match "--background=#859900"
+set -gx fish_pager_color_prefix "-i" "#268bd2"
 
 set -gx fish_term24bit 1
 

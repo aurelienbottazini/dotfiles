@@ -28,3 +28,4 @@ yarn-error.log
 .projectile
 .rakeTasks
 .rebel_readline_history
+.dumbjump

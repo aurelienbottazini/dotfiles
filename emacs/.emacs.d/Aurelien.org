@@ -338,54 +338,54 @@ It makes it harder for major modes to minor modes trying to override my personal
                      (set-face-foreground 'mode-line (cdr color))))))
 
    #+end_src
-*** Color reference
-    Those are all pantone colors. Each line has the hexadecimal value
-    of the color followed by the pantone color name. I use them across
-    my config files for xmobar, xmonad, shells to keep my UI
-    consistent.
-    #+begin_src emacs-lisp
-      ;; #fff166 101U
-      ;; #fccf61 128u
-      ;; #f79b2f 130u
-      ;; #c97f3a 145u
-      ;; #ffa2cb 210u
-      ;; #f56d9e 213u
-      ;; #dcc6ea 263u
-      ;; #bfa1e3 264u
-      ;; #9d7ad2 265u
-      ;; #adcff1 277u
-      ;; #7ab1e8 284u
-      ;; #5b8edb 279u
-      ;; #8eddeb 304u
-      ;; #00b4e4 395u
-      ;; #93e8d3 331u
-      ;; #97d88a 358u
-      ;; #5cb860 360u
-      ;; #56944f 362u
-      ;; #f1f2f1 11-0601 tpx
-      ;; #e8eae8 11-4800 tpx
-      ;; #dad9d6 cool g r a y 1 u
-      ;; #c5c5c5 cool g r a y 3 u
-      ;; #adaeb0 cool g r a y 5 u
-      ;; #939598 cool g r a y 8 u
+** Color reference
+   Those are all pantone colors. Each line has the hexadecimal value
+   of the color followed by the pantone color name. I use them across
+   my config files for xmobar, xmonad, shells to keep my UI
+   consistent.
+   #+begin_src emacs-lisp
+     ;; #fff166 101U
+     ;; #fccf61 128u
+     ;; #f79b2f 130u
+     ;; #c97f3a 145u
+     ;; #ffa2cb 210u
+     ;; #f56d9e 213u
+     ;; #dcc6ea 263u
+     ;; #bfa1e3 264u
+     ;; #9d7ad2 265u
+     ;; #adcff1 277u
+     ;; #7ab1e8 284u
+     ;; #5b8edb 279u
+     ;; #8eddeb 304u
+     ;; #00b4e4 395u
+     ;; #93e8d3 331u
+     ;; #97d88a 358u
+     ;; #5cb860 360u
+     ;; #56944f 362u
+     ;; #f1f2f1 11-0601 tpx
+     ;; #e8eae8 11-4800 tpx
+     ;; #dad9d6 cool g r a y 1 u
+     ;; #c5c5c5 cool g r a y 3 u
+     ;; #adaeb0 cool g r a y 5 u
+     ;; #939598 cool g r a y 8 u
 
-      ;; pastel
-      ;; #e4f4e9 9063u
-      ;; #c5f2e6 9520u
-      ;; #ffcfd8 9284u
+     ;; pastel
+     ;; #e4f4e9 9063u
+     ;; #c5f2e6 9520u
+     ;; #ffcfd8 9284u
 
 
-      ;; #69615f 440u
-      ;; #4c4e56 black7u
-      ;; #885a61 195u
-      ;; #f65058 r e d 032u
-      ;; #bc3e44 3517u
-      ;; #34855b 348u
-      ;; #546758 350u
-      ;; #4982cf 285u
-      ;; #3a499c Reflex B l u e U
-      ;; #65428a medium p u r p l e
-    #+end_src
+     ;; #69615f 440u
+     ;; #4c4e56 black7u
+     ;; #885a61 195u
+     ;; #f65058 r e d 032u
+     ;; #bc3e44 3517u
+     ;; #34855b 348u
+     ;; #546758 350u
+     ;; #4982cf 285u
+     ;; #3a499c Reflex B l u e U
+     ;; #65428a medium p u r p l e
+   #+end_src
 
 ** Diminish
    Don't show some modes to keep my modeline clean.

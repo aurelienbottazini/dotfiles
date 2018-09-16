@@ -628,6 +628,8 @@ It makes it harder for major modes to minor modes trying to override my personal
     "<" 'org-clock-in
     ">" 'org-clock-out
     "4" 'org-archive-subtree
+    "2" 'counsel-org-tag
+    "3" 'org-refile
     "t" 'org-todo)
 
     (add-to-list 'org-modules "org-habit")

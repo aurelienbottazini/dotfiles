@@ -339,7 +339,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
    #+end_src
 ** Color reference
-***   Solarized colors
+*** Solarized colors
 base03    #002b36  8/4 brblack  234 #1c1c1c 15 -12 -12   0  43  54 193 100  21
 base02    #073642  0/4 black    235 #262626 20 -12 -12   7  54  66 192  90  26
 base01    #586e75 10/7 brgreen  240 #585858 45 -07 -07  88 110 117 194  25  46

@@ -128,6 +128,7 @@
  '(org-sexp-date ((t (:foreground "#65428a"))))
  '(org-tag ((t (:background "#c5f2e6" :weight normal))))
  '(org-todo ((t (:foreground "#f65058" :weight normal))))
+ '(outline-2 ((t (:inherit font-lock-variable-name-face :foreground "#3a499c"))))
  '(region ((t (:background "#adcff1"))))
  '(secondary-selection ((t (:background "#fff166"))))
  '(show-paren-match ((t (:background "#97d88a" :foreground "#4c4e56"))))

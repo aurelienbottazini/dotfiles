@@ -46,6 +46,7 @@ Plug 'tpope/vim-unimpaired' " [ ] mappings
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 
@@ -63,6 +64,8 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
+set background=dark
+colorscheme solarized
 
 " set tabstop=4
 " set shiftwidth=4
@@ -124,7 +127,8 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='papercolor'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
 noremap <Leader>f :Ag<Space>
@@ -188,3 +192,4 @@ hi CursorLine term=underline ctermbg=15 cterm=underline gui=underline
 nmap <leader>i :set list!<CR>
 highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
+highlight EndOfBuffer ctermfg=3 guifg=#268bd2

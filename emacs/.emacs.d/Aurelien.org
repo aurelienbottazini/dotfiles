@@ -284,7 +284,7 @@ It makes it harder for major modes to minor modes trying to override my personal
         (set-frame-font "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
       (when *is-mac*
         (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
-      (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))
+        (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))
 
     (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
     (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))

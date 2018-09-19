@@ -67,6 +67,10 @@ It makes it harder for major modes to minor modes trying to override my personal
       (insert "+")
       (end-of-line)
       (insert "+"))
+
+    (defun run-node-on-buffer ()
+      (interactive)
+      (shell-command-on-region (point-min) (point-max) "node"))
   #+end_src
 
 * Initialize Packages
@@ -125,8 +129,26 @@ It makes it harder for major modes to minor modes trying to override my personal
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   #+begin_src emacs-lisp
-    (setenv "PATH" (concat "/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/:" "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/:" (getenv "HOME") "/.rbenv/shims:" (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
-    (setq exec-path '("/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/" "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/" "/Users/aurelienbottazini/.rbenv/bin/" "/Users/aurelienbottazini/.rbenv/shims/" "/Users/aurelienbottazini/dotfiles/bin/" "/usr/local/bin/" "/usr/local/sbin/" "/usr/bin/" "/bin/" "/usr/sbin/" "/sbin/"))
+    (setenv "PATH" (concat "/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/:"
+                           "/home/aurelienbottazini/.nvm/versions/node/v8.11.1/bin/:"
+                           "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/:"
+                           (getenv "HOME")
+                           "/.rbenv/shims:"
+                           (getenv "HOME")
+                           "/.rbenv/bin:"
+                           (getenv "PATH")))
+    (setq exec-path '("/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/"
+                      "/home/aurelienbottazini/.nvm/versions/node/v8.11.1/bin/"
+                      "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/"
+                      "/Users/aurelienbottazini/.rbenv/bin/"
+                      "/Users/aurelienbottazini/.rbenv/shims/"
+                      "/Users/aurelienbottazini/dotfiles/bin/"
+                      "/usr/local/bin/"
+                      "/usr/local/sbin/"
+                      "/usr/bin/"
+                      "/bin/"
+                      "/usr/sbin/"
+                      "/sbin/"))
   #+end_src
 
   #+begin_src emacs-lisp
@@ -831,11 +853,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
      (setq js-indent-level 2)
 
-     (use-package indium
-       :config
-       (add-hook 'js2-mode-hook #'indium-interaction-mode)
-       )
-
      (use-package js2-mode
        :mode "\\.js\\'"
        :mode "\\.jsx\\'"
@@ -955,8 +972,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (use-package yaml-mode
        :mode "\\.ya?ml\\'"
        )
-
-     (use-package enh-ruby-mode
+     (use-package ruby-mode
        :mode "\\.rake\\'"
        :mode "Rakefile\\'"
        :mode "\\.gemspec\\'"
@@ -976,6 +992,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :mode "Appraisals\\'"
        :mode "\\.rb$"
        :mode "ruby"
+       )
+
+     (use-package enh-ruby-mode
        :config
 
        (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
@@ -1121,6 +1140,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "i") 'counsel-imenu)
     (define-key my-leader-map (kbd "m") 'counsel-bookmark)
     (define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)
+    (define-key my-leader-map (kbd "S") 'projectile-find-implementation-or-test-other-window)
     (define-key my-leader-map (kbd "t") 'counsel-projectile-find-file)
 
     (use-package drag-stuff
@@ -1310,7 +1330,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ((equal major-mode 'emacs-lisp-mode)
            (eval-defun nil))
           ((equal major-mode 'js2-mode)
-           (indium-eval-defun))
+           (run-node-for-buffer))
           (t (error "No run command for that mode"))))
 
      (define-key my-leader-map (kbd "x") 'run-for-mode)

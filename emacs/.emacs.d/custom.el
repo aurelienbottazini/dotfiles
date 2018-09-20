@@ -24,6 +24,11 @@
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")
+ '(ivy-preferred-re-builders
+   (quote
+    ((ivy--regex-plus . "ivy")
+     (ivy--regex-ignore-order . "order")
+     (ivy--regex-fuzzy . "fuzzy"))))
  '(mu4e-update-interval 900)
  '(mu4e-use-fancy-chars t)
  '(org-agenda-files

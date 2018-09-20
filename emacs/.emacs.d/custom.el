@@ -45,6 +45,7 @@
  '(prettier-js-command
    "/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/prettier")
  '(projectile-tags-command "git ls-files | /usr/local/bin/ctags -e -L -")
+ '(ruby-align-chained-calls t)
  '(ruby-align-to-stmt-keywords t)
  '(ruby-deep-indent-paren-style nil)
  '(show-paren-when-point-in-periphery t)

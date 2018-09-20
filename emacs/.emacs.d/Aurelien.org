@@ -987,6 +987,27 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :mode "\\.ya?ml\\'"
        )
 
+     (use-package ruby-mode
+       :mode "\\.rake\\'"
+       :mode "Rakefile\\'"
+       :mode "\\.gemspec\\'"
+       :mode "\\.ru\\'"
+       :mode "Gemfile\\'"
+       :mode "Guardfile\\'" :mode "Capfile\\'"
+       :mode "\\.cap\\'"
+       :mode "\\.thor\\'"
+       :mode "\\.rabl\\'"
+       :mode "Thorfile\\'"
+       :mode "Vagrantfile\\'"
+       :mode "\\.jbuilder\\'"
+       :mode "Podfile\\'"
+       :mode "\\.podspec\\'"
+       :mode "Puppetfile\\'"
+       :mode "Berksfile\\'"
+       :mode "Appraisals\\'"
+       :mode "\\.rb$"
+       :mode "ruby")
+
      (use-package enh-ruby-mode
        :mode "\\.rake\\'"
        :mode "Rakefile\\'"

@@ -206,8 +206,10 @@ It makes it harder for major modes to minor modes trying to override my personal
    #+begin_src emacs-lisp
      (setq-default indent-tabs-mode nil)     ;no tabs
      (setq-default whitespace-style '(face trailing tabs tab-mark))
-     (add-hook 'prog-mode-hook 'whitespace-mode)
-     (add-hook 'org-mode-hook 'whitespace-mode)
+     (defun ab-turn-on-whitespace-mode ()
+       (progn (whitespace-mode) (diminish 'whitespace-mode)))
+     (add-hook 'prog-mode-hook 'ab-turn-on-whitespace-mode)
+     (add-hook 'org-mode-hook 'ab-turn-on-whitespace-mode)
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 
@@ -424,29 +426,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      ;; #65428a medium p u r p l e
    #+end_src
 
-** Diminish
-   Don't show some modes to keep my modeline clean.
-   #+begin_src emacs-lisp
-     (use-package diminish
-       :config
-       (diminish 'prettier-js-mode)
-       (diminish 'subword-mode)
-       (diminish 'eldoc-mode)
-       (diminish 'auto-revert-mode)
-       (diminish 'indium-interaction-mode)
-       (diminish 'paredit-everywhere-mode)
-       (diminish 'evil-lispy-mode)
-       (diminish 'company-mode)
-       (diminish 'paredit-mode)
-       (diminish 'my-keys-minor-mode)
-       (diminish 'ivy-mode)
-       (diminish 'undo-tree-mode)
-       (diminish 'evil-commentary-mode)
-       (diminish 'evil-mc-mode)
-       (diminish 'yas-minor-mode)
-       (diminish 'which-key-mode)
-       (diminish 'visual-line-mode))
-   #+end_src
 * Navigation
 ** File Registers
    Quickly navigate to important files with ~C-x r key~
@@ -532,6 +511,11 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (use-package counsel-projectile)
        (projectile-mode)
+       (setq projectile-mode-line
+             '(:eval (list " P["
+                           (propertize (projectile-project-name)
+                                       'face '(:slant italic :weight bold))
+                           "]")))
        )
 
      (use-package dumb-jump
@@ -540,7 +524,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                    ("gD" . dumb-jump-go-other-window))
        :init
        (setq dumb-jump-selector 'ivy))
-   #+end_src
+       #+end_src
 * AutoCompletions
   #+begin_src emacs-lisp
     (use-package company
@@ -1385,3 +1369,32 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (define-key my-leader-map (kbd "x") 'run-for-mode)
      (define-key my-leader-map (kbd "X") 'run-bigger-for-mode)
    #+end_src
+
+* Diminish
+  Don't show some modes to keep my modeline clean.
+  #+begin_src emacs-lisp
+    (use-package diminish
+      :config
+      (diminish 'prettier-js-mode)
+      (diminish 'subword-mode)
+      (diminish 'eldoc-mode)
+      (diminish 'auto-revert-mode)
+      (diminish 'indium-interaction-mode)
+      (diminish 'paredit-everywhere-mode)
+      (diminish 'evil-lispy-mode)
+      (diminish 'company-mode)
+      (diminish 'paredit-mode)
+      (diminish 'my-keys-minor-mode)
+      (diminish 'ivy-mode)
+      (diminish 'undo-tree-mode)
+      (diminish 'evil-commentary-mode)
+      (diminish 'evil-mc-mode)
+      (diminish 'yas-minor-mode)
+      (diminish 'which-key-mode)
+      (diminish 'whitespace-mode)
+      (diminish 'palimpsest-mode)
+      (diminish 'flycheck-mode)
+      (diminish '0blayout-mode)
+      (diminish 'auto-fill-function)
+      (diminish 'visual-line-mode))
+  #+end_src

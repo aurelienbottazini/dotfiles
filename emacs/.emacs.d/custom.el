@@ -16,7 +16,7 @@
  '(deft-new-file-format "%Y-%m-%dT%H:%M")
  '(deft-use-filename-as-title t)
  '(deft-use-filter-string-for-filename t)
- '(display-line-numbers (quote relative))
+ '(display-line-numbers t)
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
  '(dumb-jump-mode t)

@@ -64,7 +64,7 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
-set background=dark
+set background=light
 colorscheme solarized
 
 " set tabstop=4

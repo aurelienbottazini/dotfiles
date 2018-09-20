@@ -482,9 +482,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+end_src
 
 ** Search Everything
+
    #+begin_src emacs-lisp
      (use-package counsel
        :config
+       (setq counsel-git-cmd "rg --files")
+       (setq counsel-rg-base-command
+             "rg -i -M 120 --no-heading --line-number --color never %s .")
        (global-set-key (kbd "M-x") 'counsel-M-x)
        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
        (global-set-key (kbd "<f1> f") 'counsel-describe-function)
@@ -508,7 +512,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (setq enable-recursive-minibuffers t)
        (global-set-key "\C-s" 'swiper)
        (setq ivy-re-builders-alist
-          '((t . ivy--regex-plus))))
+             '((t . ivy--regex-plus))))
    #+end_src
 
 ** Project navigation
@@ -534,41 +538,64 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+end_src
 * AutoCompletions
   #+begin_src emacs-lisp
-  (use-package company
-    :diminish company-mode
-    :init
-    (add-hook 'after-init-hook 'global-company-mode)
-    :config
-    (let ((map company-active-map))
-      (define-key map (kbd "C-n") 'company-select-next)
-      (define-key map (kbd "C-p") 'company-select-previous)
-      (define-key map (kbd "C-f") 'company-complete-selection)
-      (define-key map (kbd "TAB") 'company-complete-selection)
-      (define-key map (kbd "<tab>") 'company-complete-selection))
-
-    (setq company-backends '(company-files company-css company-capf (company-dabbrev-code company-yasnippet)))
-    (use-package company-dict
+    (use-package company
+      :diminish company-mode
+      :init
+      (add-hook 'after-init-hook 'global-company-mode)
+      (setq company-show-numbers t)
       :config
-      (setq company-dict-dir (concat user-emacs-directory "dict/"))
-      (add-to-list 'company-backends 'company-dict))
-    )
+      (defun ora-company-number ()
+        "Forward to `company-complete-number'.
+    Unless the number is potentially part of the candidate.
+    In that case, insert the number."
+        (interactive)
+        (let* ((k (this-command-keys))
+               (re (concat "^" company-prefix k)))
+          (if (cl-find-if (lambda (s) (string-match re s))
+                          company-candidates)
+              (self-insert-command 1)
+            (company-complete-number (string-to-number k)))))
+      (let ((map company-active-map))
+        (mapc
+         (lambda (x)
+           (define-key map (format "%d" x) 'ora-company-number))
+         (number-sequence 0 9))
+        (define-key map " " (lambda ()
+                              (interactive)
+                              (company-abort)
+                              (self-insert-command 1)))
+        (define-key map (kbd "<return>") nil))
 
-  (use-package yasnippet
-    :bind (:map my-leader-map
-                ("vs" . yas-describe-tables))
-   :diminish yas-minor-mode
-   :init
-   (setq yas-snippet-dirs
-         '("~/.emacs.d/snippets"))
-   :config
-   (yas-global-mode 1)
-   (add-hook 'term-mode-hook (lambda()
-                               (yas-minor-mode -1))))
+      (let ((map company-active-map))
+        (define-key map (kbd "C-n") 'company-select-next)
+        (define-key map (kbd "C-p") 'company-select-previous)
+        (define-key map (kbd "C-f") 'company-complete-selection)
+        (define-key map (kbd "TAB") 'company-complete-selection)
+        (define-key map (kbd "<tab>") 'company-complete-selection))
 
-  (use-package yatemplate
-    :config
-    (auto-insert-mode t)
-    (yatemplate-fill-alist))
+      (setq company-backends '(company-files company-css company-capf (company-dabbrev-code company-yasnippet)))
+      (use-package company-dict
+        :config
+        (setq company-dict-dir (concat user-emacs-directory "dict/"))
+        (add-to-list 'company-backends 'company-dict))
+      )
+
+    (use-package yasnippet
+      :bind (:map my-leader-map
+                  ("vs" . yas-describe-tables))
+      :diminish yas-minor-mode
+      :init
+      (setq yas-snippet-dirs
+            '("~/.emacs.d/snippets"))
+      :config
+      (yas-global-mode 1)
+      (add-hook 'term-mode-hook (lambda()
+                                  (yas-minor-mode -1))))
+
+    (use-package yatemplate
+      :config
+      (auto-insert-mode t)
+      (yatemplate-fill-alist))
   #+end_src
 * VCS / Git
   I don't like popup windows when resolving merge conflicts.

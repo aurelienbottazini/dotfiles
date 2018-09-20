@@ -1397,4 +1397,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (diminish '0blayout-mode)
       (diminish 'auto-fill-function)
       (diminish 'visual-line-mode))
+      (diminish 'ruby-end-mode)
+      (diminish 'ruby-interpolation-mode)
   #+end_src

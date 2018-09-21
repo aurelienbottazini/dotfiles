@@ -1,4 +1,4 @@
-set fish_greeting "Liberty > Empathy > Integrity > Courage > Protect your time"
+set fish_greeting
 
 bass source ~/.nvm/nvm.sh
 set -gx PATH ~/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) ~/projects/depot_tools $PATH

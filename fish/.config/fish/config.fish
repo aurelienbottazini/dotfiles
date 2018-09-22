@@ -1,8 +1,6 @@
 set fish_greeting
 
-bass source ~/.nvm/nvm.sh
-set -gx PATH ~/bin /usr/local/sbin ~/.rbenv/shims (yarn global bin) ~/projects/depot_tools $PATH
-status --is-interactive; and source (rbenv init -|psub)
+set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims ~/.yarn/bin ~/projects/depot_tools $PATH
 
 set -x CDPATH $HOME $HOME/projects $HOME/work
 
@@ -18,7 +16,7 @@ set -x CDPATH $HOME $HOME/projects $HOME/work
 # marker Multi-select marker
 # spinner Streaming input indicator
 # header Header
-set -gx FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:1,fg+:-1,bg+:3,hl+:1 --color info:4,prompt:4,pointer:9,marker:166,spinner:4,header:1"
+set -x FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:1,fg+:-1,bg+:3,hl+:1 --color info:4,prompt:4,pointer:9,marker:166,spinner:4,header:1"
 
 # Effects
 # 00	Default colour
@@ -71,8 +69,6 @@ tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01
 ;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc
 =00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
 
-# status --is-interactive; and . (rbenv init -|psub)
-
 alias em "emacs_starter.sh"
 alias ec "emacsclient -ta ''"
 alias ef "emacsclient -ncq -a '' -e '(select-frame-set-input-focus (selected-frame))'"
@@ -98,18 +94,18 @@ alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 an
     neo4j:3.0"
 
 
-set -gx EDITOR 'vim'
+set -x EDITOR 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color
-set -gx fish_color_autosuggestion "#93a1a1"
-set -gx fish_color_command "-o" "#268bd2"
-set -gx fish_color_param "#268bd2"
-set -gx fish_color_search_match	"#073642" "--background=#fccf61"
-set -gx fish_color_operator "-o" "#6c71c4"
-set -gx fish_color_quote "-i" "#859900"
-set -gx fish_color_match "--background=#859900"
-set -gx fish_pager_color_prefix "-i" "#268bd2"
+set -g fish_color_autosuggestion "#93a1a1"
+set -g fish_color_command "-o" "#268bd2"
+set -g fish_color_param "#268bd2"
+set -g fish_color_search_match	"#073642" "--background=#fccf61"
+set -g fish_color_operator "-o" "#6c71c4"
+set -g fish_color_quote "-i" "#859900"
+set -g fish_color_match "--background=#859900"
+set -g fish_pager_color_prefix "-i" "#268bd2"
 
-set -gx fish_term24bit 1
+set -g fish_term24bit 1
 
 set -x GTAGSLABEL pygments
 

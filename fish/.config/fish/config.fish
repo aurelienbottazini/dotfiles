@@ -1,6 +1,6 @@
 set fish_greeting
 
-set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims ~/.yarn/bin ~/projects/depot_tools $PATH
+set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims ~/.yarn/bin ~/.cargo/bin ~/projects/depot_tools $PATH
 
 set -x CDPATH $HOME $HOME/projects $HOME/work
 

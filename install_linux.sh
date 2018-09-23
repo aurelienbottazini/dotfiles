@@ -23,6 +23,7 @@ sudo apt install silversearcher-ag
 sudo apt install rbenv
 rbenv global 2.4.4
 sudo gem install rubocop rcodetools fastri
+gem install solargraph
 # for sponge, this is to work with xmpfilter and mimic in place editing.
 sudo apt install moreutils
 

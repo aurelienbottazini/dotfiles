@@ -938,6 +938,19 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** Javascript
    #+begin_src emacs-lisp
+          (use-package lsp-javascript-typescript
+            :config
+            (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
+            (defun my-company-transformer (candidates)
+              (let ((completion-ignore-case t))
+                (all-completions (company-grab-symbol) candidates)))
+
+            (defun my-js-hook nil
+              (make-local-variable 'company-transformers)
+              (push 'my-company-transformer company-transformers))
+
+            (add-hook 'js-mode-hook 'my-js-hook))
+
      (use-package web-mode
        :mode "\\.vue\\'"
        :config

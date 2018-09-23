@@ -881,7 +881,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
     (add-hook 'find-file-hooks 'check-large-file-hook)
   #+end_src
-
+** lisp
+#+begin_src emacs-lisp
+  (use-package evil-lispy
+    :diminish evil-lispy-mode
+    :config
+    (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
+    (add-hook 'clojure-mode-hook #'evil-lispy-mode))
+#+end_src
 ** Clojure
    #+begin_src emacs-lisp
      (use-package clojure-mode
@@ -889,11 +896,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (add-hook 'clojure-mode-hook #'subword-mode)
 
-       (use-package evil-lispy
-         :diminish evil-lispy-mode
-         :config
-         (add-hook 'clojure-mode-hook #'evil-lispy-mode)
-         )
        (use-package cider))
    #+end_src
 

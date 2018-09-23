@@ -138,6 +138,7 @@ It makes it harder for major modes to minor modes trying to override my personal
                            (getenv "PATH")))
     (setq exec-path '("/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/"
                       "/home/aurelienbottazini/.nvm/versions/node/v8.11.1/bin/"
+                      "/home/aurelien/.nvm/versions/node/v8.11.1/bin/"
                       "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/"
                       "/Users/aurelienbottazini/.rbenv/bin/"
                       "/Users/aurelienbottazini/.rbenv/shims/"

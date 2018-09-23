@@ -20,7 +20,3 @@ yarn global add babel-cli
 yarn global add babel-preset-es2015
 yarn global add save-dev babel-preset-react
 yarn global add babel-preset-stage-0
-
-# for lsp-mode (autocompletion)
-yarn global add javascript-typescript-langserver
-yarn global add vscode-css-languageserver-bin

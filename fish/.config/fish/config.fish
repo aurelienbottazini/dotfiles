@@ -1,6 +1,7 @@
 set fish_greeting
 
 set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims  ~/.nvm/versions/node/v8.11.1/bin  ~/.yarn/bin ~/.cargo/bin ~/projects/depot_tools $PATH
+status --is-interactive; and source (rbenv init -|psub)
 
 set -x CDPATH $HOME $HOME/projects $HOME/work
 

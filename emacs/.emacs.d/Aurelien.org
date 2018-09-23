@@ -142,6 +142,7 @@ It makes it harder for major modes to minor modes trying to override my personal
                       "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/"
                       "/Users/aurelienbottazini/.rbenv/bin/"
                       "/Users/aurelienbottazini/.rbenv/shims/"
+                      "/home/aurelien/.rbenv/shims/"
                       "/Users/aurelienbottazini/dotfiles/bin/"
                       "/home/aurelienbottazini/.fzf/bin"
                       "/usr/local/bin/"
@@ -642,7 +643,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         (define-key map (kbd "TAB") 'company-complete-selection)
         (define-key map (kbd "<tab>") 'company-complete-selection))
 
-      (setq company-backends '(company-files company-css company-capf (company-dabbrev-code company-yasnippet)))
+       (use-package company-lsp)
+       (setq company-backends '(company-lsp company-files company-css company-capf (company-dabbrev-code company-yasnippet)))
+
+
       (use-package company-dict
         :config
         (setq company-dict-dir (concat user-emacs-directory "dict/"))
@@ -1078,6 +1082,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** Ruby
    #+begin_src emacs-lisp
+     (use-package lsp-ruby
+      :config
+      (add-hook 'ruby-mode-hook #'lsp-ruby-enable))
      (use-package yaml-mode
        :mode "\\.ya?ml\\'"
        )

@@ -673,6 +673,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   This prevents windows to popup and keeps everything in the same frame.
   #+begin_src emacs-lisp
     (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    (defun ora-ediff-hook ()
+      (ediff-setup-keymap)
+      (define-key ediff-mode-map "j" 'ediff-next-difference)
+      (define-key ediff-mode-map "k" 'ediff-previous-difference))
+
+    (add-hook 'ediff-mode-hook 'ora-ediff-hook)
+    (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+    (setq ediff-split-window-function 'split-window-vertically)
   #+end_src
 
 ** Tig

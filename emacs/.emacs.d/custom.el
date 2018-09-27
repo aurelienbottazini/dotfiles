@@ -20,6 +20,8 @@
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
  '(dumb-jump-mode t)
+ '(emamux:default-orientation (quote vertical))
+ '(emamux:use-nearest-pane t)
  '(flycheck-indication-mode nil)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)

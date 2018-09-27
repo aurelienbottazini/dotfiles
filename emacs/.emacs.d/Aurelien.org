@@ -673,6 +673,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   This prevents windows to popup and keeps everything in the same frame.
   #+begin_src emacs-lisp
     (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    (defun ora-ediff-hook ()
+      (ediff-setup-keymap)
+      (define-key ediff-mode-map "j" 'ediff-next-difference)
+      (define-key ediff-mode-map "k" 'ediff-previous-difference))
+
+    (add-hook 'ediff-mode-hook 'ora-ediff-hook)
+    (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+    (setq ediff-split-window-function 'split-window-vertically)
   #+end_src
 
 ** Tig
@@ -828,16 +836,16 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
 
-  (defun my-browse-url-chromium-new-app (url &optional new-window)
-    "Open URL in app mode in chromium."
+  (defun my-browse-url-new-app (url &optional new-window)
+    "Open URL in firefox."
     (interactive (browse-url-interactive-arg "URL: "))
     (unless
         (string= ""
                  (shell-command-to-string
-                  (concat "chromium-browser --new-window --app=" url)))
-      (message "Starting chromium...")))
+                  (concat "firefox --new-window " url)))
+      (message "Starting firefox...")))
 
-  (setq browse-url-browser-function 'my-browse-url-chromium-new-app)
+  (setq browse-url-browser-function 'my-browse-url-new-app)
   #+end_src
 * Notes
   #+begin_src emacs-lisp

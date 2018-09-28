@@ -1455,7 +1455,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ((equal major-mode 'emacs-lisp-mode)
            (eval-defun nil))
           ((equal major-mode 'js2-mode)
-           (js-comint-send-last-sexp))
+           (progn
+             (end-of-line)
+             (js-comint-send-last-sexp)))
           (t (error "No run command for that mode"))))
 
 
@@ -1474,7 +1476,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ((equal major-mode 'emacs-lisp-mode)
            (eval-defun nil))
           ((equal major-mode 'js2-mode)
-           (js-comint-send-buffer))
+           (progn
+             (js-comint-reset-repl)
+             (js-comint-send-buffer)))
           (t (error "No run command for that mode"))))
 
      (define-key my-leader-map (kbd "x") 'run-for-mode)

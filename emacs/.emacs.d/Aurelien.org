@@ -1478,7 +1478,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ((equal major-mode 'js2-mode)
            (progn
              (js-comint-reset-repl)
-             (js-comint-send-buffer)))
+             (js-comint-send-buffer)
+             (other-window -1)))
           (t (error "No run command for that mode"))))
 
      (define-key my-leader-map (kbd "x") 'run-for-mode)

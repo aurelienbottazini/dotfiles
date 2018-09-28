@@ -92,29 +92,31 @@ alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 an
 
 set -x EDITOR 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color
-set -g fish_color_autosuggestion "#93a1a1"
-set -g fish_color_command "-o" "#268bd2"
-set -g fish_color_param "#268bd2"
-set -g fish_color_search_match	"#073642" "--background=#fccf61"
-set -g fish_color_operator "-o" "#6c71c4"
-set -g fish_color_quote "-i" "#859900"
-set -g fish_color_match "--background=#859900"
-set -g fish_pager_color_prefix "-i" "#268bd2"
+if test -n "$TERM"
+  set -g fish_color_autosuggestion "#93a1a1"
+  set -g fish_color_command "-o" "#268bd2"
+  set -g fish_color_param "#268bd2"
+  set -g fish_color_search_match	"#073642" "--background=#fccf61"
+  set -g fish_color_operator "-o" "#6c71c4"
+  set -g fish_color_quote "-i" "#859900"
+  set -g fish_color_match "--background=#859900"
+  set -g fish_pager_color_prefix "-i" "#268bd2"
+
+  if test -e ~/work/dox-compose/helpers.bash
+    bass source ~/work/dox-compose/helpers.bash
+  end
+
+  if [ -z "$TMUX" ]
+    if [ "$TERM" != "dumb" ]
+     if [ -z "$INSIDE_EMACS" ]
+       if not string match -r \^com.jetbrains.intellij. $XPC_SERVICE_NAME
+         tat
+       end
+     end
+    end
+  end
+end
 
 set -g fish_term24bit 1
 
 set -x GTAGSLABEL pygments
-
-if test -e ~/work/dox-compose/helpers.bash
-  bass source ~/work/dox-compose/helpers.bash
-end
-
-if [ -z "$TMUX" ]
-  if [ "$TERM" != "dumb" ]
-   if [ -z "$INSIDE_EMACS" ]
-     if not string match -r \^com.jetbrains.intellij. $XPC_SERVICE_NAME
-       tat
-     end
-   end
-  end
-end

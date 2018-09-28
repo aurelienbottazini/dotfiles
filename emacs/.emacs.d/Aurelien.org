@@ -303,8 +303,7 @@ It makes it harder for major modes to minor modes trying to override my personal
          (define-key dired-mode-map "Y" 'ora-dired-rsync)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
-           "^" '(lambda () (interactive) (find-alternate-file ".."))
-           (kbd "RET") 'dired-find-alternate-file))
+           "^" '(lambda () (interactive) (find-alternate-file ".."))))
       )
 
     (defun dired-dwim-target-directory ()

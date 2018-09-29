@@ -1108,13 +1108,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :mode "ruby"
        :config
 
-       (eval-after-load 'enh-ruby-mode
-         '(progn
-            (defun ruby-mode-defaults ()
-              )))
-
-
-
        (add-hook 'enh-ruby-mode-hook 'subword-mode)
        ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
        ;; make it easier to work with global gnu tags
@@ -1543,4 +1536,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (add-hook 'less-mode-hook #'lsp-less-enable)
     (add-hook 'sass-mode-hook #'lsp-scss-enable)
     (add-hook 'scss-mode-hook #'lsp-scss-enable))
+
+  (use-package lsp-ruby
+    :config
+    (add-hook 'ruby-mode-hook #'lsp-ruby-enable)
+    (add-hook 'enh-ruby-mode-hook #'lsp-ruby-enable))
 #+end_src

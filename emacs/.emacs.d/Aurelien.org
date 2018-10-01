@@ -1059,8 +1059,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
        (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-       ;; seems there is a bug with js2-mode, does not color anything anymore
-       ;; (add-hook 'js2-mode-hook #'context-coloring-mode)
+       (add-hook 'js2-mode-hook #'context-coloring-mode)
        )
 
      (use-package json-mode

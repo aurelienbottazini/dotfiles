@@ -128,10 +128,12 @@ It makes it harder for major modes to minor modes trying to override my personal
 
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
+  slow down my emacs.
   #+begin_src emacs-lisp
     (setenv "PATH" (concat "/Users/aurelienbottazini/.config/yarn/global/node_modules/.bin/:"
                            "/home/aurelienbottazini/.nvm/versions/node/v8.11.1/bin/:"
                            "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/:"
+                           "/home/aurelien/.nvm/versions/node/v8.11.1/bin/:"
                            (getenv "HOME") "/.rbenv/shims:"
                            (getenv "HOME") "/.rbenv/bin:"
                            (getenv "HOME") "/.fzf/bin:"
@@ -142,6 +144,7 @@ It makes it harder for major modes to minor modes trying to override my personal
                       "/Users/aurelienbottazini/.nvm/versions/node/v8.9.1/bin/"
                       "/Users/aurelienbottazini/.rbenv/bin/"
                       "/Users/aurelienbottazini/.rbenv/shims/"
+                      "/home/aurelien/.nvm/versions/node/v8.11.1/bin/"
                       "/home/aurelien/.rbenv/shims/"
                       "/Users/aurelienbottazini/dotfiles/bin/"
                       "/home/aurelienbottazini/.fzf/bin"
@@ -303,8 +306,7 @@ It makes it harder for major modes to minor modes trying to override my personal
          (define-key dired-mode-map "Y" 'ora-dired-rsync)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
-           "^" '(lambda () (interactive) (find-alternate-file ".."))
-           (kbd "RET") 'dired-find-alternate-file))
+           "^" '(lambda () (interactive) (find-alternate-file ".."))))
       )
 
     (defun dired-dwim-target-directory ()
@@ -646,7 +648,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         (define-key map (kbd "TAB") 'company-complete-selection)
         (define-key map (kbd "<tab>") 'company-complete-selection))
 
-       (setq company-backends '(company-files company-css company-capf (company-dabbrev-code company-yasnippet)))
+      (setq company-backends '(company-files company-capf (company-lsp company-dabbrev-code company-yasnippet)))
 
       (use-package company-dict
         :config
@@ -1057,8 +1059,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
        (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-       ;; seems there is a bug with js2-mode, does not color anything anymore
-       ;; (add-hook 'js2-mode-hook #'context-coloring-mode)
+       (add-hook 'js2-mode-hook #'context-coloring-mode)
        )
 
      (use-package json-mode
@@ -1084,7 +1085,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (use-package yaml-mode
        :mode "\\.ya?ml\\'")
 
-     (use-package enh-ruby-mode
+     (use-package ruby-mode
        :mode "\\.rake\\'"
        :mode "Rakefile\\'"
        :mode "\\.gemspec\\'"
@@ -1106,18 +1107,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :mode "ruby"
        :config
 
-       (eval-after-load 'enh-ruby-mode
-         '(progn
-            (defun ruby-mode-defaults ()
-              )))
-
-
-
-       (add-hook 'enh-ruby-mode-hook 'subword-mode)
+       (add-hook 'ruby-mode-hook 'subword-mode)
        ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
        ;; make it easier to work with global gnu tags
        (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
-       (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
        (define-category ?U "Uppercase")
        (define-category ?u "Lowercase")
        (modify-category-entry (cons ?A ?Z) ?U)
@@ -1130,7 +1123,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                      (setq evil-cjk-word-separating-categories
                            (default-value 'evil-cjk-word-separating-categories)))))
 
-       (eval-after-load 'enh-ruby-mode
+       (eval-after-load 'ruby-mode
          '(progn
             (evil-define-key 'normal enh-ruby-mode-map
               "[m" 'ruby-beginning-of-defun
@@ -1456,7 +1449,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ((equal major-mode 'emacs-lisp-mode)
            (eval-defun nil))
           ((equal major-mode 'js2-mode)
-           (js-comint-send-last-sexp))
+           (progn
+             (end-of-line)
+             (js-comint-send-last-sexp)))
           (t (error "No run command for that mode"))))
 
 
@@ -1475,7 +1470,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ((equal major-mode 'emacs-lisp-mode)
            (eval-defun nil))
           ((equal major-mode 'js2-mode)
-           (js-comint-send-buffer))
+           (progn
+             (js-comint-reset-repl)
+             (js-comint-send-buffer)
+             (other-window -1)))
           (t (error "No run command for that mode"))))
 
      (define-key my-leader-map (kbd "x") 'run-for-mode)
@@ -1515,3 +1513,29 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (diminish 'subword-mode)
       (diminish 'abbrev-mode)
   #+end_src
+
+* lsp
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode)
+  (use-package lsp-javascript-typescript
+    :config
+    (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable))
+
+  (use-package lsp-css
+    :config
+    (defun my-css-mode-setup ()
+      (when (eq major-mode 'css-mode)
+        ;; Only enable in strictly css-mode, not scss-mode (css-mode-hook
+        ;; fires for scss-mode because scss-mode is derived from css-mode)
+        (lsp-css-enable)))
+    (add-hook 'css-mode-hook #'my-css-mode-setup)
+    (add-hook 'less-mode-hook #'lsp-less-enable)
+    (add-hook 'sass-mode-hook #'lsp-scss-enable)
+    (add-hook 'scss-mode-hook #'lsp-scss-enable))
+
+  (use-package lsp-ruby
+    :config
+    (add-hook 'ruby-mode-hook #'lsp-ruby-enable)
+    (add-hook 'enh-ruby-mode-hook #'lsp-ruby-enable))
+#+end_src

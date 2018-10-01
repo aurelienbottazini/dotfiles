@@ -152,6 +152,8 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
     --volume=$HOME/neo4j/logs:/logs \
     neo4j:3.0"
 
+eval "$(~/work/dox-compose/bin/dox-init)"
+
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

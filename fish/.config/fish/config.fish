@@ -1,5 +1,6 @@
 set fish_greeting
 
+eval (~/work/dox-compose/bin/dox-init)
 set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims  ~/.nvm/versions/node/v8.11.1/bin  ~/.yarn/bin ~/.cargo/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
 

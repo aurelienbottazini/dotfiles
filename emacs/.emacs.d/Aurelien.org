@@ -1513,3 +1513,46 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (diminish 'subword-mode)
       (diminish 'abbrev-mode)
   #+end_src
+
+
+* Ligatures
+#+begin_src emacs-lisp
+  ;; For emacs25
+  (setq prettify-symbols-unprettify-at-point 'right-edge)
+
+  (defconst pragmatapro-prettify-symbols-alist
+    (mapcar (lambda (s)
+              `(,(car s)
+                .
+                ,(vconcat
+                  (apply 'vconcat (make-list (- (length (car s)) 1) (vector (decode-char 'ucs #X0020) '(Br . Bl))))
+                  (vector (decode-char 'ucs (cadr s))))))
+            '(("->"        #XE984)
+              ("=>"        #XEA04)
+              ("=="        #XEA01)
+              ("!!"        #XE900)
+              ("!="        #XE901)
+              ("!!!"       #XE903)
+              ("||"        #XEA61)
+              ("&&"        #XE941)
+              ("/="        #XE9A3)
+              ("<="        #XE9C8)
+              (">="        #XEA21)
+              (">>"        #XEA22)
+              ("#("        #XE920)
+              ("#{"        #XE922)
+              ("##"        #XE925)
+              ("//"        #XE9A1)
+              ("[["        #XEA80)
+              ("]]"        #XEA81)
+              )))
+
+  (defun add-pragmatapro-prettify-symbols-alist ()
+    (dolist (alias pragmatapro-prettify-symbols-alist)
+      (push alias prettify-symbols-alist)))
+
+  (add-hook 'prog-mode-hook
+            #'add-pragmatapro-prettify-symbols-alist)
+
+  (global-prettify-symbols-mode +1)
+#+end_src

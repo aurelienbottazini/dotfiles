@@ -1086,7 +1086,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (use-package yaml-mode
        :mode "\\.ya?ml\\'")
 
-     (use-package enh-ruby-mode
+     (use-package ruby-mode
        :mode "\\.rake\\'"
        :mode "Rakefile\\'"
        :mode "\\.gemspec\\'"
@@ -1108,11 +1108,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :mode "ruby"
        :config
 
-       (add-hook 'enh-ruby-mode-hook 'subword-mode)
+       (add-hook 'ruby-mode-hook 'subword-mode)
        ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
        ;; make it easier to work with global gnu tags
        (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
-       (eval-after-load 'enh-ruby-mode '(modify-syntax-entry ?: "." enh-ruby-mode-syntax-table))
        (define-category ?U "Uppercase")
        (define-category ?u "Lowercase")
        (modify-category-entry (cons ?A ?Z) ?U)
@@ -1125,7 +1124,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                      (setq evil-cjk-word-separating-categories
                            (default-value 'evil-cjk-word-separating-categories)))))
 
-       (eval-after-load 'enh-ruby-mode
+       (eval-after-load 'ruby-mode
          '(progn
             (evil-define-key 'normal enh-ruby-mode-map
               "[m" 'ruby-beginning-of-defun
@@ -1522,7 +1521,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (use-package lsp-mode)
   (use-package lsp-javascript-typescript
     :config
-    (add-hook 'js-mode-hook 'my-js-hook)
     (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable))
 
   (use-package lsp-css

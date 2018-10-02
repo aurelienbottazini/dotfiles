@@ -158,3 +158,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 fisher fzf
 
 sudo snap install skype
+
+# terminal
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin

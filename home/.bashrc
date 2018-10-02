@@ -91,6 +91,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias l.='ls -d .*'
 
 alias ec="emacsclient -s $(tmux display-message -p '#S') -ta ''"
 

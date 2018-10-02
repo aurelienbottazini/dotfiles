@@ -388,7 +388,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     (when window-system
       (when *is-linux*
         ;;(set-frame-font "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
-        (set-frame-font "-*-PragmataPro-normal-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
+        (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
       (when *is-mac*
         (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
         (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))

@@ -423,7 +423,7 @@ It makes it harder for major modes to minor modes trying to override my personal
    modifier etc...
    #+begin_src emacs-lisp
      (setq default-frame-alist
-           '((background-color . "#ffffff")
+           '((background-color . "#f1f2f1")
              (foreground-color . "#000000")))
 
        (lexical-let ((default-color (cons (face-background 'mode-line)

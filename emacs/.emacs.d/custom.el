@@ -76,7 +76,7 @@
  '(diff-hl-delete ((t (:background "#ffcfd8" :foreground "#bc3e44"))))
  '(diff-hl-insert ((t (:background "#e4f4e9" :foreground "#546758"))))
  '(error ((t (:foreground "#f65058" :weight normal))))
- '(evil-search-highlight-persist-highlight-face ((t (:background "#fff166"))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "#fccf61"))))
  '(flycheck-info ((t (:background "#ffcfd8"))))
  '(flycheck-warning ((t (:background "#ffcfd8"))))
  '(font-lock-comment-face ((t (:foreground "#939598" :slant italic))))

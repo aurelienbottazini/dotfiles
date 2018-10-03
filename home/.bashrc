@@ -130,13 +130,7 @@ export EDITOR="vim"
 
 eval "$(rbenv init -)"
 
-g() {
-    if [[ $# > 0 ]]; then
-        git $@
-    else
-        git status
-    fi
-}
+alias g="git"
 
 export PATH=~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$PATH
 export CDPATH=.:~/:~/projects:~/work

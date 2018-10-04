@@ -155,6 +155,8 @@ eval "$(~/work/dox-compose/bin/dox-init)"
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 _gen_fzf_default_opts() {
   local base03="234"
   local base02="235"
@@ -187,5 +189,3 @@ _gen_fzf_default_opts() {
   #"
 }
 _gen_fzf_default_opts
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

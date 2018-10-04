@@ -522,28 +522,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (set-register (car r) (cadr r)))
    #+end_src
 
-** Emacs tabs
-   Keys mimic my Tmux configuration
-   #+begin_src emacs-lisp
-     (use-package eyebrowse
-       :config
-       (eyebrowse-mode t)
-       (define-key my-keys-minor-mode-map (kbd "C-a n") 'eyebrowse-next-window-config)
-       (define-key my-keys-minor-mode-map (kbd "C-a p") 'eyebrowse-prev-window-config)
-       (define-key my-keys-minor-mode-map (kbd "C-a c") 'eyebrowse-create-window-config)
-       (define-key my-keys-minor-mode-map (kbd "C-a k") 'eyebrowse-close-window-config)
-       (define-key my-keys-minor-mode-map (kbd "C-a 1") 'eyebrowse-switch-to-window-config-1)
-       (define-key my-keys-minor-mode-map (kbd "C-a 2") 'eyebrowse-switch-to-window-config-2)
-       (define-key my-keys-minor-mode-map (kbd "C-a 3") 'eyebrowse-switch-to-window-config-3)
-       (define-key my-keys-minor-mode-map (kbd "C-a 4") 'eyebrowse-switch-to-window-config-4)
-       (define-key my-keys-minor-mode-map (kbd "C-a 5") 'eyebrowse-switch-to-window-config-5)
-       (define-key my-keys-minor-mode-map (kbd "C-a 6") 'eyebrowse-switch-to-window-config-6)
-       (define-key my-keys-minor-mode-map (kbd "C-a 7") 'eyebrowse-switch-to-window-config-7)
-       (define-key my-keys-minor-mode-map (kbd "C-a 8") 'eyebrowse-switch-to-window-config-8)
-       (define-key my-keys-minor-mode-map (kbd "C-a 9") 'eyebrowse-switch-to-window-config-9)
-       (define-key my-keys-minor-mode-map (kbd "C-a 0") 'eyebrowse-switch-to-window-config-0))
-   #+end_src
-
 ** Search Everything
 
    #+begin_src emacs-lisp

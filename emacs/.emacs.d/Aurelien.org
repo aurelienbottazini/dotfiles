@@ -390,8 +390,10 @@ It makes it harder for major modes to minor modes trying to override my personal
         ;;(set-frame-font "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
         (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
       (when *is-mac*
-        (set-frame-font "-*-Operator Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
+        (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
         (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))
+
+    (add-to-list 'default-frame-alist '(font . "PragmataPro Liga-12"))
 
     (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
     (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -422,9 +424,8 @@ It makes it harder for major modes to minor modes trying to override my personal
    Changes modeline color depending on Evil state, if buffer is
    modifier etc...
    #+begin_src emacs-lisp
-     (setq default-frame-alist
-           '((background-color . "#f1f2f1")
-             (foreground-color . "#000000")))
+    (add-to-list 'default-frame-alist '(background-color . "#f1f2f1"))
+    (add-to-list 'default-frame-alist '(foreground-color . "#000000"))
 
        (lexical-let ((default-color (cons (face-background 'mode-line)
                                         (face-foreground 'mode-line))))

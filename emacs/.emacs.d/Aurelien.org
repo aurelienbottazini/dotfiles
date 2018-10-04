@@ -790,42 +790,25 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** org-capture
 #+begin_src emacs-lisp
-  ; emacsclient -ca "" -e "(make-capture-frame)"
+  ; emacsclient -ca "" -e "(counsel-org-capture)"
   ; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
   ; Bind Key to: emacsclient -e "(make-capture-frame)"
   (defadvice org-capture-finalize
       (after delete-capture-frame activate)
     "Advise capture-finalize to close the frame"
-    (if (equal "capture" (frame-parameter nil 'name))
-        (progn
-          (delete-frame)
-          (delete-frame))))
+    (progn
+    (delete-frame)))
 
   (defadvice org-capture-destroy
       (after delete-capture-frame activate)
     "Advise capture-destroy to close the frame"
-    (if (equal "capture" (frame-parameter nil 'name))
-        (progn
-          (delete-frame)
-          (delete-frame))))
+    (progn
+    (delete-frame)))
 
   ;; make the frame contain a single window. by default org-capture
   ;; splits the window.
   (add-hook 'org-capture-mode-hook
             'delete-other-windows)
-
-  (defun make-capture-frame ()
-    "Create a new frame and run org-capture."
-    (interactive)
-    (make-frame '((name . "capture")
-                  (width . 120)
-                  (height . 15)))
-    (select-frame-by-name "capture")
-    (setq word-wrap 1)
-    (setq truncate-lines nil)
-    ;; Using the second argument to org-capture, we bypass interactive selection
-    ;; and use the existing template defined above.
-    (org-capture nil "t"))
 #+end_src
 * Email
   #+begin_src emacs-lisp

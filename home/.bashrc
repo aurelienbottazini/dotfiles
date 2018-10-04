@@ -178,9 +178,7 @@ _gen_fzf_default_opts() {
   # Comment and uncomment below for the light theme.
 
   # Solarized Dark color scheme for fzf
-  export FZF_DEFAULT_OPTS="
-    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+  export FZF_DEFAULT_OPTS="--color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue,info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
   ## Solarized Light color scheme for fzf
   #export FZF_DEFAULT_OPTS="

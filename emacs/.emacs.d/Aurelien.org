@@ -1283,7 +1283,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "m") 'counsel-bookmark)
     (define-key my-leader-map (kbd "s") 'projectile-toggle-between-implementation-and-test)
     (define-key my-leader-map (kbd "S") 'projectile-find-implementation-or-test-other-window)
-    (define-key my-leader-map (kbd "t") 'counsel-git)
+    (define-key my-leader-map (kbd "t") 'counsel-projectile-find-file)
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)
 

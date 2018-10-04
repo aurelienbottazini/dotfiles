@@ -790,20 +790,22 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** org-capture
 #+begin_src emacs-lisp
-  ; emacsclient -ca "" -e "(counsel-org-capture)"
-  ; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
-  ; Bind Key to: emacsclient -e "(make-capture-frame)"
+  ;; emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e "(counsel-org-capture)"
+  ;; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
+  ;; Bind Key to: emacsclient -e "(make-capture-frame)"
   (defadvice org-capture-finalize
       (after delete-capture-frame activate)
     "Advise capture-finalize to close the frame"
-    (progn
-    (delete-frame)))
+    (if (equal "global-org-capture" (frame-parameter nil 'name))
+        (progn
+          (delete-frame))))
 
   (defadvice org-capture-destroy
       (after delete-capture-frame activate)
     "Advise capture-destroy to close the frame"
-    (progn
-    (delete-frame)))
+    (if (equal "global-org-capture" (frame-parameter nil 'name))
+        (progn
+          (delete-frame))))
 
   ;; make the frame contain a single window. by default org-capture
   ;; splits the window.

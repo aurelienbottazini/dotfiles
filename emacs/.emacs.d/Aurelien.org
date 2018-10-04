@@ -789,7 +789,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** org-capture
 #+begin_src emacs-lisp
-
+  ; emacsclient -ca "" -e "(make-capture-frame)"
   ; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
   ; Bind Key to: emacsclient -e "(make-capture-frame)"
   (defadvice org-capture-finalize

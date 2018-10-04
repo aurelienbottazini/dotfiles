@@ -6,8 +6,9 @@ windows:
       layout: main-horizontal
       panes:
         - dox-dc up auth-api
-        - dox-dc up doximity
         - dox-dc up activities
+        - dox-dc up doximity
+        - dox-dc up doximity-client-vue
   - tests:
       layout: main-horizontal
       panes:

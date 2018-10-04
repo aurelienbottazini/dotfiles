@@ -1,0 +1,10 @@
+name: dox
+root: ~/projects/aurelienbottazini.com
+
+windows:
+  - dev:
+      layout: main-horizontal
+      panes:
+        - ec .
+        - bundle exec jekyll s -wlD
+        - grunt watch

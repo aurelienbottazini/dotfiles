@@ -732,6 +732,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                                (draft-org-files :maxlevel . 3)))
     (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
     (setq org-refile-use-outline-path 'file)                  ; Show full paths for refiling
+    (setq org-refile-allow-creating-parent-nodes 'confirm)
 
     (add-hook 'org-mode-hook 'turn-on-auto-fill)
 

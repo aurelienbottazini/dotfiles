@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
+ '(company-dict-enable-fuzzy t)
  '(company-minimum-prefix-length 2)
  '(context-coloring-syntactic-comments nil)
  '(context-coloring-syntactic-strings nil)

@@ -720,15 +720,19 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
     (setq org-directory (expand-file-name "~/Dropbox/org"))
-    (setq org-default-notes-file (concat org-directory "/inbox.org"))
+    (setq org-default-notes-file (concat org-directory "/GTD.org"))
     (define-key my-keys-minor-mode-map "\C-cc" 'counsel-org-capture)
     (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
-    (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
 
-    (setq org-refile-targets '((nil :maxlevel . 9)
-                               (org-agenda-files :maxlevel . 9)))
+    (defun draft-org-files ()
+      (directory-files-recursively "~/projects/aurelienbottazini.com/_drafts/" ".*\.org"))
+
+    (setq org-refile-targets '((nil :maxlevel . 3)
+                               (org-agenda-files :maxlevel . 3)
+                               (draft-org-files :maxlevel . 3)))
     (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-    (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+    (setq org-refile-use-outline-path 'file)                  ; Show full paths for refiling
+    (setq org-refile-allow-creating-parent-nodes 'confirm)
 
     (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
@@ -737,10 +741,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq org-mu4e-link-query-in-headers-mode nil)
 
     (setq org-capture-templates
-    '(("t" "todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-    "* TODO %?\n")
-    ("l" "todo with links" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-    "* TODO %?\n  %a\n")))
+    '(("g" "GTD" entry (file+headline "~/Dropbox/org/GTD.org" "Inbox")
+    "* %?\n")
+    ("d" "doximity" entry (file+headline "~/Dropbox/org/doximity.org" "Inbox")
+    "* %?\n  %a\n")))
 
     (add-hook 'org-capture-mode-hook 'evil-insert-state)
 

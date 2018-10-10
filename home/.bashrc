@@ -120,7 +120,6 @@ if ! shopt -oq posix; then
 fi
 
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
-[[ -f ~/work/dox-compose/helpers.bash ]] && source ~/work/dox-compose/helpers.bash
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

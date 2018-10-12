@@ -565,11 +565,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+end_src
 
 ** Project navigation
+
+   [[https://projectile.readthedocs.io/en/latest/projects/#adding-custom-project-types][Custom project types]]
    #+begin_src emacs-lisp
      (use-package projectile
        :init
        (setq projectile-switch-project-action 'projectile-dired)
-       (setq projectile-enable-caching t)
+       (setq projectile-enable-caching nil)
        (setq projectile-completion-system 'ivy)
        :bind (:map my-leader-map
                    ("p" . projectile-commander))

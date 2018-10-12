@@ -193,7 +193,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     (prefer-coding-system 'utf-8)
     (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
 
-    (when *is-mac*
+    (when (or *is-mac* *is-linux*)
       (use-package xclip
         :config
         (xclip-mode 1)))

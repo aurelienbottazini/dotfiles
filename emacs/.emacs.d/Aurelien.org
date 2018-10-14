@@ -193,7 +193,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     (prefer-coding-system 'utf-8)
     (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
 
-    (when *is-mac*
+    (when (or *is-mac* *is-linux*)
       (use-package xclip
         :config
         (xclip-mode 1)))
@@ -728,7 +728,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
     (setq org-directory (expand-file-name "~/Dropbox/org"))
     (setq org-default-notes-file (concat org-directory "/GTD.org"))
-    (define-key my-keys-minor-mode-map "\C-cc" 'counsel-org-capture)
+    (define-key my-keys-minor-mode-map "\C-cc" 'org-capture)
     (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
 
     (defun draft-org-files ()
@@ -909,14 +909,23 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
     (add-hook 'find-file-hooks 'check-large-file-hook)
   #+end_src
+
+  #+begin_src emacs-lisp
+    (defun my-prog-mode-auto-fill-hook ()
+      (setq fill-column 80)
+      (set (make-local-variable 'comment-auto-fill-only-comments) t)
+      (auto-fill-mode t))
+    (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
+  #+end_src
+
 ** lisp
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (use-package evil-lispy
     :diminish evil-lispy-mode
     :config
     (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
     (add-hook 'clojure-mode-hook #'evil-lispy-mode))
-#+end_src
+   #+end_src
 ** Clojure
    #+begin_src emacs-lisp
      (use-package clojure-mode
@@ -1171,7 +1180,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
              ad-do-it))
          )
        )
-              #+end_src
+   #+end_src
 
 ** Html
    #+begin_src emacs-lisp

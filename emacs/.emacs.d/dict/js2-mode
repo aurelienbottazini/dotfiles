@@ -41,3 +41,4 @@ Symbol.toStringTag
 Symbol.unscopables
 Symbol.for
 Symbol.keyFor
+new.target

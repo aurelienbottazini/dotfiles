@@ -1361,7 +1361,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
   Here is complete setup you could insert into ~/.emacs.d/init.el,
 
-  #+BEGIN_QUOTE
+  #+BEGIN_SRC emacs-lisp :tangle no
     ;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
     ;; OR if I'm reading my personal issue track document,
     (defun my-setup-develop-environment ()
@@ -1381,7 +1381,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       )
     ;; most major modes inherit from prog-mode, so below line is enough
     (add-hook 'prog-mode-hook 'my-setup-develop-environment)
-  #+END_QUOTE
+  #+END_SRC
 
   All variables may be overridden on a per-directory basis in your
   .dir-locals.el. See (info “(Emacs) Directory Variables”) for
@@ -1391,7 +1391,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
   A sample .dir-locals.el,
 
-  #+BEGIN_QUOTE
+  #+BEGIN_SRC emacs-lisp :tangle no
     ((nil . ((ffip-project-root . "~/projs/PROJECT_DIR")
              ;; ignore files bigger than 64k and directory "dist/" when searching
              (ffip-find-options . "-not -size +64k -not -iwholename '*/dist/*'")
@@ -1404,7 +1404,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                        ;; Do NOT ignore directory "bin/" when searching
                        (setq ffip-prune-patterns `(delete "*/bin/*" ,@ffip-prune-patterns))))
              )))
-  #+END_QUOTE
+  #+END_SRC
 
   #+begin_src emacs-lisp
     (use-package find-file-in-project)

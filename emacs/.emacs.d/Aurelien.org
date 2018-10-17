@@ -740,9 +740,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
     (setq org-capture-templates
     '(("g" "GTD" entry (file+headline "~/Dropbox/org/GTD.org" "Inbox")
-    "* %?\n")
-    ("d" "doximity" entry (file+headline "~/Dropbox/org/doximity.org" "Inbox")
-    "* %?\n  %a\n")))
+    "* %?\n")))
 
     (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
@@ -1274,9 +1272,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
     (define-key my-leader-map (kbd "a") 'org-agenda)
     (define-key my-leader-map (kbd "r") 'counsel-recentf)
+    (define-key my-leader-map (kbd "R") 'revert-buffer)
     (define-key my-leader-map (kbd "f") 'counsel-rg)
     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
-    (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/")))
+    (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/drafts")))
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
     (define-key my-leader-map (kbd "jj") 'dired-jump)

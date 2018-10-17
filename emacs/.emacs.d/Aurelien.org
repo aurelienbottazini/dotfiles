@@ -511,17 +511,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+end_src
 
 * Navigation
-** File Registers
-   Quickly navigate to important files with ~C-x r key~
-   #+begin_src emacs-lisp
-     (dolist
-         (r `(
-              (?e (file . ,(concat user-emacs-directory "Aurelien.org")))
-              (?g (file . ,(concat "~/Dropbox/org/" "GTD.org")))
-              ))
-       (set-register (car r) (cadr r)))
-   #+end_src
-
 ** Search Everything
 
    #+begin_src emacs-lisp
@@ -1227,6 +1216,11 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (define-key my-leader-map (kbd "cs") 'coverlay-display-stats)
        (define-key my-leader-map (kbd "ct") 'coverlay-toggle-overlays))
    #+end_src
+
+** Rust
+#+begin_src emacs-lisp
+(use-package rust-mode)
+#+end_src
 * Bindings
 
   Shows key combination helper in minibuffer
@@ -1275,6 +1269,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "r") 'counsel-recentf)
     (define-key my-leader-map (kbd "f") 'counsel-rg)
     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
+    (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/")))
+    (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
+    (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
     (define-key my-leader-map (kbd "i") 'counsel-imenu)

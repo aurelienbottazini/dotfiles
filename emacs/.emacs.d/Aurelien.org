@@ -779,6 +779,11 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     '((sequence "TODO" "|" "DONE(!)" "CANCELED")))
   #+end_src
 
+
+** org-babel
+#+begin_src emacs-lisp
+  (require 'ob-js)
+#+end_src
 ** org-capture
 #+begin_src emacs-lisp
   ;; emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e "(counsel-org-capture)"

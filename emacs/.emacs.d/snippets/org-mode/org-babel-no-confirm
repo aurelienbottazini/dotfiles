@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-babel no confirm
+# key: obnc
+# --
+# -*- org-confirm-babel-evaluate: nil -*-$0

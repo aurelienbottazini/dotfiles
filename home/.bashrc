@@ -152,8 +152,6 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
 
 eval "$(~/work/dox-compose/bin/dox-init)"
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 _gen_fzf_default_opts() {
@@ -186,3 +184,5 @@ _gen_fzf_default_opts() {
   #"
 }
 _gen_fzf_default_opts
+
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

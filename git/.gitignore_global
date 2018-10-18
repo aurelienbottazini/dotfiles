@@ -29,3 +29,4 @@ yarn-error.log
 .rakeTasks
 .rebel_readline_history
 .dumbjump
+.dir-locals.el

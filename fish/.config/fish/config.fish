@@ -83,6 +83,7 @@ alias tu "tmux -u"
 alias screen "screen -U"
 alias pd "psql -p 5432 -h localhost -d "
 alias ls "ls --color"
+alias l. "ls -d .*"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 and; docker run \
     --publish=7474:7474 --publish=7687:7687 \
@@ -104,7 +105,7 @@ if test -n "$TERM"
   set -g fish_pager_color_prefix "-i" "#268bd2"
 
   if test -e ~/work/dox-compose/helpers.bash
-    bass source ~/work/dox-compose/helpers.bash
+    bass source ~/work/dox-compose/bin/dox-init
   end
 
   if [ -z "$TMUX" ]

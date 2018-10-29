@@ -18,7 +18,7 @@ set -x CDPATH $HOME $HOME/projects $HOME/work
 # marker Multi-select marker
 # spinner Streaming input indicator
 # header Header
-set -x FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:1,fg+:-1,bg+:3,hl+:1 --color info:4,prompt:4,pointer:9,marker:166,spinner:4,header:1"
+set -x FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:33,fg+:254,bg+:235,hl+:33,info:136,prompt:136,pointer:230,marker:230,spinner:136"
 
 # Effects
 # 00	Default colour

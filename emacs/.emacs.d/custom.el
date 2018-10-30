@@ -51,12 +51,16 @@
  '(ruby-align-chained-calls t)
  '(ruby-align-to-stmt-keywords t)
  '(ruby-deep-indent-paren-style nil)
- '(safe-local-variable-values (quote ((org-confirm-babel-evaluate))))
+ '(safe-local-variable-values
+   (quote
+    ((ffip-find-options . "-not -size +64k -not -iwholename './target/*'")
+     (ffip-find-options . "-not -size +64k -not -iwholename './target/debug/*'")
+     (org-confirm-babel-evaluate))))
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -42,3 +42,7 @@ Symbol.unscopables
 Symbol.for
 Symbol.keyFor
 new.target
+clearTimeout
+setTimeout
+clearInterval
+setInterval

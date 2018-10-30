@@ -90,8 +90,8 @@ myKeysP = [
         ("M-<Backspace>", kill)
         , ("M-S-p", spawn "scrot")
         , ("M-S-t", sendMessage ToggleStruts)
-        , ("M1-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-        , ("M4-<ArrowDown", withFocused $ windows . W.sink)
+        , ("C-S-<Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+        , ("M4-<ArrowDown>", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 5- unmute")
         , ("M4-<Space> e", runOrRaiseNext "st" (className =? "Emacs"))
         , ("M4-<Space> t", runOrRaiseNext "st" (className =? "st-256color"))
@@ -175,25 +175,25 @@ myProjects =
              },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws2WWW "firefox"
+             , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
              },
-     Project { projectName = ws3SHARE
-             , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws3SHARE "chromium-browser --new-window --app=https://tweetdeck.twitter.com"
-                                            spawnOn ws3SHARE "chromium-browser --new-window --app=https://analytics.twitter.com"
-             },
-     Project { projectName = ws7MUSIC
-             , projectDirectory = "media/aurelienbottazini/Files/music"
-             , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"
-             },
+     -- Project { projectName = ws3SHARE
+     --         , projectDirectory = "~/"
+     --         , projectStartHook = Just $ do spawnOn ws3SHARE "chromium-browser --new-window --app=https://tweetdeck.twitter.com"
+     --                                        spawnOn ws3SHARE "chromium-browser --new-window --app=https://analytics.twitter.com"
+     --         },
+     -- Project { projectName = ws7MUSIC
+     --         , projectDirectory = "media/aurelienbottazini/Files/music"
+     --         , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"
+     --         },
      Project { projectName = ws8MSG
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws8MSG "slack" },
-     Project { projectName = ws9MAIL
-             , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"
-                                            spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
-             }
+             , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
+     -- Project { projectName = ws9MAIL
+     --         , projectDirectory = "~/"
+     --         , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"
+     --                                        spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
+     --         }
    ]
 
 myStartupHook = do
@@ -229,7 +229,7 @@ main = do
         , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
-        , terminal = "st"
+        , terminal = "kitty"
         , focusedBorderColor = "#bc3e33"
         , normalBorderColor = "#c5c5c5"
         , borderWidth = 15

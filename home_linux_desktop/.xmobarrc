@@ -1,21 +1,20 @@
 Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
-        , additionalFonts = ["xft:Noto Emoji:size=10", "xft:PragmataPro:size=12"]
+        , additionalFonts = ["xft:PragmataPro Liga:size=12"]
         , borderColor = "#939598"
         , border = BottomB
-	, borderWidth = 3
+        , borderWidth = 3
         , bgColor = "#dad9d6"
         , fgColor = "black"
         , position = TopW L 100
         , commands = [
-	Run Date "%a %b %_d" "theDate" 10
-	, Run Com "date" ["+%H:%M"] "localtime" 10
-	, Run Com "./bin/sanFranciscoTime.sh" [] "sftime" 10
-	, Run Com "./bin/getVolume.sh" [] "myvolume" 10
-	, Run Com "./bin/dropboxStatus.sh" [] "mydropbox" 10
-	, Run Com "./bin/wifiStrengh.sh" ["wlx00c0ca967db2"] "mywifistrengh" 10
-	, Run StdinReader
-	]
-	, sepChar = "%"
-	, alignSep = "}{"
-	, template = " %StdinReader% }{ <action=st alsamixer><fn=2></fn> %myvolume%</action>  <action=wicd-client><fn=2></fn> %mywifistrengh%</action>  <fn=2></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>🌍</fn>%localtime% <fn=1>🌎</fn>%sftime%</action> <action=./dotfiles/bin/toggleScreens.sh><fn=2></fn></action> "
+          Run Date "%a %b %_d" "theDate" 10
+          , Run Com "date" ["+%H:%M"] "localtime" 10
+          , Run Com "./bin/sanFranciscoTime.sh" [] "sftime" 10
+          , Run Com "./bin/getVolume.sh" [] "myvolume" 10
+          , Run Com "./bin/dropboxStatus.sh" [] "mydropbox" 10
+          , Run StdinReader
+          ]
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = " %StdinReader% }{ <action=st alsamixer><fn=1></fn> %myvolume%</action> <fn=1></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> "
 }

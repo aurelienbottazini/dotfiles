@@ -1412,8 +1412,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
               )))
    #+END_SRC
 
+   To install fd (rust replacement for find), download it
+   [[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
+   to use `fd` instead of find.
    #+begin_src emacs-lisp
-     (use-package find-file-in-project)
+     (use-package find-file-in-project
+      :config
+      (setq ffip-use-rust-fd nil))
      (define-key my-leader-map (kbd "t") 'find-file-in-project)
    #+end_src
 ** Tmux Integration and Buffer navigation

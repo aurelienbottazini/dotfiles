@@ -6,6 +6,7 @@ Includes config files for:
  - Fish
  - Xmonad
  - Xmobar
+ `dmenu_run -fn "Gotham HTF Black:size=13" -nb "#fff166" -nf "#000000" -sb "#fccf61" -sf "#000000"`
  - bash
  - git
  - st

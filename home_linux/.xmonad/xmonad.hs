@@ -86,16 +86,24 @@ mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
 -- I have two variables to hold my bindings: myKeysP and myKeys.
 -- They use a different syntax and the two are combined in my config.
 -- Sometimes I prefer a syntax over another that's why I keep the two.
+
+
+-- memo
+-- default config: https://github.com/xmonad/xmonad/blob/master/src/XMonad/Config.hs
+-- M4-ret = swap master
+-- M4-, = increase number of windows in master area
+-- M4-. = decrease number of windows in master area
+-- M4-S-/ = show default keybindings
 myKeysP = [
         ("M-<Backspace>", kill)
         , ("M-S-p", spawn "flameshot gui")
+        , ("M4-S-l", sendMessage NextLayout)
         , ("M-S-t", sendMessage ToggleStruts)
         , ("C-S-<Space>", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")
-        , ("M4-<ArrowDown>", withFocused $ windows . W.sink)
+        , ("M4-S-s", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 5- unmute")
-        , ("M4-<Space> e", runOrRaiseNext "st" (className =? "Emacs"))
+        , ("M4-<Space> e", runOrRaiseNext "emacs" (className =? "Emacs"))
         , ("M4-<Space> t", runOrRaiseNext "kitty" (className =? "kitty"))
-        , ("M4-<Space> w", runOrRaiseNext "st" (className =? "Firefox"))
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)

@@ -23,5 +23,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <action=st alsamixer><fn=1></fn> %myvolume%</action>  <action=wicd-client><fn=1></fn> %mywifistrengh%</action>  <fn=1></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> %battery% "
+        , template = " %StdinReader% }{ <action=gnome-tweaks><fn=1>☢</fn></action> <action=st alsamixer><fn=1></fn> %myvolume%</action>  <action=wicd-client><fn=1></fn> %mywifistrengh%</action>  <fn=1></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> %battery% "
         }

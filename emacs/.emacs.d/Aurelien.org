@@ -589,7 +589,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 #+begin_src emacs-lisp
   (use-package counsel-etags
    :bind (:map my-leader-map
-   ("e" . counsel-etags-find-tag)))
+   ("e" . counsel-etags-find-tag-at-point)))
 #+end_src
 * AutoCompletions
   #+begin_src emacs-lisp

@@ -585,6 +585,12 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :init
        (setq dumb-jump-selector 'ivy))
        #+end_src
+** Tags
+#+begin_src emacs-lisp
+  (use-package counsel-etags
+   :bind (:map my-leader-map
+   ("e" . counsel-etags-find-tag)))
+#+end_src
 * AutoCompletions
   #+begin_src emacs-lisp
     (use-package company
@@ -815,8 +821,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (require 'mu4e)
 
   (add-to-list 'mu4e-view-actions '("Browser View" . mu4e-action-view-in-browser) t)
-
-  (define-key my-leader-map (kbd "e") 'mu4e)
 
   (setq mu4e-maildir (expand-file-name "~/Maildir/fastmail"))
   (setq mu4e-sent-messages-behavior 'sent)

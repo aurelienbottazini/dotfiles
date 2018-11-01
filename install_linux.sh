@@ -171,3 +171,13 @@ sed -i "s/Icon\=kitty/Icon\=\/home\/$USER\/.local\/kitty.app\/share\/icons\/hico
 
 # imageoptim
 sudo apt-get install trimage
+
+sudo apt-get install gnome-control-center
+
+cd ~/projects
+git clone https://github.com/universal-ctags/ctags.git
+cd ctags
+./autogen.sh
+./configure
+make
+sudo make install

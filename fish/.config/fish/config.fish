@@ -122,3 +122,4 @@ end
 set -g fish_term24bit 1
 
 set -x GTAGSLABEL pygments
+set -x XDG_CURRENT_DESKTOP GNOME # for gnome-control-center to work correctly on xmonad

@@ -73,12 +73,7 @@ scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "shutter" "shutter" (className =? "Shutter") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
-    ,(NS "htop" "st -c htop htop" (className =? "htop") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
-    ,(NS "tig" "st -c tig tig" (className =? "tig") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
-    ,(NS "spotify" "spotify --force-device-scale-factor=2 --role=spotify" (stringProperty "_NET_WM_NAME" =? "Spotify") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ]
-
 
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
@@ -96,7 +91,6 @@ mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
 -- M4-S-/ = show default keybindings
 myKeysP = [
         ("M-<Backspace>", kill)
-        , ("M-S-p", spawn "flameshot gui")
         , ("M4-S-l", sendMessage NextLayout)
         , ("M-S-t", sendMessage ToggleStruts)
         , ("C-S-<Space>", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")
@@ -122,9 +116,10 @@ myKeysP = [
         , ("M4-M1-k",  windowSwap U True)
         , ("M4-M1-w",  screenGo L True)
         , ("M4-M1-e",  screenGo R True)
+        , ("M4-s g", spawn "peek")
         , ("M4-s m", namedScratchpadAction scratchpads "cmus")
         , ("M4-s r", namedScratchpadAction scratchpads "ranger")
-        , ("M4-s s", namedScratchpadAction scratchpads "shutter" )
+        , ("M4-s s", spawn "flameshot gui")
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-t a", toggleCopyToAll)
         , ("<XF86AudioMute>", spawn "amixer -q -D pulse sset Master toggle")

@@ -157,7 +157,7 @@ getSortByIndexNoSP =
 
 ws1GTD = "1:gtd"
 ws2WWW = "2:www"
-ws3SHARE = "3:share"
+ws3TRAINING = "3:training"
 ws4CODE = "4:code"
 ws5MY = "5:my"
 ws6MY = "6:my"
@@ -165,7 +165,7 @@ ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
 
-myWorkspaces = [ws1GTD, ws2WWW, ws3SHARE, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
 myProjects :: [Project]
 
 -- Projects are predefined workspace. When you switch to a workspace
@@ -180,11 +180,12 @@ myProjects =
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
              },
-     -- Project { projectName = ws3SHARE
-     --         , projectDirectory = "~/"
-     --         , projectStartHook = Just $ do spawnOn ws3SHARE "chromium-browser --new-window --app=https://tweetdeck.twitter.com"
-     --                                        spawnOn ws3SHARE "chromium-browser --new-window --app=https://analytics.twitter.com"
-     --         },
+     Project { projectName = ws3TRAINING
+             , projectDirectory = "~/projects/training-heaven"
+             , projectStartHook = Just $ do spawnOn ws3TRAINING "idea ~/projects/training-heaven"
+                                            spawnOn ws3TRAINING "anki"
+                                            spawnOn ws3TRAINING "chromium-browser --new-window --app=https://avdi.codes/courses/moom/"
+             },
      -- Project { projectName = ws7MUSIC
      --         , projectDirectory = "media/aurelienbottazini/Files/music"
      --         , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"

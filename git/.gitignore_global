@@ -30,3 +30,4 @@ yarn-error.log
 .rebel_readline_history
 .dumbjump
 .dir-locals.el
+wallaby.js

@@ -95,7 +95,7 @@ myKeysP = [
         , ("M-S-t", sendMessage ToggleStruts)
         , ("C-S-<Space>", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")
         , ("M4-S-s", withFocused $ windows . W.sink)
-        , ("M4-S-<Space>", spawn "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e \"(counsel-org-capture)\"")
+        , ("C-S-<Return>", spawn "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'")
         , ("M4--", spawn "amixer set Master 5- unmute")
         , ("M4-<Space> e", runOrRaiseNext "emacs" (className =? "Emacs"))
         , ("M4-<Space> t", runOrRaiseNext "kitty" (className =? "kitty"))

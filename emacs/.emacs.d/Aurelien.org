@@ -552,6 +552,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
          (ibuffer nil (buffer-name) (list (cons 'name ivy--old-re))))
        (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
        (global-set-key "\C-s" 'counsel-grep-or-swiper)
+       (define-key evil-normal-state-map (kbd "/") 'counsel-grep-or-swiper)
        (setq counsel-grep-base-command
        "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
        (setq ivy-re-builders-alist
@@ -698,8 +699,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (fullframe magit-status magit-mode-quit-window))
 
-     (use-package evil-magit)
-
      (use-package diff-hl
        :config
        (add-hook 'prog-mode-hook 'diff-hl-mode)
@@ -772,7 +771,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq org-log-into-drawer t)
 
     (setq org-todo-keywords
-    '((sequence "TODO" "|" "DONE(!)" "CANCELED")))
+    '((sequence "TODO" "PR" "QA" "|" "DONE(!)" "CANCELED")))
   #+end_src
 
 
@@ -1249,10 +1248,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
   #+end_src
 
+  I use spc as my leader key so I want it available everywhere
+  #+begin_src emacs-lisp
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  #+end_src
+
   #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep)
-
 
 
     (use-package paredit
@@ -1390,6 +1393,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
          (add-to-list 'ffip-prune-patterns "*/dist/*"))
        ;; insert more WHEN statements below this line for other projects
        )
+
      ;; most major modes inherit from prog-mode, so below line is enough
      (add-hook 'prog-mode-hook 'my-setup-develop-environment)
    #+END_SRC
@@ -1423,8 +1427,11 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+begin_src emacs-lisp
      (use-package find-file-in-project
       :config
+      (add-to-list 'ffip-prune-patterns "*/dist/*")
+      (add-to-list 'ffip-prune-patterns "*/.idea/*")
+      (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
       (setq ffip-use-rust-fd nil))
-     (define-key my-leader-map (kbd "t") 'find-file-in-project)
+     (define-key my-leader-map (kbd "t") 'find-file-in-project-by-selected)
    #+end_src
 ** Tmux Integration and Buffer navigation
    Move between buffers with C-h C-j C-k C-l and makes Emacs terminal

@@ -52,7 +52,14 @@
  '(ruby-deep-indent-paren-style nil)
  '(safe-local-variable-values
    (quote
-    ((ffip-find-options . "-not -size +64k -not -iwholename './target/*'")
+    ((eval progn
+           (require
+            (quote find-file-in-project))
+           (setq ffip-prune-patterns
+                 (\`
+                  ("*/public/packs*/*"
+                   (\,@ ffip-prune-patterns)))))
+     (ffip-find-options . "-not -size +64k -not -iwholename './target/*'")
      (ffip-find-options . "-not -size +64k -not -iwholename './target/debug/*'")
      (org-confirm-babel-evaluate))))
  '(show-paren-when-point-in-periphery t)

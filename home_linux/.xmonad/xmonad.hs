@@ -99,6 +99,7 @@ myKeysP = [
         , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")
         , ("M4-<Space> e", runOrRaiseNext "emacs" (className =? "Emacs"))
         , ("M4-<Space> t", runOrRaiseNext "kitty" (className =? "kitty"))
+        , ("M4-<Space> w", runOrRaiseNext "chromium" (className =? "Chromium-browser"))
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)

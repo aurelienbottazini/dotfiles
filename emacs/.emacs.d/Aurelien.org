@@ -225,7 +225,9 @@ It makes it harder for major modes to minor modes trying to override my personal
 
    You can remove all tabs from your buffer with ~untabify~
    #+begin_src emacs-lisp
-     (setq-default indent-tabs-mode nil)     ;no tabs
+     (setq-default
+      indent-tabs-mode nil    ;no tabs
+      c-basic-offset 2)
      (setq-default whitespace-style '(face trailing tabs tab-mark))
      (defun ab-turn-on-whitespace-mode ()
        (progn (whitespace-mode) (diminish 'whitespace-mode)))
@@ -1117,7 +1119,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (use-package yaml-mode
        :mode "\\.ya?ml\\'")
 
-     (use-package enh-ruby-mode
+     (use-package ruby-mode
        :mode "\\.rake\\'"
        :mode "Rakefile\\'"
        :mode "\\.gemspec\\'"
@@ -1142,25 +1144,18 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (add-hook 'ruby-mode-hook 'subword-mode)
        ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
        ;; make it easier to work with global gnu tags
-       (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
-       (define-category ?U "Uppercase")
-       (define-category ?u "Lowercase")
-       (modify-category-entry (cons ?A ?Z) ?U)
-       (modify-category-entry (cons ?a ?z) ?u)
-       (make-variable-buffer-local 'evil-cjk-word-separating-categories)
-       (add-hook 'subword-mode-hook
-                 (lambda ()
-                   (if subword-mode
-                       (push '(?u . ?U) evil-cjk-word-separating-categories)
-                     (setq evil-cjk-word-separating-categories
-                           (default-value 'evil-cjk-word-separating-categories)))))
-
-       (eval-after-load 'enh-ruby-mode
-         '(progn
-            (evil-define-key 'normal enh-ruby-mode-map
-              "[m" 'ruby-beginning-of-defun
-              "]m" 'ruby-end-of-defun
-              )))
+       ;; (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
+       ;; (define-category ?U "Uppercase")
+       ;; (define-category ?u "Lowercase")
+       ;; (modify-category-entry (cons ?A ?Z) ?U)
+       ;; (modify-category-entry (cons ?a ?z) ?u)
+       ;; (make-variable-buffer-local 'evil-cjk-word-separating-categories)
+       ;; (add-hook 'subword-mode-hook
+       ;;           (lambda ()
+       ;;             (if subword-mode
+       ;;                 (push '(?u . ?U) evil-cjk-word-separating-categories)
+       ;;               (setq evil-cjk-word-separating-categories
+       ;;                     (default-value 'evil-cjk-word-separating-categories)))))
 
        (use-package bundler)
 

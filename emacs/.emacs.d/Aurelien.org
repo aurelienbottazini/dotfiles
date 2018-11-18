@@ -61,6 +61,7 @@ It makes it harder for major modes to minor modes trying to override my personal
                                  "python -mjson.tool" (current-buffer) t)))
 
     (defun org-strike-header ()
+      "Strikes current org-header using + markers."
       (interactive)
       (beginning-of-line)
       (re-search-forward "\*+ ")
@@ -69,24 +70,30 @@ It makes it harder for major modes to minor modes trying to override my personal
       (insert "+"))
 
     (defun run-node-on-buffer ()
+      "Run node on current buffer or region."
       (interactive)
       (shell-command-on-region (point-min) (point-max) "node"))
 
     (defun my-reload-dir-locals-for-current-buffer ()
-      "reload dir locals for the current buffer"
+      "Reload dir locals for the current buffer."
       (interactive)
       (let ((enable-local-variables :all))
         (hack-dir-local-variables-non-file-buffer)))
 
     (defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
-      "For every buffer with the same `default-directory` as the
-    current buffer's, reload dir-locals."
+      "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
       (interactive)
       (let ((dir default-directory))
         (dolist (buffer (buffer-list))
           (with-current-buffer buffer
             (when (equal default-directory dir))
             (my-reload-dir-locals-for-current-buffer)))))
+
+    (defun filepath-with-line-number-for-current-buffer ()
+      "Return a string with Buffer-file-name:line-number.
+    Make it easier to prepare commands for tools like rspec"
+      (interactive)
+      (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
   #+end_src
 
 * Initialize Packages

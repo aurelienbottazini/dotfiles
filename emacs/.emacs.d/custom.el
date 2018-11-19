@@ -6,6 +6,7 @@
  '(coffee-tab-width 2)
  '(company-dict-enable-fuzzy t)
  '(company-minimum-prefix-length 2)
+ '(company-require-match nil)
  '(context-coloring-syntactic-comments nil)
  '(context-coloring-syntactic-strings nil)
  '(coverlay-mode t)

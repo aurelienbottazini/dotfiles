@@ -37,7 +37,7 @@
  '(mu4e-use-fancy-chars t)
  '(org-agenda-files
    (quote
-    ("~/Dropbox/org/refile-beorg.org" "~/Dropbox/org/inbox.org" "~/Dropbox/org/GTD.org")))
+    ("~/Dropbox/org/refile-beorg.org" "~/Dropbox/org/GTD.org")))
  '(org-bullets-bullet-list (quote ("⭐" "◾" "◽")))
  '(org-log-into-drawer t)
  '(org-modules

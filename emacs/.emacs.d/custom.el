@@ -67,8 +67,8 @@
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -149,7 +149,7 @@
  '(org-list-dt ((t (:weight normal))))
  '(org-sexp-date ((t (:foreground "#65428a"))))
  '(org-tag ((t (:background "#c5f2e6" :weight bold))))
- '(org-todo ((t (:foreground "#f65058" :weight bold))))
+ '(org-todo ((t (:background "#fccf61" :foreground "black" :slant italic :weight normal))))
  '(outline-2 ((t (:inherit font-lock-variable-name-face :foreground "#3a499c"))))
  '(region ((t (:background "#adcff1"))))
  '(secondary-selection ((t (:background "#fff166"))))

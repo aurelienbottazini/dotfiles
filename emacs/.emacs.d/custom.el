@@ -67,8 +67,8 @@
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -77,10 +77,10 @@
  '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "default" :family "default"))))
  '(bold ((t (:weight normal))))
  '(bold-italic ((t (:slant italic :weight normal))))
- '(context-coloring-level-1-face ((t (:foreground "#4982cf"))))
+ '(context-coloring-level-1-face ((t (:foreground "#3a499c"))))
  '(context-coloring-level-2-face ((t (:foreground "#546758"))))
  '(context-coloring-level-3-face ((t (:foreground "#bc3e44"))))
- '(context-coloring-level-4-face ((t (:foreground "#3a499c"))))
+ '(context-coloring-level-4-face ((t (:foreground "#4982cf"))))
  '(context-coloring-level-5-face ((t (:foreground "#885a61"))))
  '(context-coloring-level-6-face ((t (:foreground "#65428a"))))
  '(context-coloring-level-7-face ((t (:foreground "#4c4e56"))))

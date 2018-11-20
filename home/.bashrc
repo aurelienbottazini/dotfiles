@@ -185,4 +185,5 @@ _gen_fzf_default_opts() {
 }
 _gen_fzf_default_opts
 
+export XDG_CURRENT_DESKTOP=gnome
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

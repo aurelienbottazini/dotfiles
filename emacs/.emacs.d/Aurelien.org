@@ -1003,10 +1003,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 ** Javascript
    #+BEGIN_SRC emacs-lisp
      (setq compilation-error-regexp-alist-alist
-           (cons '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
+           (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
                         1 ;; file
                         2 ;; line
-                        3 ;; column
                         )
                  compilation-error-regexp-alist-alist))
      (setq compilation-error-regexp-alist

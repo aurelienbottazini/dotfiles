@@ -222,6 +222,11 @@ It makes it harder for major modes to minor modes trying to override my personal
         (xclip-mode 1)))
   #+end_src
 
+  I want error highlights and binding for those in shell modes too.
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
+  #+END_SRC
+
 ** tabs and whitespace
    By default I disable tabs.
    In addition I have ~whitespace-mode~ because sometimes when copy pasting code from
@@ -996,6 +1001,21 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+end_src
 
 ** Javascript
+   #+BEGIN_SRC emacs-lisp
+     (setq compilation-error-regexp-alist-alist
+           (cons '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
+                        1 ;; file
+                        2 ;; line
+                        3 ;; column
+                        )
+                 compilation-error-regexp-alist-alist))
+     (setq compilation-error-regexp-alist
+           (cons 'node compilation-error-regexp-alist))
+     (add-hook 'js2-mode-hook
+               (lambda ()
+                 (set (make-local-variable 'compile-command)
+                      (format "node %s" (file-name-nondirectory buffer-file-name)))))
+   #+END_SRC
    #+begin_src emacs-lisp
      (use-package web-mode
        :mode "\\.vue\\'"

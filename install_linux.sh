@@ -181,3 +181,6 @@ cd ctags
 ./configure
 make
 sudo make install
+
+# bluetooth blueman-manager
+sudo apt-get install blueman

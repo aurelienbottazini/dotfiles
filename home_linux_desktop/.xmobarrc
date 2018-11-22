@@ -16,5 +16,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
           ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <action=launch-settings.sh><fn=1></fn></action> <action=st alsamixer><fn=1></fn> %myvolume%</action> <fn=1></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> "
+        , template = " %StdinReader% }{ <action=toggleScreens.sh><fn=1></fn></action> <action=blueman-manager><fn=1></fn></action> <action=launch-settings.sh><fn=1></fn></action> <action=st alsamixer><fn=1></fn> %myvolume%</action> <fn=1></fn> <action=firefox --new-window https://www.fastmail.com/calendar/>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> "
 }

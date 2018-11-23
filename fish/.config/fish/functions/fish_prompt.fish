@@ -93,7 +93,7 @@ function fish_prompt
   set -l last_status $status
 
   set_color -i -o
-  _print_in_color "  "(_pwd_with_tilde) blue
+  _print_in_color "  "(_pwd_with_tilde) "#268bd2"
 
   if _in_git_directory
    if _no_commits

@@ -103,6 +103,7 @@ if test -n "$TERM"
   set -g fish_color_quote "-i" "#859900"
   set -g fish_color_match "--background=#859900"
   set -g fish_pager_color_prefix "-i" "#268bd2"
+  set -g fish_color_error "red"
 
   if test -e ~/work/dox-compose/helpers.bash
     bass source ~/work/dox-compose/bin/dox-init

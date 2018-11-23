@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "PragmataPro Liga:pixelsize=26:antialias=true:autohint=true";
+static char *font = "PragmataPro Liga:pixelsize=28:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -82,44 +82,72 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"#000000",
-	"#bc3e44",
-	"#546758",
-	"#fccf61",
-	"#3a499c",
-	"#65428a",
-	"#5b8edb",
-	"#e8eae8",
+	"#073642",
+	"#dc322f",
+	"#859900",
+	"#b58900",
+	"#268bd2",
+	"#d33682",
+	"#2aa198",
+	"#eee8d5",
 
 	/* 8 bright colors */
-	"#4c4e56",
-	"#f65058",
-	"#97d88a",
-	"#fff166",
-	"#4982cf",
-	"#f56d9e",
-	"#00b4e4",
-	"#ffffff",
+	"#002b36",
+	"#cb4b16",
+	"#586e75",
+	"#657b83",
+	"#839496",
+	"#6c71c4",
+	"#93a1a1",
+	"#fdf6e3",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
+	"#f56d9e",
 	"#555555",
 };
+
+/* /\* Terminal colors (16 first used in escape sequence) *\/ */
+/* static const char *colorname[] = { */
+/* 	/\* 8 normal colors *\/ */
+/* 	"black", */
+/* 	"red3", */
+/* 	"green3", */
+/* 	"yellow3", */
+/* 	"blue2", */
+/* 	"magenta3", */
+/* 	"cyan3", */
+/* 	"gray90", */
+
+/* 	/\* 8 bright colors *\/ */
+/* 	"gray50", */
+/* 	"red", */
+/* 	"green", */
+/* 	"yellow", */
+/* 	"#5c5cff", */
+/* 	"magenta", */
+/* 	"cyan", */
+/* 	"white", */
+
+/* 	[255] = 0, */
+
+/* 	/\* more colors can be added after 255 to use with DefaultXX *\/ */
+/* 	"#cccccc", */
+/* 	"#555555", */
+/* }; */
 
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 0;
-unsigned int defaultbg = 15;
-static unsigned int defaultcs = 13;
-static unsigned int defaultrcs = 14;
+unsigned int defaultfg = 12;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -177,7 +205,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_I,           iso14755,       {.i =  0} },
 };
 
 /*

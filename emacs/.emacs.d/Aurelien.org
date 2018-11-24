@@ -417,14 +417,14 @@ It makes it harder for major modes to minor modes trying to override my personal
   #+begin_src emacs-lisp
     (when window-system
       (when *is-linux*
-        ;; (set-frame-font "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
-        (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
+        (set-frame-font "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
+        ;; (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
       (when *is-mac*
         (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1"))
         (set-fontset-font t 'unicode "Noto Emoji" nil 'prepend))
 
-    (add-to-list 'default-frame-alist '(font . "PragmataPro Liga-12"))
-    ;; (add-to-list 'default-frame-alist '(font . "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
+    ;; (add-to-list 'default-frame-alist '(font . "PragmataPro Liga-12"))
+    (add-to-list 'default-frame-alist '(font . "-*-Operator Mono-light-normal-normal-*-28-*-*-*-m-0-iso10646-1"))
 
     (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
     (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -1864,8 +1864,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         (push alias prettify-symbols-alist)))
 
     ;; I use kitty as a terminal and it already supports ligatures
-    (when (display-graphic-p)
-      (add-hook 'prog-mode-hook
-                #'add-pragmatapro-prettify-symbols-alist)
-      (global-prettify-symbols-mode +1))
+    ;; (when (display-graphic-p)
+    ;;   (add-hook 'prog-mode-hook
+    ;;             #'add-pragmatapro-prettify-symbols-alist)
+    ;;   (global-prettify-symbols-mode +1))
   #+end_src

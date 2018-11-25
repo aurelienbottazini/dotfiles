@@ -184,3 +184,5 @@ sudo make install
 
 # bluetooth blueman-manager
 sudo apt-get install blueman
+
+sudo apt-get install gsimplecal

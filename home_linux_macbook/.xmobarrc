@@ -23,5 +23,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <fn=1></fn>%mydropbox% <action=launch-settings.sh sound><fn=1></fn> %myvolume%</action>  <action=launch-settings.sh wifi><fn=1></fn> %mywifistrengh%</action>  <fn=1></fn> <action=gsimplecal>%theDate%</action> <action=firefox --new-window https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> %battery% "
+        , template = " %StdinReader% }{ <fn=1></fn>%mydropbox% <action=launch-settings.sh sound><fn=1></fn> %myvolume%</action>  <action=launch-settings.sh wifi><fn=1></fn> %mywifistrengh%</action>  <fn=1></fn> <action=gsimplecal>%theDate%</action> <action=chromium-browser --new-window --app=https://www.worldtimebuddy.com><fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%</action> %battery% "
         }

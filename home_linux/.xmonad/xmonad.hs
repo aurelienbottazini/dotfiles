@@ -75,8 +75,10 @@ scratchpads =
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "settings" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ]
+    ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    -- resource is used to match the first component of the WM_NAME property
+    ,(NS "calendar" "chromium-browser --new-window --app=http://calendar.google.com" (resource =? "calendar.google.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ] where role = stringProperty "WM_WINDOW_ROLE"
 
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ smartBorders $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
@@ -126,6 +128,7 @@ myKeysP = [
         , ("M4-s r", namedScratchpadAction scratchpads "ranger")
         , ("M4-s s", spawn "flameshot gui")
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
+        , ("M4-s c", namedScratchpadAction scratchpads "calendar")
         , ("M4-t a", toggleCopyToAll)
         , ("<XF86AudioMute>", spawn "amixer -q -D pulse sset Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5- unmute")
@@ -189,7 +192,7 @@ myProjects =
              , projectDirectory = "~/projects/training-heaven"
              , projectStartHook = Just $ do spawnOn ws3TRAINING "idea ~/projects/training-heaven"
                                             spawnOn ws3TRAINING "anki"
-                                            spawnOn ws3TRAINING "chromium-browser --new-window --app=https://avdi.codes/courses/moom/"
+                                            spawnOn ws3TRAINING "chromium-browser --new-window https://avdi.codes/courses/moom/"
              },
      -- Project { projectName = ws7MUSIC
      --         , projectDirectory = "media/aurelienbottazini/Files/music"

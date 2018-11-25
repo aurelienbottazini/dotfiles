@@ -71,6 +71,7 @@ prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 -- are displayed on the current workspace
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -126,7 +127,8 @@ myKeysP = [
         , ("M4-M1-w",  screenGo L True)
         , ("M4-M1-e",  screenGo R True)
         , ("M4-s g", spawn "peek")
-        , ("M4-s m", namedScratchpadAction scratchpads "cmus")
+        , ("M4-s m", namedScratchpadAction scratchpads "youtube-music")
+        , ("M4-s M", namedScratchpadAction scratchpads "cmus")
         , ("M4-s r", namedScratchpadAction scratchpads "ranger")
         , ("M4-s s", spawn "flameshot gui")
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")

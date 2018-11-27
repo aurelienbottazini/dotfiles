@@ -28,6 +28,7 @@ import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.PhysicalScreens
 import XMonad.Actions.CopyWindow
+import XMonad.Hooks.EwmhDesktops
 
 import qualified XMonad.StackSet as W
 
@@ -241,13 +242,16 @@ main = do
     xmproc <- spawnPipe "xmobar"
 
     xmonad
+        $ ewmh
         $ withUrgencyHook LibNotifyUrgencyHook
         $ dynamicProjects myProjects
         $ docks
         $ withNavigation2DConfig myNavigation2DConfig
         $ def
         {
-        manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
+          handleEventHook =
+            handleEventHook def <+> fullscreenEventHook,
+          manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
         , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook

@@ -107,6 +107,7 @@
  '(isearch ((t (:background "#fccf61" :foreground "#4c4e56"))))
  '(line-number ((t (:background "#dad9d6" :foreground "#939598"))))
  '(line-number-current-line ((t (:background "#dad9d6" :foreground "black"))))
+ '(link ((t (:foreground "RoyalBlue3" :underline t :slant italic))))
  '(linum ((t (:background "#dad9d6" :foreground "#4c4e56"))))
  '(magit-branch-current ((t (:inherit magit-branch-local :box 1 :weight normal))))
  '(magit-branch-local ((t (:foreground "SkyBlue4" :weight normal))))

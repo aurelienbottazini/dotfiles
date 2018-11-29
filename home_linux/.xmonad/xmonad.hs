@@ -112,7 +112,7 @@ myKeysP = [
         , ("M4-<Space> e", runOrRaiseNext "emacs" (className =? "Emacs"))
         , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-<Space> t", runOrRaiseNext "st" (className =? "st-256color"))
-        , ("M4-<Space> w", runOrRaiseNext "chromium" (className =? "Chromium-browser"))
+        , ("M4-<Space> w", runOrRaiseNext "chromium " (resource =? "chromium-browser"))
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)

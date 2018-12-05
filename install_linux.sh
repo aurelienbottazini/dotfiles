@@ -186,3 +186,7 @@ sudo make install
 sudo apt-get install blueman
 
 sudo apt-get install gsimplecal
+
+sudo apt-get install rofi
+
+sudo apt-get install arandr

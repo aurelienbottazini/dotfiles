@@ -65,3 +65,6 @@ URxvt.resize-font.smaller: C-M-Down
 URxvt.resize-font.bigger: C-M-Up
 URxvt.resize-font.reset: C-M-0
 URxvt.resize-font.show: C-M-question
+
+rofi.run-command: fish -c '{cmd}'
+rofi.run-list-command: 'fish -c functions'

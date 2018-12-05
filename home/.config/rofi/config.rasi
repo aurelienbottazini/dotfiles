@@ -1,0 +1,86 @@
+* {
+  black:      #000000;
+  blue:       #3a499c;
+  red:        #bc3e44;
+  emphasis:   #f79b2f;
+  green:      #5cb860;
+  yellow:     #fff166;
+  mangenta:   #9d7ad2;
+  cyan:       #4982cf;
+
+  text:       #000000;
+  text-alt:   #000000;
+
+  fg:         #abb2bf;
+  bg:         #282c34;
+
+  spacing: 0;
+  background-color: transparent;
+
+  font: "Gotham HTF Black 26";
+  text-color: @text;
+}
+
+window {
+  fullscreen: false;
+  background-color: #fccf61;
+}
+
+inputbar {
+  margin: 20px 10px 20px 10px;
+  children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+  text-color: @blue;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: ":";
+  text-color: @text-alt;
+}
+
+entry {
+  margin: 0px 10px;
+}
+
+listview {
+  spacing: 5px;
+  dynamic: true;
+  scrollbar: false;
+}
+
+element {
+  padding: 5px;
+  text-color: @text-alt;
+  highlight: bold #bc3e44; /* green */
+  border-radius: 3px;
+}
+
+element selected {
+  background-color: @emphasis;
+  text-color: @text;
+}
+
+element urgent, element selected urgent {
+  text-color: @red;
+}
+
+element active, element selected active {
+  text-color: @purple;
+}
+
+message {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+  border: 1px;
+  border-color: @cyan;
+}
+
+button selected {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+}

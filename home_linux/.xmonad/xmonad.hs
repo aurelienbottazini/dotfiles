@@ -110,6 +110,7 @@ myKeysP = [
         , ("M4-S-x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown -h now\"")
         , ("M4-S-s", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 5- unmute")
+        , ("M4-p", spawn "rofi -show run")
         , ("M4-<Space> <Space>", spawn "rofi -show run")
         , ("M4-<Space> <Return>", namedScratchpadAction scratchpads "global-org-capture")
         , ("M4-<Space> w", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))

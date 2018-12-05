@@ -104,6 +104,8 @@ myKeysP = [
         ("M-<Backspace>", kill)
         , ("M4-S-l", sendMessage NextLayout)
         , ("M-S-t", sendMessage ToggleStruts)
+        , ("M4-S-r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot\"")
+        , ("M4-S-x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown -h now\"")
         , ("M4-S-s", withFocused $ windows . W.sink)
         , ("M4--", spawn "amixer set Master 5- unmute")
         , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")

@@ -225,7 +225,7 @@ myStartupHook = do
     -- https://wiki.haskell.org/Xmonad/Frequently_asked_questions#Problems_with_Java_applications.2C_Applet_java_console
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "xsetroot -cursor_name left_ptr"
-    spawn "feh --bg-fill ~/Dropbox/Pictures/wallpaper/rawpixel-580237-unsplash.jpg"
+    spawn "feh --bg-fill ~/Dropbox/Pictures/wallpaper/jonny-caspari-1148431-unsplash.jpg"
 
 noScratchPad ws = if ws == "NSP" then "" else ws
 

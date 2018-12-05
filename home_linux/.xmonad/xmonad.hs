@@ -113,7 +113,7 @@ myKeysP = [
         , ("M4-<Space> w", spawn "rofi -show window")
         , ("M4-<Space> e", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
         , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
-        , ("M4-<Space> t", runOrRaiseNext "st" (className =? "st-256color"))
+        , ("M4-<Space> t", runOrRaiseNext "kitty" (resource =? "kitty"))
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)
@@ -256,7 +256,7 @@ main = do
         , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
-        , terminal = "st"
+        , terminal = "kitty"
         , focusedBorderColor = "#bc3e33"
         , normalBorderColor = "#c5c5c5"
         , borderWidth = 15

@@ -190,3 +190,4 @@ sudo apt-get install gsimplecal
 sudo apt-get install rofi
 
 sudo apt-get install arandr
+sudo apt-get install zathura

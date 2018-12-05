@@ -114,6 +114,7 @@ myKeysP = [
         , ("M4-<Space> e", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
         , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-<Space> t", runOrRaiseNext "kitty" (resource =? "kitty"))
+        , ("M4-<Space> u", spawn "dmenu-unicode.sh")
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)

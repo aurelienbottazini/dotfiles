@@ -110,7 +110,7 @@ myKeysP = [
         , ("M4--", spawn "amixer set Master 5- unmute")
         , ("M4-<Space> <Space>", spawn "rofi -show run")
         , ("M4-<Space> <Return>", namedScratchpadAction scratchpads "global-org-capture")
-        , ("M4-<Space> w", spawn "rofi -show window")
+        , ("M4-<Space> w", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))
         , ("M4-<Space> e", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
         , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-<Space> t", runOrRaiseNext "kitty" (resource =? "kitty"))

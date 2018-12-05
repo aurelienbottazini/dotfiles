@@ -195,7 +195,8 @@ myProjects =
    [
      Project { projectName = ws1GTD
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws1GTD "emacs ~/Dropbox/org/GTD.org"
+             , projectStartHook = Just $ do spawnOn ws1GTD "kitty"
+                                            spawnOn ws1GTD "idea ~/work/doximity"
              },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
@@ -205,7 +206,6 @@ myProjects =
              , projectDirectory = "~/projects/training-heaven"
              , projectStartHook = Just $ do spawnOn ws3TRAINING "idea ~/projects/training-heaven"
                                             spawnOn ws3TRAINING "anki"
-                                            spawnOn ws3TRAINING "chromium-browser --new-window https://avdi.codes/courses/moom/"
              },
      -- Project { projectName = ws7MUSIC
      --         , projectDirectory = "media/aurelienbottazini/Files/music"

@@ -13,6 +13,8 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Accordion
+import XMonad.Layout.Grid
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicProjects
@@ -87,7 +89,7 @@ scratchpads =
     ] where role = stringProperty "WM_WINDOW_ROLE"
 
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
-  $ spacing mySpacing $ smartBorders $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2)
+  $ spacing mySpacing $ smartBorders $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
 
 -- I have two variables to hold my bindings: myKeysP and myKeys.
 -- They use a different syntax and the two are combined in my config.
@@ -115,6 +117,7 @@ myKeysP = [
         , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-<Space> t", runOrRaiseNext "kitty" (resource =? "kitty"))
         , ("M4-<Space> u", spawn "dmenu-unicode.sh")
+        , ("M4-<Space> l", sendMessage NextLayout)
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "amixer set Master 5+ unmute")
         , ("M4-M1-o", swapNextScreen)
@@ -236,6 +239,9 @@ myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), (
 myLayoutPrinter :: String -> String
 myLayoutPrinter "Spacing 7 ThreeCol" = "ThreeCol"
 myLayoutPrinter "Spacing 7 Tall" = "Tall"
+myLayoutPrinter "Spacing 7 Accordion" = "Accordion"
+myLayoutPrinter "Spacing 7 Grid" = "Grid"
+myLayoutPrinter "Tabbed Simplest" = "Simplest"
 myLayoutPrinter x = x
 
 main :: IO()

@@ -7,16 +7,16 @@ bind status R !git rebase -i %(commit)^
 bind main R !git rebase -i %(commit)^
 bind diff R !git rebase -i %(commit)^
 
-
-color "---"     blue  default
-color "diff --"     white black underline
-color "--- "      red  default
-color "+++ "      green  default
-color "@@"      white magenta
-color "+"     green color10 
-color " +"    green color10
-color "-"     black color9
-color " -"    black color9
+# nice 256 colors reference https://jonasjacek.github.io/colors/
+color "---"     blue default
+color "diff --"     white blue underline
+color "--- "      52 203
+color "+++ "      28  114
+color "@@"      magenta default
+color "+"     28 114
+color " +"    28 114
+color "-"     52 203
+color " -"    52 203
 color "index "      blue  default
 color "old file mode "    yellow  default
 color "new file mode "    yellow  default
@@ -50,7 +50,7 @@ color "    Acked-by"    yellow  default
 color "    Tested-by"   yellow  default
 color "    Reviewed-by"   yellow  default
 color default     default default normal
-color cursor      black color7 bold
+color cursor      black color14 bold
 color status      green default
 color delimiter     magenta default
 color date      blue  default
@@ -64,8 +64,8 @@ color file      default default
 color grep.file     blue  default
 color file-size     default default
 color line-number   cyan  default
-color title-blur    black color7
-color title-focus   black yellow  bold
+color title-blur    0 11
+color title-focus   black 220 bold
 color main-commit   default default
 color main-tag      magenta default bold
 color main-local-tag    magenta default

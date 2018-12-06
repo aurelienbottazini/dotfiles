@@ -20,7 +20,6 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.ICCCMFocus
 import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.WindowGo
@@ -28,24 +27,23 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Util.NamedWindows
 import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
-import XMonad.Actions.PhysicalScreens
 import XMonad.Actions.CopyWindow
 import XMonad.Hooks.EwmhDesktops
 
 import qualified XMonad.StackSet as W
 
-import System.IO
-
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 instance UrgencyHook LibNotifyUrgencyHook where
     urgencyHook LibNotifyUrgencyHook w = do
-        name     <- getName w
+        windowName     <- getName w
         Just idx <- fmap (W.findTag w) $ gets windowset
 
-        safeSpawn "notify-send" [show name, "workspace " ++ idx]
+        safeSpawn "notify-send" [show windowName, "workspace " ++ idx]
 
-
+mySpacing :: Int
 mySpacing = 7
+
+myTabTheme :: Theme
 myTabTheme = def {
   fontName = "xft:Gotham HTF Black:size=12",
   decoHeight = 40,
@@ -57,21 +55,10 @@ myTabTheme = def {
   inactiveTextColor = "#000000"
 }
 
-substring :: String -> String -> Bool
-substring (x:xs) [] = False
-substring xs ys
-    | prefix xs ys = True
-    | substring xs (tail ys) = True
-    | otherwise = False
-
-prefix :: String -> String -> Bool
-prefix [] ys = True
-prefix (x:xs) [] = False
-prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
-
 -- Scratchpads are windows I can hide / show on demand. When Hidden
 -- they are waiting on a special scratchpad workspace. When shown they
 -- are displayed on the current workspace
+scratchpads :: [NamedScratchpad]
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -88,13 +75,9 @@ scratchpads =
     ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
     ] -- where role = stringProperty "WM_WINDOW_ROLE"
 
-mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
-  $ spacing mySpacing $ smartBorders $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
-
 -- I have two variables to hold my bindings: myKeysP and myKeys.
 -- They use a different syntax and the two are combined in my config.
 -- Sometimes I prefer a syntax over another that's why I keep the two.
-
 
 -- memo
 -- default config: https://github.com/xmonad/xmonad/blob/master/src/XMonad/Config.hs
@@ -102,6 +85,7 @@ mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
 -- M4-, = increase number of windows in master area
 -- M4-. = decrease number of windows in master area
 -- M4-S-/ = show default keybindings
+myKeysP :: [(String, X ())]
 myKeysP = [
         ("M-<Backspace>", kill)
         , ("M4-S-l", sendMessage NextLayout)
@@ -155,6 +139,7 @@ myKeysP = [
         , ("M4-z", sendMessage ToggleLayout)
         ]
 
+myKeys :: [((KeyMask, KeySym), X ())]
 myKeys = [
         -- kept as examples
         --
@@ -170,24 +155,40 @@ myKeys = [
             | (key, sc) <- zip [xK_w, xK_e, xK_r] [0,1,2] -- was [0..] *** change to match your screen order ***
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
+toggleCopyToAll :: X ()
 toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
                                                   [] -> windows copyToAll
                                                   _ -> killAllOtherCopies
+
+nextNonEmptyWS :: X ()
 nextNonEmptyWS = findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
+
+prevNonEmptyWS :: X ()
 prevNonEmptyWS = findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1
         >>= \t -> (windows . W.view $ t)
+
+getSortByIndexNoSP :: X([WindowSpace] -> [WindowSpace])
 getSortByIndexNoSP =
        fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
 
+ws1GTD :: String
 ws1GTD = "1:gtd"
+ws2WWW :: String
 ws2WWW = "2:www"
+ws3TRAINING :: String
 ws3TRAINING = "3:training"
+ws4CODE :: String
 ws4CODE = "4:code"
+ws5MY :: String
 ws5MY = "5:my"
+ws6MY :: String
 ws6MY = "6:my"
+ws7MUSIC :: String
 ws7MUSIC = "7:music"
+ws8MSG :: String
 ws8MSG = "8:msg"
+ws9MAIL :: String
 ws9MAIL = "9:mail"
 
 myWorkspaces :: [String]
@@ -226,6 +227,7 @@ myProjects =
      --         }
    ]
 
+myStartupHook :: X ()
 myStartupHook = do
     -- https://wiki.haskell.org/Xmonad/Frequently_asked_questions#Problems_with_Java_applications.2C_Applet_java_console
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
@@ -235,6 +237,7 @@ myStartupHook = do
 noScratchPad :: String -> String
 noScratchPad ws = if ws == "NSP" then "" else ws
 
+myNavigation2DConfig :: Navigation2DConfig
 myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), ("Spacing 7 Tall", centerNavigation)]
                            , unmappedWindowRect = [("Full", singleWindowRect)]
                            }
@@ -265,7 +268,12 @@ main = do
           manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
         , modMask = mod4Mask
         , startupHook = myStartupHook
-        , layoutHook = smartBorders $ avoidStruts $ mylayoutHook
+        , layoutHook = smartBorders
+          $ avoidStruts
+          $ toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
+          $ spacing mySpacing
+          $ smartBorders
+          $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
         , terminal = "kitty"
         , focusedBorderColor = "#bc3e33"
         , normalBorderColor = "#c5c5c5"
@@ -274,10 +282,10 @@ main = do
         , focusFollowsMouse = False
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"
+                        , ppCurrent = xmobarColor "#ffffff"  "#bc3e33" . wrap " [" "] "
                         , ppLayout = xmobarColor "#ffffff" "#65428a" . myLayoutPrinter
-                        , ppTitle = xmobarColor "#3a499c" "" . shorten 50
+                        , ppTitle = xmobarColor "#ffffff" "#3a499c" . shorten 50 . wrap " " " "
                         , ppHidden = noScratchPad
-                        } >> updatePointer (0.5, 0.5) (0, 0) >> takeTopFocus
+                        } >> updatePointer (0.5, 0.5) (0, 0)
         } `additionalKeysP` myKeysP
           `additionalKeys` myKeys

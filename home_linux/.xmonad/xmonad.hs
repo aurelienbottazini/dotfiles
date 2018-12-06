@@ -86,7 +86,7 @@ scratchpads =
     ,(NS "worldtimebuddy" "chromium-browser --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "gsimplecal" "gsimplecal" (className =? "Gsimplecal") (customFloating $ W.RationalRect (4/5) (1/40) (1/5) (1/5)))
     ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
-    ] where role = stringProperty "WM_WINDOW_ROLE"
+    ] -- where role = stringProperty "WM_WINDOW_ROLE"
 
 mylayoutHook = toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
   $ spacing mySpacing $ smartBorders $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
@@ -190,9 +190,10 @@ ws7MUSIC = "7:music"
 ws8MSG = "8:msg"
 ws9MAIL = "9:mail"
 
+myWorkspaces :: [String]
 myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
-myProjects :: [Project]
 
+myProjects :: [Project]
 -- Projects are predefined workspace. When you switch to a workspace
 -- and that workspace is empty, the preconfigured windows are launched / created.
 myProjects =
@@ -231,6 +232,7 @@ myStartupHook = do
     spawn "xsetroot -cursor_name left_ptr"
     spawn "feh --bg-fill ~/Dropbox/Pictures/wallpaper/jonny-caspari-1148431-unsplash.jpg"
 
+noScratchPad :: String -> String
 noScratchPad ws = if ws == "NSP" then "" else ws
 
 myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), ("Spacing 7 Tall", centerNavigation)]
@@ -238,11 +240,11 @@ myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), (
                            }
 
 myLayoutPrinter :: String -> String
-myLayoutPrinter "Spacing 7 ThreeCol" = "ThreeCol"
-myLayoutPrinter "Spacing 7 Tall" = "Tall"
-myLayoutPrinter "Spacing 7 Accordion" = "Accordion"
-myLayoutPrinter "Spacing 7 Grid" = "Grid"
-myLayoutPrinter "Tabbed Simplest" = "Simplest"
+myLayoutPrinter "Spacing 7 ThreeCol" = " ThreeCol "
+myLayoutPrinter "Spacing 7 Tall" = " Tall "
+myLayoutPrinter "Spacing 7 Accordion" = " Accordion "
+myLayoutPrinter "Spacing 7 Grid" = " Grid "
+myLayoutPrinter "Tabbed Simplest" = " Simplest "
 myLayoutPrinter x = x
 
 main :: IO()
@@ -273,7 +275,7 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#000000"  "#fccf61" . wrap "[" "]"
-                        , ppLayout = myLayoutPrinter
+                        , ppLayout = xmobarColor "#ffffff" "#65428a" . myLayoutPrinter
                         , ppTitle = xmobarColor "#3a499c" "" . shorten 50
                         , ppHidden = noScratchPad
                         } >> updatePointer (0.5, 0.5) (0, 0) >> takeTopFocus

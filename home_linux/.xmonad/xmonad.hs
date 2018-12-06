@@ -268,8 +268,7 @@ main = do
           manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
         , modMask = mod4Mask
         , startupHook = myStartupHook
-        , layoutHook = smartBorders
-          $ avoidStruts
+        , layoutHook = avoidStruts
           $ toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
           $ spacing mySpacing
           $ smartBorders

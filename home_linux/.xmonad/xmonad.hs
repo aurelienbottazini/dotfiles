@@ -246,10 +246,10 @@ myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), (
                            }
 
 myLayoutPrinter :: String -> String
-myLayoutPrinter "Spacing 7 ThreeCol" = " ThreeCol "
-myLayoutPrinter "Spacing 7 Tall" = " Tall "
-myLayoutPrinter "Spacing 7 Accordion" = " Accordion "
-myLayoutPrinter "Spacing 7 Grid" = " Grid "
+myLayoutPrinter "NoFrillsDeco Spacing 7 ThreeCol" = " ThreeCol "
+myLayoutPrinter "NoFrillsDeco Spacing 7 Tall" = " Tall "
+myLayoutPrinter "NoFrillsDeco Spacing 7 Accordion" = " Accordion "
+myLayoutPrinter "NoFrillsDeco Spacing 7 Grid" = " Grid "
 myLayoutPrinter "Tabbed Simplest" = " Simplest "
 myLayoutPrinter x = x
 

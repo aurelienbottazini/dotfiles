@@ -29,6 +29,8 @@ import XMonad.Util.Run
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CopyWindow
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Actions.WithAll
+import XMonad.Layout.NoFrillsDecoration
 
 import qualified XMonad.StackSet as W
 
@@ -93,6 +95,7 @@ myKeysP = [
         , ("M4-S-b", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot\"")
         , ("M4-S-x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown -h now\"")
         , ("M4-S-s", withFocused $ windows . W.sink)
+        , ("M4-S-<Backspace>", killAll)
         , ("M4--", spawn "amixer set Master 5- unmute")
         , ("M4-p", spawn "rofi -show run")
         , ("M4-<Space> <Space>", spawn "rofi -show run")
@@ -250,6 +253,28 @@ myLayoutPrinter "Spacing 7 Grid" = " Grid "
 myLayoutPrinter "Tabbed Simplest" = " Simplest "
 myLayoutPrinter x = x
 
+topBarTheme = def
+    { fontName              =  "xft:Gotham HTF Black:size=12"
+    , inactiveBorderColor   = "#002b36"
+    , inactiveColor         = "#002b36"
+    , inactiveTextColor     = "#002b36"
+    , activeBorderColor     = "#fccf61"
+    , activeColor           = "#fccf61"
+    , activeTextColor       = "#fccf61"
+    , urgentBorderColor     = "#bc3e44"
+    , urgentTextColor       = "#000000"
+    , decoHeight            = 20
+    }
+
+myLayoutHook = avoidStruts
+               $ toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
+               $ addTopBar
+               $ spacing mySpacing
+               $ smartBorders
+               $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
+
+addTopBar = noFrillsDeco shrinkText topBarTheme
+
 main :: IO()
 main = do
 
@@ -268,22 +293,18 @@ main = do
           manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
         , modMask = mod4Mask
         , startupHook = myStartupHook
-        , layoutHook = avoidStruts
-          $ toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
-          $ spacing mySpacing
-          $ smartBorders
-          $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
+        , layoutHook = myLayoutHook
         , terminal = "kitty"
         , focusedBorderColor = "#bc3e33"
         , normalBorderColor = "#c5c5c5"
-        , borderWidth = 15
+        , borderWidth = 0
         , workspaces = myWorkspaces
         , focusFollowsMouse = False
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor "#ffffff"  "#bc3e33" . wrap " [" "] "
                         , ppLayout = xmobarColor "#ffffff" "#65428a" . myLayoutPrinter
-                        , ppTitle = xmobarColor "#ffffff" "#3a499c" . shorten 50 . wrap " " " "
+                        , ppTitle = xmobarColor "#000000" "#fccf61" . shorten 50 . wrap " " " "
                         , ppHidden = noScratchPad
                         } >> updatePointer (0.5, 0.5) (0, 0)
         } `additionalKeysP` myKeysP

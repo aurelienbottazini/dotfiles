@@ -92,7 +92,6 @@ myKeysP :: [(String, X ())]
 myKeysP = [
         ("M-<Backspace>", kill)
         , ("M4-S-l", sendMessage NextLayout)
-        , ("M-S-t", sendMessage ToggleStruts)
         , ("M4-S-b", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot\"")
         , ("M4-S-x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown -h now\"")
         , ("M4-S-s", withFocused $ windows . W.sink)
@@ -110,6 +109,7 @@ myKeysP = [
         , ("M4-<Space> o s m", spawn "pulseaudio-rofi.sh --mute")
         , ("M4-<Space> o s o", spawn "pulseaudio-rofi.sh --output")
         , ("M4-<Space> o s i", spawn "pulseaudio-rofi.sh --input")
+        , ("M4-<Space> o t", sendMessage ToggleStruts)
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "pulseaudio-rofi.sh --volume_up")
         , ("M4-M1-o", swapNextScreen)

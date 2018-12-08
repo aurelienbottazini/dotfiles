@@ -91,7 +91,7 @@ scratchpads =
 myKeysP :: [(String, X ())]
 myKeysP = [
         ("M-<Backspace>", kill)
-        , ("M4-S-l", sendMessage NextLayout)
+        , ("M4-S-l", spawn "gnome-screensaver-command -l")
         , ("M4-S-b", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot\"")
         , ("M4-S-x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown -h now\"")
         , ("M4-S-s", withFocused $ windows . W.sink)

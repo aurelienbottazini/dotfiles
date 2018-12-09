@@ -186,21 +186,21 @@ ws2WWW :: String
 ws2WWW = "2:www"
 ws3TRAINING :: String
 ws3TRAINING = "3:training"
-ws4CODE :: String
-ws4CODE = "4:code"
+ws4TALK :: String
+ws4TALK = "4:code"
 ws5MY :: String
 ws5MY = "5:my"
 ws6MY :: String
 ws6MY = "6:my"
-ws7MUSIC :: String
-ws7MUSIC = "7:music"
+ws7MY :: String
+ws7MY = "7:my"
 ws8MSG :: String
-ws8MSG = "8:msg"
+ws8MSG = "8:my"
 ws9MAIL :: String
 ws9MAIL = "9:mail"
 
 myWorkspaces :: [String]
-myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4CODE, ws5MY, ws6MY, ws7MUSIC, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4TALK, ws5MY, ws6MY, ws7MY, ws8MSG, ws9MAIL]
 
 myProjects :: [Project]
 -- Projects are predefined workspace. When you switch to a workspace
@@ -210,7 +210,7 @@ myProjects =
      Project { projectName = ws1GTD
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws1GTD "kitty"
-                                            spawnOn ws1GTD "idea ~/work/doximity"
+
              },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
@@ -218,14 +218,13 @@ myProjects =
              },
      Project { projectName = ws3TRAINING
              , projectDirectory = "~/projects/training-heaven"
-             , projectStartHook = Just $ do spawnOn ws3TRAINING "idea ~/projects/training-heaven"
-                                            spawnOn ws3TRAINING "anki"
+             , projectStartHook = Just $ do spawnOn ws3TRAINING "anki"
              },
-     -- Project { projectName = ws7MUSIC
+     -- Project { projectName = ws7MY
      --         , projectDirectory = "media/aurelienbottazini/Files/music"
-     --         , projectStartHook = Just $ do spawnOn ws7MUSIC "spotify --force-device-scale-factor=2"
+     --         , projectStartHook = Just $ do spawnOn ws7MY "spotify --force-device-scale-factor=2"
      --         },
-     Project { projectName = ws8MSG
+     Project { projectName = ws4TALK
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
      -- Project { projectName = ws9MAIL

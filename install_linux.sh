@@ -190,4 +190,5 @@ sudo apt-get install gsimplecal
 sudo apt-get install rofi
 
 sudo apt-get install arandr
-sudo apt-get install zathura
+
+sudo apt-get install gnome-screensaver

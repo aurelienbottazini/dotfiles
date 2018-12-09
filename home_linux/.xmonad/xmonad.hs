@@ -134,7 +134,7 @@ myKeysP = [
         , ("M4-o", windows W.focusDown)
         , ("M4-p", spawn "rofi -show run")
         , ("M4-s M", namedScratchpadAction scratchpads "cmus")
-        , ("M4-s S", spawn "peek")
+        , ("M4-s p", spawn "peek")
         , ("M4-s c", namedScratchpadAction scratchpads "calendar")
         , ("M4-s e", namedScratchpadAction scratchpads "email")
         , ("M4-s g", namedScratchpadAction scratchpads "GTD")

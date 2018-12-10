@@ -187,7 +187,7 @@ ws2WWW = "2:www"
 ws3TRAINING :: String
 ws3TRAINING = "3:training"
 ws4TALK :: String
-ws4TALK = "4:code"
+ws4TALK = "4:talk"
 ws5MY :: String
 ws5MY = "5:my"
 ws6MY :: String

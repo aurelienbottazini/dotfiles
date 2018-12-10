@@ -14,33 +14,15 @@ set noerrorbells
 nnoremap [<space> O<esc>0C<esc>j
 " Insert line below.
 nnoremap ]<space> o<esc>0C<esc>k
-" Insert space before in normal mode.
-nnoremap <space>[ i<space><esc>l
-" Insert space after in normal mode.
-nnoremap <space>] a<space><esc>h
 
 nnoremap <C-h> :action TabShiftActions.MoveFocusLeft<CR>
 nnoremap <C-j> :action TabShiftActions.MoveFocusDown<CR>
 nnoremap <C-k> :action TabShiftActions.MoveFocusUp<CR>
 nnoremap <C-l> :action TabShiftActions.MoveFocusRight<CR>
 
-nnoremap <M-p> :action SearchEverywhere<CR>
-
-" Previous method.
-nnoremap [m :action MethodUp<cr>
-" Next method.
-nnoremap ]m :action MethodDown<cr>
-
 let mapleader = " "
-map <leader>a :action GotoAction<CR>
-map <leader>d :action Debug<CR>
-map <leader>g :action Vcs.QuickListPopupAction<CR>
-map <leader>p :action OpenProjectWindows<CR>
-map <leader>r :action RecentFiles<CR>
 map <leader>t :action GotoTest<CR>
-map <leader>v :source ~/.ideavimrc<CR>
-map <leader>x :action Run<CR>
-map <leader>z :action MaximizeToolWindow<CR>
+map <leader>r :source ~/.ideavimrc<CR>
 
 map <leader>cT :action :cursive.testing.actions/run-ns-tests<CR>
 map <leader>ct :action :cursive.testing.actions/rerun-last-test<CR>

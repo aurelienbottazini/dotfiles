@@ -837,6 +837,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
            :publishing-function org-html-publish-to-html
            :headline-levels 4             ; Just the default for this project.
            :auto-preamble t
+           :html-head nil
+           :html-head-extra nil
            )
           ;; ... add all the components here (see below)...
           ("wiki-static"

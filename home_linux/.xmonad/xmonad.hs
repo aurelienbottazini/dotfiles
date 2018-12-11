@@ -226,7 +226,7 @@ myProjects =
      --         },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
+             , projectStartHook = Just $ do spawnOn ws4TALK "slack" }
      -- Project { projectName = ws9MAIL
      --         , projectDirectory = "~/"
      --         , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"

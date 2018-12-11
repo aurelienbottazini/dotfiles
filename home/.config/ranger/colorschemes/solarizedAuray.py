@@ -107,7 +107,7 @@ class SolarizedAuray(ColorScheme):
         elif context.in_statusbar:
             if context.permissions:
                 if context.good:
-                    fg = 93
+                    fg = 33
                 elif context.bad:
                     fg = 160
                     bg = 235

@@ -93,6 +93,7 @@ alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 an
 
 
 set -x EDITOR 'vim'
+set -x VISUAL 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color
 if test -n "$TERM"
   set -g fish_color_autosuggestion "#93a1a1"

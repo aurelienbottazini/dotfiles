@@ -65,7 +65,7 @@ scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "ranger" "st -c ranger ranger" (className =? "ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "ranger" "kitty --class kitty-ranger ranger" (className =? "kitty-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger-dropbox" "st -c rangerDropbox ranger ~/Dropbox" (className =? "rangerDropbox") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -187,7 +187,7 @@ ws2WWW = "2:www"
 ws3TRAINING :: String
 ws3TRAINING = "3:training"
 ws4TALK :: String
-ws4TALK = "4:code"
+ws4TALK = "4:talk"
 ws5MY :: String
 ws5MY = "5:my"
 ws6MY :: String
@@ -238,6 +238,7 @@ myStartupHook :: X ()
 myStartupHook = do
     -- https://wiki.haskell.org/Xmonad/Frequently_asked_questions#Problems_with_Java_applications.2C_Applet_java_console
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
+    spawn "compton -CG --active-opacity 1.0 --shadow-ignore-shaped"
     spawn "xsetroot -cursor_name left_ptr"
     spawn "feh --bg-fill ~/Dropbox/Pictures/wallpaper/jonny-caspari-1148431-unsplash.jpg"
 

@@ -192,3 +192,4 @@ sudo apt-get install rofi
 sudo apt-get install arandr
 
 sudo apt-get install gnome-screensaver
+sudo apt-get install compton

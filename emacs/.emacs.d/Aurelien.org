@@ -795,8 +795,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq org-todo-keywords
     '((sequence "TODO" "PR" "QA" "|" "DONE(!)" "CANCELED")))
   #+end_src
-
-
 ** org-babel
 #+begin_src emacs-lisp
   (require 'ob-js)
@@ -824,6 +822,31 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   ;; splits the window.
   (add-hook 'org-capture-mode-hook
             'delete-other-windows)
+#+end_src
+** org-publish
+
+#+begin_src emacs-lisp
+  (require 'ox-publish)
+  (setq org-publish-project-alist
+        '(
+          ("wiki-notes"
+           :base-directory "~/projects/wiki"
+           :base-extension "org"
+           :publishing-directory "~/projects/wiki/public_html/"
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4             ; Just the default for this project.
+           :auto-preamble t
+           )
+          ;; ... add all the components here (see below)...
+          ("wiki-static"
+           :base-directory "~/projects/wiki/"
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+           :publishing-directory "~/projects/wiki/public_html/"
+           :recursive t
+           :publishing-function org-publish-attachment
+           )
+          ("wiki" :components ("wiki-notes" "wiki-static"))))
 #+end_src
 * Email
   #+begin_src emacs-lisp

@@ -66,7 +66,6 @@ scratchpads =
     ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "kitty --class kitty-ranger ranger" (className =? "kitty-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "ranger-dropbox" "st -c rangerDropbox ranger ~/Dropbox" (className =? "rangerDropbox") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -106,11 +105,11 @@ myKeysP = [
         , ("M4-<Space> o s m", spawn "pulseaudio-rofi.sh --mute")
         , ("M4-<Space> o s o", spawn "pulseaudio-rofi.sh --output")
         , ("M4-<Space> o t", sendMessage ToggleStruts)
-        , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot\"")
+        , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
         , ("M4-<Space> t", runOrRaiseNext "kitty" (resource =? "kitty"))
         , ("M4-<Space> u", spawn "dmenu-unicode.sh")
         , ("M4-<Space> w", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))
-        , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown -h now\"")
+        , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown.sh\"")
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-=", spawn "pulseaudio-rofi.sh --volume_up")
         , ("M4-S-<Backspace>", killAll)
@@ -226,7 +225,7 @@ myProjects =
      --         },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws8MSG "slack" }
+             , projectStartHook = Just $ do spawnOn ws4TALK "slack" }
      -- Project { projectName = ws9MAIL
      --         , projectDirectory = "~/"
      --         , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"

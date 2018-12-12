@@ -8,6 +8,7 @@
 [push]
 	default = current
 [alias]
+        a = add -p
         s = status
         cm = !git-cm
         d = diff -w

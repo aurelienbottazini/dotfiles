@@ -96,6 +96,8 @@ set hlsearch " highlight matches
 " " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 
+set splitbelow splitright
+
 " set relativenumber
 " set number
 set backspace=indent,eol,start  " Sane backspace behavior

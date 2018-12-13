@@ -193,3 +193,8 @@ sudo apt-get install arandr
 
 sudo apt-get install gnome-screensaver
 sudo apt-get install compton
+
+# cljs repl
+sudo add-apt-repository ppa:mfikes/planck
+sudo apt-get update
+sudo apt-get install planck

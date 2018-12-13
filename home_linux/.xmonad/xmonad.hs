@@ -63,9 +63,12 @@ myTabTheme = def {
 scratchpads :: [NamedScratchpad]
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "transmittion" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
     ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "nautilus" "nautilus" (className =? "Nautilus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "kitty --class kitty-ranger ranger" (className =? "kitty-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "ranger" "st --class rangerDropbox ranger ~/Dropbox" (className =? "rangerDropbox") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -132,7 +135,7 @@ myKeysP = [
         , ("M4-m w",  screenGo L True)
         , ("M4-o", windows W.focusDown)
         , ("M4-p", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")
-        , ("M4-s M", namedScratchpadAction scratchpads "cmus")
+        , ("M4-s S-m", namedScratchpadAction scratchpads "cmus")
         , ("M4-s p", spawn "peek")
         , ("M4-s c", namedScratchpadAction scratchpads "calendar")
         , ("M4-s e", namedScratchpadAction scratchpads "email")
@@ -187,8 +190,8 @@ ws3TRAINING :: String
 ws3TRAINING = "3:training"
 ws4TALK :: String
 ws4TALK = "4:talk"
-ws5MY :: String
-ws5MY = "5:my"
+ws5EMACS :: String
+ws5EMACS = "5:emacs"
 ws6MY :: String
 ws6MY = "6:my"
 ws7MY :: String
@@ -199,7 +202,7 @@ ws9MAIL :: String
 ws9MAIL = "9:mail"
 
 myWorkspaces :: [String]
-myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4TALK, ws5MY, ws6MY, ws7MY, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4TALK, ws5EMACS, ws6MY, ws7MY, ws8MSG, ws9MAIL]
 
 myProjects :: [Project]
 -- Projects are predefined workspace. When you switch to a workspace
@@ -225,7 +228,10 @@ myProjects =
      --         },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws4TALK "slack" }
+             , projectStartHook = Just $ do spawnOn ws4TALK "slack" },
+     Project { projectName = ws5EMACS
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws5EMACS "emacs" }
      -- Project { projectName = ws9MAIL
      --         , projectDirectory = "~/"
      --         , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"

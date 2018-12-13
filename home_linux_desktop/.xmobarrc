@@ -15,5 +15,5 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
           ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <action=`st -c rangerDropbox ranger ~/Dropbox`><fn=1></fn>%mydropbox%</action> <action=blueman-manager><fn=1></fn></action> <action=launch-settings.sh sound><fn=1></fn></action> <fn=1></fn> <action=gsimplecal>%theDate%</action> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%"
+        , template = " %StdinReader% }{ <action=`nautilus ~/Dropbox`><fn=1></fn>%mydropbox%</action> <action=blueman-manager><fn=1></fn></action> <action=launch-settings.sh sound><fn=1></fn></action> <fn=1></fn> <action=gsimplecal>%theDate%</action> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%"
 }

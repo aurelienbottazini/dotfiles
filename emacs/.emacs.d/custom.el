@@ -39,10 +39,6 @@
    (quote
     ("~/Dropbox/org/refile-beorg.org" "~/Dropbox/org/GTD.org")))
  '(org-bullets-bullet-list (quote ("⭐" "◾" "◽")))
- '(org-html-doctype "html5")
- '(org-html-head-include-default-style nil)
- '(org-html-head-include-scripts nil)
- '(org-html-html5-fancy t)
  '(org-html-indent t)
  '(org-log-into-drawer t)
  '(org-modules

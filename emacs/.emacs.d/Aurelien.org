@@ -832,7 +832,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ("wiki-notes"
            :base-directory "~/projects/wiki"
            :base-extension "org"
-           :publishing-directory "~/projects/wiki/public_html/"
+           :publishing-directory "~/projects/aurelienbottazini.github.io/"
            :recursive t
            :publishing-function org-html-publish-to-html
            :headline-levels 4             ; Just the default for this project.
@@ -844,11 +844,18 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
           ("wiki-static"
            :base-directory "~/projects/wiki/"
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory "~/projects/wiki/public_html/"
+           :publishing-directory "~/projects/aurelienbottazini.github.io/"
            :recursive t
            :publishing-function org-publish-attachment
            )
-          ("wiki" :components ("wiki-notes" "wiki-static"))))
+          ("wiki" :components ("wiki-notes" "wiki-static")))
+
+        org-html-doctype "html5"
+        org-html-head-include-default-style nil
+        org-html-head-include-scripts nil
+        org-html-html5-fancy t
+        org-html-indent t
+        )
 #+end_src
 * Email
   #+begin_src emacs-lisp

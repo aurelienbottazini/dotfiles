@@ -68,7 +68,7 @@ scratchpads =
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "nautilus" "nautilus" (className =? "Nautilus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "ranger" "kitty --class kitty-ranger ranger" (className =? "kitty-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "ranger" "st -c term-ranger ranger" (className =? "term-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -116,7 +116,7 @@ myKeysP = [
         , ("M4-c", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
         , ("M4-b", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))
         , ("M4-i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
-        , ("M4-v", runOrRaiseNext "kitty" (resource =? "kitty"))
+        , ("M4-v", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
         , ("M4-n",  windows W.focusUp)
         , ("M4-p",  windows W.focusDown)
@@ -207,7 +207,7 @@ myProjects =
    [
      Project { projectName = ws1GTD
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws1GTD "kitty"
+             , projectStartHook = Just $ do spawnOn ws1GTD "st"
 
              },
      Project { projectName = ws2WWW
@@ -300,7 +300,7 @@ main = do
         , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = myLayoutHook
-        , terminal = "kitty"
+        , terminal = "st"
         , focusedBorderColor = "#bc3e33"
         , normalBorderColor = "#c5c5c5"
         , borderWidth = 0

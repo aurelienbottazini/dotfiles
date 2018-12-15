@@ -89,16 +89,17 @@ sudo apt install linux-common-tools linux-tools-4.15.0-22-generic
 sudo apt install corebird
 mkdir -p ~/Pictures/Screenshots
 
-
-# I have some segfault problem with dmenu compiled from git. The version from apt does not have this problem.
-# git clone https://git.suckless.org/dmenu
-sudo apt install suckless-tools
-
-# command i have in my shortcuts to run dmenu
-# dmenu_run -fn "Gotham HTF Black:size=13" -nb "#fff166" -nf "#000000" -sb "#fccf61" -sf "#000000"
-
 sudo apt install golang
 
+cd ~/projects
+git clone git@github.com:aurelienbottazini/st.git
+cd ./st
+sudo make install
+
+cd ~/projects
+git clone git@github.com:aurelienbottazini/dmenu.git
+cd ./dmenu
+suro make install
 
 #######################################
 ## Compile from source

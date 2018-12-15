@@ -99,7 +99,7 @@ myKeysP = [
         , ("<XF86MonBrightnessDown>", spawn "lux -s 10%")
         , ("<XF86MonBrightnessUp>", spawn "lux -a 10%")
         , ("M4-<Space> <Return>", namedScratchpadAction scratchpads "global-org-capture")
-        , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu -fn \"Gotham HTF Black:size=13\" -nb \"#fff166\" -nf \"#000000\" -sb \"#fccf61\" -sf \"#000000\"` && eval \"exec $exe\"")
+        , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M4-<Space> e", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
         , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")

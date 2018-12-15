@@ -24,7 +24,9 @@
  '(dumb-jump-mode t)
  '(emamux:default-orientation (quote vertical))
  '(emamux:use-nearest-pane t)
+ '(flycheck-disabled-checkers (quote (c/c++-gcc)))
  '(flycheck-indication-mode nil)
+ '(global-flycheck-mode t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")
@@ -39,6 +41,10 @@
    (quote
     ("~/Dropbox/org/refile-beorg.org" "~/Dropbox/org/GTD.org")))
  '(org-bullets-bullet-list (quote ("⭐" "◾" "◽")))
+ '(org-html-doctype "html5")
+ '(org-html-head-include-default-style nil)
+ '(org-html-head-include-scripts nil)
+ '(org-html-html5-fancy t)
  '(org-html-indent t)
  '(org-log-into-drawer t)
  '(org-modules
@@ -68,8 +74,8 @@
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

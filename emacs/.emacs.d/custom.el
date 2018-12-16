@@ -24,7 +24,7 @@
  '(dumb-jump-mode t)
  '(emamux:default-orientation (quote vertical))
  '(emamux:use-nearest-pane t)
- '(flycheck-disabled-checkers (quote (c/c++-gcc)))
+ '(flycheck-disabled-checkers (quote (c/c++-gcc emacs-lisp-checkdoc)))
  '(flycheck-indication-mode nil)
  '(global-flycheck-mode t)
  '(indicate-buffer-boundaries (quote left))
@@ -74,8 +74,8 @@
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

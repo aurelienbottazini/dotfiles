@@ -31,6 +31,7 @@ import XMonad.Actions.CopyWindow
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.WithAll
 import XMonad.Layout.NoFrillsDecoration
+import XMonad.Hooks.ManageHelpers
 
 import qualified XMonad.StackSet as W
 
@@ -63,11 +64,10 @@ myTabTheme = def {
 scratchpads :: [NamedScratchpad]
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "transmittion" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
+    ,(NS "tranmission" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
     ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "nautilus" "nautilus" (className =? "Nautilus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c term-ranger ranger" (className =? "term-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -259,6 +259,7 @@ myLayoutPrinter "NoFrillsDeco Spacing 7 Grid" = " Grid "
 myLayoutPrinter "Tabbed Simplest" = " Simplest "
 myLayoutPrinter x = x
 
+topBarTheme :: Theme
 topBarTheme = def
     { fontName              =  "xft:Gotham HTF Black:size=12"
     , inactiveBorderColor   = "#002b36"
@@ -281,6 +282,13 @@ myLayoutHook = avoidStruts
 
 addTopBar = noFrillsDeco shrinkText topBarTheme
 
+myManageHook :: ManageHook
+myManageHook = manageDocks <+> namedScratchpadManageHook scratchpads
+  <+> (composeAll . concat $
+      [[className    =? c            --> doCenterFloat       |   c   <- myFloats ]
+      ]
+    ) where myFloats  = ["Nautilus"]
+
 main :: IO()
 main = do
 
@@ -296,7 +304,7 @@ main = do
         {
           handleEventHook =
             handleEventHook def <+> fullscreenEventHook,
-          manageHook = manageDocks <+> namedScratchpadManageHook scratchpads
+          manageHook = myManageHook
         , modMask = mod4Mask
         , startupHook = myStartupHook
         , layoutHook = myLayoutHook

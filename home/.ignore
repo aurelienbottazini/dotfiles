@@ -1,3 +1,5 @@
+# used by ripgrep to not search some files
 apiari.db
 public/assets
 apiary.apib
+*.dic

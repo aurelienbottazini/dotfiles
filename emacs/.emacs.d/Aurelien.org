@@ -830,7 +830,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (setq org-publish-project-alist
         '(
           ("wiki-notes"
-           :base-directory "~/Dropbox/wiki"
+           :base-directory "~/projects/wiki"
            :base-extension "org"
            :publishing-directory "~/projects/aurelienbottazini.github.io/"
            :recursive t
@@ -842,7 +842,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
            )
           ;; ... add all the components here (see below)...
           ("wiki-static"
-           :base-directory "~/Dropbox/wiki/"
+           :base-directory "~/projects/wiki/"
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
            :publishing-directory "~/projects/aurelienbottazini.github.io/"
            :recursive t
@@ -1350,7 +1350,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
+    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/projects/wiki")))
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
     (define-key my-leader-map (kbd "i") 'counsel-imenu)

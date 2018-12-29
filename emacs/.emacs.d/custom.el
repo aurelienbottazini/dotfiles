@@ -91,7 +91,7 @@
  '(context-coloring-level-5-face ((t (:foreground "#885a61"))))
  '(context-coloring-level-6-face ((t (:foreground "#65428a"))))
  '(context-coloring-level-7-face ((t (:foreground "#4c4e56"))))
- '(cursor ((t (:background "#f56d9e"))))
+ '(cursor ((t (:background "#000000"))))
  '(custom-variable-tag ((t (:foreground "blue1" :weight bold))))
  '(diff-hl-change ((t (:background "#adcff1" :foreground "#3a499c"))))
  '(diff-hl-delete ((t (:background "#ffcfd8" :foreground "#bc3e44"))))

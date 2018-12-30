@@ -1906,3 +1906,17 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                 #'add-pragmatapro-prettify-symbols-alist)
       (global-prettify-symbols-mode +1))
   #+end_src
+* lsp-mode
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :commands lsp
+  :init
+  (add-hook 'js2-mode-hook #'lsp)
+  (add-hook 'css-mode-hook #'lsp)
+  (add-hook 'web-mode-hook #'lsp)
+)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
+#+end_src

@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
- '(company-dict-enable-fuzzy t)
+ '(company-dict-enable-fuzzy nil)
  '(company-minimum-prefix-length 2)
  '(company-require-match nil)
  '(context-coloring-syntactic-comments nil)
@@ -116,6 +116,10 @@
  '(line-number-current-line ((t (:background "#dad9d6" :foreground "black"))))
  '(link ((t (:foreground "RoyalBlue3" :underline t :slant italic))))
  '(linum ((t (:background "#dad9d6" :foreground "#4c4e56"))))
+ '(lsp-ui-sideline-code-action ((t (:foreground "#65428a"))))
+ '(lsp-ui-sideline-current-symbol ((t (:foreground "#3a499c" :weight ultra-bold :height 0.99))))
+ '(lsp-ui-sideline-global ((t (:background "#dad9d6"))))
+ '(lsp-ui-sideline-symbol ((t (:foreground "#bc3e44" :height 0.99))))
  '(magit-branch-current ((t (:inherit magit-branch-local :box 1 :weight bold))))
  '(magit-branch-local ((t (:foreground "SkyBlue4" :weight bold))))
  '(magit-branch-remote ((t (:foreground "DarkOliveGreen4" :weight bold))))

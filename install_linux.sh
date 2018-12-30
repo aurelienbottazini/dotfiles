@@ -199,3 +199,7 @@ sudo apt-get install compton
 sudo add-apt-repository ppa:mfikes/planck
 sudo apt-get update
 sudo apt-get install planck
+
+yarn global add javascript-typescript-langserver
+yarn global add vscode-css-languageserver-bin
+yarn global add vue-language-server

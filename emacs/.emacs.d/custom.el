@@ -96,6 +96,7 @@
  '(diff-hl-change ((t (:background "#adcff1" :foreground "#3a499c"))))
  '(diff-hl-delete ((t (:background "#ffcfd8" :foreground "#bc3e44"))))
  '(diff-hl-insert ((t (:background "#e4f4e9" :foreground "#546758"))))
+ '(dired-directory ((t (:foreground "#3a499c" :weight bold))))
  '(error ((t (:foreground "#f65058" :weight bold))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#fccf61"))))
  '(flycheck-info ((t (:background "#ffcfd8"))))

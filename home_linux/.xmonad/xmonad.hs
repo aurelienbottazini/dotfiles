@@ -77,7 +77,8 @@ scratchpads =
     ,(NS "email" "chromium-browser --new-window --app=https://www.fastmail.com" (resource =? "www.fastmail.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "worldtimebuddy" "chromium-browser --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "gsimplecal" "gsimplecal" (className =? "Gsimplecal") (customFloating $ W.RationalRect (4/5) (1/40) (1/5) (1/5)))
-    ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
+    ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (defaultFloating))
+    -- ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
     ] -- where role = stringProperty "WM_WINDOW_ROLE"
 
 -- I have two variables to hold my bindings: myKeysP and myKeys.
@@ -100,11 +101,8 @@ myKeysP = [
         , ("<XF86MonBrightnessUp>", spawn "lux -a 10%")
         , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M4-<Space> <Return>", namedScratchpadAction scratchpads "global-org-capture")
-        , ("M4-<Space> e", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
-        , ("M4-<Space> i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
         , ("M4-<Space> u", spawn "dmenu-unicode.sh")
-        , ("M4-<Space> w", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))
         , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown.sh\"")
         , ("M4-<Space> s", spawn "flameshot gui")
         , ("M4-<Space> p", spawn "peek")

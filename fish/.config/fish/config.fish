@@ -126,3 +126,4 @@ set -g fish_term24bit 1
 set -x GTAGSLABEL pygments
 set -x XDG_CURRENT_DESKTOP GNOME # for gnome-control-center to work correctly on xmonad
 set -x CHROME_BIN /usr/bin/chromium-browser # for karmajs specs
+set -x NNN_BMS 'd:~/Dropbox;u:/home/aurelien/;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'

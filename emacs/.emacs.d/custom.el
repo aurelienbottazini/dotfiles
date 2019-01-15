@@ -101,6 +101,8 @@
  '(evil-search-highlight-persist-highlight-face ((t (:background "#fccf61"))))
  '(flycheck-info ((t (:background "#ffcfd8"))))
  '(flycheck-warning ((t (:background "#ffcfd8"))))
+ '(flyspell-duplicate ((t (:background "#f79b2f"))))
+ '(flyspell-incorrect ((t (:background "#ffcfd8"))))
  '(font-lock-comment-face ((t (:foreground "#939598" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#69615f"))))
  '(font-lock-function-name-face ((t (:weight bold))))

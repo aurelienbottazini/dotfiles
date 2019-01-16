@@ -69,6 +69,7 @@ scratchpads =
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c term-ranger ranger" (className =? "term-ranger") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "midnight-commander" "launch-midnight-commander.sh" (className =? "midnight-commander") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))

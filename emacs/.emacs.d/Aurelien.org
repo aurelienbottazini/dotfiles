@@ -933,6 +933,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (setq deft-default-extension "org")
       (setq deft-recursive t))
   #+end_src
+* Spelling
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'flyspell-prog-mode)
+#+end_src
 * Modes
   #+begin_src emacs-lisp
     (use-package palimpsest

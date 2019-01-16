@@ -911,13 +911,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (imagemagick-register-types))
 
   (defun my-browse-url-new-app (url &optional new-window)
-    "Open URL in firefox."
+    "Open URL in browser."
     (interactive (browse-url-interactive-arg "URL: "))
     (unless
         (string= ""
                  (shell-command-to-string
-                  (concat "chromium-browser --new-window --app=" url)))
-      (message "Starting firefox...")))
+                  (concat "chromium-browser " url)))
+      (message "Starting web browser...")))
 
   (setq browse-url-browser-function 'my-browse-url-new-app)
   #+end_src

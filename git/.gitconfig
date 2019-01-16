@@ -44,8 +44,6 @@
         recap = log --all --oneline --no-merges --author=aurelien@bottazini.com
         today = log --since=00:00:00 --all --no-merges --oneline --author=aurelien@bottazini.com
 	vdf = difftool
-[credential]
-	helper = osxkeychain
 [init]
 	templatedir = ~/.git_template
 [merge]

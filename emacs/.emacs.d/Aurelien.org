@@ -827,6 +827,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 #+begin_src emacs-lisp
   (require 'ox-publish)
+  (setq system-time-locale "C") ;; make sure time local is in english when exporting
+  (setq org-html-validation-link nil)
   (setq org-publish-project-alist
         '(
           ("wiki-notes"
@@ -903,6 +905,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         ;; (expand-file-name "~/.authinfo.gpg")
         smtpmail-smtp-service 587)
 
+  (setq user-full-name "Aurélien Bottazini")
   (setq user-mail-address "aurelien@bottazini.com")
 
   (setq mu4e-view-show-images t)
@@ -1358,6 +1361,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
     (define-key my-leader-map (kbd "i") 'counsel-imenu)
+    (define-key my-leader-map (kbd "b") 'counsel-ibuffer)
     (define-key my-leader-map (kbd "m") 'counsel-bookmark)
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)

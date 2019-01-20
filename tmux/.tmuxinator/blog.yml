@@ -5,6 +5,6 @@ windows:
   - dev:
       layout: main-horizontal
       panes:
-        - ec .
+        - cd ~/projects/aurelienbottazini.com_public
         - bundle exec jekyll s -wlD
         - grunt watch

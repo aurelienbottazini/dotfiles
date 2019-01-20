@@ -108,6 +108,18 @@ It makes it harder for major modes to minor modes trying to override my personal
         (rename-file buffer-file new-file-name)
         (set-visited-file-name new-file-name)
         (save-buffer)))
+
+    (defun toggle-html-export-on-save ()
+      "Enable or disable export HTML when saving current buffer."
+      (interactive)
+      (when (not (eq major-mode 'org-mode))
+        (error "Not an org-mode file!"))
+      (if (memq 'org-html-export-to-html after-save-hook)
+          (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
+                 (message "Disabled org html export on save"))
+        (add-hook 'after-save-hook 'org-html-export-to-html nil t)
+        (set-buffer-modified-p t)
+        (message "Enabled org html export on save")))
   #+end_src
 
 * Initialize Packages

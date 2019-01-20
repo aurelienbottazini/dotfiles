@@ -91,9 +91,23 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (defun filepath-with-line-number-for-current-buffer ()
       "Return a string with Buffer-file-name:line-number.
-    Make it easier to prepare commands for tools like rspec"
+        Make it easier to prepare commands for tools like rspec"
       (interactive)
       (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
+
+    (defun add-date-to-filename ()
+      "Add current date in front of filename."
+      (interactive)
+      (let* ((date (format-time-string "%Y-%m-%d"))
+             (buffer-file (buffer-file-name))
+             (new-file-name (concat (file-name-directory buffer-file)
+                                    date
+                                    "-"
+                                    (file-name-nondirectory buffer-file)))
+             )
+        (rename-file buffer-file new-file-name)
+        (set-visited-file-name new-file-name)
+        (save-buffer)))
   #+end_src
 
 * Initialize Packages

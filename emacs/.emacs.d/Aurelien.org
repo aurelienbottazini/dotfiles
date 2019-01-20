@@ -117,7 +117,7 @@ It makes it harder for major modes to minor modes trying to override my personal
       (if (memq 'org-html-export-to-html after-save-hook)
           (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
                  (message "Disabled org html export on save"))
-        (add-hook 'after-save-hook 'org-html-export-to-html nil t)
+        (add-hook 'after-save-hook 'org-publish-current-file nil t)
         (set-buffer-modified-p t)
         (message "Enabled org html export on save")))
   #+end_src

@@ -1,3 +1,6 @@
+# Local variables:
+# eval: (add-hook 'after-save-hook (lambda () (org-html-export-to-html t)) t t)
+# end:
 ----
 title: `(replace-regexp-in-string "-" " " (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`
 tags: $1

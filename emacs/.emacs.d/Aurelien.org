@@ -831,28 +831,23 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (setq org-html-validation-link nil)
   (setq org-publish-project-alist
         '(
-          ("wiki-notes"
-           :base-directory "~/projects/wiki"
+          ("aurelienbottazini.com-posts"
+           :base-directory "~/projects/aurelienbottazini.com/_org"
            :base-extension "org"
-           :publishing-directory "~/projects/aurelienbottazini.github.io/"
+           :publishing-directory "~/projects/aurelienbottazini.com/"
            :recursive t
            :publishing-function org-html-publish-to-html
            :headline-levels 4             ; Just the default for this project.
            :auto-preamble t
            :html-head nil
            :html-head-extra nil
+           :body-only t
            )
           ;; ... add all the components here (see below)...
-          ("wiki-static"
-           :base-directory "~/projects/wiki/"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory "~/projects/aurelienbottazini.github.io/"
-           :recursive t
-           :publishing-function org-publish-attachment
-           )
-          ("wiki" :components ("wiki-notes" "wiki-static")))
+          ("aurelienbottazini.com" :components ("aurelienbottazini.com-posts")))
 
         org-html-doctype "html5"
+        org-html-head nil
         org-html-head-include-default-style nil
         org-html-head-include-scripts nil
         org-html-html5-fancy t
@@ -1647,7 +1642,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
          (interactive)
          (cond
           ((equal major-mode 'org-mode)
-           (org-babel-execute-src-block))
+           (org-publish-current-file))
           ((equal major-mode 'ruby-mode)
            (xmp))
           ((equal major-mode 'enh-ruby-mode)

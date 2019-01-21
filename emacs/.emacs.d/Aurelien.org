@@ -110,12 +110,12 @@ It makes it harder for major modes to minor modes trying to override my personal
         (save-buffer)))
 
     (defun create-blog-post (title)
-      "Create blog post for aurelienbottazini.com.."
+      "Create blog post for aurelienbottazini.com."
       (interactive "Mtitle:")
       (let ((date (format-time-string "%Y-%m-%d"))
             (formatted-title (replace-regexp-in-string " " "-" title)))
         (find-file (concat "~/projects/aurelienbottazini.com/_org/_posts/" date "-" formatted-title ".org"))
-        (yas-expand-snippet (yas-lookup-snippet "jekyll"))
+        (yas-expand-snippet (yas-lookup-snippet "jekyll")
      ))
 
     (defun toggle-html-export-on-save ()

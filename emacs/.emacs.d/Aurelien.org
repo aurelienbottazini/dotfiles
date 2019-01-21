@@ -1,5 +1,5 @@
 #+TITLE: Aurelien Bottazini's Emacs configuration
-#+OPTIONS: toc:4 h:4
++OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
 It is important to load
@@ -600,7 +600,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** Project navigation
 
-   [[https://projectile.readthedocs.io/en/latest/projects/#adding-custom-project-types][Custom project types]]
    #+begin_src emacs-lisp
      (use-package dumb-jump
        :bind (:map evil-normal-state-map
@@ -741,7 +740,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 #+end_src
 * Notes
   #+begin_src emacs-lisp
-    (use-package markdown-mode)
     (use-package deft
       :config
       (setq deft-extensions '("txt" "tex" "org"))
@@ -751,10 +749,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (setq deft-default-extension "org")
       (setq deft-recursive t))
   #+end_src
-* Spelling
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'flyspell-prog-mode)
-#+end_src
 * Modes
   #+begin_src emacs-lisp
     (use-package palimpsest
@@ -792,129 +786,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (add-hook 'clojure-mode-hook #'subword-mode)
 
        (use-package cider))
-   #+end_src
-
-** CSS
-   #+begin_src emacs-lisp
-     (defun imenu-setup ()
-       (progn
-         (setq imenu-case-fold-search nil)
-         (setq imenu-auto-rescan t)
-         (setq imenu-space-replacement " ")
-         (setq css-indent-offset 2)
-         (imenu-add-menubar-index)
-         ))
-
-     (defun my-css-mode-setup ()
-       (setq imenu-generic-expression
-             '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
-       (imenu-setup))
-
-     (add-hook 'css-mode-hook 'my-css-mode-setup)
-
-     (use-package scss-mode
-       :mode "\\.scss\\'"
-       :config
-       (add-hook 'scss-mode-hook '(lambda ()
-                                    (setq imenu-generic-expression
-                                          '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
-                                    (imenu-setup))))
-
-     (use-package sass-mode
-       :mode "\\.sass\\'"
-       :config
-       (add-hook 'sass-mode-hook
-                 '(lambda ()
-                    (setq imenu-generic-expression
-                          '(("Imports" "@import\\(.*[^ ]\\)" 1)))
-                    (imenu-setup)))
-       (add-hook 'sass-mode-hook 'my-css-mode-setup)
-       (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))
-
-     (use-package less-css-mode
-       :mode "\\.less\\'"
-       )
-   #+end_src
-
-** Javascript
-   #+BEGIN_SRC emacs-lisp
-     (setq compilation-error-regexp-alist-alist
-           (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
-                        1 ;; file
-                        2 ;; line
-                        )
-                 compilation-error-regexp-alist-alist))
-     (setq compilation-error-regexp-alist
-           (cons 'node compilation-error-regexp-alist))
-     (add-hook 'js2-mode-hook
-               (lambda ()
-                 (set (make-local-variable 'compile-command)
-                      (format "node %s" (file-name-nondirectory buffer-file-name)))))
-   #+END_SRC
-   #+begin_src emacs-lisp
-     (use-package web-mode
-       :mode "\\.vue\\'"
-       :config
-       (setq web-mode-markup-indent-offset 2)
-       (setq web-mode-css-indent-offset 2)
-       (setq web-mode-code-indent-offset 2)
-       (setq web-mode-script-padding 2)
-       )
-
-     (setq js-indent-level 2)
-
-     (use-package js2-mode
-       :mode "\\.js\\'"
-       :mode "\\.jsx\\'"
-       :init
-
-       (setq js2-mode-show-parse-errors nil)
-       (setq js2-mode-show-strict-warnings nil)
-
-       (setq-default
-        ;; js2-mode
-        js2-basic-offset 2
-        ;; web-mode
-        css-indent-offset 2
-        web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2
-        web-mode-attr-indent-offset 2)
-
-       (setq js2-highlight-level 3)
-       :config
-       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-       (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
-
-       (use-package prettier-js
-         :config
-         (setq prettier-args '(
-                               "--trailing-comma" "es5"
-                               "--single-quote" "true"
-                               )
-               prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
-
-         (add-hook 'js2-mode-hook 'prettier-js-mode))
-         )
-
-     (defun enable-minor-mode (my-pair)
-       "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-       (if (buffer-file-name)
-           (if (string-match (car my-pair) buffer-file-name)
-               (funcall (cdr my-pair)))))
-
-     (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                   '("\\.jsx?\\'" . prettier-js-mode))))
-
-     (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                   '("\\.vue?\\'" . prettier-js-mode))))
-
-     (use-package json-mode
-       :mode "\\.json\\'"
-       :mode "\\.eslintrc\\'"
-       )
    #+end_src
 
 ** Ruby
@@ -969,36 +840,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
              ad-do-it))
          )
        )
-   #+end_src
-
-** Html
-   #+begin_src emacs-lisp
-     (use-package web-mode
-       :mode "\\.html\\'")
-
-     (use-package emmet-mode
-       :diminish emmet-mode
-       :config
-       (progn
-         (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
-         (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
-
-       (add-hook 'css-mode-hook
-                 (lambda ()
-                   (emmet-mode)
-                   (setq emmet-expand-jsx-className? nil)
-                   ))
-
-       (add-hook 'sgml-mode-hook
-                 (lambda ()
-                   (emmet-mode)
-                   (setq emmet-expand-jsx-className? nil)
-                   ))
-
-       (add-hook 'web-mode-hook
-                 (lambda ()
-                   (emmet-mode)
-                   )))
    #+end_src
 
 * Bindings
@@ -1066,10 +907,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (interactive)
       (setq display-line-numbers (quote nil)))
     (define-key my-leader-map (kbd "olh") 'hide-line-numbers)
-    (defun relative-line-numbers ()
-      (interactive)
-      (setq display-line-numbers (quote relative)))
-    (define-key my-leader-map (kbd "olr") 'relative-line-numbers)
     (defun show-line-numbers ()
       (interactive)
       (setq display-line-numbers (quote absolute)))
@@ -1158,61 +995,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
       (setq ffip-use-rust-fd nil))
      (define-key my-leader-map (kbd "t") 'find-file-in-project-by-selected)
-   #+end_src
-** Tmux Integration and Buffer navigation
-   Move between buffers with C-h C-j C-k C-l and makes Emacs terminal
-   and tmux work seamlessly.
-   #+begin_src emacs-lisp
-     (use-package emamux
-       :bind (:map my-leader-map
-                   ("cc" . emamux:send-command)
-                   ("cl" . emamux:run-last-command)))
-
-     (defun tmux-socket-command-string ()
-       (interactive)
-       (concat "tmux -S "
-               (replace-regexp-in-string "\n\\'" ""
-                                         (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
-
-     (defun tmux-move-right ()
-       (interactive)
-       (condition-case nil
-           (evil-window-right 1)
-         (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -R") nil)))))
-
-     (defun tmux-move-left ()
-       (interactive)
-       (condition-case nil
-           (evil-window-left 1)
-         (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -L") nil)))))
-
-     (defun tmux-move-up ()
-       (interactive)
-       (condition-case nil
-           (evil-window-up 1)
-         (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -U") nil)))))
-
-     (defun tmux-move-down ()
-       (interactive)
-       (condition-case nil
-           (evil-window-down 1)
-         (error (unless window-system (shell-command (concat (tmux-socket-command-string) " select-pane -D") nil)))))
-
-     (define-key my-keys-minor-mode-map (kbd "C-h") 'tmux-move-left)
-     (define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
-     (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
-     (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
-   #+end_src
-
-   Fixes some iterm keys
-   #+begin_src emacs-lisp
-     (defadvice terminal-init-xterm (after map-S-up-escape-sequence activate)
-       (define-key input-decode-map "\e[1;40" (kbd "C-("))
-       (define-key input-decode-map "\e[1;41" (kbd "C-)"))
-       (define-key input-decode-map "\e[1;42" (kbd "C-;"))
-
-       (define-key input-decode-map "\e[1;123" (kbd "C-{"))
-       (define-key input-decode-map "\e[1;125" (kbd "C-}")))
    #+end_src
 ** Run command for mode
    Run compilation or interactive command for mode.

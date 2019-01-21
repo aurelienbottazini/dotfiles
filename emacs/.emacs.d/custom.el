@@ -35,6 +35,7 @@
     ((ivy--regex-plus . "ivy")
      (ivy--regex-ignore-order . "order")
      (ivy--regex-fuzzy . "fuzzy"))))
+ '(menu-bar-mode nil)
  '(mu4e-update-interval 900)
  '(mu4e-use-fancy-chars t)
  '(org-agenda-files
@@ -71,8 +72,10 @@
      (ffip-find-options . "-not -size +64k -not -iwholename './target/*'")
      (ffip-find-options . "-not -size +64k -not -iwholename './target/debug/*'")
      (org-confirm-babel-evaluate))))
+ '(scroll-bar-mode nil)
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
+ '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
  '(web-mode-code-indent-offset 0 t)
  '(web-mode-css-indent-offset 0 t))
@@ -81,7 +84,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "default" :family "default"))))
+ '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 118 :width normal :foundry "FSD " :family "PragmataPro Liga"))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
  '(context-coloring-level-1-face ((t (:foreground "#3a499c"))))

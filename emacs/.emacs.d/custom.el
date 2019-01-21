@@ -62,7 +62,12 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((eval progn
+    ((eval add-hook
+           (quote after-save-hook)
+           (lambda nil
+             (org-html-export-to-html t))
+           t t)
+     (eval progn
            (require
             (quote find-file-in-project))
            (setq ffip-prune-patterns

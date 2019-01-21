@@ -1,3 +1,7 @@
+# -*- mode: snippet -*-
+# name: jekyll
+# key: jek
+# --
 # Local variables:
 # eval: (add-hook 'after-save-hook (lambda () (org-html-export-to-html t)) t t)
 # end:

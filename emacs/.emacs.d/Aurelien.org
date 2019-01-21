@@ -109,6 +109,13 @@ It makes it harder for major modes to minor modes trying to override my personal
         (set-visited-file-name new-file-name)
         (save-buffer)))
 
+    (defun create-blog-post (title)
+      "Create blog post for aurelienbottazini.com.."
+      (interactive "Mtitle:")
+      (let ((date (format-time-string "%Y-%m-%d"))
+            (formatted-title (replace-regexp-in-string " " "-" title)))
+        (find-file (concat "~/projects/aurelienbottazini.com/_org/_posts/" date "-" formatted-title ".org"))))
+
     (defun toggle-html-export-on-save ()
       "Enable or disable export HTML when saving current buffer."
       (interactive)
@@ -117,7 +124,7 @@ It makes it harder for major modes to minor modes trying to override my personal
       (if (memq 'org-html-export-to-html after-save-hook)
           (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
                  (message "Disabled org html export on save"))
-        (add-hook 'after-save-hook 'org-publish-current-file nil t)
+       (add-hook 'after-save-hook 'org-publish-current-file nil t)
         (set-buffer-modified-p t)
         (message "Enabled org html export on save")))
   #+end_src
@@ -621,11 +628,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (yas-global-mode 1)
       (add-hook 'term-mode-hook (lambda()
                                   (yas-minor-mode -1))))
-
-    (use-package yatemplate
-      :config
-      (auto-insert-mode t)
-      (yatemplate-fill-alist))
   #+end_src
 * Org
   #+begin_src emacs-lisp
@@ -901,11 +903,12 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)
 
+    (define-key my-leader-map (kbd "wc") 'create-blog-post)
+
     (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
     (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
     (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
     (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
-
 
     (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
     (defun hide-line-numbers ()

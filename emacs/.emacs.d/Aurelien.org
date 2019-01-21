@@ -617,23 +617,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
    [[https://projectile.readthedocs.io/en/latest/projects/#adding-custom-project-types][Custom project types]]
    #+begin_src emacs-lisp
-     (use-package projectile
-       :init
-       (setq projectile-switch-project-action 'projectile-dired)
-       (setq projectile-enable-caching nil)
-       (setq projectile-completion-system 'ivy)
-       :bind (:map my-leader-map
-                   ("p" . projectile-commander))
-       :config
-       (use-package counsel-projectile)
-       (projectile-mode)
-       (setq projectile-mode-line
-             '(:eval (list " P["
-                           (propertize (projectile-project-name)
-                                       'face '(:slant italic :weight bold))
-                           "]")))
-       )
-
      (use-package dumb-jump
        :bind (:map evil-normal-state-map
                    ("gd" . dumb-jump-go)
@@ -641,60 +624,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :init
        (setq dumb-jump-selector 'ivy))
        #+end_src
-** Tags
-#+begin_src emacs-lisp
-  (use-package counsel-etags
-   :bind (:map my-leader-map
-   ("e" . counsel-etags-find-tag-at-point)))
-#+end_src
 * AutoCompletions
   #+begin_src emacs-lisp
-    (use-package company
-      :diminish company-mode
-      :init
-      (add-hook 'after-init-hook 'global-company-mode)
-      (setq company-show-numbers t)
-      :config
-      (defun ora-company-number ()
-        "Forward to `company-complete-number'.
-    Unless the number is potentially part of the candidate.
-    In that case, insert the number."
-        (interactive)
-        (let* ((k (this-command-keys))
-               (re (concat "^" company-prefix k)))
-          (if (cl-find-if (lambda (s) (string-match re s))
-                          company-candidates)
-              (self-insert-command 1)
-            (company-complete-number (string-to-number k)))))
-      (let ((map company-active-map))
-        (mapc
-         (lambda (x)
-           (define-key map (format "%d" x) 'ora-company-number))
-         (number-sequence 0 9))
-        (define-key map " " (lambda ()
-                              (interactive)
-                              (company-abort)
-                              (self-insert-command 1)))
-        (define-key map (kbd "<return>") nil))
-
-      (let ((map company-active-map))
-        (define-key map (kbd "C-n") 'company-select-next)
-        (define-key map (kbd "C-p") 'company-select-previous)
-        (define-key map (kbd "C-f") 'company-complete-selection)
-        (define-key map (kbd "TAB") 'company-complete-selection)
-        (define-key map (kbd "<tab>") 'company-complete-selection))
-
-      (define-key my-keys-minor-mode-map (kbd "C-x C-o") 'company-complete)
-
-      (setq company-idle-delay nil)
-      (setq company-backends '(company-files company-capf (company-dabbrev-code company-yasnippet)))
-
-      (use-package company-dict
-        :config
-        (setq company-dict-dir (concat user-emacs-directory "dict/"))
-        (add-to-list 'company-backends 'company-dict))
-      )
-
     (use-package yasnippet
       :bind (:map my-leader-map
                   ("vs" . yas-describe-tables))
@@ -721,20 +652,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq ediff-split-window-function 'split-window-vertically)
   #+end_src
 
-** Tig
-   Tig is a terminal ncurses based viewer for Git. You can even commit
-   from it, navigate history, add custom commands...
-   It is *extremely fast*.
-   #+begin_src emacs-lisp
-   (defun ab-run-tig ()
-   "Start tig in current projectile project. Use st as a terminal."
-     (interactive)
-     (projectile-with-default-dir (projectile-project-root)
-       (start-process "tig" nil "st" "-c" "tig" "tig")))
-   (define-key my-leader-map (kbd "gg") 'ab-run-tig)
-
-   #+end_src
-
 ** Magit
    #+begin_src emacs-lisp
    (use-package magit
@@ -746,27 +663,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (use-package fullframe
        :config
        (fullframe magit-status magit-mode-quit-window))
-
-     (use-package diff-hl
-       :config
-       (add-hook 'prog-mode-hook 'diff-hl-mode)
-       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+       )
 
    (use-package git-link)
    (define-key my-leader-map (kbd "gl") 'git-link)
    (with-eval-after-load 'magit
      (define-key magit-status-mode-map (kbd "SPC") nil)
      )
-   (use-package git-timemachine)
-   (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
-
-   (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
-     "when entering git-timemachine mode, change evil normal state to emacs state"
-     (if (evil-normal-state-p)
-         (evil-emacs-state)
-       (evil-normal-state)))
-
-   (ad-activate 'git-timemachine-mode)
    #+end_src
 
 * Org
@@ -880,71 +783,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         org-html-indent t
         )
 #+end_src
-* Email
-  #+begin_src emacs-lisp
-  (when *is-mac*
-    (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
-    (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
-    (add-to-list 'load-path (expand-file-name "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e"))
-    )
-
-  (when *is-linux*
-    (setq mu4e-html2text-command "/usr/bin/w3m -T text/html")
-    (setq mu4e-get-mail-command "/usr/bin/mbsync -a")
-    (add-to-list 'load-path (expand-file-name "/usr/share/emacs/site-lisp/mu4e"))
-    )
-
-  (require 'epa-file)
-  (require 'mu4e)
-
-  (add-to-list 'mu4e-view-actions '("Browser View" . mu4e-action-view-in-browser) t)
-
-  (setq mu4e-maildir (expand-file-name "~/Maildir/fastmail"))
-  (setq mu4e-sent-messages-behavior 'sent)
-  (setq mu4e-sent-folder "/Sent Items"
-        mu4e-drafts-folder "/Drafts"
-        mu4e-trash-folder "/Trash"
-        mu4e-refile-folder "/Archive")
-
-  (setq mu4e-maildir-shortcuts
-        '(("/INBOX" . ?i)
-          ("/@Action" . ?a)
-          ("/@waiting" . ?w)
-          ("/Sent Items" . ?s)))
-
-  (setq mu4e-change-filenames-when-moving t)
-
-  (setq message-send-mail-function 'smtpmail-send-it
-        starttls-use-gnutls t
-        smtpmail-starttls-credentials
-        '(("mail.messagingengine.com" 587 nil nil))
-        smtpmail-default-smtp-server "mail.messagingengine.com"
-        smtpmail-smtp-server "mail.messagingengine.com"
-        ;; smtpmail-auth-credentials
-        ;; command to encrypt authinfo, you can delete authinfo after that:
-        ;; gpg --output ~/.authinfo.gpg --symmetric ~/.authinfo
-        ;; (expand-file-name "~/.authinfo.gpg")
-        smtpmail-smtp-service 587)
-
-  (setq user-full-name "Aurélien Bottazini")
-  (setq user-mail-address "aurelien@bottazini.com")
-
-  (setq mu4e-view-show-images t)
-  ;; use imagemagick, if available
-  (when (fboundp 'imagemagick-register-types)
-    (imagemagick-register-types))
-
-  (defun my-browse-url-new-app (url &optional new-window)
-    "Open URL in browser."
-    (interactive (browse-url-interactive-arg "URL: "))
-    (unless
-        (string= ""
-                 (shell-command-to-string
-                  (concat "chromium-browser " url)))
-      (message "Starting web browser...")))
-
-  (setq browse-url-browser-function 'my-browse-url-new-app)
-  #+end_src
 * Notes
   #+begin_src emacs-lisp
     (use-package markdown-mode)
@@ -968,16 +806,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (add-hook 'org-mode-hook 'palimpsest-mode)
       )
   #+end_src
-  #+begin_src emacs-lisp
-    (use-package dockerfile-mode
-      :mode "\\Dockerfile\\'")
-
-    (add-to-list 'auto-mode-alist '("\\.xsessionrc\\'" . shell-script-mode))
-
-    (use-package haskell-mode)
-    (use-package graphql-mode
-      :mode "\\.gql\\'")
-  #+end_src
 
   Keep emacs fast with large files.
   #+begin_src emacs-lisp
@@ -1000,14 +828,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
   #+end_src
 
-** lisp
-   #+begin_src emacs-lisp
-  (use-package evil-lispy
-    :diminish evil-lispy-mode
-    :config
-    (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
-    (add-hook 'clojure-mode-hook #'evil-lispy-mode))
-   #+end_src
 ** Clojure
    #+begin_src emacs-lisp
      (use-package clojure-mode
@@ -1092,8 +912,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :mode "\\.jsx\\'"
        :init
 
-       (use-package js-comint)
-
        (setq js2-mode-show-parse-errors nil)
        (setq js2-mode-show-strict-warnings nil)
 
@@ -1112,26 +930,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
        (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
 
-       (use-package import-js)
-
-       (setq javascript-common-imenu-regex-list
-             '(
-               ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
-               ("Describe" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-               ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-               ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
-               ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
-               ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-               ;; {{ es6 beginning
-               ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
-               ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
-               ;; }}
-               ))
-
-       (defun auray-js-imenu-make-index ()
-         (save-excursion
-           (imenu--generic-function javascript-common-imenu-regex-list)))
-
        (use-package prettier-js
          :config
          (setq prettier-args '(
@@ -1141,13 +939,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
 
          (add-hook 'js2-mode-hook 'prettier-js-mode))
-
-       (defun auray-js-mode-hook ()
-         (setq imenu-create-index-function 'auray-js-imenu-make-index)
          )
-       )
-
-     (add-hook 'js2-mode-hook 'auray-js-mode-hook)
 
      (defun enable-minor-mode (my-pair)
        "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
@@ -1163,41 +955,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                                   (enable-minor-mode
                                    '("\\.vue?\\'" . prettier-js-mode))))
 
-     (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
-     (defun my-jsx-hook ()
-       "My Hook for JSX Files"
-       (interactive)
-       (web-mode)
-       (web-mode-set-content-type "jsx")
-       (setq imenu-create-index-function 'auray-js-imenu-make-index)
-       (flycheck-select-checker 'javascript-eslint)
-       (emmet-mode)
-       (setq emmet-expand-jsx-className? t)
-       (tern-mode t))
-
-     (use-package context-coloring
-       :diminish context-coloring-mode
-       :config
-       (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
-       (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-       (add-hook 'js2-mode-hook #'context-coloring-mode)
-       )
-
      (use-package json-mode
        :mode "\\.json\\'"
        :mode "\\.eslintrc\\'"
-       )
-
-     (use-package coffee-mode
-       :mode "\\.coffee\\'"
-       :config
-       (use-package highlight-indentation)
-       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-       (custom-set-variables '(coffee-tab-width 2)))
-
-     (use-package typescript-mode
-       :mode "\\.ts\\'"
        )
    #+end_src
 
@@ -1229,23 +989,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
 
        (add-hook 'ruby-mode-hook 'subword-mode)
-       ;; I modify the syntax table to specify ":" as punctuation (and not part of a symbol)
-       ;; make it easier to work with global gnu tags
-       ;; (eval-after-load 'ruby-mode '(modify-syntax-entry ?: "." ruby-mode-syntax-table))
-       ;; (define-category ?U "Uppercase")
-       ;; (define-category ?u "Lowercase")
-       ;; (modify-category-entry (cons ?A ?Z) ?U)
-       ;; (modify-category-entry (cons ?a ?z) ?u)
-       ;; (make-variable-buffer-local 'evil-cjk-word-separating-categories)
-       ;; (add-hook 'subword-mode-hook
-       ;;           (lambda ()
-       ;;             (if subword-mode
-       ;;                 (push '(?u . ?U) evil-cjk-word-separating-categories)
-       ;;               (setq evil-cjk-word-separating-categories
-       ;;                     (default-value 'evil-cjk-word-separating-categories)))))
-
-       (use-package bundler)
-
        (use-package ruby-interpolation)
        (use-package inf-ruby)
 
@@ -1302,26 +1045,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                    )))
    #+end_src
 
-** Tests
-   #+begin_src emacs-lisp
-     (use-package flycheck
-       :ensure t
-       :init (global-flycheck-mode))
-
-     (use-package coverlay
-       :config
-       (define-key my-leader-map (kbd "cc") 'coverlay-mode)
-       (define-key my-leader-map (kbd "cl") 'coverlay-load-file)
-       (define-key my-leader-map (kbd "cr") 'coverlay-reload-file)
-       (define-key my-leader-map (kbd "cw") 'coverlay-watch-file)
-       (define-key my-leader-map (kbd "cs") 'coverlay-display-stats)
-       (define-key my-leader-map (kbd "ct") 'coverlay-toggle-overlays))
-   #+end_src
-
-** Rust
-#+begin_src emacs-lisp
-(use-package rust-mode)
-#+end_src
 * Bindings
 
   Shows key combination helper in minibuffer
@@ -1351,19 +1074,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (use-package paredit
       :diminish paredit-mode
       :config
-      (use-package paredit-everywhere
-        :config
-        (add-hook 'prog-mode-hook 'paredit-everywhere-mode))
       (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
       (add-hook 'clojure-mode-hook #'paredit-mode))
 
     (use-package avy)
     (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1)
-    (define-key my-keys-minor-mode-map (kbd "s-p") 'counsel-projectile)
     (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
     (define-key my-leader-map (kbd "u") 'universal-argument)
 
-    (define-key my-leader-map (kbd "1") 'projectile-run-async-shell-command-in-root)
     (define-key my-leader-map (kbd "b") 'ivy-switch-buffer)
 
     (use-package expand-region
@@ -1387,19 +1105,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)
 
-    (use-package drag-stuff
-      :diminish drag-stuff-mode
-      :config
-      (defhydra hydra-drag-stuff (global-map "<f9>")
-        "drag-stuff"
-        ("k" drag-stuff-up)
-        ("j" drag-stuff-down)
-        ("h" drag-stuff-right)
-        ("l" drag-stuff-left)))
-
     (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
-    (use-package rainbow-mode)
-    (define-key my-leader-map (kbd "or") 'rainbow-mode)
     (defun hide-line-numbers ()
       (interactive)
       (setq display-line-numbers (quote nil)))
@@ -1429,15 +1135,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
       (define-key evil-normal-state-map (kbd "[w") 'winner-undo))
 
-    (use-package origami
-      :bind (:map evil-normal-state-map
-                  ("zh" . origami-close-all-nodes)
-                  ("zc" . origami-close-node)
-                  ("zo" . origami-open-node)
-                  ("zv" . origami-open-all-nodes))
-      :config
-      (global-origami-mode))
-
     (use-package windresize
       :bind (:map evil-normal-state-map
                   ("C-w r" . windresize)))
@@ -1445,25 +1142,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (global-set-key (kbd "C-c v") 'ivy-push-view)
     (global-set-key (kbd "C-c V") 'ivy-pop-view)
   #+end_src
-** Alternative files
-   User rules can be setup using directory local variables, for
-   example, create a file .dir-locals.el, and following rules:
-
-   Every rule is a list. The first element (car) is a regular
-   expression. The rest elements (cdr) are replacements. If a file path
-   match the regular expression, all the replacements are used as
-   alternative files. In following example, spec/hello_spec.coffee has
-   alternative file assets/test.coffee.
-
-   ((nil
-   (alternative-files-rules . (("spec/\\(.*\\)_spec.coffee" "assets/\\1.coffee")
-                               ("assets/\\(.*\\).coffee" "spec/\\1_spec.coffee")))))
-   #+begin_src emacs-lisp
-     (require 'alternative-files)
-     (define-key my-leader-map (kbd "s") 'alternative-files-find-file)
-     (define-key my-leader-map (kbd "S") 'alternative-files-create-file)
-   #+end_src
-
 ** Find file in project
    Here is complete setup you could insert into ~/.emacs.d/init.el,
 
@@ -1722,216 +1400,4 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (diminish 'prettier-mode)
       (diminish 'subword-mode)
       (diminish 'abbrev-mode)
-  #+end_src
-
-* Ligatures
-  #+begin_src emacs-lisp
-    ;; For emacs25
-    (setq prettify-symbols-unprettify-at-point 'right-edge)
-
-    (defconst pragmatapro-prettify-symbols-alist
-      (mapcar (lambda (s)
-                `(,(car s)
-                  .
-                  ,(vconcat
-                    (apply 'vconcat (make-list (- (length (car s)) 1) (vector (decode-char 'ucs #X0020) '(Br . Bl))))
-                    (vector (decode-char 'ucs (cadr s))))))
-              '(("[ERROR]"   #XE380)
-                ("[DEBUG]"   #XE381)
-                ("[INFO]"    #XE382)
-                ("[WARN]"    #XE383)
-                ("[WARNING]" #XE384)
-                ("[ERR]"     #XE385)
-                ("[FATAL]"   #XE386)
-                ("[TRACE]"   #XE387)
-                ("[FIXME]"   #XE388)
-                ("[TODO]"    #XE389)
-                ("[BUG]"     #XE38A)
-                ("[NOTE]"    #XE38B)
-                ("[HACK]"    #XE38C)
-                ("[MARK]"    #XE38D)
-                ("!!"        #XE900)
-                ("!="        #XE901)
-                ("!=="       #XE902)
-                ("!!!"       #XE903)
-                ("!≡"        #XE904)
-                ("!≡≡"       #XE905)
-                ("!>"        #XE906)
-                ("#("        #XE920)
-                ("#_"        #XE921)
-                ("#{"        #XE922)
-                ("#?"        #XE923)
-                ("#>"        #XE924)
-                ("##"        #XE925)
-                ("%="        #XE930)
-                ("%>"        #XE931)
-                ("<~"        #XE932)
-                ("&%"        #XE940)
-                ("&&"        #XE941)
-                ("&*"        #XE942)
-                ("&+"        #XE943)
-                ("&-"        #XE944)
-                ("&/"        #XE945)
-                ("&="        #XE946)
-                ("&&&"       #XE947)
-                ("&>"        #XE948)
-                ("***"       #XE960)
-                ("*="        #XE961)
-                ("*/"        #XE962)
-                ("*>"        #XE963)
-                ("++"        #XE970)
-                ("+++"       #XE971)
-                ("+="        #XE972)
-                ("+>"        #XE973)
-                ("++="       #XE974)
-                ("--"        #XE980)
-                ("-<"        #XE981)
-                ("-<<"       #XE982)
-                ("-="        #XE983)
-                ("->"        #XE984)
-                ("->>"       #XE985)
-                ("---"       #XE986)
-                ("-->"       #XE987)
-                ("-+-"       #XE988)
-                ("-\\/"      #XE989)
-                (".."        #XE990)
-                ("..."       #XE991)
-                ("..<"       #XE992)
-                (".>"        #XE993)
-                (".~"        #XE994)
-                (".="        #XE995)
-                ("/*"        #XE9A0)
-                ("//"        #XE9A1)
-                ("/>"        #XE9A2)
-                ("/="        #XE9A3)
-                ("/=="       #XE9A4)
-                ("///"       #XE9A5)
-                ("/**"       #XE9A6)
-                ("::"        #XE9B0)
-                (":="        #XE9B1)
-                (":≡"        #XE9B2)
-                (":>"        #XE9B3)
-                (":=>"       #XE9B4)
-                (":("        #XE9B5)
-                (":-("       #XE9B6)
-                (":)"        #XE9B7)
-                (":-)"       #XE9B8)
-                (":/"        #XE9B9)
-                (":\\"       #XE9BA)
-                (":3"        #XE9BB)
-                (":D"        #XE9BC)
-                (":P"        #XE9BD)
-                (":>:"       #XE9BE)
-                (":<:"       #XE9BF)
-                ("<$>"       #XE9C0)
-                ("<*"        #XE9C1)
-                ("<*>"       #XE9C2)
-                ("<+>"       #XE9C3)
-                ("<-"        #XE9C4)
-                ("<<"        #XE9C5)
-                ("<<<"       #XE9C6)
-                ("<<="       #XE9C7)
-                ("<="        #XE9C8)
-                ("<=>"       #XE9C9)
-                ("<>"        #XE9CA)
-                ("<|>"       #XE9CB)
-                ("<<-"       #XE9CC)
-                ("<|"        #XE9CD)
-                ("<=<"       #XE9CE)
-                ("<~"        #XE9CF)
-                ("<~~"       #XE9D0)
-                ("<<~"       #XE9D1)
-                ("<$"        #XE9D2)
-                ("<+"        #XE9D3)
-                ("<!>"       #XE9D4)
-                ("<@>"       #XE9D5)
-                ("<#>"       #XE9D6)
-                ("<%>"       #XE9D7)
-                ("<^>"       #XE9D8)
-                ("<&>"       #XE9D9)
-                ("<?>"       #XE9DA)
-                ("<.>"       #XE9DB)
-                ("</>"       #XE9DC)
-                ("<\\>"      #XE9DD)
-                ("<\">"      #XE9DE)
-                ("<:>"       #XE9DF)
-                ("<~>"       #XE9E0)
-                ("<**>"      #XE9E1)
-                ("<<^"       #XE9E2)
-                ("<!"        #XE9E3)
-                ("<@"        #XE9E4)
-                ("<#"        #XE9E5)
-                ("<%"        #XE9E6)
-                ("<^"        #XE9E7)
-                ("<&"        #XE9E8)
-                ("<?"        #XE9E9)
-                ("<."        #XE9EA)
-                ("</"        #XE9EB)
-                ("<\\"       #XE9EC)
-                ("<\""       #XE9ED)
-                ("<:"        #XE9EE)
-                ("<->"       #XE9EF)
-                ("<!--"      #XE9F0)
-                ("<--"       #XE9F1)
-                ("<~<"       #XE9F2)
-                ("<==>"      #XE9F3)
-                ("==<"       #XEA00)
-                ("=="        #XEA01)
-                ("==="       #XEA02)
-                ("==>"       #XEA03)
-                ("=>"        #XEA04)
-                ("=~"        #XEA05)
-                ("=>>"       #XEA06)
-                ("=/="       #XEA07)
-                ("≡≡"        #XEA10)
-                ("≡≡≡"       #XEA11)
-                ("≡:≡"       #XEA12)
-                (">-"        #XEA20)
-                (">="        #XEA21)
-                (">>"        #XEA22)
-                (">>-"       #XEA23)
-                (">=="       #XEA24)
-                (">>>"       #XEA25)
-                (">=>"       #XEA26)
-                (">>^"       #XEA27)
-                ("??"        #XEA40)
-                ("?~"        #XEA41)
-                ("?="        #XEA42)
-                ("?>"        #XEA43)
-                ("???"       #XEA44)
-                ("^="        #XEA48)
-                ("^."        #XEA49)
-                ("^?"        #XEA4A)
-                ("^.."       #XEA4B)
-                ("^<<"       #XEA4C)
-                ("^>>"       #XEA4D)
-                ("^>"        #XEA4E)
-                ("\\\\"      #XEA50)
-                ("\\>"       #XEA51)
-                ("\\/-"      #XEA52)
-                ("@>"        #XEA57)
-                ("|="        #XEA60)
-                ("||"        #XEA61)
-                ("|>"        #XEA62)
-                ("|||"       #XEA63)
-                ("|+|"       #XEA64)
-                ("|->"       #XEA65)
-                ("|-->"      #XEA66)
-                ("|=>"       #XEA67)
-                ("|==>"      #XEA68)
-                ("~="        #XEA70)
-                ("~>"        #XEA71)
-                ("~~>"       #XEA72)
-                ("~>>"       #XEA73)
-                ("\">"       #XEA90))))
-
-    (defun add-pragmatapro-prettify-symbols-alist ()
-      (dolist (alias pragmatapro-prettify-symbols-alist)
-        (push alias prettify-symbols-alist)))
-
-    ;; I use kitty as a terminal and it already supports ligatures
-    (when (display-graphic-p)
-      (add-hook 'prog-mode-hook
-                #'add-pragmatapro-prettify-symbols-alist)
-      (global-prettify-symbols-mode +1))
   #+end_src

@@ -643,35 +643,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (auto-insert-mode t)
       (yatemplate-fill-alist))
   #+end_src
-* VCS / Git
-  I don't like popup windows when resolving merge conflicts.
-  This prevents windows to popup and keeps everything in the same frame.
-  #+begin_src emacs-lisp
-    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-    (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
-    (setq ediff-split-window-function 'split-window-vertically)
-  #+end_src
-
-** Magit
-   #+begin_src emacs-lisp
-   (use-package magit
-     :bind (:map my-leader-map
-                 ("gb" . magit-blame)
-                 ("gs" . magit-status)
-                 ("gh" . magit-log-buffer-file))
-     :config
-     (use-package fullframe
-       :config
-       (fullframe magit-status magit-mode-quit-window))
-       )
-
-   (use-package git-link)
-   (define-key my-leader-map (kbd "gl") 'git-link)
-   (with-eval-after-load 'magit
-     (define-key magit-status-mode-map (kbd "SPC") nil)
-     )
-   #+end_src
-
 * Org
   #+begin_src emacs-lisp
     (add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))

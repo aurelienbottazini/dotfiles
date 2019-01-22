@@ -650,10 +650,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
     (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
-    (require 'org-mu4e)
-    ;;store link to message if in header view, not to header query
-    (setq org-mu4e-link-query-in-headers-mode nil)
-
     (setq org-capture-templates
     '(("g" "GTD" entry (file+headline "~/Dropbox/org/GTD.org" "Inbox")
     "* %?\n")))
@@ -791,7 +787,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (use-package cider))
    #+end_src
 
-** Ruby
+* Ruby
    #+begin_src emacs-lisp
      (use-package yaml-mode
        :mode "\\.ya?ml\\'")

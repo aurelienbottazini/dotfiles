@@ -631,6 +631,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   #+end_src
 * Org
   #+begin_src emacs-lisp
+    (use-package htmlize)
     (add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
     (setq org-directory (expand-file-name "~/Dropbox/org"))
@@ -727,7 +728,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
            )
           ;; ... add all the components here (see below)...
           ("aurelienbottazini.com" :components ("aurelienbottazini.com-posts")))
-
+        org-export-with-toc nil
         org-html-doctype "html5"
         org-html-head nil
         org-html-head-include-default-style nil
@@ -777,6 +778,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
   #+end_src
 
+** Haskell
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+   :config
+   (require 'ob-haskell)
+
+#+END_SRC
 ** Clojure
    #+begin_src emacs-lisp
      (use-package clojure-mode
@@ -787,7 +795,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (use-package cider))
    #+end_src
 
-* Ruby
+** Ruby
    #+begin_src emacs-lisp
      (use-package yaml-mode
        :mode "\\.ya?ml\\'")

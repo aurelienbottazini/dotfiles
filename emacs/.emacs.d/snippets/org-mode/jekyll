@@ -2,13 +2,10 @@
 # name: jekyll
 # key: jek
 # --
-# Local variables:
-# eval: (add-hook 'after-save-hook (lambda () (org-html-export-to-html t)) t t)
-# end:
 #+BEGIN_EXPORT html
-----
+---
 title: `(replace-regexp-in-string "-" " " (cadr (split-string (file-name-nondirectory (file-name-sans-extension (buffer-file-name))) "[0-9]+-[0-9]+-[0-9]+-")))`
 tags: $1
------
+---
 #+END_EXPORT
 $0

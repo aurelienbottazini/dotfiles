@@ -3,18 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(company-dict-enable-fuzzy nil)
- '(company-minimum-prefix-length 2)
- '(company-require-match nil)
- '(context-coloring-syntactic-comments nil)
- '(context-coloring-syntactic-strings nil)
- '(coverlay-mode t)
- '(coverlay:tested-line-background-color "#e4f4e9")
- '(coverlay:untested-line-background-color "#ffcfd8")
- '(custom-safe-themes
-   (quote
-    ("cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "3e335d794ed3030fefd0dbd7ff2d3555e29481fe4bbb0106ea11c660d6001767" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(deft-new-file-format "%Y-%m-%dT%H:%M")
  '(deft-use-filename-as-title t)
  '(deft-use-filter-string-for-filename t)
@@ -22,11 +10,6 @@
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
  '(dumb-jump-mode t)
- '(emamux:default-orientation (quote vertical))
- '(emamux:use-nearest-pane t)
- '(flycheck-disabled-checkers (quote (c/c++-gcc emacs-lisp-checkdoc)))
- '(flycheck-indication-mode nil)
- '(global-flycheck-mode t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")
@@ -36,8 +19,6 @@
      (ivy--regex-ignore-order . "order")
      (ivy--regex-fuzzy . "fuzzy"))))
  '(menu-bar-mode nil)
- '(mu4e-update-interval 900)
- '(mu4e-use-fancy-chars t)
  '(org-agenda-files
    (quote
     ("~/Dropbox/org/refile-beorg.org" "~/Dropbox/org/GTD.org")))

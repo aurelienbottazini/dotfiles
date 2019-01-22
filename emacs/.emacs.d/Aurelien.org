@@ -1,5 +1,5 @@
 #+TITLE: Aurelien Bottazini's Emacs configuration
-+OPTIONS: toc:4 h:4
+#+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
 It is important to load
@@ -116,7 +116,7 @@ It makes it harder for major modes to minor modes trying to override my personal
             (formatted-title (replace-regexp-in-string " " "-" title)))
         (find-file (concat "~/projects/aurelienbottazini.com/_org/_posts/" date "-" formatted-title ".org"))
         (yas-expand-snippet (yas-lookup-snippet "jekyll")
-     ))
+     )))
 
     (defun toggle-html-export-on-save ()
       "Enable or disable export HTML when saving current buffer."

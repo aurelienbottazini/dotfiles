@@ -305,10 +305,6 @@ It makes it harder for major modes to minor modes trying to override my personal
         :config
         (evil-commentary-mode))
 
-      (use-package evil-fringe-mark
-        :config
-        (setq-default evil-fringe-mark-show-special t))
-
       (use-package evil-visualstar
         :config
         (global-evil-visualstar-mode t))
@@ -566,6 +562,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
    #+begin_src emacs-lisp
      (use-package counsel
+       :defer t
        :config
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
@@ -584,6 +581,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
 
      (use-package ivy
+       :defer t
        :diminish ivy-mode
        :config
        (use-package ivy-hydra)
@@ -745,6 +743,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
+      :defer t
       :config
       (setq deft-extensions '("txt" "tex" "org"))
       (setq deft-directory "~/Dropbox/org/")
@@ -869,22 +868,28 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
   #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
-    (use-package wgrep)
+    (use-package wgrep
+     :defer t)
 
     (use-package paredit
+      :defer t
       :diminish paredit-mode
       :config
       (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
       (add-hook 'clojure-mode-hook #'paredit-mode))
 
-    (use-package avy)
-    (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1)
+    (use-package avy
+     :defer t
+     :config
+    (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1))
+
     (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
     (define-key my-leader-map (kbd "u") 'universal-argument)
 
     (define-key my-leader-map (kbd "b") 'ivy-switch-buffer)
 
     (use-package expand-region
+      :defer t
       :config
       (define-key my-leader-map (kbd "SPC") 'er/expand-region))
 
@@ -999,6 +1004,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    to use `fd` instead of find.
    #+begin_src emacs-lisp
      (use-package find-file-in-project
+      :defer t
       :config
       (add-to-list 'ffip-prune-patterns "*/dist/*")
       (add-to-list 'ffip-prune-patterns "*/.idea/*")

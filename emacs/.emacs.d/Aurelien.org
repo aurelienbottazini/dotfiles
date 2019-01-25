@@ -114,7 +114,7 @@ It makes it harder for major modes to minor modes trying to override my personal
       (interactive "Mtitle:")
       (let ((date (format-time-string "%Y-%m-%d"))
             (formatted-title (replace-regexp-in-string " " "-" title)))
-        (find-file (concat "~/projects/aurelienbottazini.com/_org/_posts/" date "-" formatted-title ".org"))
+        (find-file (concat "~/projects/blog/_org/_posts/" date "-" formatted-title ".org"))
         (yas-expand-snippet (yas-lookup-snippet "jekyll")
      )))
 

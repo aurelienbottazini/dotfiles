@@ -4,9 +4,9 @@ status="$(dropbox status)"
 
 case "$status" in
     "Up to date")
-	echo "Ok" ;;
+        echo "Ok" ;;
     Syncing*)
-	echo "Sync" ;;
+        echo "Sync" ;;
     *)
-	echo "$status" ;;
+        echo "$status" ;;
 esac

@@ -94,7 +94,6 @@ case "$1" in
     ;;
     --mute)
         mute
-        dzen2_volume
     ;;
     --mute_source)
         mute_source
@@ -109,15 +108,12 @@ case "$1" in
     ;;
     --volume_source_up)
         volume_source_up
-        dzen2_volume
     ;;
     --volume_source_down)
         volume_source_down
-        dzen2_volume
     ;;
     --output_volume)
         output_volume
-        dzen2_volume
     ;;
     --input_volume)
         input_volume

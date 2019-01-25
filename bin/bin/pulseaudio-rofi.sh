@@ -100,11 +100,9 @@ case "$1" in
     ;;
     --volume_up)
         volume_up
-        dzen2_volume
     ;;
     --volume_down)
         volume_down
-        dzen2_volume
     ;;
     --volume_source_up)
         volume_source_up

@@ -188,7 +188,7 @@ set cursorline
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
 hi clear CursorLine
-hi CursorLine term=underline ctermbg=0 cterm=underline gui=underline
+hi CursorLine term=underline ctermbg=NONE cterm=underline gui=underline
 
 nmap <leader>i :set list!<CR>
 highlight NonText ctermbg=NONE ctermfg=10

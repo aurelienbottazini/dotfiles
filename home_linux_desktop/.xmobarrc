@@ -11,9 +11,10 @@ Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
           , Run Com "date" ["+%H:%M"] "localtime" 10
           , Run Com "./bin/sanFranciscoTime.sh" [] "sftime" 10
           , Run Com "./bin/dropboxStatus.sh" [] "mydropbox" 10
+          , Run Com "./bin/volume-status.sh" [] "myvolume" 10
           , Run StdinReader
           ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <action=`nautilus ~/Dropbox`><fn=1></fn>%mydropbox%</action> <action=blueman-manager><fn=1></fn></action> <action=launch-settings.sh sound><fn=1></fn></action> <fn=1></fn> <action=gsimplecal>%theDate%</action> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%"
+        , template = " %StdinReader% }{ <action=`nautilus ~/Dropbox`><fn=1></fn>%mydropbox%</action> <action=blueman-manager><fn=1></fn></action> <action=launch-settings.sh sound><fn=1></fn> %myvolume%</action> <fn=1></fn> <action=gsimplecal>%theDate%</action> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%"
 }

@@ -53,6 +53,11 @@ output_volume() {
              END { print muted=="no"?volume:"Muted" }'
 }
 
+dzen2_volume() {
+    output_volume | dzen2 -ta c -w 100 -x 100 -y 100 -bg "#bc3e44" -fg "#ffffff" -p 1
+
+}
+
 get_default_source() {
     pacmd stat | awk -F": " '/^Default source name: /{print $2}'
 }
@@ -89,24 +94,30 @@ case "$1" in
     ;;
     --mute)
         mute
+        dzen2_volume
     ;;
     --mute_source)
         mute_source
     ;;
     --volume_up)
         volume_up
+        dzen2_volume
     ;;
     --volume_down)
         volume_down
+        dzen2_volume
     ;;
     --volume_source_up)
         volume_source_up
+        dzen2_volume
     ;;
     --volume_source_down)
         volume_source_down
+        dzen2_volume
     ;;
     --output_volume)
         output_volume
+        dzen2_volume
     ;;
     --input_volume)
         input_volume

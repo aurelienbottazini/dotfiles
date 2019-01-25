@@ -4,11 +4,11 @@ set nocompatible
 
 let mapleader = "\<Space>"
 " Split edit your vimrc. Type space, v, r in sequence to trigger
-nmap <leader>vr :e `=resolve(expand("~/.vimrc"))`<cr>
+nmap <leader>ve :e $MYVIMRC<cr>
 nmap <leader>c :VtrSendCommandToRunner<space>
 map <Leader>x :VtrSendCommandToRunner<CR>
 " Source (reload) your vimrc. Type space, s, o in sequence to trigger
-nmap <leader>so :source $MYVIMRC<cr>
+nmap <leader>vr :source $MYVIMRC<cr>
 " save with Control s
 nmap <C-s> :w<cr>
 " easily escape from insert mode

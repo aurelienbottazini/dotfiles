@@ -1,2 +1,2 @@
 #!/bin/bash
-st -c midgnight-commander -- fish -i -c mc
+st -c midgnight-commander mc --nosubshell

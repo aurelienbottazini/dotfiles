@@ -246,14 +246,15 @@ noScratchPad :: String -> String
 noScratchPad ws = if ws == "NSP" then "" else ws
 
 myNavigation2DConfig :: Navigation2DConfig
-myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), ("Spacing 7 Tall", centerNavigation)]
-                           , unmappedWindowRect = [("Full", singleWindowRect)]
+myNavigation2DConfig = def { layoutNavigation   = [("NoFrillsDeco Spacing Grid", hybridNavigation), ("NoFrillsDeco Spacing Tall", hybridNavigation), ("NoFrillsDeco Spacing Full", hybridNavigation)]
+                           , unmappedWindowRect = [("NoFrillsDeco Spacing Full", singleWindowRect)]
                            }
 
 myLayoutPrinter :: String -> String
 myLayoutPrinter "NoFrillsDeco Spacing ThreeCol" = " ThreeCol "
 myLayoutPrinter "NoFrillsDeco Spacing Tall" = " Tall "
 myLayoutPrinter "NoFrillsDeco Spacing Grid" = " Grid "
+myLayoutPrinter "NoFrillsDeco Spacing Full" = " Full "
 myLayoutPrinter "Tabbed Simplest" = " Simplest "
 myLayoutPrinter x = x
 
@@ -277,7 +278,7 @@ myLayoutHook = avoidStruts
                $ toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
                $ addTopBar
                $ spacingRaw True (Border 0 7 7 7) True (Border 7 7 7 7) True
-               $ smartBorders (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Grid
+               $ smartBorders (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Grid 
 
 addTopBar = noFrillsDeco shrinkText topBarTheme
 

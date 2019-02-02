@@ -13,7 +13,6 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.ThreeColumns
-import XMonad.Layout.Accordion
 import XMonad.Layout.Grid
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.CycleWS
@@ -43,9 +42,6 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
         safeSpawn "notify-send" [show windowName, "workspace " ++ idx]
 
-mySpacing :: Int
-mySpacing = 7
-
 myTabTheme :: Theme
 myTabTheme = def {
   fontName = "xft:Gotham HTF Black:size=12",
@@ -69,7 +65,7 @@ scratchpads =
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "st -c term-ranger ranger" (className =? "term-ranger") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
-    ,(NS "midnight-commander" "st -c term-ranger -e mc --nosubshell" (className =? "term-ranger") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
+    ,(NS "midnight-commander" "st -c term-mc -e mc --nosubshell" (className =? "term-mc") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -141,9 +137,8 @@ myKeysP = [
         , ("M4-s c", namedScratchpadAction scratchpads "calendar")
         , ("M4-s e", namedScratchpadAction scratchpads "email")
         , ("M4-s g", namedScratchpadAction scratchpads "GTD")
-        , ("M4-s r", namedScratchpadAction scratchpads "ranger")
         , ("M4-s S-m", namedScratchpadAction scratchpads "youtube-music")
-        , ("M4-f", namedScratchpadAction scratchpads "midnight-commander")
+        , ("M4-f", namedScratchpadAction scratchpads "ranger")
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-o a", toggleCopyToAll)
         , ("M4-z", sendMessage ToggleLayout)
@@ -256,10 +251,9 @@ myNavigation2DConfig = def { layoutNavigation   = [("Full", centerNavigation), (
                            }
 
 myLayoutPrinter :: String -> String
-myLayoutPrinter "NoFrillsDeco Spacing 7 ThreeCol" = " ThreeCol "
-myLayoutPrinter "NoFrillsDeco Spacing 7 Tall" = " Tall "
-myLayoutPrinter "NoFrillsDeco Spacing 7 Accordion" = " Accordion "
-myLayoutPrinter "NoFrillsDeco Spacing 7 Grid" = " Grid "
+myLayoutPrinter "NoFrillsDeco Spacing ThreeCol" = " ThreeCol "
+myLayoutPrinter "NoFrillsDeco Spacing Tall" = " Tall "
+myLayoutPrinter "NoFrillsDeco Spacing Grid" = " Grid "
 myLayoutPrinter "Tabbed Simplest" = " Simplest "
 myLayoutPrinter x = x
 
@@ -277,12 +271,13 @@ topBarTheme = def
     , decoHeight            = 20
     }
 
+mySpacing = 7
+
 myLayoutHook = avoidStruts
                $ toggleLayouts (noBorders $ tabbed shrinkText myTabTheme)
                $ addTopBar
-               $ spacing mySpacing
-               $ smartBorders
-               $ (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Accordion ||| Grid
+               $ spacingRaw True (Border 0 7 7 7) True (Border 7 7 7 7) True
+               $ smartBorders (Tall 1 (3/100) (1/2)) ||| ThreeColMid 1 (2/20) (1/2) ||| Grid
 
 addTopBar = noFrillsDeco shrinkText topBarTheme
 

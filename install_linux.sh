@@ -203,3 +203,10 @@ sudo apt-get install planck
 yarn global add javascript-typescript-langserver
 yarn global add vscode-css-languageserver-bin
 yarn global add vue-language-server
+
+sudo apt-get install cabal
+cabal update
+cabal install cabal-install
+cabal install xmonad
+cabal install xmobar
+cabal install xmonad-contrib

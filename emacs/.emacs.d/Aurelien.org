@@ -914,6 +914,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)
 
+    (define-key my-leader-map (kbd "d") 'deft)
+
     (define-key my-leader-map (kbd "wc") 'create-blog-post)
 
     (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)

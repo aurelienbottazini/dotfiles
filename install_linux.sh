@@ -44,7 +44,7 @@ sudo apt install libssl-dev
 sudo apt install guile-2.0-dev html2text xdg-utils
 sudo apt install libxapian-dev libgmime-2.6-dev libwebkitgtk-3.0-dev
 
-sudo apt install notify-osd
+sudo apt install dunst
 
 sudo apt install clojure leiningen
 sudo apt install anki mplayer

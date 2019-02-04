@@ -4,6 +4,6 @@
 setxkbmap -option ctrl:swapcaps #-option altwin:swap_alt_win # /usr/lib/policykit-2-gnome/polkit-gnome-authentication-agent-1 &
 setxkbmap -option compose:ralt
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-dunst &
+dunst -font "xtf:Gotham HTF Black:size 12"
 xautolock -time 30 -locker "gnome-screensaver-command -l" -notify 10 -notifier "notify-send -t 5000 -i gtk-dialog-info 'Locking in 10 seconds'" &
 dropbox start

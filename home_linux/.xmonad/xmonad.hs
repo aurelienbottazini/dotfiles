@@ -115,11 +115,6 @@ myKeysP = [
         , ("M4-t", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
 
-        -- works in the reverse way than I was expecting (down and up). This
-        -- work as I expect it to work.
-        , ("M4-n",  windows W.focusDown)
-        , ("M4-p",  windows W.focusUp)
-
         , ("M4-j",  windowGo D True)
         , ("M4-k",  windowGo U True)
         , ("M4-l",  windowGo R True)

@@ -921,6 +921,12 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      :config
      (define-key my-leader-map (kbd "I") 'define-word-at-point))
 
+    (defun lookup-synonyms (word)
+      (interactive (list (save-excursion (car (ispell-get-word nil)))))
+      (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
+
+     (define-key my-leader-map (kbd "s") 'lookup-synonyms))
+
     (define-key my-leader-map (kbd "wc") 'create-blog-post)
 
     (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)

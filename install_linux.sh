@@ -31,7 +31,7 @@ sudo apt install tmux xclip
 sudo apt install zsh
 
 sudo apt install deluge
-sudo apt install htop tig git-sh ranger
+sudo apt install htop tig ranger
 
 sudo apt install espeak
 
@@ -210,3 +210,12 @@ cabal install cabal-install
 cabal install xmonad
 cabal install xmobar
 cabal install xmonad-contrib
+
+cd ~/projects
+curl -OL https://github.com/thoughtbot/gitsh/releases/download/v0.13/gitsh-0.13.tar.gz
+tar -zxvf gitsh-0.13.tar.gz
+cd gitsh-0.13
+sudo apt-get install ruby-dev
+./configure
+make
+sudo make install

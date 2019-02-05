@@ -46,6 +46,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'altercation/vim-colors-solarized'
+Plug 'chrisbra/Colorizer' 
 call plug#end()
 
 
@@ -163,6 +164,8 @@ nmap <leader>ws :w !sudo tee % > /dev/null
 map <leader>r :Gsearch<space>
 map <leader>a :A<CR>
 map <leader>d :redraw!<cr>
+
+map <leader>or :ColorToggle<cr>
 
 set clipboard=unnamed " copy paste within tmux
 

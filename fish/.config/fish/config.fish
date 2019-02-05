@@ -82,14 +82,16 @@ alias delete_docker_images 'docker rmi (docker images -q)'
 abbr tu "tmux -u"
 abbr screen "screen -U"
 abbr pd "psql -p 5432 -h localhost -d "
-abbr ls "ls --color"
-abbr l. "ls -d .*"
+alias ls "ls --color"
+alias l. "ls -d .*"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
 alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 and; docker run \
     --publish=7474:7474 --publish=7687:7687 \
     --volume=$HOME/neo4j/data:/data \
     --volume=$HOME/neo4j/logs:/logs \
     neo4j:3.0"
+
+alias v. "cd dotfiles;and vim ."
 
 
 set -x EDITOR 'vim'

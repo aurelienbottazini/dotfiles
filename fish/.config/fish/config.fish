@@ -93,7 +93,6 @@ alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 an
 
 alias v. "cd dotfiles;and vim ."
 
-
 set -x EDITOR 'vim'
 set -x VISUAL 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color

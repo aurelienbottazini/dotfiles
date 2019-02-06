@@ -715,10 +715,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (setq org-html-validation-link nil)
   (setq org-publish-project-alist
         '(
-          ("aurelienbottazini.com-posts"
-           :base-directory "~/projects/aurelienbottazini.com/_org"
+          ("blog-posts"
+           :base-directory "~/projects/blog/_org"
            :base-extension "org"
-           :publishing-directory "~/projects/aurelienbottazini.com/"
+           :publishing-directory "~/projects/blog/"
            :recursive t
            :publishing-function org-html-publish-to-html
            :headline-levels 4             ; Just the default for this project.
@@ -728,7 +728,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
            :body-only t
            )
           ;; ... add all the components here (see below)...
-          ("aurelienbottazini.com" :components ("aurelienbottazini.com-posts")))
+          ("blog" :components ("blog-posts")))
         org-export-with-toc nil
         org-html-doctype "html5"
         org-html-head nil
@@ -905,7 +905,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/projects/aurelienbottazini.com")))
+    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/projects/blog/")))
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
     (define-key my-leader-map (kbd "i") 'counsel-imenu)

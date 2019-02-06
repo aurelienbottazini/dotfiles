@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+echo "updating dotfiles"
+cd ~/dotfiles
+git pull
+echo "updating aurelienbottazini.com"
+cd ~/projects/aurelienbottazini.com
+git pull
+echo "updating blog"
+cd ~/projects/blog
+git pull
+echo "updating blog public"
+cd ~/projects/blog-public
+git pull

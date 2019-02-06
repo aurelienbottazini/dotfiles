@@ -754,8 +754,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   #+begin_src emacs-lisp
     (use-package palimpsest
       :config
-      (add-hook 'org-mode-hook 'palimpsest-mode)
-      )
+      (add-hook 'org-mode-hook 'palimpsest-mode))
   #+end_src
 
   Keep emacs fast with large files.
@@ -874,7 +873,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep
-     :defer t)
+      :defer t)
 
     (use-package paredit
       :defer t
@@ -884,9 +883,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (add-hook 'clojure-mode-hook #'paredit-mode))
 
     (use-package avy
-     :defer t
-     :config
-    (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1))
+      :defer t
+      :config
+      (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-word-1))
 
     (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
     (define-key my-leader-map (kbd "u") 'universal-argument)
@@ -918,14 +917,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "d") 'deft)
     (define-key my-leader-map (kbd "i") 'ispell-buffer)
     (use-package define-word
-     :config
-     (define-key my-leader-map (kbd "I") 'define-word-at-point))
+      :config
+      (define-key my-leader-map (kbd "I") 'define-word-at-point))
 
     (defun lookup-synonyms (word)
       (interactive (list (save-excursion (car (ispell-get-word nil)))))
       (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
-     (define-key my-leader-map (kbd "s") 'lookup-synonyms))
+    (define-key my-leader-map (kbd "s") 'lookup-synonyms)
 
     (define-key my-leader-map (kbd "wc") 'create-blog-post)
 

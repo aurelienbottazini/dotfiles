@@ -172,18 +172,18 @@ getSortByIndexNoSP :: X([WindowSpace] -> [WindowSpace])
 getSortByIndexNoSP =
        fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex
 
-ws1GTD :: String
-ws1GTD = "1:gtd"
+ws1TERM :: String
+ws1TERM = "1:term"
 ws2WWW :: String
 ws2WWW = "2:www"
-ws3TRAINING :: String
-ws3TRAINING = "3:training"
+ws3IDE :: String
+ws3IDE = "3:ide"
 ws4TALK :: String
 ws4TALK = "4:talk"
 ws5EMACS :: String
 ws5EMACS = "5:emacs"
-ws6MY :: String
-ws6MY = "6:my"
+ws6TRAINING :: String
+ws6TRAINING = "6:training"
 ws7MY :: String
 ws7MY = "7:my"
 ws8MSG :: String
@@ -192,41 +192,38 @@ ws9MAIL :: String
 ws9MAIL = "9:mail"
 
 myWorkspaces :: [String]
-myWorkspaces = [ws1GTD, ws2WWW, ws3TRAINING, ws4TALK, ws5EMACS, ws6MY, ws7MY, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1TERM, ws2WWW, ws3IDE, ws4TALK, ws5EMACS, ws6TRAINING, ws7MY, ws8MSG, ws9MAIL]
 
 myProjects :: [Project]
 -- Projects are predefined workspace. When you switch to a workspace
 -- and that workspace is empty, the preconfigured windows are launched / created.
 myProjects =
    [
-     Project { projectName = ws1GTD
+     Project { projectName = ws1TERM
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws1GTD "st"
+             , projectStartHook = Just $ do spawnOn ws1TERM "st"
 
-             },
+     },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
-             },
-     Project { projectName = ws3TRAINING
-             , projectDirectory = "~/projects/training-heaven"
-             , projectStartHook = Just $ do spawnOn ws3TRAINING "anki"
-             },
-     -- Project { projectName = ws7MY
-     --         , projectDirectory = "media/aurelienbottazini/Files/music"
-     --         , projectStartHook = Just $ do spawnOn ws7MY "spotify --force-device-scale-factor=2"
-     --         },
+     },
+     Project { projectName = ws3IDE
+             , projectDirectory = "~/projec5s"
+             , projectStartHook = Just $ do spawnOn ws2WWW "ide"
+     },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws4TALK "slack" },
+             , projectStartHook = Just $ do spawnOn ws4TALK "slack"
+     },
      Project { projectName = ws5EMACS
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws5EMACS "mainEmacs.sh" }
-     -- Project { projectName = ws9MAIL
-     --         , projectDirectory = "~/"
-     --         , projectStartHook = Just $ do spawnOn ws9MAIL "chromium-browser --new-window --app=https://calendar.google.com/calendar/r?tab=mc"
-     --                                        spawnOn ws9MAIL "chromium-browser --new-window --app=https://www.fastmail.com"
-     --         }
+             , projectStartHook = Just $ do spawnOn ws5EMACS "mainEmacs.sh"
+     },
+     Project { projectName = ws6TRAINING
+             , projectDirectory = "~/projects/training-heaven"
+             , projectStartHook = Just $ do spawnOn ws6TRAINING "anki"
+     }
    ]
 
 myStartupHook :: X ()

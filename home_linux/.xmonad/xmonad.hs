@@ -202,27 +202,33 @@ myProjects =
      Project { projectName = ws1TERM
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws1TERM "st"
+                                            sendMessage ToggleLayout <+> sendMessage ToggleStruts
 
      },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
+                                            sendMessage ToggleLayout <+> sendMessage ToggleStruts
      },
      Project { projectName = ws3IDE
              , projectDirectory = "~/projec5s"
              , projectStartHook = Just $ do spawnOn ws2WWW "ide"
+                                            sendMessage ToggleLayout <+> sendMessage ToggleStruts
      },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws4TALK "slack"
+                                            sendMessage ToggleLayout <+> sendMessage ToggleStruts
      },
      Project { projectName = ws5EMACS
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws5EMACS "mainEmacs.sh"
+                                            sendMessage ToggleLayout <+> sendMessage ToggleStruts
      },
      Project { projectName = ws6TRAINING
              , projectDirectory = "~/projects/training-heaven"
              , projectStartHook = Just $ do spawnOn ws6TRAINING "anki"
+                                            sendMessage ToggleLayout <+> sendMessage ToggleStruts
      }
    ]
 

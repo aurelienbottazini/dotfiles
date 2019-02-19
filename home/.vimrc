@@ -47,6 +47,7 @@ Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'altercation/vim-colors-solarized'
 Plug 'chrisbra/Colorizer' 
+Plug 'posva/vim-vue'
 call plug#end()
 
 

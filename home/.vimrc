@@ -48,8 +48,14 @@ Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'altercation/vim-colors-solarized'
 Plug 'chrisbra/Colorizer' 
 Plug 'posva/vim-vue'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
+let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_async = 1
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " colors zenburn
 " Use Silver Searcher instead of grep

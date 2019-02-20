@@ -1,3 +1,7 @@
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT=MToolkit
+wmname LG3D
+feh --bg-fill ~/Dropbox/Pictures/wallpaper/jonny-caspari-1148431-unsplash.jpg
 setxkbmap -option compose:sclk
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 # dunst -font "xtf:Gotham HTF Black:size 12" 

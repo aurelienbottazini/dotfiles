@@ -91,19 +91,25 @@ mkdir -p ~/Pictures/Screenshots
 
 sudo apt install golang
 
+#######################################
+## Compile from source
+#######################################
 cd ~/projects
 git clone git@github.com:aurelienbottazini/st.git
 cd ./st
-sudo make install
+sudo make clean install
 
 cd ~/projects
 git clone git@github.com:aurelienbottazini/dmenu.git
 cd ./dmenu
-suro make install
+suro make clean install
 
-#######################################
-## Compile from source
-#######################################
+cd ~/projects
+git clone git@github.com:aurelienbottazini/dwm.git
+cd ./dwm
+git checkout abo-config-adjustments
+suro make clean install
+
 
 mkdir -p "$(rbenv root)"/plugins
 git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build

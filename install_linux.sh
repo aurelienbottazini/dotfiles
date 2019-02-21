@@ -110,6 +110,11 @@ cd ./dwm
 git checkout abo-config-adjustments
 suro make clean install
 
+cd ~/projects
+git clone git@github.com:aurelienbottazini/slstatus.git
+cd ./slstatus
+git checkout abo-config-adjustments
+suro make clean install
 
 mkdir -p "$(rbenv root)"/plugins
 git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build

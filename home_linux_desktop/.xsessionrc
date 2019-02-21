@@ -2,7 +2,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export AWT_TOOLKIT=MToolkit
 wmname LG3D
 slstatus &
-feh --bg-fill --randomize ~/Dropbox/Pictures/wallpaper/*
+feh --bg-max --randomize ~/Dropbox/Pictures/wallpaper/*
 setxkbmap -option compose:sclk
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 # dunst -font "xtf:Gotham HTF Black:size 12" 

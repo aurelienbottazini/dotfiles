@@ -43,7 +43,12 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((eval add-hook
+    ((alternative-files-rules
+      ("src/\\(.*\\).vue" "test/unit/specs/\\1.spec.js")
+      ("test/unit/specs/\\(.*\\).spec.js" "src/\\1.vue")
+      ("src/\\(.*\\).js" "test/unit/specs/\\1.spec.js")
+      ("test/unit/specs/\\(.*\\).spec.js" "src/\\1.js"))
+     (eval add-hook
            (quote after-save-hook)
            (lambda nil
              (org-html-export-to-html t))

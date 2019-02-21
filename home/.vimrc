@@ -173,6 +173,7 @@ map <leader>a :A<CR>
 map <leader>d :redraw!<cr>
 
 map <leader>or :ColorToggle<cr>
+map <leader>oh :nohl<cr>
 
 set clipboard=unnamed " copy paste within tmux
 
@@ -193,7 +194,7 @@ endfunction
 
 set guifont=OperatorMono:h14
 set cursorline
-" set cursorcolumn
+set cursorcolumn
 " set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow

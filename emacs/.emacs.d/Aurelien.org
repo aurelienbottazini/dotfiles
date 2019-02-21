@@ -446,6 +446,9 @@ It makes it harder for major modes to minor modes trying to override my personal
 
 * GUI
   #+begin_src emacs-lisp
+  (when window-system
+    (when *is-linux*
+      (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-26-*-*-*-m-0-iso10646-1")))
     (global-hl-line-mode)
     (blink-cursor-mode 0)
     (column-number-mode)
@@ -608,6 +611,23 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 ** Project navigation
 
    #+begin_src emacs-lisp
+     (use-package projectile
+       :init
+       (setq projectile-switch-project-action 'projectile-dired)
+       (setq projectile-enable-caching nil)
+       (setq projectile-completion-system 'ivy)
+       :bind (:map my-leader-map
+                   ("p" . projectile-commander))
+       :config
+       (use-package counsel-projectile)
+       (projectile-mode)
+       (setq projectile-mode-line
+             '(:eval (list " P["
+                           (propertize (projectile-project-name)
+                                       'face '(:slant italic :weight bold))
+                           "]")))
+       )
+
      (use-package dumb-jump
        :bind (:map evil-normal-state-map
                    ("gd" . dumb-jump-go)
@@ -738,6 +758,63 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         org-html-indent t
         )
 #+end_src
+* VCS / Git
+  I don't like popup windows when resolving merge conflicts.
+  This prevents windows to popup and keeps everything in the same frame.
+  #+begin_src emacs-lisp
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+    (setq ediff-split-window-function 'split-window-vertically)
+  #+end_src
+
+** Tig
+   Tig is a terminal ncurses based viewer for Git. You can even commit
+   from it, navigate history, add custom commands...
+   It is *extremely fast*.
+   #+begin_src emacs-lisp
+   (defun ab-run-tig ()
+   "Start tig in current projectile project. Use st as a terminal."
+     (interactive)
+     (projectile-with-default-dir (projectile-project-root)
+       (start-process "tig" nil "st" "-c" "tig" "tig")))
+   (define-key my-leader-map (kbd "gg") 'ab-run-tig)
+
+   #+end_src
+
+** Magit
+   #+begin_src emacs-lisp
+   (use-package magit
+     :bind (:map my-leader-map
+                 ("gb" . magit-blame)
+                 ("gs" . magit-status)
+                 ("gh" . magit-log-buffer-file))
+     :config
+     (use-package fullframe
+       :config
+       (fullframe magit-status magit-mode-quit-window))
+
+     (use-package diff-hl
+       :config
+       (add-hook 'prog-mode-hook 'diff-hl-mode)
+       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+
+   (use-package git-link)
+   (define-key my-leader-map (kbd "gl") 'git-link)
+   (with-eval-after-load 'magit
+     (define-key magit-status-mode-map (kbd "SPC") nil)
+     )
+   (use-package git-timemachine)
+   (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
+
+   (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+     "when entering git-timemachine mode, change evil normal state to emacs state"
+     (if (evil-normal-state-p)
+         (evil-emacs-state)
+       (evil-normal-state)))
+
+   (ad-activate 'git-timemachine-mode)
+   #+end_src
+
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
@@ -848,6 +925,220 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
          )
        )
    #+end_src
+** Html
+   #+begin_src emacs-lisp
+     (use-package web-mode
+       :mode "\\.html\\'")
+
+     (use-package emmet-mode
+       :diminish emmet-mode
+       :config
+       (progn
+         (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
+         (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
+
+       (add-hook 'css-mode-hook
+                 (lambda ()
+                   (emmet-mode)
+                   (setq emmet-expand-jsx-className? nil)
+                   ))
+
+       (add-hook 'sgml-mode-hook
+                 (lambda ()
+                   (emmet-mode)
+                   (setq emmet-expand-jsx-className? nil)
+                   ))
+
+       (add-hook 'web-mode-hook
+                 (lambda ()
+                   (emmet-mode)
+                   )))
+   #+end_src
+** Rust
+#+begin_src emacs-lisp
+(use-package rust-mode)
+#+end_src
+** CSS
+   #+begin_src emacs-lisp
+     (defun imenu-setup ()
+       (progn
+         (setq imenu-case-fold-search nil)
+         (setq imenu-auto-rescan t)
+         (setq imenu-space-replacement " ")
+         (setq css-indent-offset 2)
+         (imenu-add-menubar-index)
+         ))
+
+     (defun my-css-mode-setup ()
+       (setq imenu-generic-expression
+             '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
+       (imenu-setup))
+
+     (add-hook 'css-mode-hook 'my-css-mode-setup)
+
+     (use-package scss-mode
+       :mode "\\.scss\\'"
+       :config
+       (add-hook 'scss-mode-hook '(lambda ()
+                                    (setq imenu-generic-expression
+                                          '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
+                                    (imenu-setup))))
+
+     (use-package sass-mode
+       :mode "\\.sass\\'"
+       :config
+       (add-hook 'sass-mode-hook
+                 '(lambda ()
+                    (setq imenu-generic-expression
+                          '(("Imports" "@import\\(.*[^ ]\\)" 1)))
+                    (imenu-setup)))
+       (add-hook 'sass-mode-hook 'my-css-mode-setup)
+       (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))
+
+     (use-package less-css-mode
+       :mode "\\.less\\'"
+       )
+   #+end_src
+** Javascript
+   #+BEGIN_SRC emacs-lisp
+     (setq compilation-error-regexp-alist-alist
+           (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
+                        1 ;; file
+                        2 ;; line
+                        )
+                 compilation-error-regexp-alist-alist))
+     (setq compilation-error-regexp-alist
+           (cons 'node compilation-error-regexp-alist))
+     (add-hook 'js2-mode-hook
+               (lambda ()
+                 (set (make-local-variable 'compile-command)
+                      (format "node %s" (file-name-nondirectory buffer-file-name)))))
+   #+END_SRC
+   #+begin_src emacs-lisp
+     (use-package web-mode
+       :mode "\\.vue\\'"
+       :config
+       (setq web-mode-markup-indent-offset 2)
+       (setq web-mode-css-indent-offset 2)
+       (setq web-mode-code-indent-offset 2)
+       (setq web-mode-script-padding 2)
+       )
+
+     (setq js-indent-level 2)
+
+     (use-package js2-mode
+       :mode "\\.js\\'"
+       :mode "\\.jsx\\'"
+       :init
+
+       (use-package js-comint)
+
+       (setq js2-mode-show-parse-errors nil)
+       (setq js2-mode-show-strict-warnings nil)
+
+       (setq-default
+        ;; js2-mode
+        js2-basic-offset 2
+        ;; web-mode
+        css-indent-offset 2
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-attr-indent-offset 2)
+
+       (setq js2-highlight-level 3)
+       :config
+       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+       (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+
+       (use-package import-js)
+
+       (setq javascript-common-imenu-regex-list
+             '(
+               ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
+               ("Describe" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+               ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+               ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+               ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
+               ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+               ;; {{ es6 beginning
+               ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
+               ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
+               ;; }}
+               ))
+
+       (defun auray-js-imenu-make-index ()
+         (save-excursion
+           (imenu--generic-function javascript-common-imenu-regex-list)))
+
+       (use-package prettier-js
+         :config
+         (setq prettier-args '(
+                               "--trailing-comma" "es5"
+                               "--single-quote" "true"
+                               )
+               prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
+
+         (add-hook 'js2-mode-hook 'prettier-js-mode))
+
+       (defun auray-js-mode-hook ()
+         (setq imenu-create-index-function 'auray-js-imenu-make-index)
+         )
+       )
+
+     (add-hook 'js2-mode-hook 'auray-js-mode-hook)
+
+     (defun enable-minor-mode (my-pair)
+       "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+       (if (buffer-file-name)
+           (if (string-match (car my-pair) buffer-file-name)
+               (funcall (cdr my-pair)))))
+
+     (add-hook 'web-mode-hook #'(lambda ()
+                                  (enable-minor-mode
+                                   '("\\.jsx?\\'" . prettier-js-mode))))
+
+     (add-hook 'web-mode-hook #'(lambda ()
+                                  (enable-minor-mode
+                                   '("\\.vue?\\'" . prettier-js-mode))))
+
+     (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+     (defun my-jsx-hook ()
+       "My Hook for JSX Files"
+       (interactive)
+       (web-mode)
+       (web-mode-set-content-type "jsx")
+       (setq imenu-create-index-function 'auray-js-imenu-make-index)
+       (flycheck-select-checker 'javascript-eslint)
+       (emmet-mode)
+       (setq emmet-expand-jsx-className? t)
+       (tern-mode t))
+
+     (use-package context-coloring
+       :diminish context-coloring-mode
+       :config
+       (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
+       (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
+       (add-hook 'js2-mode-hook #'context-coloring-mode)
+       )
+
+     (use-package json-mode
+       :mode "\\.json\\'"
+       :mode "\\.eslintrc\\'"
+       )
+
+     (use-package coffee-mode
+       :mode "\\.coffee\\'"
+       :config
+       (use-package highlight-indentation)
+       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+       (custom-set-variables '(coffee-tab-width 2)))
+
+     (use-package typescript-mode
+       :mode "\\.ts\\'"
+       )
+   #+end_src
 
 * Bindings
 
@@ -915,7 +1206,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "K") 'compile)
 
     (define-key my-leader-map (kbd "d") 'deft)
-    (define-key my-leader-map (kbd "i") 'ispell-buffer)
+    (define-key my-leader-map (kbd "si") 'ispell-buffer)
     (use-package define-word
       :config
       (define-key my-leader-map (kbd "I") 'define-word-at-point))
@@ -966,6 +1257,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (global-set-key (kbd "C-c v") 'ivy-push-view)
     (global-set-key (kbd "C-c V") 'ivy-pop-view)
   #+end_src
+** Alternative Files
+bsrc
 ** Find file in project
    Here is complete setup you could insert into ~/.emacs.d/init.el,
 
@@ -1027,6 +1320,25 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
       (setq ffip-use-rust-fd nil))
      (define-key my-leader-map (kbd "t") 'find-file-in-project-by-selected)
+   #+end_src
+
+** Alternative files
+   User rules can be setup using directory local variables, for
+   example, create a file .dir-locals.el, and following rules:
+
+   Every rule is a list. The first element (car) is a regular
+   expression. The rest elements (cdr) are replacements. If a file path
+   match the regular expression, all the replacements are used as
+   alternative files. In following example, spec/hello_spec.coffee has
+   alternative file assets/test.coffee.
+
+   ((nil
+   (alternative-files-rules . (("spec/\\(.*\\)_spec.coffee" "assets/\\1.coffee")
+                               ("assets/\\(.*\\).coffee" "spec/\\1_spec.coffee")))))
+   #+begin_src emacs-lisp
+     (require 'alternative-files)
+     (define-key my-leader-map (kbd "s") 'alternative-files-find-file)
+     (define-key my-leader-map (kbd "S") 'alternative-files-create-file)
    #+end_src
 ** Run command for mode
    Run compilation or interactive command for mode.

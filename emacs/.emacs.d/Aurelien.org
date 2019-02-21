@@ -446,9 +446,6 @@ It makes it harder for major modes to minor modes trying to override my personal
 
 * GUI
   #+begin_src emacs-lisp
-  (when window-system
-    (when *is-linux*
-      (set-frame-font "-*-PragmataPro Liga-normal-normal-normal-*-26-*-*-*-m-0-iso10646-1")))
     (global-hl-line-mode)
     (blink-cursor-mode 0)
     (column-number-mode)
@@ -1321,25 +1318,6 @@ bsrc
       (setq ffip-use-rust-fd nil))
      (define-key my-leader-map (kbd "t") 'find-file-in-project-by-selected)
    #+end_src
-
-** Alternative files
-   User rules can be setup using directory local variables, for
-   example, create a file .dir-locals.el, and following rules:
-
-   Every rule is a list. The first element (car) is a regular
-   expression. The rest elements (cdr) are replacements. If a file path
-   match the regular expression, all the replacements are used as
-   alternative files. In following example, spec/hello_spec.coffee has
-   alternative file assets/test.coffee.
-
-   ((nil
-   (alternative-files-rules . (("spec/\\(.*\\)_spec.coffee" "assets/\\1.coffee")
-                               ("assets/\\(.*\\).coffee" "spec/\\1_spec.coffee")))))
-   #+begin_src emacs-lisp
-     (require 'alternative-files)
-     (define-key my-leader-map (kbd "s") 'alternative-files-find-file)
-     (define-key my-leader-map (kbd "S") 'alternative-files-create-file)
-   #+end_src
 ** Run command for mode
    Run compilation or interactive command for mode.
    #+begin_src emacs-lisp
@@ -1389,6 +1367,25 @@ bsrc
 
      (define-key my-leader-map (kbd "x") 'run-for-mode)
      (define-key my-leader-map (kbd "X") 'run-bigger-for-mode)
+   #+end_src
+
+** Alternative files
+   User rules can be setup using directory local variables, for
+   example, create a file .dir-locals.el, and following rules:
+
+   Every rule is a list. The first element (car) is a regular
+   expression. The rest elements (cdr) are replacements. If a file path
+   match the regular expression, all the replacements are used as
+   alternative files. In following example, spec/hello_spec.coffee has
+   alternative file assets/test.coffee.
+
+   ((nil
+   (alternative-files-rules . (("spec/\\(.*\\)_spec.coffee" "assets/\\1.coffee")
+                               ("assets/\\(.*\\).coffee" "spec/\\1_spec.coffee")))))
+   #+begin_src emacs-lisp
+     (require 'alternative-files)
+     (define-key my-leader-map (kbd "s") 'alternative-files-find-file)
+     (define-key my-leader-map (kbd "S") 'alternative-files-create-file)
    #+end_src
 
 * Diminish

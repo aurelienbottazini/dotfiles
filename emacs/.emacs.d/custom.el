@@ -43,7 +43,8 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((alternative-files-rules
+    ((ffip-project-root . "/home/aurelienbottazini/work/doximity-client-vue/")
+     (alternative-files-rules
       ("src/\\(.*\\).vue" "test/unit/specs/\\1.spec.js")
       ("test/unit/specs/\\(.*\\).spec.js" "src/\\1.vue")
       ("src/\\(.*\\).js" "test/unit/specs/\\1.spec.js")
@@ -75,7 +76,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 118 :width normal :foundry "FSD " :family "PragmataPro Liga"))))
+ '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 100 :width normal :family "Operator Mono"))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
  '(context-coloring-level-1-face ((t (:foreground "#3a499c"))))

@@ -176,12 +176,12 @@ ws1TERM :: String
 ws1TERM = "1:term"
 ws2WWW :: String
 ws2WWW = "2:www"
-ws3IDE :: String
-ws3IDE = "3:ide"
+ws3CODE :: String
+ws3CODE = "3:Code"
 ws4TALK :: String
 ws4TALK = "4:talk"
-ws5EMACS :: String
-ws5EMACS = "5:emacs"
+ws5TOOLS :: String
+ws5TOOLS = "5:tools"
 ws6TRAINING :: String
 ws6TRAINING = "6:training"
 ws7MY :: String
@@ -192,7 +192,7 @@ ws9MAIL :: String
 ws9MAIL = "9:mail"
 
 myWorkspaces :: [String]
-myWorkspaces = [ws1TERM, ws2WWW, ws3IDE, ws4TALK, ws5EMACS, ws6TRAINING, ws7MY, ws8MSG, ws9MAIL]
+myWorkspaces = [ws1TERM, ws2WWW, ws3CODE, ws4TALK, ws5TOOLS, ws6TRAINING, ws7MY, ws8MSG, ws9MAIL]
 
 myProjects :: [Project]
 -- Projects are predefined workspace. When you switch to a workspace
@@ -208,17 +208,17 @@ myProjects =
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
      },
-     Project { projectName = ws3IDE
-             , projectDirectory = "~/projec5s"
-             , projectStartHook = Just $ do spawnOn ws2WWW "ide"
+     Project { projectName = ws3CODE
+             , projectDirectory = "~/"
+             , projectStartHook = Just $ do spawnOn ws3CODE "mainEmacs.sh"
      },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws4TALK "slack"
      },
-     Project { projectName = ws5EMACS
-             , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws5EMACS "mainEmacs.sh"
+     Project { projectName = ws5TOOLS
+             , projectDirectory = "~/projects"
+             , projectStartHook = Just $ do spawnOn ws5TOOLS "datagrip"
      },
      Project { projectName = ws6TRAINING
              , projectDirectory = "~/projects/training-heaven"

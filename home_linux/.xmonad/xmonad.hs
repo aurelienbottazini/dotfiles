@@ -72,6 +72,7 @@ scratchpads =
     -- resource is used to match the first component of the WM_NAME property
     ,(NS "calendar" "chromium-browser --new-window --app=http://calendar.google.com" (resource =? "calendar.google.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "email" "chromium-browser --new-window --app=https://www.fastmail.com" (resource =? "www.fastmail.com") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
+    ,(NS "gitsh" "st -c gitsh gitsh" (className =? "gitsh") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     ,(NS "worldtimebuddy" "chromium-browser --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "gsimplecal" "gsimplecal" (className =? "Gsimplecal") (customFloating $ W.RationalRect (4/5) (1/40) (1/5) (1/5)))
     ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (defaultFloating))

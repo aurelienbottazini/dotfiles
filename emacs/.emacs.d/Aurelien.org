@@ -1179,7 +1179,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "b") 'ivy-switch-buffer)
 
     (use-package expand-region
-      :defer t
       :config
       (define-key my-leader-map (kbd "SPC") 'er/expand-region))
 
@@ -1201,16 +1200,16 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "K") 'compile)
 
     (define-key my-leader-map (kbd "d") 'deft)
-    (define-key my-leader-map (kbd "si") 'ispell-buffer)
+    (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
     (use-package define-word
       :config
-      (define-key my-leader-map (kbd "I") 'define-word-at-point))
+      (define-key my-leader-map (kbd "<f6>") 'define-word-at-point))
 
     (defun lookup-synonyms (word)
       (interactive (list (save-excursion (car (ispell-get-word nil)))))
       (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
-    (define-key my-leader-map (kbd "s") 'lookup-synonyms)
+    (define-key my-leader-map (kbd "<f7>") 'lookup-synonyms)
 
     (define-key my-leader-map (kbd "wc") 'create-blog-post)
 
@@ -1231,6 +1230,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "ow") 'visual-line-mode)
     (define-key my-leader-map (kbd "of") 'auto-fill-mode)
     (define-key my-leader-map (kbd "os") 'org-strike-header)
+    (use-package rainbow-mode
+      :bind (:map my-leader-map
+              ("or" . rainbow-mode)))
     ;; gives each line only one visual line and don't show a continuation on next line
     (set-default 'truncate-lines t)
     (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)
@@ -1239,6 +1241,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
     (define-key evil-normal-state-map (kbd "]e") 'next-error)
     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+
 
     (when (fboundp 'winner-mode)
       (winner-mode 1)

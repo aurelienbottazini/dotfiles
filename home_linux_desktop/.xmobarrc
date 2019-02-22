@@ -1,5 +1,5 @@
-Config { font = "xft:Gotham HTF Black:size=12:antialias=true"
-        , additionalFonts = ["xft:PragmataPro Liga:size=12"]
+Config { font = "xft:Operator Mono:size=10:antialias=true"
+        , additionalFonts = ["xft:PragmataPro Liga:size=8"]
         , borderColor = "#939598"
         , border = BottomB
         , borderWidth = 3

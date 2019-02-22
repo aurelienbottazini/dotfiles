@@ -64,7 +64,7 @@ scratchpads =
     ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "ranger" "st -c term-ranger ranger" (className =? "term-ranger") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
+    ,(NS "ranger" "kitty --class kitty-ranger ranger" (className =? "kitty-ranger") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     ,(NS "midnight-commander" "st -c term-mc -e mc --nosubshell" (className =? "term-mc") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "global-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -238,7 +238,6 @@ myStartupHook = do
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "compton -CG --active-opacity 1.0 --shadow-ignore-shaped"
     spawn "xsetroot -cursor_name left_ptr"
-    spawn "feh --bg-fill ~/Dropbox/Pictures/wallpaper/jonny-caspari-1148431-unsplash.jpg"
 
 noScratchPad :: String -> String
 noScratchPad ws = if ws == "NSP" then "" else ws
@@ -259,7 +258,7 @@ myLayoutPrinter x = x
 
 topBarTheme :: Theme
 topBarTheme = def
-    { fontName              =  "xft:Gotham HTF Black:size=12"
+    { fontName              =  "xft:Operator Mono:size=12"
     , inactiveBorderColor   = "#002b36"
     , inactiveColor         = "#002b36"
     , inactiveTextColor     = "#002b36"

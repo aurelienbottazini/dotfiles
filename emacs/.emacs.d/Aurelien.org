@@ -768,10 +768,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 ** Gitsh
    #+begin_src emacs-lisp
    (defun ab-run-gitsh ()
-   "Start tig in current projectile project. Use st as a terminal."
+   "Start gitsh in current projectile project. Use st as a terminal."
      (interactive)
      (projectile-with-default-dir (projectile-project-root)
-       (start-process "gitsh" nil "st" "-c" "gitsh" "gitsh")))
+       (start-process "gitsh" nil "st" "-c" "scratch-term" "gitsh")))
    (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
 
    #+end_src

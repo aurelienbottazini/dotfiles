@@ -3,6 +3,7 @@
 #######################################
 ## packages
 #######################################
+sudo apt install fortune-mod
 
 sudo apt install vim curl stow
 sudo apt install xmonad xmobar dmenu rxvt-unicode chromium-browser emacs xscreensaver scrot

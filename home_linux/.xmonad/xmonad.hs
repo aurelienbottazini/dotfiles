@@ -3,7 +3,8 @@
 -- https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
 -- https://github.com/windelicato/dotfiles/blob/master/.xmonad/xmonad.hs
 
-import XMonad
+import XMonad hiding ( (|||) )  -- don't use the normal ||| operator
+import XMonad.Layout.LayoutCombinators   -- use the one from LayoutCombinators instead
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
@@ -113,9 +114,11 @@ myKeysP = [
         , ("M4-c", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
         , ("M4-b", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))
         , ("M4-i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
-        , ("M4-t", runOrRaiseNext "st" (className =? "st-256color"))
+        , ("M4-v", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
         , ("M4-j",  windowGo D True)
+        , ("M4-g",  sendMessage $ JumpToLayout "Grid")
+        , ("M4-t",  sendMessage $ JumpToLayout "Tall")
         , ("M4-k",  windowGo U True)
         , ("M4-l",  windowGo R True)
         , ("M4-S-h",  windowSwap L True)

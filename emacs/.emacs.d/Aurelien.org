@@ -278,8 +278,6 @@ It makes it harder for major modes to minor modes trying to override my personal
      (setq-default whitespace-style '(face trailing tabs tab-mark))
      (defun ab-turn-on-whitespace-mode ()
        (progn (whitespace-mode) (diminish 'whitespace-mode)))
-     (add-hook 'prog-mode-hook 'ab-turn-on-whitespace-mode)
-     (add-hook 'org-mode-hook 'ab-turn-on-whitespace-mode)
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 

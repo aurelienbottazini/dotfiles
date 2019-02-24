@@ -72,15 +72,14 @@ tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01
 =00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
 
 abbr em "emacs_starter.sh"
-abbr ec "emacsclient -s (tmux display-message -p '#S') -ta ''"
-abbr ef "emacsclient -ncq -a '' -e '(select-frame-set-input-focus (selected-frame))'"
-abbr eg "ef -e '(magit-status)'"
+alias ec "emacsclient -s (tmux display-message -p '#S') -ta ''"
+alias ef "emacsclient -ncq -a '' -e '(select-frame-set-input-focus (selected-frame))'"
 
 alias delete_docker_containers 'docker rm (docker ps -a -q)'
 alias delete_docker_images 'docker rmi (docker images -q)'
 
-abbr tu "tmux -u"
-abbr screen "screen -U"
+alias tu "tmux -u"
+alias screen "screen -U"
 abbr pd "psql -p 5432 -h localhost -d "
 alias ls "ls --color"
 alias l. "ls -d .*"

@@ -1155,6 +1155,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   #+end_src
 
   #+begin_src emacs-lisp
+    (use-package key-chord
+      :config
+      (key-chord-mode 1)
+      (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+  #+end_src
+
+  #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep
       :defer t)

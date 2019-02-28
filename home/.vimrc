@@ -46,7 +46,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'altercation/vim-colors-solarized'
-Plug 'chrisbra/Colorizer' 
+Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
@@ -205,3 +205,5 @@ nmap <leader>i :set list!<CR>
 highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
 highlight EndOfBuffer ctermfg=3 guifg=#268bd2
+
+au FileType gitcommit execute "normal! O" | startinsert

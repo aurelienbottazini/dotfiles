@@ -1020,6 +1020,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         ;; web-mode
         css-indent-offset 2
         web-mode-markup-indent-offset 2
+        web-mode-script-padding 0
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-attr-indent-offset 2)

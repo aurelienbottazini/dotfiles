@@ -41,6 +41,30 @@ It makes it harder for major modes to minor modes trying to override my personal
     (ad-activate 'load)
 #+end_src
 
+#+BEGIN_SRC emacs-lisp
+  (defun smart-tab ()
+    "This smart tab is minibuffer compliant: it acts as usual in
+      the minibuffer. Else, if mark is active, indents region. Else if
+      point is at the end of a symbol, expands it. Else indents the
+      current line."
+    (interactive)
+    (if (minibufferp)
+        (unless (minibuffer-complete)
+          (dabbrev-expand nil))
+      (if mark-active
+          (indent-region (region-beginning)
+                         (region-end))
+        (if (looking-at "\\_>")
+            (let ((yas/fallback-behavior nil))
+              (unless (yas/expand)
+                (hippie-expand nil)))
+          ))))
+(defun my-tab-fix ()
+  (local-set-key [tab] 'smart-tab))
+
+(add-hook 'prog-mode-hook 'my-tab-fix)
+#+END_SRC
+
 * Cute functions
 
   #+begin_src emacs-lisp
@@ -1138,6 +1162,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (use-package flycheck)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (add-hook 'web-mode-hook 'flycheck-mode)
+  (add-hook 'js2-mode-hook 'flycheck-mode)
   (defun my/use-eslint-from-node-modules ()
     (let* ((root (locate-dominating-file
                   (or (buffer-file-name) default-directory)

@@ -1076,9 +1076,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                                   (enable-minor-mode
                                    '("\\.jsx?\\'" . prettier-js-mode))))
 
-     (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                   '("\\.vue?\\'" . prettier-js-mode))))
+     ;; for now it formats wrongly the html attributes
+     ;; (add-hook 'web-mode-hook #'(lambda ()
+     ;;                              (enable-minor-mode
+     ;;                               '("\\.vue?\\'" . prettier-js-mode))))
 
      (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
      (defun my-jsx-hook ()

@@ -631,21 +631,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :init
        (setq dumb-jump-selector 'ivy))
        #+end_src
-* AutoCompletions
-  #+begin_src emacs-lisp
-    (use-package yasnippet
-      :commands yas-expand-snippet
-      :bind (:map my-leader-map
-                  ("vs" . yas-describe-tables))
-      :diminish yas-minor-mode
-      :init
-      (setq yas-snippet-dirs
-            '("~/.emacs.d/snippets"))
-      :config
-      (yas-global-mode 1)
-      (add-hook 'term-mode-hook (lambda()
-                                  (yas-minor-mode -1))))
-  #+end_src
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
@@ -1150,10 +1135,29 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         (setq-local flycheck-javascript-eslint-executable eslint))))
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 #+END_SRC
-* Completion
+* AutoCompletions
+  #+begin_src emacs-lisp
+    (use-package yasnippet
+      :demand
+      :commands yas-expand-snippet
+      :bind (:map my-leader-map
+                  ("vs" . yas-describe-tables))
+      :diminish yas-minor-mode
+      :init
+      (setq yas-snippet-dirs
+            '("~/.emacs.d/snippets"))
+      :config
+      (yas-global-mode 1)
+      (add-hook 'term-mode-hook (lambda()
+                                  (yas-minor-mode -1))))
+  #+end_src
+
 #+BEGIN_SRC emacs-lisp
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
-(define-key my-leader-map (kbd "M-/") 'hippie-expand)
+  (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
+  (require 'mode-local)
+  (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+  (define-key evil-insert-state-map (kbd "C-x C-o") 'hippie-expand)
+  (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1163,6 +1167,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
  (setq company-backends '(company-files)))
 
 #+END_SRC
+* Completion
 * Bindings
 
   Shows key combination helper in minibuffer
@@ -1170,7 +1175,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (use-package which-key
       :config
       (which-key-mode))
-
   #+end_src
 
   Combined with C-M-c (exit-recursive-edit) allows to stop doing
@@ -1272,8 +1276,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (set-default 'truncate-lines t)
     (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)
 
-    (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-    (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+    (define-key evil-normal-state-map (kbd "C-i") 'next-buffer)
+    (define-key evil-normal-state-map (kbd "C-o") 'previous-buffer)
     (define-key evil-normal-state-map (kbd "]e") 'next-error)
     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 

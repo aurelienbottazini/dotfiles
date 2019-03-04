@@ -1363,6 +1363,7 @@ bsrc
       (add-to-list 'ffip-prune-patterns "*/dist/*")
       (add-to-list 'ffip-prune-patterns "*/.idea/*")
       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
+      (add-to-list 'ffip-prune-patterns "node_modules/*")
       (setq ffip-prefer-ido-mode nil)
       (setq ffip-use-rust-fd t))
      (define-key my-leader-map (kbd "t") 'find-file-in-project)

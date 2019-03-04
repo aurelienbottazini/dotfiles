@@ -67,6 +67,7 @@
  '(scroll-bar-mode nil)
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
+ '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
  '(web-mode-code-indent-offset 0)

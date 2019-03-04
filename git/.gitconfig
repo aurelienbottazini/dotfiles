@@ -58,3 +58,5 @@
 	hideCampaign = true
 [diff]
 	tool = vimdiff
+[github]
+	user = aurelienbottazini

@@ -760,6 +760,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** Magit
    #+begin_src emacs-lisp
+   (use-package forge
+     :after magit)
    (use-package magit
      :bind (:map my-leader-map
                  ("gb" . magit-blame)
@@ -1356,11 +1358,15 @@ bsrc
      (use-package find-file-in-project
       :defer t
       :config
+
+      (add-to-list 'ffip-prune-patterns "*/.git/*")
       (add-to-list 'ffip-prune-patterns "*/dist/*")
       (add-to-list 'ffip-prune-patterns "*/.idea/*")
       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
-      (setq ffip-use-rust-fd nil))
-     (define-key my-leader-map (kbd "t") 'find-file-in-project-by-selected)
+      (setq ffip-prefer-ido-mode nil)
+      (setq ffip-use-rust-fd t))
+     (define-key my-leader-map (kbd "t") 'find-file-in-project)
+     (define-key my-leader-map (kbd "T") 'find-file-in-project-by-selected)
    #+end_src
 ** Run command for mode
    Run compilation or interactive command for mode.

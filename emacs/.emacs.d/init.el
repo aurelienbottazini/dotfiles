@@ -5,3 +5,4 @@
 (require 'ob-tangle)
 (setq vc-follow-symlinks t)
 (org-babel-load-file (expand-file-name "~/.emacs.d/Aurelien.org"))
+(put 'magit-edit-line-commit 'disabled nil)

@@ -1,3 +1,3 @@
 #!/bin/bash
 # st -c cmus cmus &
-rhythmbox
+jumpapp -c Clementine clementine

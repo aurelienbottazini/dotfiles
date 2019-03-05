@@ -1,3 +1,2 @@
 #!/bin/bash
-# st -c cmus cmus &
-jumpapp -c Clementine clementine
+st -g 120x80 -c cmus cmus

@@ -43,7 +43,14 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((ffip-project-root . "/home/aurelienbottazini/work/doximity-client-vue/")
+    ((eval progn
+           (require
+            (quote find-file-in-project))
+           (setq ffip-prune-patterns
+                 (\`
+                  ("vendor/*"
+                   (\,@ ffip-prune-patterns)))))
+     (ffip-project-root . "/home/aurelienbottazini/work/doximity-client-vue/")
      (alternative-files-rules
       ("src/\\(.*\\).vue" "test/unit/specs/\\1.spec.js")
       ("test/unit/specs/\\(.*\\).spec.js" "src/\\1.vue")

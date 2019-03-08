@@ -760,37 +760,38 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ** Magit
    #+begin_src emacs-lisp
-   (use-package forge
-     :after magit)
-   (use-package magit
-     :bind (:map my-leader-map
-                 ("gs" . magit-status)
-                 ("gf" . magit-file-dispatch))
-     :config
-     (use-package fullframe
+     (use-package forge
+       :after magit)
+     (use-package magit
+       :bind (:map my-leader-map
+                   ("gs" . magit-status)
+                   ("gf" . magit-file-dispatch))
        :config
-       (fullframe magit-status magit-mode-quit-window))
+       (use-package fullframe
+         :config
+         (fullframe magit-status magit-mode-quit-window))
 
-     (use-package diff-hl
-       :config
-       (add-hook 'prog-mode-hook 'diff-hl-mode)
-       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+       (use-package diff-hl
+         :config
+         (add-hook 'prog-mode-hook 'diff-hl-mode)
+         (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+     (setq magit-commit-show-diff nil
+           magit-revert-buffers 1)
+     (use-package git-link)
+     (define-key my-leader-map (kbd "gl") 'git-link)
+     (with-eval-after-load 'magit
+       (define-key magit-status-mode-map (kbd "SPC") nil)
+       )
+     (use-package git-timemachine)
+     (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
 
-   (use-package git-link)
-   (define-key my-leader-map (kbd "gl") 'git-link)
-   (with-eval-after-load 'magit
-     (define-key magit-status-mode-map (kbd "SPC") nil)
-     )
-   (use-package git-timemachine)
-   (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
+     (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+       "when entering git-timemachine mode, change evil normal state to emacs state"
+       (if (evil-normal-state-p)
+           (evil-emacs-state)
+         (evil-normal-state)))
 
-   (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
-     "when entering git-timemachine mode, change evil normal state to emacs state"
-     (if (evil-normal-state-p)
-         (evil-emacs-state)
-       (evil-normal-state)))
-
-   (ad-activate 'git-timemachine-mode)
+     (ad-activate 'git-timemachine-mode)
    #+end_src
 
 * Notes

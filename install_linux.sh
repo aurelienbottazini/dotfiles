@@ -47,7 +47,13 @@ sudo apt install libxapian-dev libgmime-2.6-dev libwebkitgtk-3.0-dev
 
 sudo apt install dunst
 
-sudo apt install clojure leiningen
+wget -O ~/bin/lein https://raw.github.com/technomancy/leiningen/stable/bin/lein
+chmod 755 ~/bin/lein
+
+curl -O https://download.clojure.org/install/linux-install-1.10.0.414.sh
+chmod +x linux-install-1.10.0.414.sh
+sudo ./linux-install-1.10.0.414.sh
+
 sudo apt install anki mplayer
 sudo apt install ubuntu-restricted-extras
 sudo apt install python-pip

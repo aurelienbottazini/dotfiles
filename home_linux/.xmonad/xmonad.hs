@@ -298,7 +298,7 @@ main = do
         $ dynamicProjects myProjects
         $ docks
         $ withNavigation2DConfig myNavigation2DConfig
-        $ def
+        $ ewmh defaultConfig
         {
           handleEventHook =
             handleEventHook def <+> fullscreenEventHook,

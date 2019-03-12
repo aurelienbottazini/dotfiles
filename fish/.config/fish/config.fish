@@ -126,5 +126,6 @@ set -g fish_term24bit 1
 set -x GTAGSLABEL pygments
 set -x XDG_CURRENT_DESKTOP GNOME # for gnome-control-center to work correctly on xmonad
 set -x CHROME_BIN /usr/bin/chromium-browser # for karmajs specs
+set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"

@@ -1,0 +1,40 @@
+a $opt* --? $path+
+  --all
+  --chmod $anything
+  --dry-run
+  --edit
+  --force
+  --ignore-errors
+  --ignore-missing
+  --ignore-removal
+  --intent-to-add
+  --interactive
+  --no-all
+  --no-ignore-removal
+  --patch
+  --refresh
+  --update
+  --verbose
+
+co $opt* $revision?
+  --confict (merge|diff3)
+  --detach
+  --force
+  --ignore-other-worktrees
+  --ignore-skip-worktree-bits
+  --merge
+  --no-progress
+  --no-recurse-submodules
+  --no-track
+  --orphan $anything
+  --ours
+  --patch
+  --progress
+  --quiet
+  --recurse-submodules
+  --theirs
+  --track
+  -b $anything
+  -B $anything
+
+co $opt* $anything? --? $path+

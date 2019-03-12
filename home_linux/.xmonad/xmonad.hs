@@ -77,6 +77,7 @@ scratchpads =
     ,(NS "worldtimebuddy" "chromium-browser --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "gsimplecal" "gsimplecal" (className =? "Gsimplecal") (customFloating $ W.RationalRect (4/5) (1/40) (1/5) (1/5)))
     ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (defaultFloating))
+    ,(NS "vscode" "code" (className =? "Code") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     -- ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
     ] -- where role = stringProperty "WM_WINDOW_ROLE"
 
@@ -100,6 +101,7 @@ myKeysP = [
         , ("<XF86MonBrightnessUp>", spawn "lux -a 10%")
         , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
         , ("M4-<Space> <Return>", namedScratchpadAction scratchpads "global-org-capture")
+        , ("M4-<Space> c", namedScratchpadAction scratchpads "vscode")
         , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
         , ("M4-<Space> u", spawn "dmenu-unicode.sh")
         , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown.sh\"")
@@ -112,7 +114,7 @@ myKeysP = [
         , ("M4-]", sendMessage Expand)
         , ("M4-\\",  toggleWS)
         , ("M4-c", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
-        , ("M4-b", runOrRaiseNext "chromium-browser --new-window" (resource =? "chromium-browser"))
+        , ("M4-b", runOrRaiseNext "firefox" (className =? "Firefox"))
         , ("M4-i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-v", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
@@ -209,7 +211,7 @@ myProjects =
      },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
+             , projectStartHook = Just $ do spawnOn ws2WWW "firefox"
      },
      Project { projectName = ws3CODE
              , projectDirectory = "~/"

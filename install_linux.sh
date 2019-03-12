@@ -7,7 +7,7 @@ sudo apt install fortune-mod
 
 sudo apt install vim curl stow
 sudo apt install xmonad xmobar dmenu rxvt-unicode chromium-browser emacs xscreensaver scrot
-sudo apt install git-core git-lfs
+sudo apt install git-core git-lfs meld
 
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

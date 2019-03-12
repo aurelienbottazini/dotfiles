@@ -1,0 +1,10 @@
+/* export _JAVA_AWT_WM_NONREPARENTING=1 */
+/* export AWT_TOOLKIT=MToolkit */
+/* wmname LG3D */
+/* slstatus & */
+/* feh --bg-max --randomize ~/Dropbox/Pictures/wallpaper/* */
+/* setxkbmap -option compose:sclk */
+/* /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 & */
+/* dunst -font "xtf:Operator Mono Medium:size 12" */
+/* xautolock -time 30 -locker "gnome-screensaver-command -l" -notify 10 -notifier "notify-send -t 5000 -i gtk-dialog-info 'Locking in 10 seconds'" & */
+/* dropbox start */

@@ -117,7 +117,7 @@ myKeysP = [
         , ("M4-]", sendMessage Expand)
         , ("M4-\\",  toggleWS)
         , ("M4-c", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
-        , ("M4-b", runOrRaiseNext "firefox" (className =? "Firefox"))
+        , ("M4-b", runOrRaiseNext "chromium-browser" (className =? "Chromium-browser"))
         , ("M4-i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-v", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
@@ -215,7 +215,7 @@ myProjects =
      },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws2WWW "firefox"
+             , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
      },
      Project { projectName = ws3CODE
              , projectDirectory = "~/"

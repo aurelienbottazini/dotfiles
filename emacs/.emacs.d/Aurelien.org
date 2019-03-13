@@ -655,8 +655,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
     (setq org-capture-templates
-    '(("g" "GTD" entry (file+headline "~/Dropbox/org/GTD.org" "Inbox")
-    "* %?\n")))
+          '(("g" "GTD" entry (file+headline "~/Dropbox/org/GTD.org" "Inbox") "* %?\n")
+            ("t" "TDD" checkitem (file "~/Dropbox/org/tdd.org"))
+            ))
 
     (add-hook 'org-capture-mode-hook 'evil-insert-state)
 

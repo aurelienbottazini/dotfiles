@@ -76,7 +76,8 @@ scratchpads =
     ,(NS "scratch-term" "st -c scratch-term fortune" (className =? "scratch-term") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     ,(NS "worldtimebuddy" "chromium-browser --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "gsimplecal" "gsimplecal" (className =? "Gsimplecal") (customFloating $ W.RationalRect (4/5) (1/40) (1/5) (1/5)))
-    ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (defaultFloating))
+    ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (0) (1/2) (1)))
+    ,(NS "TDD" "emacs --name tddEmacs ~/Dropbox/org/tdd.org" (resource =? "tddEmacs") (customFloating $ W.RationalRect (0) (0) (1/2) (1)))
     ,(NS "vscode" "code" (className =? "Code") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     -- ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
     ] -- where role = stringProperty "WM_WINDOW_ROLE"
@@ -137,6 +138,7 @@ myKeysP = [
         , ("M4-s c", namedScratchpadAction scratchpads "calendar")
         , ("M4-s e", namedScratchpadAction scratchpads "email")
         , ("M4-s g", namedScratchpadAction scratchpads "GTD")
+        , ("M4-s t", namedScratchpadAction scratchpads "TDD")
         , ("M4-s S-m", namedScratchpadAction scratchpads "youtube-music")
         , ("M4-f", namedScratchpadAction scratchpads "ranger")
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")

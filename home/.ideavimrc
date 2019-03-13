@@ -31,6 +31,9 @@ map <leader>oh :nohlsearch<CR>
 
 map <leader>ps :action ManageRecentProjects<CR>
 
+map <leader>f :action FindInPath<CR>
+map <leader>t :action GotoFile<CR>
+
 
 " $Copy                                              <C-C> <C-Ins>
 " $Cut                                               <C-X> <S-Del>

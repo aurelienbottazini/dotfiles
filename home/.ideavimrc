@@ -21,19 +21,24 @@ nnoremap <C-k> :action TabShiftActions.MoveFocusUp<CR>
 nnoremap <C-l> :action TabShiftActions.MoveFocusRight<CR>
 
 let mapleader = " "
-map <leader>s :action GotoTest<CR>
-map <leader>r :source ~/.ideavimrc<CR>
 
 map <leader>cT :action :cursive.testing.actions/run-ns-tests<CR>
 map <leader>ct :action :cursive.testing.actions/rerun-last-test<CR>
 
 map <leader>oh :nohlsearch<CR>
+map <leader>os :source ~/.ideavimrc<CR>
 
 map <leader>ps :action ManageRecentProjects<CR>
 
 map <leader>f :action FindInPath<CR>
+map <leader>s :action GotoTest<CR>
 map <leader>t :action GotoFile<CR>
+map <leader>r :action RecentFiles<CR>
+map <leader>R :action RecentChangedFiles<CR>
 
+" RecentChangedFiles                                 <C-S-E>
+" RecentChanges                                      <A-S-C>
+" RecentFiles                                        <C-E>
 
 " $Copy                                              <C-C> <C-Ins>
 " $Cut                                               <C-X> <S-Del>

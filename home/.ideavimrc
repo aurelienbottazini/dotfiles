@@ -28,13 +28,7 @@ map <leader>ct :action :cursive.testing.actions/rerun-last-test<CR>
 map <leader>oh :nohlsearch<CR>
 map <leader>os :source ~/.ideavimrc<CR>
 
-map <leader>ps :action ManageRecentProjects<CR>
-
-map <leader>f :action FindInPath<CR>
 map <leader>s :action GotoTest<CR>
-map <leader>t :action GotoFile<CR>
-map <leader>r :action RecentFiles<CR>
-map <leader>R :action RecentChangedFiles<CR>
 
 " RecentChangedFiles                                 <C-S-E>
 " RecentChanges                                      <A-S-C>

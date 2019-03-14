@@ -25,6 +25,7 @@ Where to find additional lisp files.
 
 Keymap where i store my global keybindings.
 It makes it harder for major modes to minor modes trying to override my personal keybindings.
+
 #+begin_src emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode
@@ -1198,7 +1199,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 )
 
 #+END_SRC
-* Completion
 * Bindings
 
   Shows key combination helper in minibuffer

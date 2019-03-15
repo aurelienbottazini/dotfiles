@@ -69,3 +69,6 @@
     cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 [github]
 	user = aurelienbottazini
+
+[mergetool]
+	keepBackup = false

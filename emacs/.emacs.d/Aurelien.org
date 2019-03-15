@@ -359,9 +359,6 @@ It makes it harder for major modes to minor modes trying to override my personal
     ;; OPTIONAL: If you prefer to grab symbols rather than words, use
     ;; `evil-multiedit-match-symbol-and-next` (or prev).
 
-    ;; Restore the last group of multiedit regions.
-    (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
-
     ;; RET will toggle the region under the cursor
     (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
 
@@ -1456,6 +1453,7 @@ bsrc
       (setq ffip-use-rust-fd t))
      (define-key my-leader-map (kbd "t") 'find-file-in-project)
      (define-key my-leader-map (kbd "T") 'find-file-in-project-by-selected)
+     (define-key evil-normal-state-map (kbd "gd") 'find-file-in-project-at-point)
    #+end_src
 ** Run command for mode
    Run compilation or interactive command for mode.

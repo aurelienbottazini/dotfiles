@@ -31,3 +31,5 @@ yarn-error.log
 .dumbjump
 .dir-locals.el
 wallaby.js
+__mock__/*
+.git/*

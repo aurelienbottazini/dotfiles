@@ -130,15 +130,6 @@ It makes it harder for major modes to minor modes trying to override my personal
        (add-hook 'after-save-hook 'org-publish-current-file nil t)
         (set-buffer-modified-p t)
         (message "Enabled org html export on save")))
-
-    (defun toggle-spec ()
-      "Disable or enable karma spec(s) with .only"
-      (interactive)
-      (save-mark-and-excursion
-        (re-search-backward "^\s*\\(it\\|describe\\)\\(.only\\)?\\((\\)" nil t 1)
-        (if (match-string 2)
-          (replace-match "" nil nil nil 2)
-          (replace-match ".only(" nil nil nil 3))))))
   #+end_src
 
 * Initialize Packages
@@ -1284,6 +1275,16 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "m") 'counsel-bookmark)
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)
+
+
+    (defun toggle-spec ()
+      "Disable or enable karma spec(s) with .only"
+      (interactive)
+      (save-mark-and-excursion
+        (re-search-backward "^\s*\\(it\\|describe\\)\\(.only\\)?\\((\\)" nil t 1)
+        (if (match-string 2)
+          (replace-match "" nil nil nil 2)
+          (replace-match ".only(" nil nil nil 3))))))
     (define-key my-leader-map (kbd "\\") 'toggle-spec)
 
     (define-key my-leader-map (kbd "d") 'deft)

@@ -1323,7 +1323,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         (re-search-backward "^\s*\\(it\\|describe\\)\\(.only\\)?\\((\\)" nil t 1)
         (if (match-string 2)
           (replace-match "" nil nil nil 2)
-          (replace-match ".only(" nil nil nil 3))))))
+          (replace-match ".only(" nil nil nil 3))))
     (define-key my-leader-map (kbd "\\") 'toggle-spec)
 
     (define-key my-leader-map (kbd "d") 'deft)

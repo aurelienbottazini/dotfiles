@@ -1541,3 +1541,5 @@ bsrc
       (diminish 'subword-mode)
       (diminish 'abbrev-mode)
   #+end_src
+
+Process gitsh finished

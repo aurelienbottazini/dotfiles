@@ -652,26 +652,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
    #+end_src
 
 ** Project navigation
-
    #+begin_src emacs-lisp
-     (use-package projectile
-       :demand
-       :init
-       (setq projectile-switch-project-action 'projectile-dired)
-       (setq projectile-enable-caching nil)
-       (setq projectile-completion-system 'ivy)
-       :bind (:map my-leader-map
-                   ("p" . projectile-commander))
-       :config
-       (use-package counsel-projectile)
-       (projectile-mode)
-       (setq projectile-mode-line
-             '(:eval (list " P["
-                           (propertize (projectile-project-name)
-                                       'face '(:slant italic :weight bold))
-                           "]")))
-       )
-
      (use-package dumb-jump
        :bind (:map evil-normal-state-map
                    ("gd" . dumb-jump-go)
@@ -801,8 +782,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (defun ab-run-gitsh ()
      "Start gitsh in current projectile project. Use st as a terminal."
        (interactive)
-       (projectile-with-default-dir (projectile-project-root)
-         (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
+       (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
+         (start-process "gitsh" (buffer-name) "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
      (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
    #+end_src
 
@@ -1303,10 +1284,12 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "R") 'revert-buffer)
     (define-key my-leader-map (kbd "f") 'counsel-rg)
     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
+    (define-key my-leader-map (kbd "jb") '(lambda () (interactive) (find-file "~/projects/blog/")))
     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/projects/blog/")))
+    (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
+    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/work/")))
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
     (define-key my-leader-map (kbd "i") 'counsel-imenu)

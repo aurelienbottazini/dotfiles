@@ -1262,11 +1262,12 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       :defer t)
 
     (use-package paredit
-      :defer t
       :diminish paredit-mode
       :config
       (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-      (add-hook 'clojure-mode-hook #'paredit-mode))
+      (add-hook 'clojure-mode-hook #'paredit-mode)
+      (define-key  my-keys-minor-mode-map (kbd "C-)") 'paredit-forward-slurp-sexp)
+      (define-key my-keys-minor-mode-map (kbd "C-}") 'paredit-forward-barf-sexp))
 
     (use-package avy
       :defer t

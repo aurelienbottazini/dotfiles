@@ -711,6 +711,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 ** org-babel
 #+begin_src emacs-lisp
   (require 'ob-js)
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '(
+                                 (shell . t)))
 #+end_src
 ** org-capture
 #+begin_src emacs-lisp

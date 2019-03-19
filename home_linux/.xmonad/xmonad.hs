@@ -62,7 +62,7 @@ scratchpads :: [NamedScratchpad]
 scratchpads =
     [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "tranmission" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
-    ,(NS "youtube-music" "chromium-browser --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "youtube-music" "chromium --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "ranger" "kitty --class kitty-ranger ranger" (className =? "kitty-ranger") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
@@ -72,10 +72,10 @@ scratchpads =
     ,(NS "settings" "launch-settings.sh" (className =? "Gnome-control-center") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "bluetooth" "blueman-manager" (className =? "Blueman-manager") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     -- resource is used to match the first component of the WM_NAME property
-    ,(NS "calendar" "chromium-browser --new-window --app=http://calendar.google.com" (resource =? "calendar.google.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "email" "chromium-browser --new-window --app=https://www.fastmail.com" (resource =? "www.fastmail.com") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
+    ,(NS "calendar" "chromium --new-window --app=http://calendar.google.com" (resource =? "calendar.google.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "email" "chromium --new-window --app=https://www.fastmail.com" (resource =? "www.fastmail.com") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     ,(NS "scratch-term" "st -c scratch-term fortune" (className =? "scratch-term") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
-    ,(NS "worldtimebuddy" "chromium-browser --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "worldtimebuddy" "chromium --new-window --app=https://www.worldtimebuddy.com" (resource =? "www.worldtimebuddy.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "gsimplecal" "gsimplecal" (className =? "Gsimplecal") (customFloating $ W.RationalRect (4/5) (1/40) (1/5) (1/5)))
     ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (0) (1/2) (1)))
     ,(NS "TDD" "emacs --name tddEmacs ~/Dropbox/org/tdd.org" (resource =? "tddEmacs") (customFloating $ W.RationalRect (0) (0) (1/2) (1)))
@@ -117,7 +117,7 @@ myKeysP = [
         , ("M4-]", sendMessage Expand)
         , ("M4-\\",  toggleWS)
         , ("M4-c", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
-        , ("M4-b", runOrRaiseNext "chromium-browser" (className =? "Chromium-browser"))
+        , ("M4-b", runOrRaiseNext "chromium" (className =? "Chromium"))
         , ("M4-i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
         , ("M4-v", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
@@ -215,7 +215,7 @@ myProjects =
      },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws2WWW "chromium-browser"
+             , projectStartHook = Just $ do spawnOn ws2WWW "chromium"
      },
      Project { projectName = ws3CODE
              , projectDirectory = "~/"

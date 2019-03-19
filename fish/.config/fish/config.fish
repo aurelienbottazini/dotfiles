@@ -1,6 +1,9 @@
 set fish_greeting
 
-eval (~/work/dox-compose/bin/dox-init)
+if test -e ~/work/dox-compose/bin/dox-init
+    eval (~/work/dox-compose/bin/dox-init)
+    /* bass source ~/work/dox-compose/bin/dox-init */
+end
 set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims  ~/.nvm/versions/node/v8.11.1/bin  ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
 
@@ -106,9 +109,6 @@ if test -n "$TERM"
   set -g fish_pager_color_prefix "-i" "#268bd2"
   set -g fish_color_error "red"
 
-  if test -e ~/work/dox-compose/helpers.bash
-    bass source ~/work/dox-compose/bin/dox-init
-  end
 
   if [ -z "$TMUX" ]
     if [ "$TERM" != "dumb" ]

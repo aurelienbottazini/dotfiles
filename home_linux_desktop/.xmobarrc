@@ -1,5 +1,5 @@
-Config { font = "xft:Operator Mono:size=10:antialias=true"
-        , additionalFonts = ["xft:PragmataPro Liga:size=8"]
+Config { font = "xft:Operator Mono:size=22:antialias=true"
+        , additionalFonts = ["xft:PragmataPro Liga:size=20"]
         , borderColor = "#939598"
         , border = BottomB
         , borderWidth = 3
@@ -16,5 +16,5 @@ Config { font = "xft:Operator Mono:size=10:antialias=true"
           ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <action=`nautilus ~/Dropbox`><fn=1></fn>%mydropbox%</action> <action=blueman-manager><fn=1></fn></action> <action=launch-settings.sh sound><fn=1></fn> %myvolume%</action> <fn=1></fn> <action=gsimplecal>%theDate%</action> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%"
+        , template = " %StdinReader% }{ %localtime% %sftime% "
 }

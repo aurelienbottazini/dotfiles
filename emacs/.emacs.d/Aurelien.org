@@ -1288,12 +1288,18 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "R") 'revert-buffer)
     (define-key my-leader-map (kbd "f") 'counsel-rg)
     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
+
     (define-key my-leader-map (kbd "jb") '(lambda () (interactive) (find-file "~/projects/blog/")))
     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
     (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
     (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/work/")))
+
+    (define-key my-leader-map (kbd "pa") '(lambda () (interactive) (find-file "~/work/activities")))
+    (define-key my-leader-map (kbd "pc") '(lambda () (interactive) (find-file "~/work/doximity-client-vue")))
+    (define-key my-leader-map (kbd "pd") '(lambda () (interactive) (find-file "~/work/doximity")))
+
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
     (define-key my-leader-map (kbd "i") 'counsel-imenu)

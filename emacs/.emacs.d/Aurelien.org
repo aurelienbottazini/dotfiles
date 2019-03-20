@@ -244,6 +244,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     ;; if file has no change, just load any changes
     ;; coming from an external process
     (global-auto-revert-mode 1)
+    (global-auto-revert-non-file-buffers 1)
 
     ;; sentences end with one space after point
     (setq sentence-end-double-space nil)
@@ -1446,7 +1447,7 @@ bsrc
       (setq ffip-use-rust-fd t))
      (define-key my-leader-map (kbd "t") 'find-file-in-project)
      (define-key my-leader-map (kbd "T") 'find-file-in-project-by-selected)
-     (define-key evil-normal-state-map (kbd "gd") 'find-file-in-project-at-point)
+     (define-key evil-normal-state-map (kbd "gf") 'find-file-in-project-at-point)
    #+end_src
 ** Run command for mode
    Run compilation or interactive command for mode.

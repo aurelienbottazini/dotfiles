@@ -1,0 +1,1 @@
+/home/auray/.config/fisherman/bass/functions/bass.fish

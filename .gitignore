@@ -17,6 +17,10 @@ emacs/.emacs.d/#ido.last#
 emacs/.emacs.d/.mc-lists.el
 emacs/.emacs.d/url
 emacs/.emacs.d/eshell
+emacs/.emacs.d/Aurelien.el
+emacs/.emacs.d/forge-database.sqlite
+emacs/.emacs.d/network-security.data
+emacs/.emacs.d/transient
 emacs/.terminfo
 /emacs/.emacs.d/.litable-lists.el
 /emacs/.emacs.d/company-statistics-cache.el
@@ -43,3 +47,5 @@ home/.config/ranger/colorschemes/__init__.pyo
 home/.config/ranger/colorschemes/solarizedAuray.pyo
 ./home/.config/ranger/colorschemes/__init__.pyo
 ./home/.config/ranger/colorschemes/solarizedAuray.pyo
+home/.cmus
+__pycache__

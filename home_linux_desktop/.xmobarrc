@@ -1,5 +1,5 @@
-Config { font = "xft:Operator Mono:size=22:antialias=true"
-        , additionalFonts = ["xft:PragmataPro Liga:size=20"]
+Config { font = "xft:Operator Mono:size=12:antialias=true"
+        , additionalFonts = ["xft:PragmataPro Liga:size=10"]
         , borderColor = "#939598"
         , border = BottomB
         , borderWidth = 3

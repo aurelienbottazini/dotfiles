@@ -2,7 +2,6 @@ set fish_greeting
 
 if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
-    /* bass source ~/work/dox-compose/bin/dox-init */
 end
 set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims  ~/.nvm/versions/node/v8.11.1/bin  ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin $PATH
 status --is-interactive; and source (rbenv init -|psub)
@@ -114,7 +113,9 @@ if test -n "$TERM"
     if [ "$TERM" != "dumb" ]
      if [ -z "$INSIDE_EMACS" ]
        if not string match -r \^com.jetbrains.intellij. $XPC_SERVICE_NAME
-         tat
+         if not status is-login
+           tat
+         end
        end
      end
     end
@@ -129,3 +130,24 @@ set -x CHROME_BIN /usr/bin/chromium-browser # for karmajs specs
 set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
+
+#Hdpi config
+set -x QT_AUTO_SCREEN_SCALE_FACTOR 1
+set -x GDK_SCALE 2 #gtk3
+#set -x GDK_DPI_SCALE 0.5 #gtk3 undo scaling of text
+
+# Start X at login
+if status is-login
+    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+        exec startx -- -keeptty
+    end
+end
+
+# Start ssh agent
+if test -z "$SSH_ENV"
+    set -xg SSH_ENV $HOME/.ssh/environment
+end
+
+if not __ssh_agent_is_started
+    __ssh_agent_start
+end

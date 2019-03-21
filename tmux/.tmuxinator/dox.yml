@@ -1,15 +1,12 @@
 name: dox
-root: ~/work/doximity
+root: ~/work/doximity-client-vue
 
 windows:
   - docker:
       layout: main-horizontal
       panes:
-        - dox-dc up doximity
-        - dox-dc up activities
-        - dox-dc up doximity-client-vue
-        - dox-dc up auth-api
+        - dox-dc up doximity activities doximity-client-vue auth-api
   - tests:
       layout: main-horizontal
       panes:
-        -
+        - sleep 10 ;and dox-do yarn run unit

@@ -667,20 +667,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
     (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
    #+END_SRC
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package ace-window
-       :init
-       (setq aw-dispatch-always t)
-       :config
-       (define-key my-leader-map (kbd "w") 'ace-window))
-   #+END_SRC
-** avy / ace-jump / easy-motion
-   #+BEGIN_SRC emacs-lisp
-     (use-package avy
-      :config
-      (global-set-key (kbd "C-;") 'avy-goto-char-timer))
-   #+END_SRC
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
@@ -1314,10 +1300,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
     (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
     (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/work/")))
-
-    (define-key my-leader-map (kbd "pa") '(lambda () (interactive) (find-file "~/work/activities")))
-    (define-key my-leader-map (kbd "pc") '(lambda () (interactive) (find-file "~/work/doximity-client-vue")))
-    (define-key my-leader-map (kbd "pd") '(lambda () (interactive) (find-file "~/work/doximity")))
 
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)

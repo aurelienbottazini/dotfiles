@@ -243,8 +243,8 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     ;; if file has no change, just load any changes
     ;; coming from an external process
+    (setq global-auto-revert-non-file-buffers t)
     (global-auto-revert-mode 1)
-    (global-auto-revert-non-file-buffers 1)
 
     ;; sentences end with one space after point
     (setq sentence-end-double-space nil)

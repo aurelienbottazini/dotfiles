@@ -789,13 +789,22 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 ** Gitsh
    #+begin_src emacs-lisp
      (defun ab-run-gitsh ()
-     "Start gitsh in current projectile project. Use st as a terminal."
+     "Start gitsh in current git project. Uses st as a terminal."
        (interactive)
        (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
          (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
      (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
    #+end_src
 
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :init
+       (setq projectile-switch-project-action 'projectile-dired)
+       :config
+       (projectile-mode t)
+       (define-key my-leader-map  (kbd "p") 'projectile-commander)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+   #+END_SRC
 ** Magit
    #+begin_src emacs-lisp
      (use-package forge

@@ -1221,50 +1221,53 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package company
-    :config
-    (add-hook 'after-init-hook 'global-company-mode)
-    (setq company-dabbrev-downcase nil)
-    (setq company-show-numbers t)
-    (use-package ac-js2)
-    (setq company-backends '((company-dabbrev company-capf company-css company-elisp ac-js2-company) company-files))
+  ;; (use-package company
+  ;;   :config
+  ;;   (add-hook 'after-init-hook 'global-company-mode)
+  ;;   (setq company-dabbrev-downcase nil)
+  ;;   (setq company-show-numbers t)
+  ;;   (use-package ac-js2)
+  ;;   (setq company-backends '((company-dabbrev company-capf company-css company-elisp ac-js2-company) company-files))
 
-    (let ((map company-active-map))
-      (mapc
-       (lambda (x)
-         (define-key map (format "%d" x) 'ora-company-number))
-       (number-sequence 0 9))
-      (define-key map " " (lambda ()
-                            (interactive)
-                            (company-abort)
-                            (self-insert-command 1)))
-      (define-key map (kbd "<return>") nil))
+  ;;   (let ((map company-active-map))
+  ;;     (mapc
+  ;;      (lambda (x)
+  ;;        (define-key map (format "%d" x) 'ora-company-number))
+  ;;      (number-sequence 0 9))
+  ;;     (define-key map " " (lambda ()
+  ;;                           (interactive)
+  ;;                           (company-abort)
+  ;;                           (self-insert-command 1)))
+  ;;     (define-key map (kbd "<return>") nil))
 
-    (defun ora-company-number ()
-      "Forward to `company-complete-number'.
+  ;;   (defun ora-company-number ()
+  ;;     "Forward to `company-complete-number'.
 
-    Unless the number is potentially part of the candidate.
-    In that case, insert the number."
-      (interactive)
-      (let* ((k (this-command-keys))
-             (re (concat "^" company-prefix k)))
-        (if (cl-find-if (lambda (s) (string-match re s))
-                        company-candidates)
-            (self-insert-command 1)
-          (company-complete-number (string-to-number k)))))
-    )
+  ;;   Unless the number is potentially part of the candidate.
+  ;;   In that case, insert the number."
+  ;;     (interactive)
+  ;;     (let* ((k (this-command-keys))
+  ;;            (re (concat "^" company-prefix k)))
+  ;;       (if (cl-find-if (lambda (s) (string-match re s))
+  ;;                       company-candidates)
+  ;;           (self-insert-command 1)
+  ;;         (company-complete-number (string-to-number k)))))
+  ;;   )
 
 #+END_SRC
 * Bindings
 
+** Narrow Indirect
   Vue bindings to focus specific parts of the vue template
   #+BEGIN_SRC emacs-lisp
     (require 'aurayb-narrow-indirect-vue)
     (define-key my-leader-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
     (define-key my-leader-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
     (define-key my-leader-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+    (define-key my-leader-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
   #+END_SRC
 
+** General
   Shows key combination helper in minibuffer
   #+begin_src emacs-lisp
     (use-package which-key

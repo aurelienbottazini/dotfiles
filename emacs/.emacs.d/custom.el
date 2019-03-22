@@ -43,7 +43,8 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((eval progn
+    ((ffip-project-root . "/home/auray/work/doximity-client-vue/")
+     (eval progn
            (require
             (quote find-file-in-project))
            (setq ffip-prune-patterns
@@ -77,8 +78,8 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

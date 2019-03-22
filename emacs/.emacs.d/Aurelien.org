@@ -92,7 +92,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (defun filepath-with-line-number-for-current-buffer ()
       "Return a string with Buffer-file-name:line-number.
-        Make it easier to prepare commands for tools like rspec"
+           Make it easier to prepare commands for tools like rspec"
       (interactive)
       (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
 
@@ -117,7 +117,7 @@ It makes it harder for major modes to minor modes trying to override my personal
             (formatted-title (replace-regexp-in-string " " "-" title)))
         (find-file (concat "~/projects/blog/_org/_posts/" date "-" formatted-title ".org"))
         (yas-expand-snippet (yas-lookup-snippet "jekyll")
-     )))
+                            )))
 
     (defun toggle-html-export-on-save ()
       "Enable or disable export HTML when saving current buffer."
@@ -127,7 +127,7 @@ It makes it harder for major modes to minor modes trying to override my personal
       (if (memq 'org-html-export-to-html after-save-hook)
           (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
                  (message "Disabled org html export on save"))
-       (add-hook 'after-save-hook 'org-publish-current-file nil t)
+        (add-hook 'after-save-hook 'org-publish-current-file nil t)
         (set-buffer-modified-p t)
         (message "Enabled org html export on save")))
   #+end_src
@@ -269,7 +269,7 @@ It makes it harder for major modes to minor modes trying to override my personal
   ~C-c C-w~ to copy regex to something usable with emacs-lisp
   ~C-c C-q~ to quit re-builder and to remove highlights
   #+BEGIN_SRC emacs-lisp
-  (require 're-builder)
+  ( require 're-builder)
   (setq reb-re-syntax 'string)
   #+END_SRC
 
@@ -1248,6 +1248,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 #+END_SRC
 * Bindings
+
+  Vue bindings to focus specific parts of the vue template
+  #+BEGIN_SRC emacs-lisp
+    (require 'aurayb-narrow-indirect-vue)
+    (define-key my-leader-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
+    (define-key my-leader-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
+    (define-key my-leader-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+  #+END_SRC
 
   Shows key combination helper in minibuffer
   #+begin_src emacs-lisp

@@ -220,7 +220,7 @@ It makes it harder for major modes to minor modes trying to override my personal
   #+begin_src emacs-lisp
     (setq inhibit-startup-message t)
     (setq delete-by-moving-to-trash t)
-
+    (setq tab-always-indent 'complete)
     ;; show end of buffer on left fringe
     (setq-default default-indicate-empty-lines nil)
 
@@ -644,7 +644,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
          (ibuffer nil (buffer-name) (list (cons 'name ivy--old-re))))
        (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
        (global-set-key "\C-s" 'counsel-grep-or-swiper)
-       (define-key evil-normal-state-map (kbd "/") 'counsel-grep-or-swiper)
        (setq counsel-grep-base-command
        "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
        (setq ivy-re-builders-alist
@@ -1211,7 +1210,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq company-dabbrev-downcase nil)
     (setq company-show-numbers t)
     (use-package ac-js2)
-    (setq company-backends '(company-css company-elisp ac-js2-company company-files company-dabbrev))
+    (setq company-backends '((company-dabbrev company-capf company-css company-elisp ac-js2-company) company-files))
 
     (let ((map company-active-map))
       (mapc

@@ -673,11 +673,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-char-timer)
       (define-key my-leader-map (kbd ";") 'avy-goto-char-timer))
    #+END_SRC
-**
+
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
-    (add-hook 'org-mode-hook (lambda () (define-key evil-normal-state-map (kbd \T\A\B"") 'org-cycle)))
 
     (setq org-directory (expand-file-name "~/Dropbox/org"))
     (setq org-default-notes-file (concat org-directory "/GTD.org"))
@@ -705,7 +704,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq org-use-speed-commands nil)
 
     (evil-define-key 'normal org-mode-map
-    (kbd "TAB") 'org-cycle
     (kbd "M-l") 'org-shiftmetaright
     (kbd "M-h") 'org-shiftmetaleft
     (kbd "M-k") 'org-move-subtree-up

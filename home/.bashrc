@@ -141,9 +141,10 @@ function evil_git_dirty {
 
 export PROMPT_COMMAND='__git_ps1 "\e[3m\e[1m\e[34m\w\e[0m" "$(evil_git_dirty)\n› "'
 
-source ~/.git-completion.bash
+source /usr/share/git/completion/git-completion.bash
+source /usr/share/git/completion/git-prompt.sh
 
-\. /usr/share/autojump/autojump.sh
+\. /usr/share/autojump/autojump.bash
 
 alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \
     --publish=7474:7474 --publish=7687:7687 \

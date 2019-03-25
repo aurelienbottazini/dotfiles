@@ -7,8 +7,7 @@ Config { font = "xft:Operator Mono:size=12:antialias=true"
         , fgColor = "black"
         , position = TopW L 100
         , commands = [
-          Run Date "%a %b %_d" "theDate" 10
-          , Run Com "date" ["+%H:%M"] "localtime" 10
+          Run Com "date" ["+%d-%m-%y %H:%M"] "localtime" 10
           , Run Com "./bin/sanFranciscoTime.sh" [] "sftime" 10
           , Run Com "./bin/dropboxStatus.sh" [] "mydropbox" 10
           , Run Com "./bin/volume-status.sh" [] "myvolume" 10

@@ -22,6 +22,12 @@ if has("termguicolors")  " set true colors
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim' " quickly find files
 Plug 'tpope/vim-sensible' " base set of configurations

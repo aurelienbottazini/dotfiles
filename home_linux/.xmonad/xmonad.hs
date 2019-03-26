@@ -104,7 +104,7 @@ myKeysP = [
         , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
         , ("M4-<Space> u", spawn "dmenu-unicode.sh")
         , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown.sh\"")
-        , ("M4-<Space> s", spawn "flameshot gui")
+        , ("M4-<Space> s", spawn "deepin-screenshot -s ~/screenshots")
         , ("M4-<Space> p", spawn "peek")
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-S-<Backspace>", killAll)

@@ -132,15 +132,15 @@ set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/d
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
 
 #Hdpi config
-set -x QT_AUTO_SCREEN_SCALE_FACTOR 1
-set -x GDK_SCALE 2 #gtk3
+#set -x QT_AUTO_SCREEN_SCALE_FACTOR 1
+#set -x GDK_SCALE 2 #gtk3
 #set -x GDK_DPI_SCALE 0.5 #gtk3 undo scaling of text
 
 # Start X at login
-if status is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-        exec ssh-agent startx -- -keeptty
-    end
-end
+# if status is-login
+#     if test -z "$DISPLAY" -a $XDG_VTNR = 1
+#         exec ssh-agent startx -- -keeptty
+#     end
+# end
 
 source /usr/share/autojump/autojump.fish

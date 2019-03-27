@@ -9,4 +9,4 @@ windows:
   - tests:
       layout: main-horizontal
       panes:
-        - sleep 10 ;and dox-do yarn run unit
+        - sleep 10 & dox-do yarn run unit

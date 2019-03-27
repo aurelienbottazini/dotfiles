@@ -15,5 +15,5 @@ Config { font = "xft:Operator Mono:size=12:antialias=true"
           ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% }{ <fn=1><action=`pavucontrol`></action></fn> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime% "
+        , template = " %StdinReader% }{ <fn=1><action=`pavucontrol`></action></fn> <fn=1>⌚</fn> %localtime% <fn=1>⌚</fn> %sftime%         "
 }

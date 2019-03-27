@@ -76,7 +76,7 @@ scratchpads =
     ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (0) (1/2) (1)))
     ,(NS "TDD" "emacs --name tddEmacs ~/Dropbox/org/tdd.org" (resource =? "tddEmacs") (customFloating $ W.RationalRect (0) (0) (1/2) (1)))
     ,(NS "vscode" "code" (className =? "Code") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
-    -- ,(NS "GTD" "emacs --name gtdEmacs ~/Dropbox/org/GTD.org" (resource =? "gtdEmacs") (customFloating $ W.RationalRect (0) (1/40) (1/2) (6/10)))
+    ,(NS "jetbrains-toolbox"  "jetbrains-toolbox" (className =? "jetbrains-toolbox") (customFloating $ W.RationalRect (0/5) (1/5) (3/5) (3/5)))
     ] -- where role = stringProperty "WM_WINDOW_ROLE"
 
 -- I have two variables to hold my bindings: myKeysP and myKeys.

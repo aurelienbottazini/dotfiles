@@ -8,4 +8,5 @@ setxkbmap -option compose:sclk
 stalonetray &
 jetbrains-toolbox &
 dropbox &
+dunst -config ~/.config/dunst/dunstrc &
 exec xmonad

@@ -49,3 +49,6 @@ home/.config/ranger/colorschemes/solarizedAuray.pyo
 ./home/.config/ranger/colorschemes/solarizedAuray.pyo
 home/.cmus
 __pycache__
+bin/bin/datagrip
+bin/bin/jetbrains-toolbox
+bin/bin/idea

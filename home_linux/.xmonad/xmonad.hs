@@ -212,10 +212,9 @@ myProjects =
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws2WWW "chromium"
      },
-     Project { projectName = ws3CODE
-             , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws3CODE "mainEmacs.sh"
-     },
+     -- Project { projectName = ws3CODE
+     --         , projectDirectory = "~/"
+     -- },
      Project { projectName = ws4TALK
              , projectDirectory = "~/"
              , projectStartHook = Just $ do spawnOn ws4TALK "slack"

@@ -43,7 +43,10 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((ffip-project-root . "/home/auray/work/doximity-client-vue/")
+    ((compilation-scroll-output
+      (quote first-error))
+     (compilation-scroll-output t)
+     (ffip-project-root . "/home/auray/work/doximity-client-vue/")
      (eval progn
            (require
             (quote find-file-in-project))
@@ -78,8 +81,8 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -175,7 +178,7 @@
  '(show-paren-match ((t (:background "#97d88a" :foreground "#4c4e56"))))
  '(show-paren-mismatch ((t (:background "#f65058"))))
  '(web-mode-html-attr-name-face ((t (:foreground "#3a499c"))))
- '(web-mode-html-tag-face ((t (:foreground "#bc3e44"))))
+ '(web-mode-html-tag-face ((t (:foreground "#bc3e44" :weight bold))))
  '(whitespace-indentation ((t (:background "#f79b2f" :foreground "black"))))
  '(whitespace-space-after-tab ((t (:background "#fccf61" :foreground "black"))))
  '(whitespace-space-before-tab ((t (:background "#f79b2f" :foreground "black"))))

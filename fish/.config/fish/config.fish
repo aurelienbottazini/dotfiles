@@ -139,17 +139,8 @@ set -x GDK_SCALE 2 #gtk3
 # Start X at login
 if status is-login
     if test -z "$DISPLAY" -a $XDG_VTNR = 1
-        exec startx -- -keeptty
+        exec ssh-agent startx -- -keeptty
     end
-end
-
-# Start ssh agent
-if test -z "$SSH_ENV"
-    set -xg SSH_ENV $HOME/.ssh/environment
-end
-
-if not __ssh_agent_is_started
-    __ssh_agent_start
 end
 
 source /usr/share/autojump/autojump.fish

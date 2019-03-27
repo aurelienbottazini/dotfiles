@@ -10,9 +10,11 @@ If already in the indirect buffer, switches bach to base-buffer."
       (let* ((indirect-vue-buffer-name (concat atag-string "->" (buffer-name)))
              (indirect-vue-buffer (get-buffer indirect-vue-buffer-name)))
         (cond
-         ((buffer-base-buffer) (pop-to-buffer-same-window (buffer-base-buffer)))
-         (indirect-vue-buffer
-          (pop-to-buffer-same-window indirect-vue-buffer))
+         ((buffer-base-buffer) (progn (pop-to-buffer-same-window (buffer-base-buffer))
+                                      (font-lock-fontify-buffer)))
+         (indirect-vue-buffer (progn
+                                (pop-to-buffer-same-window indirect-vue-buffer)
+                                (font-lock-fontify-buffer)))
          (t (progn
               (pop-to-buffer-same-window (make-indirect-buffer (buffer-name)  indirect-vue-buffer-name nil))
               (goto-char (point-max))

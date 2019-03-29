@@ -83,6 +83,8 @@ editor_stop_format_chars=-+*\\,.;:&>
 mcview_eof=
 skin=default
 
+safe_overwrite=false
+
 [Layout]
 message_visible=1
 keybar_visible=1
@@ -93,7 +95,7 @@ menubar_visible=1
 free_space=1
 horizontal_split=0
 vertical_equal=1
-left_panel_size=82
+left_panel_size=75
 horizontal_equal=1
 top_panel_size=1
 

@@ -112,6 +112,8 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
 
 eval "$(~/work/dox-compose/bin/dox-init)"
 
+[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 _gen_fzf_default_opts() {

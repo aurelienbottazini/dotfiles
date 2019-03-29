@@ -25,9 +25,11 @@ emacs/.terminfo
 /emacs/.emacs.d/.litable-lists.el
 /emacs/.emacs.d/company-statistics-cache.el
 /emacs/.emacs.d/ac-comphist.dat
+emacs/.emacs.d/session*
 home/.npmrc
 home/.npmrc
 home/.quokka/node_modules
+home/.config/mc/panels.ini
 /home_linux/.xmonad/xmonad-x86_64-linux
 /home_linux/.xmonad/xmonad.errors
 /home_linux/.xmonad/xmonad.hi

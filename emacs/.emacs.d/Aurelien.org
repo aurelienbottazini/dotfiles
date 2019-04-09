@@ -1547,6 +1547,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      (define-key my-leader-map (kbd "S") 'alternative-files-create-file)
    #+end_src
 
+** Drag stuff
+#+begin_src emacs-lisp
+(use-package drag-stuff
+  :config
+  (drag-stuff-global-mode t)
+  (drag-stuff-define-keys))
+#+end_src
 * Diminish
   Don't show some modes to keep my modeline clean.
   #+begin_src emacs-lisp

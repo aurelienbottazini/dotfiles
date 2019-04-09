@@ -1220,39 +1220,37 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package company
-  ;;   :config
-  ;;   (add-hook 'after-init-hook 'global-company-mode)
-  ;;   (setq company-dabbrev-downcase nil)
-  ;;   (setq company-show-numbers t)
-  ;;   (use-package ac-js2)
-  ;;   (setq company-backends '((company-dabbrev company-capf company-css company-elisp ac-js2-company) company-files))
+  (use-package company
+    :config
+    (add-hook 'after-init-hook 'global-company-mode)
+    (setq company-dabbrev-downcase nil)
+    (setq company-show-numbers t)
+    (use-package ac-js2)
+    (setq company-backends '(company-dabbrev company-files (company-capf company-css company-elisp ac-js2-company)))
 
-  ;;   (let ((map company-active-map))
-  ;;     (mapc
-  ;;      (lambda (x)
-  ;;        (define-key map (format "%d" x) 'ora-company-number))
-  ;;      (number-sequence 0 9))
-  ;;     (define-key map " " (lambda ()
-  ;;                           (interactive)
-  ;;                           (company-abort)
-  ;;                           (self-insert-command 1)))
-  ;;     (define-key map (kbd "<return>") nil))
+    (let ((map company-active-map))
+      (mapc
+       (lambda (x)
+         (define-key map (format "%d" x) 'ora-company-number))
+       (number-sequence 0 9))
+      (define-key map " " (lambda ()
+                            (interactive)
+                            (company-abort)
+                            (self-insert-command 1)))
+      (define-key map (kbd "<return>") nil))
 
-  ;;   (defun ora-company-number ()
-  ;;     "Forward to `company-complete-number'.
+    (defun ora-company-number ()
+      "Forward to `company-complete-number'.
 
-  ;;   Unless the number is potentially part of the candidate.
-  ;;   In that case, insert the number."
-  ;;     (interactive)
-  ;;     (let* ((k (this-command-keys))
-  ;;            (re (concat "^" company-prefix k)))
-  ;;       (if (cl-find-if (lambda (s) (string-match re s))
-  ;;                       company-candidates)
-  ;;           (self-insert-command 1)
-  ;;         (company-complete-number (string-to-number k)))))
-  ;;   )
-
+    Unless the number is potentially part of the candidate.
+    In that case, insert the number."
+      (interactive)
+      (let* ((k (this-command-keys))
+             (re (concat "^" company-prefix k)))
+        (if (cl-find-if (lambda (s) (string-match re s))
+                        company-candidates)
+            (self-insert-command 1)
+          (company-complete-number (string-to-number k))))))
 #+END_SRC
 * Bindings
 
@@ -1411,8 +1409,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
         (global-set-key (kbd "C-c v") 'ivy-push-view)
         (global-set-key (kbd "C-c V") 'ivy-pop-view)
   #+end_src
-** Alternative Files
-bsrc
 ** Find file in project
    Here is complete setup you could insert into ~/.emacs.d/init.el,
 

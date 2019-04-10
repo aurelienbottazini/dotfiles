@@ -1552,7 +1552,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 (use-package drag-stuff
   :config
   (drag-stuff-global-mode t)
-  (drag-stuff-define-keys))
+  (define-key my-keys-minor-mode-map (kbd "C-M-<up>") 'drag-stuff-up)
+  (define-key my-keys-minor-mode-map (kbd "C-M-<down>") 'drag-stuff-down))
 #+end_src
 * Diminish
   Don't show some modes to keep my modeline clean.

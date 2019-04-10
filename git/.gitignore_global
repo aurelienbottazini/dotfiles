@@ -33,3 +33,4 @@ yarn-error.log
 wallaby.js
 __mock__/*
 .git/*
+/.graphqlconfig

@@ -1,4 +1,4 @@
 setxkbmap -option compose:sclk
-exec ssh-agent startxfce4
+dropbox &
 hp-systray &
-jetbtrains-toolbox --minimize &
+exec ssh-agent startxfce4

@@ -30,6 +30,8 @@ map <leader>os :source ~/.ideavimrc<CR>
 
 map <leader>s :action GotoTest<CR>
 
+set clipboard+=unnamed
+
 " RecentChangedFiles                                 <C-S-E>
 " RecentChanges                                      <A-S-C>
 " RecentFiles                                        <C-E>

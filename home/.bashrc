@@ -160,4 +160,4 @@ source /usr/share/autojump/autojump.bash
 
 eval "$("/home/auray/work/dox-compose/bin/dox-init")"
 
-# [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat

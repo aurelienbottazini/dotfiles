@@ -1215,7 +1215,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
   (require 'mode-local)
   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
-  (define-key evil-insert-state-map (kbd "C-x C-o") 'hippie-expand)
   (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
 #+END_SRC
 
@@ -1226,8 +1225,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (setq company-dabbrev-downcase nil)
     (setq company-show-numbers t)
     (use-package ac-js2)
-    (setq company-backends '(company-dabbrev company-files (company-capf company-css company-elisp ac-js2-company)))
+    (setq company-backends '((company-dabbrev company-files company-capf company-css company-elisp ac-js2-company)))
 
+    (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
     (let ((map company-active-map))
       (mapc
        (lambda (x)

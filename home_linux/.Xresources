@@ -1,70 +1,9 @@
 Xcursor.theme: DMZ-White
-Xcursor.size: 52
+Xcursor.size: 62
 Xft.dpi: 183
 Xft.antialias: true
-Xft.hinting: true
-Xft.hintstyle: true
+Xft.autohint: 0
+Xft.hinting: 1
+Xft.hintstyle: hintfull
 Xft.rgba: rgb
 
-URxvt*font: xft:Operator Mono Book:size=12,\
-            xft:PragmataPro:size=12,\
-            xft:Noto Emoji:size=12,\
-	    xft:Ubuntu Mono:size=12
-URxvt*boldFont: xft:Operator Mono Book:bold:size=12,\
-                xft:PragmataPro:bold:size=12,\
-  		xft:Noto Emoji:size=12
-URxvt*boldItalicFont: xft:Operator Mono Book:italic:size=12,\
-                     xft:PragmataPro:italic:size=12,\
- 		      xft:Noto Emoji:size=12 *
-
-URxvt*saveLines: 10000
-URxvt*scrollBar: false
-
-!! URxvt*foreground: #f1f2f1
-!! URxvt*background: #4c4e56
-
-URxvt*foreground: #000000
-URxvt*background: #ffffff
-
-
-!! colors: dark/light
-!! black
-URxvt*color0: #4c4e56
-URxvt*color8: #69615f
-
-!! red
-URxvt*color1: #bc3e44
-URxvt*color9: #f65058
-
-!! green
-URxvt*color2: #56944f
-URxvt*color10: #5cb860
-
-!! yellow
-URxvt*color3: #fccf61
-URxvt*color11: #fff166
-
-!! blue
-URxvt*color4: #3a499c
-URxvt*color12: #4982cf
-
-!! magenta
-URxvt*color5: #f56d9e
-URxvt*color13: #ffa2cb
-
-!! cyan
-URxvt*color6: #00b4e4
-URxvt*color14: #93e8d3
-
-!! white
-URxvt*color7: #e8eae8
-URxvt*color15: #f1f2f1
-
-URxvt.perl-ext-common: resize-font
-URxvt.resize-font.smaller: C-M-Down
-URxvt.resize-font.bigger: C-M-Up
-URxvt.resize-font.reset: C-M-0
-URxvt.resize-font.show: C-M-question
-
-rofi.run-command: fish -c '{cmd}'
-rofi.run-list-command: 'fish -c functions'

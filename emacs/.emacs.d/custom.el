@@ -91,6 +91,7 @@
  '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight book :height 110 :width normal :foundry "FSD" :family "Operator Mono"))))
  '(bold ((t (:weight medium))))
  '(bold-italic ((t (:slant italic :weight medium))))
+ '(cider-result-overlay-face ((t (:background "grey90" :box (:line-width 2 :color "#f79b2f")))))
  '(context-coloring-level-1-face ((t (:foreground "#3a499c"))))
  '(context-coloring-level-2-face ((t (:foreground "#546758"))))
  '(context-coloring-level-3-face ((t (:foreground "#65428a"))))

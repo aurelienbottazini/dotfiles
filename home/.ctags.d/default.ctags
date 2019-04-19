@@ -1,0 +1,7 @@
+--exclude=.git
+--exclude=.hg
+--exclude=log
+--exclude=tmp
+--exclude=dlls
+
+--map-html=+.vue

@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-minimum-prefix-length 2)
  '(deft-new-file-format "%Y-%m-%dT%H:%M")
  '(deft-use-filename-as-title t)
  '(deft-use-filter-string-for-filename t)

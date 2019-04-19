@@ -658,7 +658,15 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                    ("gD" . dumb-jump-go-other-window))
        :init
        (setq dumb-jump-selector 'ivy))
-       #+end_src
+    #+end_src
+
+    #+begin_src emacs-lisp
+     (use-package counsel-etags
+       :bind (:map evil-normal-state-map
+                   ("gt" . counsel-etags-find-tag-at-point)
+                   ("gT" . counsel-etags-find-tag))
+     )
+    #+end_src
 ** Windows
    #+BEGIN_SRC emacs-lisp
     (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)

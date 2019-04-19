@@ -1,2 +1,2 @@
 #!/bin/sh
-git ls-files | /usr/local/bin/ctags -e -L -
+git ls-files | /usr/local/bin/ctags -e -L - --extras-html=+g

@@ -9,9 +9,7 @@ export ELM_SCALE=2
 setxkbmap -option compose:sclk
 wmname LG3D
 
-stalonetray &
-dropbox &
 hp-systray &
 
 # slstatus &
-feh --bg-max --randomize ~/Dropbox/Pictures/wallpaper/ps21_16x20.jpg
+# feh --bg-max --randomize ~/Dropbox/Pictures/wallpaper/ps21_16x20.jpg

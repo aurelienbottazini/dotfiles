@@ -122,6 +122,7 @@
  '(fringe ((t (:background "#dad9d6"))))
  '(haskell-keyword-face ((t (:inherit font-lock-keyword-face))))
  '(hl-line ((t (:background "#dad9d6"))))
+ '(ido-first-match ((t (:weight normal))))
  '(iedit-occurrence ((t (:background "#ffaaff"))))
  '(isearch ((t (:background "#fccf61" :foreground "#4c4e56"))))
  '(ivy-minibuffer-match-face-2 ((t (:background "#e99ce8" :weight normal))))

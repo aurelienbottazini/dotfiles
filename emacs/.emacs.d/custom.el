@@ -108,6 +108,7 @@
  '(dired-directory ((t (:foreground "#3a499c" :weight medium))))
  '(error ((t (:foreground "#f65058" :weight medium))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#fccf61"))))
+ '(flycheck-error ((t (:background "#ffcfd8" :underline (:color "black" :style wave)))))
  '(flycheck-info ((t (:background "#ffcfd8"))))
  '(flycheck-warning ((t (:background "#ffcfd8"))))
  '(flyspell-duplicate ((t (:background "#f79b2f"))))

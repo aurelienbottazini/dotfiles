@@ -235,6 +235,7 @@ myStartupHook = do
     setWMName "LG3D" -- workaround to make java swing windows work correctly. Without it they are just empty. For example Firefox -> file open.
     spawn "compton -CG --active-opacity 1.0 --shadow-ignore-shaped"
     spawn "xsetroot -cursor_name left_ptr"
+    spawn "feh --bg-fill  ~/Dropbox/Pictures/wallpaper/ps21_16x20.jpg"
 
 noScratchPad :: String -> String
 noScratchPad ws = if ws == "NSP" then "" else ws

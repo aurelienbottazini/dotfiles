@@ -79,10 +79,6 @@ fi
 
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
-export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
-[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM
-
 export EDITOR="vim"
 export VISUAL="vim"
 
@@ -91,6 +87,7 @@ alias g="git"
 
 export PATH=~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$PATH
 eval "$(rbenv init -)"
+
 export CDPATH=.:~/:~/projects:~/work
 
 function evil_git_dirty {
@@ -160,12 +157,8 @@ source /usr/share/autojump/autojump.bash
 
 eval "$("/home/auray/work/dox-compose/bin/dox-init")"
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat
+export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
+export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
+[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM
 
-find-up () {
-    path=$(pwd)
-    while [[ "$path" != "" && ! -e "$path/$1" ]]; do
-        path=${path%/*}
-    done
-    echo "$path"
-}
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat

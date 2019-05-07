@@ -682,8 +682,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
      ;; (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
      ;; (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
      (use-package ace-window
-       :bind (:map my-leader-map
-               ("w" . ace-window)))
+       :bind (:map my-keys-minor-mode-map
+               ("M-o" . ace-window)))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp

@@ -677,13 +677,10 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     #+end_src
 ** Windows
    #+BEGIN_SRC emacs-lisp
-     ;; (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
-     ;; (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
-     ;; (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
-     ;; (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
-     (use-package ace-window
-       :bind (:map my-keys-minor-mode-map
-               ("M-o" . ace-window)))
+     (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
+     (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
+     (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
+     (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -1153,10 +1150,9 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                                   (enable-minor-mode
                                    '("\\.jsx?\\'" . prettier-js-mode))))
 
-     ;; for now it formats wrongly the html attributes
-     ;; (add-hook 'web-mode-hook #'(lambda ()
-     ;;                              (enable-minor-mode
-     ;;                               '("\\.vue?\\'" . prettier-js-mode))))
+     (add-hook 'web-mode-hook #'(lambda ()
+                                  (enable-minor-mode
+                                   '("\\.vue?\\'" . prettier-js-mode))))
 
      (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
      (defun my-jsx-hook ()

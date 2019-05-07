@@ -82,8 +82,8 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -165,7 +165,7 @@
  '(org-agenda-date-today ((t (:inherit org-agenda-date :slant italic :weight medium))))
  '(org-agenda-date-weekend ((t (:inherit org-agenda-date :weight medium))))
  '(org-agenda-structure ((t (:foreground "#4982cf"))))
- '(org-block ((t (:background "#dad9d6"))))
+ '(org-block ((t (:background "#e8eae8"))))
  '(org-column-title ((t (:background "grey90" :underline t :weight medium))))
  '(org-date ((t (:foreground "#65428a" :underline t :slant italic))))
  '(org-document-title ((t (:foreground "midnight blue" :weight medium))))

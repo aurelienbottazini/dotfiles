@@ -672,10 +672,13 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     #+end_src
 ** Windows
    #+BEGIN_SRC emacs-lisp
-    (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
-    (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
-    (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
-    (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
+     ;; (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
+     ;; (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
+     ;; (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
+     ;; (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
+     (use-package ace-window
+       :bind (:map my-leader-map
+               ("w" . ace-window)))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -1500,12 +1503,22 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (add-to-list 'ffip-prune-patterns "*/.git/*")
       (add-to-list 'ffip-prune-patterns "*/dist/*")
       (add-to-list 'ffip-prune-patterns "*/.idea/*")
+      (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
-      (add-to-list 'ffip-prune-patterns "node_modules/*")
+      (add-to-list 'ffip-prune-patterns "node_modues/*")
       (setq ffip-prefer-ido-mode nil)
       (setq ffip-use-rust-fd t))
+      (setq ffip-ignore-filenames '(
+
+      ))
      (define-key my-leader-map (kbd "t") 'find-file-in-project)
      (define-key my-leader-map (kbd "T") 'find-file-in-project-by-selected)
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
      (define-key evil-normal-state-map (kbd "gf") 'find-file-in-project-at-point)
    #+end_src
 ** Run command for mode

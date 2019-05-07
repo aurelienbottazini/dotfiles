@@ -5,3 +5,4 @@ apiary.apib
 *.dic
 .git/*
 yarn.lock
+.nuxt/*

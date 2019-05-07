@@ -660,7 +660,12 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
                    ("gd" . dumb-jump-go)
                    ("gD" . dumb-jump-go-other-window))
        :init
-       (setq dumb-jump-selector 'ivy))
+       (setq dumb-jump-selector 'ivy)
+       :config
+       (add-hook 'dumb-jump-after-jump-hook
+         (defun abo-dumb-jump-pulse-line ()
+           (pulse-momentary-highlight-one-line (point))))
+       )
     #+end_src
 
     #+begin_src emacs-lisp

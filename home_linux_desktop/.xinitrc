@@ -13,5 +13,6 @@ setxkbmap -option compose:sclk
 dropbox start &
 hp-systray &
 exec ssh-agent startxfce4
+# exec ssh-agent startkde
 # stalonetray &
 #exec ssh-agent xmonad

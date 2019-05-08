@@ -44,7 +44,15 @@
  '(ruby-deep-indent-paren-style (quote space))
  '(safe-local-variable-values
    (quote
-    ((compilation-scroll-output
+    ((eval progn
+           (require
+            (quote find-file-in-project))
+           (setq ffip-prune-patterns
+                 (\`
+                  ("*/public/packs*/*"
+                   (\,@ ffip-prune-patterns))))
+           (setq prettier-js-command "/home/auray/work/doximity-client-vue/node_modules/.bin/prettier"))
+     (compilation-scroll-output
       (quote first-error))
      (compilation-scroll-output t)
      (ffip-project-root . "/home/auray/work/doximity-client-vue/")

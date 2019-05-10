@@ -613,7 +613,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
-             "rg -i -M 120 --hidden --no-heading --line-number --color never %s .")
+             "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s .")
+             unse
        (global-set-key (kbd "M-x") 'counsel-M-x)
        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
        (global-set-key (kbd "<f1> f") 'counsel-describe-function)
@@ -1350,7 +1351,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (define-key my-leader-map (kbd "a") 'org-agenda)
     (define-key my-leader-map (kbd "r") 'counsel-recentf)
     (define-key my-leader-map (kbd "R") 'revert-buffer)
-    (define-key my-leader-map (kbd "f") 'counsel-ag)
+    (define-key my-leader-map (kbd "f") 'counsel-rg)
     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
 
     (define-key my-leader-map (kbd "jb") '(lambda () (interactive) (find-file "~/projects/blog/")))

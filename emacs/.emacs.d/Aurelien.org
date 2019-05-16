@@ -192,6 +192,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     (let (home-folder (getenv "HOME"))
       (setenv "PATH" (concat (getenv "HOME") "/.config/yarn/global/node_modules/.bin/:"
                              (getenv "HOME") "/bin/:"
+                             (getenv "HOME") "/snap/bin/:"
                              (getenv "HOME") "/work/dox-compose/bin/:"
                              (getenv "HOME") "/.nvm/versions/node/v8.9.1/bin/:"
                              (getenv "HOME") "/.nvm/versions/node/v8.11.1/bin/:"
@@ -202,6 +203,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
                       "~/bin"
+                      "/snap/bin/"
                       "~/work/dox-compose/bin/"
                       "~/.nvm/versions/node/v8.11.1/bin/"
                       "~/.nvm/versions/node/v8.9.1/bin/"

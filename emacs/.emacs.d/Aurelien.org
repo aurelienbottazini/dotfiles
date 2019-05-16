@@ -192,6 +192,7 @@ It makes it harder for major modes to minor modes trying to override my personal
     (let (home-folder (getenv "HOME"))
       (setenv "PATH" (concat (getenv "HOME") "/.config/yarn/global/node_modules/.bin/:"
                              (getenv "HOME") "/bin/:"
+                             (getenv "HOME") "/snap/bin/:"
                              (getenv "HOME") "/work/dox-compose/bin/:"
                              (getenv "HOME") "/.nvm/versions/node/v8.9.1/bin/:"
                              (getenv "HOME") "/.nvm/versions/node/v8.11.1/bin/:"
@@ -202,6 +203,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
                       "~/bin"
+                      "/snap/bin/"
                       "~/work/dox-compose/bin/"
                       "~/.nvm/versions/node/v8.11.1/bin/"
                       "~/.nvm/versions/node/v8.9.1/bin/"
@@ -614,7 +616,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
              "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s .")
-             unse
        (global-set-key (kbd "M-x") 'counsel-M-x)
        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
        (global-set-key (kbd "<f1> f") 'counsel-describe-function)
@@ -743,7 +744,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
   (require 'ob-js)
   (org-babel-do-load-languages 'org-babel-load-languages
                                '(
-                                 (shell . t)))
+                                 (sh . t)))
 #+end_src
 ** org-capture
 #+begin_src emacs-lisp

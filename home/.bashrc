@@ -96,8 +96,6 @@ function evil_git_dirty {
 
 export PROMPT_COMMAND='__git_ps1 "\e[3m\e[34m\w\e[0m" "$(evil_git_dirty)\n› "'
 
-source /usr/share/git/completion/git-completion.bash
-source /usr/share/git/completion/git-prompt.sh
 
 alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \
     --publish=7474:7474 --publish=7687:7687 \
@@ -105,12 +103,14 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
     --volume=$HOME/neo4j/logs:/logs \
     neo4j:3.0"
 
-eval "$(~/work/dox-compose/bin/dox-init)"
-
+[ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
 [ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
+[ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
+[ -f /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
+[ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
 
 _gen_fzf_default_opts() {
   local base03="234"
@@ -153,10 +153,8 @@ export MC_SKIN="$HOME/.config/mc/solarized.ini"
 
 source /usr/share/autojump/autojump.bash
 
-eval "$("/home/auray/work/dox-compose/bin/dox-init")"
-
 export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
-[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # Load NVM
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

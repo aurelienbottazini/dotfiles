@@ -1609,6 +1609,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
     (when *is-linux*
       (setq mu4e-html2text-command "/usr/bin/w3m -T text/html")
       (setq mu4e-get-mail-command "/usr/bin/mbsync -a")
+      (setq mu4e-update-interval 300)
       (add-to-list 'load-path (expand-file-name "/usr/share/emacs/site-lisp/mu4e"))
       )
 

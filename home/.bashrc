@@ -111,6 +111,8 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
 [ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
 [ -f /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
 [ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
+[ -f /usr/share/autojump/autojump.bash ] && source /usr/share/autojump/autojump.bash
+
 
 _gen_fzf_default_opts() {
   local base03="234"
@@ -150,8 +152,6 @@ export CHROME_BIN=/usr/bin/chromium-browser # for karmajs specs
 export NNN_CONTEXT_COLORS='5173'
 export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
-
-source /usr/share/autojump/autojump.bash
 
 export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # Load NVM

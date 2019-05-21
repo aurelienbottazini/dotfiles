@@ -156,7 +156,7 @@ export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # Load NVM
+[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"  # Load NVM
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

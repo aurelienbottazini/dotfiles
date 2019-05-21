@@ -153,6 +153,7 @@ export CHROME_BIN=/usr/bin/chromium-browser # for karmajs specs
 export NNN_CONTEXT_COLORS='5173'
 export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
+export XDG_CONFIG_HOME="~/.config/"
 
 export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # Load NVM

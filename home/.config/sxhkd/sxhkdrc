@@ -1,0 +1,12 @@
+super + b
+  jumpapp chromium
+super + i
+  jumpapp -c jetbrains-idea ~/bin/idea
+super + t
+  jumpapp -c main-terminal ~/bin/launch-main-terminal.sh
+super + e
+  jumpapp emacs 
+super + p
+  dmenu_run
+super + o
+  xfce4-settings-manager

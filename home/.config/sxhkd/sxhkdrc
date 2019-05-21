@@ -12,3 +12,5 @@ super + o
   xfce4-settings-manager
 Print
   flameshot gui
+super + Print
+  peek

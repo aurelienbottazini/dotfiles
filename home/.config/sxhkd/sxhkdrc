@@ -5,8 +5,10 @@ super + i
 super + t
   jumpapp -c main-terminal ~/bin/launch-main-terminal.sh
 super + e
-  jumpapp emacs 
+  jumpapp emacs
 super + p
   dmenu_run
 super + o
   xfce4-settings-manager
+Print
+  flameshot gui

@@ -51,7 +51,7 @@ Plug 'tpope/vim-unimpaired' " [ ] mappings
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
-Plug 'altercation/vim-colors-solarized'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', {
@@ -78,7 +78,7 @@ let g:ctrlp_max_height = 30
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 set background=dark
-colorscheme solarized
+colorscheme dracula
 
 " set tabstop=4
 " set shiftwidth=4
@@ -142,7 +142,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='solarized'
+let g:airline_theme='dracula'
 let g:airline_solarized_bg='dark'
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd

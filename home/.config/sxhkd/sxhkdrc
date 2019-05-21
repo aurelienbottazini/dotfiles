@@ -14,3 +14,5 @@ Print
   flameshot gui
 super + Print
   peek
+super + s
+  slack

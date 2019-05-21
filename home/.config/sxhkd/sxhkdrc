@@ -16,3 +16,5 @@ super + Print
   peek
 super + s
   slack
+super + a
+  jumpapp anki

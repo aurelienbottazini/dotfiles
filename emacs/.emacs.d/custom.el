@@ -97,10 +97,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 130 :width normal :family "Operator Mono Book"))))
+ '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 130 :width normal :family "Operator Mono"))))
  '(bold ((t (:weight medium))))
  '(bold-italic ((t (:slant italic :weight medium))))
- '(italic ((t (:slant italic :weight medium))))
  '(cider-result-overlay-face ((t (:background "grey90" :box (:line-width 2 :color "#f79b2f")))))
  '(context-coloring-level-1-face ((t (:foreground "#3a499c"))))
  '(context-coloring-level-2-face ((t (:foreground "#546758"))))
@@ -122,7 +121,7 @@
  '(flycheck-warning ((t (:background "#ffcfd8"))))
  '(flyspell-duplicate ((t (:background "#f79b2f"))))
  '(flyspell-incorrect ((t (:background "#ffcfd8"))))
- '(font-lock-comment-face ((t (:foreground "#939598"))))
+ '(font-lock-comment-face ((t (:foreground "#939598" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#65428a"))))
  '(font-lock-function-name-face ((t (:weight medium))))
  '(font-lock-keyword-face ((t (:foreground "black" :weight medium))))
@@ -135,7 +134,7 @@
  '(ido-first-match ((t (:weight normal))))
  '(iedit-occurrence ((t (:background "#ffaaff"))))
  '(isearch ((t (:background "#fccf61" :foreground "#4c4e56"))))
- '(italic ((t (:slant italic :weight normal))))
+ '(italic ((t (:slant italic :weight medium))))
  '(ivy-minibuffer-match-face-2 ((t (:background "#e99ce8" :weight normal))))
  '(ivy-minibuffer-match-face-3 ((t (:background "#bbbbff" :weight normal))))
  '(ivy-minibuffer-match-face-4 ((t (:background "#ffbbff" :weight normal))))

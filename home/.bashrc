@@ -82,7 +82,6 @@ fi
 export EDITOR="vim"
 export VISUAL="vim"
 
-
 alias g="git"
 
 export PATH=~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
@@ -94,7 +93,7 @@ function evil_git_dirty {
     [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "\e[35m*\e[0m"
 }
 
-export PROMPT_COMMAND='__git_ps1 "\e[30m\e[3m\e[44m\w \e[0m\e[30m\e[40;1;m" "$(evil_git_dirty)\e[0m\n› "'
+export PROMPT_COMMAND='__git_ps1 "\e[34;4;3m\\w\e[0m" "$(evil_git_dirty)\e[0m\n› "'
 
 
 alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \

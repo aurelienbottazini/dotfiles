@@ -1,4 +1,3 @@
-setxkbmap -option ctrl:swapcaps
 dropbox start &
 hp-systray &
 sxhkd &

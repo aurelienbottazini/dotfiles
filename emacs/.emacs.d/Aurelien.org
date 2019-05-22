@@ -1170,11 +1170,7 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
      (use-package context-coloring
        :diminish context-coloring-mode
-       :config
-       (add-hook 'emacs-lisp-mode-hook #'context-coloring-mode)
-       (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode)
-       (add-hook 'js2-mode-hook #'context-coloring-mode)
-       )
+       :bind (:map my-leader-map ("oc" . context-coloring-mode)))
 
      (use-package json-mode
        :mode "\\.json\\'"

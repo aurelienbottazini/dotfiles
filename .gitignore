@@ -60,3 +60,4 @@ home_linux_desktop/.quokka/notifications.json
 home_linux_desktop/.quokka/package.json
 /home_linux_desktop/.quokka/config.json
 .quokka
+emacs/.emacs.d/tramp

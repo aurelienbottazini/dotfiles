@@ -1250,6 +1250,8 @@ keybindgins.
   (define-key evil-motion-state-map (kbd "SPC") nil)
   #+end_src
 
+  I only use keychords as a shortcut to exit vim insert mode.
+  Maybe I could use it for more?
   #+begin_src emacs-lisp
     (use-package key-chord
       :config
@@ -1257,11 +1259,14 @@ keybindgins.
       (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
   #+end_src
 
+  Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
   #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep
       :defer t)
+  #+end_src
 
+  #+begin_src emacs-lisp
     (use-package paredit
       :diminish paredit-mode
       :config

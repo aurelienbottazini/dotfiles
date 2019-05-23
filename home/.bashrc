@@ -83,6 +83,8 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 alias g="git"
+complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
+      || complete -o default -o nospace -F _git g
 
 export PATH=~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 eval "$(rbenv init -)"

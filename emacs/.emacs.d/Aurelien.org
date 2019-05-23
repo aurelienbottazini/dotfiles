@@ -178,6 +178,91 @@ keybindgins.
     (add-hook 'after-init-hook 'sanityinc/show-init-time)
   #+end_src
 
+* Vim / Evil
+
+  Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
+  #+begin_src emacs-lisp
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
+      (setq evil-mode-line-format nil)
+      :config
+
+      (evil-mode 1)
+
+      (use-package evil-surround
+        :config
+        (global-evil-surround-mode 1))
+
+      (use-package evil-commentary
+        :diminish evil-commentary-mode
+        :config
+        (evil-commentary-mode))
+
+      (use-package evil-visualstar
+        :config
+        (global-evil-visualstar-mode t))
+
+      (use-package evil-indent-plus
+        :config
+        (evil-indent-plus-default-bindings))
+
+      (use-package evil-matchit
+        :config
+        (global-evil-matchit-mode 1))
+
+      (use-package evil-search-highlight-persist
+        :config
+        (global-evil-search-highlight-persist t))
+
+      (evil-set-initial-state 'deft-mode 'insert)
+      (add-hook 'with-editor-mode-hook 'evil-insert-state)
+      (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
+      (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
+
+      (evil-ex-define-cmd "W" 'save-buffer)
+      (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
+  #+end_src
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-multiedit
+    :config
+    ;; Highlights all matches of the selection in the buffer.
+    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+
+    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
+    ;; incrementally add the next unmatched match.
+    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+    ;; Match selected region.
+    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+    ;; Insert marker at point
+    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+
+    ;; Same as M-d but in reverse.
+    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+
+    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
+    ;; `evil-multiedit-match-symbol-and-next` (or prev).
+
+    ;; RET will toggle the region under the cursor
+    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+    ;; ...and in visual mode, RET will disable all fields outside the selected region
+    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+    ;; For moving between edit regions
+    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
+    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
+    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
+    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
+
+    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
+    ;; for example :ie word or :ied word etc.
+    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
+#+END_SRC
+
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   slow down my emacs.
@@ -263,7 +348,7 @@ keybindgins.
   (setq reb-re-syntax 'string)
   (define-key my-leader-map (kbd "odr") 're-builder)
   #+END_SRC
-
+  
 ** tabs and whitespace
    By default I disable tabs. In addition I use ~whitespace-mode~
    because sometimes when copy pasting code from external sources
@@ -283,91 +368,6 @@ keybindgins.
        (progn (whitespace-mode) (diminish 'whitespace-mode)))
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
-
-* Vim / Evil
-
-  Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
-  #+begin_src emacs-lisp
-    (use-package evil
-      :ensure t
-      :init
-      (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
-      (setq evil-mode-line-format nil)
-      :config
-
-      (evil-mode 1)
-
-      (use-package evil-surround
-        :config
-        (global-evil-surround-mode 1))
-
-      (use-package evil-commentary
-        :diminish evil-commentary-mode
-        :config
-        (evil-commentary-mode))
-
-      (use-package evil-visualstar
-        :config
-        (global-evil-visualstar-mode t))
-
-      (use-package evil-indent-plus
-        :config
-        (evil-indent-plus-default-bindings))
-
-      (use-package evil-matchit
-        :config
-        (global-evil-matchit-mode 1))
-
-      (use-package evil-search-highlight-persist
-        :config
-        (global-evil-search-highlight-persist t))
-
-      (evil-set-initial-state 'deft-mode 'insert)
-      (add-hook 'with-editor-mode-hook 'evil-insert-state)
-      (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
-      (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
-
-      (evil-ex-define-cmd "W" 'save-buffer)
-      (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
-  #+end_src
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-multiedit
-    :config
-    ;; Highlights all matches of the selection in the buffer.
-    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-
-    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
-    ;; incrementally add the next unmatched match.
-    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-    ;; Match selected region.
-    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-    ;; Insert marker at point
-    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
-
-    ;; Same as M-d but in reverse.
-    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-
-    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
-    ;; `evil-multiedit-match-symbol-and-next` (or prev).
-
-    ;; RET will toggle the region under the cursor
-    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; ...and in visual mode, RET will disable all fields outside the selected region
-    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; For moving between edit regions
-    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
-    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
-
-    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-    ;; for example :ie word or :ied word etc.
-    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
-#+END_SRC
 
 * Dired
 

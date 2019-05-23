@@ -13,18 +13,22 @@
         s = status
         cm = !git-cm
         d = diff -w
-        df = diff --word-diff --color-words
+        dw = diff --word-diff --color-words
         co = checkout
         b = branch
 	set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
         ignore-tracked = update-index --assume-unchanged
 	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep
-	rm-merged = !git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d
+        bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+        new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	sla = log --oneline --decorate --graph --all
 	car = commit --amend --no-edit
+        caa = commit -a --amend -C HEAD
 	unstage = reset
 	uncommit = reset --soft HEAD^
+        pop = reset --soft HEAD^
+        ignore = "!f() { echo \"$1\" >> .gitignore; }; f"
         abortmerge= git reset --hard HEAD
 	mup = !git checkout master && git pull && git checkout -
 	sup = !git checkout staging && git pull && git checkout -
@@ -43,9 +47,15 @@
         leaderboard = shortlog -sn --all --no-merges
         recent-branches = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
         recap = log --all --oneline --no-merges --author=aurelien@bottazini.com
-        today = log --since=00:00:00 --all --no-merges --oneline --author=aurelien@bottazini.com
-	vdf = difftool
-[init]
+        standup = log --since yesterday --all --no-merges --oneline --author $(git config user.email) --pretty=short
+        scrum = log --since yesterday --all --no-merges --oneline --author $(git config user.email) --pretty=short
+        # A more concise and readable git log
+        ls = log --pretty=format:"%C(yellow)%h\\ %Creset%s%Cblue\\ [%cn]\\%Cred%d" --decorate
+        # Same as above, with files changed in each commit
+        ll = ls --numstat
+        # show the history difference between a local branche and its remote
+        divergence = log --left-right --graph --cherry-pick --oneline $1...origin/$1
+
 	templatedir = ~/.git_template
 [merge]
 #        ff = only

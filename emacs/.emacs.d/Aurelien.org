@@ -24,8 +24,10 @@ Where to find additional lisp files.
 #+end_src
 
 Keymap where i store my global keybindings.
-It makes it harder for major modes to minor modes trying to override my personal keybindings.
-
+It gives priority to my keybindings over ones in major and minor
+modes.
+Without this, /aggressive/ minor and major modes tend to override my
+keybindgins.
 #+begin_src emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode
@@ -46,7 +48,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
   #+begin_src emacs-lisp
     (defun sudo ()
-      "Use TRAMP to `sudo' the current buffer."
+      "Use TRAMP to `sudo' the file for current buffer."
       (interactive)
       (when buffer-file-name
         (find-alternate-file
@@ -76,7 +78,7 @@ It makes it harder for major modes to minor modes trying to override my personal
       (shell-command-on-region (point-min) (point-max) "node"))
 
     (defun my-reload-dir-locals-for-current-buffer ()
-      "Reload dir locals for the current buffer."
+      "Reloads dir locals for the current buffer."
       (interactive)
       (let ((enable-local-variables :all))
         (hack-dir-local-variables-non-file-buffer)))
@@ -97,7 +99,7 @@ It makes it harder for major modes to minor modes trying to override my personal
       (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
 
     (defun add-date-to-filename ()
-      "Add current date in front of filename."
+      "Add current date in front of filename for current buffer."
       (interactive)
       (let* ((date (format-time-string "%Y-%m-%d"))
              (buffer-file (buffer-file-name))
@@ -109,15 +111,6 @@ It makes it harder for major modes to minor modes trying to override my personal
         (rename-file buffer-file new-file-name)
         (set-visited-file-name new-file-name)
         (save-buffer)))
-
-    (defun create-blog-post (title)
-      "Create blog post for aurelienbottazini.com."
-      (interactive "Mtitle:")
-      (let ((date (format-time-string "%Y-%m-%d"))
-            (formatted-title (replace-regexp-in-string " " "-" title)))
-        (find-file (concat "~/projects/blog/_org/_posts/" date "-" formatted-title ".org"))
-        (yas-expand-snippet (yas-lookup-snippet "jekyll")
-                            )))
 
     (defun toggle-html-export-on-save ()
       "Enable or disable export HTML when saving current buffer."
@@ -156,7 +149,7 @@ It makes it harder for major modes to minor modes trying to override my personal
 
   #+end_src
 
-  Show loading time in *messages* buffer. Make it easier to optimize
+  Show loading time in *messages* buffer. Makes it easier to optimize
   emacs dotfiles
   #+begin_src emacs-lisp
     (defun sanityinc/time-subtract-millis (b a)
@@ -256,14 +249,9 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (prefer-coding-system 'utf-8)
     (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
-
-    ;; (when (or *is-mac* *is-linux*)
-    ;;   (use-package xclip
-    ;;     :config
-    ;;     (xclip-mode 1)))
   #+end_src
 
-  I want error highlights and binding for those in shell modes too.
+  I want error highlights and error bindings in shell modes too.
   #+BEGIN_SRC emacs-lisp
     (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
   #+END_SRC
@@ -273,12 +261,14 @@ It makes it harder for major modes to minor modes trying to override my personal
   #+BEGIN_SRC emacs-lisp
   ( require 're-builder)
   (setq reb-re-syntax 'string)
+  (define-key my-leader-map (kbd "odr") 're-builder)
   #+END_SRC
 
 ** tabs and whitespace
-   By default I disable tabs.
-   In addition I have ~whitespace-mode~ because sometimes when copy pasting code from
-   external sources those external sources have tabs.
+   By default I disable tabs. In addition I use ~whitespace-mode~
+   because sometimes when copy pasting code from external sources
+   those external sources have tabs. I want to see those tabs to
+   remove them.
 
    I don't use the ~global-whitespace-mode~ because some emacs mode
    like ~magit~ use tabs.
@@ -375,9 +365,8 @@ It makes it harder for major modes to minor modes trying to override my personal
     (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
 
     ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
-    )
-
+    ;; for example :ie word or :ied word etc.
+    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
 #+END_SRC
 
 * Dired
@@ -417,8 +406,7 @@ It makes it harder for major modes to minor modes trying to override my personal
          (define-key dired-mode-map "Y" 'ora-dired-rsync)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
-           "^" '(lambda () (interactive) (find-alternate-file ".."))))
-      )
+           "^" '(lambda () (interactive) (find-alternate-file "..")))))
 
     (defun dired-dwim-target-directory ()
       ;; Try to guess which target directory the user may want.
@@ -514,7 +502,8 @@ It makes it harder for major modes to minor modes trying to override my personal
 
     (show-paren-mode 1)
 
-    (fringe-mode 20)                        ;makes fringe big enough on linux with HDPI
+    ;makes fringe big enough on linux with HDPI
+    (fringe-mode 20)
   #+end_src
 ** Colors
    Changes modeline color depending on Evil state, if buffer is
@@ -543,24 +532,6 @@ It makes it harder for major modes to minor modes trying to override my personal
 
    #+end_src
 ** Color reference
-*** Solarized colors
-base03    #002b36  8/4 brblack  234 #1c1c1c 15 -12 -12   0  43  54 193 100  21
-base02    #073642  0/4 black    235 #262626 20 -12 -12   7  54  66 192  90  26
-base01    #586e75 10/7 brgreen  240 #585858 45 -07 -07  88 110 117 194  25  46
-base00    #657b83 11/7 bryellow 241 #626262 50 -07 -07 101 123 131 195  23  51
-base0     #839496 12/6 brblue   244 #808080 60 -06 -03 131 148 150 186  13  59
-base1     #93a1a1 14/4 brcyan   245 #8a8a8a 65 -05 -02 147 161 161 180   9  63
-base2     #eee8d5  7/7 white    254 #e4e4e4 92 -00  10 238 232 213  44  11  93
-base3     #fdf6e3 15/7 brwhite  230 #ffffd7 97  00  10 253 246 227  44  10  99
-yellow    #b58900  3/3 yellow   136 #af8700 60  10  65 181 137   0  45 100  71
-orange    #cb4b16  9/3 brred    166 #d75f00 50  50  55 203  75  22  18  89  80
-red       #dc322f  1/1 red      160 #d70000 50  65  45 220  50  47   1  79  86
-magenta   #d33682  5/5 magenta  125 #af005f 50  65 -05 211  54 130 331  74  83
-violet    #6c71c4 13/5 brmagenta 61 #5f5faf 50  15 -45 108 113 196 237  45  77
-blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
-cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
-green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
-
 *** Pantone
    #+begin_src emacs-lisp
      ;; #fff166 101U
@@ -608,10 +579,8 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 * Navigation
 ** Search Everything
-
    #+begin_src emacs-lisp
      (use-package counsel
-       :defer t
        :config
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
@@ -666,16 +635,14 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
        :config
        (add-hook 'dumb-jump-after-jump-hook
          (defun abo-dumb-jump-pulse-line ()
-           (pulse-momentary-highlight-one-line (point))))
-       )
+           (pulse-momentary-highlight-one-line (point)))))
     #+end_src
 
     #+begin_src emacs-lisp
      (use-package counsel-etags
        :bind (:map evil-normal-state-map
                    ("gt" . counsel-etags-find-tag-at-point)
-                   ("gT" . counsel-etags-find-tag))
-     )
+                   ("gT" . counsel-etags-find-tag)))
     #+end_src
 ** Windows
    #+BEGIN_SRC emacs-lisp
@@ -878,7 +845,6 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
       (setq deft-use-filter-string-for-filename t)
       (setq deft-default-extension "org")
       (setq deft-recursive t))
-    (global-set-key (kbd "<f9>") 'deft)
   #+end_src
 * Modes
   #+begin_src emacs-lisp
@@ -1013,44 +979,32 @@ green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 #+end_src
 ** CSS
    #+begin_src emacs-lisp
-     (defun imenu-setup ()
+     (defun my-css-imenu-setup ()
        (progn
          (setq imenu-case-fold-search nil)
          (setq imenu-auto-rescan t)
          (setq imenu-space-replacement " ")
          (setq css-indent-offset 2)
          (imenu-add-menubar-index)
+         (setq imenu-generic-expression
+         '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
          ))
 
-     (defun my-css-mode-setup ()
-       (setq imenu-generic-expression
-             '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
-       (imenu-setup))
-
-     (add-hook 'css-mode-hook 'my-css-mode-setup)
+     (add-hook 'css-mode-hook 'my-css-imenu-setup)
 
      (use-package scss-mode
        :mode "\\.scss\\'"
        :config
-       (add-hook 'scss-mode-hook '(lambda ()
-                                    (setq imenu-generic-expression
-                                          '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
-                                    (imenu-setup))))
+       (add-hook 'scss-mode-hook 'my-css-imenu-setup))
 
      (use-package sass-mode
        :mode "\\.sass\\'"
        :config
-       (add-hook 'sass-mode-hook
-                 '(lambda ()
-                    (setq imenu-generic-expression
-                          '(("Imports" "@import\\(.*[^ ]\\)" 1)))
-                    (imenu-setup)))
-       (add-hook 'sass-mode-hook 'my-css-mode-setup)
+       (add-hook 'sass-mode-hook 'my-css-imenu-setup)
        (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))
 
      (use-package less-css-mode
-       :mode "\\.less\\'"
-       )
+       :mode "\\.less\\'")
    #+end_src
 ** Javascript
    #+BEGIN_SRC emacs-lisp

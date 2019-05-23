@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Small wrapper around git status. Bare 'cm' will enter normal git commit
+# editor, but with args it will do a direct `git status`
+
+if [[ $# > 0 ]]; then
+    git $@
+else
+    git status
+fi

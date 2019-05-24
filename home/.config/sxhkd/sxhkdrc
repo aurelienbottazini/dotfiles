@@ -18,3 +18,5 @@ super + s
   slack
 super + a
   jumpapp anki
+super + m
+  jumpapp -c cmus ~/bin/launch-music-player.sh

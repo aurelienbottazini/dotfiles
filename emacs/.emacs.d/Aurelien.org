@@ -1028,7 +1028,7 @@ keybindgins.
        (setq web-mode-markup-indent-offset 2)
        (setq web-mode-css-indent-offset 2)
        (setq web-mode-code-indent-offset 2)
-       (setq web-mode-script-padding 2)
+       (setq web-mode-script-padding 0)
        (defun jjpandari/merge-imenu (index-fun)
          (interactive)
          (let ((mode-imenu (funcall index-fun))
@@ -1073,15 +1073,12 @@ keybindgins.
        (setq javascript-common-imenu-regex-list
              '(
                ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
-               ("Describe" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
+               ("Desc" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
                ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-               ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+               ("Fn" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+               ("Fn" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
                ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
-               ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-               ;; {{ es6 beginning
-               ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*([a-zA-Z0-9, ]*) *\{ *$" 1) ;; es6 fn1 () { }
-               ("Function" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
-               ;; }}
+               ("Arrow Fn" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
                ))
 
        (defun auray-js-imenu-make-index ()

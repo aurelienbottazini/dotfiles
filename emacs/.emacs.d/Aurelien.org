@@ -348,7 +348,7 @@ keybindgins.
   (setq reb-re-syntax 'string)
   (define-key my-leader-map (kbd "odr") 're-builder)
   #+END_SRC
-  
+
 ** tabs and whitespace
    By default I disable tabs. In addition I use ~whitespace-mode~
    because sometimes when copy pasting code from external sources
@@ -1029,7 +1029,16 @@ keybindgins.
        (setq web-mode-css-indent-offset 2)
        (setq web-mode-code-indent-offset 2)
        (setq web-mode-script-padding 2)
-       )
+       (defun jjpandari/merge-imenu (index-fun)
+         (interactive)
+         (let ((mode-imenu (funcall index-fun))
+               (custom-imenu (imenu--generic-function imenu-generic-expression)))
+           (append custom-imenu mode-imenu)))
+
+       (add-hook 'web-mode-hook
+                 (lambda ()
+                   (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index)))
+                   (setq imenu-generic-expression javascript-common-imenu-regex-list))))
 
      (setq js-indent-level 2)
 

@@ -95,7 +95,7 @@ function evil_git_dirty {
     [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "\e[35m*\e[0m"
 }
 
-export PROMPT_COMMAND='__git_ps1 "\e[34;4;3m\\w\e[0m" "$(evil_git_dirty)\e[0m\n› "'
+export PROMPT_COMMAND='__git_ps1 "\e[34;4;3;1m\\w\e[0m" "$(evil_git_dirty)\e[0m\n›\e[0m "'
 
 
 alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \

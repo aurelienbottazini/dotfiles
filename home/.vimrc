@@ -51,7 +51,7 @@ Plug 'tpope/vim-unimpaired' " [ ] mappings
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'cormacrelf/vim-colors-github'
 Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', {
@@ -63,7 +63,6 @@ let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_async = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-" colors zenburn
 " Use Silver Searcher instead of grep
 set grepprg=ag\ --nogroup\ --column
 " set grepprg=ag
@@ -77,8 +76,7 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
-set background=dark
-colorscheme dracula
+colorscheme github
 
 " set tabstop=4
 " set shiftwidth=4
@@ -142,8 +140,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='dracula'
-let g:airline_solarized_bg='dark'
+let g:airline_theme='github'
 let g:airline_symbols_ascii = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
@@ -201,7 +198,7 @@ endfunction
 
 set guifont=OperatorMono:h14
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 " set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow

@@ -679,7 +679,6 @@ keybindgins.
       (setq deft-default-extension "org")
       (setq deft-recursive t))
   #+end_src
-
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
@@ -759,35 +758,33 @@ keybindgins.
             'delete-other-windows)
 #+end_src
 ** org-publish
-
 #+begin_src emacs-lisp
   (require 'ox-publish)
   (setq system-time-locale "C") ;; make sure time local is in english when exporting
   (setq org-html-validation-link nil)
   (setq org-publish-project-alist
         '(
-          ("blog-posts"
-           :base-directory "~/projects/blog/_org"
+          ("wiki-files"
+           :base-directory "~/Dropbox/wiki"
            :base-extension "org"
-           :publishing-directory "~/projects/blog/"
+           :publishing-directory "~/projects/wiki/"
            :recursive t
            :publishing-function org-html-publish-to-html
            :headline-levels 4             ; Just the default for this project.
            :auto-preamble t
            :html-head nil
            :html-head-extra nil
-           :body-only t
+           :body-only nil
            )
           ;; ... add all the components here (see below)...
-          ("blog" :components ("blog-posts")))
+          ("wiki" :components ("wiki-files")))
         org-export-with-toc nil
         org-html-doctype "html5"
         org-html-head nil
         org-html-head-include-default-style nil
         org-html-head-include-scripts nil
         org-html-html5-fancy t
-        org-html-indent t
-        )
+        org-html-indent t)
 #+end_src
 * VCS / Git
   I don't like popup windows when resolving merge conflicts.
@@ -978,28 +975,12 @@ keybindgins.
 #+end_src
 ** CSS
    #+begin_src emacs-lisp
-     (defun my-css-imenu-setup ()
-       (progn
-         (setq imenu-case-fold-search nil)
-         (setq imenu-auto-rescan t)
-         (setq imenu-space-replacement " ")
-         (setq css-indent-offset 2)
-         (imenu-add-menubar-index)
-         (setq imenu-generic-expression
-         '(("Selectors" "^[[:blank:]]*\\(.*[^ ]\\) *{" 1)))
-         ))
-
-     (add-hook 'css-mode-hook 'my-css-imenu-setup)
-
      (use-package scss-mode
-       :mode "\\.scss\\'"
-       :config
-       (add-hook 'scss-mode-hook 'my-css-imenu-setup))
+       :mode "\\.scss\\'")
 
      (use-package sass-mode
        :mode "\\.sass\\'"
        :config
-       (add-hook 'sass-mode-hook 'my-css-imenu-setup)
        (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))
 
      (use-package less-css-mode
@@ -1029,7 +1010,7 @@ keybindgins.
        (setq web-mode-code-indent-offset 2)
        (setq web-mode-script-padding 0)
        (defun jjpandari/merge-imenu (index-fun)
-         (interactive)
+         (interactHLL8360CDWG1ive)
          (let ((mode-imenu (funcall index-fun))
                (custom-imenu (imenu--generic-function imenu-generic-expression)))
            (append custom-imenu mode-imenu)))

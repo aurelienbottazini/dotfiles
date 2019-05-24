@@ -20,3 +20,5 @@ super + a
   jumpapp anki
 super + m
   jumpapp -c cmus ~/bin/launch-music-player.sh
+super + space
+  ~/bin/launch-emacs-org-capture.sh

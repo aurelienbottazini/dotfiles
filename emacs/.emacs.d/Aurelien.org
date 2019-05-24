@@ -1301,7 +1301,7 @@ keybindgins.
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
     (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
-    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/work/")))
+    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
 
     (define-key my-leader-map (kbd "jj") 'dired-jump)
     (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)

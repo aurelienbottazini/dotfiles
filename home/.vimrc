@@ -15,7 +15,9 @@ nmap <C-s> :w<cr>
 imap jk <esc>
 imap kj <esc>
 
-set t_ut=                " fix 255 colors in tmux http://sunaku.github.io/vim-256color-bce.html
+" fix 255 colors in tmux
+" http://sunaku.github.io/vim-256color-bce.html
+set t_ut=
 
 if has("termguicolors")  " set true colors
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"

@@ -22,3 +22,5 @@ super + m
   jumpapp -c cmus ~/bin/launch-music-player.sh
 super + space
   ~/bin/launch-emacs-org-capture.sh
+super + r
+  jumpapp -c ranger ~/bin/launch-ranger.sh

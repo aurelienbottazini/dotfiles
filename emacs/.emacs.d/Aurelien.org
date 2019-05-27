@@ -27,7 +27,7 @@ Keymap where i store my global keybindings.
 It gives priority to my keybindings over ones in major and minor
 modes.
 Without this, /aggressive/ minor and major modes tend to override my
-keybindgins.
+keybindings.
 #+begin_src emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode

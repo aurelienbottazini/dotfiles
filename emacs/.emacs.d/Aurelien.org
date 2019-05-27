@@ -35,17 +35,15 @@ keybindgins.
     t " my-keys" 'my-keys-minor-mode-map)
   (my-keys-minor-mode 1)
 
-    (defadvice load (after give-my-keybindings-priority)
-      "Try to ensure that my keybindings always have priority."
-      (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
-          (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-            (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-            (add-to-list 'minor-mode-map-alist mykeys))))
-    (ad-activate 'load)
+  (defadvice load (after give-my-keybindings-priority)
+    "Try to ensure that my keybindings always have priority."
+    (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+        (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+          (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+          (add-to-list 'minor-mode-map-alist mykeys))))
+  (ad-activate 'load)
 #+end_src
-
 * Cute functions
-
   #+begin_src emacs-lisp
     (defun sudo ()
       "Use TRAMP to `sudo' the file for current buffer."
@@ -133,7 +131,6 @@ keybindgins.
     (require-package 'use-package)
     (require 'use-package)
     (setq use-package-always-ensure t)
-
   #+end_src
 
   Show loading time in *messages* buffer. Makes it easier to optimize
@@ -164,9 +161,7 @@ keybindgins.
 
     (add-hook 'after-init-hook 'sanityinc/show-init-time)
   #+end_src
-
 * Vim / Evil
-
   Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
   #+begin_src emacs-lisp
     (use-package evil
@@ -211,7 +206,6 @@ keybindgins.
       (evil-ex-define-cmd "W" 'save-buffer)
       (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
   #+end_src
-
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   slow down my emacs.
@@ -307,7 +301,6 @@ keybindgins.
    #+end_src
 
 * Dired
-
   #+begin_src emacs-lisp
     (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform
 
@@ -343,7 +336,6 @@ keybindgins.
            "gg" 'evil-goto-first-line
            "^" '(lambda () (interactive) (find-alternate-file "..")))))
   #+end_src
-
 * GUI
   #+begin_src emacs-lisp
     (blink-cursor-mode 0)
@@ -364,7 +356,7 @@ keybindgins.
 
     (show-paren-mode 1)
 
-    ;makes fringe big enough on linux with HDPI
+    ;; makes fringe big enough on linux with HDPI
     (fringe-mode 20)
   #+end_src
 ** Colors
@@ -444,19 +436,26 @@ keybindgins.
    #+begin_src emacs-lisp
      (use-package counsel
        :bind (
-       ("M-x" . counsel-M-x)
-       ("C-x C-f" . counsel-find-file)
-       ("<f1> f" . counsel-describe-function)
-       ("<f1> v" . counsel-describe-variable)
-       ("<f1> l" . counsel-find-library)
-       ("<f2> i" . counsel-info-lookup-symbol)
-       ("<f2> u" . counsel-unicode-char)
-       ("C-c g" . counsel-git)
-       ("C-c j" . counsel-git-grep)
-       ("C-c k" . counsel-rg)
-       ("C-x l" . counsel-locate)
-       :map minibuffer-local-map
-       ("C-r" . counsel-minibuffer-history))
+              ("M-x" . counsel-M-x)
+              ("C-x C-f" . counsel-find-file)
+              ("<f1> f" . counsel-describe-function)
+              ("<f1> v" . counsel-describe-variable)
+              ("<f1> l" . counsel-find-library)
+              ("<f2> i" . counsel-info-lookup-symbol)
+              ("<f2> u" . counsel-unicode-char)
+              ("C-c g" . counsel-git)
+              ("C-c j" . counsel-git-grep)
+              ("C-c k" . counsel-rg)
+              ("C-x l" . counsel-locate)
+              :map minibuffer-local-map
+              ("C-r" . counsel-minibuffer-history)
+              :map my-leader-map
+              ("r" . counsel-recentf)
+              ("f" . counsel-rg)
+              ("i" . counsel-imenu)
+              ("b" . counsel-ibuffer)
+              ("m" . counsel-bookmark)
+              ("jo" . counsel-org-goto-all))
        :init
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
@@ -464,28 +463,33 @@ keybindgins.
 
      (use-package ivy
        :diminish ivy-mode
-       :config
-       (use-package ivy-hydra)
-       (ivy-mode 1)
-       (define-key my-keys-minor-mode-map (kbd "C-c C-r") 'ivy-resume)
+       :bind (
+              ("C-s" . swiper-isearch)
+              :map my-keys-minor-mode-map
+              ("C-c C-r" . ivy-resume)
+              ("C-c v" . ivy-push-view)
+              ("C-c V" . ivy-pop-view)
+              :map evil-normal-state-map
+              ("/" . swiper-isearch)
+              :map my-leader-map
+              ("b" . ivy-switch-buffer))
+       :init
        (setq ivy-use-selectable-prompt t)
-
        ;; enable bookmarks and recent-f
        (setq ivy-use-virtual-buffers t)
        (setq enable-recursive-minibuffers t)
        (setq ivy-initial-inputs-alist nil)
+       (setq counsel-grep-base-command
+             "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+       (setq ivy-re-builders-alist
+             '((t . ivy--regex-plus)))
+       :config
+       (use-package ivy-hydra)
+       (ivy-mode 1)
        (defun ivy-switch-buffer-occur ()
          "Occur function for `ivy-switch-buffer' using `ibuffer'."
          (ibuffer nil (buffer-name) (list (cons 'name ivy--old-re))))
-       (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
-       ;;(global-set-key "\C-s" 'counsel-grep-or-swiper)
-       (global-set-key "\C-s" 'swiper-isearch)
-       (define-key evil-normal-state-map (kbd "/") 'swiper-isearch)
-
-       (setq counsel-grep-base-command
-       "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-       (setq ivy-re-builders-alist
-             '((t . ivy--regex-plus))))
+       (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
    #+end_src
 
 ** Windows
@@ -498,16 +502,17 @@ keybindgins.
 
    #+BEGIN_SRC emacs-lisp
      (use-package avy
-      :config
-      (define-key my-keys-minor-mode-map (kbd "C-;") 'avy-goto-char-timer)
-      (define-key my-leader-map (kbd ";") 'avy-goto-char-timer))
+       :bind (
+              :map my-keys-minor-mode-map
+              ("C-;" . avy-goto-char-timer)
+              :map my-leader-map
+              (";" . avy-goto-char-timer)))
    #+END_SRC
-
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
       :defer t
-      :config
+      :init
       (setq deft-extensions '("txt" "tex" "org"))
       (setq deft-directory "~/Dropbox/org/")
       (setq deft-use-filename-as-title t)
@@ -545,29 +550,28 @@ keybindgins.
     (setq org-use-speed-commands nil)
 
     (evil-define-key 'normal org-mode-map
-    (kbd "M-l") 'org-shiftmetaright
-    (kbd "M-h") 'org-shiftmetaleft
-    (kbd "M-k") 'org-move-subtree-up
-    (kbd "M-j") 'org-move-subtree-down
-    "<" 'org-clock-in
-    ">" 'org-clock-out
-    "4" 'org-archive-subtree
-    "2" 'counsel-org-tag
-    "3" 'org-refile
-    "t" 'org-todo)
+      (kbd "M-l") 'org-shiftmetaright
+      (kbd "M-h") 'org-shiftmetaleft
+      (kbd "M-k") 'org-move-subtree-up
+      (kbd "M-j") 'org-move-subtree-down
+      "<" 'org-clock-in
+      ">" 'org-clock-out
+      "4" 'org-archive-subtree
+      "2" 'counsel-org-tag
+      "3" 'org-refile
+      "t" 'org-todo)
 
     (add-to-list 'org-modules "org-habit")
     (setq org-log-into-drawer t)
 
     (setq org-todo-keywords
-    '((sequence "TODO" "PR" "QA" "|" "DONE(!)" "CANCELED")))
+          '((sequence "TODO" "PR" "QA" "|" "DONE(!)" "CANCELED")))
   #+end_src
 ** org-babel
    #+begin_src emacs-lisp
   (require 'ob-js)
    (org-babel-do-load-languages 'org-babel-load-languages
-                                '(
-                                  (shell . t)))
+                                '((shell . t)))
    #+end_src
 ** org-capture
    #+begin_src emacs-lisp
@@ -661,9 +665,9 @@ keybindgins.
 ** General
    Shows key combination helper in minibuffer
    #+begin_src emacs-lisp
-    (use-package which-key
-      :config
-      (which-key-mode))
+     (use-package which-key
+       :config
+       (which-key-mode))
    #+end_src
 
    Combined with C-M-c (exit-recursive-edit) allows to stop doing
@@ -680,118 +684,112 @@ keybindgins.
    I only use keychords as a shortcut to exit vim insert mode.
    Maybe I could use it for more?
    #+begin_src emacs-lisp
-    (use-package key-chord
-      :config
-      (key-chord-mode 1)
-      (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+     (use-package key-chord
+       :bind (
+              :map evil-insert-state-map
+              ("jk" . evil-normal-state))
+       :config
+       (key-chord-mode 1))
    #+end_src
 
    Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
    #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
-    (use-package wgrep
-      :defer t)
+    (use-package wgrep :defer t)
    #+end_src
 
    #+begin_src emacs-lisp
-    (use-package paredit
-      :diminish paredit-mode
-      :config
-      (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-      (define-key  my-keys-minor-mode-map (kbd "C-)") 'paredit-forward-slurp-sexp)
-      (define-key my-keys-minor-mode-map (kbd "C-}") 'paredit-forward-barf-sexp))
+     (use-package paredit
+       :diminish paredit-mode
+       :bind (
+              :map my-keys-minor-mode-map
+              ("C-)" . paredit-forward-slurp-sexp)
+              ("C-}" . paredit-forward-bard-sexp))
+       :config
+       (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 
-    (use-package parinfer
-      :ensure t
-      :bind
-      (("C-," . parinfer-toggle-mode))
-      :init
-      (progn
-        (setq parinfer-extensions
-              '(defaults       ; should be included.
-                 pretty-parens  ; different paren styles for different modes.
-                 evil           ; If you use Evil.
-                 ;; lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
-                 paredit        ; Introduce some paredit commands.
-                 smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-                 smart-yank))   ; Yank behavior depend on mode.
-        (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-        (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-        (add-hook 'lisp-mode-hook #'parinfer-mode)))
+     (use-package parinfer
+       :ensure t
+       :bind
+       (("C-," . parinfer-toggle-mode))
+       :init
+       (progn
+         (setq parinfer-extensions
+               '(defaults       ; should be included.
+                  pretty-parens  ; different paren styles for different modes.
+                  evil           ; If you use Evil.
+                  ;; lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+                  paredit        ; Introduce some paredit commands.
+                  smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+                  smart-yank))   ; Yank behavior depend on mode.
+         :config
+         (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+         (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+         (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
-    (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
-    (define-key my-leader-map (kbd "u") 'universal-argument)
+     (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
+     (define-key my-leader-map (kbd "u") 'universal-argument)
 
-    (define-key my-leader-map (kbd "b") 'ivy-switch-buffer)
 
-    (use-package expand-region
-      :config
-      (define-key my-leader-map (kbd "SPC") 'er/expand-region))
+     (use-package expand-region
+       :bind (:map my-leader-map ("SPC" . er/expand-region)))
 
-    (define-key my-leader-map (kbd "a") 'org-agenda)
-    (define-key my-leader-map (kbd "r") 'counsel-recentf)
-    (define-key my-leader-map (kbd "R") 'revert-buffer)
-    (define-key my-leader-map (kbd "f") 'counsel-rg)
-    (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
+     (define-key my-leader-map (kbd "a") 'org-agenda)
 
-    (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
-    (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
-    (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-    (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
-    (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
+     (define-key my-leader-map (kbd "R") 'revert-buffer)
+     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
 
-    (define-key my-leader-map (kbd "jj") 'dired-jump)
-    (define-key my-leader-map (kbd "jo") 'counsel-org-goto-all)
-    (define-key my-leader-map (kbd "i") 'counsel-imenu)
-    (define-key my-leader-map (kbd "b") 'counsel-ibuffer)
-    (define-key my-leader-map (kbd "m") 'counsel-bookmark)
-    (define-key my-leader-map (kbd "k") 'recompile)
-    (define-key my-leader-map (kbd "K") 'compile)
+     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
+     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
+     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
+     (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
+     (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
 
-    (define-key my-leader-map (kbd "d") 'deft)
-    (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
-    (use-package define-word
-      :config
-      (define-key my-leader-map (kbd "<f6>") 'define-word-at-point))
+     (define-key my-leader-map (kbd "jj") 'dired-jump)
+     (define-key my-leader-map (kbd "k") 'recompile)
+     (define-key my-leader-map (kbd "K") 'compile)
 
-    (defun lookup-synonyms (word)
-      (interactive (list (save-excursion (car (ispell-get-word nil)))))
-      (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
+     (define-key my-leader-map (kbd "d") 'deft)
+     (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
+     (use-package define-word
+       :config
+       (define-key my-leader-map (kbd "<f6>") 'define-word-at-point))
 
-    (define-key my-leader-map (kbd "<f7>") 'lookup-synonyms)
-    (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
-    (defun hide-line-numbers ()
-      (interactive)
-      (setq display-line-numbers (quote nil)))
-    (define-key my-leader-map (kbd "olh") 'hide-line-numbers)
-    (defun show-line-numbers ()
-      (interactive)
-      (setq display-line-numbers (quote absolute)))
-    (define-key my-leader-map (kbd "oll") 'show-line-numbers)
-    (define-key my-leader-map (kbd "ow") 'visual-line-mode)
-    (define-key my-leader-map (kbd "of") 'auto-fill-mode)
-    (define-key my-leader-map (kbd "os") 'org-strike-header)
-    (define-key my-leader-map (kbd "og") 'global-hl-line-mode)
-    (use-package rainbow-mode
-      :bind (:map my-leader-map
-                  ("or" . rainbow-mode)))
-    ;; gives each line only one visual line and don't show a continuation on next line
-    (set-default 'truncate-lines t)
-    (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)
+     (defun lookup-synonyms (word)
+       (interactive (list (save-excursion (car (ispell-get-word nil)))))
+       (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
-    (define-key evil-normal-state-map (kbd "<mouse-8>") 'previous-buffer)
-    (define-key evil-normal-state-map (kbd "<mouse-9>") 'next-buffer)
-    (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
-    (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-    (define-key evil-normal-state-map (kbd "]e") 'next-error)
-    (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+     (define-key my-leader-map (kbd "<f7>") 'lookup-synonyms)
+     (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
+     (defun hide-line-numbers ()
+       (interactive)
+       (setq display-line-numbers (quote nil)))
+     (define-key my-leader-map (kbd "olh") 'hide-line-numbers)
+     (defun show-line-numbers ()
+       (interactive)
+       (setq display-line-numbers (quote absolute)))
+     (define-key my-leader-map (kbd "oll") 'show-line-numbers)
+     (define-key my-leader-map (kbd "ow") 'visual-line-mode)
+     (define-key my-leader-map (kbd "of") 'auto-fill-mode)
+     (define-key my-leader-map (kbd "os") 'org-strike-header)
+     (define-key my-leader-map (kbd "og") 'global-hl-line-mode)
+     (use-package rainbow-mode
+       :bind (:map my-leader-map
+                   ("or" . rainbow-mode)))
+     ;; gives each line only one visual line and don't show a continuation on next line
+     (set-default 'truncate-lines t)
+     (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)
 
-    (use-package windresize
-      :bind (:map evil-normal-state-map
-                  ("C-w r" . windresize)))
+     (define-key evil-normal-state-map (kbd "<mouse-8>") 'previous-buffer)
+     (define-key evil-normal-state-map (kbd "<mouse-9>") 'next-buffer)
+     (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+     (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+     (define-key evil-normal-state-map (kbd "]e") 'next-error)
+     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 
-    (global-set-key (kbd "C-c v") 'ivy-push-view)
-    (global-set-key (kbd "C-c V") 'ivy-pop-view)
+     (use-package windresize
+       :bind (:map evil-normal-state-map
+                   ("C-w r" . windresize)))
    #+end_src
 ** Find file in project
    Here is complete setup you could insert into ~/.emacs.d/init.el,
@@ -847,70 +845,35 @@ keybindgins.
    to use `fd` instead of find.
    #+begin_src emacs-lisp
      (use-package find-file-in-project
-      :defer t
-      :config
-
-      (add-to-list 'ffip-prune-patterns "*/.git/*")
-      (add-to-list 'ffip-prune-patterns "*/dist/*")
-      (add-to-list 'ffip-prune-patterns "*/.idea/*")
-      (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
-      (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
-      (add-to-list 'ffip-prune-patterns "node_modues/*")
-      (setq ffip-prefer-ido-mode nil)
-      (setq ffip-use-rust-fd t))
-      (setq ffip-ignore-filenames '(
-
-      ))
-     (define-key my-leader-map (kbd "t") 'find-file-in-project)
-     (define-key my-leader-map (kbd "T") 'find-file-in-project-by-selected)
-     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
-     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
-     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
-     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
-     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
-     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
-     (define-key evil-normal-state-map (kbd "gf") 'find-file-in-project-at-point)
+       :bind
+       (:map  my-leader-map
+              ("t" . find-file-in-project)
+              ("T" . find-file-in-project-by-selected)
+              :map evil-normal-state-map
+              ("gf" . find-file-in-project-at-point))
+       :config
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
+       (setq ffip-prefer-ido-mode nil)
+       (setq ffip-use-rust-fd t)
+       (add-to-list 'ffip-prune-patterns "*/.git/*")
+       (add-to-list 'ffip-prune-patterns "*/dist/*")
+       (add-to-list 'ffip-prune-patterns "*/.idea/*")
+       (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
+       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
+       (add-to-list 'ffip-prune-patterns "node_modules/*"))
    #+end_src
 ** Drag stuff
    #+begin_src emacs-lisp
-(use-package drag-stuff
-  :config
-  (drag-stuff-global-mode t)
-  (define-key my-keys-minor-mode-map (kbd "C-M-<up>") 'drag-stuff-up)
-  (define-key my-keys-minor-mode-map (kbd "C-M-<down>") 'drag-stuff-down))
+     (use-package drag-stuff
+       :bind (
+              :map my-keys-minor-mode-map
+              ("C-M-<up>" . drag-stuff-up)
+              ("C-M-<down>" . drag-stuff-down))
+       :config
+       (drag-stuff-global-mode t))
    #+end_src
-* Diminish
-  Don't show some modes to keep my modeline clean.
-  #+begin_src emacs-lisp
-    (use-package diminish
-      :config
-      (diminish 'prettier-js-mode)
-      (diminish 'subword-mode)
-      (diminish 'eldoc-mode)
-      (diminish 'auto-revert-mode)
-      (diminish 'indium-interaction-mode)
-      (diminish 'paredit-everywhere-mode)
-      (diminish 'evil-lispy-mode)
-      (diminish 'company-mode)
-      (diminish 'paredit-mode)
-      (diminish 'my-keys-minor-mode)
-      (diminish 'ivy-mode)
-      (diminish 'undo-tree-mode)
-      (diminish 'evil-commentary-mode)
-      (diminish 'evil-mc-mode)
-      (diminish 'yas-minor-mode)
-      (diminish 'which-key-mode)
-      (diminish 'whitespace-mode)
-      (diminish 'palimpsest-mode)
-      (diminish 'flycheck-mode)
-      (diminish '0blayout-mode)
-      (diminish 'auto-fill-function)
-      (diminish 'visual-line-mode))
-      (diminish 'ruby-end-mode)
-      (diminish 'ruby-interpolation-mode)
-      (diminish 'prettier-mode)
-      (diminish 'subword-mode)
-      (diminish 'abbrev-mode)
-  #+end_src
-
-  Process gitsh finished

@@ -443,22 +443,24 @@ keybindgins.
 ** Search Everything
    #+begin_src emacs-lisp
      (use-package counsel
-       :config
+       :bind (
+       ("M-x" . counsel-M-x)
+       ("C-x C-f" . counsel-find-file)
+       ("<f1> f" . counsel-describe-function)
+       ("<f1> v" . counsel-describe-variable)
+       ("<f1> l" . counsel-find-library)
+       ("<f2> i" . counsel-info-lookup-symbol)
+       ("<f2> u" . counsel-unicode-char)
+       ("C-c g" . counsel-git)
+       ("C-c j" . counsel-git-grep)
+       ("C-c k" . counsel-rg)
+       ("C-x l" . counsel-locate)
+       :map minibuffer-local-map
+       ("C-r" . counsel-minibuffer-history))
+       :init
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
-             "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s .")
-       (global-set-key (kbd "M-x") 'counsel-M-x)
-       (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-       (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-       (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-       (global-set-key (kbd "<f1> l") 'counsel-find-library)
-       (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-       (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-       (global-set-key (kbd "C-c g") 'counsel-git)
-       (global-set-key (kbd "C-c j") 'counsel-git-grep)
-       (global-set-key (kbd "C-c k") 'counsel-rg)
-       (global-set-key (kbd "C-x l") 'counsel-locate)
-       (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
+             "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s ."))
 
      (use-package ivy
        :diminish ivy-mode
@@ -593,32 +595,33 @@ keybindgins.
    #+end_src
 ** org-publish
    #+begin_src emacs-lisp
-  (require 'ox-publish)
-  (setq system-time-locale "C") ;; make sure time local is in english when exporting
-  (setq org-html-validation-link nil)
-  (setq org-publish-project-alist
-        '(
-          ("wiki-files"
-           :base-directory "~/Dropbox/wiki"
-           :base-extension "org"
-           :publishing-directory "~/projects/wiki/"
-           :recursive t
-           :publishing-function org-html-publish-to-html
-           :headline-levels 4             ; Just the default for this project.
-           :auto-preamble t
-           :html-head nil
-           :html-head-extra nil
-           :body-only nil
-           )
-          ;; ... add all the components here (see below)...
-          ("wiki" :components ("wiki-files")))
-        org-export-with-toc nil
-        org-html-doctype "html5"
-        org-html-head nil
-        org-html-head-include-default-style nil
-        org-html-head-include-scripts nil
-        org-html-html5-fancy t
-        org-html-indent t)
+       (require 'ox-publish)
+       (setq system-time-locale "C") ;; make sure time local is in english when exporting
+       (setq org-html-validation-link nil)
+       (setq org-publish-project-alist
+             '(
+               ("wiki-files"
+                :base-directory "~/Dropbox/wiki"
+                :base-extension "org"
+                :publishing-directory "~/projects/wiki/"
+                :recursive t
+                :publishing-function org-html-publish-to-html
+                :headline-levels 4             ; Just the default for this project.
+                :auto-preamble t
+                :html-head nil
+                :html-head-extra nil
+                :body-only nil
+                )
+               ;; ... add all the components here (see below)...
+               ;; ("wiki" :components ("wiki-files"))
+               )
+             org-export-with-toc nil
+             org-html-doctype "html5"
+             org-html-head nil
+             org-html-head-include-default-style nil
+             org-html-head-include-scripts nil
+             org-html-html5-fancy t
+             org-html-indent t)
    #+end_src
   #+begin_src emacs-lisp
     (use-package palimpsest

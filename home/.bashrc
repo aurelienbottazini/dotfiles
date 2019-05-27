@@ -91,12 +91,9 @@ eval "$(rbenv init -)"
 
 export CDPATH=.:~/:~/projects:~/work
 
-function evil_git_dirty {
-    [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "\e[35m*\e[0m"
-}
-
-export PROMPT_COMMAND='__git_ps1 "\e[34;4;3;1m\\w\e[0m" "$(evil_git_dirty) \e[31m$\e[0m "'
-
+# export PROMPT_COMMAND="\[\e[34;4;3;1m\]\w\[\e[31m\]$\[\e[0m\]"
+export PROMPT_COMMAND=""
+export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[31;1m\] $\[\e[0m\] '
 
 alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \
     --publish=7474:7474 --publish=7687:7687 \
@@ -111,8 +108,6 @@ alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 &
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
 [ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
-[ -f /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
-[ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
 [ -f /usr/share/autojump/autojump.bash ] && source /usr/share/autojump/autojump.bash
 
 

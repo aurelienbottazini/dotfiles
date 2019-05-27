@@ -55,14 +55,6 @@ keybindgins.
          (concat "/sudo:root@localhost:"
                  buffer-file-name))))
 
-    (defun beautify-json ()
-      "Make that json readable."
-      (interactive)
-      (let ((b (if mark-active (min (point) (mark)) (point-min)))
-            (e (if mark-active (max (point) (mark)) (point-max))))
-        (shell-command-on-region b e
-                                 "python -mjson.tool" (current-buffer) t)))
-
     (defun org-strike-header ()
       "Strikes current org-header using + markers."
       (interactive)
@@ -71,11 +63,6 @@ keybindgins.
       (insert "+")
       (end-of-line)
       (insert "+"))
-
-    (defun run-node-on-buffer ()
-      "Run node on current buffer or region."
-      (interactive)
-      (shell-command-on-region (point-min) (point-max) "node"))
 
     (defun my-reload-dir-locals-for-current-buffer ()
       "Reloads dir locals for the current buffer."
@@ -225,55 +212,13 @@ keybindgins.
       (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
   #+end_src
 
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-multiedit
-    :config
-    ;; Highlights all matches of the selection in the buffer.
-    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-
-    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
-    ;; incrementally add the next unmatched match.
-    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-    ;; Match selected region.
-    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-    ;; Insert marker at point
-    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
-
-    ;; Same as M-d but in reverse.
-    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-
-    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
-    ;; `evil-multiedit-match-symbol-and-next` (or prev).
-
-    ;; RET will toggle the region under the cursor
-    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; ...and in visual mode, RET will disable all fields outside the selected region
-    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; For moving between edit regions
-    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
-    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
-
-    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-    ;; for example :ie word or :ied word etc.
-    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
-#+END_SRC
-
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   slow down my emacs.
   #+begin_src emacs-lisp
     (let (home-folder (getenv "HOME"))
       (setenv "PATH" (concat (getenv "HOME") "/.config/yarn/global/node_modules/.bin/:"
-                             (getenv "HOME") "/bin/:"
-                             (getenv "HOME") "/snap/bin/:"
                              (getenv "HOME") "/work/dox-compose/bin/:"
-                             (getenv "HOME") "/.nvm/versions/node/v8.9.1/bin/:"
-                             (getenv "HOME") "/.nvm/versions/node/v8.11.1/bin/:"
                              (getenv "HOME") "/.rbenv/shims:"
                              (getenv "HOME") "/.rbenv/bin:"
                              (getenv "HOME") "/.fzf/bin:"
@@ -281,20 +226,14 @@ keybindgins.
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
                       "~/bin"
-                      "/snap/bin/"
                       "~/work/dox-compose/bin/"
-                      "~/.nvm/versions/node/v8.11.1/bin/"
-                      "~/.nvm/versions/node/v8.9.1/bin/"
                       "~/.rbenv/bin/"
                       "~/.rbenv/shims/"
                       "~/dotfiles/bin/"
                       "~/.fzf/bin"
                       "/usr/local/bin/"
                       "/usr/local/sbin/"
-                      "/usr/bin/"
-                      "/bin/"
-                      "/usr/sbin/"
-                      "/sbin/"))
+                      "/usr/bin/"))
   #+end_src
 
   #+begin_src emacs-lisp
@@ -364,8 +303,6 @@ keybindgins.
       indent-tabs-mode nil    ;no tabs
       c-basic-offset 2)
      (setq-default whitespace-style '(face trailing tabs tab-mark))
-     (defun ab-turn-on-whitespace-mode ()
-       (progn (whitespace-mode) (diminish 'whitespace-mode)))
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 
@@ -402,84 +339,9 @@ keybindgins.
          (define-key dired-mode-map "-" 'dired-up-directory)
          (define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
          (define-key dired-mode-map (kbd "SPC") nil)
-         (define-key dired-mode-map "e" 'ora-ediff-files)
-         (define-key dired-mode-map "Y" 'ora-dired-rsync)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
            "^" '(lambda () (interactive) (find-alternate-file "..")))))
-
-    (defun dired-dwim-target-directory ()
-      ;; Try to guess which target directory the user may want.
-      ;; If there is a dired buffer displayed in one of the next windows,
-      ;; use its current subdir, else use current subdir of this dired buffer.
-      (let ((this-dir (and (eq major-mode 'dired-mode)
-                           (dired-current-directory))))
-        ;; non-dired buffer may want to profit from this function, e.g. vm-uudecode
-        (if dired-dwim-target
-            (let* ((other-win (get-window-with-predicate
-                               (lambda (window)
-                                 (with-current-buffer (window-buffer window)
-                                   (eq major-mode 'dired-mode)))
-                               nil
-                               'visible)) ; <========================
-                   (other-dir (and other-win
-                                   (with-current-buffer (window-buffer other-win)
-                                     (and (eq major-mode 'dired-mode)
-                                          (dired-current-directory))))))
-              (or other-dir this-dir))
-          this-dir)))
-
-
-    (defun ora-ediff-files ()
-      (interactive)
-      (let ((files (dired-get-marked-files))
-            (wnd (current-window-configuration)))
-        (if (<= (length files) 2)
-            (let ((file1 (car files))
-                  (file2 (if (cdr files)
-                             (cadr files)
-                           (read-file-name
-                            "file: "
-                            (dired-dwim-target-directory)))))
-              (if (file-newer-than-file-p file1 file2)
-                  (ediff-files file2 file1)
-                (ediff-files file1 file2))
-              (add-hook 'ediff-after-quit-hook-internal
-                        (lambda ()
-                          (setq ediff-after-quit-hook-internal nil)
-                          (set-window-configuration wnd))))
-          (error "no more than 2 files should be marked"))))
-
-
-    ;;;###autoload
-    (defun ora-dired-rsync (dest)
-      (interactive
-       (list
-        (expand-file-name
-         (read-file-name
-          "Rsync to:"
-          (dired-dwim-target-directory)))))
-      ;; store all selected files into "files" list
-      (let ((files (dired-get-marked-files
-                    nil current-prefix-arg))
-            ;; the rsync command
-            (tmtxt/rsync-command
-             "rsync -arvz --progress "))
-        ;; add all selected file names as arguments
-        ;; to the rsync command
-        (dolist (file files)
-          (setq tmtxt/rsync-command
-                (concat tmtxt/rsync-command
-                        (shell-quote-argument file)
-                        " ")))
-        ;; append the destination
-        (setq tmtxt/rsync-command
-              (concat tmtxt/rsync-command
-                      (shell-quote-argument dest)))
-        ;; run the async shell command
-        (async-shell-command tmtxt/rsync-command "*rsync*")
-        ;; finally, switch to that window
-        (other-window 1)))
   #+end_src
 
 * GUI
@@ -533,7 +395,7 @@ keybindgins.
    #+end_src
 ** Color reference
 *** Pantone
-   #+begin_src emacs-lisp
+    #+begin_src emacs-lisp
      ;; #fff166 101U
      ;; #fccf61 128u
      ;; #f79b2f 130u
@@ -575,7 +437,7 @@ keybindgins.
      ;; #4982cf 285u
      ;; #3a499c Reflex B l u e U
      ;; #65428a medium p u r p l e
-   #+end_src
+    #+end_src
 
 * Navigation
 ** Search Everything
@@ -624,34 +486,6 @@ keybindgins.
              '((t . ivy--regex-plus))))
    #+end_src
 
-** Project navigation
-   #+begin_src emacs-lisp
-     (use-package projectile
-       :init
-       (setq projectile-switch-project-action 'projectile-dired)
-       :config
-       (projectile-mode t)
-       (define-key my-leader-map  (kbd "p") 'projectile-commander)
-       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
-
-     (use-package dumb-jump
-       :bind (:map evil-normal-state-map
-                   ("gd" . dumb-jump-go)
-                   ("gD" . dumb-jump-go-other-window))
-       :init
-       (setq dumb-jump-selector 'ivy)
-       :config
-       (add-hook 'dumb-jump-after-jump-hook
-         (defun abo-dumb-jump-pulse-line ()
-           (pulse-momentary-highlight-one-line (point)))))
-    #+end_src
-
-    #+begin_src emacs-lisp
-     (use-package counsel-etags
-       :bind (:map evil-normal-state-map
-                   ("gt" . counsel-etags-find-tag-at-point)
-                   ("gT" . counsel-etags-find-tag)))
-    #+end_src
 ** Windows
    #+BEGIN_SRC emacs-lisp
      (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
@@ -727,14 +561,14 @@ keybindgins.
     '((sequence "TODO" "PR" "QA" "|" "DONE(!)" "CANCELED")))
   #+end_src
 ** org-babel
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (require 'ob-js)
-  ;; (org-babel-do-load-languages 'org-babel-load-languages
-  ;;                              '(
-  ;;                                (sh . t)))
-#+end_src
+   (org-babel-do-load-languages 'org-babel-load-languages
+                                '(
+                                  (shell . t)))
+   #+end_src
 ** org-capture
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   ;; emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e "(counsel-org-capture)"
   ;; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
   ;; Bind Key to: emacsclient -e "(make-capture-frame)"
@@ -756,9 +590,9 @@ keybindgins.
   ;; splits the window.
   (add-hook 'org-capture-mode-hook
             'delete-other-windows)
-#+end_src
+   #+end_src
 ** org-publish
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
   (require 'ox-publish)
   (setq system-time-locale "C") ;; make sure time local is in english when exporting
   (setq org-html-validation-link nil)
@@ -785,64 +619,7 @@ keybindgins.
         org-html-head-include-scripts nil
         org-html-html5-fancy t
         org-html-indent t)
-#+end_src
-* VCS / Git
-  I don't like popup windows when resolving merge conflicts.
-  This prevents windows to popup and keeps everything in the same frame.
-  #+begin_src emacs-lisp
-    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-    (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
-    (setq ediff-split-window-function 'split-window-vertically)
-  #+end_src
-
-** Gitsh
-   #+begin_src emacs-lisp
-     (defun ab-run-gitsh ()
-     "Start gitsh in current git project. Uses st as a terminal."
-       (interactive)
-       (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
-         (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
-     (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
    #+end_src
-
-** Magit
-   #+begin_src emacs-lisp
-     (use-package forge
-       :after magit)
-     (use-package magit
-       :bind (:map my-leader-map
-                   ("gs" . magit-status)
-                   ("gc" . magit-commit)
-                   ("gp" . magit-push-current)
-                   ("gf" . magit-file-dispatch))
-       :config
-       (use-package fullframe
-         :config
-         (fullframe magit-status magit-mode-quit-window))
-
-       (use-package diff-hl
-         :config
-         (add-hook 'prog-mode-hook 'diff-hl-mode)
-         (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
-     (setq magit-commit-show-diff nil
-           magit-revert-buffers 1)
-     (use-package git-link)
-     (define-key my-leader-map (kbd "gl") 'git-link)
-     (with-eval-after-load 'magit
-       (define-key magit-status-mode-map (kbd "SPC") nil)
-       )
-     (use-package git-timemachine)
-     (define-key my-leader-map (kbd "gt") 'git-timemachine-toggle)
-
-     (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
-       "when entering git-timemachine mode, change evil normal state to emacs state"
-       (if (evil-normal-state-p)
-           (evil-emacs-state)
-         (evil-normal-state)))
-
-     (ad-activate 'git-timemachine-mode)
-   #+end_src
-* Modes
   #+begin_src emacs-lisp
     (use-package palimpsest
       :config
@@ -870,394 +647,54 @@ keybindgins.
     (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
   #+end_src
 
-** Haskell
-#+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode
-   :config
-   (require 'ob-haskell))
-
-#+END_SRC
-** Clojure
-   #+begin_src emacs-lisp
-     (use-package clojure-mode
-       :mode "\\.clj\\'"
-       :config
-       (add-hook 'clojure-mode-hook #'subword-mode)
-
-       (use-package cider))
-   #+end_src
-
-** Ruby
-   #+begin_src emacs-lisp
-     (use-package yaml-mode
-       :mode "\\.ya?ml\\'")
-
-     (use-package ruby-mode
-       :mode "\\.rake\\'"
-       :mode "Rakefile\\'"
-       :mode "\\.gemspec\\'"
-       :mode "\\.ru\\'"
-       :mode "Gemfile\\'"
-       :mode "Guardfile\\'" :mode "Capfile\\'"
-       :mode "\\.cap\\'"
-       :mode "\\.thor\\'"
-       :mode "\\.rabl\\'"
-       :mode "Thorfile\\'"
-       :mode "Vagrantfile\\'"
-       :mode "\\.jbuilder\\'"
-       :mode "Podfile\\'"
-       :mode "\\.podspec\\'"
-       :mode "Puppetfile\\'"
-       :mode "Berksfile\\'"
-       :mode "Appraisals\\'"
-       :mode "\\.rb$"
-       :mode "ruby"
-       :config
-
-       (add-hook 'ruby-mode-hook 'subword-mode)
-       (use-package ruby-interpolation)
-       (use-package inf-ruby)
-
-       (use-package ruby-end)
-       (use-package rspec-mode)
-
-       ;; Hitting M-; twice adds an xmpfilter comment. Hitting xmp keybinding will put the output in this comment
-       (use-package rcodetools
-         :load-path "/site-lisp/rcodetools.el"
-         :pin manual
-         :ensure nil
-         :config
-         (defadvice comment-dwim (around rct-hack activate)
-           "If comment-dwim is successively called, add => mark."
-           (if (and (or (eq major-mode 'enh-ruby-mode)
-                        (eq major-mode 'ruby-mode))
-                    (eq last-command 'comment-dwim))
-               (progn
-                 (if (eq major-mode 'enh-ruby-mode)
-                     (end-of-line))
-                 (insert "=>"))
-             ad-do-it))
-         )
-       )
-   #+end_src
-** Html
-   #+begin_src emacs-lisp
-     (use-package web-mode
-       :mode "\\.html\\'")
-
-     (use-package emmet-mode
-       :diminish emmet-mode
-       :config
-       (progn
-         (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
-         (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
-
-       (add-hook 'css-mode-hook
-                 (lambda ()
-                   (emmet-mode)
-                   (setq emmet-expand-jsx-className? nil)
-                   ))
-
-       (add-hook 'sgml-mode-hook
-                 (lambda ()
-                   (emmet-mode)
-                   (setq emmet-expand-jsx-className? nil)
-                   ))
-
-       (add-hook 'web-mode-hook
-                 (lambda ()
-                   (emmet-mode)
-                   )))
-   #+end_src
-** Rust
-#+begin_src emacs-lisp
-(use-package rust-mode)
-#+end_src
-** CSS
-   #+begin_src emacs-lisp
-     (use-package scss-mode
-       :mode "\\.scss\\'")
-
-     (use-package sass-mode
-       :mode "\\.sass\\'"
-       :config
-       (add-hook 'sass-mode-hook 'highlight-indent-guides-mode))
-
-     (use-package less-css-mode
-       :mode "\\.less\\'")
-   #+end_src
-** Javascript
-   #+BEGIN_SRC emacs-lisp
-     (setq compilation-error-regexp-alist-alist
-           (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
-                        1 ;; file
-                        2 ;; line
-                        )
-                 compilation-error-regexp-alist-alist))
-     (setq compilation-error-regexp-alist
-           (cons 'node compilation-error-regexp-alist))
-     (add-hook 'js2-mode-hook
-               (lambda ()
-                 (set (make-local-variable 'compile-command)
-                      (format "node %s" (file-name-nondirectory buffer-file-name)))))
-   #+END_SRC
-   #+begin_src emacs-lisp
-     (use-package web-mode
-       :mode "\\.vue\\'"
-       :config
-       (setq web-mode-markup-indent-offset 2)
-       (setq web-mode-css-indent-offset 2)
-       (setq web-mode-code-indent-offset 2)
-       (setq web-mode-script-padding 0)
-       (defun jjpandari/merge-imenu (index-fun)
-         (interactHLL8360CDWG1ive)
-         (let ((mode-imenu (funcall index-fun))
-               (custom-imenu (imenu--generic-function imenu-generic-expression)))
-           (append custom-imenu mode-imenu)))
-
-       (add-hook 'web-mode-hook
-                 (lambda ()
-                   (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index)))
-                   (setq imenu-generic-expression javascript-common-imenu-regex-list))))
-
-     (setq js-indent-level 2)
-
-     (use-package js2-mode
-       :mode "\\.js\\'"
-       :mode "\\.jsx\\'"
-       :init
-
-       (use-package js-comint)
-
-       (setq js2-mode-show-parse-errors nil)
-       (setq js2-mode-show-strict-warnings nil)
-
-       (setq-default
-        ;; js2-mode
-        js2-basic-offset 2
-        ;; web-mode
-        css-indent-offset 2
-        web-mode-markup-indent-offset 2
-        web-mode-script-padding 0
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2
-        web-mode-attr-indent-offset 2)
-
-       (setq js2-highlight-level 3)
-       :config
-       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-       (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
-
-       (use-package import-js)
-
-       (setq javascript-common-imenu-regex-list
-             '(
-               ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
-               ("Desc" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-               ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-               ("Fn" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
-               ("Fn" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-               ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
-               ("Arrow Fn" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
-               ))
-
-       (defun auray-js-imenu-make-index ()
-         (save-excursion
-           (imenu--generic-function javascript-common-imenu-regex-list)))
-
-       (use-package prettier-js
-         :config
-         (setq prettier-args '(
-                               "--trailing-comma" "es5"
-                               "--single-quote" "true"
-                               )
-               prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
-
-         (add-hook 'js2-mode-hook 'prettier-js-mode))
-
-       (defun auray-js-mode-hook ()
-         (setq imenu-create-index-function 'auray-js-imenu-make-index)
-         )
-       )
-
-     (add-hook 'js2-mode-hook 'auray-js-mode-hook)
-
-     (defun enable-minor-mode (my-pair)
-       "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-       (if (buffer-file-name)
-           (if (string-match (car my-pair) buffer-file-name)
-               (funcall (cdr my-pair)))))
-
-     (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                   '("\\.jsx?\\'" . prettier-js-mode))))
-
-     (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                   '("\\.vue?\\'" . prettier-js-mode))))
-
-     (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
-     (defun my-jsx-hook ()
-       "My Hook for JSX Files"
-       (interactive)
-       (web-mode)
-       (web-mode-set-content-type "jsx")
-       (setq imenu-create-index-function 'auray-js-imenu-make-index)
-       (flycheck-select-checker 'javascript-eslint)
-       (emmet-mode)
-       (setq emmet-expand-jsx-className? t)
-       (tern-mode t))
-
-     (use-package context-coloring
-       :diminish context-coloring-mode
-       :bind (:map my-leader-map ("oc" . context-coloring-mode)))
-
-     (use-package json-mode
-       :mode "\\.json\\'"
-       :mode "\\.eslintrc\\'"
-       )
-
-     (use-package coffee-mode
-       :mode "\\.coffee\\'"
-       :config
-       (use-package highlight-indentation)
-       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-       (custom-set-variables '(coffee-tab-width 2)))
-
-     (use-package typescript-mode
-       :mode "\\.ts\\'"
-       )
-   #+end_src
-
-* Flycheck
-#+BEGIN_SRC emacs-lisp
-  (use-package flycheck)
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (add-hook 'web-mode-hook 'flycheck-mode)
-  (add-hook 'js2-mode-hook 'flycheck-mode)
-  (defun my/use-eslint-from-node-modules ()
-    (let* ((root (locate-dominating-file
-                  (or (buffer-file-name) default-directory)
-                  "node_modules"))
-           (eslint (and root
-                        (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                          root))))
-      (when (and eslint (file-executable-p eslint))
-        (setq-local flycheck-javascript-eslint-executable eslint))))
-  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-#+END_SRC
 * AutoCompletions
-  #+begin_src emacs-lisp
-    (use-package yasnippet
-      :demand
-      :commands yas-expand-snippet
-      :bind (:map my-leader-map
-                  ("vs" . yas-describe-tables))
-      :diminish yas-minor-mode
-      :init
-      (setq yas-snippet-dirs
-            '("~/.emacs.d/snippets"))
-      :config
-      (yas-global-mode 1)
-      (add-hook 'term-mode-hook (lambda()
-                                  (yas-minor-mode -1))))
-  #+end_src
-
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
   (require 'mode-local)
   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
   (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (use-package company
-    :config
-    (add-hook 'after-init-hook 'global-company-mode)
-    (setq company-dabbrev-downcase nil)
-    (setq company-show-numbers t)
-    (use-package ac-js2)
-    (setq company-backends '((company-files company-capf)))
-
-    (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
-    (let ((map company-active-map))
-      (mapc
-       (lambda (x)
-         (define-key map (format "%d" x) 'ora-company-number))
-       (number-sequence 0 9))
-      (define-key map " " (lambda ()
-                            (interactive)
-                            (company-abort)
-                            (self-insert-command 1)))
-      (define-key map (kbd "<return>") nil))
-
-    (defun ora-company-number ()
-      "Forward to `company-complete-number'.
-
-    Unless the number is potentially part of the candidate.
-    In that case, insert the number."
-      (interactive)
-      (let* ((k (this-command-keys))
-             (re (concat "^" company-prefix k)))
-        (if (cl-find-if (lambda (s) (string-match re s))
-                        company-candidates)
-            (self-insert-command 1)
-          (company-complete-number (string-to-number k))))))
-#+END_SRC
-* Bindings
-
-** Narrow Indirect
-  Vue bindings to focus specific parts of the vue template
-  #+BEGIN_SRC emacs-lisp
-    (require 'aurayb-narrow-indirect-vue)
-    (define-key my-leader-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
-    (define-key my-leader-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
-    (define-key my-leader-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
-    (define-key my-leader-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
   #+END_SRC
-
+* Bindings
 ** General
-  Shows key combination helper in minibuffer
-  #+begin_src emacs-lisp
+   Shows key combination helper in minibuffer
+   #+begin_src emacs-lisp
     (use-package which-key
       :config
       (which-key-mode))
-  #+end_src
+   #+end_src
 
-  Combined with C-M-c (exit-recursive-edit) allows to stop doing
-  something, do something else and come back to it later.
-  #+begin_src emacs-lisp
+   Combined with C-M-c (exit-recursive-edit) allows to stop doing
+   something, do something else and come back to it later.
+   #+begin_src emacs-lisp
     (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
-  #+end_src
+   #+end_src
 
-  I use spc as my leader key so I want it available everywhere
-  #+begin_src emacs-lisp
+   I use spc as my leader key so I want it available everywhere
+   #+begin_src emacs-lisp
   (define-key evil-motion-state-map (kbd "SPC") nil)
-  #+end_src
+   #+end_src
 
-  I only use keychords as a shortcut to exit vim insert mode.
-  Maybe I could use it for more?
-  #+begin_src emacs-lisp
+   I only use keychords as a shortcut to exit vim insert mode.
+   Maybe I could use it for more?
+   #+begin_src emacs-lisp
     (use-package key-chord
       :config
       (key-chord-mode 1)
       (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
-  #+end_src
+   #+end_src
 
-  Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
-  #+begin_src emacs-lisp
+   Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
+   #+begin_src emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep
       :defer t)
-  #+end_src
+   #+end_src
 
-  #+begin_src emacs-lisp
+   #+begin_src emacs-lisp
     (use-package paredit
       :diminish paredit-mode
       :config
       (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-      (add-hook 'clojure-mode-hook #'paredit-mode)
       (define-key  my-keys-minor-mode-map (kbd "C-)") 'paredit-forward-slurp-sexp)
       (define-key my-keys-minor-mode-map (kbd "C-}") 'paredit-forward-barf-sexp))
 
@@ -1275,10 +712,8 @@ keybindgins.
                  paredit        ; Introduce some paredit commands.
                  smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
                  smart-yank))   ; Yank behavior depend on mode.
-        (add-hook 'clojure-mode-hook #'parinfer-mode)
         (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
         (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-        (add-hook 'scheme-mode-hook #'parinfer-mode)
         (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
     (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
@@ -1296,7 +731,6 @@ keybindgins.
     (define-key my-leader-map (kbd "f") 'counsel-rg)
     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
 
-    (define-key my-leader-map (kbd "jb") '(lambda () (interactive) (find-file "~/projects/blog/")))
     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
@@ -1311,17 +745,6 @@ keybindgins.
     (define-key my-leader-map (kbd "k") 'recompile)
     (define-key my-leader-map (kbd "K") 'compile)
 
-
-    (defun toggle-spec ()
-      "Disable or enable karma spec(s) with .only"
-      (interactive)
-      (save-mark-and-excursion
-        (re-search-backward "^\s*\\(it\\|describe\\)\\(.only\\)?\\((\\)" nil t 1)
-        (if (match-string 2)
-            (replace-match "" nil nil nil 2)
-          (replace-match ".only(" nil nil nil 3))))
-    (define-key my-leader-map (kbd "\\") 'toggle-spec)
-
     (define-key my-leader-map (kbd "d") 'deft)
     (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
     (use-package define-word
@@ -1333,9 +756,6 @@ keybindgins.
       (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
     (define-key my-leader-map (kbd "<f7>") 'lookup-synonyms)
-
-    (define-key my-leader-map (kbd "cb") 'create-blog-post)
-
     (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
     (defun hide-line-numbers ()
       (interactive)
@@ -1363,18 +783,13 @@ keybindgins.
     (define-key evil-normal-state-map (kbd "]e") 'next-error)
     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 
-    (when (fboundp 'winner-mode)
-      (winner-mode 1)
-      (define-key evil-normal-state-map (kbd "]w") 'winner-redo)
-      (define-key evil-normal-state-map (kbd "[w") 'winner-undo))
-
     (use-package windresize
       :bind (:map evil-normal-state-map
                   ("C-w r" . windresize)))
 
     (global-set-key (kbd "C-c v") 'ivy-push-view)
     (global-set-key (kbd "C-c V") 'ivy-pop-view)
-  #+end_src
+   #+end_src
 ** Find file in project
    Here is complete setup you could insert into ~/.emacs.d/init.el,
 
@@ -1453,84 +868,14 @@ keybindgins.
      (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
      (define-key evil-normal-state-map (kbd "gf") 'find-file-in-project-at-point)
    #+end_src
-** Run command for mode
-   Run compilation or interactive command for mode.
-   #+begin_src emacs-lisp
-     (defun run-for-mode ()
-         "Run interactive command for the current buffer programming mode"
-         (interactive)
-         (cond
-          ((equal major-mode 'org-mode)
-           (org-babel-execute-src-block))
-          ((equal major-mode 'ruby-mode)
-           (xmp))
-          ((equal major-mode 'enh-ruby-mode)
-           (xmp))
-          ((equal major-mode 'clojure-mode)
-           (cider-eval-defun-at-point))
-          ((equal major-mode 'clojurescript-mode)
-           (cider-eval-defun-at-point))
-          ((equal major-mode 'emacs-lisp-mode)
-           (eval-defun nil))
-          ((equal major-mode 'js2-mode)
-           (run-node-on-buffer))
-          (t (error "No run command for that mode"))))
-
-
-     (defun run-bigger-for-mode ()
-         "Run interactive command for the current buffer programming mode"
-         (interactive)
-         (cond
-          ((equal major-mode 'org-mode)
-           (org-publish-current-file))
-          ((equal major-mode 'ruby-mode)
-           (xmp))
-          ((equal major-mode 'enh-ruby-mode)
-           (xmp))
-          ((equal major-mode 'clojure-mode)
-           (cider-load-buffer))
-          ((equal major-mode 'clojurescript-mode)
-           (cider-load-buffer))
-          ((equal major-mode 'emacs-lisp-mode)
-           (eval-defun nil))
-          ((equal major-mode 'js2-mode)
-           (progn
-             (js-comint-reset-repl)
-             (js-comint-send-buffer)
-             (other-window -1)))
-          (t (error "No run command for that mode"))))
-
-     (define-key my-leader-map (kbd "x") 'run-for-mode)
-     (define-key my-leader-map (kbd "X") 'run-bigger-for-mode)
-   #+end_src
-
-** Alternative files
-   User rules can be setup using directory local variables, for
-   example, create a file .dir-locals.el, and following rules:
-
-   Every rule is a list. The first element (car) is a regular
-   expression. The rest elements (cdr) are replacements. If a file path
-   match the regular expression, all the replacements are used as
-   alternative files. In following example, spec/hello_spec.coffee has
-   alternative file assets/test.coffee.
-
-   ((nil
-   (alternative-files-rules . (("spec/\\(.*\\)_spec.coffee" "assets/\\1.coffee")
-                               ("assets/\\(.*\\).coffee" "spec/\\1_spec.coffee")))))
-   #+begin_src emacs-lisp
-     (require 'alternative-files)
-     (define-key my-leader-map (kbd "s") 'alternative-files-find-file)
-     (define-key my-leader-map (kbd "S") 'alternative-files-create-file)
-   #+end_src
-
 ** Drag stuff
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 (use-package drag-stuff
   :config
   (drag-stuff-global-mode t)
   (define-key my-keys-minor-mode-map (kbd "C-M-<up>") 'drag-stuff-up)
   (define-key my-keys-minor-mode-map (kbd "C-M-<down>") 'drag-stuff-down))
-#+end_src
+   #+end_src
 * Diminish
   Don't show some modes to keep my modeline clean.
   #+begin_src emacs-lisp
@@ -1565,4 +910,4 @@ keybindgins.
       (diminish 'abbrev-mode)
   #+end_src
 
-Process gitsh finished
+  Process gitsh finished

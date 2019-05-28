@@ -438,8 +438,7 @@ keybindings.
 ** Search Everything
    #+begin_src emacs-lisp
      (use-package counsel
-       :bind (
-              ("M-x" . counsel-M-x)
+       :bind (("M-x" . counsel-M-x)
               ("C-x C-f" . counsel-find-file)
               ("<f1> f" . counsel-describe-function)
               ("<f1> v" . counsel-describe-variable)
@@ -466,8 +465,7 @@ keybindings.
 
      (use-package ivy
        :diminish ivy-mode
-       :bind (
-              ("C-s" . swiper-isearch)
+       :bind (("C-s" . swiper-isearch)
               :map my-keys-minor-mode-map
               ("C-c C-r" . ivy-resume)
               ("C-c v" . ivy-push-view)
@@ -505,8 +503,7 @@ keybindings.
 
    #+BEGIN_SRC emacs-lisp
      (use-package avy
-       :bind (
-              :map my-keys-minor-mode-map
+       :bind (:map my-keys-minor-mode-map
               ("C-;" . avy-goto-char-timer)
               :map my-leader-map
               (";" . avy-goto-char-timer)))
@@ -514,7 +511,8 @@ keybindings.
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
-      :defer t
+      :bind (:map my-leader-map
+             ("d" . deft))
       :init
       (setq deft-extensions '("txt" "tex" "org"))
       (setq deft-directory "~/Dropbox/org/")
@@ -690,8 +688,7 @@ keybindings.
    Maybe I could use it for more?
    #+begin_src emacs-lisp
      (use-package key-chord
-       :bind (
-              :map evil-insert-state-map
+       :bind (:map evil-insert-state-map
               ("jk" . evil-normal-state))
        :config
        (key-chord-mode 1))
@@ -706,8 +703,7 @@ keybindings.
    #+begin_src emacs-lisp
      (use-package paredit
        :diminish paredit-mode
-       :bind (
-              :map my-keys-minor-mode-map
+       :bind (:map my-keys-minor-mode-map
               ("C-)" . paredit-forward-slurp-sexp)
               ("C-}" . paredit-forward-bard-sexp))
        :config
@@ -715,8 +711,7 @@ keybindings.
 
      (use-package parinfer
        :diminish parinfer-mode
-       :bind
-       (("C-," . parinfer-toggle-mode))
+       :bind (("C-," . parinfer-toggle-mode))
        :init
        (progn
          (setq parinfer-extensions
@@ -754,7 +749,6 @@ keybindings.
      (define-key my-leader-map (kbd "k") 'recompile)
      (define-key my-leader-map (kbd "K") 'compile)
 
-     (define-key my-leader-map (kbd "d") 'deft)
      (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
      (use-package define-word
        :config
@@ -850,12 +844,11 @@ keybindings.
    to use `fd` instead of find.
    #+begin_src emacs-lisp
      (use-package find-file-in-project
-       :bind
-       (:map  my-leader-map
-              ("t" . find-file-in-project)
-              ("T" . find-file-in-project-by-selected)
-              :map evil-normal-state-map
-              ("gf" . find-file-in-project-at-point))
+       :bind (:map  my-leader-map
+                    ("t" . find-file-in-project)
+                    ("T" . find-file-in-project-by-selected)
+                    :map evil-normal-state-map
+                    ("gf" . find-file-in-project-at-point))
        :config
        (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
        (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
@@ -876,8 +869,7 @@ keybindings.
    #+begin_src emacs-lisp
      (use-package drag-stuff
        :diminish t
-       :bind (
-              :map my-keys-minor-mode-map
+       :bind (:map my-keys-minor-mode-map
               ("C-M-<up>" . drag-stuff-up)
               ("C-M-<down>" . drag-stuff-down))
        :config

@@ -5,7 +5,7 @@ super + i
 super + t
   jumpapp -c main-terminal ~/bin/launch-main-terminal.sh
 super + e
-  jumpapp -c mainEmacs ~/bin/mainEmacs.sh
+  jumpapp -c emacs ~/bin/launch-main-emacs.sh
 super + p
   dmenu_run
 super + o

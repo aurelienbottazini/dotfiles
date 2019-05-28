@@ -467,7 +467,7 @@ keybindings.
        :diminish ivy-mode
        :bind (("C-s" . swiper-isearch)
               :map my-keys-minor-mode-map
-              ("C-c C-r" . ivy-resume)
+              ("C-c C-r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
@@ -555,6 +555,7 @@ keybindings.
       (kbd "M-h") 'org-shiftmetaleft
       (kbd "M-k") 'org-move-subtree-up
       (kbd "M-j") 'org-move-subtree-down
+      (kbd "M-p") 'org-publish-current-project
       "<" 'org-clock-in
       ">" 'org-clock-out
       "4" 'org-archive-subtree
@@ -608,7 +609,7 @@ keybindings.
                ("wiki-files"
                 :base-directory "~/Dropbox/wiki"
                 :base-extension "org"
-                :publishing-directory "~/projects/wiki/"
+                :publishing-directory "~/Dropbox/wiki_published/"
                 :recursive t
                 :publishing-function org-html-publish-to-html
                 :headline-levels 4             ; Just the default for this project.
@@ -682,16 +683,6 @@ keybindings.
    I use spc as my leader key so I want it available everywhere
    #+begin_src emacs-lisp
   (define-key evil-motion-state-map (kbd "SPC") nil)
-   #+end_src
-
-   I only use keychords as a shortcut to exit vim insert mode.
-   Maybe I could use it for more?
-   #+begin_src emacs-lisp
-     (use-package key-chord
-       :bind (:map evil-insert-state-map
-              ("jk" . evil-normal-state))
-       :config
-       (key-chord-mode 1))
    #+end_src
 
    Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~

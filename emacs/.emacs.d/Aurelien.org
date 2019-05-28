@@ -601,33 +601,43 @@ keybindings.
    #+end_src
 ** org-publish
    #+begin_src emacs-lisp
-       (require 'ox-publish)
-       (setq system-time-locale "C") ;; make sure time local is in english when exporting
-       (setq org-html-validation-link nil)
-       (setq org-publish-project-alist
-             '(
-               ("wiki-files"
-                :base-directory "~/Dropbox/wiki"
-                :base-extension "org"
-                :publishing-directory "~/Dropbox/wiki_published/"
-                :recursive t
-                :publishing-function org-html-publish-to-html
-                :headline-levels 4             ; Just the default for this project.
-                :auto-preamble t
-                :html-head nil
-                :html-head-extra nil
-                :body-only nil
-                )
-               ;; ... add all the components here (see below)...
-               ;; ("wiki" :components ("wiki-files"))
-               )
-             org-export-with-toc nil
-             org-html-doctype "html5"
-             org-html-head nil
-             org-html-head-include-default-style nil
-             org-html-head-include-scripts nil
-             org-html-html5-fancy t
-             org-html-indent t)
+     (setq
+      time-stamp-active t
+      time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
+      time-stamp-format "Updated on %04y-%02m-%02d") ;
+
+     (add-hook 'org-mode-hook
+               (lambda () (add-hook 'before-save-hook 'time-stamp nil 'local)))
+
+     (add-hook 'write-file-hooks 'time-stamp) ; update when saving
+     (require 'ox-publish)
+     (setq system-time-locale "C") ;; make sure time local is in english when exporting
+     (setq org-html-validation-link nil)
+     (setq org-publish-project-alist
+           '(
+             ("wiki-files"
+              :base-directory "~/Dropbox/wiki"
+              :base-extension "org"
+              :publishing-directory "~/Dropbox/wiki_published/"
+              :recursive t
+              :publishing-function org-html-publish-to-html
+              :headline-levels 4             ; Just the default for this project.
+              :auto-preamble t
+              :html-head nil
+              :html-head-extra nil
+              :body-only nil
+              )
+             ;; ... add all the components here (see below)...
+             ;; ("wiki" :components ("wiki-files"))
+             )
+           org-export-with-toc nil
+           org-html-doctype "html5"
+           org-html-head nil
+           org-html-head-include-default-style nil
+           org-html-head-include-scripts nil
+           org-html-html5-fancy t
+           org-html-postamble nil
+           org-html-indent t)
    #+end_src
   #+begin_src emacs-lisp
     (use-package palimpsest

@@ -69,7 +69,7 @@ end
 
 function _prompt_color_for_status
   if test $argv[1] -eq 0
-    echo "#008700"
+    echo green
   else
     echo red
   end
@@ -77,7 +77,9 @@ end
 
 function _prompt_last_status
   if test $argv[1] -eq 0
-    _print_in_color "✘" red
+    _print_in_color "\$ " blue
+  else
+    _print_in_color "✘ " red
   end
 end
 
@@ -92,13 +94,13 @@ end
 function fish_prompt
   set -l last_status $status
 
-  set_color -i -o
-  _print_in_color ""(_pwd_with_tilde) "#268bd2"
+  set_color -i -o -u
+  _print_in_color ""(_pwd_with_tilde) blue
 
   if _in_git_directory
    if _no_commits
-     _print_in_color " "(_git_branch_name_or_revision) yellow
-     _print_in_color " "(git rev-parse --short HEAD) "#008700"
+     _print_in_color " "(_git_branch_name_or_revision) magenta
+     _print_in_color " "(git rev-parse --short HEAD) green
      _print_in_color " "(_git_upstream_status) cyan
 
       _print_in_color (_git_dirty_status) red
@@ -106,6 +108,5 @@ function fish_prompt
   end
 
   printf "\n"
-# _prompt_last_status $last_status
-  _print_in_color "\$ " "#268bd2"
+  _prompt_last_status $last_status
 end

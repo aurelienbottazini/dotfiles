@@ -3,8 +3,7 @@ set fish_greeting
 if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
 end
-set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims  ~/.nvm/versions/node/v8.11.1/bin  ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin $PATH
-status --is-interactive; and source (rbenv init -|psub)
+set -x PATH ~/bin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin $PATH
 
 set -x CDPATH $HOME $HOME/projects $HOME/work
 
@@ -99,13 +98,13 @@ set -x VISUAL 'vim'
 # https://fishshell.com/docs/2.3index.html#variables-color
 if test -n "$TERM"
   set -g fish_color_autosuggestion "#93a1a1"
-  set -g fish_color_command "-o" "#268bd2"
-  set -g fish_color_param "#268bd2"
+  set -g fish_color_command "-o"blue
+  set -g fish_color_param blue
   set -g fish_color_search_match	"#073642" "--background=#fccf61"
   set -g fish_color_operator "-o" "#6c71c4"
-  set -g fish_color_quote "-i" "#859900"
-  set -g fish_color_match "--background=#859900"
-  set -g fish_pager_color_prefix "-i" "#268bd2"
+  set -g fish_color_quote "-i" green
+  set -g fish_color_match "--background=green"
+  set -g fish_pager_color_prefix "-i" blue
   set -g fish_color_error "red"
 
 
@@ -130,17 +129,5 @@ set -x CHROME_BIN /usr/bin/chromium-browser # for karmajs specs
 set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
-
-#Hdpi config
-#set -x QT_AUTO_SCREEN_SCALE_FACTOR 1
-#set -x GDK_SCALE 2 #gtk3
-#set -x GDK_DPI_SCALE 0.5 #gtk3 undo scaling of text
-
-# Start X at login
-# if status is-login
-#     if test -z "$DISPLAY" -a $XDG_VTNR = 1
-#         exec ssh-agent startx -- -keeptty
-#     end
-# end
 
 source /usr/share/autojump/autojump.fish

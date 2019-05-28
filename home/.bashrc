@@ -87,19 +87,12 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
       || complete -o default -o nospace -F _git g
 
 export PATH=~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
-eval "$(rbenv init -)"
 
 export CDPATH=.:~/:~/projects:~/work
 
 # export PROMPT_COMMAND="\[\e[34;4;3;1m\]\w\[\e[31m\]$\[\e[0m\]"
 export PROMPT_COMMAND=""
 export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[31;1m\] $\[\e[0m\] '
-
-alias training_docker="chromium-browser --app --new-window http://0.0.0.0:7474 && docker run \
-    --publish=7474:7474 --publish=7687:7687 \
-    --volume=$HOME/neo4j/data:/data \
-    --volume=$HOME/neo4j/logs:/logs \
-    neo4j:3.0"
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
@@ -151,11 +144,7 @@ export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/d
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"  # Load NVM
-
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

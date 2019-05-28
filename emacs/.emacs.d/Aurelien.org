@@ -604,7 +604,8 @@ keybindings.
      (setq
       time-stamp-active t
       time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
-      time-stamp-format "Updated on %04y-%02m-%02d") ;
+      time-stamp-start "Updated on:[ 	]+\\\\?[\"<]+"
+      time-stamp-format "%04y-%02m-%02d") ;
 
      (add-hook 'org-mode-hook
                (lambda () (add-hook 'before-save-hook 'time-stamp nil 'local)))

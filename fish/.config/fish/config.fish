@@ -130,4 +130,7 @@ set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
 
+
+set -x SSH_AUTH_SOCK (gnome-keyring-daemon --start)
+
 source /usr/share/autojump/autojump.fish

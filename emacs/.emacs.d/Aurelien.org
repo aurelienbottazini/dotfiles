@@ -571,7 +571,26 @@ keybindings.
         (evil-normal-state)))
 
     (ad-activate 'git-timemachine-mode))
+
+(defun ab-run-gitsh ()
+"Start gitsh in current git project. Uses st as a terminal."
+  (interactive)
+  (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
+    (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
+(define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
 #+end_src
+* Projects
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :bind (:map my-leader-map
+           ("p" . projectile-commander)
+           :map projectile-mode-map
+           ("C-c p" . projectile-command-map))
+    :init
+    (setq projectile-switch-project-action 'projectile-dired)
+    :config
+    (projectile-mode t))
+#+END_SRC
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
@@ -730,6 +749,8 @@ keybindings.
 #+END_SRC
 * Ruby
 #+BEGIN_SRC emacs-lisp
+require 'ruby-refactoring)
+
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
 

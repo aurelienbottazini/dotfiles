@@ -1,11 +1,11 @@
 super + b
   jumpapp chromium
 super + i
-  jumpapp -c jetbrains-idea ~/bin/idea
+  jumpapp -c jetbrains-idea idea
 super + t
-  jumpapp -c main-terminal ~/bin/launch-main-terminal.sh
+  ~/bin/launch-main-terminal.sh
 super + e
-  jumpapp -c emacs ~/bin/launch-main-emacs.sh
+  ~/bin/launch-main-emacs.sh
 super + p
   dmenu_run
 super + o
@@ -19,8 +19,8 @@ super + s
 super + a
   jumpapp anki
 super + m
-  jumpapp -c cmus ~/bin/launch-music-player.sh
+  jumpapp -c cmus launch-music-player.sh
 super + space
-  ~/bin/launch-emacs-org-capture.sh
+  launch-emacs-org-capture.sh
 super + r
-  jumpapp -c ranger ~/bin/launch-ranger.sh
+  jumpapp -c ranger launch-ranger.sh

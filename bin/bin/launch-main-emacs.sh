@@ -1,2 +1,2 @@
 #!/bin/sh
-emacs --name mainEmacs
+jumpapp -c main-emacs -- emacs --name mainEmacs

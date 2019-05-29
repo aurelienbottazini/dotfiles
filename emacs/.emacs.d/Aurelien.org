@@ -521,6 +521,51 @@ keybindings.
       (setq deft-default-extension "org")
       (setq deft-recursive t))
   #+end_src
+* Magit
+#+begin_src emacs-lisp
+  (use-package forge
+    :after magit)
+
+  (use-package magit
+    :bind (:map my-leader-map
+                ("gs" . magit-status)
+                ("gc" . magit-commit)
+                ("gp" . magit-push-current)
+                ("gf" . magit-file-dispatch))
+    :init
+    (setq magit-commit-show-diff nil
+          magit-revert-buffers 1)
+    :config
+    (use-package fullframe
+      :config
+      (fullframe magit-status magit-mode-quit-window))
+
+    (with-eval-after-load 'magit
+      (define-key magit-status-mode-map (kbd "SPC") nil)
+      )
+    )
+
+  (use-package diff-hl
+    :config
+    (add-hook 'prog-mode-hook 'diff-hl-mode)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+  (use-package git-link
+    :bind (:map my-leader-map
+                ("gl" . git-link)))
+
+  (use-package git-timemachine
+    :bind (:map my-leader-map
+                ("gt" . git-timemachine-toggle))
+    :config
+    (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+      "when entering git-timemachine mode, change evil normal state to emacs state"
+      (if (evil-normal-state-p)
+          (evil-emacs-state)
+        (evil-normal-state)))
+
+    (ad-activate 'git-timemachine-mode))
+#+end_src
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)

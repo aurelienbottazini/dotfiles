@@ -749,7 +749,7 @@ keybindings.
 #+END_SRC
 * Ruby
 #+BEGIN_SRC emacs-lisp
-require 'ruby-refactoring)
+(require 'ruby-refactoring)
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")

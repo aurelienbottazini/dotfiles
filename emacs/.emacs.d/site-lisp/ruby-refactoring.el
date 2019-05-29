@@ -47,7 +47,7 @@
   (mark-defun)
   (goto-char (point))
   (open-line 1)
-  (insert-string "\n")
+  (insert "\n")
   (rrf-insert-named-expression rrf-refactored-const-name rrf-refactored-const-body))
 
 (defun rrf-extract-method (method-name args beg end)
@@ -65,7 +65,7 @@
   (mark-defun)
   (goto-char (mark))
   (open-line 1)
-  (insert-string "\n")
+  (insert "\n")
   (rrf-insert-extracted-method))
 
 (defun rrf-jump-to-extraction-point ()
@@ -104,30 +104,30 @@
 (defun rrf-insert-extracted-method ()
   "Insert the definition for a previously extracted method."
   (let ((b nil) (e nil))
-    (insert-string "def ")
-    (insert-string rrf-refactored-method-name)
+    (insert "def ")
+    (insert rrf-refactored-method-name)
     (indent-according-to-mode)
-    (insert-string "\n")
+    (insert "\n")
     (setq b (point))
-    (insert-string rrf-refactored-method-body)
+    (insert rrf-refactored-method-body)
     (setq e (point))
     (indent-region b e)
-    (insert-string "\nend")
+    (insert "\nend")
     (indent-according-to-mode)))
 
 (defun rrf-replace-region (beg end replacement)
   "Replace the region with REPLACEMENT"
   (goto-char beg)
   (kill-region beg end)
-  (insert-string replacement)
+  (insert replacement)
   (indent-according-to-mode))
 
 (defun rrf-insert-named-expression (name expression)
   "Insert NAME = EXPRESSION."
-  (insert-string name)
+  (insert name)
   (indent-according-to-mode)
-  (insert-string " = ")
-  (insert-string expression)
+  (insert " = ")
+  (insert expression)
   (indent-region (mark) (point)))
 
 (defun rrf-adj-beg (beg end)
@@ -173,10 +173,10 @@
 (defun rrfx (beg end)
   "Insert the beg/end of the adjusted region (for debugging)."
   (interactive "r")
-  (insert-string (rrf-adj-beg beg end))
-  (insert-string ",")
-  (insert-string (rrf-adj-endl beg end))
-  (insert-string "\n"))
+  (insert (rrf-adj-beg beg end))
+  (insert ",")
+  (insert (rrf-adj-endl beg end))
+  (insert "\n"))
 
 ;;; Key bindings
 

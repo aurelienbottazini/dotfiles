@@ -996,6 +996,7 @@ keybindings.
 
 #+BEGIN_SRC emacs-lisp
 (use-package company
+  :diminish company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase nil)

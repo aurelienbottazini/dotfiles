@@ -3,7 +3,7 @@ super + b
 super + i
   jumpapp -c jetbrains-idea idea
 super + t
-  ~/bin/launch-main-terminal.sh
+  jumpapp -c main-terminal launch-main-terminal.sh
 super + e
   ~/bin/launch-main-emacs.sh
 super + p

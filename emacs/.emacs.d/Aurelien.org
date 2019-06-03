@@ -784,7 +784,7 @@ keybindings.
 
     (use-package ruby-refactor
       :diminish ruby-refactor-mode
-      :bind (:map my-keys-minor-mode-map
+      :bind (:map ruby-mode-map
                   ("C-c r m" . ruby-refactor-extract-to-method)
                   ("C-c r c" . ruby-refactor-extract-constant)
                   ("C-c r v" . ruby-refactor-extract-local-variable)
@@ -871,6 +871,13 @@ keybindings.
     :mode "\\.js\\'"
     :mode "\\.jsx\\'"
     :init
+
+    (use-package js2-refactor
+      :init
+      (setq js2-skip-preprocessor-directives t)
+      :config
+      (add-hook 'js2-mode-hook #'js2-refactor-mode)
+      (js2r-add-keybindings-with-prefix "C-c r"))
 
     (use-package js-comint)
 

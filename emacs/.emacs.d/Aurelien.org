@@ -749,56 +749,66 @@ keybindings.
 #+END_SRC
 * Ruby
 #+BEGIN_SRC emacs-lisp
-(require 'ruby-refactoring)
+  (use-package yaml-mode
+    :mode "\\.ya?ml\\'")
 
-(use-package yaml-mode
-  :mode "\\.ya?ml\\'")
-
-(use-package ruby-mode
-  :mode "\\.rake\\'"
-  :mode "Rakefile\\'"
-  :mode "\\.gemspec\\'"
-  :mode "\\.ru\\'"
-  :mode "Gemfile\\'"
-  :mode "Guardfile\\'" :mode "Capfile\\'"
-  :mode "\\.cap\\'"
-  :mode "\\.thor\\'"
-  :mode "\\.rabl\\'"
-  :mode "Thorfile\\'"
-  :mode "Vagrantfile\\'"
-  :mode "\\.jbuilder\\'"
-  :mode "Podfile\\'"
-  :mode "\\.podspec\\'"
-  :mode "Puppetfile\\'"
-  :mode "Berksfile\\'"
-  :mode "Appraisals\\'"
-  :mode "\\.rb$"
-  :mode "ruby"
-  :config
-
-  (add-hook 'ruby-mode-hook 'subword-mode)
-  (use-package ruby-interpolation)
-  (use-package inf-ruby)
-
-  (use-package ruby-end)
-  (use-package rspec-mode)
-
-  ;; Hitting M-; twice adds an xmpfilter comment. Hitting xmp keybinding will put the output in this comment
-  (use-package rcodetools
-    :load-path "/site-lisp/rcodetools.el"
-    :pin manual
-    :ensure nil
+  (use-package ruby-mode
+    :mode "\\.rake\\'"
+    :mode "Rakefile\\'"
+    :mode "\\.gemspec\\'"
+    :mode "\\.ru\\'"
+    :mode "Gemfile\\'"
+    :mode "Guardfile\\'" :mode "Capfile\\'"
+    :mode "\\.cap\\'"
+    :mode "\\.thor\\'"
+    :mode "\\.rabl\\'"
+    :mode "Thorfile\\'"
+    :mode "Vagrantfile\\'"
+    :mode "\\.jbuilder\\'"
+    :mode "Podfile\\'"
+    :mode "\\.podspec\\'"
+    :mode "Puppetfile\\'"
+    :mode "Berksfile\\'"
+    :mode "Appraisals\\'"
+    :mode "\\.rb$"
+    :mode "ruby"
     :config
-    (defadvice comment-dwim (around rct-hack activate)
-      "If comment-dwim is successively called, add => mark."
-      (if (and (or (eq major-mode 'enh-ruby-mode)
-                   (eq major-mode 'ruby-mode))
-               (eq last-command 'comment-dwim))
-          (progn
-            (if (eq major-mode 'enh-ruby-mode)
-                (end-of-line))
-            (insert "=>"))
-        ad-do-it))))
+
+    (add-hook 'ruby-mode-hook 'subword-mode)
+    (diminish 'subword-mode)
+    (use-package ruby-interpolation)
+    (use-package inf-ruby)
+
+    (use-package ruby-end)
+    (use-package rspec-mode)
+
+    (use-package ruby-refactor
+      :diminish ruby-refactor-mode
+      :bind (:map my-keys-minor-mode-map
+                  ("C-c r m" . ruby-refactor-extract-to-method)
+                  ("C-c r c" . ruby-refactor-extract-constant)
+                  ("C-c r v" . ruby-refactor-extract-local-variable)
+                  ("C-c r l" . ruby-refactor-extract-to-let))
+      :config
+      (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
+
+
+    ;; Hitting M-; twice adds an xmpfilter comment. Hitting xmp keybinding will put the output in this comment
+    (use-package rcodetools
+      :load-path "/site-lisp/rcodetools.el"
+      :pin manual
+      :ensure nil
+      :config
+      (defadvice comment-dwim (around rct-hack activate)
+        "If comment-dwim is successively called, add => mark."
+        (if (and (or (eq major-mode 'enh-ruby-mode)
+                     (eq major-mode 'ruby-mode))
+                 (eq last-command 'comment-dwim))
+            (progn
+              (if (eq major-mode 'enh-ruby-mode)
+                  (end-of-line))
+              (insert "=>"))
+          ad-do-it))))
 #+END_SRC
 * HTML
 #+BEGIN_SRC emacs-lisp

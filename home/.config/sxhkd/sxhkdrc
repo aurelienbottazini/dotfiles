@@ -1,5 +1,5 @@
 super + b
-  jumpapp chromium
+  jumpapp -c firefox firefox-developer-edition
 super + i
   jumpapp -c jetbrains-idea idea
 super + t

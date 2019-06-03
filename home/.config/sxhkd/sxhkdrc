@@ -6,7 +6,7 @@ super + t
   jumpapp -c main-terminal launch-main-terminal.sh
 super + e
   ~/bin/launch-main-emacs.sh
-super + p
+super + space
   dmenu_run
 super + o
   xfce4-settings-manager
@@ -24,3 +24,5 @@ super + space
   launch-emacs-org-capture.sh
 super + r
   jumpapp -c ranger launch-ranger.sh
+super + p
+  xfce4-display-settings --minimal

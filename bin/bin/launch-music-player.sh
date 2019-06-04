@@ -1,2 +1,2 @@
 #!/bin/bash
-kitty --class cmus cmus
+tilix --class cmus -e cmus

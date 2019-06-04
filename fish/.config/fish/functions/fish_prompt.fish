@@ -77,9 +77,9 @@ end
 
 function _prompt_last_status
   if test $argv[1] -eq 0
-    _print_in_color "✔ " green
+    _print_in_color "☺  " green
   else
-    _print_in_color "✘ " red
+    _print_in_color "☹  " red
   end
 end
 

@@ -1,2 +1,2 @@
 #!/bin/bash
-tilix --class cmus --new-process -e cmus
+kitty --class cmus cmus

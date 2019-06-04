@@ -77,9 +77,9 @@ end
 
 function _prompt_last_status
   if test $argv[1] -eq 0
-    _print_in_color "☺  " green
+    _print_in_color "✔ " green
   else
-    _print_in_color "☹  " red
+    _print_in_color "✘ " red
   end
 end
 
@@ -94,7 +94,7 @@ end
 function fish_prompt
   set -l last_status $status
 
-  set_color -i -o -u
+  set_color -o -u
   _print_in_color ""(_pwd_with_tilde) blue
 
   if _in_git_directory

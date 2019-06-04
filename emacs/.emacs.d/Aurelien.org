@@ -1335,8 +1335,7 @@ keybindings.
        (drag-stuff-global-mode t))
    #+end_src
 * Email
-When you run the initial indexing with mu do ~mu index --rebuild -m
-./Maildir/fastmail/~.
+When you run the initial indexing with mu do ~mu index --rebuild -m ./Maildir/fastmail/~.
 
 If you run a mu index comment with the incorrect path specified, you
 will have problems moving emails around inside mu
@@ -1365,7 +1364,6 @@ will have problems moving emails around inside mu
 
 (setq mu4e-maildir-shortcuts
       '(("/INBOX" . ?i)
-        ("/@Action" . ?a)
         ("/@waiting" . ?w)
         ("/@maybe" . ?m)
         ("/@read" . ?r)

@@ -4,11 +4,11 @@ module.exports = {
     // normal
     // fontSize: 14,
     // presentation
-    fontSize: 12,
+    fontSize: 18,
 
     // font family with optional fallbacks
     fontFamily:
-      '"Operator Mono", PragmataPro, Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+      '"PragmataPro Liga", "Operator Mono", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     // cursorColor: "rgba(148, 191, 243, 0.7)",
@@ -29,9 +29,14 @@ module.exports = {
     // custom css to embed in the main window
     css: ".term_fit { padding: 0.1em 0.1em !important }",
 
+      webGLRenderer: false,
     // custom css to embed in the terminal window
     termCSS:
-      '.terms_terms {margin-top: 0 !important};.cursor-node[focus=false] { background-color: transparent !important} span[style="color: rgb(186, 144, 189);"], span[style*="italic"]{ font-family: "Operator Mono"; font-style: italic;}',
+      `
+  x-screen x-row {
+    font-variant-ligatures: initial;
+  }
+`,
 
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: "12px 14px",
@@ -96,7 +101,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: []
+  plugins: ['hyper-font-ligatures']
 
   // in development, you can create a directory under
   // `~/.hyperterm_plugins/local/` and include it here

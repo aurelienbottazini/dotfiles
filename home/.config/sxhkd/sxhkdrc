@@ -26,3 +26,5 @@ super + r
   jumpapp -c ranger launch-ranger.sh
 super + p
   xfce4-display-settings --minimal
+super + f
+  thunar

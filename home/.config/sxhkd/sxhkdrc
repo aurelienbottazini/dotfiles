@@ -20,7 +20,7 @@ super + a
   jumpapp anki
 super + m
   jumpapp -c cmus launch-music-player.sh
-super + space
+super + n
   launch-emacs-org-capture.sh
 super + r
   jumpapp -c ranger launch-ranger.sh

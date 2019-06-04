@@ -1,2 +1,2 @@
 #!/bin/bash
-tilix --class cmus -e cmus
+tilix --class cmus --new-process -e cmus

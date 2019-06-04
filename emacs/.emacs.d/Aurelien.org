@@ -591,6 +591,26 @@ keybindings.
     :config
     (projectile-mode t))
 #+END_SRC
+
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :bind (:map evil-normal-state-map
+                ("gd" . dumb-jump-go)
+                ("gD" . dumb-jump-go-other-window))
+    :init
+    (setq dumb-jump-selector 'ivy)
+    :config
+    (add-hook 'dumb-jump-after-jump-hook
+              (defun abo-dumb-jump-pulse-line ()
+                (pulse-momentary-highlight-one-line (point)))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package counsel-etags
+    :bind (:map evil-normal-state-map
+                ("gt" . counsel-etags-find-tag-at-point)
+                ("gT" . counsel-etags-find-tag)))
+#+end_src
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)

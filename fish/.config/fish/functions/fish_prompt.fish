@@ -99,6 +99,7 @@ function fish_prompt
 
   if _in_git_directory
    if _no_commits
+     set_color -i
      _print_in_color " "(_git_branch_name_or_revision) magenta
      _print_in_color " "(git rev-parse --short HEAD) green
      _print_in_color " "(_git_upstream_status) cyan

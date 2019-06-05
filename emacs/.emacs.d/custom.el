@@ -97,7 +97,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 160 :family "Operator Mono Book"))))
+ '(default ((t (:inherit nil :stipple nil :background "#f1f2f1" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 160 :family "Operator Mono"))))
  '(bold ((t (:weight medium))))
  '(bold-italic ((t (:slant italic :weight medium))))
  '(cider-result-overlay-face ((t (:background "grey90" :box (:line-width 2 :color "#f79b2f")))))

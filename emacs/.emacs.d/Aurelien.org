@@ -532,6 +532,10 @@ keybindings.
   (use-package forge
     :after magit)
 
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+  (setq ediff-split-window-function 'split-window-vertically)
+
   (use-package magit
     :bind (:map my-leader-map
                 ("gs" . magit-status)
@@ -548,8 +552,7 @@ keybindings.
 
     (with-eval-after-load 'magit
       (define-key magit-status-mode-map (kbd "SPC") nil)
-      )
-    )
+      ))
 
   (use-package diff-hl
     :config
@@ -572,12 +575,12 @@ keybindings.
 
     (ad-activate 'git-timemachine-mode))
 
-(defun ab-run-gitsh ()
-"Start gitsh in current git project. Uses st as a terminal."
-  (interactive)
-  (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
-    (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
-(define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
+  (defun ab-run-gitsh ()
+    "Start gitsh in current git project. Uses st as a terminal."
+    (interactive)
+    (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
+      (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
+  (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
 #+end_src
 * Projects
 #+BEGIN_SRC emacs-lisp

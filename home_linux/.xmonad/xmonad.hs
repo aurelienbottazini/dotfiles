@@ -61,7 +61,7 @@ myTabTheme = def {
 scratchpads :: [NamedScratchpad]
 scratchpads =
     [
-    ,(NS "tranmission" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
+    (NS "tranmission" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
     ,(NS "youtube-music" "chromium --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -90,8 +90,8 @@ scratchpads =
 -- M4-S-/ = show default keybindings
 myKeysP :: [(String, X ())]
 myKeysP = [
-        ("M-<Backspace>", kill),
-        ("<F4>", kill),
+        ("M-<Backspace>", kill)
+        , ("<F4>", kill)
         , ("M4-<Space> t", namedScratchpadAction scratchpads "tdd-org-capture")
         , ("M4-<Space> c", namedScratchpadAction scratchpads "vscode")
         , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
@@ -125,7 +125,7 @@ myKeysP = [
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-o a", toggleCopyToAll)
         , ("M4-z", sendMessage ToggleLayout <+> sendMessage ToggleStruts)
-        , ("M4-<F11>", sendMessage ToggleLayout <+> sendMessage ToggleStruts)
+        , ("<F11>", sendMessage ToggleLayout <+> sendMessage ToggleStruts)
         ]
 
 myKeys :: [((KeyMask, KeySym), X ())]

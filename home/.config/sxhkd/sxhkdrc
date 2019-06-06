@@ -6,6 +6,10 @@ super + t
   jumpapp -c main-terminal launch-main-terminal.sh
 super + e
   ~/bin/launch-main-emacs.sh
+super + space ; space
+  dmenu_run
+super + s ; return
+  launch-emacs-org-capture.sh
 super + p
   dmenu_run
 super + o ; s
@@ -22,8 +26,6 @@ super + a
   jumpapp anki
 super + m
   jumpapp -c cmus launch-music-player.sh
-super + n
-  launch-emacs-org-capture.sh
 super + r
   jumpapp -c ranger launch-ranger.sh
 super + f

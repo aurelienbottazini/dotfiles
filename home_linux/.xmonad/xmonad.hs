@@ -91,29 +91,16 @@ scratchpads =
 myKeysP :: [(String, X ())]
 myKeysP = [
         ("M-<Backspace>", kill),
-        , ("<XF86AudioLowerVolume>", spawn "pulseaudio-rofi.sh --volume_down")
-        , ("<XF86AudioMute>", spawn "pulseaudio-rofi.sh --mute")
-        , ("<XF86AudioRaiseVolume>", spawn "pulseaudio-rofi.sh --volume_up")
-        , ("<XF86MonBrightnessDown>", spawn "lux -s 10%")
-        , ("<XF86MonBrightnessUp>", spawn "lux -a 10%")
-        , ("M4-<Space> <Space>", spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-        , ("M4-<Space> <Return>", namedScratchpadAction scratchpads "gtd-org-capture")
+        ("<F4>", kill),
         , ("M4-<Space> t", namedScratchpadAction scratchpads "tdd-org-capture")
         , ("M4-<Space> c", namedScratchpadAction scratchpads "vscode")
         , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
-        , ("M4-<Space> u", spawn "dmenu-unicode.sh")
         , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown.sh\"")
-        , ("M4-<Space> s", spawn "deepin-screenshot -s ~/screenshots")
-        , ("M4-<Space> p", spawn "peek")
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-S-<Backspace>", killAll)
         , ("M4-[", sendMessage Shrink)
         , ("M4-]", sendMessage Expand)
         , ("M4-\\",  toggleWS)
-        , ("M4-c", runOrRaiseNext "mainEmacs.sh" (resource =? "mainEmacs"))
-        , ("M4-b", runOrRaiseNext "chromium" (className =? "Chromium"))
-        , ("M4-i", runOrRaiseNext "idea" (className =? "jetbrains-idea"))
-        , ("M4-t", runOrRaiseNext "st" (className =? "st-256color"))
         , ("M4-h",  windowGo L True)
         , ("M4-j",  windowGo D True)
         , ("M4-g",  sendMessage $ JumpToLayout "Grid")
@@ -138,6 +125,7 @@ myKeysP = [
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-o a", toggleCopyToAll)
         , ("M4-z", sendMessage ToggleLayout <+> sendMessage ToggleStruts)
+        , ("M4-<F11>", sendMessage ToggleLayout <+> sendMessage ToggleStruts)
         ]
 
 myKeys :: [((KeyMask, KeySym), X ())]

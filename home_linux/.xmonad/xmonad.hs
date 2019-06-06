@@ -94,8 +94,6 @@ myKeysP = [
         , ("<F4>", kill)
         , ("M4-<Space> t", namedScratchpadAction scratchpads "tdd-org-capture")
         , ("M4-<Space> c", namedScratchpadAction scratchpads "vscode")
-        , ("M4-<Space> r", spawn "dmenu-yes-no.sh \"Do you want to reboot?\" \"reboot.sh\"")
-        , ("M4-<Space> x", spawn "dmenu-yes-no.sh \"Do you want to shutdown?\" \"shutdown.sh\"")
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-S-<Backspace>", killAll)
         , ("M4-[", sendMessage Shrink)

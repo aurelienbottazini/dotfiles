@@ -8,7 +8,11 @@ super + e
   ~/bin/launch-main-emacs.sh
 super + space ; space
   dmenu_run
-super + s ; return
+super + space ; r
+  dmenu-yes-no.sh "Do you want to reboot?" "reboot.sh"
+super + space ; x
+  dmenu-yes-no.sh "Do you want to shutdown?" "shutdown.sh"
+super + space ; return
   launch-emacs-org-capture.sh
 super + p
   dmenu_run
@@ -29,4 +33,4 @@ super + m
 super + r
   jumpapp -c ranger launch-ranger.sh
 super + f
-  thunar
+  jumpapp thunar

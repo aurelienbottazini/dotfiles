@@ -236,6 +236,7 @@ myStartupHook = do
     spawn "compton -CG --active-opacity 1.0 --shadow-ignore-shaped"
     spawn "xsetroot -cursor_name left_ptr"
     spawn "feh --bg-fill  ~/Dropbox/Pictures/wallpaper/ps21_16x20.jpg"
+    spawn "setxkbmap -option ctrl:nocaps"
 
 noScratchPad :: String -> String
 noScratchPad ws = if ws == "NSP" then "" else ws

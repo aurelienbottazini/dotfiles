@@ -67,7 +67,6 @@ scratchpads =
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "midnight-commander" "st -c term-mc -e mc --nosubshell" (className =? "term-mc") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "gtd-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "tdd-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"t\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "calendar" "chromium --new-window --app=http://calendar.google.com" (resource =? "calendar.google.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "email" "chromium --new-window --app=https://www.fastmail.com" (resource =? "www.fastmail.com") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     ,(NS "scratch-term" "st -c scratch-term fortune" (className =? "scratch-term") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
@@ -92,8 +91,6 @@ myKeysP :: [(String, X ())]
 myKeysP = [
         ("M-<Backspace>", kill)
         , ("<F4>", kill)
-        , ("M4-<Space> t", namedScratchpadAction scratchpads "tdd-org-capture")
-        , ("M4-<Space> c", namedScratchpadAction scratchpads "vscode")
         , ("M4-<Tab>" , nextNonEmptyWS)
         , ("M4-S-<Backspace>", killAll)
         , ("M4-[", sendMessage Shrink)

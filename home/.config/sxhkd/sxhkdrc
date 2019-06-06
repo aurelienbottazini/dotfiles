@@ -12,6 +12,8 @@ super + space ; r
   dmenu-yes-no.sh "Do you want to reboot?" "reboot.sh"
 super + space ; x
   dmenu-yes-no.sh "Do you want to shutdown?" "shutdown.sh"
+super + space ; t
+  tdd-org-capture.sh
 super + space ; Return
   launch-emacs-org-capture.sh
 super + p

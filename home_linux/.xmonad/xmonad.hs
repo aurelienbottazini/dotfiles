@@ -60,12 +60,11 @@ myTabTheme = def {
 -- are displayed on the current workspace
 scratchpads :: [NamedScratchpad]
 scratchpads =
-    [(NS "cmus" "st -c cmus cmus" (className =? "cmus") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    [
     ,(NS "tranmission" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
     ,(NS "youtube-music" "chromium --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
-    ,(NS "ranger" "st -c my-ranger ranger" (className =? "my-ranger") (customFloating $ W.RationalRect (1/2) (0) (1/2) (1)))
     ,(NS "midnight-commander" "st -c term-mc -e mc --nosubshell" (className =? "term-mc") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))
     ,(NS "gtd-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"g\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "tdd-org-capture"  "emacsclient -ca \"\" --frame-parameters='(quote (name . \"global-org-capture\"))' -e '(org-capture nil \"t\")'" (appName =? "global-org-capture") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
@@ -91,7 +90,7 @@ scratchpads =
 -- M4-S-/ = show default keybindings
 myKeysP :: [(String, X ())]
 myKeysP = [
-        ("M-<Backspace>", kill)
+        ("M-<Backspace>", kill),
         , ("<XF86AudioLowerVolume>", spawn "pulseaudio-rofi.sh --volume_down")
         , ("<XF86AudioMute>", spawn "pulseaudio-rofi.sh --mute")
         , ("<XF86AudioRaiseVolume>", spawn "pulseaudio-rofi.sh --volume_up")
@@ -131,13 +130,11 @@ myKeysP = [
         , ("M4-o l", sendMessage NextLayout)
         , ("M4-o s", withFocused $ windows . W.sink)
         , ("M4-o t", sendMessage ToggleStruts)
-        , ("M4-s m", namedScratchpadAction scratchpads "cmus")
         , ("M4-s c", namedScratchpadAction scratchpads "calendar")
         , ("M4-s e", namedScratchpadAction scratchpads "email")
         , ("M4-s g", namedScratchpadAction scratchpads "GTD")
         , ("M4-s t", namedScratchpadAction scratchpads "TDD")
         , ("M4-s S-m", namedScratchpadAction scratchpads "youtube-music")
-        , ("M4-f", namedScratchpadAction scratchpads "ranger")
         , ("M4-s v", namedScratchpadAction scratchpads "vlc")
         , ("M4-o a", toggleCopyToAll)
         , ("M4-z", sendMessage ToggleLayout <+> sendMessage ToggleStruts)

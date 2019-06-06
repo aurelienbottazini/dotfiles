@@ -6,15 +6,17 @@ super + t
   jumpapp -c main-terminal launch-main-terminal.sh
 super + e
   ~/bin/launch-main-emacs.sh
-super + space
+super + p
   dmenu_run
-super + o
+super + o ; s
   xfce4-settings-manager
+super + o ; d
+  xfce4-display-settings --minimal
 Print
   flameshot gui
 super + Print
   peek
-super + s
+super + d
   slack
 super + a
   jumpapp anki
@@ -24,7 +26,5 @@ super + n
   launch-emacs-org-capture.sh
 super + r
   jumpapp -c ranger launch-ranger.sh
-super + p
-  xfce4-display-settings --minimal
 super + f
   thunar

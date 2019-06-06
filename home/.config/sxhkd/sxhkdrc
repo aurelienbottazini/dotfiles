@@ -12,7 +12,7 @@ super + space ; r
   dmenu-yes-no.sh "Do you want to reboot?" "reboot.sh"
 super + space ; x
   dmenu-yes-no.sh "Do you want to shutdown?" "shutdown.sh"
-super + space ; return
+super + space ; Return
   launch-emacs-org-capture.sh
 super + p
   dmenu_run

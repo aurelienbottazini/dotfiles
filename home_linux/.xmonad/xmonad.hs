@@ -190,12 +190,12 @@ myProjects =
    [
      Project { projectName = ws1TERM
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws1TERM "st"
+             , projectStartHook = Just $ do spawnOn ws1TERM "kitty"
 
      },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws2WWW "chromium"
+             , projectStartHook = Just $ do spawnOn ws2WWW "firefox-developer-edition"
      },
      -- Project { projectName = ws3CODE
      --         , projectDirectory = "~/"

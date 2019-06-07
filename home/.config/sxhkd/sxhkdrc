@@ -39,6 +39,6 @@ super + f
 XF86AudioMute
   amixer -q sset Master toggle
 XF86Audio{Lower,Raise}Volume
-  pactl set-sink-volume 0 {-5%,+5%}
+  pactl set-sink-volume 0 {-5%,+5%};and pactl list sinks | rg "front-left:" | awk '\{print $5\}' | while read OUTPUT; notify-send "$OUTPUT"; end
 XF86MonBrightness{Up,Down}
   lux {-a 5%,-s 5%}

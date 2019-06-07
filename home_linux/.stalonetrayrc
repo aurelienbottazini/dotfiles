@@ -1,5 +1,5 @@
-geometry 4x1-0+0
-icon_size 36
+geometry 4x1-2+15
+icon_size 32 
 background "#dad9d6"
 
 decorations none

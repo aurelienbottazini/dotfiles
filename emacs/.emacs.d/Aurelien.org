@@ -893,7 +893,7 @@ keybindings.
   (use-package js2-mode
     :mode "\\.js\\'"
     :mode "\\.jsx\\'"
-    :init
+    :config
 
     (use-package js2-refactor
       :init

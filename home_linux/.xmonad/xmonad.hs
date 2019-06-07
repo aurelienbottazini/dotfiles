@@ -299,6 +299,6 @@ main = do
                         , ppLayout = xmobarColor "#ffffff" "#65428a" . myLayoutPrinter
                         , ppTitle = xmobarColor "#000000" "#fccf61" . shorten 50 . wrap " " " "
                         , ppHidden = noScratchPad
-                        } >> updatePointer (0.5, 0.5) (0, 0)
+                        } >> updatePointer (0.5, 0.5) (0, 0) >> setWMName "LG3D"
         } `additionalKeysP` myKeysP
           `additionalKeys` myKeys

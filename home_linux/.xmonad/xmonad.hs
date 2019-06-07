@@ -187,7 +187,7 @@ myProjects =
    [
      Project { projectName = ws1TERM
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws1TERM "kitty"
+             , projectStartHook = Just $ do spawnOn ws1TERM "st"
 
      },
      Project { projectName = ws2WWW

@@ -1,2 +1,2 @@
 #!/bin/sh
-kitty --class music-player ncmpc
+st -c music-player ncmpc

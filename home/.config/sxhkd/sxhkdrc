@@ -30,8 +30,6 @@ super + d
   slack
 super + a
   jumpapp anki
-super + m
-  jumpapp -c music-player launch-music-player.sh
 super + r
   jumpapp -c ranger launch-ranger.sh
 super + f

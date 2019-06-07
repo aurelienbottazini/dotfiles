@@ -1,2 +1,2 @@
-#!/bin/bash
-kitty --class cmus cmus
+#!/bin/sh
+kitty --class music-player ncmpc

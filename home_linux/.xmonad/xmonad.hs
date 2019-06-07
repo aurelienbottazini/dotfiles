@@ -63,6 +63,7 @@ scratchpads =
     [
     (NS "tranmission" "transmission-gtk" (className =? "Transmission-gtk") (customFloating $ W.RationalRect (1/5) (1/5) (2/5) (2/5)))
     ,(NS "youtube-music" "chromium --new-window --app=https://music.youtube.com" (resource =? "music.youtube.com") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
+    ,(NS "ncmpc" "jumapp -c music-player launch-music-player.sh" (className =? "music-player") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "peek" "peek" (className =? "Peek") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "vlc" "vlc" (className =? "vlc") (customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)))
     ,(NS "midnight-commander" "st -c term-mc -e mc --nosubshell" (className =? "term-mc") (customFloating $ W.RationalRect (1/10) (1/10) (4/5) (4/5)))

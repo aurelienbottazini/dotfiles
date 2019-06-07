@@ -31,7 +31,7 @@ super + d
 super + a
   jumpapp anki
 super + m
-  jumpapp -c cmus launch-music-player.sh
+  jumpapp -c music-player launch-music-player.sh
 super + r
   jumpapp -c ranger launch-ranger.sh
 super + f

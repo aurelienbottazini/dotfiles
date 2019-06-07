@@ -36,3 +36,9 @@ super + r
   jumpapp -c ranger launch-ranger.sh
 super + f
   jumpapp thunar
+XF86AudioMute
+  amixer -q sset Master toggle
+XF86AudioLowerVolume
+  pactl set-sink-volume 0 -5%
+XF86AudioRaiseVolume
+  pactl set-sink-volume 0 +5%

@@ -300,6 +300,13 @@ keybindings.
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 
+
+** Recent files
+#+BEGIN_SRC emacs-lisp
+(recentf-mode 1)
+(setq recentf-max-menu-items 50)
+(setq recentf-max-saved-items 50)
+#+END_SRC
 * Dired
   #+begin_src emacs-lisp
     (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform

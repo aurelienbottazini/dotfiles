@@ -8,7 +8,8 @@ sxhkd &
 flameshot &
 jetbrains-toolbox &
 skypeforlinux &
-command -v cbatticon && cbatticon &
+command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
+
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 /* exec ssh-agent startxfce4 */

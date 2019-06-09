@@ -1,4 +1,4 @@
-#+TITLE: Aurelien Bottazini's Emacs configuration
+#+TITLE: Aurélien Bottazini's Emacs configuration
 #+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
@@ -624,6 +624,7 @@ keybindings.
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
+    (add-hook 'org-mode-hook (lambda() (variable-pitch-mode t)))
 
     (setq org-directory (expand-file-name "~/Dropbox/org"))
     (setq org-default-notes-file (concat org-directory "/GTD.org"))

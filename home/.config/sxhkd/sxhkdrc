@@ -33,7 +33,7 @@ super + a
 super + r
   jumpapp -c ranger launch-ranger.sh
 super + f
-  jumpapp thunar
+  thunar
 XF86AudioMute
   amixer -q sset Master toggle
 XF86Audio{Lower,Raise}Volume

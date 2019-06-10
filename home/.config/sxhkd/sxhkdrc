@@ -22,6 +22,8 @@ super + o ; s
   xfce4-settings-manager
 super + o ; d
   xfce4-display-settings --minimal
+super + o ; b
+  kill -s USR1 $(pgrep sxhkd); notify-send "reloaded sxhkd bindings"
 Print
   flameshot gui
 super + Print

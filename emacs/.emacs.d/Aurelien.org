@@ -902,7 +902,7 @@ keybindings.
     :mode "\\.js\\'"
     :mode "\\.jsx\\'"
     :config
-
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
     (use-package js2-refactor
       :init
       (setq js2-skip-preprocessor-directives t)

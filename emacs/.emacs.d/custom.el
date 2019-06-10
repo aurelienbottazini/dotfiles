@@ -170,6 +170,7 @@
  '(mu4e-title-face ((t (:inherit font-lock-type-face :weight medium))))
  '(mu4e-unread-face ((t (:inherit font-lock-keyword-face :weight medium))))
  '(mu4e-url-number-face ((t (:inherit font-lock-constant-face :weight medium))))
+ '(mu4e-view-body-face ((t (:inherit default :family "sans-serif"))))
  '(mu4e-warning-face ((t (:inherit font-lock-warning-face :slant italic :weight medium))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :slant italic :weight medium))))
  '(org-agenda-date-weekend ((t (:inherit org-agenda-date :weight medium))))

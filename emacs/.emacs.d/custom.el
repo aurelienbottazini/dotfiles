@@ -11,6 +11,7 @@
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
  '(dumb-jump-mode t)
+ '(hydra-hint-display-type (quote posframe))
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")

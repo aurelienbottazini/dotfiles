@@ -373,6 +373,11 @@ keybindings.
       (diminish 'my-keys-minor-mode)
       (diminish 'eldoc-mode)
    #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package posframe)
+#+END_SRC
+
 ** Colors
    Changes modeline color depending on Evil state, if buffer is
    modifier etc...

@@ -16,7 +16,7 @@ command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
 # setxkbmap -print -verbose 10
 
 # example commands i put in a .machinerc. I keep the .machinerc
-# setxkbmap -model pc105 -layout us -variant altgr-intl -option ctrl:swapcaps
+# setxkbmap -model pc105 -layout us -variant altgr-intl -option ctrl:swapcaps -option compose:sclk
 # specific to the machine I am running it on.
 [ -f ~/.machinerc ] && source ~/.machinerc
 

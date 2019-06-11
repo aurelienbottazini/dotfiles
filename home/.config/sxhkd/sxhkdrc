@@ -25,7 +25,7 @@ super + o ; d
 super + o ; b
   kill -s USR1 $(pgrep sxhkd); notify-send "reloaded sxhkd bindings"
 super + o ; k
-  setxkbmap -model pc105 -layout us -variant altgr-intl -option compose:sclk; notify-send "changed keyboard layout"
+  toggle-keymaps.sh
 Print
   flameshot gui
 super + Print

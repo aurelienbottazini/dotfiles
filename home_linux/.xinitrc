@@ -8,16 +8,16 @@ dunst &
 dropbox start &
 sxhkd &
 flameshot &
-jetbrains-toolbox &
 skypeforlinux &
 command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
+command -v mpd && mpd
 
 # localectl list-x11-keymap-variants
 # setxkbmap -print -verbose 10
 
 # example commands i put in a .machinerc. I keep the .machinerc
-# setxkbmap -model pc105 -layout us -variant altgr-intl -option ctrl:swapcaps -option compose:sclk
 # specific to the machine I am running it on.
+# setxkbmap -model pc105 -layout us -variant altgr-intl -option ctrl:swapcaps -option compose:sclk
 [ -f ~/.machinerc ] && source ~/.machinerc
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)

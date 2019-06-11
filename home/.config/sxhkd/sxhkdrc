@@ -37,8 +37,7 @@ super + r
 super + f
   thunar
 XF86AudioMute
-  amixer -q sset Master toggle
+  amixer -q sset Master toggle; notify-send "toggled mute"
 XF86Audio{Lower,Raise}Volume
-  amixer set Master {5%-,5%+}
-XF86MonBrightness{Up,Down}
-  lux {-a 5%,-s 5%}
+  amixer set Master {5%-,5%+}; notify-send "volume changed" XF86MonBrightness{Up,Down}
+  lux {-a 2%,-s 2%}

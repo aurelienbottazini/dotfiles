@@ -24,6 +24,8 @@ super + o ; d
   xfce4-display-settings --minimal
 super + o ; b
   kill -s USR1 $(pgrep sxhkd); notify-send "reloaded sxhkd bindings"
+super + o ; k
+  setxkbmap -model pc105 -layout us -variant altgr-intl -option compose:sclk; notify-send "changed keyboard layout"
 Print
   flameshot gui
 super + Print
@@ -39,5 +41,6 @@ super + f
 XF86AudioMute
   amixer -q sset Master toggle; notify-send "toggled mute"
 XF86Audio{Lower,Raise}Volume
-  amixer set Master {5%-,5%+}; notify-send "volume changed" XF86MonBrightness{Up,Down}
+  amixer set Master {5%-,5%+}; notify-send "volume changed"
+XF86MonBrightness{Up,Down}
   lux {-a 2%,-s 2%}

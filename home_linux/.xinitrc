@@ -9,9 +9,14 @@ sxhkd &
 flameshot &
 jetbrains-toolbox &
 skypeforlinux &
-command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
+
+# localectl list-x11-keymap-variants
+# setxkbmap -print -verbose 10
+setxkbmap -model pc105 -layout us -variant altgr-intl -option ctrl:swapcaps
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
-/* exec ssh-agent startxfce4 */
+
+command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
+
 exec ssh-agent xmonad

@@ -9,6 +9,13 @@ those first as it can impact the loading of other packages
   (load custom-file)
 #+end_src
 
+I keep my machine specific settings here.
+For example for the font size: ~(set-face-attribute 'default nil :height 100 )~
+#+BEGIN_SRC emacs-lisp
+  (if (file-exists-p "~/.emacs-local")
+    (load "~/.emacs-local"))
+#+END_SRC
+
 In my configuration I have some parts that are mac or linux specific.
 Those variables make it easier to apply those env specific setup.
 #+begin_src emacs-lisp

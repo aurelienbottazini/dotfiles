@@ -893,7 +893,7 @@ keybindings.
   :mode "\\.less\\'")
 #+END_SRC
 * Javascript
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
   (require 'compile)
   (setq compilation-error-regexp-alist-alist
         (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
@@ -970,11 +970,10 @@ keybindings.
       (add-hook 'js2-mode-hook 'prettier-js-mode))
 
     (defun auray-js-mode-hook ()
-      (setq imenu-create-index-function 'auray-js-imenu-make-index)
-      )
+      (setq imenu-create-index-function 'auray-js-imenu-make-index))
+    (add-hook 'js2-mode-hook 'auray-js-mode-hook)
     )
 
-  (add-hook 'js2-mode-hook 'auray-js-mode-hook)
 
   (defun enable-minor-mode (my-pair)
     "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
@@ -986,9 +985,9 @@ keybindings.
                                (enable-minor-mode
                                 '("\\.jsx?\\'" . prettier-js-mode))))
 
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.vue?\\'" . prettier-js-mode))))
+  ;; (add-hook 'web-mode-hook #'(lambda ()
+  ;;                              (enable-minor-mode
+  ;;                               '("\\.vue?\\'" . prettier-js-mode))))
 
   (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
   (defun my-jsx-hook ()
@@ -1082,7 +1081,7 @@ keybindings.
   (setq company-dabbrev-downcase nil)
   (setq company-show-numbers t)
   (use-package ac-js2)
-  (setq company-backends '((company-files company-capf)))
+  (setq company-backends '((company-files company-capf company-dabbrev)))
 
   (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
   (let ((map company-active-map))

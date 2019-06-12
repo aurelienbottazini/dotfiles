@@ -985,9 +985,9 @@ keybindings.
                                (enable-minor-mode
                                 '("\\.jsx?\\'" . prettier-js-mode))))
 
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.vue?\\'" . prettier-js-mode))))
+  ;; (add-hook 'web-mode-hook #'(lambda ()
+  ;;                              (enable-minor-mode
+  ;;                               '("\\.vue?\\'" . prettier-js-mode))))
 
   (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
   (defun my-jsx-hook ()
@@ -1081,7 +1081,7 @@ keybindings.
   (setq company-dabbrev-downcase nil)
   (setq company-show-numbers t)
   (use-package ac-js2)
-  (setq company-backends '((company-files company-capf)))
+  (setq company-backends '((company-files company-capf company-dabbrev)))
 
   (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
   (let ((map company-active-map))

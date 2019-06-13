@@ -192,7 +192,7 @@ myProjects =
      },
      Project { projectName = ws2WWW
              , projectDirectory = "~/"
-             , projectStartHook = Just $ do spawnOn ws2WWW "firefox-developer-edition"
+             , projectStartHook = Just $ do spawnOn ws2WWW "chromium"
      },
      -- Project { projectName = ws3CODE
      --         , projectDirectory = "~/"

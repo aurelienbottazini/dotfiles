@@ -784,6 +784,12 @@ keybindings.
 
 * Clojure
 #+BEGIN_SRC emacs-lisp
+(use-package evil-lispy
+  :config
+  ;; make evil-lispy start in the modes you want
+  (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
+  (add-hook 'clojure-mode-hook #'evil-lispy-mode))
+
 (use-package clojure-mode
   :mode "\\.clj\\'"
   :config

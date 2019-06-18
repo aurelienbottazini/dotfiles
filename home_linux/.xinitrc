@@ -1,10 +1,10 @@
 #!/bin/sh
-export GDK_SCALE=2
-export QT_AUTO_SCREEN_SCALE_FACTOR=2
+# export GDK_SCALE=2
+# export QT_AUTO_SCREEN_SCALE_FACTOR=2
 xrdb -merge ~/.Xresources
 thunar --daemon &
-stalonetray &
-dunst &
+# stalonetray &
+# dunst &
 dropbox start &
 sxhkd &
 flameshot &
@@ -23,4 +23,5 @@ command -v mpd && mpd
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-exec ssh-agent xmonad
+# exec ssh-agent xmonad
+exec ssh-agent startxfce4

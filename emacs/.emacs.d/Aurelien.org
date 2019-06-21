@@ -977,7 +977,8 @@ keybindings.
                             )
             prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
 
-      (add-hook 'js2-mode-hook 'prettier-js-mode))
+      ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+)
 
     (defun auray-js-mode-hook ()
       (setq imenu-create-index-function 'auray-js-imenu-make-index))

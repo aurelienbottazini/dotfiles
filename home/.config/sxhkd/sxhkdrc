@@ -16,6 +16,8 @@ super + space ; t
   tdd-org-capture.sh
 super + space ; Return
   launch-emacs-org-capture.sh
+super + m
+  jumpapp -c music-player launch-music-player.sh
 super + p
   dmenu_run
 super + o ; s
@@ -24,8 +26,6 @@ super + o ; d
   xfce4-display-settings --minimal
 super + o ; b
   kill -s USR1 $(pgrep sxhkd); notify-send "reloaded sxhkd bindings"
-super + o ; k
-  toggle-keymaps.sh
 Print
   flameshot gui
 super + Print

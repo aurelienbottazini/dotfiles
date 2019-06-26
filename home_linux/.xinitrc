@@ -2,14 +2,14 @@
 # export GDK_SCALE=2
 # export QT_AUTO_SCREEN_SCALE_FACTOR=2
 xrdb -merge ~/.Xresources
-thunar --daemon &
+# thunar --daemon &
 # stalonetray &
 # dunst &
 dropbox start &
 sxhkd &
 flameshot &
 skypeforlinux &
-command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
+# command -v cbatticon && cbatticon -l 20 -r 8 -c "/usr/bin/systemctl hibernate" &
 command -v mpd && mpd
 
 # localectl list-x11-keymap-variants

@@ -115,6 +115,7 @@
  '(diff-hl-insert ((t (:background "#e4f4e9" :foreground "#546758"))))
  '(dired-directory ((t (:foreground "#3a499c" :weight medium))))
  '(error ((t (:foreground "#f65058" :weight medium))))
+ '(eshell-prompt ((t (:foreground "Red" :weight normal))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#fccf61"))))
  '(flycheck-error ((t (:background "#ffcfd8" :underline (:color "black" :style wave)))))
  '(flycheck-info ((t (:background "#ffcfd8"))))

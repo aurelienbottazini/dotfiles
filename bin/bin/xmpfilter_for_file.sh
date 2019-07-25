@@ -1,2 +1,2 @@
 #!/bin/sh
-~/.rbenv/shims/xmpfilter $1 | sponge $1
+xmpfilter $1 | sponge $1

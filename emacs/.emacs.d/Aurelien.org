@@ -1079,6 +1079,7 @@ keybindings.
   (define-derived-mode cfn-mode yaml-mode
     "Cloudformation"
     "Cloudformation template mode.")
+  (add-to-list 'auto-mode-alist '(".output.yaml\\'" . cfn-mode))
   (add-to-list 'auto-mode-alist '(".template.yaml\\'" . cfn-mode))
   (add-hook 'cfn-mode-hook 'flycheck-mode)
   (flycheck-define-checker cfn-lint
@@ -1104,9 +1105,9 @@ keybindings.
 #+END_SRC
 * AutoCompletion
 #+BEGIN_SRC emacs-lisp
-  (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
+  (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line))
   (require 'mode-local)
-  (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+  (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
   (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
 #+END_SRC
 

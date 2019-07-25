@@ -11,6 +11,8 @@
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
  '(dumb-jump-mode t)
+ '(electric-pair-mode t)
+ '(electric-quote-string t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")
@@ -90,8 +92,8 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -115,7 +117,6 @@
  '(diff-hl-insert ((t (:background "#e4f4e9" :foreground "#546758"))))
  '(dired-directory ((t (:foreground "#3a499c" :weight medium))))
  '(error ((t (:foreground "#f65058" :weight medium))))
- '(eshell-prompt ((t (:foreground "Red" :weight normal))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "#fccf61"))))
  '(flycheck-error ((t (:background "#ffcfd8" :underline (:color "black" :style wave)))))
  '(flycheck-info ((t (:background "#ffcfd8"))))

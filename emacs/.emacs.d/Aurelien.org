@@ -319,7 +319,7 @@ keybindings.
 * Dired
   #+begin_src emacs-lisp
     (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform
-
+    (setq dired-listing-switches "-alh")
     ;; on mac there is some weird prefixing going on for GNU Tools like ls.
     ;; I favor GNU ls over MacOSX default ls
     (when *is-mac*

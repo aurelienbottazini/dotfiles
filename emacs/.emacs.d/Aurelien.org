@@ -490,13 +490,14 @@ keybindings.
 
      (use-package ivy
        :diminish ivy-mode
-       :bind (("C-s" . swiper-isearch)
+       :bind (("C-s" . swiper)
               :map my-keys-minor-mode-map
               ("C-c C-r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
-              ("/" . swiper-isearch)
+              ("/" . swiper)
+              ("?" . swiper-backward)
               :map my-leader-map
               ("b" . ivy-switch-buffer))
        :init
@@ -1397,6 +1398,10 @@ keybindings.
        :config
        (drag-stuff-global-mode t))
    #+end_src
+** Iedit
+#+begin_src emacs-lisp
+(use-package evil-iedit-state)
+#+end_src
 * Email
 When you run the initial indexing with mu do ~mu index --rebuild -m ./Maildir/fastmail/~.
 

@@ -4,7 +4,7 @@ if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
 end
 set -x PATH ~/bin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin $PATH
-set -x CDPATH $HOME $HOME/projects $HOME/work
+set -x CDPATH . $HOME $HOME/projects $HOME/work
 
 # fg Text
 # bg Background

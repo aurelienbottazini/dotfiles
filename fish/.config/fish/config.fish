@@ -134,6 +134,17 @@ set -x DATOMIC_SYSTEM "datomic-tutorial"
 set -x DATOMIC_REGION "eu-west-1"
 set -x DATOMIC_SOCKS_PORT 8182
 
-set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start | awk -F "=" '$1 == "SSH_AUTH_SOCK" { print $2 }')
+if type -q gnome-keyring-daemon
+  set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start | awk -F "=" '$1 == "SSH_AUTH_SOCK" { print $2 }')
+end
 
-source /usr/share/autojump/autojump.fish
+
+if test -e /usr/share/autojump/autojump.fish
+  source /usr/share/autojump/autojump.fish
+end
+
+if test -e /usr/local/share/autojump/autojump.fish
+  source /usr/local/share/autojump/autojump.fish
+end
+
+set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths

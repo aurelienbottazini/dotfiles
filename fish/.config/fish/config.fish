@@ -3,7 +3,7 @@ set fish_greeting
 if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
 end
-set -x PATH ~/bin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin /usr/local/opt/coreutils/libexec/gnubin $PATH
+set -x PATH ~/bin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin /usr/local/opt/coreutils/libexec/gnubin ~/Library/Python/3.7/bin $PATH
 set -x CDPATH . $HOME $HOME/projects $HOME/work
 
 # fg Text
@@ -124,11 +124,16 @@ set -g fish_term24bit 1
 
 set -x GTAGSLABEL pygments
 set -x XDG_CURRENT_DESKTOP GNOME # for gnome-control-center to work correctly on xmonad
-set -x CHROME_BIN /usr/bin/chromium-browser # for karmajs specs
 set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
-set -x CHROME_BIN "/usr/bin/google-chrome-stable"
+
+if test -e /Applications/Google\ Chrome.app/Contents/MacOs/Google\ Chrome
+  set -x CHROME_BIN "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+end
+if test -e /usr/bin/google-chrome-stable
+  set -x CHROME_BIN "/usr/bin/google-chrome-stable"
+end
 
 set -x DATOMIC_SYSTEM "datomic-tutorial"
 set -x DATOMIC_REGION "eu-west-1"
@@ -148,3 +153,5 @@ if test -e /usr/local/share/autojump/autojump.fish
 end
 
 set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths
+
+  

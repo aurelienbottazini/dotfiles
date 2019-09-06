@@ -62,3 +62,7 @@ home_linux_desktop/.quokka/package.json
 .quokka
 emacs/.emacs.d/tramp
 fish/.config/yarn/
+/fish/.config/configstore/nodemon.json
+/home/.clojure/.cpcache/1278501115.cp
+/home/.clojure/.cpcache
+/home/.clojure/deps.edn

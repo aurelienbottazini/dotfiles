@@ -390,10 +390,12 @@ keybindings.
   #+end_src
 
    #+BEGIN_SRC emacs-lisp
-      (diminish 'undo-tree-mode)
-      (diminish 'auto-fill-function)
-      (diminish 'my-keys-minor-mode)
-      (diminish 'eldoc-mode)
+   (use-package diminish
+     :config
+     (diminish 'undo-tree-mode)
+     (diminish 'auto-fill-function)
+     (diminish 'my-keys-minor-mode)
+     (diminish 'eldoc-mode))
    #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

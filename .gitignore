@@ -66,3 +66,4 @@ fish/.config/yarn/
 /home/.clojure/.cpcache/1278501115.cp
 /home/.clojure/.cpcache
 /home/.clojure/deps.edn
+fish/.config/configstore/update-notifier-npm.json

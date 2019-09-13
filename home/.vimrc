@@ -212,4 +212,4 @@ highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
 highlight EndOfBuffer ctermfg=3 guifg=#268bd2
 
-au FileType gitcommit execute "normal! O" | startinsert
+" au FileType gitcommit execute "normal! O" | startinsert

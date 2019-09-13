@@ -2425,3 +2425,7 @@ set clipboard+=unnamed
 " XMLRefactoringMenu                                
 " XSD2Document                                      
 " ZoomCurrentWindow                                 
+<<<<<<< HEAD
+=======
+set ideajoin
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31

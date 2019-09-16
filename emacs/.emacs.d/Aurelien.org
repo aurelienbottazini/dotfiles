@@ -171,6 +171,49 @@ keybindings.
 * Vim / Evil
   Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
   #+begin_src emacs-lisp
+<<<<<<< HEAD
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
+      (setq evil-mode-line-format nil)
+      :config
+
+      (evil-mode 1)
+
+      (use-package evil-surround
+        :config
+        (global-evil-surround-mode 1))
+
+      (use-package evil-commentary
+        :diminish evil-commentary-mode
+        :config
+        (evil-commentary-mode))
+
+      (use-package evil-visualstar
+        :config
+        (global-evil-visualstar-mode t))
+
+      (use-package evil-indent-plus
+        :config
+        (evil-indent-plus-default-bindings))
+
+      (use-package evil-matchit
+        :config
+        (global-evil-matchit-mode 1))
+
+      (use-package evil-search-highlight-persist
+        :config
+        (global-evil-search-highlight-persist t))
+
+      (evil-set-initial-state 'deft-mode 'insert)
+      (add-hook 'with-editor-mode-hook 'evil-insert-state)
+      (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
+      (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
+
+      (evil-ex-define-cmd "W" 'save-buffer)
+      (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
+=======
         (use-package evil
           :ensure t
           :init
@@ -219,6 +262,7 @@ keybindings.
 
           (evil-ex-define-cmd "W" 'save-buffer)
           (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
   #+end_src
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
@@ -231,9 +275,17 @@ keybindings.
                              (getenv "HOME") "/.rbenv/shims:"
                              (getenv "HOME") "/.rbenv/bin:"
                              (getenv "HOME") "/.fzf/bin:"
+<<<<<<< HEAD
                              (getenv "PATH"))))
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
+=======
+                             "/usr/local/opt/coreutils/libexec/gnubin:"
+                             (getenv "PATH"))))
+
+    (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
+                      "/usr/local/opt/coreutils/libexec/gnubin"
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
                       "~/.local/bin"
                       "~/bin"
                       "~/work/dox-compose/bin/"
@@ -388,10 +440,19 @@ keybindings.
   #+end_src
 
    #+BEGIN_SRC emacs-lisp
+<<<<<<< HEAD
       (diminish 'undo-tree-mode)
       (diminish 'auto-fill-function)
       (diminish 'my-keys-minor-mode)
       (diminish 'eldoc-mode)
+=======
+   (use-package diminish
+     :config
+     (diminish 'undo-tree-mode)
+     (diminish 'auto-fill-function)
+     (diminish 'my-keys-minor-mode)
+     (diminish 'eldoc-mode))
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
    #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -497,14 +558,22 @@ keybindings.
 
      (use-package ivy
        :diminish ivy-mode
+<<<<<<< HEAD
+       :bind (("C-s" . swiper-isearch)
+=======
        :bind (("C-s" . swiper)
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
               :map my-keys-minor-mode-map
               ("C-c C-r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
+<<<<<<< HEAD
+              ("/" . swiper-isearch)
+=======
               ("/" . swiper)
               ("?" . swiper-backward)
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
               :map my-leader-map
               ("b" . ivy-switch-buffer))
        :init
@@ -541,6 +610,15 @@ keybindings.
               :map my-leader-map
               (";" . avy-goto-char-timer)))
    #+END_SRC
+<<<<<<< HEAD
+** Alternative files
+#+BEGIN_SRC emacs-lisp
+(require 'alternative-files)
+(define-key my-leader-map (kbd "s") 'alternative-files-find-file)
+(define-key my-leader-map (kbd "S") 'alternative-files-create-file)
+#+END_SRC
+=======
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
@@ -613,6 +691,15 @@ keybindings.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
     :bind (:map my-leader-map
+<<<<<<< HEAD
+           ("p" . projectile-commander)
+           :map projectile-mode-map
+           ("C-c p" . projectile-command-map))
+    :init
+    (setq projectile-switch-project-action 'projectile-dired)
+    :config
+    (projectile-mode t))
+=======
                 ("p" . projectile-commander)
                 ("s" . projectile-toggle-between-implementation-and-test)
                 ("S" . projectile-find-implementation-or-test-other-window)
@@ -628,6 +715,7 @@ keybindings.
                                       :test "npm test"
                                       :run "npm start"
                                       :test-suffix ".spec"))
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
 #+END_SRC
 
 #+begin_src emacs-lisp
@@ -1089,7 +1177,10 @@ keybindings.
   (define-derived-mode cfn-mode yaml-mode
     "Cloudformation"
     "Cloudformation template mode.")
+<<<<<<< HEAD
+=======
   (add-to-list 'auto-mode-alist '(".output.yaml\\'" . cfn-mode))
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
   (add-to-list 'auto-mode-alist '(".template.yaml\\'" . cfn-mode))
   (add-hook 'cfn-mode-hook 'flycheck-mode)
   (flycheck-define-checker cfn-lint
@@ -1115,9 +1206,15 @@ keybindings.
 #+END_SRC
 * AutoCompletion
 #+BEGIN_SRC emacs-lisp
+<<<<<<< HEAD
+  (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
+  (require 'mode-local)
+  (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+=======
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line))
   (require 'mode-local)
   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
   (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
 #+END_SRC
 
@@ -1406,6 +1503,7 @@ keybindings.
        :config
        (drag-stuff-global-mode t))
    #+end_src
+<<<<<<< HEAD
 ** Iedit
 
 #+begin_src emacs-lisp
@@ -1528,3 +1626,51 @@ will have problems moving emails around inside mu
 
 (setq browse-url-browser-function 'my-browse-url-chromium-new-app)
 #+END_SRC
+=======
+** Iedit
+
+#+begin_src emacs-lisp
+  (use-package evil-multiedit
+    :config
+    ;; Highlights all matches of the selection in the buffer.
+    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+
+    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
+    ;; incrementally add the next unmatched match.
+    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+    ;; Match selected region.
+    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-and-next)
+    ;; Insert marker at point
+    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+
+    ;; Same as M-d but in reverse.
+    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-and-prev)
+
+    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
+    ;; `evil-multiedit-match-symbol-and-next` (or prev).
+
+    ;; Restore the last group of multiedit regions.
+    (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
+
+    ;; RET will toggle the region under the cursor
+    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+    ;; ...and in visual mode, RET will disable all fields outside the selected region
+    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+    ;; For moving between edit regions
+    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
+    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
+    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
+    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
+
+    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
+    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
+#+end_src
+
+When using expand-region, use ~e~ to enter iedit state.
+#+begin_src emacs-lisp
+(use-package evil-iedit-state)
+#+end_src
+>>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31

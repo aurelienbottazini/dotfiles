@@ -3,8 +3,33 @@ set fish_greeting
 if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
 end
-set -x PATH ~/bin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin $PATH
+
+set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin /usr/local/opt/coreutils/libexec/gnubin ~/Library/Python/3.7/bin $PATH
 set -x CDPATH . $HOME $HOME/projects $HOME/work
+
+function __fish_rbenv_needs_command
+  set cmd (commandline -opc)
+  if [ (count $cmd) -eq 1 -a $cmd[1] = 'rbenv' ]
+    return 0
+  end
+  return 1
+end
+
+function __fish_rbenv_using_command
+  set cmd (commandline -opc)
+  if [ (count $cmd) -gt 1 ]
+    if [ $argv[1] = $cmd[2] ]
+      return 0
+    end
+  end
+  return 1
+end
+
+complete -f -c rbenv -n '__fish_rbenv_needs_command' -a '(rbenv commands)'
+for cmd in (rbenv commands)
+  complete -f -c rbenv -n "__fish_rbenv_using_command $cmd" -a \
+    "(rbenv completions (commandline -opc)[2..-1])"
+end
 
 # fg Text
 # bg Background
@@ -124,16 +149,32 @@ set -g fish_term24bit 1
 
 set -x GTAGSLABEL pygments
 set -x XDG_CURRENT_DESKTOP GNOME # for gnome-control-center to work correctly on xmonad
-set -x CHROME_BIN /usr/bin/chromium-browser # for karmajs specs
 set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
-set -x CHROME_BIN "/usr/bin/google-chrome-stable"
+
+if test -e /Applications/Google\ Chrome.app/Contents/MacOs/Google\ Chrome
+  set -x CHROME_BIN "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+end
+if test -e /usr/bin/google-chrome-stable
+  set -x CHROME_BIN "/usr/bin/google-chrome-stable"
+end
 
 set -x DATOMIC_SYSTEM "datomic-tutorial"
 set -x DATOMIC_REGION "eu-west-1"
 set -x DATOMIC_SOCKS_PORT 8182
 
-set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start | awk -F "=" '$1 == "SSH_AUTH_SOCK" { print $2 }')
+if type -q gnome-keyring-daemon
+  set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start | awk -F "=" '$1 == "SSH_AUTH_SOCK" { print $2 }')
+end
 
-source /usr/share/autojump/autojump.fish
+
+if test -e /usr/share/autojump/autojump.fish
+  source /usr/share/autojump/autojump.fish
+end
+
+if test -e /usr/local/share/autojump/autojump.fish
+  source /usr/local/share/autojump/autojump.fish
+end
+
+set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths

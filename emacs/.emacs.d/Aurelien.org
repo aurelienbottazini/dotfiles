@@ -223,9 +223,11 @@ keybindings.
                              (getenv "HOME") "/.rbenv/shims:"
                              (getenv "HOME") "/.rbenv/bin:"
                              (getenv "HOME") "/.fzf/bin:"
+                             "/usr/local/opt/node@10/bin:"
                              (getenv "PATH"))))
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
+                      "/usr/local/opt/node@10/bin/"
                       "~/.local/bin"
                       "~/bin"
                       "~/work/dox-compose/bin/"
@@ -491,7 +493,7 @@ keybindings.
        :diminish ivy-mode
        :bind (("C-s" . swiper-isearch)
               :map my-keys-minor-mode-map
-              ("C-c C-r" . ffip-ivy-resume)
+              ("C-c s r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
@@ -599,7 +601,7 @@ keybindings.
 * Projects
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :bind (:map projectile-mode-map
+    :bind (:map my-keys-minor-mode-map
            ("C-c p" . projectile-command-map))
     :init
     (setq projectile-switch-project-action 'projectile-dired)
@@ -946,36 +948,32 @@ keybindings.
 
     (use-package import-js)
 
-    (setq javascript-common-imenu-regex-list
-          '(
-            ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
-            ("Desc" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-            ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-            ("Fn" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
-            ("Fn" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-            ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
-            ("Arrow Fn" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
-            ))
+    (use-package js2-refactor)
+    (use-package xref-js2)
 
-    (defun auray-js-imenu-make-index ()
-      (save-excursion
-        (imenu--generic-function javascript-common-imenu-regex-list)))
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (js2r-add-keybindings-with-prefix "C-c C-r")
+    (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
 
+    ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+    ;; unbind it.
+    (define-key js-mode-map (kbd "M-.") nil)
+
+    (add-hook 'js2-mode-hook (lambda ()
+                               (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
     (use-package prettier-js
       :config
       (setq prettier-args '(
                             "--trailing-comma" "es5"
                             "--single-quote" "true"
                             )
-            prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
-
-      ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
-)
+            prettier-js-command "/usr/local/bin/prettier")
+      (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+      (add-hook 'js2-mode-hook 'prettier-js-mode))
 
     (defun auray-js-mode-hook ()
       (setq imenu-create-index-function 'auray-js-imenu-make-index))
-    (add-hook 'js2-mode-hook 'auray-js-mode-hook)
-    )
+    (add-hook 'js2-mode-hook 'auray-js-mode-hook))
 
 
   (defun enable-minor-mode (my-pair)

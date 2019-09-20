@@ -2,6 +2,8 @@
 #+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
+* Setup
+
 It is important to load
 those first as it can impact the loading of other packages
 #+begin_src emacs-lisp

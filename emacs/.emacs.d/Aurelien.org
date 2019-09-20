@@ -380,6 +380,10 @@ keybindings.
 
     ;; makes fringe big enough on linux with HDPI
     (fringe-mode 20)
+
+    ;; show in mode bar the current function
+    (require 'which-func)
+    (which-function-mode t)
   #+end_src
 
    #+BEGIN_SRC emacs-lisp
@@ -464,30 +468,41 @@ keybindings.
 * Navigation
 ** Search Everything
    #+begin_src emacs-lisp
-     (use-package counsel
-       :bind (("M-x" . counsel-M-x)
-              ("C-x C-f" . counsel-find-file)
-              ("<f1> f" . counsel-describe-function)
-              ("<f1> v" . counsel-describe-variable)
-              ("<f1> l" . counsel-find-library)
-              ("<f2> i" . counsel-info-lookup-symbol)
-              ("<f2> u" . counsel-unicode-char)
-              ("C-c g" . counsel-git)
-              ("C-c j" . counsel-git-grep)
-              ("C-c k" . counsel-rg)
-              ("C-x l" . counsel-locate)
-              :map minibuffer-local-map
-              ("C-r" . counsel-minibuffer-history)
-              :map my-keys-minor-mode-map
-              ("C-c r" . counsel-recentf)
-              ("C-c f" . counsel-rg)
-              ("C-c i" . counsel-imenu)
-              ("C-c b" . counsel-ibuffer)
-              ("C-c m" . counsel-bookmark))
-       :init
-       (setq counsel-git-cmd "rg --files")
-       (setq counsel-rg-base-command
-             "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s ."))
+               (use-package counsel
+                 :bind (("M-x" . counsel-M-x)
+                        ("C-x C-f" . counsel-find-file)
+                        ("<f1> f" . counsel-describe-function)
+                        ("<f1> v" . counsel-describe-variable)
+                        ("<f1> l" . counsel-find-library)
+                        ("<f2> i" . counsel-info-lookup-symbol)
+                        ("<f2> u" . counsel-unicode-char)
+                        ("C-c g" . counsel-git)
+                        ("C-c j" . counsel-git-grep)
+                        ("C-c k" . counsel-rg)
+                        ("C-x l" . counsel-locate)
+                        :map minibuffer-local-map
+                        ("C-r" . counsel-minibuffer-history)
+                        :map my-keys-minor-mode-map
+                        ("C-c r" . counsel-recentf)
+                        ("C-c f" . counsel-rg)
+                        ("C-c i" . counsel-imenu)
+                        ("C-c b" . counsel-ibuffer)
+                        ("C-c m" . counsel-bookmark))
+                 :init
+                 (setq counsel-git-cmd "rg --files")
+                 (setq counsel-rg-base-command
+                       "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s .")
+
+                 )
+
+     (eval-after-load "counsel" '(progn
+                                   (defun counsel-imenu-categorize-functions (items)
+                                     "Categorize all the functions of imenu."
+                                     (let ((fns (cl-remove-if #'listp items :key #'cdr)))
+                                       (if fns
+                                           (nconc (cl-remove-if #'nlistp items :key #'cdr)
+                                                  `((":" ,@fns)))
+                                         items)))))
 
      (use-package ivy
        :diminish ivy-mode

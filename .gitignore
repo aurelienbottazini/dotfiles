@@ -61,3 +61,4 @@ home_linux_desktop/.quokka/package.json
 /home_linux_desktop/.quokka/config.json
 .quokka
 emacs/.emacs.d/tramp
+/fish/.config/fish/fish_variables

@@ -134,4 +134,10 @@ set -x DATOMIC_SYSTEM "datomic-tutorial"
 set -x DATOMIC_REGION "eu-west-1"
 set -x DATOMIC_SOCKS_PORT 8182
 
-source /usr/share/autojump/autojump.fish
+if test -e /usr/share/autojump/autojump.fish
+  source /usr/share/autojump/autojump.fish
+end
+
+if test -e /usr/local/share/autojump/autojump.fish
+  source /usr/local/share/autojump/autojump.fish
+end

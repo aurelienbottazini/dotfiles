@@ -412,7 +412,6 @@ keybindings.
        (add-hook 'post-command-hook
                  (lambda ()
                    (let ((color (cond ((minibufferp) default-color)
-                                      ((bound-and-true-p lispy-mode) '("#9d7ad2" . "#4c4e56"))
                                       ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
                                       ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
                                       ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
@@ -797,12 +796,6 @@ keybindings.
 
 * Clojure
 #+BEGIN_SRC emacs-lisp
-(use-package evil-lispy
-  :config
-  ;; make evil-lispy start in the modes you want
-  (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
-  (add-hook 'clojure-mode-hook #'evil-lispy-mode))
-
 (use-package clojure-mode
   :mode "\\.clj\\'"
   :config

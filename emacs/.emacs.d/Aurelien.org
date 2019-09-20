@@ -551,7 +551,7 @@ keybindings.
   #+begin_src emacs-lisp
     (use-package deft
       :bind (:map my-keys-minor-mode-map
-             ("C-c d" . deft))
+             ("C-c n" . deft))
       :init
       (setq deft-extensions '("txt" "tex" "org"))
       (setq deft-directory "~/Dropbox/org/")
@@ -912,6 +912,12 @@ keybindings.
 (use-package less-css-mode
   :mode "\\.less\\'")
 #+END_SRC
+* Docker
+#+begin_src emacs-lisp
+(use-package docker
+ :ensure t
+ :bind ("C-c d". docker))
+#+end_src
 * Javascript
 #+BEGIN_SRC emacs-lisp
   (require 'compile)

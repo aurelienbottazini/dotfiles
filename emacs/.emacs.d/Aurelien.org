@@ -916,7 +916,14 @@ keybindings.
 #+begin_src emacs-lisp
 (use-package docker
  :ensure t
- :bind ("C-c d". docker))
+ :bind ("C-c d". docker)
+ :config
+    (defadvice docker-image-mode (after docker-image-mode-change-to-emacs-state activate compile)
+      "when entering git-timemachine mode, change evil normal state to emacs state"
+      (if (evil-normal-state-p)
+          (evil-emacs-state)
+        (evil-normal-state)))
+        )
 #+end_src
 * Javascript
 #+BEGIN_SRC emacs-lisp

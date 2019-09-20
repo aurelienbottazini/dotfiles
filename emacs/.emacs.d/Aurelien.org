@@ -210,8 +210,7 @@ keybindings.
       (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
       (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
 
-      (evil-ex-define-cmd "W" 'save-buffer)
-      (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
+      (evil-ex-define-cmd "W" 'save-buffer))
   #+end_src
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
@@ -288,7 +287,6 @@ keybindings.
   #+BEGIN_SRC emacs-lisp
   ( require 're-builder)
   (setq reb-re-syntax 'string)
-  (define-key my-leader-map (kbd "odr") 're-builder)
   #+END_SRC
 
 ** tabs and whitespace
@@ -476,13 +474,12 @@ keybindings.
               ("C-x l" . counsel-locate)
               :map minibuffer-local-map
               ("C-r" . counsel-minibuffer-history)
-              :map my-leader-map
-              ("r" . counsel-recentf)
-              ("f" . counsel-rg)
-              ("i" . counsel-imenu)
-              ("b" . counsel-ibuffer)
-              ("m" . counsel-bookmark)
-              ("jo" . counsel-org-goto-all))
+              :map my-keys-minor-mode-map
+              ("C-c r" . counsel-recentf)
+              ("C-c f" . counsel-rg)
+              ("C-c i" . counsel-imenu)
+              ("C-c b" . counsel-ibuffer)
+              ("C-c m" . counsel-bookmark))
        :init
        (setq counsel-git-cmd "rg --files")
        (setq counsel-rg-base-command
@@ -496,9 +493,7 @@ keybindings.
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
-              ("/" . swiper-isearch)
-              :map my-leader-map
-              ("b" . ivy-switch-buffer))
+              ("/" . swiper-isearch))
        :init
        (setq ivy-use-selectable-prompt t)
        ;; enable bookmarks and recent-f
@@ -529,21 +524,13 @@ keybindings.
    #+BEGIN_SRC emacs-lisp
      (use-package avy
        :bind (:map my-keys-minor-mode-map
-              ("C-;" . avy-goto-char-timer)
-              :map my-leader-map
-              (";" . avy-goto-char-timer)))
+              ("C-;" . avy-goto-char-timer)))
    #+END_SRC
-** Alternative files
-#+BEGIN_SRC emacs-lisp
-(require 'alternative-files)
-(define-key my-leader-map (kbd "s") 'alternative-files-find-file)
-(define-key my-leader-map (kbd "S") 'alternative-files-create-file)
-#+END_SRC
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
-      :bind (:map my-leader-map
-             ("d" . deft))
+      :bind (:map my-keys-minor-mode-map
+             ("C-c d" . deft))
       :init
       (setq deft-extensions '("txt" "tex" "org"))
       (setq deft-directory "~/Dropbox/org/")
@@ -562,11 +549,11 @@ keybindings.
   (setq ediff-split-window-function 'split-window-vertically)
 
   (use-package magit
-    :bind (:map my-leader-map
-                ("gs" . magit-status)
-                ("gc" . magit-commit)
-                ("gp" . magit-push-current)
-                ("gf" . magit-file-dispatch))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c gs" . magit-status)
+                ("C-c gc" . magit-commit)
+                ("C-c gp" . magit-push-current)
+                ("C-c gf" . magit-file-dispatch))
     :init
     (setq magit-commit-show-diff nil
           magit-revert-buffers 1)
@@ -585,12 +572,12 @@ keybindings.
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
   (use-package git-link
-    :bind (:map my-leader-map
-                ("gl" . git-link)))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c gl" . git-link)))
 
   (use-package git-timemachine
-    :bind (:map my-leader-map
-                ("gt" . git-timemachine-toggle))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c gt" . git-timemachine-toggle))
     :config
     (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
       "when entering git-timemachine mode, change evil normal state to emacs state"
@@ -605,14 +592,12 @@ keybindings.
     (interactive)
     (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
       (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
-  (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
+  (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
 #+end_src
 * Projects
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :bind (:map my-leader-map
-           ("p" . projectile-commander)
-           :map projectile-mode-map
+    :bind (:map projectile-mode-map
            ("C-c p" . projectile-command-map))
     :init
     (setq projectile-switch-project-action 'projectile-dired)
@@ -1019,7 +1004,7 @@ keybindings.
 
   (use-package context-coloring
     :diminish context-coloring-mode
-    :bind (:map my-leader-map ("oc" . context-coloring-mode)))
+    :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode)))
 
   (use-package json-mode
     :mode "\\.json\\'"
@@ -1097,10 +1082,10 @@ keybindings.
   (add-to-list 'flycheck-checkers 'cfn-lint))
 
   (require 'aurayb-narrow-indirect-vue)
-  (define-key my-leader-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
-  (define-key my-leader-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
-  (define-key my-leader-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
-  (define-key my-leader-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
+  ;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
+  ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
+  ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+  ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
 #+END_SRC
 * AutoCompletion
 #+BEGIN_SRC emacs-lisp
@@ -1150,8 +1135,8 @@ keybindings.
   (use-package yasnippet
     :demand
     :commands yas-expand-snippet
-    :bind (:map my-leader-map
-                ("vs" . yas-describe-tables))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c yd" . yas-describe-tables))
     :diminish yas-minor-mode
     :init
     (setq yas-snippet-dirs
@@ -1207,8 +1192,8 @@ keybindings.
         (other-window -1)))
      (t (error "No run command for that mode"))))
 
-(define-key my-leader-map (kbd "x") 'run-for-mode)
-(define-key my-leader-map (kbd "X") 'run-bigger-for-mode)
+(define-key my-keys-minor-mode-map (kbd "x") 'run-for-mode)
+(define-key my-keys-minor-mode-map (kbd "X") 'run-bigger-for-mode)
 #+END_SRC
 * Bindings
 ** General
@@ -1247,58 +1232,52 @@ keybindings.
        (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 
      (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
-     (define-key my-leader-map (kbd "u") 'universal-argument)
 
      (use-package expand-region
-       :bind (:map my-leader-map ("w" . er/expand-region)))
+       :bind (:map my-keys-minor-mode-map ("C-c w" . er/expand-region)))
 
-     (define-key my-leader-map (kbd "a") 'org-agenda)
+     (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
+     (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
+     (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
+     (define-key my-keys-minor-mode-map (kbd "C-c jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
+     (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
+     (define-key my-keys-minor-mode-map (kbd "C-c jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
+     (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
+     (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
 
-     (define-key my-leader-map (kbd "R") 'revert-buffer)
-     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
-
-     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
-     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
-     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-     (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
-     (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
-
-     (define-key my-leader-map (kbd "jj") 'dired-jump)
-     (define-key my-leader-map (kbd "k") 'recompile)
-     (define-key my-leader-map (kbd "K") 'compile)
-
-     (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
+     (define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
      (use-package define-word
        :config
-       (define-key my-leader-map (kbd "<f6>") 'define-word-at-point))
+       (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
 
      (defun lookup-synonyms (word)
        (interactive (list (save-excursion (car (ispell-get-word nil)))))
        (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
-     (define-key my-leader-map (kbd "<f7>") 'lookup-synonyms)
-     (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
+     (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
+     (define-key my-keys-minor-mode-map (kbd "C-c oh") 'evil-search-highlight-persist-remove-all)
      (defun hide-line-numbers ()
        (interactive)
        (setq display-line-numbers (quote nil)))
-     (define-key my-leader-map (kbd "olh") 'hide-line-numbers)
+     (define-key my-keys-minor-mode-map (kbd "C-c olh") 'hide-line-numbers)
      (defun show-line-numbers ()
        (interactive)
        (setq display-line-numbers (quote absolute)))
-     (define-key my-leader-map (kbd "oll") 'show-line-numbers)
-     (define-key my-leader-map (kbd "ow") 'visual-line-mode)
-     (define-key my-leader-map (kbd "of") 'auto-fill-mode)
-     (define-key my-leader-map (kbd "os") 'org-strike-header)
-     (define-key my-leader-map (kbd "og") 'global-hl-line-mode)
+     (define-key my-keys-minor-mode-map (kbd "C-c oll") 'show-line-numbers)
+     (define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
+     (define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
+     (define-key my-keys-minor-mode-map (kbd "C-c os") 'org-strike-header)
+     (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
      (use-package rainbow-mode
-       :bind (:map my-leader-map
-                   ("or" . rainbow-mode)))
+       :bind (:map my-keys-minor-mode-map
+                   ("C-c or" . rainbow-mode)))
      ;; gives each line only one visual line and don't show a continuation on next line
      (set-default 'truncate-lines t)
-     (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)
+     (define-key my-keys-minor-mode-map (kbd "C-c ot") 'toggle-truncate-lines)
 
-     (define-key evil-normal-state-map (kbd "<mouse-8>") 'previous-buffer)
-     (define-key evil-normal-state-map (kbd "<mouse-9>") 'next-buffer)
      (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
      (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
      (define-key evil-normal-state-map (kbd "]e") 'next-error)
@@ -1364,9 +1343,9 @@ keybindings.
    to use `fd` instead of find.
    #+begin_src emacs-lisp
      (use-package find-file-in-project
-       :bind (:map  my-leader-map
-                    ("t" . find-file-in-project)
-                    ("T" . find-file-in-project-by-selected)
+       :bind (:map  my-keys-minor-mode-map
+                    ("C-c t" . find-file-in-project)
+                    ("C-c T" . find-file-in-project-by-selected)
                     :map evil-normal-state-map
                     ("gf" . find-file-in-project-at-point))
        :config

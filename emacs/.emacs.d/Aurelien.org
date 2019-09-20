@@ -236,6 +236,8 @@ keybindings.
                       "/usr/local/bin/"
                       "/usr/local/sbin/"
                       "/usr/bin/"))
+    (when *is-mac*
+      (add-to-list 'exec-path "/usr/local/opt/coreutils/libexec/gnubin"))
   #+end_src
 
   #+begin_src emacs-lisp
@@ -1192,8 +1194,8 @@ keybindings.
         (other-window -1)))
      (t (error "No run command for that mode"))))
 
-(define-key my-keys-minor-mode-map (kbd "x") 'run-for-mode)
-(define-key my-keys-minor-mode-map (kbd "X") 'run-bigger-for-mode)
+(define-key my-keys-minor-mode-map (kbd "C-c x") 'run-for-mode)
+(define-key my-keys-minor-mode-map (kbd "C-c X") 'run-bigger-for-mode)
 #+END_SRC
 * Bindings
 ** General

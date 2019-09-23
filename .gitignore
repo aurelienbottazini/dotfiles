@@ -62,3 +62,4 @@ home_linux_desktop/.quokka/package.json
 .quokka
 emacs/.emacs.d/tramp
 /fish/.config/fish/fish_variables
+/emacs/.emacs.d/.lsp-session-v1

@@ -1126,8 +1126,7 @@ keybindings.
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase nil)
   (setq company-show-numbers t)
-  (use-package ac-js2)
-  (setq company-backends '((company-files company-capf company-dabbrev)))
+  (setq company-backends '((company-files company-lsp company-capf company-dabbrev)))
 
   (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
   (let ((map company-active-map))
@@ -1154,6 +1153,16 @@ keybindings.
           (self-insert-command 1)
         (company-complete-number (string-to-number k))))))
 #+END_SRC
+* lsp (intellisense)
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :hook ((js2-mode . lsp)
+         (web-mode . lsp))
+  :commands lsp)
+
+(use-package company-lsp
+  :commands company-lsp)
+#+end_src
 * Snippets
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet

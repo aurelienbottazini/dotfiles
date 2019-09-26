@@ -2,6 +2,8 @@
 #+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
+* Setup
+
 It is important to load
 those first as it can impact the loading of other packages
 #+begin_src emacs-lisp
@@ -211,6 +213,7 @@ keybindings.
       (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
       (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
 
+<<<<<<< HEAD
       (evil-ex-define-cmd "W" 'save-buffer)
       (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
 =======
@@ -263,6 +266,10 @@ keybindings.
           (evil-ex-define-cmd "W" 'save-buffer)
           (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
 >>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
+=======
+      (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)
+      (evil-ex-define-cmd "W" 'save-buffer))
+>>>>>>> f07449c2c13ef93054672cfc519c3b5c5c81ad55
   #+end_src
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
@@ -275,17 +282,11 @@ keybindings.
                              (getenv "HOME") "/.rbenv/shims:"
                              (getenv "HOME") "/.rbenv/bin:"
                              (getenv "HOME") "/.fzf/bin:"
-<<<<<<< HEAD
+                             "/usr/local/opt/node@10/bin:"
                              (getenv "PATH"))))
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
-=======
-                             "/usr/local/opt/coreutils/libexec/gnubin:"
-                             (getenv "PATH"))))
-
-    (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
-                      "/usr/local/opt/coreutils/libexec/gnubin"
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
+                      "/usr/local/opt/node@10/bin/"
                       "~/.local/bin"
                       "~/bin"
                       "~/work/dox-compose/bin/"
@@ -296,6 +297,8 @@ keybindings.
                       "/usr/local/bin/"
                       "/usr/local/sbin/"
                       "/usr/bin/"))
+    (when *is-mac*
+      (add-to-list 'exec-path "/usr/local/opt/coreutils/libexec/gnubin"))
   #+end_src
 
   #+begin_src emacs-lisp
@@ -347,7 +350,6 @@ keybindings.
   #+BEGIN_SRC emacs-lisp
   ( require 're-builder)
   (setq reb-re-syntax 'string)
-  (define-key my-leader-map (kbd "odr") 're-builder)
   #+END_SRC
 
 ** tabs and whitespace
@@ -437,6 +439,10 @@ keybindings.
 
     ;; makes fringe big enough on linux with HDPI
     (fringe-mode 20)
+
+    ;; show in mode bar the current function
+    (require 'which-func)
+    (which-function-mode t)
   #+end_src
 
    #+BEGIN_SRC emacs-lisp
@@ -471,7 +477,6 @@ keybindings.
        (add-hook 'post-command-hook
                  (lambda ()
                    (let ((color (cond ((minibufferp) default-color)
-                                      ((bound-and-true-p lispy-mode) '("#9d7ad2" . "#4c4e56"))
                                       ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
                                       ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
                                       ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
@@ -530,31 +535,41 @@ keybindings.
 * Navigation
 ** Search Everything
    #+begin_src emacs-lisp
-     (use-package counsel
-       :bind (("M-x" . counsel-M-x)
-              ("C-x C-f" . counsel-find-file)
-              ("<f1> f" . counsel-describe-function)
-              ("<f1> v" . counsel-describe-variable)
-              ("<f1> l" . counsel-find-library)
-              ("<f2> i" . counsel-info-lookup-symbol)
-              ("<f2> u" . counsel-unicode-char)
-              ("C-c g" . counsel-git)
-              ("C-c j" . counsel-git-grep)
-              ("C-c k" . counsel-rg)
-              ("C-x l" . counsel-locate)
-              :map minibuffer-local-map
-              ("C-r" . counsel-minibuffer-history)
-              :map my-leader-map
-              ("r" . counsel-recentf)
-              ("f" . counsel-rg)
-              ("i" . counsel-imenu)
-              ("b" . counsel-ibuffer)
-              ("m" . counsel-bookmark)
-              ("jo" . counsel-org-goto-all))
-       :init
-       (setq counsel-git-cmd "rg --files")
-       (setq counsel-rg-base-command
-             "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s ."))
+               (use-package counsel
+                 :bind (("M-x" . counsel-M-x)
+                        ("C-x C-f" . counsel-find-file)
+                        ("<f1> f" . counsel-describe-function)
+                        ("<f1> v" . counsel-describe-variable)
+                        ("<f1> l" . counsel-find-library)
+                        ("<f2> i" . counsel-info-lookup-symbol)
+                        ("<f2> u" . counsel-unicode-char)
+                        ("C-c g" . counsel-git)
+                        ("C-c j" . counsel-git-grep)
+                        ("C-c k" . counsel-rg)
+                        ("C-x l" . counsel-locate)
+                        :map minibuffer-local-map
+                        ("C-r" . counsel-minibuffer-history)
+                        :map my-keys-minor-mode-map
+                        ("C-c r" . counsel-recentf)
+                        ("C-c f" . counsel-rg)
+                        ("C-c i" . counsel-imenu)
+                        ("C-c b" . counsel-ibuffer)
+                        ("C-c m" . counsel-bookmark))
+                 :init
+                 (setq counsel-git-cmd "rg --files")
+                 (setq counsel-rg-base-command
+                       "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s .")
+
+                 )
+
+     (eval-after-load "counsel" '(progn
+                                   (defun counsel-imenu-categorize-functions (items)
+                                     "Categorize all the functions of imenu."
+                                     (let ((fns (cl-remove-if #'listp items :key #'cdr)))
+                                       (if fns
+                                           (nconc (cl-remove-if #'nlistp items :key #'cdr)
+                                                  `((":" ,@fns)))
+                                         items)))))
 
      (use-package ivy
        :diminish ivy-mode
@@ -564,18 +579,11 @@ keybindings.
        :bind (("C-s" . swiper)
 >>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
               :map my-keys-minor-mode-map
-              ("C-c C-r" . ffip-ivy-resume)
+              ("C-c s r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
-<<<<<<< HEAD
-              ("/" . swiper-isearch)
-=======
-              ("/" . swiper)
-              ("?" . swiper-backward)
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
-              :map my-leader-map
-              ("b" . ivy-switch-buffer))
+              ("/" . swiper-isearch))
        :init
        (setq ivy-use-selectable-prompt t)
        ;; enable bookmarks and recent-f
@@ -606,10 +614,9 @@ keybindings.
    #+BEGIN_SRC emacs-lisp
      (use-package avy
        :bind (:map my-keys-minor-mode-map
-              ("C-;" . avy-goto-char-timer)
-              :map my-leader-map
-              (";" . avy-goto-char-timer)))
+              ("C-;" . avy-goto-char-timer)))
    #+END_SRC
+<<<<<<< HEAD
 <<<<<<< HEAD
 ** Alternative files
 #+BEGIN_SRC emacs-lisp
@@ -619,11 +626,13 @@ keybindings.
 #+END_SRC
 =======
 >>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
+=======
+>>>>>>> f07449c2c13ef93054672cfc519c3b5c5c81ad55
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
-      :bind (:map my-leader-map
-             ("d" . deft))
+      :bind (:map my-keys-minor-mode-map
+             ("C-c n" . deft))
       :init
       (setq deft-extensions '("txt" "tex" "org"))
       (setq deft-directory "~/Dropbox/org/")
@@ -642,11 +651,11 @@ keybindings.
   (setq ediff-split-window-function 'split-window-vertically)
 
   (use-package magit
-    :bind (:map my-leader-map
-                ("gs" . magit-status)
-                ("gc" . magit-commit)
-                ("gp" . magit-push-current)
-                ("gf" . magit-file-dispatch))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c gs" . magit-status)
+                ("C-c gc" . magit-commit)
+                ("C-c gp" . magit-push-current)
+                ("C-c gf" . magit-file-dispatch))
     :init
     (setq magit-commit-show-diff nil
           magit-revert-buffers 1)
@@ -665,12 +674,12 @@ keybindings.
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
   (use-package git-link
-    :bind (:map my-leader-map
-                ("gl" . git-link)))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c gl" . git-link)))
 
   (use-package git-timemachine
-    :bind (:map my-leader-map
-                ("gt" . git-timemachine-toggle))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c gt" . git-timemachine-toggle))
     :config
     (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
       "when entering git-timemachine mode, change evil normal state to emacs state"
@@ -685,15 +694,12 @@ keybindings.
     (interactive)
     (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
       (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
-  (define-key my-leader-map (kbd "gg") 'ab-run-gitsh)
+  (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
 #+end_src
 * Projects
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :bind (:map my-leader-map
-<<<<<<< HEAD
-           ("p" . projectile-commander)
-           :map projectile-mode-map
+    :bind (:map my-keys-minor-mode-map
            ("C-c p" . projectile-command-map))
     :init
     (setq projectile-switch-project-action 'projectile-dired)
@@ -888,12 +894,6 @@ keybindings.
 
 * Clojure
 #+BEGIN_SRC emacs-lisp
-(use-package evil-lispy
-  :config
-  ;; make evil-lispy start in the modes you want
-  (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
-  (add-hook 'clojure-mode-hook #'evil-lispy-mode))
-
 (use-package clojure-mode
   :mode "\\.clj\\'"
   :config
@@ -1004,6 +1004,19 @@ keybindings.
 (use-package less-css-mode
   :mode "\\.less\\'")
 #+END_SRC
+* Docker
+#+begin_src emacs-lisp
+(use-package docker
+ :ensure t
+ :bind ("C-c d". docker)
+ :config
+    (defadvice docker-image-mode (after docker-image-mode-change-to-emacs-state activate compile)
+      "when entering git-timemachine mode, change evil normal state to emacs state"
+      (if (evil-normal-state-p)
+          (evil-emacs-state)
+        (evil-normal-state)))
+        )
+#+end_src
 * Javascript
 #+BEGIN_SRC emacs-lisp
   (require 'compile)
@@ -1057,36 +1070,32 @@ keybindings.
 
     (use-package import-js)
 
-    (setq javascript-common-imenu-regex-list
-          '(
-            ("Class" "class[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*" 1)
-            ("Desc" "describe('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-            ("It" "it('\\([a-zA-Z0-9_$./ ]+\\)'*" 1)
-            ("Fn" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
-            ("Fn" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-            ("Const" "const[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]* =" 1)
-            ("Arrow Fn" "^[ \t]*\\([A-Za-z_$][A-Za-z0-9_$]+\\)[ \t]*=[ \t]*(?[a-zA-Z0-9, ]*)?[ \t]*=>" 1) ;; es6 fn1 = (e) =>
-            ))
+    (use-package js2-refactor)
+    (use-package xref-js2)
 
-    (defun auray-js-imenu-make-index ()
-      (save-excursion
-        (imenu--generic-function javascript-common-imenu-regex-list)))
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (js2r-add-keybindings-with-prefix "C-c C-r")
+    (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
 
+    ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+    ;; unbind it.
+    (define-key js-mode-map (kbd "M-.") nil)
+
+    (add-hook 'js2-mode-hook (lambda ()
+                               (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
     (use-package prettier-js
       :config
       (setq prettier-args '(
                             "--trailing-comma" "es5"
                             "--single-quote" "true"
                             )
-            prettier-js-command (concat (getenv "HOME") "/.yarn/bin/prettier"))
-
-      ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
-)
+            prettier-js-command "/usr/local/bin/prettier")
+      (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+      (add-hook 'js2-mode-hook 'prettier-js-mode))
 
     (defun auray-js-mode-hook ()
       (setq imenu-create-index-function 'auray-js-imenu-make-index))
-    (add-hook 'js2-mode-hook 'auray-js-mode-hook)
-    )
+    (add-hook 'js2-mode-hook 'auray-js-mode-hook))
 
 
   (defun enable-minor-mode (my-pair)
@@ -1117,7 +1126,7 @@ keybindings.
 
   (use-package context-coloring
     :diminish context-coloring-mode
-    :bind (:map my-leader-map ("oc" . context-coloring-mode)))
+    :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode)))
 
   (use-package json-mode
     :mode "\\.json\\'"
@@ -1199,10 +1208,10 @@ keybindings.
   (add-to-list 'flycheck-checkers 'cfn-lint))
 
   (require 'aurayb-narrow-indirect-vue)
-  (define-key my-leader-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
-  (define-key my-leader-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
-  (define-key my-leader-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
-  (define-key my-leader-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
+  ;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
+  ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
+  ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+  ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
 #+END_SRC
 * AutoCompletion
 #+BEGIN_SRC emacs-lisp
@@ -1225,8 +1234,7 @@ keybindings.
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase nil)
   (setq company-show-numbers t)
-  (use-package ac-js2)
-  (setq company-backends '((company-files company-capf company-dabbrev)))
+  (setq company-backends '((company-files company-lsp company-capf company-dabbrev)))
 
   (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
   (let ((map company-active-map))
@@ -1253,13 +1261,23 @@ keybindings.
           (self-insert-command 1)
         (company-complete-number (string-to-number k))))))
 #+END_SRC
+* lsp (intellisense)
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :hook ((js2-mode . lsp)
+         (web-mode . lsp))
+  :commands lsp)
+
+(use-package company-lsp
+  :commands company-lsp)
+#+end_src
 * Snippets
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
     :demand
     :commands yas-expand-snippet
-    :bind (:map my-leader-map
-                ("vs" . yas-describe-tables))
+    :bind (:map my-keys-minor-mode-map
+                ("C-c yd" . yas-describe-tables))
     :diminish yas-minor-mode
     :init
     (setq yas-snippet-dirs
@@ -1285,7 +1303,7 @@ keybindings.
       (cider-eval-defun-at-point))
      ((equal major-mode 'clojurescript-mode)
       (cider-eval-defun-at-point))
-     ((equal major-mode 'emacs-lisp-mode)
+     ((or (equal major-mode 'emacs-lisp-mode) (equal major-mode 'lisp-interaction-mode))
       (eval-defun nil))
      ((equal major-mode 'js2-mode)
       (run-node-on-buffer))
@@ -1306,7 +1324,7 @@ keybindings.
       (cider-load-buffer))
      ((equal major-mode 'clojurescript-mode)
       (cider-load-buffer))
-     ((equal major-mode 'emacs-lisp-mode)
+     ((or (equal major-mode 'emacs-lisp-mode) (equal major-mode 'lisp-interaction-mode))
       (eval-defun nil))
      ((equal major-mode 'js2-mode)
       (progn
@@ -1315,8 +1333,8 @@ keybindings.
         (other-window -1)))
      (t (error "No run command for that mode"))))
 
-(define-key my-leader-map (kbd "x") 'run-for-mode)
-(define-key my-leader-map (kbd "X") 'run-bigger-for-mode)
+(define-key my-keys-minor-mode-map (kbd "C-c x") 'run-for-mode)
+(define-key my-keys-minor-mode-map (kbd "C-c X") 'run-bigger-for-mode)
 #+END_SRC
 * Bindings
 ** General
@@ -1355,58 +1373,52 @@ keybindings.
        (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 
      (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
-     (define-key my-leader-map (kbd "u") 'universal-argument)
 
      (use-package expand-region
-       :bind (:map my-leader-map ("w" . er/expand-region)))
+       :bind (:map my-keys-minor-mode-map ("C-c w" . er/expand-region)))
 
-     (define-key my-leader-map (kbd "a") 'org-agenda)
+     (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
+     (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
+     (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
+     (define-key my-keys-minor-mode-map (kbd "C-c jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
+     (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
+     (define-key my-keys-minor-mode-map (kbd "C-c jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
+     (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
+     (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
 
-     (define-key my-leader-map (kbd "R") 'revert-buffer)
-     (define-key my-leader-map (kbd "jc") 'org-clock-jump-to-current-clock)
-
-     (define-key my-leader-map (kbd "jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
-     (define-key my-leader-map (kbd "je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
-     (define-key my-leader-map (kbd "jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-     (define-key my-leader-map (kbd "jp") '(lambda () (interactive) (find-file "~/projects/")))
-     (define-key my-leader-map (kbd "jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
-
-     (define-key my-leader-map (kbd "jj") 'dired-jump)
-     (define-key my-leader-map (kbd "k") 'recompile)
-     (define-key my-leader-map (kbd "K") 'compile)
-
-     (define-key my-leader-map (kbd "<f5>") 'ispell-buffer)
+     (define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
      (use-package define-word
        :config
-       (define-key my-leader-map (kbd "<f6>") 'define-word-at-point))
+       (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
 
      (defun lookup-synonyms (word)
        (interactive (list (save-excursion (car (ispell-get-word nil)))))
        (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
-     (define-key my-leader-map (kbd "<f7>") 'lookup-synonyms)
-     (define-key my-leader-map (kbd "oh") 'evil-search-highlight-persist-remove-all)
+     (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
+     (define-key my-keys-minor-mode-map (kbd "C-c oh") 'evil-search-highlight-persist-remove-all)
      (defun hide-line-numbers ()
        (interactive)
        (setq display-line-numbers (quote nil)))
-     (define-key my-leader-map (kbd "olh") 'hide-line-numbers)
+     (define-key my-keys-minor-mode-map (kbd "C-c olh") 'hide-line-numbers)
      (defun show-line-numbers ()
        (interactive)
        (setq display-line-numbers (quote absolute)))
-     (define-key my-leader-map (kbd "oll") 'show-line-numbers)
-     (define-key my-leader-map (kbd "ow") 'visual-line-mode)
-     (define-key my-leader-map (kbd "of") 'auto-fill-mode)
-     (define-key my-leader-map (kbd "os") 'org-strike-header)
-     (define-key my-leader-map (kbd "og") 'global-hl-line-mode)
+     (define-key my-keys-minor-mode-map (kbd "C-c oll") 'show-line-numbers)
+     (define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
+     (define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
+     (define-key my-keys-minor-mode-map (kbd "C-c os") 'org-strike-header)
+     (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
      (use-package rainbow-mode
-       :bind (:map my-leader-map
-                   ("or" . rainbow-mode)))
+       :bind (:map my-keys-minor-mode-map
+                   ("C-c or" . rainbow-mode)))
      ;; gives each line only one visual line and don't show a continuation on next line
      (set-default 'truncate-lines t)
-     (define-key my-leader-map (kbd "ot") 'toggle-truncate-lines)
+     (define-key my-keys-minor-mode-map (kbd "C-c ot") 'toggle-truncate-lines)
 
-     (define-key evil-normal-state-map (kbd "<mouse-8>") 'previous-buffer)
-     (define-key evil-normal-state-map (kbd "<mouse-9>") 'next-buffer)
      (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
      (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
      (define-key evil-normal-state-map (kbd "]e") 'next-error)
@@ -1472,9 +1484,9 @@ keybindings.
    to use `fd` instead of find.
    #+begin_src emacs-lisp
      (use-package find-file-in-project
-       :bind (:map  my-leader-map
-                    ("t" . find-file-in-project)
-                    ("T" . find-file-in-project-by-selected)
+       :bind (:map  my-keys-minor-mode-map
+                    ("C-c t" . find-file-in-project)
+                    ("C-c T" . find-file-in-project-by-selected)
                     :map evil-normal-state-map
                     ("gf" . find-file-in-project-at-point))
        :config
@@ -1503,174 +1515,3 @@ keybindings.
        :config
        (drag-stuff-global-mode t))
    #+end_src
-<<<<<<< HEAD
-** Iedit
-
-#+begin_src emacs-lisp
-  (use-package evil-multiedit
-    :config
-    ;; Highlights all matches of the selection in the buffer.
-    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-
-    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
-    ;; incrementally add the next unmatched match.
-    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-    ;; Match selected region.
-    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-and-next)
-    ;; Insert marker at point
-    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
-
-    ;; Same as M-d but in reverse.
-    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-and-prev)
-
-    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
-    ;; `evil-multiedit-match-symbol-and-next` (or prev).
-
-    ;; Restore the last group of multiedit regions.
-    (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
-
-    ;; RET will toggle the region under the cursor
-    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; ...and in visual mode, RET will disable all fields outside the selected region
-    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; For moving between edit regions
-    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
-    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
-
-    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
-#+end_src
-
-When using expand-region, use ~e~ to enter iedit state.
-#+begin_src emacs-lisp
-(use-package evil-iedit-state)
-#+end_src
-* Email
-When you run the initial indexing with mu do ~mu index --rebuild -m ./Maildir/fastmail/~.
-
-If you run a mu index comment with the incorrect path specified, you
-will have problems moving emails around inside mu
-#+BEGIN_SRC emacs-lisp
-(when *is-linux*
-  (setq mu4e-html2text-command "/usr/bin/w3m -T text/html")
-  (setq mu4e-get-mail-command "/usr/bin/mbsync -a")
-  (setq mu4e-update-interval 300)
-  (add-to-list 'load-path (expand-file-name "/usr/share/emacs/site-lisp/mu4e"))
-  )
-
-(require 'epa-file)
-(epa-file-enable)
-(require 'mu4e)
-
-(add-to-list 'mu4e-view-actions '("Browser View" . mu4e-action-view-in-browser) t)
-
-(define-key my-leader-map (kbd "e") 'mu4e)
-
-(setq mu4e-maildir (expand-file-name "~/Maildir/fastmail"))
-(setq mu4e-sent-messages-behavior 'sent)
-(setq mu4e-sent-folder "/Sent Items"
-      mu4e-drafts-folder "/Drafts"
-      mu4e-trash-folder "/Trash"
-      mu4e-refile-folder "/Archive")
-
-(setq mu4e-maildir-shortcuts
-      '(("/INBOX" . ?i)
-        ("/@waiting" . ?w)
-        ("/@maybe" . ?m)
-        ("/@read" . ?r)
-        ("/Sent Items" . ?s)))
-
-;; needed for mbsync
-(setq mu4e-change-filenames-when-moving t)
-
-;; I want my format=flowed thank you very much
-;; mu4e sets up visual-line-mode and also fill (M-q) to do the right thing
-;; each paragraph is a single long line; at sending, emacs will add the
-;; special line continuation characters.
-(setq mu4e-compose-format-flowed t)
-(setq message-send-mail-function 'smtpmail-send-it
-      ;; smtpmail-starttls-credentials
-      ;; '(("smtp.fastmail.com" 587 nil nil))
-      ;; machine smtp.fastmail.com login your-email@fastmail.fm port 465 password your-password
-      smtpmail-default-smtp-server "smtp.fastmail.com"
-      smtpmail-smtp-server "smtp.fastmail.com"
-      ;; .authinfo example
-
-      ;; command to encrypt authinfo, you can delete authinfo after that:
-      ;; gpg --output ~/.authinfo.gpg --symmetric ~/.authinfo
-      smtpmail-auth-credentials (expand-file-name "~/.authinfo.gpg")
-      smtpmail-stream-type 'ssl
-      smtpmail-smtp-service 465)
-
-(setq user-full-name "Aurélien Bottazini")
-(setq user-mail-address "aurelien@bottazini.com")
-
-(setq mu4e-view-show-images t)
-;; use imagemagick, if available
-(when (fboundp 'imagemagick-register-types)
-  (imagemagick-register-types))
-
-(defun my-browse-url-chromium-new-app (url &optional new-window)
-  "Open URL in app mode in chromium."
-  (interactive (browse-url-interactive-arg "URL: "))
-  (unless
-      (string= ""
-               (shell-command-to-string
-                (concat "chromium --new-window --app=" url)))
-    (message "Starting chromium...")))
-
-(setq browse-url-browser-function 'my-browse-url-chromium-new-app)
-#+END_SRC
-=======
-** Iedit
-
-#+begin_src emacs-lisp
-  (use-package evil-multiedit
-    :config
-    ;; Highlights all matches of the selection in the buffer.
-    (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-
-    ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
-    ;; incrementally add the next unmatched match.
-    (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-    ;; Match selected region.
-    (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-and-next)
-    ;; Insert marker at point
-    (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
-
-    ;; Same as M-d but in reverse.
-    (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-    (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-and-prev)
-
-    ;; OPTIONAL: If you prefer to grab symbols rather than words, use
-    ;; `evil-multiedit-match-symbol-and-next` (or prev).
-
-    ;; Restore the last group of multiedit regions.
-    (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
-
-    ;; RET will toggle the region under the cursor
-    (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; ...and in visual mode, RET will disable all fields outside the selected region
-    (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-    ;; For moving between edit regions
-    (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
-    (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
-    (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
-
-    ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-    (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match))
-#+end_src
-
-When using expand-region, use ~e~ to enter iedit state.
-#+begin_src emacs-lisp
-(use-package evil-iedit-state)
-#+end_src
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31

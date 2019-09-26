@@ -3,33 +3,8 @@ set fish_greeting
 if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
 end
-
-set -x PATH ~/bin /usr/local/sbin ~/.rbenv/shims ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin /usr/local/opt/coreutils/libexec/gnubin ~/Library/Python/3.7/bin $PATH
-set -x CDPATH . $HOME $HOME/projects $HOME/work
-
-function __fish_rbenv_needs_command
-  set cmd (commandline -opc)
-  if [ (count $cmd) -eq 1 -a $cmd[1] = 'rbenv' ]
-    return 0
-  end
-  return 1
-end
-
-function __fish_rbenv_using_command
-  set cmd (commandline -opc)
-  if [ (count $cmd) -gt 1 ]
-    if [ $argv[1] = $cmd[2] ]
-      return 0
-    end
-  end
-  return 1
-end
-
-complete -f -c rbenv -n '__fish_rbenv_needs_command' -a '(rbenv commands)'
-for cmd in (rbenv commands)
-  complete -f -c rbenv -n "__fish_rbenv_using_command $cmd" -a \
-    "(rbenv completions (commandline -opc)[2..-1])"
-end
+set -x PATH ~/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin $PATH
+set -x CDPATH $HOME $HOME/projects $HOME/work ./
 
 # fg Text
 # bg Background
@@ -178,3 +153,11 @@ if test -e /usr/local/share/autojump/autojump.fish
 end
 
 set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths
+
+if test -e /usr/share/autojump/autojump.fish
+  source /usr/share/autojump/autojump.fish
+end
+
+if test -e /usr/local/share/autojump/autojump.fish
+  source /usr/local/share/autojump/autojump.fish
+end

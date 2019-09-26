@@ -14,6 +14,7 @@ command -v mpd && mpd
 
 # localectl list-x11-keymap-variants
 # setxkbmap -print -verbose 10
+setxkbmap -option "ctrl:nocaps"
 
 # example commands i put in a .machinerc. I keep the .machinerc
 # specific to the machine I am running it on.

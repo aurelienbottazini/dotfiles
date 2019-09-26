@@ -134,6 +134,9 @@ end
 if test -e /usr/bin/google-chrome-stable
   set -x CHROME_BIN "/usr/bin/google-chrome-stable"
 end
+if test -e /usr/bin/chromium
+  set -x CHROME_BIN "/usr/bin/chromium"
+end
 
 set -x DATOMIC_SYSTEM "datomic-tutorial"
 set -x DATOMIC_REGION "eu-west-1"

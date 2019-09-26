@@ -523,7 +523,7 @@ keybindings.
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view)
               :map evil-normal-state-map
-              ("/" . swiper-isearch))
+              ("/" . swiper))
        :init
        (setq ivy-use-selectable-prompt t)
        ;; enable bookmarks and recent-f

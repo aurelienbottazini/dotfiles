@@ -173,50 +173,6 @@ keybindings.
 * Vim / Evil
   Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
   #+begin_src emacs-lisp
-<<<<<<< HEAD
-    (use-package evil
-      :ensure t
-      :init
-      (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
-      (setq evil-mode-line-format nil)
-      :config
-
-      (evil-mode 1)
-
-      (use-package evil-surround
-        :config
-        (global-evil-surround-mode 1))
-
-      (use-package evil-commentary
-        :diminish evil-commentary-mode
-        :config
-        (evil-commentary-mode))
-
-      (use-package evil-visualstar
-        :config
-        (global-evil-visualstar-mode t))
-
-      (use-package evil-indent-plus
-        :config
-        (evil-indent-plus-default-bindings))
-
-      (use-package evil-matchit
-        :config
-        (global-evil-matchit-mode 1))
-
-      (use-package evil-search-highlight-persist
-        :config
-        (global-evil-search-highlight-persist t))
-
-      (evil-set-initial-state 'deft-mode 'insert)
-      (add-hook 'with-editor-mode-hook 'evil-insert-state)
-      (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
-      (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
-
-<<<<<<< HEAD
-      (evil-ex-define-cmd "W" 'save-buffer)
-      (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
-=======
         (use-package evil
           :ensure t
           :init
@@ -263,13 +219,8 @@ keybindings.
           (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
           (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
 
-          (evil-ex-define-cmd "W" 'save-buffer)
-          (bind-keys :map evil-normal-state-map :prefix-map my-leader-map :prefix "SPC"))
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
-=======
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)
       (evil-ex-define-cmd "W" 'save-buffer))
->>>>>>> f07449c2c13ef93054672cfc519c3b5c5c81ad55
   #+end_src
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
@@ -446,19 +397,12 @@ keybindings.
   #+end_src
 
    #+BEGIN_SRC emacs-lisp
-<<<<<<< HEAD
-      (diminish 'undo-tree-mode)
-      (diminish 'auto-fill-function)
-      (diminish 'my-keys-minor-mode)
-      (diminish 'eldoc-mode)
-=======
    (use-package diminish
      :config
      (diminish 'undo-tree-mode)
      (diminish 'auto-fill-function)
      (diminish 'my-keys-minor-mode)
      (diminish 'eldoc-mode))
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
    #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -573,11 +517,7 @@ keybindings.
 
      (use-package ivy
        :diminish ivy-mode
-<<<<<<< HEAD
-       :bind (("C-s" . swiper-isearch)
-=======
        :bind (("C-s" . swiper)
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
               :map my-keys-minor-mode-map
               ("C-c s r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
@@ -616,18 +556,6 @@ keybindings.
        :bind (:map my-keys-minor-mode-map
               ("C-;" . avy-goto-char-timer)))
    #+END_SRC
-<<<<<<< HEAD
-<<<<<<< HEAD
-** Alternative files
-#+BEGIN_SRC emacs-lisp
-(require 'alternative-files)
-(define-key my-leader-map (kbd "s") 'alternative-files-find-file)
-(define-key my-leader-map (kbd "S") 'alternative-files-create-file)
-#+END_SRC
-=======
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
-=======
->>>>>>> f07449c2c13ef93054672cfc519c3b5c5c81ad55
 * Notes
   #+begin_src emacs-lisp
     (use-package deft
@@ -704,16 +632,6 @@ keybindings.
     :init
     (setq projectile-switch-project-action 'projectile-dired)
     :config
-    (projectile-mode t))
-=======
-                ("p" . projectile-commander)
-                ("s" . projectile-toggle-between-implementation-and-test)
-                ("S" . projectile-find-implementation-or-test-other-window)
-                :map projectile-mode-map
-                ("C-c p" . projectile-command-map))
-    :init
-    (setq projectile-switch-project-action 'projectile-dired)
-    :config
     (projectile-mode t)
 
     (projectile-register-project-type 'npm '("package.json")
@@ -721,7 +639,6 @@ keybindings.
                                       :test "npm test"
                                       :run "npm start"
                                       :test-suffix ".spec"))
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
 #+END_SRC
 
 #+begin_src emacs-lisp
@@ -903,9 +820,7 @@ keybindings.
 * Ruby
 #+BEGIN_SRC emacs-lisp
   (use-package yaml-mode
-    :mode "\\.ya?ml\\'"
-
-    )
+    :mode "\\.ya?ml\\'")
 
   (use-package ruby-mode
     :mode "\\.rake\\'"
@@ -1186,10 +1101,6 @@ keybindings.
   (define-derived-mode cfn-mode yaml-mode
     "Cloudformation"
     "Cloudformation template mode.")
-<<<<<<< HEAD
-=======
-  (add-to-list 'auto-mode-alist '(".output.yaml\\'" . cfn-mode))
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
   (add-to-list 'auto-mode-alist '(".template.yaml\\'" . cfn-mode))
   (add-hook 'cfn-mode-hook 'flycheck-mode)
   (flycheck-define-checker cfn-lint
@@ -1215,15 +1126,12 @@ keybindings.
 #+END_SRC
 * AutoCompletion
 #+BEGIN_SRC emacs-lisp
-<<<<<<< HEAD
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
   (require 'mode-local)
   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
-=======
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line))
   (require 'mode-local)
   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31
   (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
 #+END_SRC
 
@@ -1261,16 +1169,6 @@ keybindings.
           (self-insert-command 1)
         (company-complete-number (string-to-number k))))))
 #+END_SRC
-* lsp (intellisense)
-#+begin_src emacs-lisp
-(use-package lsp-mode
-  :hook ((js2-mode . lsp)
-         (web-mode . lsp))
-  :commands lsp)
-
-(use-package company-lsp
-  :commands company-lsp)
-#+end_src
 * Snippets
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet

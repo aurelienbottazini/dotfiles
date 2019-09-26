@@ -922,21 +922,21 @@ keybindings.
 #+END_SRC
 * Docker
 #+begin_src emacs-lisp
-(use-package docker
- :ensure t
- :bind ("C-c d d". docker)
- :config
-    (defadvice docker-image-mode (after docker-image-mode-change-to-emacs-state activate compile)
-      "when entering git-timemachine mode, change evil normal state to emacs state"
-      (if (evil-normal-state-p)
-          (evil-emacs-state)
-        (evil-normal-state)))
-        )
+  (use-package docker
+   :ensure t
+   :bind ("C-c d d". docker)
+   :config
+      (defadvice docker-image-mode (after docker-image-mode-change-to-emacs-state activate compile)
+        "when entering git-timemachine mode, change evil normal state to emacs state"
+        (if (evil-normal-state-p)
+            (evil-emacs-state)
+          (evil-normal-state)))
+          )
 
- ;; (require 'dox-dc)
- ;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
- ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
-
+  ;; (use-package transient)
+  ;; (require 'dox-dc)
+  ;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
+  ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
 #+end_src
 * Javascript
 #+BEGIN_SRC emacs-lisp

@@ -1,4 +1,6 @@
 #!/bin/bash
+# run with $ sudo stow -t / root
+# this is to fix the non working keyboard and touchpad on my infinity book pro after sleep
 
 case $1 in
     pre)

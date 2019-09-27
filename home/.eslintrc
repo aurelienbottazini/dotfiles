@@ -13,18 +13,14 @@
     "no-underscore-dangle": 0,
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "camelcase": [0, {"properties": "never"}],
-		"no-underscore-dangle": ["error", { "allow": ["_meta", "_type"] }],
 		"react/prefer-stateless-function": 0,
 		"no-restricted-syntax": 1,
 		"no-debugger": 1,
-		"jsx-a11y/img-has-alt": 2,
-		"jsx-a11y/onclick-has-role": 2,
     "jsx-a11y/mouse-events-have-key-events": 2,
     "jsx-a11y/no-onchange": 0,
     "jsx-a11y/no-access-key": 2,
     "jsx-a11y/label-has-for": 2,
     "jsx-a11y/img-redundant-alt": 2,
-    "jsx-a11y/href-no-hash": 2,
     "max-len": [2, {"code": 200, "tabWidth": 2, "ignoreUrls": true, "ignorePattern": ^\\s*var\\s.+=\\s*require\\s*\\}]
   },
   "plugins": [

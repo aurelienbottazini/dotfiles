@@ -25,7 +25,7 @@ super + o ; s
 super + o ; d
   xfce4-display-settings --minimal
 super + o ; b
-  kill -s USR1 $(pgrep sxhkd); notify-send "reloaded sxhkd bindings"
+  kill -s USR1 (pgrep sxhkd); notify-send "reloaded sxhkd bindings"
 super + o ; h
   jumpapp hardinfo
 Print
@@ -36,6 +36,8 @@ super + d
   slack
 super + a
   jumpapp anki
+super + c
+  jumpapp code
 super + r
   jumpapp -c ranger launch-ranger.sh
 super + f

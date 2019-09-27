@@ -5,8 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(company-minimum-prefix-length 2)
  '(deft-new-file-format "%Y-%m-%dT%H:%M")
- '(deft-use-filename-as-title t)
- '(deft-use-filter-string-for-filename t)
+ '(deft-use-filename-as-title t t)
+ '(deft-use-filter-string-for-filename t t)
  '(display-line-numbers nil)
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))

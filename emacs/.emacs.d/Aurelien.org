@@ -360,12 +360,20 @@ keybindings.
          (define-key dired-mode-map "-" 'dired-up-directory)
          (define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
          (define-key dired-mode-map (kbd "SPC") nil)
+         (define-key dired-mode-map (kbd "/") 'swiper)
          (define-key dired-mode-map (kbd "j") 'dired-next-line)
          (define-key dired-mode-map (kbd "k") 'dired-previous-line)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
            "^" '(lambda () (interactive) (find-alternate-file "..")))))
   #+end_src
+* Search
+#+begin_src emacs-lisp
+  (use-package rg
+    :config
+    (rg-enable-menu)
+  )
+#+end_src
 * GUI
   #+begin_src emacs-lisp
     (blink-cursor-mode 0)

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+case $1 in
+    pre)
+      modprobe -R i8042
+    ;;
+    post)
+      modprobe i8042
+      modprobe -R i8042
+      modprobe i8042
+      setxkbmap -option "ctrl:nocaps"
+    ;;
+esac

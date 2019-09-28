@@ -6,8 +6,8 @@ Includes config files for:
  - Fish
  - Xmonad
  - Xmobar
- - bash
- - git
+ - Bash
+ - Git
  - st
  - dmenu
 
@@ -20,19 +20,13 @@ Includes config files for:
 
   Example Usage:
 
-  run ~stow <directory-name>~ commands to symlink directories
+  run ~stow <directory-name>~ commands to symlink directories.
+  Those example commands will work if this repository is checked out
+  as a subfolder of your home directory. For example ~\~/dotfiles~
   For example on my linux desktop machine I run:
   ~stow home~
   ~stow home_linux~
-  ~stow_home_linux_desktop~
 
-* bin
-
-  The bin directory contains scripts that I use from time to time.
-
-  There are scripts to
-  - get the local time in San Francisco
-  - launch tmux sessions /tat/
-  - test colors in the terminal /colortest/
-  - get the dropbox status /dropboxStatus/
-  - change the brigthness on my laptop /brightness/.
+  There is one exception with the ~root~ directory.
+  It needs to be run with ~stow -t / root~. It contains files specific
+  to my linux configuration and involving what I consider tricky settings.

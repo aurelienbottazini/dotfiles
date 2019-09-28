@@ -556,6 +556,9 @@ keybindings.
      (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
      (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
      (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
+
+     (define-key my-keys-minor-mode-map (kbd "C-w \\") 'evil-window-vsplit)
+     (define-key my-keys-minor-mode-map (kbd "C-w -") 'evil-window-split)
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp

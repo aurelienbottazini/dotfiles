@@ -2,5 +2,8 @@
     "editor.fontFamily": "'Operator Mono Book', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 14,
     "eslint.packageManager": "yarn",
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "vim.handleKeys": {
+      "<C-k>": false,
+    }
 }

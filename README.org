@@ -6,7 +6,6 @@ Includes config files for:
  - Fish
  - Xmonad
  - Xmobar
- `dmenu_run -fn "Gotham HTF Black:size=13" -nb "#fff166" -nf "#000000" -sb "#fccf61" -sf "#000000"`
  - bash
  - git
  - st
@@ -14,26 +13,18 @@ Includes config files for:
 
 * Usage
 
-  There are two parts to my dotfiles:
-
-  1. Install scripts: they help me to install softwares on my
-  different computers. Those are named /install_computer_type.sh/.
-  On a fresh install I use them but they also serve as documentation
-  when I switch between computers. It makes it easier to remember
-  which software I need.
-  2. All the directories are meant to be used with stow. I split my
-     config files depending on usage and importance of the software.
-     For example Emacs as a dedicated folder even though It could have
-     been included inside the ~home~ directory.
+  All the directories are meant to be used with stow. I split my
+  config files depending on usage and importance of the software.
+  For example Emacs as a dedicated folder even though It could have
+  been included inside the ~home~ directory.
 
   Example Usage:
 
-  - run ~install_linux.sh~
-  - run ~stow <directory-name>~ commands to symlink directories
-    For example on my linux desktop machine I run:
-    ~stow home~
-    ~stow home_linux~
-    ~stow_home_linux_desktop~
+  run ~stow <directory-name>~ commands to symlink directories
+  For example on my linux desktop machine I run:
+  ~stow home~
+  ~stow home_linux~
+  ~stow_home_linux_desktop~
 
 * bin
 

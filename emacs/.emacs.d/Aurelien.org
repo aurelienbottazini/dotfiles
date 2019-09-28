@@ -369,10 +369,7 @@ keybindings.
   #+end_src
 * Search
 #+begin_src emacs-lisp
-  (use-package rg
-    :config
-    (rg-enable-menu)
-  )
+  (use-package rg)
 #+end_src
 * GUI
   #+begin_src emacs-lisp

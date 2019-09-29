@@ -3,7 +3,7 @@ set fish_greeting
 if test -e ~/work/dox-compose/bin/dox-init
     eval (~/work/dox-compose/bin/dox-init)
 end
-set -x PATH ~/bin /usr/local/opt/coreutils/libexec/gnubin /usr/local/sbin ~/.yarn/bin ~/.cargo/bin ~/.cabal/bin ~/.gem/ruby/2.6.0/bin ~/.local/bin $PATH
+set -x PATH ~/bin /usr/local/sbin ~/.yarn/bin  ~/.gem/ruby/2.6.0/bin ~/.local/bin $PATH
 set -x CDPATH $HOME $HOME/projects $HOME/work ./
 
 # fg Text
@@ -71,7 +71,6 @@ tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01
 ;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc
 =00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
 
-abbr em "emacs_starter.sh"
 alias ec "emacsclient -s (tmux display-message -p '#S') -ta ''"
 alias ef "emacsclient -ncq -a '' -e '(select-frame-set-input-focus (selected-frame))'"
 
@@ -79,16 +78,9 @@ alias delete_docker_containers 'docker rm (docker ps -a -q)'
 alias delete_docker_images 'docker rmi (docker images -q)'
 
 alias tu "tmux -u"
-alias screen "screen -U"
-abbr pd "psql -p 5432 -h localhost -d "
 alias ls "ls --color"
 alias l. "ls -d .*"
 alias grep "grep --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules --exclude=GTAGS --exclude=GRTAGS --exclude=GPATH"
-alias training_neo4j="chromium-browser --app --new-window http://0.0.0.0:7474 and; docker run \
-    --publish=7474:7474 --publish=7687:7687 \
-    --volume=$HOME/neo4j/data:/data \
-    --volume=$HOME/neo4j/logs:/logs \
-    neo4j:3.0"
 
 alias v. "cd dotfiles;and vim ."
 
@@ -138,24 +130,9 @@ if test -e /usr/bin/chromium
   set -x CHROME_BIN "/usr/bin/chromium"
 end
 
-set -x DATOMIC_SYSTEM "datomic-tutorial"
-set -x DATOMIC_REGION "eu-west-1"
-set -x DATOMIC_SOCKS_PORT 8182
-
 if type -q gnome-keyring-daemon
   set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start | awk -F "=" '$1 == "SSH_AUTH_SOCK" { print $2 }')
 end
-
-
-if test -e /usr/share/autojump/autojump.fish
-  source /usr/share/autojump/autojump.fish
-end
-
-if test -e /usr/local/share/autojump/autojump.fish
-  source /usr/local/share/autojump/autojump.fish
-end
-
-set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths
 
 if test -e /usr/share/autojump/autojump.fish
   source /usr/share/autojump/autojump.fish

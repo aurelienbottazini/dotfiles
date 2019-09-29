@@ -5,10 +5,8 @@
 case $1 in
     pre)
       modprobe -R i8042
-      modprobe i8042
     ;;
     post)
-      modprobe -R i8042
       modprobe i8042
       setxkbmap -option "ctrl:nocaps"
     ;;

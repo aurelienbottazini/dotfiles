@@ -20,7 +20,7 @@
         ignore-tracked = update-index --assume-unchanged
 	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep
-        bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+        rm-merged-branches = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
         new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	sla = log --oneline --decorate --graph --all
 	car = commit --amend --no-edit
@@ -31,16 +31,16 @@
         ignore = "!f() { echo \"$1\" >> .gitignore; }; f"
         abortmerge= git reset --hard HEAD
 	mup = !git checkout master && git pull && git checkout - && git merge master
-	sup = !git checkout staging && git pull && git checkout -
 	ureset = !git upstream && git reset --hard (git upstream)
         browse = !hub browse
         compare = !hub compare
         issues = !hub browse -- issues
         pr = !hub pull-request
         ci = !hub ci-status
-        upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
+        which-upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
         fall = !git-fetch-all-remote
         rm-from-history = !git-remove-from-history
+        bfg = !bfg # faster way to remove files from history
         find-commits-for-file = log --all --
         po = !git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)
 	praise = blame
@@ -49,13 +49,9 @@
         recap = log --all --oneline --no-merges --author=aurelien@bottazini.com
         standup = log --since yesterday --all --no-merges --oneline --author $(git config user.email) --pretty=short
         scrum = log --since yesterday --all --no-merges --oneline --author $(git config user.email) --pretty=short
-        # A more concise and readable git log
-        ls = log --pretty=format:"%C(yellow)%h\\ %Creset%s%Cblue\\ [%cn]\\%Cred%d" --decorate
-        # Same as above, with files changed in each commit
-        ll = ls --numstat
-        # show the history difference between a local branche and its remote
-        divergence = log --left-right --graph --cherry-pick --oneline $1...origin/$1
-
+        ls = log --pretty=format:"%C(yellow)%h\\ %Creset%s%Cblue\\ [%cn]\\%Cred%d" --decorate # A more concise and readable git log
+        ll = ls --numstat # Same as above, with files changed in each commit
+        divergence = log --left-right --graph --cherry-pick --oneline $1...origin/$1 # show the history difference between a local branche and its remote
 	templatedir = ~/.git_template
 [merge]
 #        ff = only

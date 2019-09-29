@@ -1,5 +1,6 @@
 #!/bin/sh
-#
+# Test 24 bits color support for current terminal
+# If successful it displays a gradient colored rgb bar
 
 
 awk 'BEGIN{

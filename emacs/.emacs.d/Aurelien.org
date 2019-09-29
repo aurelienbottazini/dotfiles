@@ -2,10 +2,18 @@
 #+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args :results silent
 
+*IN_PROGRESS*
+
+I am in the process of refactoring this emacs dotfile.
+I want to explain my emacs config strategy to
+
+- Make it easier for others to copy things from it.
+- To teach myself better emacs strategies.
+
 * Setup
 
-It is important to load
-those first as it can impact the loading of other packages
+  It is important to load
+  those first as it can impact the loading of other packages
 #+begin_src emacs-lisp
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)

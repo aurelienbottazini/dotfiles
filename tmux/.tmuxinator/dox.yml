@@ -5,7 +5,7 @@ windows:
   - docker:
       layout: main-horizontal
       panes:
-        - dox-dc up doximity activities doximity-client-vue auth-api
+        - dox-dc up -d doximity activities doximity-client-vue auth-api
   - tests:
       layout: main-horizontal
       panes:

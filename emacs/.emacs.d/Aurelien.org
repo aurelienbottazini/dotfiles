@@ -1191,21 +1191,29 @@ keybindings.
         (company-complete-number (string-to-number k))))))
 #+END_SRC
 * Snippets
-#+BEGIN_SRC emacs-lisp
-  (use-package yasnippet
-    :demand
-    :commands yas-expand-snippet
-    :bind (:map my-keys-minor-mode-map
-                ("C-c yd" . yas-describe-tables))
-    :diminish yas-minor-mode
-    :init
-    (setq yas-snippet-dirs
-          '("~/.emacs.d/snippets"))
-    :config
-    (yas-global-mode 1)
-    (add-hook 'term-mode-hook (lambda()
-                                (yas-minor-mode -1))))
-#+END_SRC
+  #+BEGIN_SRC emacs-lisp
+    (use-package yasnippet
+      :demand
+      :commands yas-expand-snippet
+      :bind (:map my-keys-minor-mode-map
+                  ("C-c yd" . yas-describe-tables))
+      :diminish yas-minor-mode
+      :init
+      (setq yas-snippet-dirs
+            '("~/.emacs.d/snippets"))
+      :config
+      (yas-global-mode 1)
+      (add-hook 'term-mode-hook (lambda()
+                                  (yas-minor-mode -1))))
+  #+END_SRC
+
+  #+begin_src emacs-lisp
+    (use-package yatemplate
+      :config
+      (add-hook 'find-file-hook 'auto-insert)
+      (yatemplate-fill-alist))
+  #+end_src
+
 * Run for mode
 #+BEGIN_SRC emacs-lisp
 (defun run-for-mode ()

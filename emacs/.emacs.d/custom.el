@@ -187,7 +187,7 @@
  '(org-drawer ((t (:foreground "#3a499c"))))
  '(org-footnote ((t (:foreground "#65428a" :underline t))))
  '(org-level-1 ((t (:inherit outline-1 :foreground "#bc3e44" :height 1.3))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0 :weight medium))))
  '(org-level-3 ((t (:inherit outline-3))))
  '(org-list-dt ((t (:weight normal))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :family "monospace"))))

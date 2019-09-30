@@ -19,8 +19,8 @@ I want to explain my emacs config strategy to
   (load custom-file)
 #+end_src
 
-I keep my machine specific settings here.
-For example for the font size: ~(set-face-attribute 'default nil :height 100 )~
+  I keep my machine specific settings here.
+  For example for the font size: ~(set-face-attribute 'default nil :height 100 )~
 #+BEGIN_SRC emacs-lisp
   (if (file-exists-p "~/.emacs-local")
     (load "~/.emacs-local"))
@@ -728,7 +728,7 @@ keybindings.
   #+end_src
 ** org-babel
    #+begin_src emacs-lisp
-  (require 'ob-js)
+   (require 'ob-js)
    (org-babel-do-load-languages 'org-babel-load-languages
                                 '((shell . t)))
    #+end_src

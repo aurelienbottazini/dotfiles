@@ -1,7 +1,16 @@
 Searching is probably the most important thing in a code editor.
 Here is how I search.
 
-* Main command
+* Search in current file/buffer
+
+  I use ~evil-search-forward~ and ~evil-search-backward~ as it does
+  not interrup my flow with any popup window. It also allows me to do
+  powerful /vim/ combinations.
+
+  I use ~counsel-isearch~ when I am exploring the buffer or when I
+  want to do some search refinements or complex replacements.
+
+* Search in project
 
   ~counsel-rg~ is my main way to search. Invoked with an argument, it
   allows you to specify the directory and search options.
@@ -15,11 +24,18 @@ Here is how I search.
   either ~g~ on the entry I want to preview or ~c~ to automatically
   preview results as I move through the result list.
 
-  A trick I am learning is to use more ~C-'~ to jump directly to a
+  A trick I am learning is to use ~C-'~ to jump directly to a
   search results.
 
-* When I need to search specific files
+** When I need to narrow down my search to specific files
 
+*** Narrowing on the filetype
+
+    Launch ~counsel-rg~ with a prefix and then I can use for example
+    ~-tjs~ as an argument to search only inside javascript files.
+    ~-Tjs~ searches inside files but javascript ones.
+
+*** From Dired
   ~C-x d~ to launch dired . I mark the files I am interested in with
   ~m~. Then I can grep those files with ~A~ and do a query replace
   with ~Q~.

@@ -374,10 +374,6 @@ keybindings.
            "gg" 'evil-goto-first-line
            "^" '(lambda () (interactive) (find-alternate-file "..")))))
   #+end_src
-* Search
-#+begin_src emacs-lisp
-  (use-package rg)
-#+end_src
 * GUI
   #+begin_src emacs-lisp
     (blink-cursor-mode 0)
@@ -501,15 +497,11 @@ keybindings.
                         ("<f1> l" . counsel-find-library)
                         ("<f2> i" . counsel-info-lookup-symbol)
                         ("<f2> u" . counsel-unicode-char)
-                        ("C-c g" . counsel-git)
-                        ("C-c j" . counsel-git-grep)
-                        ("C-c k" . counsel-rg)
                         ("C-x l" . counsel-locate)
                         :map minibuffer-local-map
                         ("C-r" . counsel-minibuffer-history)
                         :map my-keys-minor-mode-map
                         ("C-c r" . counsel-recentf)
-                        ("C-c f" . counsel-rg)
                         ("C-c i" . counsel-imenu)
                         ("C-c b" . counsel-ibuffer)
                         ("C-c m" . counsel-bookmark))

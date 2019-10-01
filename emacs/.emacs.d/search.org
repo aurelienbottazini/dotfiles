@@ -1,0 +1,25 @@
+Searching is probably the most important thing in a code editor.
+Here is how I search.
+
+* Main command
+
+  ~counsel-rg~ is my main way to search. Invoked with an argument, it
+  allows you to specify the directory and search options.
+  #+begin_src emacs-lisp :results silent
+   (use-package counsel
+     :bind (:map my-keys-minor-mode-map ("C-c f" . counsel-rg)))
+  #+end_src
+
+  When I am investigating things, I like to see a preview of the
+  results as I scroll down the search results. I do it with ~C-o~ then
+  either ~g~ on the entry I want to preview or ~c~ to automatically
+  preview results as I move through the result list.
+
+  A trick I am learning is to use more ~C-'~ to jump directly to a
+  search results.
+
+* When I need to search specific files
+
+  ~C-x d~ to launch dired . I mark the files I am interested in with
+  ~m~. Then I can grep those files with ~A~ and do a query replace
+  with ~Q~.

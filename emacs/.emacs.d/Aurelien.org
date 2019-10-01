@@ -367,7 +367,7 @@ keybindings.
          (define-key dired-mode-map "-" 'dired-up-directory)
          (define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
          (define-key dired-mode-map (kbd "SPC") nil)
-         (define-key dired-mode-map (kbd "/") 'swiper)
+         (define-key dired-mode-map (kbd "/") 'evil-search-forward)
          (define-key dired-mode-map (kbd "j") 'dired-next-line)
          (define-key dired-mode-map (kbd "k") 'dired-previous-line)
          (evil-define-key 'normal dired-mode-map
@@ -523,13 +523,11 @@ keybindings.
 
      (use-package ivy
        :diminish ivy-mode
-       :bind (("C-s" . swiper)
+       :bind (("C-s" . swiper-isearch)
               :map my-keys-minor-mode-map
               ("C-c s r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
-              ("C-c V" . ivy-pop-view)
-              :map evil-normal-state-map
-              ("/" . swiper))
+              ("C-c V" . ivy-pop-view))
        :init
        (setq ivy-use-selectable-prompt t)
        ;; enable bookmarks and recent-f

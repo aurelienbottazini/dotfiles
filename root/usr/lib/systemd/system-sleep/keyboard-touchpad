@@ -8,6 +8,7 @@ case $1 in
     ;;
     post)
       modprobe i8042
-      setxkbmap -option "ctrl:nocaps"
+      # handled by kde
+      #  setxkbmap -option "ctrl:nocaps"
     ;;
 esac

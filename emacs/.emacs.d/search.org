@@ -3,12 +3,27 @@ Here is how I search.
 
 * Search in current file/buffer
 
-  I use ~evil-search-forward~ and ~evil-search-backward~ as it does
-  not interrup my flow with any popup window. It also allows me to do
-  powerful /vim/ combinations.
+  I have two main way to search in a buffer:
 
-  I use ~counsel-isearch~ when I am exploring the buffer or when I
-  want to do some search refinements or complex replacements.
+** Vim way
+   I use ~evil-search-forward~ (bound to ~/~) and
+   ~evil-search-backward~ (bound to ~?~) as it allows me to do
+   powerful /vim/ combinations.
+
+   For example I do a search, then navigate through the search list
+   with ~n~ or ~N~. Or do a search then replace matches with ~:
+   %s//replacement/gc~
+
+** Counsel
+   I use ~counsel-isearch~ when I am exploring the buffer or when I
+   want to do some search refinements or complex replacements.
+
+   From counsel it is easy to swith to occur with ~C-c C-o~. This
+   allows me to have a list of matches in a seperate buffer and edit
+   them using:
+   - ~C-x C-q~
+   - make the changes in the occur buffer
+   - ~C-x C-s~ to save the changes
 
 * Search in project
 

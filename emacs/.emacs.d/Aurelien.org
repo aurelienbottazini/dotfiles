@@ -576,61 +576,6 @@ keybindings.
       (setq deft-default-extension "org")
       (setq deft-recursive t))
   #+end_src
-* Magit
-#+begin_src emacs-lisp
-  (use-package forge
-    :after magit)
-
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
-  (setq ediff-split-window-function 'split-window-vertically)
-
-  (use-package magit
-    :bind (:map my-keys-minor-mode-map
-                ("C-c gs" . magit-status)
-                ("C-c gc" . magit-commit)
-                ("C-c gp" . magit-push-current)
-                ("C-c gf" . magit-file-dispatch))
-    :init
-    (setq magit-commit-show-diff nil
-          magit-revert-buffers 1)
-    :config
-    (use-package fullframe
-      :config
-      (fullframe magit-status magit-mode-quit-window))
-
-    (with-eval-after-load 'magit
-      (define-key magit-status-mode-map (kbd "SPC") nil)
-      ))
-
-  (use-package diff-hl
-    :config
-    (add-hook 'prog-mode-hook 'diff-hl-mode)
-    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
-
-  (use-package git-link
-    :bind (:map my-keys-minor-mode-map
-                ("C-c gl" . git-link)))
-
-  (use-package git-timemachine
-    :bind (:map my-keys-minor-mode-map
-                ("C-c gt" . git-timemachine-toggle))
-    :config
-    (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
-      "when entering git-timemachine mode, change evil normal state to emacs state"
-      (if (evil-normal-state-p)
-          (evil-emacs-state)
-        (evil-normal-state)))
-
-    (ad-activate 'git-timemachine-mode))
-
-  (defun ab-run-gitsh ()
-    "Start gitsh in current git project. Uses st as a terminal."
-    (interactive)
-    (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
-      (start-process "gitsh" nil "st" "-g" "120x70" "-c" "scratch-term" "gitsh")))
-  (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
-#+end_src
 * Projects
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
@@ -1015,7 +960,7 @@ keybindings.
                             "--trailing-comma" "es5"
                             "--single-quote" "true"
                             )
-            prettier-js-command "/usr/local/bin/prettier")
+            prettier-js-command "~/.yarn/bin/prettier")
       (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
       (add-hook 'js2-mode-hook 'prettier-js-mode))
 

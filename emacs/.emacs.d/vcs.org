@@ -1,5 +1,7 @@
 I mainly use git. I prefix all git related keybindings with ~c-c g~.
 
+Don't forget emacs vcs features accessible with the prefix ~C-x v~!
+
 * Resolving conflicts
 
   This is to prevent popup windows when resolving file conflicts.
@@ -28,10 +30,16 @@ I mainly use git. I prefix all git related keybindings with ~c-c g~.
   #+end_src
 
 * View History
+** vc-annotate
 
-  Allows to view previous versions of a file. It is an altenative to
-  /magit/ log functionality. It is not focused on the diff but on the
-  file itself. Use ~n~ and ~p~ to navigate between versions.
+   Bound to ~C-x v g~. Use ~l~ to see the commit message and ~f~ to
+   see what the file looked like at that revision. ~n~ and ~p~ to
+   navigate between revisions.
+
+** timemachine
+  Allows to view previous versions of a file. It is not focused on the
+  diff but on the file itself. Use ~n~ and ~p~ to navigate between
+  versions.
   #+begin_src emacs-lisp :results silent
     (use-package git-timemachine
       :bind (:map my-keys-minor-mode-map

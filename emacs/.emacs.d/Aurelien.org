@@ -579,6 +579,7 @@ keybindings.
 * Projects
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
+    :demand
     :bind (:map my-keys-minor-mode-map
            ("C-c p" . projectile-command-map))
     :init

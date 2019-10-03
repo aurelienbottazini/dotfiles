@@ -180,51 +180,60 @@ keybindings.
 * Vim / Evil
   Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
   #+begin_src emacs-lisp
-        (use-package evil
-          :ensure t
-          :init
-          (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
-          (setq evil-mode-line-format nil)
-          :config
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
+      (setq evil-mode-line-format nil)
+      :config
 
-          (evil-mode 1)
-          (use-package key-chord
-            :config
-            (key-chord-mode 1)
-            (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+      (defun my-evil-record-macro ()
+        (interactive)
+        (if buffer-read-only
+            (quit-window)
+          (call-interactively 'evil-record-macro)))
 
-          (use-package evil-surround
-            :config
-            (global-evil-surround-mode 1))
+      (with-eval-after-load 'evil-maps
+        (define-key evil-normal-state-map (kbd "q") 'my-evil-record-macro))
 
-          (use-package evil-commentary
-            :diminish evil-commentary-mode
-            :config
-            (evil-commentary-mode))
+      (evil-mode 1)
+      (use-package key-chord
+        :config
+        (key-chord-mode 1)
+        (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
 
-          (use-package evil-visualstar
-            :config
-            (global-evil-visualstar-mode t))
+      (use-package evil-surround
+        :config
+        (global-evil-surround-mode 1))
 
-          (use-package evil-indent-plus
-            :config
-            (evil-indent-plus-default-bindings))
+      (use-package evil-commentary
+        :diminish evil-commentary-mode
+        :config
+        (evil-commentary-mode))
 
-          (use-package evil-matchit
-            :config
-            (global-evil-matchit-mode 1))
+      (use-package evil-visualstar
+        :config
+        (global-evil-visualstar-mode t))
 
-          (use-package evil-search-highlight-persist
-            :config
-            (global-evil-search-highlight-persist t))
+      (use-package evil-indent-plus
+        :config
+        (evil-indent-plus-default-bindings))
 
-          (evil-set-initial-state 'deft-mode 'insert)
-          (evil-set-initial-state 'dired-mode 'emacs)
-          (evil-set-initial-state 'magit-mode 'emacs)
+      (use-package evil-matchit
+        :config
+        (global-evil-matchit-mode 1))
 
-          (add-hook 'with-editor-mode-hook 'evil-insert-state)
-          (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
-          (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
+      (use-package evil-search-highlight-persist
+        :config
+        (global-evil-search-highlight-persist t))
+
+      (evil-set-initial-state 'deft-mode 'insert)
+      (evil-set-initial-state 'dired-mode 'emacs)
+      (evil-set-initial-state 'magit-mode 'emacs)
+
+      (add-hook 'with-editor-mode-hook 'evil-insert-state)
+      (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
+      (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
 
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)
       (evil-ex-define-cmd "W" 'save-buffer))

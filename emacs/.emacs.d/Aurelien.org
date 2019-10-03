@@ -506,7 +506,7 @@ keybindings.
      (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
 
      (define-key my-keys-minor-mode-map (kbd "C-w \\") 'evil-window-vsplit)
-     (define-key my-keys-minor-mode-map (kbd "C-w -") 'evil-window-split)
+     (evil-define-key 'normal my-keys-minor-mode-map (kbd "C-w -") 'evil-window-split)
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -879,11 +879,6 @@ keybindings.
             prettier-js-command "~/.yarn/bin/prettier")
       (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
       (add-hook 'js2-mode-hook 'prettier-js-mode))
-
-    (defun auray-js-mode-hook ()
-      (setq imenu-create-index-function 'auray-js-imenu-make-index))
-    (add-hook 'js2-mode-hook 'auray-js-mode-hook))
-
 
   (defun enable-minor-mode (my-pair)
     "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."

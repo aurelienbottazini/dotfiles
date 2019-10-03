@@ -51,9 +51,7 @@ Here are some tools I use that are IDE oriented.
                   (pulse-momentary-highlight-one-line (point)))))
   #+end_src
 
-  #+begin_src emacs-lisp :results silent
-    (use-package counsel-etags
-      :bind (:map evil-normal-state-map
-                  ("gt" . counsel-etags-find-tag-at-point)
-                  ("gT" . counsel-etags-find-tag)))
-  #+end_src
+* Tags
+
+  Tags are generated through a [[file:~/dotfiles/git/.git_template/hooks/post-commit::.git/hooks/create_ctags%20>/dev/null%202>&1%20&][git hook]] with [[https://ctags.io/][Universal ctags]].
+  I use Vim standard ~C-]~ to visit the tag at point.

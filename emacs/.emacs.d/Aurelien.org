@@ -905,6 +905,7 @@ keybindings.
     (emmet-mode)
     (setq emmet-expand-jsx-className? t)
     (tern-mode t))
+    )
 
   (use-package context-coloring
     :diminish context-coloring-mode

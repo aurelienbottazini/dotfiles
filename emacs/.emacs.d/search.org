@@ -14,8 +14,8 @@ Here is how I search.
    with ~n~ or ~N~. Or do a search then replace matches with ~:
    %s//replacement/gc~
 
-** Counsel
-   I use ~counsel-isearch~ when I am exploring the buffer or when I
+** swiper
+   I use ~swiper-isearch~ when I am exploring the buffer or when I
    want to do some search refinements or complex replacements.
 
    From counsel it is easy to swith to occur with ~C-c C-o~. This
@@ -24,6 +24,31 @@ Here is how I search.
    - ~C-x C-q~
    - make the changes in the occur buffer
    - ~C-x C-s~ to save the changes
+
+   #+begin_src emacs-lisp :results silent
+     (use-package ivy
+       :diminish ivy-mode
+       :bind (("C-s" . swiper-isearch)
+              :map my-keys-minor-mode-map
+              ("C-c s r" . ffip-ivy-resume)
+              ("C-c v" . ivy-push-view)
+              ("C-c V" . ivy-pop-view))
+       :init
+       (setq ivy-use-selectable-prompt t)
+       ;; enable bookmarks and recent-f
+       (setq ivy-use-virtual-buffers t)
+       (setq enable-recursive-minibuffers t)
+       (setq ivy-initial-inputs-alist nil)
+       (setq ivy-re-builders-alist
+             '((t . ivy--regex-plus)))
+       :config
+       (use-package ivy-hydra)
+       (ivy-mode 1)
+       (defun ivy-switch-buffer-occur ()
+         "Occur function for `ivy-switch-buffer' using `ibuffer'."
+         (ibuffer nil (buffer-name) (list (cons 'name ivy--old-re))))
+       (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
+   #+end_src
 
 * Search in project
 
@@ -54,3 +79,39 @@ Here is how I search.
   ~C-x d~ to launch dired . I mark the files I am interested in with
   ~m~. Then I can grep those files with ~A~ and do a query replace
   with ~Q~.
+* Search Emacs documentation
+
+  Remplacements for emacs search and completion commands.
+  I find the UI better.
+  #+begin_src emacs-lisp :results silent
+    (use-package counsel
+      :bind (("M-x" . counsel-M-x)
+             ("C-x C-f" . counsel-find-file)
+             ("<f1> f" . counsel-describe-function)
+             ("<f1> v" . counsel-describe-variable)
+             ("<f1> l" . counsel-find-library)
+             ("<f2> i" . counsel-info-lookup-symbol)
+             ("<f2> u" . counsel-unicode-char)
+             ("C-x l" . counsel-locate)
+             :map minibuffer-local-map
+             ("C-r" . counsel-minibuffer-history)
+             :map my-keys-minor-mode-map
+             ("C-c r" . counsel-recentf)
+             ("C-c i" . counsel-imenu)
+             ("C-c b" . counsel-ibuffer)
+             ("C-c m" . counsel-bookmark))
+      :init
+      (setq counsel-git-cmd "rg --files")
+      (setq counsel-rg-base-command
+            "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s ."))
+
+    (eval-after-load "counsel" '(progn
+                                  (defun counsel-imenu-categorize-functions (items)
+                                    "Categorize all the functions of imenu."
+                                    (let ((fns (cl-remove-if #'listp items :key #'cdr)))
+                                      (if fns
+                                          (nconc (cl-remove-if #'nlistp items :key #'cdr)
+                                                 `((":" ,@fns)))
+                                        items)))))
+
+  #+end_src

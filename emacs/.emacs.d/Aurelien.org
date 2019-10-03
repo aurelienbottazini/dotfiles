@@ -890,9 +890,9 @@ keybindings.
                                (enable-minor-mode
                                 '("\\.jsx?\\'" . prettier-js-mode))))
 
-  ;; (add-hook 'web-mode-hook #'(lambda ()
-  ;;                              (enable-minor-mode
-  ;;                               '("\\.vue?\\'" . prettier-js-mode))))
+  (add-hook 'web-mode-hook #'(lambda ()
+                               (enable-minor-mode
+                                '("\\.vue?\\'" . prettier-js-mode))))
 
   (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
   (defun my-jsx-hook ()
@@ -936,15 +936,14 @@ keybindings.
     (setq web-mode-code-indent-offset 2)
     (setq web-mode-script-padding 0)
     (defun jjpandari/merge-imenu (index-fun)
-      (interactHLL8360CDWG1ive)
+      (interactive)
       (let ((mode-imenu (funcall index-fun))
             (custom-imenu (imenu--generic-function imenu-generic-expression)))
         (append custom-imenu mode-imenu)))
 
     (add-hook 'web-mode-hook
               (lambda ()
-                (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index)))
-                (setq imenu-generic-expression javascript-common-imenu-regex-list))))
+                (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index))))))
 
 #+END_SRC
 * Flycheck

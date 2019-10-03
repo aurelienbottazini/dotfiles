@@ -1,7 +1,84 @@
 Emacs is not an ide but I can be pretty close to one.
 Here are some tools I use that are IDE oriented.
 
-* Project
+* Find file in project
+** Examples
+   #+begin_src emacs-lisp :tangle no
+     ;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
+     ;; OR if I'm reading my personal issue track document,
+     (defun my-setup-develop-environment ()
+       (interactive)
+       (when (ffip-current-full-filename-match-pattern-p "\\(PROJECT_DIR\\|issue-track.org\\)")
+         ;; Though PROJECT_DIR is team's project, I care only its sub-directory "subproj1""
+         (setq-local ffip-project-root "~/projs/PROJECT_DIR/subproj1")
+         ;; well, I'm not interested in concatenated BIG js file or file in dist/
+         (setq-local ffip-find-options "-not -size +64k -not -iwholename '*/dist/*'")
+         ;; for this project, I'm only interested certain types of files
+         (setq-local ffip-patterns '("*.html" "*.js" "*.css" "*.java" "*.xml" "*.js"))
+         ;; maybe you want to search files in `bin' directory?
+         (setq-local ffip-prune-patterns (delete "*/bin/*" ffip-prune-patterns))
+         ;; exclude `dist/' directory
+         (add-to-list 'ffip-prune-patterns "*/dist/*"))
+       ;; insert more WHEN statements below this line for other projects
+       )
+
+     ;; most major modes inherit from prog-mode, so below line is enough
+     (add-hook 'prog-mode-hook 'my-setup-develop-environment)
+   #+end_src
+
+   All variables may be overridden on a per-directory basis in your
+   .dir-locals.el. See (info “(Emacs) Directory Variables”) for
+   details.
+
+   You can place .dir-locals.el into your project root directory.
+
+   A sample .dir-locals.el,
+
+   #+begin_src emacs-lisp :tangle no
+     ((nil . ((ffip-project-root . "~/projs/PROJECT_DIR")
+              ;; ignore files bigger than 64k and directory "dist/" when searching
+              (ffip-find-options . "-not -size +64k -not -iwholename '*/dist/*'")
+              ;; only search files with following extensions
+              (ffip-patterns . ("*.html" "*.js" "*.css" "*.java" "*.xml" "*.js"))
+              (eval . (progn
+                        (require 'find-file-in-project)
+                        ;; ignore directory ".tox/" when searching
+                        (setq ffip-prune-patterns `("*/.tox/*" ,@ffip-prune-patterns))
+                        ;; Do NOT ignore directory "bin/" when searching
+                        (setq ffip-prune-patterns `(delete "*/bin/*" ,@ffip-prune-patterns))))
+              )))
+   #+end_src
+
+** My config
+
+   To install fd (rust replacement for find), download it
+   [[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
+   to use `fd` instead of find.
+   #+begin_src emacs-lisp :results silent
+     (use-package find-file-in-project
+       :bind (:map  my-keys-minor-mode-map
+                    ("C-c t" . find-file-in-project)
+                    ("C-c T" . find-file-in-project-by-selected)
+                    :map evil-normal-state-map
+                    ("gf" . find-file-in-project-at-point))
+       :config
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
+       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
+       (setq ffip-prefer-ido-mode nil)
+       (setq ffip-use-rust-fd t)
+       (add-to-list 'ffip-prune-patterns "*/.git/*")
+       (add-to-list 'ffip-prune-patterns "*/dist/*")
+       (add-to-list 'ffip-prune-patterns "*/.idea/*")
+       (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
+       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
+       (add-to-list 'ffip-prune-patterns "node_modules/*"))
+   #+end_src
+* Switch between projects
+
   The main command I use with projectile is ~C-c p p~ to switch quickly
   between projects. I keep projectile because I has a lot of functions
   project oriented and I use them from time to time. Also
@@ -17,6 +94,8 @@ Here are some tools I use that are IDE oriented.
       :config
       (projectile-mode t))
   #+end_src
+
+* Switch between test and implementation
 
   This defines a new project type, the interesting part is the test suffix. I
   use it to jump quickly between a test and its implementation.
@@ -55,3 +134,8 @@ Here are some tools I use that are IDE oriented.
 
   Tags are generated through a [[file:~/dotfiles/git/.git_template/hooks/post-commit::.git/hooks/create_ctags%20>/dev/null%202>&1%20&][git hook]] with [[https://ctags.io/][Universal ctags]].
   I use Vim standard ~C-]~ to visit the tag at point.
+
+  To make sure my hooks are used I delete the hooks directory
+  ~./git/config~ and run ~git init .~ again from the concerned project
+  directory.
+  My [[file:~/dotfiles/git/.git_template][templates]] are used thanks to the [[~GIT_TEMPLATE_DIR][~GIT_TEMPLATE_DIR~]] environment variable.

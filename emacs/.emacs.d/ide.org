@@ -1,0 +1,59 @@
+Emacs is not an ide but I can be pretty close to one.
+Here are some tools I use that are IDE oriented.
+
+* Project
+  The main command I use with projectile is ~C-c p p~ to switch quickly
+  between projects. I keep projectile because I has a lot of functions
+  project oriented and I use them from time to time. Also
+
+  ~projectile-commander~ accessible with ~C-c p m~ has a pretty nice UI.
+  #+begin_src emacs-lisp :results silent
+    (use-package projectile
+      :demand
+      :bind (:map my-keys-minor-mode-map
+             ("C-c p" . projectile-command-map))
+      :init
+      (setq projectile-switch-project-action 'projectile-dired)
+      :config
+      (projectile-mode t))
+  #+end_src
+
+  This defines a new project type, the interesting part is the test suffix. I
+  use it to jump quickly between a test and its implementation.
+  Default projectile shortcut for that is ~C-c p t~
+  #+begin_src emacs-lisp :results silent
+    (use-package projectile
+      :config
+      (projectile-register-project-type 'npm '("package.json")
+                                        :compile "npm install"
+                                        :test "npm test"
+                                        :run "npm start"
+                                        :test-suffix ".spec"))
+  #+end_src
+
+* Jump
+
+  /dumb-jump/ just do a search through the project to try to guess the
+  correct jump location for the current symbol. It is not has good as an
+  IDE code analysis but it works surprisingly well.
+
+  I added a small function to make the current line flash just after a jump
+  #+begin_src emacs-lisp :results silent
+    (use-package dumb-jump
+      :bind (:map evil-normal-state-map
+                  ("gd" . dumb-jump-go)
+                  ("gD" . dumb-jump-go-other-window))
+      :init
+      (setq dumb-jump-selector 'ivy)
+      :config
+      (add-hook 'dumb-jump-after-jump-hook
+                (defun abo-dumb-jump-pulse-line ()
+                  (pulse-momentary-highlight-one-line (point)))))
+  #+end_src
+
+  #+begin_src emacs-lisp :results silent
+    (use-package counsel-etags
+      :bind (:map evil-normal-state-map
+                  ("gt" . counsel-etags-find-tag-at-point)
+                  ("gT" . counsel-etags-find-tag)))
+  #+end_src

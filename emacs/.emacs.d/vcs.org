@@ -63,8 +63,10 @@ Don't forget emacs vcs features accessible with the prefix ~C-x v~!
 
   also q to quit window everywhere?
   #+begin_src emacs-lisp :results silent
-    (define-key vc-annotate-mode-map "j" 'evil-next-line)
-    (define-key vc-annotate-mode-map "k" 'evil-previous-line)
+    (eval-after-load "vc-annotate"
+         '(progn
+          (define-key vc-annotate-mode-map "j" 'evil-next-line)
+          (define-key vc-annotate-mode-map "k" 'evil-previous-line)))
 
     (use-package evil
       :config

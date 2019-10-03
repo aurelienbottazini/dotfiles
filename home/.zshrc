@@ -8,6 +8,7 @@ export PATH=~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/
 export GOPATH=/usr/local/opt/go/libexec/bin
 export EDITOR="vim"
 export DICPATH=~/dictionaries
+export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
 setopt auto_cd
 cdpath=($HOME $HOME/projects $HOME/work)

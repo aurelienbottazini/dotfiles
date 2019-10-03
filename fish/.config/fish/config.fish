@@ -119,6 +119,7 @@ set -x XDG_CURRENT_DESKTOP GNOME # for gnome-control-center to work correctly on
 set -x NNN_CONTEXT_COLORS '5173'
 set -x NNN_BMS 'd:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 set -x MC_SKIN "$HOME/.config/mc/solarized.ini"
+set -x GIT_TEMPLATE_DIR "$HOME/.git_template"
 
 if test -e /Applications/Google\ Chrome.app/Contents/MacOs/Google\ Chrome
   set -x CHROME_BIN "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

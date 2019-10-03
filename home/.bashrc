@@ -143,6 +143,7 @@ export NNN_CONTEXT_COLORS='5173'
 export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
+export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK

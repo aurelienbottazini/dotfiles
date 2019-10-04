@@ -527,7 +527,6 @@ keybindings.
       (setq deft-default-extension "org")
       (setq deft-recursive t))
   #+end_src
-* Projects
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
@@ -991,75 +990,6 @@ keybindings.
   ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
   ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
 #+END_SRC
-* AutoCompletion
-#+BEGIN_SRC emacs-lisp
-  (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
-  (require 'mode-local)
-  (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
-  (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line))
-  (require 'mode-local)
-  (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
-  (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package company
-  :diminish company-mode
-  :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-dabbrev-downcase nil)
-  (setq company-show-numbers t)
-  (setq company-backends '((company-files company-lsp company-capf company-dabbrev)))
-
-  (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
-  (let ((map company-active-map))
-    (mapc
-     (lambda (x)
-       (define-key map (format "%d" x) 'ora-company-number))
-     (number-sequence 0 9))
-    (define-key map " " (lambda ()
-                          (interactive)
-                          (company-abort)
-                          (self-insert-command 1)))
-    (define-key map (kbd "<return>") nil))
-
-  (defun ora-company-number ()
-    "Forward to `company-complete-number'.
-
-  Unless the number is potentially part of the candidate.
-  In that case, insert the number."
-    (interactive)
-    (let* ((k (this-command-keys))
-           (re (concat "^" company-prefix k)))
-      (if (cl-find-if (lambda (s) (string-match re s))
-                      company-candidates)
-          (self-insert-command 1)
-        (company-complete-number (string-to-number k))))))
-#+END_SRC
-* Snippets
-  #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet
-      :demand
-      :commands yas-expand-snippet
-      :bind (:map my-keys-minor-mode-map
-                  ("C-c yd" . yas-describe-tables))
-      :diminish yas-minor-mode
-      :init
-      (setq yas-snippet-dirs
-            '("~/.emacs.d/snippets"))
-      :config
-      (yas-global-mode 1)
-      (add-hook 'term-mode-hook (lambda()
-                                  (yas-minor-mode -1))))
-  #+END_SRC
-
-  #+begin_src emacs-lisp
-    (use-package yatemplate
-      :config
-      (add-hook 'find-file-hook 'auto-insert)
-      (yatemplate-fill-alist))
-  #+end_src
-
 * Run for mode
 #+BEGIN_SRC emacs-lisp
 (defun run-for-mode ()

@@ -1,0 +1,82 @@
+* Hippie expand
+  Bound to ~s-/~, it provides a simple on demand completion mechanism.
+  You can customize its behaviour by choosing different expand functions.
+
+  The description of all the hippie expand functions is inside
+  [[https://github.com/emacs-mirror/emacs/blob/master/lisp/hippie-exp.el#L63][~hippie-exp.el~]] (location can vary on your system)
+  #+begin_src emacs-lisp :results silent
+   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
+   (require 'mode-local)
+   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+   (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line))
+   (require 'mode-local)
+   (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+   (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
+  #+end_src
+
+* AutoCompletion
+
+  company shows a popup where you can select completions with a number
+  or with ~enter~. You can also invoke the popup manually with ~C-x
+  C-o~
+  #+begin_src emacs-lisp :results silent
+     (use-package company
+       :diminish company-mode
+       :config
+       (add-hook 'after-init-hook 'global-company-mode)
+       (setq company-dabbrev-downcase nil)
+       (setq company-show-numbers t)
+       (setq company-backends '((company-files company-capf company-dabbrev)))
+
+       (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+       (let ((map company-active-map))
+         (mapc
+          (lambda (x)
+            (define-key map (format "%d" x) 'ora-company-number))
+          (number-sequence 0 9))
+         (define-key map " " (lambda ()
+                               (interactive)
+                               (company-abort)
+                               (self-insert-command 1)))
+         (define-key map (kbd "<return>") nil))
+
+       (defun ora-company-number ()
+         "Forward to `company-complete-number'.
+
+       Unless the number is potentially part of the candidate.
+       In that case, insert the number."
+         (interactive)
+         (let* ((k (this-command-keys))
+                (re (concat "^" company-prefix k)))
+           (if (cl-find-if (lambda (s) (string-match re s))
+                           company-candidates)
+               (self-insert-command 1)
+             (company-complete-number (string-to-number k))))))
+  #+end_src
+
+* Snippets
+
+  #+begin_src emacs-lisp :results silent
+    (use-package yasnippet
+      :demand
+      :commands yas-expand-snippet
+      :bind (:map my-keys-minor-mode-map
+                  ("C-c yd" . yas-describe-tables))
+      :diminish yas-minor-mode
+      :init
+      (setq yas-snippet-dirs
+            '("~/.emacs.d/snippets"))
+      :config
+      (yas-global-mode 1)
+      (add-hook 'term-mode-hook (lambda()
+                                  (yas-minor-mode -1))))
+  #+end_src
+
+  This allow me to automatically expand [[https://github.com/aurelienbottazini/dotfiles/blob/master/emacs/.emacs.d/templates/][templates]] into new files using
+  the yasnippet format. The filenames for the template are regexes.
+  #+begin_src emacs-lisp :results silent
+    (use-package yatemplate
+      :config
+      (add-hook 'find-file-hook 'auto-insert)
+      (yatemplate-fill-alist))
+  #+end_src

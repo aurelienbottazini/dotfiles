@@ -9,5 +9,6 @@
 (org-babel-load-file (expand-file-name "~/.emacs.d/search.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/vcs.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/ide.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/completion.org"))
 (put 'magit-edit-line-commit 'disabled nil)
 (put 'narrow-to-region 'disabled nil)

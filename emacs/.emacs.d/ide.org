@@ -120,8 +120,8 @@ Here are some tools I use that are IDE oriented.
   #+begin_src emacs-lisp :results silent
     (use-package dumb-jump
       :bind (:map evil-normal-state-map
-                  ("gd" . dumb-jump-go)
-                  ("gD" . dumb-jump-go-other-window))
+                  ("gj" . dumb-jump-go)
+                  ("gJ" . dumb-jump-go-other-window))
       :init
       (setq dumb-jump-selector 'ivy)
       :config
@@ -139,3 +139,29 @@ Here are some tools I use that are IDE oriented.
   ~./git/config~ and run ~git init .~ again from the concerned project
   directory.
   My [[file:~/dotfiles/git/.git_template][templates]] are used thanks to the [[~GIT_TEMPLATE_DIR][~GIT_TEMPLATE_DIR~]] environment variable.
+* IntelliSense
+
+  lsp uses the language mode server developed by Microsoft for VsCode.
+  To use it you need to install [[https://github.com/emacs-lsp/lsp-mode#supported-languages][lsp servers]].
+  #+begin_src emacs-lisp :results silent
+    (use-package lsp-mode
+      :bind (:map evil-normal-state-map
+                  ("gi" . lsp-find-definition)
+                  ("gr" . lsp-find-references))
+      :hook ((js2-mode . lsp)
+             (web-mode . lsp)
+             (html-mode . lsp)
+             (css-mode . lsp)
+             (scss-mode . lsp)
+             (sass-mode . lsp))
+      :commands lsp)
+
+    (use-package company-lsp
+      :requires company
+      :commands company-lsp
+      :config
+      (push 'company-lsp company-backends)
+      (setq company-transformers nil
+            company-lsp-async t
+            company-lsp-cache-candidates nil))
+  #+end_src

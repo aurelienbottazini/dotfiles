@@ -32,6 +32,10 @@ emacs/.emacs.d/.emacs.desktop
 emacs/.emacs.d/.emacs.desktop.lock
 emacs/.emacs.d/.mc-lists.el
 emacs/.emacs.d/Aurelien.el
+emacs/.emacs.d/completion.el
+emacs/.emacs.d/ide.el
+emacs/.emacs.d/search.el
+emacs/.emacs.d/vcs.el
 emacs/.emacs.d/bookmarks
 emacs/.emacs.d/elpa/
 emacs/.emacs.d/emacs-config.el

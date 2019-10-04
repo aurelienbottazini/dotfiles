@@ -408,7 +408,9 @@ keybindings.
                        (abbreviate-file-name (buffer-file-name))
                      "%b"))))
 
-    (show-paren-mode 1)
+
+    (define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
+    (setq blink-matching-paren 'jump-offscreen)
 
     ;; makes fringe big enough on linux with HDPI
     (fringe-mode 20)
@@ -1048,11 +1050,6 @@ keybindings.
    something, do something else and come back to it later.
    #+begin_src emacs-lisp
     (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
-   #+end_src
-
-   I use spc as my leader key so I want it available everywhere
-   #+begin_src emacs-lisp
-  (define-key evil-motion-state-map (kbd "SPC") nil)
    #+end_src
 
    Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~

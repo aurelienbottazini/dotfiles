@@ -21,7 +21,9 @@
     ((ivy--regex-plus . "ivy")
      (ivy--regex-ignore-order . "order")
      (ivy--regex-fuzzy . "fuzzy"))))
+ '(lsp-ui-doc-enable nil)
  '(lsp-ui-doc-use-webkit nil)
+ '(lsp-ui-sideline-enable nil)
  '(menu-bar-mode nil)
  '(org-agenda-files
    (quote

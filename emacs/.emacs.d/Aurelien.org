@@ -269,6 +269,7 @@ keybindings.
   #+end_src
 
   #+begin_src emacs-lisp
+    (setq help-window-select t)
     (setq inhibit-startup-message t)
     (setq delete-by-moving-to-trash t)
     (setq tab-always-indent 'complete)

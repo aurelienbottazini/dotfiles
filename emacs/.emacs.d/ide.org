@@ -120,8 +120,8 @@ Here are some tools I use that are IDE oriented.
   #+begin_src emacs-lisp :results silent
     (use-package dumb-jump
       :bind (:map evil-normal-state-map
-                  ("gj" . dumb-jump-go)
-                  ("gJ" . dumb-jump-go-other-window))
+                  ("gd" . dumb-jump-go)
+                  ("gD" . dumb-jump-go-other-window))
       :init
       (setq dumb-jump-selector 'ivy)
       :config
@@ -141,13 +141,10 @@ Here are some tools I use that are IDE oriented.
   My [[file:~/dotfiles/git/.git_template][templates]] are used thanks to the [[~GIT_TEMPLATE_DIR][~GIT_TEMPLATE_DIR~]] environment variable.
 * IntelliSense
 
-  lsp uses the language mode server developed by Microsoft for VsCode.
+  [[https://langserver.org/][lsp]] uses the language mode server created by Microsoft for VsCode.
   To use it you need to install [[https://github.com/emacs-lsp/lsp-mode#supported-languages][lsp servers]].
   #+begin_src emacs-lisp :results silent
     (use-package lsp-mode
-      :bind (:map evil-normal-state-map
-                  ("gi" . lsp-find-definition)
-                  ("gr" . lsp-find-references))
       :hook ((js2-mode . lsp)
              (web-mode . lsp)
              (html-mode . lsp)
@@ -164,4 +161,13 @@ Here are some tools I use that are IDE oriented.
       (setq company-transformers nil
             company-lsp-async t
             company-lsp-cache-candidates nil))
+  #+end_src
+
+  These are my two go commands to navigate between code references.
+  If /lsp/ is enabled for the current buffer, those bindings will use lsp.
+  #+begin_src emacs-lisp :results silent
+  (use-package evil
+    :bind (:map evil-normal-state-map
+                  ("g." . xref-find-definitions)
+                  ("gr" . xref-find-references)))
   #+end_src

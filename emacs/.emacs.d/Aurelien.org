@@ -498,8 +498,7 @@ keybindings.
     #4982cf 285u
     #3a499c Reflex B l u e U
     #65428a medium p u r p l e
-* Navigation
-** Windows
+* Windows
    #+BEGIN_SRC emacs-lisp
      (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)
      (define-key my-keys-minor-mode-map (kbd "C-j") 'evil-window-down)
@@ -510,11 +509,6 @@ keybindings.
      (evil-define-key 'normal my-keys-minor-mode-map (kbd "C-w -") 'evil-window-split)
    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package avy
-       :bind (:map my-keys-minor-mode-map
-              ("C-;" . avy-goto-char-timer)))
-   #+END_SRC
 * Notes
   #+begin_src emacs-lisp
     (use-package deft

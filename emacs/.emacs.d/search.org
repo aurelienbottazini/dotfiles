@@ -50,6 +50,12 @@ Here is how I search.
        (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
    #+end_src
 
+* Search in visible windows
+   #+BEGIN_SRC emacs-lisp
+     (use-package avy
+       :bind (:map my-keys-minor-mode-map
+              ("C-;" . avy-goto-char-timer)))
+   #+END_SRC
 * Search in project
 
   ~counsel-rg~ is my main way to search. Invoked with an argument, it

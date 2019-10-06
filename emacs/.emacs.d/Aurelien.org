@@ -187,6 +187,10 @@ keybindings.
       (setq evil-mode-line-format nil)
       :config
 
+      (setq evil-insert-state-cursor '(box "#34855b")
+            evil-visual-state-cursor '(box "#4c4e56")
+            evil-emacs-state-cursor '(box "#bc3e44")
+            evil-normal-state-cursor '(box "#4c4e56"))
       (defun my-evil-record-macro ()
         (interactive)
         (if buffer-read-only

@@ -143,7 +143,10 @@ Here are some tools I use that are IDE oriented.
 
   [[https://langserver.org/][lsp]] uses the language mode server created by Microsoft for VsCode.
   To use it you need to install [[https://github.com/emacs-lsp/lsp-mode#supported-languages][lsp servers]].
-  #+begin_src emacs-lisp :results silent
+  However I found that they do too much and slow down my emacs
+  configuration so those are disabled for now (with ~:tangle no~ on
+  this babel code block).
+  #+begin_src emacs-lisp :results silent :tangle no
     (use-package lsp-mode
       :hook ((js2-mode . lsp)
              (web-mode . lsp)

@@ -21,6 +21,7 @@
     ((ivy--regex-plus . "ivy")
      (ivy--regex-ignore-order . "order")
      (ivy--regex-fuzzy . "fuzzy"))))
+ '(lsp-prefer-flymake :none)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-sideline-enable nil)

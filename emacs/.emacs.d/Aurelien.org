@@ -1039,7 +1039,7 @@ keybindings.
      (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
      (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
      (define-key my-keys-minor-mode-map (kbd "C-c jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
-     (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file (concat user-emacs-directory "Aurelien.org"))))
+     (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file (concat user-emacs-directory))))
      (define-key my-keys-minor-mode-map (kbd "C-c jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
      (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
      (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))

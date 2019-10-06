@@ -59,6 +59,7 @@ Here are some tools I use that are IDE oriented.
        :bind (:map  my-keys-minor-mode-map
                     ("C-c t" . find-file-in-project)
                     ("C-c T" . find-file-in-project-by-selected)
+                    ("C-c s" . find-file-with-similar-name)
                     :map evil-normal-state-map
                     ("gf" . find-file-in-project-at-point))
        :config
@@ -69,7 +70,8 @@ Here are some tools I use that are IDE oriented.
        (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
        (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
        (setq ffip-prefer-ido-mode nil)
-       (setq ffip-use-rust-fd t)
+       (setq ffip-use-rust-fd nil) ;; find works better than fd. fd with ffip ignores my .emacs.d directory for some reason
+       (setq ffip-strip-file-name-regex "\\(\\.mock\\|\\.test\\|\\.mockup\\|\\.spec\\)")
        (add-to-list 'ffip-prune-patterns "*/.git/*")
        (add-to-list 'ffip-prune-patterns "*/dist/*")
        (add-to-list 'ffip-prune-patterns "*/.idea/*")

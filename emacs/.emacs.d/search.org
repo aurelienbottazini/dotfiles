@@ -30,7 +30,6 @@ Here is how I search.
        :diminish ivy-mode
        :bind (("C-s" . swiper-isearch)
               :map my-keys-minor-mode-map
-              ("C-c s r" . ffip-ivy-resume)
               ("C-c v" . ivy-push-view)
               ("C-c V" . ivy-pop-view))
        :init
@@ -98,7 +97,6 @@ Here is how I search.
              ("<f1> l" . counsel-find-library)
              ("<f2> i" . counsel-info-lookup-symbol)
              ("<f2> u" . counsel-unicode-char)
-             ("C-x l" . counsel-locate)
              :map minibuffer-local-map
              ("C-r" . counsel-minibuffer-history)
              :map my-keys-minor-mode-map

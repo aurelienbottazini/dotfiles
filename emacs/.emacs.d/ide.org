@@ -74,7 +74,7 @@ Here are some tools I use that are IDE oriented.
        (setq ffip-strip-file-name-regex "\\(\\.mock\\|\\.test\\|\\.mockup\\|\\.spec\\)")
        (add-to-list 'ffip-prune-patterns "*/.git/*")
        (add-to-list 'ffip-prune-patterns "*/dist/*")
-       (add-to-list 'ffip-prune-patterns "*/.idea/*")
+       (add-to-list 'ffip-prune-patterns "*/.emacs.d/elpa/*")
        (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
        (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
        (add-to-list 'ffip-prune-patterns "node_modules/*"))

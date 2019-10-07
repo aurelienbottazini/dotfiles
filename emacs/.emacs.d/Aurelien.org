@@ -254,12 +254,14 @@ keybindings.
                              (getenv "HOME") "/.rbenv/bin:"
                              (getenv "HOME") "/.fzf/bin:"
                              "/usr/local/opt/node@10/bin:"
+                             "/bin"
                              (getenv "PATH"))))
 
     (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
                       "/usr/local/opt/node@10/bin/"
                       "~/.local/bin"
                       "~/bin"
+                      "/bin/"
                       "~/work/dox-compose/bin/"
                       "~/.rbenv/bin/"
                       "~/.rbenv/shims/"

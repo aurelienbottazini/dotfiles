@@ -198,7 +198,10 @@ function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
 
-set guifont=OperatorMono:h14
+set guioptions -=T "remove menubar
+set guioptions -=m "remove toolbar
+set guioptions -=r "remove scrollbar
+
 set cursorline
 " set cursorcolumn
 " set colorcolumn=80

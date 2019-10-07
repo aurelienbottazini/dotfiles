@@ -145,7 +145,8 @@ export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
-eval $(gnome-keyring-daemon --start)
-export SSH_AUTH_SOCK
+eval "$("/home/auray/work/dox-compose/bin/dox-init")"
+export PATH=$PATH:/home/auray/.rbenv/bin
+eval "$(rbenv init -)"
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat

@@ -1,6 +1,6 @@
 
 * Dired
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :results silent
     (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform
     (setq dired-listing-switches "-alh")
     ;; on mac there is some weird prefixing going on for GNU Tools like ls.
@@ -38,7 +38,12 @@
            "^" '(lambda () (interactive) (find-alternate-file "..")))))
 
     (define-key package-menu-mode-map (kbd "/") 'evil-search-forward)
+
+    (use-package dired-rsync
+    :config
+    (bind-key "p" 'dired-rsync dired-mode-map))
   #+end_src
+
 * Counsel
   I redefine the standard ~C-x C-f~ to use counsel. It allows me to do
   pretty cool stuff with it [[https://oremacs.com/2017/11/18/dired-occur/][thanks to ivy-occur and dired]].

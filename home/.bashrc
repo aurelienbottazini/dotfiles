@@ -146,7 +146,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
 eval "$("/home/auray/work/dox-compose/bin/dox-init")"
-export PATH=$PATH:/home/auray/.rbenv/bin
+export PATH=$PATH:/home/auray/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin
 eval "$(rbenv init -)"
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat

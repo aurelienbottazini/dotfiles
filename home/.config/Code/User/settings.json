@@ -5,5 +5,7 @@
     "editor.tabSize": 2,
     "vim.handleKeys": {
       "<C-k>": false,
-    }
+    },
+    "sync.gist": "c549ea035c114d8e7f90e0571163067f",
+    "window.zoomLevel": 0
 }

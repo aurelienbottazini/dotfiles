@@ -57,8 +57,8 @@ Here are some tools I use that are IDE oriented.
    #+begin_src emacs-lisp :results silent
      (use-package find-file-in-project
        :bind (:map  my-keys-minor-mode-map
-                    ("C-c t" . find-file-in-project)
-                    ("C-c T" . find-file-in-project-by-selected)
+                    ("C-c T" . find-file-in-project)
+                    ("C-c t" . find-file-in-project-by-selected)
                     ("C-c s" . find-file-with-similar-name)
                     :map evil-normal-state-map
                     ("gf" . find-file-in-project-at-point))

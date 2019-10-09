@@ -11,7 +11,7 @@
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
  '(dumb-jump-mode t)
- '(electric-pair-mode t)
+ '(electric-pair-mode nil)
  '(electric-quote-string t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)

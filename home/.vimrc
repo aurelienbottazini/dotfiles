@@ -215,4 +215,11 @@ highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
 highlight EndOfBuffer ctermfg=3 guifg=#268bd2
 
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " au FileType gitcommit execute "normal! O" | startinsert

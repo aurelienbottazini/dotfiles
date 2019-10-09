@@ -121,7 +121,7 @@ Don't forget emacs vcs features accessible with the prefix ~C-x v~!
     (defun ab-run-gitsh ()
       "Start gitsh in current git project. Uses st as a terminal."
       (interactive)
-      (let ((default-directory (locate-dominating-file (buffer-file-name) ".gitignore")))
+      (let ((default-directory (locate-dominating-file (expand-file-name default-directory) ".gitignore")))
         (start-process "gitsh" nil "gnome-terminal" "--geometry=120x70" "--class=scratch-term" "--" "gitsh")))
     (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
   #+end_src

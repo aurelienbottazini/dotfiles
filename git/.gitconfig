@@ -35,7 +35,8 @@
         browse = !hub browse
         compare = !hub compare
         issues = !hub browse -- issues
-        pr = !hub pull-request
+        prc = !hub pull-request -c
+        prl = !hub pr list -L 20 -b master --format='%t [%H] | %U%n'
         ci = !hub ci-status
         which-upstream = rev-parse --abbrev-ref --symbolic-full-name @{upstream}
         fall = !git-fetch-all-remote

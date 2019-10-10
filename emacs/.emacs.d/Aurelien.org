@@ -153,6 +153,15 @@ keybindings.
   #+begin_src emacs-lisp :tangle no
   (emacs-init-time)
   #+end_src
+
+  #+begin_src emacs-lisp
+    (defun my-prog-mode-auto-fill-hook ()
+      (setq fill-column 80)
+      (set (make-local-variable 'comment-auto-fill-only-comments) t)
+      (auto-fill-mode t))
+    (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
+  #+end_src
+
 * Vim / Evil
   Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
   #+begin_src emacs-lisp
@@ -250,6 +259,19 @@ keybindings.
       (add-to-list 'exec-path "/usr/local/opt/coreutils/libexec/gnubin"))
   #+end_src
 
+  Keep emacs fast with large files.
+  #+begin_src emacs-lisp
+    (defun check-large-file-hook ()
+      "If a file is over a given size, turn off minor modes."
+      (when (> (buffer-size) (* 1024 100)) ;; 100K
+        (fundamental-mode)
+        (font-lock-mode -1)
+        (setq buffer-read-only t)
+        (buffer-disable-undo)))
+
+    (add-hook 'find-file-hooks 'check-large-file-hook)
+  #+end_src
+
   #+begin_src emacs-lisp
     (setq help-window-select t)
     (setq inhibit-startup-message t)
@@ -319,7 +341,6 @@ keybindings.
      (setq-default whitespace-style '(face trailing tabs tab-mark))
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
-
 
 ** Recent files
 #+BEGIN_SRC emacs-lisp
@@ -449,19 +470,6 @@ keybindings.
      (evil-define-key 'normal my-keys-minor-mode-map (kbd "C-w -") 'evil-window-split)
    #+END_SRC
 
-* Notes
-  #+begin_src emacs-lisp
-    (use-package deft
-      :bind (:map my-keys-minor-mode-map
-             ("C-c n" . deft))
-      :init
-      (setq deft-extensions '("txt" "tex" "org"))
-      (setq deft-directory "~/Dropbox/org/")
-      (setq deft-use-filename-as-title t)
-      (setq deft-use-filter-string-for-filename t)
-      (setq deft-default-extension "org")
-      (setq deft-recursive t))
-  #+end_src
 * Org
   #+begin_src emacs-lisp
     (use-package htmlize)
@@ -540,31 +548,6 @@ keybindings.
      (require 'ox-publish)
      (setq system-time-locale "C") ;; make sure time local is in english when exporting
      (setq org-html-validation-link nil)
-     (setq org-publish-project-alist
-           '(
-             ("wiki-files"
-              :base-directory "~/Dropbox/wiki"
-              :base-extension "org"
-              :publishing-directory "~/Dropbox/wiki_published/"
-              :recursive t
-              :publishing-function org-html-publish-to-html
-              :headline-levels 4             ; Just the default for this project.
-              :auto-preamble t
-              :html-head nil
-              :html-head-extra nil
-              :body-only nil
-              )
-             ;; ... add all the components here (see below)...
-             ;; ("wiki" :components ("wiki-files"))
-             )
-           org-export-with-toc nil
-           org-html-doctype "html5"
-           org-html-head nil
-           org-html-head-include-default-style nil
-           org-html-head-include-scripts nil
-           org-html-html5-fancy t
-           org-html-postamble nil
-           org-html-indent t)
    #+end_src
   #+begin_src emacs-lisp
     (use-package palimpsest
@@ -572,28 +555,6 @@ keybindings.
       :config
       (add-hook 'org-mode-hook 'palimpsest-mode))
   #+end_src
-
-  Keep emacs fast with large files.
-  #+begin_src emacs-lisp
-    (defun check-large-file-hook ()
-      "If a file is over a given size, turn off minor modes."
-      (when (> (buffer-size) (* 1024 100)) ;; 100K
-        (fundamental-mode)
-        (font-lock-mode -1)
-        (setq buffer-read-only t)
-        (buffer-disable-undo)))
-
-    (add-hook 'find-file-hooks 'check-large-file-hook)
-  #+end_src
-
-  #+begin_src emacs-lisp
-    (defun my-prog-mode-auto-fill-hook ()
-      (setq fill-column 80)
-      (set (make-local-variable 'comment-auto-fill-only-comments) t)
-      (auto-fill-mode t))
-    (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
-  #+end_src
-
 * Clojure
 #+BEGIN_SRC emacs-lisp
 (use-package clojure-mode

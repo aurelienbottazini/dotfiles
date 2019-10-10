@@ -198,10 +198,6 @@ function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
 
-set guioptions -=T "remove menubar
-set guioptions -=m "remove toolbar
-set guioptions -=r "remove scrollbar
-
 set cursorline
 " set cursorcolumn
 " set colorcolumn=80

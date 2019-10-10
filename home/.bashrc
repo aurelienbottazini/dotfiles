@@ -150,3 +150,5 @@ export PATH=$PATH:/home/auray/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin
 eval "$(rbenv init -)"
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

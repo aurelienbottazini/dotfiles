@@ -950,8 +950,6 @@ keybindings.
        :config
        (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 
-     (define-key my-keys-minor-mode-map (kbd "C-u") 'evil-scroll-up)
-
      (use-package expand-region
        :bind (:map my-keys-minor-mode-map ("C-c w" . er/expand-region)))
 
@@ -968,9 +966,9 @@ keybindings.
      (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
 
      (define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
-     (use-package define-word
-       :config
-       (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
+     ;;(use-package define-word
+     ;;  :config
+     ;;  (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
 
      (defun lookup-synonyms (word)
        (interactive (list (save-excursion (car (ispell-get-word nil)))))

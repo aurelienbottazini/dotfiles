@@ -119,3 +119,16 @@ Here is how I search.
                                         items)))))
 
   #+end_src
+
+* Replace in current buffer
+
+  Prefix with ~0~ to only match in current function.
+  Prefix with universal argument to repeat the previous iedit match.
+  Select region and press ~F6~ again to restrict to region.
+  ~tab~ and ~S-tab~ to navigate between matches. ~M-;~ to clear a match.
+
+  Shows only matching lines with ~C-'~
+  #+begin_src emacs-lisp :results silent
+    (use-package iedit
+     :bind (:map my-keys-minor-mode-map ("<f6>" . iedit-mode)))
+  #+end_src

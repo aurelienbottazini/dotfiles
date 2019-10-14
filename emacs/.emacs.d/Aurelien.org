@@ -350,6 +350,13 @@ keybindings.
 #+END_SRC
 * GUI
   #+begin_src emacs-lisp
+    (use-package all-the-icons)
+    (use-package all-the-icons-dired
+      :config
+      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+  #+end_src
+
+  #+begin_src emacs-lisp
     (blink-cursor-mode 0)
     (column-number-mode)
 

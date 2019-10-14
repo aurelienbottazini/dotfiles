@@ -75,3 +75,4 @@ home_linux_desktop/.quokka/package.json
 /emacs/.emacs.d/.lsp-session-v1
 /emacs/.emacs.d/files-and-directories.el
 home/.config/Code/*
+emacs/.emacs.d/vim.el

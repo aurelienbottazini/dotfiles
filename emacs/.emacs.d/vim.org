@@ -1,0 +1,91 @@
+* Vim / Evil
+  Awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
+  #+begin_src emacs-lisp
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
+      (setq evil-mode-line-format nil)
+      :config
+
+      (setq evil-insert-state-cursor '(box "#34855b")
+            evil-visual-state-cursor '(box "#4c4e56")
+            evil-emacs-state-cursor '(box "#bc3e44")
+            evil-normal-state-cursor '(box "#4c4e56"))
+      (defun my-evil-record-macro ()
+        (interactive)
+        (if buffer-read-only
+            (quit-window)
+          (call-interactively 'evil-record-macro)))
+
+      (with-eval-after-load 'evil-maps
+        (define-key evil-normal-state-map (kbd "q") 'my-evil-record-macro))
+
+      (evil-mode 1)
+      (use-package key-chord
+        :config
+        (key-chord-mode 1)
+        (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+
+      (use-package evil-surround
+        :config
+        (global-evil-surround-mode 1))
+
+      (use-package evil-commentary
+        :diminish evil-commentary-mode
+        :config
+        (evil-commentary-mode))
+
+      (use-package evil-visualstar
+        :config
+        (global-evil-visualstar-mode t))
+
+      (use-package evil-indent-plus
+        :config
+        (evil-indent-plus-default-bindings))
+
+      (use-package evil-matchit
+        :config
+        (global-evil-matchit-mode 1))
+
+      (use-package evil-search-highlight-persist
+        :config
+        (global-evil-search-highlight-persist t))
+
+      (evil-set-initial-state 'deft-mode 'insert)
+      (evil-set-initial-state 'dired-mode 'emacs)
+      (evil-set-initial-state 'magit-mode 'emacs)
+
+      (add-hook 'with-editor-mode-hook 'evil-insert-state)
+      (evil-define-key 'insert deft-mode-map (kbd "C-p") 'previous-line)
+      (evil-define-key 'insert deft-mode-map (kbd "C-n") 'next-line)
+
+      (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)
+      (evil-ex-define-cmd "W" 'save-buffer))
+  #+end_src
+
+
+   Changes modeline color depending on Evil state, if buffer is
+   modifier etc...
+   #+begin_src emacs-lisp
+    (add-to-list 'default-frame-alist '(background-color . "#f1f2f1"))
+    (add-to-list 'default-frame-alist '(foreground-color . "#000000"))
+
+       (lexical-let ((default-color (cons (face-background 'mode-line)
+                                        (face-foreground 'mode-line))))
+       (add-hook 'post-command-hook
+                 (lambda ()
+                   (let ((color (cond ((minibufferp) default-color)
+                                      ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
+                                      ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
+                                      ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
+                                      ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
+                                      (t default-color)))
+                         )
+
+                     (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
+                     (set-face-background 'mode-line (car color))
+                     (set-face-foreground 'mode-line-buffer-id (cdr color))
+                     (set-face-foreground 'mode-line (cdr color))))))
+
+   #+end_src

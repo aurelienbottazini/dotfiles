@@ -107,6 +107,13 @@ Don't forget emacs vcs features accessible with the prefix ~C-x v~!
       (fullframe magit-status magit-mode-quit-window))
   #+end_src
 
+  Start in insert mode when committing from vcs
+  #+begin_src emacs-lisp :results silent
+    (use-package evil
+      :config
+      (add-hook 'with-editor-mode-hook 'evil-insert-state))
+  #+end_src
+
 * gitsh
 
   #+BEGIN_QUOTE

@@ -939,3 +939,16 @@ keybindings.
        :config
        (drag-stuff-global-mode t))
    #+end_src
+#+begin_src emacs-lisp :results silent
+  (use-package key-chord
+    :after evil
+    :config
+    (key-chord-mode 1)
+    (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+#+end_src
+
+  #+begin_src emacs-lisp :results silent
+    (use-package evil
+      :config
+      (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
+  #+end_src

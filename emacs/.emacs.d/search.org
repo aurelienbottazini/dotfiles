@@ -120,7 +120,7 @@ Here is how I search.
 
   #+end_src
 
-* Replace in current buffer
+* Rename
 
   Prefix with ~0~ to only match in current function.
   Prefix with universal argument to repeat the previous iedit match.
@@ -131,4 +131,16 @@ Here is how I search.
   #+begin_src emacs-lisp :results silent
     (use-package iedit
      :bind (:map my-keys-minor-mode-map ("<f6>" . iedit-mode)))
+  #+end_src
+
+  #+begin_src emacs-lisp :results silent
+    (use-package evil-mc
+      (:map my-keys-minor-mode-map
+            ("C->" . evil-mc-make-and-goto-next-match)
+            ("C-<" . evil-mc-make-and-goto-prev-match)
+            ("C-c C-<" . evil-mc-make-all-cursors))
+      :config
+      (evil-define-key 'visual evil-mc-key-map
+        "A" #'evil-mc-makefoo-cursor-in-visual-selection-end
+        "I" #'evil-mc-makefoo-cursor-in-visual-selection-beg))
   #+end_src

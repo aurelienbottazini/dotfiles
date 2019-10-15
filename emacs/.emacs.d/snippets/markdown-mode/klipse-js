@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: klipse-js
-# key: kjs
-# --
-<pre>
-<code class="kjs">
-$0
-</code>
-</pre>

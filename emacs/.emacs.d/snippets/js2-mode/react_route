@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: react_route
-# key: rrt
-# --
-<Route path="$1" component={$0} />

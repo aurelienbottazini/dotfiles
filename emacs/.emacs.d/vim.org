@@ -115,3 +115,13 @@ Make my cursor match my modeline color
           evil-emacs-state-cursor '(box "#bc3e44")
           evil-normal-state-cursor '(box "#4c4e56")))
 #+end_src
+
+
+Add text objects to select, copy things based on indentation level.
+Use it with ~vii~ and ~yii~.
+#+begin_src emacs-lisp :results silent
+(use-package evil-indent-plus
+  :after evil
+  :config
+  (evil-indent-plus-default-bindings))
+#+end_src

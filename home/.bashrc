@@ -90,9 +90,10 @@ export PATH=~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.
 
 export CDPATH=.:~/:~/projects:~/work
 
+source ~/.git-completion.bash
 # export PROMPT_COMMAND="\[\e[34;4;3;1m\]\w\[\e[31m\]$\[\e[0m\]"
 export PROMPT_COMMAND=""
-export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[31;1m\] $\[\e[0m\] '
+export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[31;1m\] \$\[\e[0m\] '
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash

@@ -1,4 +1,3 @@
-" :actionlist to know what to bind to shortcuts
 imap jk <Esc>
 set scrolloff=5
 
@@ -22,16 +21,14 @@ nnoremap <C-l> :action TabShiftActions.MoveFocusRight<CR>
 
 let mapleader = " "
 
-map <leader>cT :action :cursive.testing.actions/run-ns-tests<CR>
-map <leader>ct :action :cursive.testing.actions/rerun-last-test<CR>
-
 map <leader>oh :nohlsearch<CR>
 map <leader>os :source ~/.ideavimrc<CR>
 
-map <leader>s :action GotoTest<CR>
-
 set clipboard+=unnamed
 
+set ideajoin
+
+" :actionlist to know what to bind to shortcuts
 " RecentChangedFiles                                 <C-S-E>
 " RecentChanges                                      <A-S-C>
 " RecentFiles                                        <C-E>
@@ -2425,7 +2422,3 @@ set clipboard+=unnamed
 " XMLRefactoringMenu                                
 " XSD2Document                                      
 " ZoomCurrentWindow                                 
-<<<<<<< HEAD
-=======
-set ideajoin
->>>>>>> bf1172c783f7b1199ee7edd79d5f0ef96a015a31

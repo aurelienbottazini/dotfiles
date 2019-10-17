@@ -1,13 +1,13 @@
 [user]
 	name = Aurélien Bottazini
-	email = aurelien@bottazini.com
+	email = aurelien.bottazini@gmail.com
 [core]
 	quotepath = false
 	excludesfile = ~/.gitignore_global
 	editor = vim
 	autocrlf = input
 [push]
-	default = current
+	default = upstream
 [alias]
         a = add -p
         s = status
@@ -76,11 +76,12 @@
     cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 [github]
 	user = aurelienbottazini
-
 [mergetool]
 	keepBackup = false
 [tag]
 	sort = version:refname
+[color]
+  ui = auto
 [gitsh]
   defaultcommand = status -sb
   gitcommand = hub

@@ -51,7 +51,7 @@
         standup = log --since yesterday --all --no-merges --oneline --author $(git config user.email) --pretty=short
         scrum = log --since yesterday --all --no-merges --oneline --author $(git config user.email) --pretty=short
         ls = log --pretty=format:"%C(yellow)%h\\ %Creset%s%Cblue\\ [%cn]\\%Cred%d" --decorate # A more concise and readable git log
-        ll = ls --numstat # Same as above, with files changed in each commit
+        ll = !git ls --numstat # Same as above, with files changed in each commit
         divergence = log --left-right --graph --cherry-pick --oneline $1...origin/$1 # show the history difference between a local branche and its remote
 [merge]
 #        ff = only

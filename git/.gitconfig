@@ -7,7 +7,7 @@
 	editor = vim
 	autocrlf = input
 [push]
-	default = upstream
+	default = current # allows to set upstream automatically with git push -u
 [alias]
         a = add -p
         s = status

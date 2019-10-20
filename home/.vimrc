@@ -46,7 +46,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-airline/vim-airline' " better status and tab line
 Plug 'vim-airline/vim-airline-themes' " better status and tab line
 Plug 'mkitt/tabline.vim'
-Plug 'rking/ag.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
 Plug 'tpope/vim-unimpaired' " [ ] mappings
@@ -66,12 +65,11 @@ let g:prettier#exec_cmd_async = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " Use Silver Searcher instead of grep
-set grepprg=ag\ --nogroup\ --column
+set grepprg=rg\ --vimgrep
 " set grepprg=ag
 set grepformat=%f:%l:%c:%m
 let g:grep_cmd_opts = '--line-numbers --noheading'
-" Make CtrlP use ag for listing the files. Way faster and no useless files.
-let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!.git/*"'
 let g:ctrlp_use_caching = 0
 " Let ctrlp have up to 30 results.
 let g:ctrlp_max_height = 30

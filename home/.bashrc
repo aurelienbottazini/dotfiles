@@ -121,7 +121,7 @@ export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
-eval "$("/home/auray/work/dox-compose/bin/dox-init")"
+[ -f /home/auray/work/dox-compose/bin/dox-init ] && eval "$("/home/auray/work/dox-compose/bin/dox-init")"
 export PATH=$PATH:/home/auray/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin
 eval "$(rbenv init -)"
 

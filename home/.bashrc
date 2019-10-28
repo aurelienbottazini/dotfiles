@@ -123,8 +123,8 @@ export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
 [ -f /home/auray/work/dox-compose/bin/dox-init ] && eval "$("/home/auray/work/dox-compose/bin/dox-init")"
 export PATH=$PATH:/home/auray/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin
-eval "$(rbenv init -)"
+hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && tat
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null && tat
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

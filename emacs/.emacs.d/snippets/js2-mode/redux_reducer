@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: redux_reducer
+# key: rrd
+# --
+export default function (state = ${1:null}, action) {
+  switch (action.type) {
+    case $2:
+      return action.payload;
+
+    default:
+      return state;
+  }
+}

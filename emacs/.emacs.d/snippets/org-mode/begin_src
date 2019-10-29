@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: begin_src
+# key: bsrc
+# --
+#+begin_src ${1:emacs-lisp} :results ${2:silent}
+  $0
+#+end_src

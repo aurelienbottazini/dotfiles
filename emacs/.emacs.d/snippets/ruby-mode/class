@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: class
+# key: cla
+# --
+class ${1:ClassName < SuperClass}
+  $0
+end

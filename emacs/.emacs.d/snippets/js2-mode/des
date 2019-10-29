@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: describe
+# key: des
+# --
+describe('${1:cool component}', () => {
+  $0
+});

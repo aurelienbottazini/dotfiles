@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: constructor
+# key: ctt
+# --
+constructor($1) {
+  super($0);
+}

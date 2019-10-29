@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: begin_quote
+# key: bquote
+# expand-env: ((yas-wrap-around-region nil))
+# --
+#+BEGIN_QUOTE
+ `yas-selected-text`$0
+#+END_QUOTE

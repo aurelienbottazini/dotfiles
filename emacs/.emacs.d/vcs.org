@@ -1,0 +1,145 @@
+I mainly use git. I prefix all git related keybindings with ~c-c g~.
+
+Don't forget emacs vcs features accessible with the prefix ~C-x v~!
+
+* Resolving conflicts
+
+  This is to prevent popup windows when resolving file conflicts.
+  I prefer to have the ediff take over and restove the windows when
+  done.
+
+  #+begin_src emacs-lisp :results silent
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+    (setq ediff-split-window-function 'split-window-vertically)
+  #+end_src
+
+* Working with github
+
+  To grab a link I can share with co-workers from the region or file.
+  #+begin_src emacs-lisp :results silent
+    (use-package git-link
+      :bind (:map my-keys-minor-mode-map
+                  ("C-c gl" . git-link)))
+  #+end_src
+
+  Otherwise I launch a ~gitsh~ session and I use [[https://github.com/github/hub][hub]] to interact with
+  github directly
+
+* View History
+** timemachine
+  Allows to view previous versions of a file. It is not focused on the
+  diff but on the file itself. Use ~n~ and ~p~ to navigate between
+  versions.
+  #+begin_src emacs-lisp :results silent
+    (use-package git-timemachine
+      :bind (:map my-keys-minor-mode-map
+                  ("C-c gt" . git-timemachine-toggle))
+      :config
+      (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+        "when entering git-timemachine mode, change evil normal state to emacs state"
+        (if (evil-normal-state-p)
+            (evil-emacs-state)
+          (evil-normal-state)))
+
+      (ad-activate 'git-timemachine-mode))
+  #+end_src
+** vc-annotate
+
+   Bound to ~C-x v g~.
+   - Use ~l~ to see the commit message
+   - ~f~ to see what the file looked like at that revision. You can
+     then use /git-link/ to grab a link with ~C-c gl~
+   - ~n~ and ~p~ to navigate between revisions
+   - ~=~ to see the diff.
+
+
+  I prefer to use a full-window with vc-annotate
+  #+begin_src emacs-lisp :results silent
+    (use-package fullframe
+      :config
+      (fullframe vc-annotate quit-window))
+  #+end_src
+
+  also q to quit window everywhere?
+  #+begin_src emacs-lisp :results silent
+    (eval-after-load "vc-annotate"
+         '(progn
+          (define-key vc-annotate-mode-map "j" 'evil-next-line)
+          (define-key vc-annotate-mode-map "k" 'evil-previous-line)))
+
+    (use-package evil
+      :config
+      (evil-define-key 'normal diff-mode-map (kbd "q") 'quit-window))
+  #+end_src
+
+* Magit
+
+  #+BEGIN_QUOTE
+  [[https://magit.vc/][Magit]] is an interface to the version control system Git, implemented
+  as an Emacs package. Magit aspires to be a complete Git porcelain.
+  While we cannot (yet) claim that Magit wraps and improves upon each
+  and every Git command, it is complete enough to allow even
+  experienced Git users to perform almost all of their daily version
+  control tasks directly from within Emacs. While many fine Git
+  clients exist, only Magit and Git itself deserve to be called
+  porcelains.
+  #+END_QUOTE
+
+  #+begin_src emacs-lisp :results silent
+    (use-package magit
+      :bind (:map my-keys-minor-mode-map
+                  ("C-c gs" . magit-status)
+                  ("C-c gc" . magit-commit)
+                  ("C-c gp" . magit-push-current)
+                  ("C-c gf" . magit-file-dispatch))
+      :init
+      (setq magit-commit-show-diff nil
+            magit-revert-buffers 1))
+   #+end_src
+
+  When I use magit, I prefer to have it use the full emacs frame
+  instead of splitting the current buffer.
+  #+begin_src emacs-lisp :results silent
+    (use-package fullframe
+      :after magit
+      :config
+      (fullframe magit-status magit-mode-quit-window))
+  #+end_src
+
+  Start in insert mode when committing from vcs
+  #+begin_src emacs-lisp :results silent
+    (use-package evil
+      :config
+      (add-hook 'with-editor-mode-hook 'evil-insert-state))
+  #+end_src
+
+* gitsh
+
+  #+BEGIN_QUOTE
+    The [[https://github.com/thoughtbot/gitsh][gitsh]] program is an interactive shell for git. From within
+    gitsh you can issue any git command, even using your local aliases
+    and configuration
+  #+END_QUOTE
+
+  When I have to do git related things that are painful to do with
+  magit, I just fire a terminal with /gitsh/ for the current project.
+  #+begin_src emacs-lisp :results silent
+    (defun ab-run-gitsh ()
+      "Start gitsh in current git project. Uses st as a terminal."
+      (interactive)
+      (let ((default-directory (locate-dominating-file (expand-file-name default-directory) ".gitignore")))
+        (start-process "gitsh" nil "gnome-terminal" "--geometry=120x70" "--class=scratch-term" "--" "gitsh")))
+    (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
+  #+end_src
+
+* Visual enhancements
+
+  See in the fringe lines added, changed and removed since last commit.
+  #+begin_src emacs-lisp :results silent
+    (use-package diff-hl
+      :after magit
+      :config
+      (add-hook 'prog-mode-hook 'diff-hl-mode)
+      (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+  #+end_src

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: jekyll
+# key: jek
+# --
+#+BEGIN_EXPORT html
+---
+title: `(replace-regexp-in-string "-" " " (cadr (split-string (file-name-nondirectory (file-name-sans-extension (buffer-file-name))) "[0-9]+-[0-9]+-[0-9]+-")))`
+tags: $1
+---
+#+END_EXPORT
+$0

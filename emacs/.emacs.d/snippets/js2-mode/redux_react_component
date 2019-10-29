@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: redux_react_component
+# key: rrc
+# --
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+export class ${1:`(capitalize (file-name-sans-extension (buffer-name)))`} extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {$2};
+  }
+
+  render() {
+    return (
+      <div>$0</div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+export default connect(mapStateToProps)($1);

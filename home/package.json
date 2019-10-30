@@ -1,4 +1,5 @@
 {
+  "private": true,
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",

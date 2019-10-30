@@ -1,18 +1,30 @@
-My org mode configuration
+Some people switch to Emacs just to use org-mode.
+
+It is one of the best tool for note taking and writing
+
+This is a most important binding.
+~C-c l~ to store a link and ~C-c C-l~ to insert that link.
+
+If you have a selection, it will be part of the link and Emacs will
+actually look for that selection If you visit the link.
+#+begin_src emacs-lisp :results silent
+  (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
+#+end_src
+
+Setting the org-directory helps integration with org-agenda and
+for org template captures.
+#+begin_src emacs-lisp :results silent
+  (setq org-directory (expand-file-name "~/Dropbox/org"))
+#+end_src
 
 #+begin_src emacs-lisp :results silent
-  (use-package htmlize)
-
-  (setq org-directory (expand-file-name "~/Dropbox/org"))
-  (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
-
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
-  (setq org-use-speed-commands nil)
-
   (use-package evil
+    :init
+    (setq org-use-speed-commands nil)
     :config
     (evil-define-key 'normal org-mode-map
       (kbd "M-l") 'org-shiftmetaright
@@ -31,7 +43,7 @@ My org mode configuration
   (setq org-log-into-drawer t)
 
   (setq org-todo-keywords
-        '((sequence "TODO" "|" "DONE(!)" "CANCELED")))
+        '((sequence "TODO" "WAITING" "|" "DONE(!)")))
 #+end_src
 
 #+begin_src emacs-lisp :results silent
@@ -43,6 +55,10 @@ My org mode configuration
 
 * org-babel
 
+  Org babel allows to evaluate code snippets inside org files.
+  This is the best way I know of doing [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
+
+  This loads more programming languages to use with org-babel.
   #+begin_src emacs-lisp :results silent
     (require 'ob-js)
     (org-babel-do-load-languages 'org-babel-load-languages

@@ -76,3 +76,6 @@ home_linux_desktop/.quokka/package.json
 /emacs/.emacs.d/files-and-directories.el
 home/.config/Code/*
 emacs/.emacs.d/vim.el
+/home/.config/ranger/bookmarks
+/home/.config/ranger/history
+/home/.config/ranger/tagged

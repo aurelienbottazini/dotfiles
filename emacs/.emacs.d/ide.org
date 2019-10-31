@@ -59,7 +59,7 @@ Here are some tools I use that are IDE oriented.
        :bind (:map  my-keys-minor-mode-map
                     ("C-c T" . find-file-in-project)
                     ("C-c t" . find-file-in-project-by-selected)
-                    ("C-c s" . find-file-with-similar-name)
+                    ("C-c s" . abo-find-file-with-similar-name)
                     :map evil-normal-state-map
                     ("gf" . find-file-in-project-at-point))
        :config
@@ -71,13 +71,30 @@ Here are some tools I use that are IDE oriented.
        (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
        (setq ffip-prefer-ido-mode nil)
        (setq ffip-use-rust-fd nil) ;; find works better than fd. fd with ffip ignores my .emacs.d directory for some reason
-       (setq ffip-strip-file-name-regex "\\(\\.mock\\|\\.test\\|\\.mockup\\|\\.spec\\)")
+       (setq ffip-strip-file-name-regex "\\(\\.mock\\|_test\\|\\.test\\|\\.mockup\\|\\.spec\\)")
        (add-to-list 'ffip-prune-patterns "*/.git/*")
        (add-to-list 'ffip-prune-patterns "*/dist/*")
        (add-to-list 'ffip-prune-patterns "*/.emacs.d/elpa/*")
        (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
        (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
+       (add-to-list 'ffip-prune-patterns "*/public/*")
+       (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
        (add-to-list 'ffip-prune-patterns "node_modules/*"))
+   #+end_src
+
+   #+begin_src emacs-lisp :results silent
+     (defun abo-find-file-with-similar-name (&optional open-another-window)
+       "Use base name of current file as keyword which could be further stripped.
+     by `ffip-strip-file-name-regex'.
+     If OPEN-ANOTHER-WINDOW is not nil, the file will be opened in new window."
+       (interactive "P")
+       (when buffer-file-name
+         (let* ((keyword (concat (file-name-base buffer-file-name) "") ))
+           (if ffip-strip-file-name-regex
+               (setq keyword (replace-regexp-in-string ffip-strip-file-name-regex
+                                                       ""
+                                                       keyword)))
+           (ffip-find-files keyword open-another-window))))
    #+end_src
 * Switch between projects
 

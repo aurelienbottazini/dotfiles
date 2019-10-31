@@ -167,29 +167,31 @@ keybindings.
   slow down my emacs.
   #+begin_src emacs-lisp
     (let (home-folder (getenv "HOME"))
-      (setenv "PATH" (concat (getenv "HOME") "/.config/yarn/global/node_modules/.bin/:"
-                             (getenv "HOME") "/.local/bin/:"
-                             (getenv "HOME") "/work/dox-compose/bin/:"
-                             (getenv "HOME") "/.rbenv/shims:"
-                             (getenv "HOME") "/.rbenv/bin:"
-                             (getenv "HOME") "/.fzf/bin:"
+      (setenv "PATH" (concat "/home/auray" "/.config/yarn/global/node_modules/.bin/:"
+                             "/home/auray" "/n/bin/:"
+                             "/home/auray" "/.local/bin/:"
+                             "/home/auray" "/work/dox-compose/bin/:"
+                             "/home/auray" "/.rbenv/shims:"
+                             "/home/auray" "/.rbenv/bin:"
+                             "/home/auray" "/.fzf/bin:"
                              "/usr/local/opt/node@10/bin:"
                              "/bin"
-                             (getenv "PATH"))))
+                             (getenv "PATH")))
 
-    (setq exec-path '("~/.config/yarn/global/node_modules/.bin/"
-                      "/usr/local/opt/node@10/bin/"
-                      "~/.local/bin"
-                      "~/bin"
-                      "/bin/"
-                      "~/work/dox-compose/bin/"
-                      "~/.rbenv/bin/"
-                      "~/.rbenv/shims/"
-                      "~/dotfiles/bin/"
-                      "~/.fzf/bin"
-                      "/usr/local/bin/"
-                      "/usr/local/sbin/"
-                      "/usr/bin/"))
+      (setq exec-path '("/home/auray/.config/yarn/global/node_modules/.bin/"
+                        "/home/auray/n/bin/"
+                        "/usr/local/opt/node@10/bin/"
+                        "/home/auray/.local/bin"
+                        "~/bin"
+                        "/bin/"
+                        "/home/auray/work/dox-compose/bin/"
+                        "/home/auray/.rbenv/bin/"
+                        "/home/auray/.rbenv/shims/"
+                        "/home/auray/dotfiles/bin/"
+                        "/home/auray/.fzf/bin"
+                        "/usr/local/bin/"
+                        "/usr/local/sbin/"
+                        "/usr/bin/")))
     (when *is-mac*
       (add-to-list 'exec-path "/usr/local/opt/coreutils/libexec/gnubin"))
   #+end_src

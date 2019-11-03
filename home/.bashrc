@@ -121,12 +121,12 @@ export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 export GIT_TEMPLATE_DIR="$HOME/.git_template"
 
-[ -f /home/auray/work/dox-compose/bin/dox-init ] && eval "$("/home/auray/work/dox-compose/bin/dox-init")"
-export PATH=$PATH:/home/auray/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
 [ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null && tat
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+export N_PREFIX="$HOME/n";
+export PATH=$N_PREFIX/bin:$PATH

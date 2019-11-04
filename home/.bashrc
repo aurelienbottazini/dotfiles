@@ -55,6 +55,9 @@ fi
 
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
+export LC_ALL="en_US"
+export LANG="en_US"
+export DICPATH="/Users/auray/dictionaries/"
 export EDITOR="vim"
 export VISUAL="vim"
 

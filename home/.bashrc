@@ -63,6 +63,8 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
 
 export PATH=/usr/local/bin:~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 
+# to use with bash_completion version 2 otherwise it makes bash startup very slow
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 export CDPATH=.:~/:~/projects:~/work
 
 source ~/.git-completion.bash

@@ -61,6 +61,14 @@ for org template captures.
   #+end_src
 
   #+begin_src emacs-lisp :results silent
+   (setq org-capture-templates
+          '(("g" "Notes" entry (file+headline "~/Dropbox/org/notes.org" "Inbox") "* %?\n")
+            ("t" "TDD" checkitem (file "~/Dropbox/org/tdd.org"))))
+
+   (add-hook 'org-capture-mode-hook 'evil-insert-state)
+  #+end_src
+
+  #+begin_src emacs-lisp :results silent
     ;; emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e "(counsel-org-capture)"
     ;; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
     ;; Bind Key to: emacsclient -e "(make-capture-frame)"

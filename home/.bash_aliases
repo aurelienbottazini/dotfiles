@@ -14,6 +14,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias l.='ls -d .*'
+alias tmux='tmux -u'
 
 alias clj-rebel='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
 

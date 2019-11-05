@@ -19,10 +19,10 @@ imap kj <esc>
 " http://sunaku.github.io/vim-256color-bce.html
 set t_ut=
 
-if has("termguicolors")  " set true colors
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
+" if has("termguicolors")  " set true colors
+  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" endif
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs

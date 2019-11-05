@@ -60,8 +60,6 @@ for org template captures.
     (add-hook 'org-mode-hook 'palimpsest-mode))
   #+end_src
 
-  To launch an Emacs client with a capture frame selecting the ~n~ template
-  ~emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e '(org-capture nil "n")'~
   #+begin_src emacs-lisp :results silent
    (setq org-capture-templates
           '(("n" "Notes" entry (file+headline "~/Dropbox/org/notes.org" "Inbox") "* %?\n")
@@ -70,10 +68,18 @@ for org template captures.
    (add-hook 'org-capture-mode-hook 'evil-insert-state)
   #+end_src
 
+  To launch an Emacs client with a capture frame selecting the ~n~ template
+  ~emacsclient -ca "" --frame-parameters='(quote (name .
+  "global-org-capture"))' -e '(org-capture nil "n")'~.
+
+  It works nicely on Linux, however on Mac the focus and input focus
+  is sketchy and is not reliable. I much prefer to gather my thoughts
+  with a voice recorder and transcribe them the following day in my
+  notes first thing in the morning.
+
+  The following takes advantage that I name those capture frame
+  ~global-org-capture~ to do some housekeeping around them
   #+begin_src emacs-lisp :results silent
-    ;; emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e "(counsel-org-capture)"
-    ;; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
-    ;; Bind Key to: emacsclient -e "(make-capture-frame)"
     (defadvice org-capture-finalize
         (after delete-capture-frame activate)
       "Advise capture-finalize to close the frame"
@@ -92,8 +98,6 @@ for org template captures.
     ;; splits the window.
     (add-hook 'org-capture-mode-hook
               'delete-other-windows)
-
-    (add-hook 'server-switch-hook (lambda () (select-frame-set-input-focus (selected-frame))))
   #+end_src
 
 * Inline Code

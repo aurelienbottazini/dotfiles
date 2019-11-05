@@ -2,15 +2,6 @@ Some people switch to Emacs just to use org-mode.
 
 It is one of the best tool for note taking and writing
 
-This is a most important binding.
-~C-c l~ to store a link and ~C-c C-l~ to insert that link.
-
-If you have a selection, it will be part of the link and Emacs will
-actually look for that selection If you visit the link.
-#+begin_src emacs-lisp :results silent
-  (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
-#+end_src
-
 Setting the org-directory helps integration with org-agenda and
 for org template captures.
 #+begin_src emacs-lisp :results silent
@@ -46,28 +37,28 @@ for org template captures.
         '((sequence "TODO" "WAITING" "|" "DONE(!)")))
 #+end_src
 
-   ~C-c C-q~ move region to trash
-   ~C-c C-r~ move region to bottom
-#+begin_src emacs-lisp :results silent
+* Capture Ideas
+
+  This is a most important binding.
+  ~C-c l~ to store a link and ~C-c C-l~ to insert that link.
+
+  If you have a selection, it will be part of the link and Emacs will
+  actually look for that selection If you visit the link.
+  #+begin_src emacs-lisp :results silent
+  (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
+  #+end_src
+
+  Palimpsest makes it easier to quickly discard blocks of text.
+  Main use is to just send the block of text at the bottom of the
+  buffer. This way I can revise my writing without losing my drafts.
+  ~C-c C-q~ move region to trash
+  ~C-c C-r~ move region to bottom
+  #+begin_src emacs-lisp :results silent
   (use-package palimpsest
     :diminish palimpsest-mode
     :config
     (add-hook 'org-mode-hook 'palimpsest-mode))
-#+end_src
-
-* org-babel
-
-  Org babel allows to evaluate code snippets inside org files.
-  This is the best way I know of doing [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
-
-  This loads more programming languages to use with org-babel.
-  #+begin_src emacs-lisp :results silent
-    (require 'ob-js)
-    (org-babel-do-load-languages 'org-babel-load-languages
-                                 '((shell . t)))
   #+end_src
-
-* org-capture
 
   #+begin_src emacs-lisp :results silent
     ;; emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e "(counsel-org-capture)"
@@ -93,7 +84,19 @@ for org template captures.
               'delete-other-windows)
   #+end_src
 
-* org-publish
+* Inline Code
+
+  Org babel allows to evaluate code snippets inside org files.
+  This is the best way I know of doing [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
+
+  This loads more programming languages to use with org-babel.
+  #+begin_src emacs-lisp :results silent
+    (require 'ob-js)
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 '((shell . t)))
+  #+end_src
+
+* Publish
 
   #+begin_src emacs-lisp :results silent
     (setq
@@ -111,29 +114,65 @@ for org template captures.
     (setq system-time-locale "C") ;; make sure time local is in english when exporting
     (setq org-html-validation-link nil)
   #+end_src
-* Spelling
+* Feedback
 
   Ispell buffer with ~s-:r~
   Ispell word with ~z =~
-#+begin_src emacs-lisp :results silent
+  #+begin_src emacs-lisp :results silent
  (setq ispell-program-name "aspell")
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
 (add-hook 'org-mode-hook 'turn-on-flyspell)
-#+end_src
+  #+end_src
 
   Word definition
-#+begin_src emacs-lisp :results silent
+  #+begin_src emacs-lisp :results silent
   (use-package define-word
     :config
     (evil-define-key 'normal org-mode-map
       (kbd "z w") 'define-word-at-point))
-#+end_src
+  #+end_src
 
-#+begin_src emacs-lisp :results silent
+  Word synonyms.
+  #+begin_src emacs-lisp :results silent
   (use-package powerthesaurus
     :config
     (evil-define-key 'normal org-mode-map
       (kbd "z s") 'powerthesaurus-lookup-word-dwim))
-#+end_src
+  #+end_src
+
+  For most documents, aim for a score of approximately 60 to 70 for
+  the reading ease and 7.0 to 8.0 for the grade level.
+  #+begin_src emacs-lisp :results silent
+  (use-package writegood-mode
+   :config
+   (evil-define-key 'normal org-mode-map
+      (kbd "z g g") 'writegood-mode)
+   (evil-define-key 'normal org-mode-map
+      (kbd "z g r") 'writegood-reading-ease)
+   (evil-define-key 'normal org-mode-map
+      (kbd "z g l") 'writegood-grade-level))
+  #+end_src
+
+  If you need additional feedback from an external service here is an
+  easy way to do it:
+  #+begin_src emacs-lisp :results silent :tangle no
+  (require 'browse-url) ; part of gnu emacs
+
+  (defun my-lookup-wikipedia ()
+    "Look up the word under cursor in Wikipedia.
+  If there is a text selection (a phrase), use that.
+
+  This command switches to browser."
+    (interactive)
+    (let (word)
+      (setq word
+            (if (use-region-p)
+                (buffer-substring-no-properties (region-beginning) (region-end))
+              (current-word)))
+      (setq word (replace-regexp-in-string " " "_" word))
+      (browse-url (concat "http://en.wikipedia.org/wiki/" word))
+      ;; (eww myUrl) ; emacs's own browser
+      ))
+  #+end_src

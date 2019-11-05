@@ -60,9 +60,11 @@ for org template captures.
     (add-hook 'org-mode-hook 'palimpsest-mode))
   #+end_src
 
+  To launch an Emacs client with a capture frame selecting the ~n~ template
+  ~emacsclient -ca "" --frame-parameters='(quote (name . "global-org-capture"))' -e '(org-capture nil "n")'~
   #+begin_src emacs-lisp :results silent
    (setq org-capture-templates
-          '(("g" "Notes" entry (file+headline "~/Dropbox/org/notes.org" "Inbox") "* %?\n")
+          '(("n" "Notes" entry (file+headline "~/Dropbox/org/notes.org" "Inbox") "* %?\n")
             ("t" "TDD" checkitem (file "~/Dropbox/org/tdd.org"))))
 
    (add-hook 'org-capture-mode-hook 'evil-insert-state)
@@ -90,6 +92,8 @@ for org template captures.
     ;; splits the window.
     (add-hook 'org-capture-mode-hook
               'delete-other-windows)
+
+    (add-hook 'server-switch-hook (lambda () (select-frame-set-input-focus (selected-frame))))
   #+end_src
 
 * Inline Code

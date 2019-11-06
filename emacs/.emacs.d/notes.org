@@ -107,6 +107,9 @@ for org template captures.
 
   This loads more programming languages to use with org-babel.
   #+begin_src emacs-lisp :results silent
+    (require 'ob-clojure) ;; run cider-jack-in from org buffer to be able to run
+                          ;; clojure code
+    (setq org-babel-clojure-backend 'cider)
     (require 'ob-js)
     (org-babel-do-load-languages 'org-babel-load-languages
                                  '((shell . t)))

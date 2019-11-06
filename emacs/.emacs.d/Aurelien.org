@@ -165,7 +165,9 @@ keybindings.
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   slow down my emacs.
-  #+begin_src emacs-lisp
+
+  #+begin_src emacs-lisp :results silent
+    (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
     (let (home-folder (getenv "HOME"))
       (setenv "PATH" (concat "/home/auray" "/.config/yarn/global/node_modules/.bin/:"
                              "/home/auray" "/n/bin/:"
@@ -174,6 +176,7 @@ keybindings.
                              "/home/auray" "/.rbenv/shims:"
                              "/home/auray" "/.rbenv/bin:"
                              "/home/auray" "/.fzf/bin:"
+                             "/usr/bin:"
                              "/usr/local/bin:"
                              "/usr/local/opt/node@10/bin:"
                              "/bin"
@@ -183,6 +186,7 @@ keybindings.
                         "/home/auray/n/bin/"
                         "/usr/local/opt/node@10/bin/"
                         "/home/auray/.local/bin"
+                        "/usr/bin"
                         "/usr/local/bin"
                         "~/bin"
                         "/bin/"

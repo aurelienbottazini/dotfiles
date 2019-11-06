@@ -19,7 +19,7 @@
   company shows a popup where you can select completions with a number
   or with ~enter~. You can also invoke the popup manually with ~C-x
   C-o~
-  #+begin_src emacs-lisp :results silent
+  #+begin_src emacs-lisp :results silent :tangle no
      (use-package company
        :diminish company-mode
        :config

@@ -124,6 +124,7 @@ export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/d
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 export GIT_TEMPLATE_DIR="$HOME/.git_template"
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 hash rbenv 2>/dev/null && eval "$(rbenv init -)"

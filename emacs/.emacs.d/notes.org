@@ -109,6 +109,7 @@ for org template captures.
   #+begin_src emacs-lisp :results silent
     (require 'ob-clojure) ;; run cider-jack-in from org buffer to be able to run
                           ;; clojure code
+    (use-package ob-clojurescript) ;; requires [[https://github.com/anmonteiro/lumo][lumo]]
     (setq org-babel-clojure-backend 'cider)
     (require 'ob-js)
     (org-babel-do-load-languages 'org-babel-load-languages

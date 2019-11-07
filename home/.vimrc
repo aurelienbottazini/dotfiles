@@ -76,7 +76,7 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
-colorscheme github
+" colorscheme zenburn
 
 " set tabstop=4
 " set shiftwidth=4

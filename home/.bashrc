@@ -55,8 +55,8 @@ fi
 
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
-export LC_ALL="en_US"
-export LANG="en_US"
+#export LC_ALL="en_US"
+#export LANG="en_US"
 export EDITOR="vim"
 export VISUAL="vim"
 
@@ -124,9 +124,10 @@ export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/d
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export XDG_CONFIG_HOME="$HOME/.config"
 export GIT_TEMPLATE_DIR="$HOME/.git_template"
-export JAVA_HOME=$(/usr/libexec/java_home)
+#export JAVA_HOME=$(/usr/libexec/java_home)
 
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+export PATH="$HOME/.rbenv/bin:$PATH"
 hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
 [ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)

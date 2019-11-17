@@ -83,7 +83,6 @@ export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[35;1m\]$(__git_ps1 " (%s)")\n\[\e[0m
 [ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
 [ -f /usr/share/autojump/autojump.bash ] && source /usr/share/autojump/autojump.bash
 
-
 _gen_fzf_default_opts() {
   local base03="234"
   local base02="235"
@@ -136,3 +135,6 @@ hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
+
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'

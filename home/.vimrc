@@ -53,6 +53,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'cormacrelf/vim-colors-github'
+Plug 'morhetz/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', {
@@ -76,7 +77,8 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
-" colorscheme zenburn
+colorscheme gruvbox
+set background=dark
 
 " set tabstop=4
 " set shiftwidth=4
@@ -140,7 +142,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='github'
+let g:airline_theme='gruvbox'
 let g:airline_symbols_ascii = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd

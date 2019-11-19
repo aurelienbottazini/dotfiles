@@ -8,12 +8,12 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
 # append to the history file, don't overwrite it
 shopt -s histappend
+# Avoid duplicates
+HISTCONTROL=ignoredups:erasedups
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
@@ -129,7 +129,7 @@ export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
 hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
-[ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+#[ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 2>/dev/null
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null && tat
 
@@ -141,3 +141,4 @@ bind 'TAB:menu-complete'
 
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa
 source $HOME/.keychain/$HOSTNAME-sh
+sysctl -p 1>/dev/null

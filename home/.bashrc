@@ -139,6 +139,6 @@ export PATH=$N_PREFIX/bin:$PATH
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 
-/usr/bin/keychain --nogui $HOME/.ssh/id_rsa
+/usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
 source $HOME/.keychain/$HOSTNAME-sh
 sysctl -p 1>/dev/null

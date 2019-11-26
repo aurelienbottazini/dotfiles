@@ -10,6 +10,12 @@ I want to explain my emacs config strategy to
 - Make it easier for others to copy things from it.
 - To teach myself better emacs strategies.
 
+#+begin_src emacs-lisp :results silent
+(use-package gruvbox-theme
+ :config
+ (load-theme 'gruvbox-dark-medium))
+#+end_src
+
 * Setup
   It is important to load
   those first as it can impact the loading of other packages

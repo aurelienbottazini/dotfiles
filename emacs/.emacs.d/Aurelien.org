@@ -10,6 +10,7 @@ I want to explain my emacs config strategy to
 - Make it easier for others to copy things from it.
 - To teach myself better emacs strategies.
 
+
 * Setup
   It is important to load
   those first as it can impact the loading of other packages
@@ -290,6 +291,7 @@ keybindings.
       c-basic-offset 2)
      (setq-default whitespace-style '(face trailing tabs tab-mark))
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
+     (add-hook 'prog-mode-hook 'whitespace-mode)
    #+end_src
 
 ** Recent files
@@ -584,7 +586,7 @@ keybindings.
                             "--trailing-comma" "es5"
                             "--single-quote" "true"
                             )
-            prettier-js-command "~/.yarn/bin/prettier")
+            prettier-js-command "prettier")
       (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
       (add-hook 'js2-mode-hook 'prettier-js-mode))
 

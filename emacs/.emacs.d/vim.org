@@ -84,9 +84,6 @@ Persist highlight from ~evil search~ and ~isearch~
 Changes modeline color depending on Evil state, if buffer is
 modified etc...
 #+begin_src emacs-lisp
-  (add-to-list 'default-frame-alist '(background-color . "#f1f2f1"))
-  (add-to-list 'default-frame-alist '(foreground-color . "#000000"))
-
      (lexical-let ((default-color (cons (face-background 'mode-line)
                                       (face-foreground 'mode-line))))
      (add-hook 'post-command-hook

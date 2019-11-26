@@ -10,12 +10,6 @@ I want to explain my emacs config strategy to
 - Make it easier for others to copy things from it.
 - To teach myself better emacs strategies.
 
-#+begin_src emacs-lisp :results silent
-(use-package gruvbox-theme
- :config
- (load-theme 'gruvbox-dark-medium))
-#+end_src
-
 * Setup
   It is important to load
   those first as it can impact the loading of other packages
@@ -154,6 +148,13 @@ keybindings.
     (require 'use-package)
     (setq use-package-always-ensure t)
   #+end_src
+
+  #+begin_src emacs-lisp :results silent
+   (use-package gruvbox-theme
+     :config
+     (load-theme 'gruvbox-dark-medium))
+  #+end_src
+
 
   You can get the time it took for emacs to start with
   #+begin_src emacs-lisp :tangle no
@@ -342,7 +343,6 @@ keybindings.
 #+END_SRC
 
 ** Colors
-** Color reference
 *** Pantone
     #fff166 101U
     #fccf61 128u

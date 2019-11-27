@@ -16,3 +16,6 @@ awk 'BEGIN{
     }
     printf "\n";
 }'
+
+echo "\e[3mThis should be in italic\e[23m"
+echo "Ligatures: != -> == && =>"

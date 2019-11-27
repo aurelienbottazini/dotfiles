@@ -105,6 +105,10 @@ source $ZSH/oh-my-zsh.sh
 # hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 # export N_PREFIX="$HOME/n";
 # export PATH=$N_PREFIX/bin:$PATH
+#
+
+[ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
+[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin

@@ -10,6 +10,10 @@ I want to explain my emacs config strategy to
 - Make it easier for others to copy things from it.
 - To teach myself better emacs strategies.
 
+#+begin_src emacs-lisp :results raw
+(setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
+#+end_src
+
 
 * Setup
   It is important to load
@@ -179,6 +183,7 @@ keybindings.
     (let (home-folder (getenv "HOME"))
       (setenv "PATH" (concat "/home/auray" "/.config/yarn/global/node_modules/.bin/:"
                              "/home/auray" "/n/bin/:"
+                             "/mnt/c/Users/abott/AppData/Roaming/npm/:"
                              "/home/auray" "/.local/bin/:"
                              "/home/auray" "/work/dox-compose/bin/:"
                              "/home/auray" "/.rbenv/shims:"
@@ -192,6 +197,7 @@ keybindings.
 
       (setq exec-path '("/home/auray/.config/yarn/global/node_modules/.bin/"
                         "/home/auray/n/bin/"
+                        "/mnt/c/Users/abott/AppData/Roaming/npm/"
                         "/usr/local/opt/node@10/bin/"
                         "/home/auray/.local/bin"
                         "/usr/bin"

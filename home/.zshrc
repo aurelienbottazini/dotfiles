@@ -117,8 +117,9 @@ eval "$(rbenv init -)"
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
 
+export CDPATH=.:~/:~/projects:~/work
 export PATH=~/bin:$PATH
-alias v.="(cd dotfiles &&  vim .)"
+alias v.="(cd ~/dotfiles &&  vim .)"
 alias l.='ls -d .*'
 alias g="git-status"
 alias ec="emacsclient -s $(tmux display-message -p '#S') -ta ''"
@@ -127,3 +128,4 @@ HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
 source $HOME/.keychain/$HOSTNAME-sh
 sysctl -p 1>/dev/null
+export BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"

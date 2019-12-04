@@ -128,4 +128,4 @@ HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
 source $HOME/.keychain/$HOSTNAME-sh
 sysctl -p 1>/dev/null
-export BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+export BROWSER="browser.sh"

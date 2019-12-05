@@ -16,6 +16,7 @@
  '(dumb-jump-mode t)
  '(electric-pair-mode nil)
  '(electric-quote-string t)
+ '(evil-toggle-key "C-c e")
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")
@@ -99,8 +100,8 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

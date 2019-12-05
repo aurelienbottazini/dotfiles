@@ -67,18 +67,19 @@ Persist highlight from ~evil search~ and ~isearch~
   (use-package evil
     :ensure t
     :init
-    (setq evil-toggle-key "C-`")          ;switch between evil and emacs mode
     (setq evil-mode-line-format nil)
     :config
 
     (evil-mode 1)
-
     (evil-set-initial-state 'deft-mode 'insert)
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-set-initial-state 'magit-mode 'emacs)
 
     (evil-ex-define-cmd "W" 'save-buffer))
 #+end_src
+
+#+RESULTS:
+: t
 
 
 Changes modeline color depending on Evil state, if buffer is

@@ -23,6 +23,7 @@ for org template captures.
       (kbd "M-k") 'org-move-subtree-up
       (kbd "M-j") 'org-move-subtree-down
       (kbd "M-p") 'org-publish-current-project
+      (kbd "TAB") 'org-cycle
       "<" 'org-clock-in
       ">" 'org-clock-out
       "4" 'org-archive-subtree

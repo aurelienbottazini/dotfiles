@@ -149,11 +149,6 @@ keybindings.
     (setq use-package-always-ensure t)
   #+end_src
 
-  #+begin_src emacs-lisp :results silent
-   (use-package gruvbox-theme
-     :config
-     (load-theme 'gruvbox-dark-medium))
-  #+end_src
 
 
   You can get the time it took for emacs to start with
@@ -474,8 +469,7 @@ keybindings.
 * HTML
 #+BEGIN_SRC emacs-lisp
   (use-package web-mode
-    :mode "\\.html\\'"
-    :mode "\\.gohtml\\'")
+    :mode "\\.html\\'")
 
   (use-package emmet-mode
   :after evil
@@ -914,4 +908,30 @@ keybindings.
 #+begin_src emacs-lisp :results raw
 (setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
 (use-package go-mode)
+(use-package web-mode
+  :mode "\\.html\\'"
+  :mode "\\.gohtml\\'")
+#+end_src
+
+  #+begin_src emacs-lisp :results silent
+    ;; (use-package gruvbox-theme
+    ;;   :config
+    ;;   (load-theme 'gruvbox-dark-medium))
+  #+end_src
+
+#+begin_src emacs-lisp :results silent
+  (use-package doom-themes
+    :custom
+    (doom-themes-enable-bold t)
+    (doom-themes-enable-italic t)
+    :config
+    (load-theme 'doom-tomorrow-night t)
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config))
+#+end_src
+
+#+begin_src emacs-lisp :results silent
+(use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode))
 #+end_src

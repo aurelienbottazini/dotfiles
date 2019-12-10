@@ -303,7 +303,10 @@ keybindings.
 
     (electric-indent-mode t)
 
-    (setq electric-pair-inhibit-predicate #'pvj/inhibit-electric-pair-mode)
+    (electric-pair-mode)
+    (defun inhibit-electric-pair-mode-in-minibuffer (char)
+      (minibufferp))
+    (setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
 
     ;; wrap lines when they reach the end of buffer
     ;; trying to toggle this only manually to see if i like it

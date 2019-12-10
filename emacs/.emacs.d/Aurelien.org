@@ -944,3 +944,9 @@ keybindings.
   :bind (:map my-keys-minor-mode-map
   ("C-c z" . writeroom-mode)))
 #+end_src
+
+#+BEGIN_SRC emacs-lisp :results silent
+(setq org-src-preserve-indentation nil
+      org-html-indent nil
+      org-edit-src-content-indentation 0)
+#+END_SRC

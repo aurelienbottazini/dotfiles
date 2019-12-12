@@ -4,6 +4,7 @@ case $- in
       *) return;;
 esac
 
+HISTFILE=.zhistory
 HISTSIZE=1000
 HISTFILESIZE=2000
 

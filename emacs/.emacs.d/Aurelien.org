@@ -950,3 +950,13 @@ keybindings.
       org-html-indent nil
       org-edit-src-content-indentation 0)
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results value
+(defun abo-note-file-path ()
+ (cadr (split-string (locate-dominating-file (buffer-file-name) ".git") "/")))
+
+(defun abo-jump-to-note-file ()
+  "Jump to org note file for current buffer"
+  (interactive)
+  (find-file (concat "~/Dropbox/notes/" (abo-note-file-path) ".org")))
+#+END_SRC

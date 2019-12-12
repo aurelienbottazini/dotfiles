@@ -70,7 +70,7 @@ export CDPATH=.:~/:~/projects:~/work
 
 HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
-# source $HOME/.keychain/$HOSTNAME-sh
+source $HOME/.keychain/$HOSTNAME-sh
 # sysctl -p 1>/dev/null
 #
 # Load version control information

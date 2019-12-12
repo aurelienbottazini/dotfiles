@@ -16,8 +16,8 @@ fi
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 
-# source ~/.git-completion.zsh
-source ~/.git-prompt.sh
+zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
+compdef git-status='git'
 
 export EDITOR="vim"
 export VISUAL="vim"
@@ -33,14 +33,24 @@ export PATH=$N_PREFIX/bin:$PATH
 export BROWSER="browser.sh"
 
 export CDPATH=.:~/:~/projects:~/work
-alias v.="(cd ~/dotfiles &&  vim .)"
-alias l.='ls -d .*'
-alias g="git-status"
-alias ec="emacsclient -s $(tmux display-message -p '#S') -ta ''"
 
 HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
 source $HOME/.keychain/$HOSTNAME-sh
 # sysctl -p 1>/dev/null
 #
-PROMPT='[%~] %(!.#.$) '
+# Load version control information
+autoload -Uz vcs_info
+# zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats "%b %u %c " enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-staged-changes true
+precmd() {
+  vcs_info
+}
+setopt prompt_subst
+autoload -U colors && colors
+PROMPT='%{$fg[blue]%}[%~] %{$fg[red]%}%(!.#.$)%{$reset_color%} '
+RPROMPT='%{$fg[magenta]%}${vcs_info_msg_0_}%{$reset_color%}'
+
+zstyle ':completion:*' menu select

@@ -71,8 +71,8 @@ export CDPATH=.:~/:~/projects:~/work
 
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
-export PROMPT_COMMAND=""
 export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[35;1m\]$(__git_ps1 " (%s)")\n\[\e[0m\]\[\e[31;1m\]\$\[\e[0m\] '
+__git_complete g _git
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
@@ -135,6 +135,7 @@ hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
+export BROWSER="browser.sh"
 
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dox_analytics_spec
+# key: d_as
+# --
+it('${1:does something}', () => {
+  $0
+});

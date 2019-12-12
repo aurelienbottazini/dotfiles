@@ -16,7 +16,7 @@ alias l='ls -CF'
 alias l.='ls -d .*'
 alias tmux='tmux -u'
 
-alias clj-rebel='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
+alias cljr='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -25,3 +25,5 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias v.="(cd dotfiles &&  vim .)"
 
 alias g="git-status"
+alias ec="emacsclient -s $(tmux display-message -p '#S') -ta ''"
+

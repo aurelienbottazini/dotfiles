@@ -63,7 +63,7 @@ Persist highlight from ~evil search~ and ~isearch~
     (global-evil-search-highlight-persist t))
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes :results silent
   (use-package evil
     :ensure t
     :init
@@ -77,10 +77,6 @@ Persist highlight from ~evil search~ and ~isearch~
 
     (evil-ex-define-cmd "W" 'save-buffer))
 #+end_src
-
-#+RESULTS:
-: t
-
 
 Changes modeline color depending on Evil state, if buffer is
 modified etc...

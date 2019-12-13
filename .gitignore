@@ -81,3 +81,4 @@ emacs/.emacs.d/vim.el
 /home/.config/ranger/tagged
 /emacs/.emacs.d/notes.el
 /emacs/.emacs.d/request/
+/emacs/.emacs.d/company-stats-cache.el

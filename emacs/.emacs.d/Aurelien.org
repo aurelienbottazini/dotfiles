@@ -939,7 +939,7 @@ keybindings.
       org-edit-src-content-indentation 0)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :results value
+#+BEGIN_SRC emacs-lisp :results silent
 (defun abo-note-file-path ()
  (cadr (split-string (locate-dominating-file (buffer-file-name) ".git") "/")))
 

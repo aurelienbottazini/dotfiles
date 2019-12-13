@@ -32,7 +32,7 @@ You can also change surroundings ~cs~ or delete surroundings ~ds~.
 #+end_src
 
 Comment things with ~gc~. Comment and copy with ~gy~
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp :tangle yes :results silent
   (use-package evil-commentary
     :after evil
     :diminish evil-commentary-mode

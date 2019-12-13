@@ -102,8 +102,9 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

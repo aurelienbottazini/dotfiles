@@ -84,7 +84,7 @@ Persist highlight from ~evil search~ and ~isearch~
 
 Changes modeline color depending on Evil state, if buffer is
 modified etc...
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes :results silent
      (lexical-let ((default-color (cons (face-background 'mode-line)
                                       (face-foreground 'mode-line))))
      (add-hook 'post-command-hook
@@ -103,6 +103,9 @@ modified etc...
                    (set-face-foreground 'mode-line (cdr color))))))
 
 #+end_src
+
+#+RESULTS:
+| (lambda (&rest --cl-rest--) (apply (function (lambda (G6) (let ((color (cond ((minibufferp) (symbol-value G6)) ((evil-emacs-state-p) (quote (#ffa2cb . #4c4e56))) ((evil-visual-state-p) (quote (#adcff1 . #4c4e56))) ((evil-insert-state-p) (quote (#97d88a . #4c4e56))) ((buffer-modified-p) (quote (#f79b2f . #4c4e56))) (t (symbol-value G6))))) (set-face-attribute (quote mode-line) nil :box (list (quote :line-width) 2 (quote :color) (car color))) (set-face-background (quote mode-line) (car color)) (set-face-foreground (quote mode-line-buffer-id) (cdr color)) (set-face-foreground (quote mode-line) (cdr color))))) (quote --default-color--) --cl-rest--)) | evil-repeat-post-hook |
 
 Make my cursor match my modeline color
 #+begin_src emacs-lisp :results silent

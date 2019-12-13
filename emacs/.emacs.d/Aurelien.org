@@ -916,12 +916,6 @@ keybindings.
   :mode "\\.gohtml\\'")
 #+end_src
 
-  #+begin_src emacs-lisp :results silent
-    ;; (use-package gruvbox-theme
-    ;;   :config
-    ;;   (load-theme 'gruvbox-dark-medium))
-  #+end_src
-
 #+begin_src emacs-lisp :results silent
   (use-package doom-themes
     :custom
@@ -933,7 +927,7 @@ keybindings.
     (doom-themes-org-config))
 #+end_src
 
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp :results silent :tangle no
 (use-package doom-modeline
       :ensure t
       :hook (after-init . doom-modeline-mode))
@@ -958,5 +952,5 @@ keybindings.
 (defun abo-jump-to-note-file ()
   "Jump to org note file for current buffer"
   (interactive)
-  (find-file (concat "~/Dropbox/notes/" (abo-note-file-path) ".org")))
+  (find-file (concat "~/notes/" (abo-note-file-path) ".org")))
 #+END_SRC

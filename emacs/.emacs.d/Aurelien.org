@@ -10,6 +10,10 @@ I want to explain my emacs config strategy to
 - Make it easier for others to copy things from it.
 - To teach myself better emacs strategies.
 
+#+BEGIN_SRC emacs-lisp :results silent
+(setq evil-toggle-key "C-c e")
+#+END_SRC
+
 * Setup
   It is important to load
   those first as it can impact the loading of other packages
@@ -948,6 +952,7 @@ keybindings.
   (interactive)
   (find-file (concat "~/notes/" (abo-note-file-path) ".org")))
 #+END_SRC
+
 ** Completion
 
    #+BEGIN_SRC emacs-lisp :results value

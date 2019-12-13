@@ -18,7 +18,6 @@
  '(dumb-jump-mode t)
  '(electric-pair-mode nil)
  '(electric-quote-string t)
- '(evil-toggle-key "C-c e")
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines nil)
  '(ispell-program-name "/usr/bin/hunspell")

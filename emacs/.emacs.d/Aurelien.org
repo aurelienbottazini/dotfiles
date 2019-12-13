@@ -927,12 +927,6 @@ keybindings.
     (doom-themes-org-config))
 #+end_src
 
-#+begin_src emacs-lisp :results silent :tangle no
-(use-package doom-modeline
-      :ensure t
-      :hook (after-init . doom-modeline-mode))
-#+end_src
-
 #+begin_src emacs-lisp :results silent
 (use-package writeroom-mode
   :bind (:map my-keys-minor-mode-map

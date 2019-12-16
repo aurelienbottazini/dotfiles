@@ -951,6 +951,8 @@ keybindings.
   "Jump to org note file for current buffer"
   (interactive)
   (find-file (concat "~/notes/" (abo-note-file-path) ".org")))
+
+(define-key my-keys-minor-mode-map "\C-cn" 'abo-jump-to-note-file)
 #+END_SRC
 
 ** Completion
@@ -972,9 +974,9 @@ keybindings.
            company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
            company-backends '(company-capf company-dabbrev company-ispell company-yasnippet)
            company-transformers '(company-sort-by-occurrence))
-     (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
      (global-company-mode +1))
 
+     (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
    ;; helps rank completion candidates based on usage
    (use-package company-statistics
      :after company
@@ -991,6 +993,7 @@ keybindings.
            (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
          (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
      (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
+
 
      (autoload 'company-capf "company-capf")
      (autoload 'company-yasnippet "company-yasnippet")

@@ -955,6 +955,15 @@ keybindings.
 (define-key my-keys-minor-mode-map "\C-cn" 'abo-jump-to-note-file)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(defun abo-change-line-endings-to-unix ()
+  (let ((coding-str (symbol-name buffer-file-coding-system)))
+    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+      (set-buffer-file-coding-system 'unix))))
+
+(add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
+#+END_SRC
+
 ** Completion
 
    #+BEGIN_SRC emacs-lisp :results value

@@ -950,7 +950,9 @@ keybindings.
 (defun abo-jump-to-note-file ()
   "Jump to org note file for current buffer"
   (interactive)
-  (find-file (concat "~/notes/" (abo-note-file-path) ".org")))
+  (if (file-directory-p "/mnt/c/Users/abott/Dropbox/org/notes")
+      (find-file (concat "/mnt/c/Users/abott/Dropbox/org/notes/" (abo-note-file-path) ".org"))
+      (find-file (concat "~/Dropbox/notes/" (abo-note-file-path) ".org"))))
 
 (define-key my-keys-minor-mode-map "\C-cn" 'abo-jump-to-note-file)
 #+END_SRC

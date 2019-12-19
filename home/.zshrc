@@ -88,5 +88,8 @@ PROMPT='%{$fg[blue]%}[%~] %{$fg[red]%}%(!.#.$)%{$reset_color%} '
 RPROMPT='%{$fg[magenta]%}${vcs_info_msg_0_}%{$reset_color%}'
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export GDK_SCALE=2 #retina support
 
 zstyle ':completion:*' menu select
+
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

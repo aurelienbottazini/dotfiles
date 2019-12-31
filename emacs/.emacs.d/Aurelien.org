@@ -966,6 +966,10 @@ keybindings.
 (add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
 #+END_SRC
 
+#+begin_src emacs-lisp :results silent
+(use-package markdown-mode)
+#+end_src
+
 ** Completion
 
    #+BEGIN_SRC emacs-lisp :results value

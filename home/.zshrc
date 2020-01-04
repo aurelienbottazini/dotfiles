@@ -14,6 +14,7 @@ fi
 
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
+bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 [ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh
@@ -60,7 +61,7 @@ export PATH=/usr/local/bin:~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_m
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 eval "$(rbenv init -)"
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH

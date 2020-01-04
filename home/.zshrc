@@ -18,6 +18,7 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
 
+stty -ixon # disable legacy c-s scroll-lock
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

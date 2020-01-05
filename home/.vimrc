@@ -77,6 +77,7 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
+let g:gruvbox_contrast_dark = 'medium'
 colorscheme gruvbox
 set background=dark
 
@@ -203,8 +204,8 @@ set cursorline
 " set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
-hi clear CursorLine
-hi CursorLine term=underline ctermbg=NONE cterm=underline gui=underline
+" hi clear CursorLine
+hi CursorLine term=underline cterm=underline gui=underline
 
 nmap <leader>i :set list!<CR>
 highlight NonText ctermbg=NONE ctermfg=10

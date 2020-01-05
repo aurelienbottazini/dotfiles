@@ -63,6 +63,8 @@ _gen_fzf_default_opts() {
 }
 _gen_fzf_default_opts
 
+autoload -Uz compinit
+compinit # on OSX needs to be run before using compdef
 zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
 compdef git-status='git'
 
@@ -83,7 +85,7 @@ export CDPATH=.:~/:~/projects:~/work
 
 HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
-source $HOME/.keychain/$HOSTNAME-sh
+[ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
 # sysctl -p 1>/dev/null
 #
 # Load version control information

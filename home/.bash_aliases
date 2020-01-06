@@ -26,4 +26,4 @@ alias v.="(cd dotfiles &&  vim .)"
 
 alias g="git-status"
 alias ec="emacsclient -s $(tmux display-message -p '#S') -ta ''"
-
+alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"

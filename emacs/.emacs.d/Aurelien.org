@@ -25,8 +25,8 @@ I want to explain my emacs config strategy to
   I keep my machine specific settings here.
   For example for the font size: ~(set-face-attribute 'default nil :height 100 )~
 #+BEGIN_SRC emacs-lisp
-  (if (file-exists-p "~/.emacs-local")
-    (load "~/.emacs-local"))
+  (if (file-exists-p "~/.emacs.d/.emacs-local")
+    (load "~/.emacs.d/.emacs-local"))
 #+END_SRC
 
 In my configuration I have some parts that are mac or linux specific.
@@ -790,11 +790,10 @@ keybindings.
      (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
      (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
      (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
-     (define-key my-keys-minor-mode-map (kbd "C-c jd") '(lambda () (interactive) (find-file "~/Dropbox/org/writing/drafts")))
      (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d")))
      (define-key my-keys-minor-mode-map (kbd "C-c jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
      (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
-     (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file "~/Dropbox/wiki")))
+     (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-writing-folder**)))
      (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
      (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
      (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)

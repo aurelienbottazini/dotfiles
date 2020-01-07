@@ -186,6 +186,7 @@ keybindings.
                              "/usr/bin:"
                              "/usr/local/bin:"
                              "/usr/local/opt/node@10/bin:"
+                             "/home/linuxbrew/.linuxbrew/bin/:"
                              "/bin"
                              (getenv "PATH")))
 
@@ -199,6 +200,7 @@ keybindings.
                         "~/bin"
                         "/bin/"
                         "/home/auray/work/dox-compose/bin/"
+                        "/home/linuxbrew/.linuxbrew/bin/"
                         "/home/auray/.rbenv/bin/"
                         "/home/auray/.rbenv/shims/"
                         "/home/auray/dotfiles/bin/"

@@ -73,6 +73,7 @@ export VISUAL="vim"
 
 export PATH=/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+export PATH=$PATH:$HOME/.rbenv/bin
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 eval "$(rbenv init -)"

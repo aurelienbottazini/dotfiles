@@ -82,3 +82,4 @@ emacs/.emacs.d/vim.el
 /emacs/.emacs.d/notes.el
 /emacs/.emacs.d/request/
 /emacs/.emacs.d/company-stats-cache.el
+emacs/.emacs.d/.emacs-local

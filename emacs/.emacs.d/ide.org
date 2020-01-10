@@ -55,31 +55,32 @@ Here are some tools I use that are IDE oriented.
    [[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
    to use `fd` instead of find.
    #+begin_src emacs-lisp :results silent
-     (use-package find-file-in-project
-       :bind (:map  my-keys-minor-mode-map
-                    ("C-c T" . find-file-in-project)
-                    ("C-c t" . find-file-in-project-by-selected)
-                    ("C-c s" . abo-find-file-with-similar-name)
-                    :map evil-normal-state-map
-                    ("gf" . find-file-in-project-at-point))
-       :config
-       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
-       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
-       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
-       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
-       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
-       (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
-       (setq ffip-prefer-ido-mode nil)
-       (setq ffip-use-rust-fd nil) ;; find works better than fd. fd with ffip ignores my .emacs.d directory for some reason
-       (setq ffip-strip-file-name-regex "\\(\\.mock\\|_test\\|\\.test\\|\\.mockup\\|\\.spec\\)")
-       (add-to-list 'ffip-prune-patterns "*/.git/*")
-       (add-to-list 'ffip-prune-patterns "*/dist/*")
-       (add-to-list 'ffip-prune-patterns "*/.emacs.d/elpa/*")
-       (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
-       (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
-       (add-to-list 'ffip-prune-patterns "*/public/*")
-       (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
-       (add-to-list 'ffip-prune-patterns "node_modules/*"))
+   (use-package find-file-in-project
+     :bind (:map  my-keys-minor-mode-map
+                  ("C-c T" . find-file-in-project)
+                  ("C-c t" . counsel-fzf)
+                  ;; ("C-c t" . find-file-in-project-by-selected)
+                  ("C-c s" . abo-find-file-with-similar-name)
+                  :map evil-normal-state-map
+                  ("gf" . find-file-in-project-at-point))
+     :config
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
+     (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
+     (setq ffip-prefer-ido-mode nil)
+     (setq ffip-use-rust-fd nil) ;; find works better than fd. fd with ffip ignores my .emacs.d directory for some reason
+     (setq ffip-strip-file-name-regex "\\(\\.mock\\|_test\\|\\.test\\|\\.mockup\\|\\.spec\\)")
+     (add-to-list 'ffip-prune-patterns "*/.git/*")
+     (add-to-list 'ffip-prune-patterns "*/dist/*")
+     (add-to-list 'ffip-prune-patterns "*/.emacs.d/elpa/*")
+     (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
+     (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
+     (add-to-list 'ffip-prune-patterns "*/public/*")
+     (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
+     (add-to-list 'ffip-prune-patterns "node_modules/*"))
    #+end_src
 
    #+begin_src emacs-lisp :results silent

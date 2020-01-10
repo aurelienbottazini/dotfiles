@@ -170,41 +170,38 @@ keybindings.
 
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
-  slow down my emacs.
+  slow down my Emacs.
 
   #+begin_src emacs-lisp :results silent
     (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
-    (let (home-folder (getenv "HOME"))
-      (setenv "PATH" (concat "/home/auray" "/.config/yarn/global/node_modules/.bin/:"
-                             "/home/auray" "/n/bin/:"
-                             "/mnt/c/Users/abott/AppData/Roaming/npm/:"
-                             "/home/auray" "/.local/bin/:"
-                             "/home/auray" "/work/dox-compose/bin/:"
-                             "/home/auray" "/.rbenv/shims:"
-                             "/home/auray" "/.rbenv/bin:"
-                             "/home/auray" "/.fzf/bin:"
+    (let ((home-folder (getenv "HOME")))
+      (setenv "PATH" (concat (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
+                             (concat home-folder "/n/bin/:")
+                             (concat home-folder "/.local/bin/:")
+                             (concat home-folder "/work/dox-compose/bin/:")
+                             (concat home-folder "/.rbenv/shims:")
+                             (concat home-folder "/.rbenv/bin:")
+                             (concat home-folder "/.fzf/bin:")
                              "/usr/bin:"
                              "/usr/local/bin:"
                              "/usr/local/opt/node@10/bin:"
                              "/home/linuxbrew/.linuxbrew/bin/:"
-                             "/bin"
-                             (getenv "PATH")))
+                             "/bin"))
 
-      (setq exec-path '("/home/auray/.config/yarn/global/node_modules/.bin/"
-                        "/home/auray/n/bin/"
-                        "/mnt/c/Users/abott/AppData/Roaming/npm/"
+      (setq exec-path `(,(concat home-folder "/.config/yarn/global/node_modules/.bin/")
+                        ,(concat home-folder "/work/dox-compose/bin/")
+                        ,(concat home-folder "/n/bin/")
+                        ,(concat home-folder "/.rbenv/bin/")
+                        ,(concat home-folder "/.rbenv/shims/")
+                        ,(concat home-folder "/dotfiles/bin/")
+                        ,(concat home-folder "/.fzf/bin")
+                        ,(concat home-folder "/.local/bin")
                         "/usr/local/opt/node@10/bin/"
-                        "/home/auray/.local/bin"
                         "/usr/bin"
                         "/usr/local/bin"
                         "~/bin"
                         "/bin/"
-                        "/home/auray/work/dox-compose/bin/"
                         "/home/linuxbrew/.linuxbrew/bin/"
-                        "/home/auray/.rbenv/bin/"
-                        "/home/auray/.rbenv/shims/"
-                        "/home/auray/dotfiles/bin/"
-                        "/home/auray/.fzf/bin"
                         "/usr/local/bin/"
                         "/usr/local/sbin/"
                         "/usr/bin/")))

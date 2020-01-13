@@ -3,7 +3,6 @@
 #+PROPERTY: header-args :results silent
 
 *IN_PROGRESS*
-
 I am in the process of refactoring this emacs dotfile.
 I want to explain my emacs config strategy to
 

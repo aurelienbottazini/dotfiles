@@ -112,4 +112,7 @@
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 130 :family "Input Mono"))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
+ '(ivy-current-match ((t (:background "#4982cf" :foreground "white"))))
+ '(mode-line-emphasis ((t (:inherit mode-line))))
+ '(swiper-line-face ((t (:background "#4982cf" :foreground "black"))))
  '(which-func ((t (:foreground "DarkGrey")))))

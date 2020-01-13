@@ -330,10 +330,6 @@ keybindings.
 
     ;; makes fringe big enough on linux with HDPI
     (fringe-mode 20)
-
-    ;; show in mode bar the current function
-    (require 'which-func)
-    (which-function-mode t)
   #+end_src
 
    #+BEGIN_SRC emacs-lisp

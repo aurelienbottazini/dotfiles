@@ -291,6 +291,8 @@ keybindings.
      (setq-default whitespace-style '(face trailing tabs tab-mark))
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
      (add-hook 'prog-mode-hook 'whitespace-mode)
+     (eval-after-load "whitespace"
+       '(diminish 'whitespace-mode))
    #+end_src
 
 ** Recent files
@@ -336,7 +338,8 @@ keybindings.
    #+BEGIN_SRC emacs-lisp
    (use-package diminish
      :config
-     (diminish 'undo-tree-mode)
+     (eval-after-load "undo-tree"
+       '(diminish 'undo-tree-mode))
      (diminish 'auto-fill-function)
      (diminish 'my-keys-minor-mode)
      (diminish 'eldoc-mode))
@@ -437,11 +440,14 @@ keybindings.
     :config
 
     (add-hook 'ruby-mode-hook 'subword-mode)
-    (diminish 'subword-mode)
-    (use-package ruby-interpolation)
+    (eval-after-load "subword"
+      '(diminish 'subword-mode))
+    (use-package ruby-interpolation
+      :diminish ruby-interpolation-mode)
     (use-package inf-ruby)
 
-    (use-package ruby-end)
+    (use-package ruby-end
+      :diminish ruby-end-mode)
     (use-package rspec-mode)
 
     (use-package ruby-refactor

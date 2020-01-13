@@ -107,4 +107,6 @@ export GDK_SCALE=2 #retina support
 
 zstyle ':completion:*' menu select
 
+sudo /sbin/sysctl -p > /dev/null
+
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

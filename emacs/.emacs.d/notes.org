@@ -23,11 +23,7 @@ for org template captures.
       (kbd "M-k") 'org-move-subtree-up
       (kbd "M-j") 'org-move-subtree-down
       (kbd "M-p") 'org-publish-current-project
-      (kbd "TAB") 'org-cycle
-      "4" 'org-archive-subtree
-      "2" 'counsel-org-tag
-      "3" 'org-refile
-      "t" 'org-todo)
+      (kbd "TAB") 'org-cycle)
     )
   (add-to-list 'org-modules "org-habit")
   (setq org-log-into-drawer t)

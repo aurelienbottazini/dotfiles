@@ -107,6 +107,9 @@ export GDK_SCALE=2 #retina support
 
 zstyle ':completion:*' menu select
 
-sudo /sbin/sysctl -p > /dev/null
+if [ `uname` != "Darwin" ]
+then
+  sudo /sbin/sysctl -p > /dev/null
+fi
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat

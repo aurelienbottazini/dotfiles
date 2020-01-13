@@ -622,8 +622,11 @@ keybindings.
     )
 
   (use-package context-coloring
+    :ensure t
     :diminish context-coloring-mode
-    :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode)))
+    :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
+    :config
+      (add-hook 'js2-mode-hook #'context-coloring-mode))
 
   (use-package json-mode
     :mode "\\.json\\'"

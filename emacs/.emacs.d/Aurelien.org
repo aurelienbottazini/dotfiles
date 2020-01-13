@@ -910,6 +910,57 @@ keybindings.
        (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
        (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
    #+end_src
+
+* Completion
+
+   #+BEGIN_SRC emacs-lisp :results value
+   (use-package company
+     :commands (company-mode global-company-mode company-complete
+                             company-complete-common company-manual-begin company-grab-line)
+     :after evil
+     :config
+     (setq company-idle-delay nil
+           company-tooltip-limit 10
+           company-dabbrev-downcase nil
+           company-dabbrev-ignore-case nil
+           company-dabbrev-code-other-buffers t
+           company-tooltip-align-annotations t
+           company-require-match 'never
+           company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
+           company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
+           company-backends '(company-capf company-dabbrev company-ispell company-yasnippet)
+           company-transformers '(company-sort-by-occurrence))
+     (global-company-mode +1))
+
+     (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
+   ;; helps rank completion candidates based on usage
+   (use-package company-statistics
+     :after company
+     :config
+     (setq company-statistics-file "~/.emacs.d/company-stats-cache.el")
+     (company-statistics-mode +1))
+
+   (use-package company-dict
+     :commands company-dict
+     :config
+     (defun +company|enable-project-dicts (mode &rest _)
+       "Enable per-project dictionaries."
+       (if (symbol-value mode)
+           (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
+         (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
+     (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
+
+
+     (autoload 'company-capf "company-capf")
+     (autoload 'company-yasnippet "company-yasnippet")
+     (autoload 'company-dabbrev "company-dabbrev")
+     (autoload 'company-dabbrev-code "company-dabbrev-code")
+     (autoload 'company-etags "company-etags")
+     (autoload 'company-elisp "company-elisp")
+     (autoload 'company-files "company-files")
+     (autoload 'company-gtags "company-gtags")
+     (autoload 'company-ispell "company-ispell")
+   #+END_SRC
 * Testing things
   #+begin_src emacs-lisp :results silent
       (when (fboundp 'winner-mode)
@@ -968,54 +1019,3 @@ keybindings.
 #+begin_src emacs-lisp :results silent
 (use-package markdown-mode)
 #+end_src
-
-** Completion
-
-   #+BEGIN_SRC emacs-lisp :results value
-   (use-package company
-     :commands (company-mode global-company-mode company-complete
-                             company-complete-common company-manual-begin company-grab-line)
-     :after evil
-     :config
-     (setq company-idle-delay nil
-           company-tooltip-limit 10
-           company-dabbrev-downcase nil
-           company-dabbrev-ignore-case nil
-           company-dabbrev-code-other-buffers t
-           company-tooltip-align-annotations t
-           company-require-match 'never
-           company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
-           company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-           company-backends '(company-capf company-dabbrev company-ispell company-yasnippet)
-           company-transformers '(company-sort-by-occurrence))
-     (global-company-mode +1))
-
-     (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
-   ;; helps rank completion candidates based on usage
-   (use-package company-statistics
-     :after company
-     :config
-     (setq company-statistics-file "~/.emacs.d/company-stats-cache.el")
-     (company-statistics-mode +1))
-
-   (use-package company-dict
-     :commands company-dict
-     :config
-     (defun +company|enable-project-dicts (mode &rest _)
-       "Enable per-project dictionaries."
-       (if (symbol-value mode)
-           (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
-         (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
-     (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
-
-
-     (autoload 'company-capf "company-capf")
-     (autoload 'company-yasnippet "company-yasnippet")
-     (autoload 'company-dabbrev "company-dabbrev")
-     (autoload 'company-dabbrev-code "company-dabbrev-code")
-     (autoload 'company-etags "company-etags")
-     (autoload 'company-elisp "company-elisp")
-     (autoload 'company-files "company-files")
-     (autoload 'company-gtags "company-gtags")
-     (autoload 'company-ispell "company-ispell")
-   #+END_SRC

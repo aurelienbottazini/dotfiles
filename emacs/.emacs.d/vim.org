@@ -104,7 +104,7 @@ Make my cursor match my modeline color
 #+begin_src emacs-lisp :results silent
 (use-package evil
   :config
-    (setq evil-insert-state-cursor '(bar "#bc3e44")
+    (setq evil-insert-state-cursor '(bar "#97d88a")
           evil-visual-state-cursor '(box "#adcff1")
           evil-emacs-state-cursor '(box "#ffa2cb")
           evil-normal-state-cursor '(box "#bc3e44")))

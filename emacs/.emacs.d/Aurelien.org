@@ -916,6 +916,11 @@ keybindings.
        (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
    #+end_src
 * Testing things
+  #+begin_src emacs-lisp :results silent
+      (when (fboundp 'winner-mode)
+      (winner-mode 1))
+  #+end_src
+
 #+begin_src emacs-lisp :results raw
 (setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
 (use-package go-mode)

@@ -113,6 +113,7 @@
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
  '(ivy-current-match ((t (:background "#4982cf" :foreground "white"))))
+ '(magit-mode-line-process ((t (:inherit mode-line-emphasis :foreground "black" :weight bold))))
  '(mode-line-emphasis ((t (:inherit mode-line))))
  '(swiper-line-face ((t (:background "#4982cf" :foreground "black"))))
  '(which-func ((t (:foreground "DarkGrey")))))

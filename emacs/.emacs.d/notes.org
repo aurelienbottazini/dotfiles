@@ -5,7 +5,7 @@ It is one of the best tool for note taking and writing
 Setting the org-directory helps integration with org-agenda and
 for org template captures.
 #+begin_src emacs-lisp :results silent
-  (setq org-directory (expand-file-name "~/Dropbox/org"))
+  (setq org-directory **local-org-folder**)
 #+end_src
 
 #+begin_src emacs-lisp :results silent
@@ -24,8 +24,6 @@ for org template captures.
       (kbd "M-j") 'org-move-subtree-down
       (kbd "M-p") 'org-publish-current-project
       (kbd "TAB") 'org-cycle
-      "<" 'org-clock-in
-      ">" 'org-clock-out
       "4" 'org-archive-subtree
       "2" 'counsel-org-tag
       "3" 'org-refile
@@ -135,9 +133,9 @@ for org template captures.
     (setq org-publish-project-alist
           '(
             ("wiki-files"
-             :base-directory "~/Dropbox/org/writing/"
+             :base-directory **local-writing-folder**
              :base-extension "org"
-             :publishing-directory "~/Dropbox/org/writing_exported/"
+             :publishing-directory **local-published-folder**
              :recursive t
              :publishing-function org-html-publish-to-html
              :headline-levels 4             ; Just the default for this project.

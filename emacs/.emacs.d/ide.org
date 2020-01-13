@@ -58,8 +58,8 @@ Here are some tools I use that are IDE oriented.
    (use-package find-file-in-project
      :bind (:map  my-keys-minor-mode-map
                   ("C-c T" . find-file-in-project)
-                  ("C-c t" . counsel-fzf)
-                  ;; ("C-c t" . find-file-in-project-by-selected)
+                  ;; ("C-c t" . counsel-fzf)
+                  ("C-c t" . find-file-in-project-by-selected)
                   ("C-c s" . abo-find-file-with-similar-name)
                   :map evil-normal-state-map
                   ("gf" . find-file-in-project-at-point))

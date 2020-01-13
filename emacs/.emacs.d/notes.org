@@ -63,9 +63,9 @@ for org template captures.
 
   #+begin_src emacs-lisp :results silent
    (setq org-capture-templates
-          '(("n" "Notes" entry (file+headline "~/Dropbox/org/notes.org" "Inbox") "* %?\n")
-            ("t" "TDD" checkitem (file "~/Dropbox/org/tdd.org"))))
+          '(("n" "Notes" entry (file+headline **local-note-file** "Inbox") "* %?\n")))
 
+   (define-key my-keys-minor-mode-map (kbd "C-c n") 'org-capture)
    (add-hook 'org-capture-mode-hook 'evil-insert-state)
   #+end_src
 
@@ -74,9 +74,7 @@ for org template captures.
   "global-org-capture"))' -e '(org-capture nil "n")'~.
 
   It works nicely on Linux, however on Mac the focus and input focus
-  is sketchy and is not reliable. I much prefer to gather my thoughts
-  with a voice recorder and transcribe them the following day in my
-  notes first thing in the morning.
+  is sketchy and is not reliable.
 
   The following takes advantage that I name those capture frame
   ~global-org-capture~ to do some housekeeping around them

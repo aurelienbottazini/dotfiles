@@ -394,10 +394,10 @@ keybindings.
      (define-key my-keys-minor-mode-map (kbd "C-k") 'evil-window-up)
      (define-key my-keys-minor-mode-map (kbd "C-l") 'evil-window-right)
 
-     (define-key my-keys-minor-mode-map (kbd "C-w \\") 'evil-window-vsplit)
+     (define-key my-keys-minor-mode-map (kbd "C-c \\") 'split-window-right)
      (use-package evil
      :config
-     (evil-define-key 'normal my-keys-minor-mode-map (kbd "C-w -") 'evil-window-split))
+     (evil-define-key 'normal my-keys-minor-mode-map (kbd "C-c -") 'split-window-below))
    #+END_SRC
 
 * Clojure

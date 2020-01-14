@@ -759,6 +759,12 @@ keybindings.
 #+END_SRC
 * Bindings
 ** General
+   Easier to type M-x
+   #+begin_src emacs-lisp :results silent
+   (define-key my-keys-minor-mode-map (kbd "C-x C-m") 'execute-extended-command)
+   (define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
+   #+end_src
+
    Shows key combination helper in minibuffer
    #+begin_src emacs-lisp
      (use-package which-key

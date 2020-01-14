@@ -122,6 +122,7 @@
  '(context-coloring-level-3-face ((t (:foreground "#bfa1e3"))))
  '(context-coloring-level-5-face ((t (:foreground "#ffa2cb"))))
  '(context-coloring-level-6-face ((t (:foreground "#f79b2f"))))
+ '(evil-search-highlight-persist-highlight-face ((t (:inherit highlight))))
  '(font-lock-builtin-face ((t (:foreground "#bfa1e3"))))
  '(font-lock-comment-face ((t (:foreground "#939598" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#97d88a"))))

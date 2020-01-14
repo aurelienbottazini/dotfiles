@@ -979,17 +979,6 @@ keybindings.
 #+end_src
 
 #+begin_src emacs-lisp :results silent
-;; (use-package doom-themes
-;;   :custom
-;;   (doom-themes-enable-bold t)
-;;   (doom-themes-enable-italic t)
-;;   :config
-;;   (load-theme 'doom-tomorrow-night t)
-;;   (doom-themes-visual-bell-config)
-;;   (doom-themes-org-config))
-#+end_src
-
-#+begin_src emacs-lisp :results silent
 (use-package writeroom-mode
   :bind (:map my-keys-minor-mode-map
   ("C-c z" . writeroom-mode)))

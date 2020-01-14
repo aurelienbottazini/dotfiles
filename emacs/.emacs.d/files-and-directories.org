@@ -34,7 +34,7 @@
          (define-key dired-mode-map (kbd "j") 'dired-next-line)
          (define-key dired-mode-map (kbd "k") 'dired-previous-line)
          (define-key dired-mode-map (kbd "[b") 'previous-buffer)
-         (define-key dired-more-map (kbd "]b") 'next-buffer)
+         (define-key dired-mode-map (kbd "]b") 'next-buffer)
          (evil-define-key 'normal dired-mode-map
            "gg" 'evil-goto-first-line
            "^" '(lambda () (interactive) (find-alternate-file "..")))))

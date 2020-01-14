@@ -305,7 +305,6 @@ keybindings.
     (blink-cursor-mode 0)
     (column-number-mode)
 
-    (global-hl-line-mode nil)
     (electric-indent-mode t)
 
     (electric-pair-mode)

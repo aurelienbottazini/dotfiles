@@ -529,7 +529,7 @@ keybindings.
   ;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
   ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
 #+end_src
-* Javascript
+* JavaScript
 #+BEGIN_SRC emacs-lisp
   (require 'compile)
   (setq compilation-error-regexp-alist-alist
@@ -780,67 +780,66 @@ keybindings.
    #+end_src
 
    #+begin_src emacs-lisp
-     (use-package paredit
-       :diminish paredit-mode
-       :bind (:map my-keys-minor-mode-map
-              ("C-)" . paredit-forward-slurp-sexp)
-              ("C-}" . paredit-forward-bard-sexp))
-       :config
-       (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
+   (use-package paredit
+     :diminish paredit-mode
+     :bind (:map my-keys-minor-mode-map
+            ("C-)" . paredit-forward-slurp-sexp)
+            ("C-}" . paredit-forward-bard-sexp))
+     :config
+     (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 
-     (use-package expand-region
-       :bind (:map my-keys-minor-mode-map ("C-c w" . er/expand-region)))
+   (use-package expand-region
+     :bind (:map my-keys-minor-mode-map ("C-c w" . er/expand-region)))
 
-     (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
-     (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
-     (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
-     (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d")))
-     (define-key my-keys-minor-mode-map (kbd "C-c jg") '(lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
-     (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
-     (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-writing-folder**)))
-     (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
-     (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
-     (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
-     (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
+   (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
+   (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
+   (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
+   (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/Aurelien.org")))
+   (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
+   (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-writing-folder**)))
+   (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
+   (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
+   (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
+   (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
 
-     (define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
-     ;;(use-package define-word
-     ;;  :config
-     ;;  (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
+   (define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
+   ;;(use-package define-word
+   ;;  :config
+   ;;  (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
 
-     (defun lookup-synonyms (word)
-       (interactive (list (save-excursion (car (ispell-get-word nil)))))
-       (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
+   ;; (defun lookup-synonyms (word)
+   ;;   (interactive (list (save-excursion (car (ispell-get-word nil)))))
+   ;;   (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
-     (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
-     (define-key my-keys-minor-mode-map (kbd "C-c oh") 'evil-search-highlight-persist-remove-all)
-     (defun hide-line-numbers ()
-       (interactive)
-       (setq display-line-numbers (quote nil)))
-     (define-key my-keys-minor-mode-map (kbd "C-c olh") 'hide-line-numbers)
-     (defun show-line-numbers ()
-       (interactive)
-       (setq display-line-numbers (quote absolute)))
-     (define-key my-keys-minor-mode-map (kbd "C-c oll") 'show-line-numbers)
-     (define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
-     (define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
-     (define-key my-keys-minor-mode-map (kbd "C-c os") 'org-strike-header)
-     (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
-     (use-package rainbow-mode
-       :bind (:map my-keys-minor-mode-map
-                   ("C-c or" . rainbow-mode)))
-     ;; gives each line only one visual line and don't show a continuation on next line
-     (set-default 'truncate-lines t)
-     (define-key my-keys-minor-mode-map (kbd "C-c ot") 'toggle-truncate-lines)
+   ;; (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
+   (define-key my-keys-minor-mode-map (kbd "C-c oh") 'evil-search-highlight-persist-remove-all)
+   (defun hide-line-numbers ()
+     (interactive)
+     (setq display-line-numbers (quote nil)))
+   (define-key my-keys-minor-mode-map (kbd "C-c olh") 'hide-line-numbers)
+   (defun show-line-numbers ()
+     (interactive)
+     (setq display-line-numbers (quote absolute)))
+   (define-key my-keys-minor-mode-map (kbd "C-c oll") 'show-line-numbers)
+   (define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
+   (define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
+   (define-key my-keys-minor-mode-map (kbd "C-c os") 'org-strike-header)
+   (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
+   (use-package rainbow-mode
+     :bind (:map my-keys-minor-mode-map
+                 ("C-c or" . rainbow-mode)))
+   ;; gives each line only one visual line and don't show a continuation on next line
+   (set-default 'truncate-lines t)
+   (define-key my-keys-minor-mode-map (kbd "C-c ot") 'toggle-truncate-lines)
 
-     (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
-     (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-     (define-key evil-normal-state-map (kbd "]e") 'next-error)
-     (define-key evil-normal-state-map (kbd "[e") 'previous-error)
+   (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+   (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+   (define-key evil-normal-state-map (kbd "]e") 'next-error)
+   (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 
-     (use-package windresize
-       :bind (:map evil-normal-state-map
-                   ("C-w r" . windresize)))
+   (use-package windresize
+     :bind (:map evil-normal-state-map
+                 ("C-w r" . windresize)))
    #+end_src
 ** Drag stuff
    #+begin_src emacs-lisp

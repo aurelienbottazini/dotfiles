@@ -585,6 +585,7 @@ keybindings.
     (add-hook 'js2-mode-hook (lambda ()
                                (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
     (use-package prettier-js
+      :diminish prettier-js-mode
       :config
       (setq prettier-args '(
                             "--trailing-comma" "es5"
@@ -666,6 +667,7 @@ keybindings.
 * Flycheck
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
+    :diminish flycheck-mode
     :config
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     (add-hook 'web-mode-hook 'flycheck-mode)
@@ -832,6 +834,7 @@ keybindings.
    (define-key my-keys-minor-mode-map (kbd "C-c os") 'org-strike-header)
    (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
    (use-package rainbow-mode
+     :diminish rainbow-mode
      :bind (:map my-keys-minor-mode-map
                  ("C-c or" . rainbow-mode)))
    ;; gives each line only one visual line and don't show a continuation on next line

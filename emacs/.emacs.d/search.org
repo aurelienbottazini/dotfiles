@@ -47,6 +47,8 @@ Here is how I search.
          "Occur function for `ivy-switch-buffer' using `ibuffer'."
          (ibuffer nil (buffer-name) (list (cons 'name ivy--old-re))))
        (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
+       (eval-after-load "ivy"
+         '(define-key ivy-minibuffer-map (kbd "C-c SPC") 'ivy-restrict-to-matches))
    #+end_src
 
 * Search in visible windows

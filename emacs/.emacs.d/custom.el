@@ -109,8 +109,8 @@
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
  '(vc-follow-symlinks t)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -133,7 +133,7 @@
  '(font-lock-keyword-face ((t (:foreground "#f79b2f"))))
  '(font-lock-string-face ((t (:foreground "#5cb860"))))
  '(font-lock-variable-name-face ((t (:foreground "#fccf61"))))
- '(highlight ((t (:background "#fff166" :foreground "black"))))
+ '(highlight ((t (:background "#3a499c" :foreground "white"))))
  '(ivy-confirm-face ((t (:inherit minibuffer-prompt :foreground "#5cb860"))))
  '(ivy-current-match ((t (:background "#4982cf" :foreground "white"))))
  '(ivy-match-required-face ((t (:inherit minibuffer-prompt :foreground "#f56d9e"))))

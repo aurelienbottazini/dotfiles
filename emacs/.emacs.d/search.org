@@ -76,7 +76,7 @@ Here is how I search.
 
 ** When I need to narrow down my search to specific files
 
-*** Narrowing on the filetype
+*** Narrowing on the file-type
 
     Launch ~counsel-rg~ with a prefix and then I can use for example
     ~-tjs~ as an argument to search only inside javascript files.

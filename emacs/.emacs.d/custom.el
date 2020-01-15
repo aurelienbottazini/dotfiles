@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(blink-matching-paren (quote jump-offscreen))
  '(company-minimum-prefix-length 2)
  '(custom-safe-themes
    (quote
@@ -44,6 +45,7 @@
  '(org-html-head-include-scripts nil)
  '(org-html-html5-fancy t)
  '(org-html-indent t)
+ '(org-html-validation-link nil)
  '(org-log-into-drawer t)
  '(org-modules
    (quote
@@ -106,8 +108,9 @@
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(vc-follow-symlinks t)
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -134,6 +137,7 @@
  '(ivy-confirm-face ((t (:inherit minibuffer-prompt :foreground "#5cb860"))))
  '(ivy-current-match ((t (:background "#4982cf" :foreground "white"))))
  '(ivy-match-required-face ((t (:inherit minibuffer-prompt :foreground "#f56d9e"))))
+ '(link ((t (:foreground "#8eddeb" :underline "#bfa1e3"))))
  '(magit-mode-line-process ((t (:inherit mode-line-emphasis :foreground "black" :weight bold))))
  '(minibuffer-prompt ((t (:foreground "#adcff1"))))
  '(mode-line-emphasis ((t (:inherit mode-line))))

@@ -72,8 +72,8 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 export PATH=/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
-export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-export PATH=$PATH:$HOME/.rbenv/bin
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH=$HOME/.rbenv/bin:$PATH
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 eval "$(rbenv init -)"
@@ -105,6 +105,7 @@ RPROMPT=''
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export GDK_SCALE=2 #retina support
+export GIT_TEMPLATE_DIR=$HOME/.git_template
 
 zstyle ':completion:*' menu select
 

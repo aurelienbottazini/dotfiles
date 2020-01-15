@@ -174,7 +174,9 @@ keybindings.
   #+begin_src emacs-lisp :results silent
     (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
     (let ((home-folder (getenv "HOME")))
-      (setenv "PATH" (concat (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
+      (setenv "PATH" (concat
+                             "/home/linuxbrew/.linuxbrew/bin/:"
+                             (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
                              (concat home-folder "/n/bin/:")
                              (concat home-folder "/.local/bin/:")
                              (concat home-folder "/work/dox-compose/bin/:")
@@ -184,10 +186,11 @@ keybindings.
                              "/usr/bin:"
                              "/usr/local/bin:"
                              "/usr/local/opt/node@10/bin:"
-                             "/home/linuxbrew/.linuxbrew/bin/:"
                              "/bin"))
 
-      (setq exec-path `(,(concat home-folder "/.config/yarn/global/node_modules/.bin/")
+      (setq exec-path `(
+                        "/home/linuxbrew/.linuxbrew/bin/"
+                        ,(concat home-folder "/.config/yarn/global/node_modules/.bin/")
                         ,(concat home-folder "/work/dox-compose/bin/")
                         ,(concat home-folder "/n/bin/")
                         ,(concat home-folder "/.rbenv/bin/")
@@ -200,7 +203,6 @@ keybindings.
                         "/usr/local/bin"
                         "~/bin"
                         "/bin/"
-                        "/home/linuxbrew/.linuxbrew/bin/"
                         "/usr/local/bin/"
                         "/usr/local/sbin/"
                         "/usr/bin/")))

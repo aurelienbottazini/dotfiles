@@ -109,8 +109,8 @@
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
  '(vc-follow-symlinks t)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -141,6 +141,7 @@
  '(magit-mode-line-process ((t (:inherit mode-line-emphasis :foreground "black" :weight bold))))
  '(minibuffer-prompt ((t (:foreground "#adcff1"))))
  '(mode-line-emphasis ((t (:inherit mode-line))))
+ '(org-meta-line ((t (:background "#383a42" :foreground "#8eddeb" :slant italic))))
  '(region ((t (:background "#3a499c"))))
  '(shadow ((t (:background "#222222"))))
  '(success ((t (:foreground "#97d88a" :weight bold))))

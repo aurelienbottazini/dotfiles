@@ -151,4 +151,5 @@
  '(success ((t (:foreground "#97d88a" :weight bold))))
  '(swiper-line-face ((t (:background "#4982cf" :foreground "black"))))
  '(web-mode-html-tag-face ((t (:foreground "#8eddeb"))))
- '(which-func ((t (:foreground "DarkGrey")))))
+ '(which-func ((t (:foreground "DarkGrey"))))
+ '(widget-field ((t (:background "#dad9d6" :foreground "black")))))

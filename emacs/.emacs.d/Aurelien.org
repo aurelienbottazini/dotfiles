@@ -433,6 +433,23 @@ keybindings.
      | "white"        | "#FAFAFA" |
      | "yellow"       | "#C18401" |
 
+*** Tronesque
+    #081724
+    #033340
+    #1d5483
+    #2872b2
+    #d3f9ee
+    #a6f3dd
+    #effffe
+    #fffed9
+    #ff694d
+    #f5b55f
+    #fffe4e
+    #afc0fd
+    #96a5d9
+    #bad6e2
+    #d2f1ff
+    #68f6cb
 * Windows
    #+BEGIN_SRC emacs-lisp
      (define-key my-keys-minor-mode-map (kbd "C-h") 'evil-window-left)

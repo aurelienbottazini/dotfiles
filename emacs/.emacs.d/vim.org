@@ -7,7 +7,7 @@ Here is an awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
 Quit read-only windows with Q instead of trying to register a Vim
 Macro.
 This is mainly to restore emacs behavior with help windows.
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp :results silent :tangle yes
   (use-package evil
     :config
     (defun my-evil-record-macro ()
@@ -24,7 +24,7 @@ Surround things with
 - ~S~ in visual mode
 - ~ys<text-object>~ in normal mode
 You can also change surroundings ~cs~ or delete surroundings ~ds~.
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp :results silent :tangle yes
   (use-package evil-surround
     :after evil
     :config

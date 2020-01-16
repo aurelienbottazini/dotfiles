@@ -1,3 +1,13 @@
+#+TITLE: Aurélien Bottazini's Emacs configuration
+#+OPTIONS: toc:4 h:4
+#+PROPERTY: header-args :results silent
+
+*IN_PROGRESS*
+I am in the process of refactoring this emacs dotfile.
+I want to explain my emacs config strategy to
+
+
+- Make it easier for others to copy things from it.
 - To teach myself better emacs strategies.
 
 Change the face on the Emacs graphical client to match my terminal settings.

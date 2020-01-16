@@ -30,6 +30,6 @@ alias g="git-status"
 # tic -x -o ~/.terminfo ~/dotfiles/emacs/terminfo-24bit.src
 alias ec="TERM=xterm-24bit emacsclient -s $(tmux display-message -p '#S') -ta ''"
 alias ee="TERM=xterm-24bit emacs -nw"
-# alias ee="emacs . >/dev/null 1>&2 &; disown $1"
+alias emg="emacs . >/dev/null 0>&2 &; disown $1"
 
 alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"

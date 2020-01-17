@@ -1,6 +1,6 @@
 #+TITLE: Aurélien Bottazini's Emacs configuration
 #+OPTIONS: toc:4 h:4
-#+PROPERTY: header-args :results silent
+#+PROPERTY: header-args :results silent :tangle yes
 
 *IN_PROGRESS*
 I am in the process of refactoring this emacs dotfile.
@@ -11,13 +11,13 @@ I want to explain my emacs config strategy to
 - To teach myself better emacs strategies.
 
 Change the face on the Emacs graphical client to match my terminal settings.
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp
 (when (display-graphic-p)
   (set-face-background 'default "#282c34")
   (set-face-foreground 'default "#dcdfe4"))
 #+end_src
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp
 (setq evil-toggle-key "C-c e")
 #+END_SRC
 
@@ -179,7 +179,7 @@ keybindings.
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   slow down my Emacs.
 
-  #+begin_src emacs-lisp :results silent
+  #+begin_src emacs-lisp
     (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
     (let ((home-folder (getenv "HOME")))
       (setenv "PATH" (concat
@@ -832,7 +832,7 @@ keybindings.
 * Bindings
 ** General
    Easier to type M-x
-   #+begin_src emacs-lisp :results silent
+   #+begin_src emacs-lisp
    (define-key my-keys-minor-mode-map (kbd "C-x C-m") 'execute-extended-command)
    (define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
    #+end_src
@@ -930,7 +930,7 @@ keybindings.
        :config
        (drag-stuff-global-mode t))
    #+end_src
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp
   (use-package key-chord
     :after evil
     :config
@@ -938,7 +938,7 @@ keybindings.
     (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
 #+end_src
 
-  #+begin_src emacs-lisp :results silent
+  #+begin_src emacs-lisp
     (use-package evil
       :config
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
@@ -1043,12 +1043,12 @@ keybindings.
      (autoload 'company-ispell "company-ispell")
    #+END_SRC
 * Testing things
-  #+begin_src emacs-lisp :results silent
+  #+begin_src emacs-lisp
       (when (fboundp 'winner-mode)
       (winner-mode 1))
   #+end_src
 
-#+begin_src emacs-lisp :results raw
+#+begin_src emacs-lisp
 (setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
 (use-package go-mode)
 (use-package web-mode
@@ -1056,19 +1056,19 @@ keybindings.
   :mode "\\.gohtml\\'")
 #+end_src
 
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp
 (use-package writeroom-mode
   :bind (:map my-keys-minor-mode-map
   ("C-c z" . writeroom-mode)))
 #+end_src
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp
 (setq org-src-preserve-indentation nil
       org-html-indent nil
       org-edit-src-content-indentation 0)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp
 (defun abo-jump-to-note-file ()
   "Jump to org note file for current buffer"
   (interactive)
@@ -1086,6 +1086,6 @@ keybindings.
 (add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
 #+END_SRC
 
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp
 (use-package markdown-mode)
 #+end_src

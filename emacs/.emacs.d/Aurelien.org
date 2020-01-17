@@ -6,17 +6,17 @@ I like to use a dark background.
 This is setup on my terminal through the terminal color settings.
 However if I use the Emacs GUI I need to make sure the colors match
 what my terminal settings are.
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (when (display-graphic-p)
   (set-face-background 'default "#282c34")
   (set-face-foreground 'default "#dcdfe4"))
-#+end_src
+#+END_SRC
 
 I  use Vim keybindings everywhere except with special modes
 like Magit, Dired... I setup those special modes to start with Emacs
 keybindings by default. If for any reason I encounter other modes
 where the Vim keybindings are interfering too much, I can disable the
-Vim keybindings with ~evil-toggle-key~
+Vim keybindings with ~evil-toggle-key~.
 #+BEGIN_SRC emacs-lisp
 (setq evil-toggle-key "C-c e")
 #+END_SRC
@@ -34,10 +34,10 @@ Vim keybindings with ~evil-toggle-key~
   It is important to load custom settings first. Those are the ones
   managed by Emacs through customization menus. They can impact the
   loading of other packages.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)
-  #+end_src
+  #+END_SRC
 
   As I work on different computers, I need slightly different
   settings. Instead of embedding machine specific code through
@@ -53,17 +53,17 @@ Vim keybindings with ~evil-toggle-key~
 
   I keep elisp I write inside the site-lisp directory. The files
   inside that directory are automatically added to the Emacs load-path.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (let ((default-directory  "~/.emacs.d/site-lisp/"))
     (normal-top-level-add-to-load-path '("."))
     (normal-top-level-add-subdirs-to-load-path))
-  #+end_src
+  #+END_SRC
 
   I use a special keymap ~my-keys-minor-mode-map~ where i store my global keybindings.
   This is mainly to use a ~defadvice~ to make sure that any key I
   define in my keymap as priority over ones defined elsewhere by
   built-in Emacs modes or 3rd party packages
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode
     "A minor mode so that my key settings override annoying major modes."
@@ -77,10 +77,10 @@ Vim keybindings with ~evil-toggle-key~
           (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
           (add-to-list 'minor-mode-map-alist mykeys))))
   (ad-activate 'load)
-  #+end_src
+  #+END_SRC
 
 * Package library initialization
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (setq package-archives
           '(("melpa"       . "http://melpa.milkbox.net/packages/")
             ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -100,13 +100,13 @@ Vim keybindings with ~evil-toggle-key~
     (require-package 'use-package)
     (require 'use-package)
     (setq use-package-always-ensure t)
-  #+end_src
+  #+END_SRC
 
   You can get the time it took for emacs to start with.
   It ~c-c c-c~ and it will show in the echo area.
-  #+begin_src emacs-lisp :tangle no
+  #+BEGIN_SRC emacs-lisp :tangle no
   (emacs-init-time)
-  #+end_src
+  #+END_SRC
 
 * Local variables
   Local variables are useful to customize your settings for different
@@ -134,7 +134,7 @@ Vim keybindings with ~evil-toggle-key~
   #+END_SRC
 
 * Utility functions
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (defun sudo ()
       "Use TRAMP to `sudo' the file for current buffer."
       (interactive)
@@ -175,13 +175,13 @@ Vim keybindings with ~evil-toggle-key~
         (add-hook 'after-save-hook 'org-publish-current-file nil t)
         (set-buffer-modified-p t)
         (message "Enabled org html export on save")))
-  #+end_src
+  #+END_SRC
 
 * Better Defaults
   I like setting the path manually as other solutions like ~exec-path-from-shell~
   slow down my Emacs.
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
     (let ((home-folder (getenv "HOME")))
       (setenv "PATH" (concat
@@ -195,7 +195,6 @@ Vim keybindings with ~evil-toggle-key~
                              (concat home-folder "/.fzf/bin:")
                              "/usr/bin:"
                              "/usr/local/bin:"
-                             "/usr/local/opt/node@10/bin:"
                              "/bin"))
 
       (setq exec-path `(
@@ -208,18 +207,17 @@ Vim keybindings with ~evil-toggle-key~
                         ,(concat home-folder "/dotfiles/bin/")
                         ,(concat home-folder "/.fzf/bin")
                         ,(concat home-folder "/.local/bin")
+                        ,(concat home-folder "/bin")
                         "/usr/local/opt/node@10/bin/"
-                        "/usr/bin"
                         "/usr/local/bin"
-                        "~/bin"
                         "/bin/"
-                        "/usr/local/bin/"
                         "/usr/local/sbin/"
                         "/usr/bin/")))
-  #+end_src
+  #+END_SRC
 
-  Keep emacs fast with large files.
-  #+begin_src emacs-lisp
+  Emacs can be really fast with large files too. The trick is to
+  disable
+  #+BEGIN_SRC emacs-lisp
     (defun check-large-file-hook ()
       "If a file is over a given size, turn off minor modes."
       (when (> (buffer-size) (* 1024 100)) ;; 100K
@@ -229,9 +227,9 @@ Vim keybindings with ~evil-toggle-key~
         (buffer-disable-undo)))
 
     (add-hook 'find-file-hooks 'check-large-file-hook)
-  #+end_src
+  #+END_SRC
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (setq help-window-select t)
     (setq inhibit-startup-message t)
     (setq delete-by-moving-to-trash t)
@@ -239,8 +237,8 @@ Vim keybindings with ~evil-toggle-key~
     ;; show end of buffer on left fringe
     (setq-default default-indicate-empty-lines nil)
     (make-variable-buffer-local 'compile-command)
-    (defalias 'yes-or-no-p 'y-or-n-p)
-    (setq ring-bell-function 'ignore)
+    (defalias 'yes-or-no-p 'y-or-n-p) ;; instead of typing yes or no, type y or n
+    (setq ring-bell-function 'ignore) ;; please don't startle me with a bell!
 
     (setq backup-by-copying t      ; don't clobber symlinks
           backup-directory-alist
@@ -261,22 +259,26 @@ Vim keybindings with ~evil-toggle-key~
     (setq global-auto-revert-non-file-buffers t)
     (global-auto-revert-mode 1)
 
-    ;; sentences end with one space after point
-    (setq sentence-end-double-space nil)
-
     ;;; replace selected text when typing
     (pending-delete-mode 1)
 
     (prefer-coding-system 'utf-8)
     (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
-  #+end_src
+  #+END_SRC
+
+  Sentences end with one space after point. The default two space is
+  an historical setting. This makes Emacs sentence based commands more
+  understandable to me.
+  #+BEGIN_SRC emacs-lisp
+  (setq sentence-end-double-space nil)
+  #+END_SRC
 
   I want error highlights and error bindings in shell modes too.
   #+BEGIN_SRC emacs-lisp
     (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
   #+END_SRC
 
-  ~C-c C-w~ to copy regex to something usable with emacs-lisp
+  ~C-c C-w~ to copy regex
   ~C-c C-q~ to quit re-builder and to remove highlights
   #+BEGIN_SRC emacs-lisp
   ( require 're-builder)
@@ -284,16 +286,16 @@ Vim keybindings with ~evil-toggle-key~
   #+END_SRC
 
 ** tabs and whitespace
-   By default I disable tabs. In addition I use ~whitespace-mode~
-   because sometimes when copy pasting code from external sources
-   those external sources have tabs. I want to see those tabs to
-   remove them.
+   By default I disable tabs. I use ~whitespace-mode~ in programming
+   buffers because sometimes when copy pasting code from external
+   sources those external sources have tabs. I want to see those tabs
+   to remove them.
 
-   I don't use the ~global-whitespace-mode~ because some emacs mode
-   like ~magit~ use tabs.
+   I don't use the ~global-whitespace-mode~ as some emacs mode like
+   ~magit~ use tabs.
 
    You can remove all tabs from your buffer with ~untabify~
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (setq-default
       indent-tabs-mode nil    ;no tabs
       c-basic-offset 2)
@@ -302,16 +304,17 @@ Vim keybindings with ~evil-toggle-key~
      (add-hook 'prog-mode-hook 'whitespace-mode)
      (eval-after-load "whitespace"
        '(diminish 'whitespace-mode))
-   #+end_src
+   #+END_SRC
 
 ** Recent files
    #+BEGIN_SRC emacs-lisp
-(recentf-mode 1)
-(setq recentf-max-menu-items 50)
-(setq recentf-max-saved-items 50)
+   (recentf-mode 1)
+   (setq recentf-max-menu-items 200)
+   (setq recentf-max-saved-items 200)
    #+END_SRC
+
 * GUI
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
   (column-number-mode)
 
@@ -321,8 +324,6 @@ Vim keybindings with ~evil-toggle-key~
   (defun inhibit-electric-pair-mode-in-minibuffer (char)
     (minibufferp))
   (setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
-
-  ;; wrap lines when they reach the end of buffer
 
   ;; file path in frame title
   (setq frame-title-format
@@ -334,9 +335,9 @@ Vim keybindings with ~evil-toggle-key~
   (define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
   (setq blink-matching-paren 'jump-offscreen)
 
-  ;; makes fringe big enough on linux with HDPI
+  ;; makes fringe big enough with HDPI
   (fringe-mode 20)
-  #+end_src
+  #+END_SRC
 
   #+BEGIN_SRC emacs-lisp
    (use-package diminish
@@ -347,12 +348,10 @@ Vim keybindings with ~evil-toggle-key~
      (diminish 'my-keys-minor-mode)
      (diminish 'eldoc-mode))
   #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-  (use-package posframe)
-  #+END_SRC
-
 * Colors
+  This is a list of all the colors I use with Emacs. When I want to
+  change a color I look through those colors. This helps me achieve
+  consistency.
 ** Pantone
 
    | Hex     | Pantone Color Name |
@@ -583,7 +582,7 @@ Vim keybindings with ~evil-toggle-key~
   :mode "\\.less\\'")
   #+END_SRC
 * Docker
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package docker
    :ensure t
    :bind ("C-c d d". docker)
@@ -599,7 +598,7 @@ Vim keybindings with ~evil-toggle-key~
   ;; (require 'dox-dc)
   ;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
   ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
-  #+end_src
+  #+END_SRC
 * JavaScript
   #+BEGIN_SRC emacs-lisp
   (require 'compile)
@@ -830,32 +829,32 @@ Vim keybindings with ~evil-toggle-key~
 * Bindings
 ** General
    Easier to type M-x
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (define-key my-keys-minor-mode-map (kbd "C-x C-m") 'execute-extended-command)
    (define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
-   #+end_src
+   #+END_SRC
 
    Shows key combination helper in minibuffer
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package which-key
        :diminish which-key-mode
        :config
        (which-key-mode))
-   #+end_src
+   #+END_SRC
 
    Combined with C-M-c (exit-recursive-edit) allows to stop doing
    something, do something else and come back to it later.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
-   #+end_src
+   #+END_SRC
 
    Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep :defer t)
-   #+end_src
+   #+END_SRC
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package paredit
      :diminish paredit-mode
      :bind (:map my-keys-minor-mode-map
@@ -922,9 +921,9 @@ Vim keybindings with ~evil-toggle-key~
    (use-package windresize
      :bind (:map evil-normal-state-map
                  ("C-w r" . windresize)))
-   #+end_src
+   #+END_SRC
 ** Drag stuff
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package drag-stuff
        :diminish t
        :bind (:map my-keys-minor-mode-map
@@ -932,24 +931,24 @@ Vim keybindings with ~evil-toggle-key~
               ("C-M-<down>" . drag-stuff-down))
        :config
        (drag-stuff-global-mode t))
-   #+end_src
-   #+begin_src emacs-lisp
+   #+END_SRC
+   #+BEGIN_SRC emacs-lisp
   (use-package key-chord
     :after evil
     :config
     (key-chord-mode 1)
     (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
-   #+end_src
+   #+END_SRC
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     (use-package evil
       :config
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
-   #+end_src
+   #+END_SRC
 * Tmux Integration and Buffer navigation
   Move between buffers with C-h C-j C-k C-l and makes Emacs terminal
   and tmux work seamlessly.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
        ;; (use-package emamux
        ;;   :bind (:map my-keys-minor-mode-map
        ;;               ("C-c c c" . emamux:send-command)
@@ -993,7 +992,7 @@ Vim keybindings with ~evil-toggle-key~
        (define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
        (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
        (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
-  #+end_src
+  #+END_SRC
 
 * Completion
 
@@ -1052,11 +1051,11 @@ Vim keybindings with ~evil-toggle-key~
 
   Setting the org-directory helps integration with org-agenda and
   for org template captures.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (setq org-directory **local-org-folder**)
-  #+end_src
+  #+END_SRC
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
@@ -1078,7 +1077,7 @@ Vim keybindings with ~evil-toggle-key~
 
   (setq org-todo-keywords
         '((sequence "TODO" "WAITING" "|" "DONE(!)")))
-  #+end_src
+  #+END_SRC
 
 ** Capture Ideas
 
@@ -1087,29 +1086,29 @@ Vim keybindings with ~evil-toggle-key~
 
    If you have a selection, it will be part of the link and Emacs will
    actually look for that selection If you visit the link.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
-   #+end_src
+   #+END_SRC
 
    Palimpsest makes it easier to quickly discard blocks of text.
    Main use is to just send the block of text at the bottom of the
    buffer. This way I can revise my writing without losing my drafts.
    ~C-c C-q~ move region to trash
    ~C-c C-r~ move region to bottom
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package palimpsest
      :diminish palimpsest-mode
      :config
      (add-hook 'org-mode-hook 'palimpsest-mode))
-   #+end_src
+   #+END_SRC
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
            '(("n" "Notes" entry (file+headline **local-note-file** "Inbox") "* %?\n")))
 
     (define-key my-keys-minor-mode-map (kbd "C-c n") 'org-capture)
     (add-hook 'org-capture-mode-hook 'evil-insert-state)
-   #+end_src
+   #+END_SRC
 
    To launch an Emacs client with a capture frame selecting the ~n~ template
    ~emacsclient -ca "" --frame-parameters='(quote (name .
@@ -1120,7 +1119,7 @@ Vim keybindings with ~evil-toggle-key~
 
    The following takes advantage that I name those capture frame
    ~global-org-capture~ to do some housekeeping around them
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (defadvice org-capture-finalize
          (after delete-capture-frame activate)
        "Advise capture-finalize to close the frame"
@@ -1139,7 +1138,7 @@ Vim keybindings with ~evil-toggle-key~
      ;; splits the window.
      (add-hook 'org-capture-mode-hook
                'delete-other-windows)
-   #+end_src
+   #+END_SRC
 
 ** Inline Code
 
@@ -1147,7 +1146,7 @@ Vim keybindings with ~evil-toggle-key~
    This is the best way I know of doing [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
 
    This loads more programming languages to use with org-babel.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (require 'ob-clojure) ;; run cider-jack-in from org buffer to be able to run
                          ;; clojure code
    (use-package ob-clojurescript) ;; requires [[https://github.com/anmonteiro/lumo][lumo]]
@@ -1157,7 +1156,7 @@ Vim keybindings with ~evil-toggle-key~
                                 '((shell . t)
                                   (ditaa . t)))
    (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.11.0/libexec/ditaa-0.11.0-standalone.jar")
-   #+end_src
+   #+END_SRC
 
 ** Publish
    My strategy is to keep my writings in the same folder
@@ -1166,7 +1165,7 @@ Vim keybindings with ~evil-toggle-key~
 
    The HTML export has just the body. I then use a tool like ~jekyll~
    or ~hugo~ to make it accessible on internet.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (setq
       time-stamp-active t
       time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
@@ -1209,13 +1208,13 @@ Vim keybindings with ~evil-toggle-key~
      (require 'ox-publish)
      (setq system-time-locale "C") ;; make sure time local is in english when exporting
      (setq org-html-validation-link nil)
-   #+end_src
+   #+END_SRC
 
 ** Feedback
 
    Ispell buffer with ~s-:r~
    Ispell word with ~z =~
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (setq ispell-program-name "aspell")
    (setq ispell-personal-dictionary **local-personal-dictionary**)
    ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
@@ -1224,27 +1223,27 @@ Vim keybindings with ~evil-toggle-key~
    (add-hook 'org-mode-hook 'turn-on-flyspell)
    (eval-after-load "flyspell"
         '(diminish 'flyspell-mode))
-   #+end_src
+   #+END_SRC
 
    Word definition
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package define-word
      :config
      (evil-define-key 'normal org-mode-map
        (kbd "z w") 'define-word-at-point))
-   #+end_src
+   #+END_SRC
 
    Word synonyms.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package powerthesaurus
      :config
      (evil-define-key 'normal org-mode-map
        (kbd "z s") 'powerthesaurus-lookup-word-dwim))
-   #+end_src
+   #+END_SRC
 
    For most documents, aim for a score of approximately 60 to 70 for
    the reading ease and 7.0 to 8.0 for the grade level.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package writegood-mode
     :config
     (evil-define-key 'normal org-mode-map
@@ -1253,11 +1252,11 @@ Vim keybindings with ~evil-toggle-key~
        (kbd "z g r") 'writegood-reading-ease)
     (evil-define-key 'normal org-mode-map
        (kbd "z g l") 'writegood-grade-level))
-   #+end_src
+   #+END_SRC
 
    If you need additional feedback from an external service here is an
    easy way to do it:
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (require 'browse-url) ; part of gnu emacs
 
    (defun my-lookup-wikipedia ()
@@ -1275,7 +1274,7 @@ Vim keybindings with ~evil-toggle-key~
        (browse-url (concat "http://en.wikipedia.org/wiki/" word))
        ;; (eww myUrl) ; emacs's own browser
        ))
-   #+end_src
+   #+END_SRC
 
 * Vim
   I started using Vim to help me prevent [[https://www.emacswiki.org/emacs/RepeatedStrainInjury][emacs RSI.]]
@@ -1287,7 +1286,7 @@ Vim keybindings with ~evil-toggle-key~
   Quit read-only windows with Q instead of trying to register a Vim
   Macro.
   This is mainly to restore emacs behavior with help windows.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil
     :config
     (defun my-evil-record-macro ()
@@ -1298,52 +1297,52 @@ Vim keybindings with ~evil-toggle-key~
 
     (with-eval-after-load 'evil-maps
       (define-key evil-normal-state-map (kbd "q") 'my-evil-record-macro)))
-  #+end_src
+  #+END_SRC
 
   Surround things with
   - ~S~ in visual mode
   - ~ys<text-object>~ in normal mode
   You can also change surroundings ~cs~ or delete surroundings ~ds~.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil-surround
     :after evil
     :config
     (global-evil-surround-mode 1))
-  #+end_src
+  #+END_SRC
 
   Comment things with ~gc~. Comment and copy with ~gy~
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil-commentary
     :after evil
     :diminish evil-commentary-mode
     :config
     (evil-commentary-mode))
-  #+end_src
+  #+END_SRC
 
   Start a search from visual selection with ~*~ or ~#~ (backward).
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil-visualstar
     :after evil
     :config
     (global-evil-visualstar-mode t))
-  #+end_src
+  #+END_SRC
 
   Jump to matching pairs with ~%~.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil-matchit
     :after evil
     :config
     (global-evil-matchit-mode 1))
-  #+end_src
+  #+END_SRC
 
   Persist highlight from ~evil search~ and ~isearch~
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil-search-highlight-persist
     :config
     (global-evil-search-highlight-persist t))
-  #+end_src
+  #+END_SRC
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package evil
     :ensure t
     :init
@@ -1358,11 +1357,11 @@ Vim keybindings with ~evil-toggle-key~
     (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
     (evil-ex-define-cmd "W" 'save-buffer))
-  #+end_src
+  #+END_SRC
 
   Changes modeline color depending on Evil state, if buffer is
   modified etc...
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
      (lexical-let ((default-color (cons (face-background 'mode-line)
                                       (face-foreground 'mode-line))))
      (add-hook 'post-command-hook
@@ -1380,26 +1379,26 @@ Vim keybindings with ~evil-toggle-key~
                    (set-face-foreground 'mode-line-buffer-id (cdr color))
                    (set-face-foreground 'mode-line (cdr color))))))
 
-  #+end_src
+  #+END_SRC
 
   Make my cursor match my modeline color
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 (use-package evil
   :config
     (setq evil-insert-state-cursor '(bar "#97d88a")
           evil-visual-state-cursor '(box "#adcff1")
           evil-emacs-state-cursor '(box "#ffa2cb")
           evil-normal-state-cursor '(box "#bc3e44")))
-  #+end_src
+  #+END_SRC
 
   Add text objects to select, copy things based on indentation level.
   Use it with ~vii~ and ~yii~.
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 (use-package evil-indent-plus
   :after evil
   :config
   (evil-indent-plus-default-bindings))
-  #+end_src
+  #+END_SRC
 
 * Search
   Searching is probably the most important thing in a code editor.
@@ -1429,7 +1428,7 @@ Vim keybindings with ~evil-toggle-key~
     - make the changes in the occur buffer
     - ~C-x C-s~ to save the changes
 
-    #+begin_src emacs-lisp
+    #+BEGIN_SRC emacs-lisp
       (use-package ivy
         :diminish ivy-mode
         :bind (("C-s" . swiper-isearch)
@@ -1453,7 +1452,7 @@ Vim keybindings with ~evil-toggle-key~
         (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
         (eval-after-load "ivy"
           '(define-key ivy-minibuffer-map (kbd "C-c SPC") 'ivy-restrict-to-matches))
-    #+end_src
+    #+END_SRC
 
 ** Search in visible windows
    #+BEGIN_SRC emacs-lisp
@@ -1465,10 +1464,10 @@ Vim keybindings with ~evil-toggle-key~
 
    ~counsel-rg~ is my main way to search. Invoked with an argument, it
    allows you to specify the directory and search options.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     (use-package counsel
       :bind (:map my-keys-minor-mode-map ("C-c f" . counsel-rg)))
-   #+end_src
+   #+END_SRC
 
    When I am investigating things, I like to see a preview of the
    results as I scroll down the search results. I do it with ~C-o~ then
@@ -1494,7 +1493,7 @@ Vim keybindings with ~evil-toggle-key~
 
    Remplacements for emacs search and completion commands.
    I find the UI better.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package counsel
        :bind (("M-x" . counsel-M-x)
               ("C-x C-f" . counsel-find-file)
@@ -1524,7 +1523,7 @@ Vim keybindings with ~evil-toggle-key~
                                                   `((":" ,@fns)))
                                          items)))))
 
-   #+end_src
+   #+END_SRC
 
 ** Rename
 
@@ -1534,18 +1533,18 @@ Vim keybindings with ~evil-toggle-key~
    ~tab~ and ~S-tab~ to navigate between matches. ~M-;~ to clear a match.
 
    Shows only matching lines with ~C-'~
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package iedit
       :bind (:map my-keys-minor-mode-map ("<f6>" . iedit-mode)))
-   #+end_src
+   #+END_SRC
 
    Sometimes I like to use the mouse to setup multiple cursors. For
    other /multiple-cursors/ usage I prefer to use either
    ~evil-visual-block-mode~ or ~iedit~.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package multiple-cursors
    :bind (:map my-keys-minor-mode-map ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
-   #+end_src
+   #+END_SRC
 
 * VCS
   I mainly use git. I prefix all git related keybindings with ~c-c g~.
@@ -1558,20 +1557,20 @@ Vim keybindings with ~evil-toggle-key~
    I prefer to have the ediff take over and restove the windows when
    done.
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (setq ediff-window-setup-function 'ediff-setup-windows-plain)
      (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
      (setq ediff-split-window-function 'split-window-vertically)
-   #+end_src
+   #+END_SRC
 
 ** Working with github
 
    To grab a link I can share with co-workers from the region or file.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package git-link
        :bind (:map my-keys-minor-mode-map
                    ("C-c gl" . git-link)))
-   #+end_src
+   #+END_SRC
 
    Otherwise I launch a ~gitsh~ session and I use [[https://github.com/github/hub][hub]] to interact with
    github directly
@@ -1581,7 +1580,7 @@ Vim keybindings with ~evil-toggle-key~
     Allows to view previous versions of a file. It is not focused on the
     diff but on the file itself. Use ~n~ and ~p~ to navigate between
     versions.
-    #+begin_src emacs-lisp
+    #+BEGIN_SRC emacs-lisp
      (use-package git-timemachine
        :bind (:map my-keys-minor-mode-map
                    ("C-c gt" . git-timemachine-toggle))
@@ -1593,7 +1592,7 @@ Vim keybindings with ~evil-toggle-key~
            (evil-normal-state)))
 
        (ad-activate 'git-timemachine-mode))
-    #+end_src
+    #+END_SRC
 *** vc-annotate
 
     Bound to ~C-x v g~.
@@ -1605,14 +1604,14 @@ Vim keybindings with ~evil-toggle-key~
 
 
     I prefer to use a full-window with vc-annotate
-    #+begin_src emacs-lisp
+    #+BEGIN_SRC emacs-lisp
      (use-package fullframe
        :config
        (fullframe vc-annotate quit-window))
-    #+end_src
+    #+END_SRC
 
     also q to quit window everywhere?
-    #+begin_src emacs-lisp
+    #+BEGIN_SRC emacs-lisp
      (eval-after-load "vc-annotate"
           '(progn
            (define-key vc-annotate-mode-map "j" 'evil-next-line)
@@ -1621,7 +1620,7 @@ Vim keybindings with ~evil-toggle-key~
      (use-package evil
        :config
        (evil-define-key 'normal diff-mode-map (kbd "q") 'quit-window))
-    #+end_src
+    #+END_SRC
 
 ** Magit
 
@@ -1636,7 +1635,7 @@ Vim keybindings with ~evil-toggle-key~
    porcelains.
    #+END_QUOTE
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package magit
        :bind (:map my-keys-minor-mode-map
                    ("C-c gs" . magit-status)
@@ -1646,23 +1645,23 @@ Vim keybindings with ~evil-toggle-key~
        :init
        (setq magit-commit-show-diff nil
              magit-revert-buffers 1))
-   #+end_src
+   #+END_SRC
 
    When I use magit, I prefer to have it use the full emacs frame
    instead of splitting the current buffer.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package fullframe
        :after magit
        :config
        (fullframe magit-status magit-mode-quit-window))
-   #+end_src
+   #+END_SRC
 
    Start in insert mode when committing from vcs
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package evil
        :config
        (add-hook 'with-editor-mode-hook 'evil-insert-state))
-   #+end_src
+   #+END_SRC
 
 ** gitsh
 
@@ -1674,25 +1673,25 @@ Vim keybindings with ~evil-toggle-key~
 
    When I have to do git related things that are painful to do with
    magit, I just fire a terminal with /gitsh/ for the current project.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (defun ab-run-gitsh ()
        "Start gitsh in current git project. Uses st as a terminal."
        (interactive)
        (let ((default-directory (locate-dominating-file (expand-file-name default-directory) ".gitignore")))
          (start-process "gitsh" nil "gnome-terminal" "--geometry=120x70" "--class=scratch-term" "--" "gitsh")))
      (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
-   #+end_src
+   #+END_SRC
 
 ** Visual enhancements
 
    See in the fringe lines added, changed and removed since last commit.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package diff-hl
        :after magit
        :config
        (add-hook 'prog-mode-hook 'diff-hl-mode)
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
-   #+end_src
+   #+END_SRC
 
 * IDE
   Emacs is not an IDE but I can be pretty close to one.
@@ -1700,7 +1699,7 @@ Vim keybindings with ~evil-toggle-key~
 
 ** Find file in project
 *** Examples
-    #+begin_src emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp :tangle no
       ;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
       ;; OR if I'm reading my personal issue track document,
       (defun my-setup-develop-environment ()
@@ -1721,7 +1720,7 @@ Vim keybindings with ~evil-toggle-key~
 
       ;; most major modes inherit from prog-mode, so below line is enough
       (add-hook 'prog-mode-hook 'my-setup-develop-environment)
-    #+end_src
+    #+END_SRC
 
     All variables may be overridden on a per-directory basis in your
     .dir-locals.el. See (info “(Emacs) Directory Variables”) for
@@ -1731,7 +1730,7 @@ Vim keybindings with ~evil-toggle-key~
 
     A sample .dir-locals.el,
 
-    #+begin_src emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp :tangle no
       ((nil . ((ffip-project-root . "~/projs/PROJECT_DIR")
                ;; ignore files bigger than 64k and directory "dist/" when searching
                (ffip-find-options . "-not -size +64k -not -iwholename '*/dist/*'")
@@ -1744,14 +1743,14 @@ Vim keybindings with ~evil-toggle-key~
                          ;; Do NOT ignore directory "bin/" when searching
                          (setq ffip-prune-patterns `(delete "*/bin/*" ,@ffip-prune-patterns))))
                )))
-    #+end_src
+    #+END_SRC
 
 *** My config
 
     To install fd (rust replacement for find), download it
     [[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
     to use `fd` instead of find.
-    #+begin_src emacs-lisp
+    #+BEGIN_SRC emacs-lisp
     (use-package find-file-in-project
       :bind (:map  my-keys-minor-mode-map
                    ("C-c T" . find-file-in-project)
@@ -1778,9 +1777,9 @@ Vim keybindings with ~evil-toggle-key~
       (add-to-list 'ffip-prune-patterns "*/public/*")
       (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
       (add-to-list 'ffip-prune-patterns "node_modules/*"))
-    #+end_src
+    #+END_SRC
 
-    #+begin_src emacs-lisp
+    #+BEGIN_SRC emacs-lisp
       (defun abo-find-file-with-similar-name (&optional open-another-window)
         "Use base name of current file as keyword which could be further stripped.
       by `ffip-strip-file-name-regex'.
@@ -1793,7 +1792,7 @@ Vim keybindings with ~evil-toggle-key~
                                                         ""
                                                         keyword)))
             (ffip-find-files keyword open-another-window))))
-    #+end_src
+    #+END_SRC
 ** Switch between projects
 
    The main command I use with projectile is ~C-c p p~ to switch quickly
@@ -1801,7 +1800,7 @@ Vim keybindings with ~evil-toggle-key~
    project oriented and I use them from time to time. Also
 
    ~projectile-commander~ accessible with ~C-c p m~ has a pretty nice UI.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :demand
        :bind (:map my-keys-minor-mode-map
@@ -1811,14 +1810,14 @@ Vim keybindings with ~evil-toggle-key~
        (setq projectile-mode-line-prefix " ")
        :config
        (projectile-mode t))
-   #+end_src
+   #+END_SRC
 
 ** Switch between test and implementation
 
    This defines a new project type, the interesting part is the test suffix. I
    use it to jump quickly between a test and its implementation.
    Default projectile shortcut for that is ~C-c p t~
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :config
        (projectile-register-project-type 'npm '("package.json")
@@ -1826,7 +1825,7 @@ Vim keybindings with ~evil-toggle-key~
                                          :test "npm test"
                                          :run "npm start"
                                          :test-suffix ".spec"))
-   #+end_src
+   #+END_SRC
 
 ** Jump
 
@@ -1835,7 +1834,7 @@ Vim keybindings with ~evil-toggle-key~
    IDE code analysis but it works surprisingly well.
 
    I added a small function to make the current line flash just after a jump
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package dumb-jump
        :bind (:map evil-normal-state-map
                    ("gd" . dumb-jump-go)
@@ -1846,7 +1845,7 @@ Vim keybindings with ~evil-toggle-key~
        (add-hook 'dumb-jump-after-jump-hook
                  (defun abo-dumb-jump-pulse-line ()
                    (pulse-momentary-highlight-one-line (point)))))
-   #+end_src
+   #+END_SRC
 
 ** Tags
 
@@ -1857,33 +1856,33 @@ Vim keybindings with ~evil-toggle-key~
    directory.
 
    My [[file:~/dotfiles/git/.git_template][templates]] are used thanks to the [[~GIT_TEMPLATE_DIR][~GIT_TEMPLATE_DIR~]] environment variable.
-   #+begin_src shell :results output
+   #+BEGIN_SRC shell :results output
    env | grep GIT_TEMPLATE_DIR
-   #+end_src
+   #+END_SRC
 
    #+RESULTS:
    : GIT_TEMPLATE_DIR=/home/auray/.git_template
 
    I install Universal ctags with
-   #+begin_src shell :results output
+   #+BEGIN_SRC shell :results output
    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-   #+end_src
+   #+END_SRC
 
    To verify you have the proper version of universal ctags run
-   #+begin_src shell :results output
+   #+BEGIN_SRC shell :results output
    ctags --version | grep -q "Universal Ctags" >/dev/null && echo "Universal ctags is installed" || echo "Missing Universal ctags"
-   #+end_src
+   #+END_SRC
 
    #+RESULTS:
    : Universal ctags is installed
 
    These are my two go commands to navigate between code references.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package evil
      :bind (:map evil-normal-state-map
                    ("g." . xref-find-definitions)
                    ("gr" . xref-find-references)))
-   #+end_src
+   #+END_SRC
 
 * completion
 ** Hippie expand
@@ -1892,7 +1891,7 @@ Vim keybindings with ~evil-toggle-key~
 
    The description of all the hippie expand functions is inside
    [[https://github.com/emacs-mirror/emacs/blob/master/lisp/hippie-exp.el#L63][~hippie-exp.el~]] (location can vary on your system)
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
     (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
     (require 'mode-local)
     (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
@@ -1900,14 +1899,14 @@ Vim keybindings with ~evil-toggle-key~
     (require 'mode-local)
     (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
     (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
-   #+end_src
+   #+END_SRC
 
 ** AutoCompletion
 
    company shows a popup where you can select completions with a number
    or with ~enter~. You can also invoke the popup manually with ~C-x
    C-o~
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
       (use-package company
         :diminish company-mode
         :config
@@ -1940,11 +1939,11 @@ Vim keybindings with ~evil-toggle-key~
                             company-candidates)
                 (self-insert-command 1)
               (company-complete-number (string-to-number k))))))
-   #+end_src
+   #+END_SRC
 
 ** Snippets
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
        :demand
        :commands yas-expand-snippet
@@ -1958,21 +1957,21 @@ Vim keybindings with ~evil-toggle-key~
        (yas-global-mode 1)
        (add-hook 'term-mode-hook (lambda()
                                    (yas-minor-mode -1))))
-   #+end_src
+   #+END_SRC
 
    This allow me to automatically expand [[https://github.com/aurelienbottazini/dotfiles/blob/master/emacs/.emacs.d/templates/][templates]] into new files using
    the yasnippet format. The filenames for the template are regexes.
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (use-package yatemplate
        :config
        (add-hook 'find-file-hook 'auto-insert)
        (yatemplate-fill-alist))
-   #+end_src
+   #+END_SRC
 
 * files and directories
 
 ** Dired
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
      (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform
      (setq dired-listing-switches "-alh")
      ;; on mac there is some weird prefixing going on for GNU Tools like ls.
@@ -2016,7 +2015,7 @@ Vim keybindings with ~evil-toggle-key~
      (use-package dired-rsync
      :config
      (bind-key "p" 'dired-rsync dired-mode-map))
-   #+end_src
+   #+END_SRC
 
 ** Counsel
    I redefine the standard ~C-x C-f~ to use counsel. It allows me to do
@@ -2036,30 +2035,30 @@ Vim keybindings with ~evil-toggle-key~
    ~M-x counsel-fzf mp4$ C-c C-o.~
    #+END_QUOTE
 
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp
    (use-package counsel
      :bind (("C-x C-f" . counsel-find-file)))
-   #+end_src
+   #+END_SRC
 
 * Testing things
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
       (when (fboundp 'winner-mode)
       (winner-mode 1))
-  #+end_src
+  #+END_SRC
 
-  #+begin_src emacs-lisp :results raw
+  #+BEGIN_SRC emacs-lisp :results raw
 (setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
 (use-package go-mode)
 (use-package web-mode
   :mode "\\.html\\'"
   :mode "\\.gohtml\\'")
-  #+end_src
+  #+END_SRC
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 (use-package writeroom-mode
   :bind (:map my-keys-minor-mode-map
   ("C-c z" . writeroom-mode)))
-  #+end_src
+  #+END_SRC
 
   #+BEGIN_SRC emacs-lisp
 (setq org-src-preserve-indentation nil
@@ -2085,6 +2084,6 @@ Vim keybindings with ~evil-toggle-key~
 (add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
   #+END_SRC
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode)
-  #+end_src
+  #+END_SRC

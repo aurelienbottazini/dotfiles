@@ -380,24 +380,24 @@ Vim keybindings with ~evil-toggle-key~
    | #56944f | 362u               |
    | #f1f2f1 | 11-0601 tpx        |
    | #e8eae8 | 11-4800 tpx        |
-   | #dad9d6 | cool g r a y 1 u   |
-   | #c5c5c5 | cool g r a y 3 u   |
-   | #adaeb0 | cool g r a y 5 u   |
-   | #939598 | cool g r a y 8 u   |
+   | #dad9d6 | cool gray 1u       |
+   | #c5c5c5 | cool gray 3u       |
+   | #adaeb0 | cool gray 5u       |
+   | #939598 | cool gray 8u       |
    | #e4f4e9 | 9063u              |
    | #c5f2e6 | 9520u              |
    | #ffcfd8 | 9284u              |
    | #69615f | 440u               |
    | #4c4e56 | black7u            |
    | #885a61 | 195u               |
-   | #f65058 | r e d 032u         |
+   | #f65058 | red 032u           |
    | #bc3e44 | 3517u              |
    | #34855b | 348u               |
    | #546758 | 350u               |
    | #4982cf | 285u               |
-   | #3a499c | Reflex B l u e U   |
-   | #65428a | medium p u r p l e |
-*** One Half
+   | #3a499c | Reflex Blue U      |
+   | #65428a | medium purple      |
+** One Half
 **** Dark
 
      | Color Name     | Hex             |
@@ -444,7 +444,7 @@ Vim keybindings with ~evil-toggle-key~
      | "white"        | "#FAFAFA" |
      | "yellow"       | "#C18401" |
 
-*** Tronesque
+** Tronesque
     #081724
     #033340
     #1d5483

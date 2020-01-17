@@ -327,7 +327,6 @@ Vim keybindings with ~evil-toggle-key~
 
   ;; wrap lines when they reach the end of buffer
 
-  (global-visual-line-mode)
   ;; file path in frame title
   (setq frame-title-format
         '((:eval (if (buffer-file-name)
@@ -892,7 +891,13 @@ Vim keybindings with ~evil-toggle-key~
    ;;   (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
    ;; (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
-   (define-key my-keys-minor-mode-map (kbd "C-c oh") 'evil-search-highlight-persist-remove-all)
+
+   (define-key my-keys-minor-mode-map (kbd "C-c h") 'highlight-symbol-at-point)
+   (define-key my-keys-minor-mode-map (kbd "C-c H") 'unhighlight-regexp)
+   (define-key my-keys-minor-mode-map (kbd "C-c oh") '(lambda ()
+     (interactive)
+     (hi-lock-mode -1)
+     (evil-search-highlight-persist-remove-all)))
    (defun hide-line-numbers ()
      (interactive)
      (setq display-line-numbers (quote nil)))

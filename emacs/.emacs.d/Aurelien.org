@@ -21,6 +21,15 @@ Vim keybindings with ~evil-toggle-key~
 (setq evil-toggle-key "C-c e")
 #+END_SRC
 
+
+#+BEGIN_SRC emacs-lisp
+(defun my-prog-mode-auto-fill-hook ()
+  (setq fill-column 80)
+  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+  (auto-fill-mode t))
+(add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
+#+END_SRC
+
 * Setup
   It is important to load custom settings first. Those are the ones
   managed by Emacs through customization menus. They can impact the
@@ -50,10 +59,10 @@ Vim keybindings with ~evil-toggle-key~
     (normal-top-level-add-subdirs-to-load-path))
   #+end_src
 
-  Emacs modes have the tendency to be pretty aggressive when it comes
-  to binding keys. Instead of relying on Emacs built-in
-  ~global-set-key~ and ~local-set-key~ I prefer to have my own key-map
-  with a ~defadvice~ to ensure my keys are not overridden.
+  I use a special keymap ~my-keys-minor-mode-map~ where i store my global keybindings.
+  This is mainly to use a ~defadvice~ to make sure that any key I
+  define in my keymap as priority over ones defined elsewhere by
+  built-in Emacs modes or 3rd party packages
   #+begin_src emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode
@@ -70,74 +79,7 @@ Vim keybindings with ~evil-toggle-key~
   (ad-activate 'load)
   #+end_src
 
-* Cute functions
-  #+begin_src emacs-lisp
-    (defun sudo ()
-      "Use TRAMP to `sudo' the file for current buffer."
-      (interactive)
-      (when buffer-file-name
-        (find-alternate-file
-         (concat "/sudo:root@localhost:"
-                 buffer-file-name))))
-
-    (defun org-strike-header ()
-      "Strikes current org-header using + markers."
-      (interactive)
-      (beginning-of-line)
-      (re-search-forward "\*+ ")
-      (insert "+")
-      (end-of-line)
-      (insert "+"))
-
-    (defun my-reload-dir-locals-for-current-buffer ()
-      "Reloads dir locals for the current buffer."
-      (interactive)
-      (let ((enable-local-variables :all))
-        (hack-dir-local-variables-non-file-buffer)))
-
-    (defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
-      "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
-      (interactive)
-      (let ((dir default-directory))
-        (dolist (buffer (buffer-list))
-          (with-current-buffer buffer
-            (when (equal default-directory dir))
-            (my-reload-dir-locals-for-current-buffer)))))
-
-    (defun filepath-with-line-number-for-current-buffer ()
-      "Return a string with Buffer-file-name:line-number.
-           Make it easier to prepare commands for tools like rspec"
-      (interactive)
-      (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
-
-    (defun add-date-to-filename ()
-      "Add current date in front of filename for current buffer."
-      (interactive)
-      (let* ((date (format-time-string "%Y-%m-%d"))
-             (buffer-file (buffer-file-name))
-             (new-file-name (concat (file-name-directory buffer-file)
-                                    date
-                                    "-"
-                                    (file-name-nondirectory buffer-file)))
-             )
-        (rename-file buffer-file new-file-name)
-        (set-visited-file-name new-file-name)
-        (save-buffer)))
-
-    (defun toggle-html-export-on-save ()
-      "Enable or disable export HTML when saving current buffer."
-      (interactive)
-      (when (not (eq major-mode 'org-mode))
-        (error "Not an org-mode file!"))
-      (if (memq 'org-html-export-to-html after-save-hook)
-          (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
-                 (message "Disabled org html export on save"))
-        (add-hook 'after-save-hook 'org-publish-current-file nil t)
-        (set-buffer-modified-p t)
-        (message "Enabled org html export on save")))
-  #+end_src
-
-* Initialize Packages
+* Package library initialization
   #+begin_src emacs-lisp
     (setq package-archives
           '(("melpa"       . "http://melpa.milkbox.net/packages/")
@@ -160,17 +102,79 @@ Vim keybindings with ~evil-toggle-key~
     (setq use-package-always-ensure t)
   #+end_src
 
-  You can get the time it took for emacs to start with
+  You can get the time it took for emacs to start with.
+  It ~c-c c-c~ and it will show in the echo area.
   #+begin_src emacs-lisp :tangle no
   (emacs-init-time)
   #+end_src
 
+* Local variables
+  Local variables are useful to customize your settings for different
+  projects/directories. The built in ~make-local-variable~ is
+  convenient in helping you create those variables.
+
+  I find annoying when I edit those local variables
+  that they are not picked up automatically for open buffers. Those two
+  functions help me with the reloading of those locals.
+  #+BEGIN_SRC emacs-lisp
+    (defun my-reload-dir-locals-for-current-buffer ()
+      "Reloads dir locals for the current buffer."
+      (interactive)
+      (let ((enable-local-variables :all))
+        (hack-dir-local-variables-non-file-buffer)))
+
+    (defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
+      "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
+      (interactive)
+      (let ((dir default-directory))
+        (dolist (buffer (buffer-list))
+          (with-current-buffer buffer
+            (when (equal default-directory dir))
+            (my-reload-dir-locals-for-current-buffer)))))
+  #+END_SRC
+
+* Utility functions
   #+begin_src emacs-lisp
-    (defun my-prog-mode-auto-fill-hook ()
-      (setq fill-column 80)
-      (set (make-local-variable 'comment-auto-fill-only-comments) t)
-      (auto-fill-mode t))
-    (add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
+    (defun sudo ()
+      "Use TRAMP to `sudo' the file for current buffer."
+      (interactive)
+      (when buffer-file-name
+        (find-alternate-file
+         (concat "/sudo:root@localhost:"
+                 buffer-file-name))))
+
+    (defun filepath-with-line-number-for-current-buffer ()
+      "Return a string with Buffer-file-name:line-number.
+           Make it easier to prepare commands for tools like rspec"
+      (interactive)
+      (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
+
+    (defun add-date-to-filename ()
+      "Add current date in front of filename for current buffer. This is useful with some
+      Blog tools like Jekyll to publish new articles."
+      (interactive)
+      (let* ((date (format-time-string "%Y-%m-%d"))
+             (buffer-file (buffer-file-name))
+             (new-file-name (concat (file-name-directory buffer-file)
+                                    date
+                                    "-"
+                                    (file-name-nondirectory buffer-file)))
+             )
+        (rename-file buffer-file new-file-name)
+        (set-visited-file-name new-file-name)
+        (save-buffer)))
+
+    (defun toggle-html-export-on-save ()
+      "Enable or disable HTML export when saving current org buffer."
+      (interactive)
+      (when (not (eq major-mode 'org-mode))
+        (error "Not an org-mode file!"))
+      (if (memq 'org-html-export-to-html after-save-hook)
+          (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
+                 (message "Disabled org html export on save"))
+        (add-hook 'after-save-hook 'org-publish-current-file nil t)
+        (set-buffer-modified-p t)
+        (message "Enabled org html export on save")))
   #+end_src
 
 * Better Defaults
@@ -308,32 +312,30 @@ Vim keybindings with ~evil-toggle-key~
    #+END_SRC
 * GUI
   #+begin_src emacs-lisp
-    (blink-cursor-mode 0)
-    (column-number-mode)
+  (blink-cursor-mode 0)
+  (column-number-mode)
 
-    (electric-indent-mode t)
+  (electric-indent-mode t)
 
-    (electric-pair-mode)
-    (defun inhibit-electric-pair-mode-in-minibuffer (char)
-      (minibufferp))
-    (setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
+  (electric-pair-mode)
+  (defun inhibit-electric-pair-mode-in-minibuffer (char)
+    (minibufferp))
+  (setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
 
-    ;; wrap lines when they reach the end of buffer
-    ;; trying to toggle this only manually to see if i like it
-    ;; (global-visual-line-mode)
+  ;; wrap lines when they reach the end of buffer
 
-    ;; file path in frame title
-    (setq frame-title-format
-          '((:eval (if (buffer-file-name)
-                       (abbreviate-file-name (buffer-file-name))
-                     "%b"))))
+  ;; file path in frame title
+  (setq frame-title-format
+        '((:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                   "%b"))))
 
 
-    (define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
-    (setq blink-matching-paren 'jump-offscreen)
+  (define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
+  (setq blink-matching-paren 'jump-offscreen)
 
-    ;; makes fringe big enough on linux with HDPI
-    (fringe-mode 20)
+  ;; makes fringe big enough on linux with HDPI
+  (fringe-mode 20)
   #+end_src
 
   #+BEGIN_SRC emacs-lisp
@@ -375,24 +377,24 @@ Vim keybindings with ~evil-toggle-key~
    | #56944f | 362u               |
    | #f1f2f1 | 11-0601 tpx        |
    | #e8eae8 | 11-4800 tpx        |
-   | #dad9d6 | cool g r a y 1 u   |
-   | #c5c5c5 | cool g r a y 3 u   |
-   | #adaeb0 | cool g r a y 5 u   |
-   | #939598 | cool g r a y 8 u   |
+   | #dad9d6 | cool gray 1u       |
+   | #c5c5c5 | cool gray 3u       |
+   | #adaeb0 | cool gray 5u       |
+   | #939598 | cool gray 8u       |
    | #e4f4e9 | 9063u              |
    | #c5f2e6 | 9520u              |
    | #ffcfd8 | 9284u              |
    | #69615f | 440u               |
    | #4c4e56 | black7u            |
    | #885a61 | 195u               |
-   | #f65058 | r e d 032u         |
+   | #f65058 | red 032u           |
    | #bc3e44 | 3517u              |
    | #34855b | 348u               |
    | #546758 | 350u               |
    | #4982cf | 285u               |
-   | #3a499c | Reflex B l u e U   |
-   | #65428a | medium p u r p l e |
-*** One Half
+   | #3a499c | Reflex Blue U      |
+   | #65428a | medium purple      |
+** One Half
 **** Dark
 
      | Color Name     | Hex             |
@@ -439,7 +441,7 @@ Vim keybindings with ~evil-toggle-key~
      | "white"        | "#FAFAFA" |
      | "yellow"       | "#C18401" |
 
-*** Tronesque
+** Tronesque
     #081724
     #033340
     #1d5483
@@ -886,7 +888,13 @@ Vim keybindings with ~evil-toggle-key~
    ;;   (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
 
    ;; (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
-   (define-key my-keys-minor-mode-map (kbd "C-c oh") 'evil-search-highlight-persist-remove-all)
+
+   (define-key my-keys-minor-mode-map (kbd "C-c h") 'highlight-symbol-at-point)
+   (define-key my-keys-minor-mode-map (kbd "C-c H") 'unhighlight-regexp)
+   (define-key my-keys-minor-mode-map (kbd "C-c oh") '(lambda ()
+     (interactive)
+     (hi-lock-mode -1)
+     (evil-search-highlight-persist-remove-all)))
    (defun hide-line-numbers ()
      (interactive)
      (setq display-line-numbers (quote nil)))
@@ -897,7 +905,6 @@ Vim keybindings with ~evil-toggle-key~
    (define-key my-keys-minor-mode-map (kbd "C-c oll") 'show-line-numbers)
    (define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
    (define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
-   (define-key my-keys-minor-mode-map (kbd "C-c os") 'org-strike-header)
    (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
    (use-package rainbow-mode
      :diminish rainbow-mode

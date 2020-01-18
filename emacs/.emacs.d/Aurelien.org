@@ -570,11 +570,12 @@ Vim keybindings with ~evil-toggle-key~.
 
     (add-hook 'ruby-mode-hook 'subword-mode)
 
+    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
     (use-package ruby-interpolation
       :diminish ruby-interpolation-mode)
     (use-package ruby-end
       :diminish ruby-end-mode)
-    (use-package rspec-mode)
+    (use-package rspec-mode))
   #+END_SRC
 
   I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freebie-xmpfilter/][Ruby Tapas.]] Hit ~M-;~ twice adds a special
@@ -854,55 +855,6 @@ Vim keybindings with ~evil-toggle-key~.
     :modes (cfn-mode))
   (add-to-list 'flycheck-checkers 'cfn-lint))
 
-  #+END_SRC
-* Run for mode
-  #+BEGIN_SRC emacs-lisp
-(defun run-for-mode ()
-    "Run interactive command for the current buffer programming mode"
-    (interactive)
-    (cond
-     ((equal major-mode 'org-mode)
-      (org-babel-execute-src-block))
-     ((equal major-mode 'ruby-mode)
-      (xmp))
-     ((equal major-mode 'enh-ruby-mode)
-      (xmp))
-     ((equal major-mode 'clojure-mode)
-      (cider-eval-defun-at-point))
-     ((equal major-mode 'clojurescript-mode)
-      (cider-eval-defun-at-point))
-     ((or (equal major-mode 'emacs-lisp-mode) (equal major-mode 'lisp-interaction-mode))
-      (eval-defun nil))
-     ((equal major-mode 'js2-mode)
-      (run-node-on-buffer))
-     (t (error "No run command for that mode"))))
-
-
-(defun run-bigger-for-mode ()
-    "Run interactive command for the current buffer programming mode"
-    (interactive)
-    (cond
-     ((equal major-mode 'org-mode)
-      (org-publish-current-file))
-     ((equal major-mode 'ruby-mode)
-      (xmp))
-     ((equal major-mode 'enh-ruby-mode)
-      (xmp))
-     ((equal major-mode 'clojure-mode)
-      (cider-load-buffer))
-     ((equal major-mode 'clojurescript-mode)
-      (cider-load-buffer))
-     ((or (equal major-mode 'emacs-lisp-mode) (equal major-mode 'lisp-interaction-mode))
-      (eval-defun nil))
-     ((equal major-mode 'js2-mode)
-      (progn
-        (js-comint-reset-repl)
-        (js-comint-send-buffer)
-        (other-window -1)))
-     (t (error "No run command for that mode"))))
-
-(define-key my-keys-minor-mode-map (kbd "C-c x") 'run-for-mode)
-(define-key my-keys-minor-mode-map (kbd "C-c X") 'run-bigger-for-mode)
   #+END_SRC
 * Bindings
 ** General
@@ -1248,7 +1200,7 @@ Vim keybindings with ~evil-toggle-key~.
    (require 'ox-publish)
    (setq system-time-locale "C") ;; make sure time local is in english when exporting
    (setq org-html-validation-link nil)
-      #+END_SRC
+   #+END_SRC
 
 ** Feedback
 

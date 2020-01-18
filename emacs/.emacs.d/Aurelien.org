@@ -629,6 +629,12 @@ Vim keybindings with ~evil-toggle-key~.
   ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
   #+END_SRC
 * JavaScript
+  Node compilation errors messages are not understood by Emacs by
+  default. All that's needed to make it work is to add a new regex
+  describing what are the components of the messages.
+
+  After running the compile command, you can navigate through the
+  errors with ~next-error~ and ~previous-error~
   #+BEGIN_SRC emacs-lisp
   (require 'compile)
   (setq compilation-error-regexp-alist-alist
@@ -639,33 +645,32 @@ Vim keybindings with ~evil-toggle-key~.
               compilation-error-regexp-alist-alist))
   (setq compilation-error-regexp-alist
         (cons 'node compilation-error-regexp-alist))
+
   (add-hook 'js2-mode-hook
             (lambda ()
               (set (make-local-variable 'compile-command)
                    (format "node %s" (file-name-nondirectory buffer-file-name)))))
 
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
   (setq js-indent-level 2)
 
   (use-package js2-mode
     :config
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
-    (setq js2-mode-show-parse-errors nil)
-    (setq js2-mode-show-strict-warnings nil)
-
-    (setq-default
-     ;; js2-mode
-     js2-basic-offset 2
-     ;; web-mode
-     css-indent-offset 2
-     web-mode-markup-indent-offset 2
-     web-mode-script-padding 0
-     web-mode-css-indent-offset 2
-     web-mode-style-padding 2
-     web-mode-code-indent-offset 2
-     web-mode-attr-indent-offset 2)
-
-    (setq js2-highlight-level 3)
+    (setq js2-mode-show-parse-errors nil
+          js2-mode-show-strict-warnings nil
+          js2-basic-offset 2
+          js2-highlight-level 3
+          css-indent-offset 2
+          web-mode-markup-indent-offset 2
+          web-mode-script-padding 0
+          web-mode-css-indent-offset 2
+          web-mode-style-padding 2
+          web-mode-code-indent-offset 2
+          web-mode-attr-indent-offset 2)
     :config
     (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
     (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
@@ -673,11 +678,6 @@ Vim keybindings with ~evil-toggle-key~.
     (use-package import-js)
 
     (use-package xref-js2)
-
-    ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
-    ;; unbind it.
-    (define-key js-mode-map (kbd "M-.") nil)
-
     (add-hook 'js2-mode-hook (lambda ()
                                (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
     (use-package prettier-js
@@ -691,31 +691,31 @@ Vim keybindings with ~evil-toggle-key~.
       (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
       (add-hook 'js2-mode-hook 'prettier-js-mode))
 
-  (defun enable-minor-mode (my-pair)
-    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-    (if (buffer-file-name)
-        (if (string-match (car my-pair) buffer-file-name)
-            (funcall (cdr my-pair)))))
+    (defun enable-minor-mode (my-pair)
+      "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+      (if (buffer-file-name)
+          (if (string-match (car my-pair) buffer-file-name)
+              (funcall (cdr my-pair)))))
 
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.jsx?\\'" . prettier-js-mode))))
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (enable-minor-mode
+                                  '("\\.jsx?\\'" . prettier-js-mode))))
 
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.vue?\\'" . prettier-js-mode))))
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (enable-minor-mode
+                                  '("\\.vue?\\'" . prettier-js-mode))))
 
-  (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
-  (defun my-jsx-hook ()
-    "My Hook for JSX Files"
-    (interactive)
-    (web-mode)
-    (web-mode-set-content-type "jsx")
-    (setq imenu-create-index-function 'auray-js-imenu-make-index)
-    (flycheck-select-checker 'javascript-eslint)
-    (emmet-mode)
-    (setq emmet-expand-jsx-className? t)
-    (tern-mode t))
+    (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+    (defun my-jsx-hook ()
+      "My Hook for JSX Files"
+      (interactive)
+      (web-mode)
+      (web-mode-set-content-type "jsx")
+      (setq imenu-create-index-function 'auray-js-imenu-make-index)
+      (flycheck-select-checker 'javascript-eslint)
+      (emmet-mode)
+      (setq emmet-expand-jsx-className? t)
+      (tern-mode t))
     )
 
   (use-package context-coloring
@@ -723,7 +723,7 @@ Vim keybindings with ~evil-toggle-key~.
     :diminish context-coloring-mode
     :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
     :config
-      (add-hook 'js2-mode-hook #'context-coloring-mode))
+    (add-hook 'js2-mode-hook #'context-coloring-mode))
 
   (use-package json-mode
     :mode "\\.json\\'"

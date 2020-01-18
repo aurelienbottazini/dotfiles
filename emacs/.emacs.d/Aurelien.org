@@ -135,46 +135,66 @@ Vim keybindings with ~evil-toggle-key~.
 
 * Utility functions
   #+BEGIN_SRC emacs-lisp
-    (defun sudo ()
-      "Use TRAMP to `sudo' the file for current buffer."
-      (interactive)
-      (when buffer-file-name
-        (find-alternate-file
-         (concat "/sudo:root@localhost:"
-                 buffer-file-name))))
+  (defun sudo ()
+    "Use TRAMP to `sudo' the file for current buffer."
+    (interactive)
+    (when buffer-file-name
+      (find-alternate-file
+       (concat "/sudo:root@localhost:"
+               buffer-file-name))))
 
-    (defun filepath-with-line-number-for-current-buffer ()
-      "Return a string with Buffer-file-name:line-number.
-           Make it easier to prepare commands for tools like rspec"
-      (interactive)
-      (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
+  (defun enable-minor-mode (my-pair)
+    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+    (if (buffer-file-name)
+        (if (string-match (car my-pair) buffer-file-name)
+            (funcall (cdr my-pair)))))
 
-    (defun add-date-to-filename ()
-      "Add current date in front of filename for current buffer. This is useful with some
-      Blog tools like Jekyll to publish new articles."
-      (interactive)
-      (let* ((date (format-time-string "%Y-%m-%d"))
-             (buffer-file (buffer-file-name))
-             (new-file-name (concat (file-name-directory buffer-file)
-                                    date
-                                    "-"
-                                    (file-name-nondirectory buffer-file)))
-             )
-        (rename-file buffer-file new-file-name)
-        (set-visited-file-name new-file-name)
-        (save-buffer)))
+  (defun filepath-with-line-number-for-current-buffer ()
+    "Return a string with Buffer-file-name:line-number.
+               Make it easier to prepare commands for tools like rspec"
+    (interactive)
+    (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
 
-    (defun toggle-html-export-on-save ()
-      "Enable or disable HTML export when saving current org buffer."
-      (interactive)
-      (when (not (eq major-mode 'org-mode))
-        (error "Not an org-mode file!"))
-      (if (memq 'org-html-export-to-html after-save-hook)
-          (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
-                 (message "Disabled org html export on save"))
-        (add-hook 'after-save-hook 'org-publish-current-file nil t)
-        (set-buffer-modified-p t)
-        (message "Enabled org html export on save")))
+  (defun add-date-to-filename ()
+    "Add current date in front of filename for current buffer. This is useful with some
+          Blog tools like Jekyll to publish new articles."
+    (interactive)
+    (let* ((date (format-time-string "%Y-%m-%d"))
+           (buffer-file (buffer-file-name))
+           (new-file-name (concat (file-name-directory buffer-file)
+                                  date
+                                  "-"
+                                  (file-name-nondirectory buffer-file)))
+           )
+      (rename-file buffer-file new-file-name)
+      (set-visited-file-name new-file-name)
+      (save-buffer)))
+
+  (defun toggle-html-export-on-save ()
+    "Enable or disable HTML export when saving current org buffer."
+    (interactive)
+    (when (not (eq major-mode 'org-mode))
+      (error "Not an org-mode file!"))
+    (if (memq 'org-html-export-to-html after-save-hook)
+        (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
+               (message "Disabled org html export on save"))
+      (add-hook 'after-save-hook 'org-publish-current-file nil t)
+      (set-buffer-modified-p t)
+      (message "Enabled org html export on save")))
+
+
+  (defun abo-jump-to-note-file ()
+    "Jump to org note file for current buffer"
+    (interactive)
+    (find-file **local-note-file**))
+  (define-key my-keys-minor-mode-map "\C-cn" 'abo-jump-to-note-file)
+
+  (defun abo-change-line-endings-to-unix ()
+    (let ((coding-str (symbol-name buffer-file-coding-system)))
+      (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+        (set-buffer-file-coding-system 'unix))))
+
+  (add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
   #+END_SRC
 
 * Better Defaults
@@ -264,6 +284,9 @@ Vim keybindings with ~evil-toggle-key~.
 
     (prefer-coding-system 'utf-8)
     (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
+
+    ;; gives each line only one visual line and don't show a continuation on next line
+    (set-default 'truncate-lines t)
   #+END_SRC
 
   Sentences end with one space after point. The default two space is
@@ -574,10 +597,19 @@ Vim keybindings with ~evil-toggle-key~.
               (insert "=>"))
           ad-do-it))))
   #+END_SRC
+* Go
+
+  #+BEGIN_SRC emacs-lisp
+  (use-package go-mode)
+  #+END_SRC
+
 * HTML
+
   #+BEGIN_SRC emacs-lisp
   (use-package web-mode
     :mode "\\.html\\'")
+(use-package web-mode
+  :mode "\\.gohtml\\'")
 
   (use-package emmet-mode
   :after evil
@@ -601,6 +633,7 @@ Vim keybindings with ~evil-toggle-key~.
               (lambda ()
                 (emmet-mode))))
   #+END_SRC
+
 * CSS
   #+BEGIN_SRC emacs-lisp
   (use-package scss-mode
@@ -654,112 +687,134 @@ Vim keybindings with ~evil-toggle-key~.
   #+END_SRC
 
   #+BEGIN_SRC emacs-lisp
-  (setq js-indent-level 2)
+    (setq js-indent-level 2)
 
-  (use-package js2-mode
-    :config
-    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
-    (setq js2-mode-show-parse-errors nil
-          js2-mode-show-strict-warnings nil
-          js2-basic-offset 2
-          js2-highlight-level 3
-          css-indent-offset 2
-          web-mode-markup-indent-offset 2
-          web-mode-script-padding 0
-          web-mode-css-indent-offset 2
-          web-mode-style-padding 2
-          web-mode-code-indent-offset 2
-          web-mode-attr-indent-offset 2)
-    :config
-    (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-    (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
-
-    (use-package import-js)
-
-    (use-package xref-js2)
-    (add-hook 'js2-mode-hook (lambda ()
-                               (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
-    (use-package prettier-js
-      :diminish prettier-js-mode
+    (use-package js2-mode
       :config
-      (setq prettier-args '(
-                            "--trailing-comma" "es5"
-                            "--single-quote" "true"
-                            )
-            prettier-js-command "prettier")
-      (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-      (add-hook 'js2-mode-hook 'prettier-js-mode))
+      (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+      (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
+      (setq js2-mode-show-parse-errors nil
+            js2-mode-show-strict-warnings nil
+            js2-basic-offset 2
+            js2-highlight-level 3
+            css-indent-offset 2
+            web-mode-markup-indent-offset 2
+            web-mode-script-padding 0
+            web-mode-css-indent-offset 2
+            web-mode-style-padding 2
+            web-mode-code-indent-offset 2
+            web-mode-attr-indent-offset 2)
+      :config
+      (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+      (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
 
-    (defun enable-minor-mode (my-pair)
-      "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-      (if (buffer-file-name)
-          (if (string-match (car my-pair) buffer-file-name)
-              (funcall (cdr my-pair)))))
+      (use-package xref-js2
+        :init
+        (setq xref-js2-search-program 'rg)
+        :config
+        (add-hook 'js2-mode-hook (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 
-    (add-hook 'web-mode-hook #'(lambda ()
-                                 (enable-minor-mode
-                                  '("\\.jsx?\\'" . prettier-js-mode))))
+    (use-package json-mode
+      :mode "\\.json\\'"
+      :mode "\\.eslintrc\\'")
 
-    (add-hook 'web-mode-hook #'(lambda ()
-                                 (enable-minor-mode
-                                  '("\\.vue?\\'" . prettier-js-mode))))
+    (use-package coffee-mode
+      :mode "\\.coffee\\'"
+      :config
+      (use-package highlight-indentation)
+      (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+      (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+      (custom-set-variables '(coffee-tab-width 2)))
 
-    (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
-    (defun my-jsx-hook ()
-      "My Hook for JSX Files"
-      (interactive)
-      (web-mode)
-      (web-mode-set-content-type "jsx")
-      (setq imenu-create-index-function 'auray-js-imenu-make-index)
-      (flycheck-select-checker 'javascript-eslint)
-      (emmet-mode)
-      (setq emmet-expand-jsx-className? t)
-      (tern-mode t))
-    )
+    (use-package typescript-mode
+      :mode "\\.ts\\'")
+  #+END_SRC
 
+  Auto-format JavaScript on save
+  #+BEGIN_SRC emacs-lisp
+  (use-package prettier-js
+    :diminish prettier-js-mode
+    :config
+    (setq prettier-args '(
+                          "--trailing-comma" "es5"
+                          "--single-quote" "true"
+                          )
+          prettier-js-command "prettier")
+    (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+    (add-hook 'js2-mode-hook 'prettier-js-mode))
+  #+END_SRC
+
+  Context-coloring highlights code based on closures.
+  This gives a refreshing view of the code and helps using closures
+  efficiently.
+  #+BEGIN_SRC emacs-lisp
   (use-package context-coloring
     :ensure t
     :diminish context-coloring-mode
     :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
     :config
     (add-hook 'js2-mode-hook #'context-coloring-mode))
-
-  (use-package json-mode
-    :mode "\\.json\\'"
-    :mode "\\.eslintrc\\'")
-
-  (use-package coffee-mode
-    :mode "\\.coffee\\'"
-    :config
-    (use-package highlight-indentation)
-    (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-    (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-    (custom-set-variables '(coffee-tab-width 2)))
-
-  (use-package typescript-mode
-    :mode "\\.ts\\'")
   #+END_SRC
+
+** React
+
+   The following shows a pretty interesting way to quickly create
+   major modes _magically_. It parses the file to detect if this is a
+   react file. If yes I run a function to use web-mode and make some
+   adjustments for JSX.
+   #+BEGIN_SRC emacs-lisp
+   (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+   (defun my-jsx-hook ()
+     "Set web mode with adjustments for JSX"
+     (interactive)
+     (web-mode)
+     (web-mode-set-content-type "jsx")
+     (setq imenu-create-index-function 'auray-js-imenu-make-index
+           emmet-expand-jsx-className? t)
+     (flycheck-select-checker 'javascript-eslint)
+     (emmet-mode)))
+
+   (use-package prettier
+     :config
+     (add-hook 'web-mode-hook #'(lambda ()
+                                  (enable-minor-mode
+                                   '("\\.jsx?\\'" . prettier-js-mode)))))
+   #+END_SRC
 ** Vue
    #+BEGIN_SRC emacs-lisp
-  (use-package web-mode
-    :mode "\\.vue\\'"
-    :config
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-script-padding 0)
-    (defun jjpandari/merge-imenu (index-fun)
-      (interactive)
-      (let ((mode-imenu (funcall index-fun))
-            (custom-imenu (imenu--generic-function imenu-generic-expression)))
-        (append custom-imenu mode-imenu)))
+   (use-package web-mode
+     :mode "\\.vue\\'"
+     :config
+     (setq web-mode-markup-indent-offset 2)
+     (setq web-mode-css-indent-offset 2)
+     (setq web-mode-code-indent-offset 2)
+     (setq web-mode-script-padding 0)
+     (defun jjpandari/merge-imenu (index-fun)
+       (interactive)
+       (let ((mode-imenu (funcall index-fun))
+             (custom-imenu (imenu--generic-function imenu-generic-expression)))
+         (append custom-imenu mode-imenu)))
 
-    (add-hook 'web-mode-hook
-              (lambda ()
-                (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index))))))
+     (use-package prettier
+       :config
+       (add-hook 'web-mode-hook #'(lambda ()
+                                    (enable-minor-mode
+                                     '("\\.vue?\\'" . prettier-js-mode)))))
 
+     (add-hook 'web-mode-hook
+               (lambda ()
+                 (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index))))))
+
+   (require 'aurayb-narrow-indirect-vue)
+   ;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
+   ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
+   ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+   ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
    #+END_SRC
+* Markdown
+  #+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode)
+  #+END_SRC
 * Flycheck
   #+BEGIN_SRC emacs-lisp
   (use-package flycheck
@@ -778,7 +833,6 @@ Vim keybindings with ~evil-toggle-key~.
         (when (and eslint (file-executable-p eslint))
           (setq-local flycheck-javascript-eslint-executable eslint))))
     (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
 
   (define-derived-mode cfn-mode yaml-mode
     "Cloudformation"
@@ -800,11 +854,6 @@ Vim keybindings with ~evil-toggle-key~.
     :modes (cfn-mode))
   (add-to-list 'flycheck-checkers 'cfn-lint))
 
-  (require 'aurayb-narrow-indirect-vue)
-  ;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
-  ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
-  ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
-  ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
   #+END_SRC
 * Run for mode
   #+BEGIN_SRC emacs-lisp
@@ -863,7 +912,7 @@ Vim keybindings with ~evil-toggle-key~.
    (define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
    #+END_SRC
 
-   Shows key combination helper in minibuffer
+   Shows a key combination helper in the minibuffer
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
        :diminish which-key-mode
@@ -871,8 +920,9 @@ Vim keybindings with ~evil-toggle-key~.
        (which-key-mode))
    #+END_SRC
 
-   Combined with C-M-c (exit-recursive-edit) allows to stop doing
-   something, do something else and come back to it later.
+   ~recursived-edit~, combined with C-M-c (exit-recursive-edit),
+   allows to stop doing something momentarily, do something else and
+   come back to it later.
    #+BEGIN_SRC emacs-lisp
     (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
    #+END_SRC
@@ -907,15 +957,6 @@ Vim keybindings with ~evil-toggle-key~.
    (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
 
    (define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
-   ;;(use-package define-word
-   ;;  :config
-   ;;  (define-key my-keys-minor-mode-map (kbd "<f6>") 'define-word-at-point))
-
-   ;; (defun lookup-synonyms (word)
-   ;;   (interactive (list (save-excursion (car (ispell-get-word nil)))))
-   ;;   (browse-url (format "http://en.wiktionary.org/wiki/%s" word)))
-
-   ;; (define-key my-keys-minor-mode-map (kbd "<f7>") 'lookup-synonyms)
 
    (define-key my-keys-minor-mode-map (kbd "C-c h") 'highlight-symbol-at-point)
    (define-key my-keys-minor-mode-map (kbd "C-c H") 'unhighlight-regexp)
@@ -923,10 +964,12 @@ Vim keybindings with ~evil-toggle-key~.
      (interactive)
      (hi-lock-mode -1)
      (evil-search-highlight-persist-remove-all)))
+
    (defun hide-line-numbers ()
      (interactive)
      (setq display-line-numbers (quote nil)))
    (define-key my-keys-minor-mode-map (kbd "C-c olh") 'hide-line-numbers)
+
    (defun show-line-numbers ()
      (interactive)
      (setq display-line-numbers (quote absolute)))
@@ -934,12 +977,12 @@ Vim keybindings with ~evil-toggle-key~.
    (define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
    (define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
    (define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
+
    (use-package rainbow-mode
      :diminish rainbow-mode
      :bind (:map my-keys-minor-mode-map
                  ("C-c or" . rainbow-mode)))
-   ;; gives each line only one visual line and don't show a continuation on next line
-   (set-default 'truncate-lines t)
+
    (define-key my-keys-minor-mode-map (kbd "C-c ot") 'toggle-truncate-lines)
 
    (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
@@ -961,6 +1004,7 @@ Vim keybindings with ~evil-toggle-key~.
        :config
        (drag-stuff-global-mode t))
    #+END_SRC
+
    #+BEGIN_SRC emacs-lisp
   (use-package key-chord
     :after evil
@@ -974,9 +1018,10 @@ Vim keybindings with ~evil-toggle-key~.
       :config
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
    #+END_SRC
+
 * Completion
 
-  #+BEGIN_SRC emacs-lisp :results value
+  #+BEGIN_SRC emacs-lisp
    (use-package company
      :commands (company-mode global-company-mode company-complete
                              company-complete-common company-manual-begin company-grab-line)
@@ -1024,7 +1069,9 @@ Vim keybindings with ~evil-toggle-key~.
      (autoload 'company-gtags "company-gtags")
      (autoload 'company-ispell "company-ispell")
   #+END_SRC
+
 * Notes
+
   Some people switch to Emacs just to use org-mode.
 
   It is one of the best tool for note taking and writing
@@ -1061,7 +1108,6 @@ Vim keybindings with ~evil-toggle-key~.
 
 ** Capture Ideas
 
-   This is a most important binding.
    ~C-c l~ to store a link and ~C-c C-l~ to insert that link.
 
    If you have a selection, it will be part of the link and Emacs will
@@ -1082,6 +1128,8 @@ Vim keybindings with ~evil-toggle-key~.
      (add-hook 'org-mode-hook 'palimpsest-mode))
    #+END_SRC
 
+   org-capture allows to set up templates for quick note taking.
+   This is a must to capture ideas quickly.
    #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
            '(("n" "Notes" entry (file+headline **local-note-file** "Inbox") "* %?\n")))
@@ -1132,10 +1180,13 @@ Vim keybindings with ~evil-toggle-key~.
    (use-package ob-clojurescript) ;; requires [[https://github.com/anmonteiro/lumo][lumo]]
    (setq org-babel-clojure-backend 'cider)
    (require 'ob-js)
+   (setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
    (org-babel-do-load-languages 'org-babel-load-languages
                                 '((shell . t)
                                   (ditaa . t)))
    (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.11.0/libexec/ditaa-0.11.0-standalone.jar")
+
+
    #+END_SRC
 
 ** Publish
@@ -1146,53 +1197,60 @@ Vim keybindings with ~evil-toggle-key~.
    The HTML export has just the body. I then use a tool like ~jekyll~
    or ~hugo~ to make it accessible on internet.
    #+BEGIN_SRC emacs-lisp
-     (setq
-      time-stamp-active t
-      time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
-      time-stamp-format "%04y-%02m-%02d") ;
+   (setq
+    time-stamp-active t
+    time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
+    time-stamp-format "%04y-%02m-%02d") ;
 
-     (setq system-time-locale "C") ;; make sure time local is in english when exporting
-     (setq org-html-validation-link nil)
-     (setq org-publish-project-alist
-           '(
-             ("wiki-files"
-              :base-directory **local-writing-folder**
-              :base-extension "org"
-              :publishing-directory **local-published-folder**
-              :recursive t
-              :publishing-function org-html-publish-to-html
-              :headline-levels 4             ; Just the default for this project.
-              :auto-preamble t
-              :html-head nil
-              :html-head-extra nil
-              :body-only true
-              )
-             ;; ... add all the components here (see below)...
-             ;; ("wiki" :components ("wiki-files"))
-             )
-           org-export-with-toc nil
-           org-html-doctype "html5"
-           org-html-head nil
-           org-html-head-include-default-style nil
-           org-html-head-include-scripts nil
-           org-html-html5-fancy t
-           org-html-postamble nil
-           org-html-indent t)
+   (use-package writeroom-mode
+     :bind (:map my-keys-minor-mode-map
+                 ("C-c z" . writeroom-mode)))
 
-     (add-hook 'org-mode-hook
-               (lambda ()
-                 (setq-local time-stamp-start "Updated on[ 	]+\\\\?[\"<]+")
-                 (add-hook 'before-save-hook 'time-stamp nil 'local)))
+   (setq org-src-preserve-indentation nil
+         org-html-indent nil
+         org-edit-src-content-indentation 0)
+   (setq system-time-locale "C") ;; make sure time local is in english when exporting
+   (setq org-html-validation-link nil)
+   (setq org-publish-project-alist
+         '(
+           ("wiki-files"
+            :base-directory **local-writing-folder**
+            :base-extension "org"
+            :publishing-directory **local-published-folder**
+            :recursive t
+            :publishing-function org-html-publish-to-html
+            :headline-levels 4             ; Just the default for this project.
+            :auto-preamble t
+            :html-head nil
+            :html-head-extra nil
+            :body-only true
+            )
+           ;; ... add all the components here (see below)...
+           ;; ("wiki" :components ("wiki-files"))
+           )
+         org-export-with-toc nil
+         org-html-doctype "html5"
+         org-html-head nil
+         org-html-head-include-default-style nil
+         org-html-head-include-scripts nil
+         org-html-html5-fancy t
+         org-html-postamble nil
+         org-html-indent t)
 
-     (add-hook 'write-file-hooks 'time-stamp) ; update when saving
-     (require 'ox-publish)
-     (setq system-time-locale "C") ;; make sure time local is in english when exporting
-     (setq org-html-validation-link nil)
-   #+END_SRC
+   (add-hook 'org-mode-hook
+             (lambda ()
+               (setq-local time-stamp-start "Updated on[ 	]+\\\\?[\"<]+")
+               (add-hook 'before-save-hook 'time-stamp nil 'local)))
+
+   (add-hook 'write-file-hooks 'time-stamp) ; update when saving
+   (require 'ox-publish)
+   (setq system-time-locale "C") ;; make sure time local is in english when exporting
+   (setq org-html-validation-link nil)
+      #+END_SRC
 
 ** Feedback
 
-   Ispell buffer with ~s-:r~
+   Ispell buffer with ~F5~
    Ispell word with ~z =~
    #+BEGIN_SRC emacs-lisp
    (setq ispell-program-name "aspell")
@@ -1322,6 +1380,7 @@ Vim keybindings with ~evil-toggle-key~.
     (global-evil-search-highlight-persist t))
   #+END_SRC
 
+  I prefer to not start in normal mode with some modes.
   #+BEGIN_SRC emacs-lisp
   (use-package evil
     :ensure t
@@ -1339,7 +1398,7 @@ Vim keybindings with ~evil-toggle-key~.
     (evil-ex-define-cmd "W" 'save-buffer))
   #+END_SRC
 
-  Changes modeline color depending on Evil state, if buffer is
+  Changes mode-line color depending on Evil state, if buffer is
   modified etc...
   #+BEGIN_SRC emacs-lisp
      (lexical-let ((default-color (cons (face-background 'mode-line)
@@ -1363,21 +1422,21 @@ Vim keybindings with ~evil-toggle-key~.
 
   Make my cursor match my modeline color
   #+BEGIN_SRC emacs-lisp
-(use-package evil
-  :config
-    (setq evil-insert-state-cursor '(bar "#97d88a")
-          evil-visual-state-cursor '(box "#adcff1")
-          evil-emacs-state-cursor '(box "#ffa2cb")
-          evil-normal-state-cursor '(box "#bc3e44")))
+  (use-package evil
+    :config
+      (setq evil-insert-state-cursor '(bar "#97d88a")
+            evil-visual-state-cursor '(box "#adcff1")
+            evil-emacs-state-cursor '(box "#ffa2cb")
+            evil-normal-state-cursor '(box "#bc3e44")))
   #+END_SRC
 
   Add text objects to select, copy things based on indentation level.
   Use it with ~vii~ and ~yii~.
   #+BEGIN_SRC emacs-lisp
-(use-package evil-indent-plus
-  :after evil
-  :config
-  (evil-indent-plus-default-bindings))
+  (use-package evil-indent-plus
+    :after evil
+    :config
+    (evil-indent-plus-default-bindings))
   #+END_SRC
 
 * Search
@@ -1438,7 +1497,7 @@ Vim keybindings with ~evil-toggle-key~.
    #+BEGIN_SRC emacs-lisp
       (use-package avy
         :bind (:map my-keys-minor-mode-map
-               ("C-;" . avy-goto-char-timer)))
+               ("C-c ;" . avy-goto-char-timer)))
    #+END_SRC
 ** Search in project
 
@@ -1507,6 +1566,7 @@ Vim keybindings with ~evil-toggle-key~.
 
 ** Rename
 
+   ~iedit~ makes it very easy to
    Prefix with ~0~ to only match in current function.
    Prefix with universal argument to repeat the previous iedit match.
    Select region and press ~F6~ again to restrict to region.
@@ -1523,7 +1583,11 @@ Vim keybindings with ~evil-toggle-key~.
    ~evil-visual-block-mode~ or ~iedit~.
    #+BEGIN_SRC emacs-lisp
    (use-package multiple-cursors
-   :bind (:map my-keys-minor-mode-map ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
+     :bind (:map my-keys-minor-mode-map
+                 ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+                 ("C-c c a" . mc/mark-all-like-this)
+                 ("C-c c p" . mc/mark-previous-like-this)
+                 ("C-c c n" . mc/mark-next-like-this)))
    #+END_SRC
 
 * VCS
@@ -1536,7 +1600,6 @@ Vim keybindings with ~evil-toggle-key~.
    This is to prevent popup windows when resolving file conflicts.
    I prefer to have the ediff take over and restove the windows when
    done.
-
    #+BEGIN_SRC emacs-lisp
      (setq ediff-window-setup-function 'ediff-setup-windows-plain)
      (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
@@ -1582,7 +1645,6 @@ Vim keybindings with ~evil-toggle-key~.
     - ~n~ and ~p~ to navigate between revisions
     - ~=~ to see the diff.
 
-
     I prefer to use a full-window with vc-annotate
     #+BEGIN_SRC emacs-lisp
      (use-package fullframe
@@ -1590,7 +1652,6 @@ Vim keybindings with ~evil-toggle-key~.
        (fullframe vc-annotate quit-window))
     #+END_SRC
 
-    also q to quit window everywhere?
     #+BEGIN_SRC emacs-lisp
      (eval-after-load "vc-annotate"
           '(progn
@@ -1881,7 +1942,7 @@ Vim keybindings with ~evil-toggle-key~.
     (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
    #+END_SRC
 
-** AutoCompletion
+** Auto-Completion
 
    company shows a popup where you can select completions with a number
    or with ~enter~. You can also invoke the popup manually with ~C-x
@@ -2017,53 +2078,6 @@ Vim keybindings with ~evil-toggle-key~.
 
    #+BEGIN_SRC emacs-lisp
    (use-package counsel
+     :demand
      :bind (("C-x C-f" . counsel-find-file)))
    #+END_SRC
-
-* Testing things
-  #+BEGIN_SRC emacs-lisp
-      (when (fboundp 'winner-mode)
-      (winner-mode 1))
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp :results raw
-(setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
-(use-package go-mode)
-(use-package web-mode
-  :mode "\\.html\\'"
-  :mode "\\.gohtml\\'")
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-(use-package writeroom-mode
-  :bind (:map my-keys-minor-mode-map
-  ("C-c z" . writeroom-mode)))
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-(setq org-src-preserve-indentation nil
-      org-html-indent nil
-      org-edit-src-content-indentation 0)
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-(defun abo-jump-to-note-file ()
-  "Jump to org note file for current buffer"
-  (interactive)
-  (find-file **local-note-file**))
-
-(define-key my-keys-minor-mode-map "\C-cn" 'abo-jump-to-note-file)
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-(defun abo-change-line-endings-to-unix ()
-  (let ((coding-str (symbol-name buffer-file-coding-system)))
-    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
-      (set-buffer-file-coding-system 'unix))))
-
-(add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-(use-package markdown-mode)
-  #+END_SRC

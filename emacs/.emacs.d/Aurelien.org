@@ -21,14 +21,12 @@ Vim keybindings with ~evil-toggle-key~.
 (setq evil-toggle-key "C-c e")
 #+END_SRC
 
+If Emacs complains about a mismatched paren while trying to start
+you can use ~check-parens~
+#+begin_src emacs-lisp :tangle no
+(check-parens)
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
-(defun my-prog-mode-auto-fill-hook ()
-  (setq fill-column 80)
-  (set (make-local-variable 'comment-auto-fill-only-comments) t)
-  (auto-fill-mode t))
-(add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
-#+END_SRC
 
 * Setup
   It is important to load custom settings first. Those are the ones
@@ -79,59 +77,198 @@ Vim keybindings with ~evil-toggle-key~.
   (ad-activate 'load)
   #+END_SRC
 
-* Package library initialization
-  #+BEGIN_SRC emacs-lisp
-    (setq package-archives
-          '(("melpa"       . "http://melpa.milkbox.net/packages/")
-            ("marmalade" . "http://marmalade-repo.org/packages/")
-            ("gnu"         . "http://elpa.gnu.org/packages/")))
+** Package library initialization
+   #+BEGIN_SRC emacs-lisp
+     (setq package-archives
+           '(("melpa"       . "http://melpa.milkbox.net/packages/")
+             ("marmalade" . "http://marmalade-repo.org/packages/")
+             ("gnu"         . "http://elpa.gnu.org/packages/")))
 
-    (setq package-user-dir (concat user-emacs-directory "elpa"))
+     (setq package-user-dir (concat user-emacs-directory "elpa"))
 
-    (package-initialize)
-    (unless package-archive-contents
-      (package-refresh-contents))
+     (package-initialize)
+     (unless package-archive-contents
+       (package-refresh-contents))
 
-    (defun require-package (package &optional min-version)
-      "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
-      (unless (package-installed-p package min-version)
-        (package-install package)))
+     (defun require-package (package &optional min-version)
+       "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
+       (unless (package-installed-p package min-version)
+         (package-install package)))
 
-    (require-package 'use-package)
-    (require 'use-package)
-    (setq use-package-always-ensure t)
-  #+END_SRC
+     (require-package 'use-package)
+     (require 'use-package)
+     (setq use-package-always-ensure t)
+   #+END_SRC
 
-  You can get the time it took for emacs to start with.
-  It ~c-c c-c~ and it will show in the echo area.
-  #+BEGIN_SRC emacs-lisp :tangle no
-  (emacs-init-time)
-  #+END_SRC
+   You can get the time it took for emacs to start with.
+   It ~c-c c-c~ and it will show in the echo area.
+   #+BEGIN_SRC emacs-lisp :tangle no
+   (emacs-init-time)
+   #+END_SRC
 
-* Local variables
-  Local variables are useful to customize your settings for different
-  projects/directories. The built in ~make-local-variable~ is
-  convenient in helping you create those variables.
+** Local variables
+   Local variables are useful to customize your settings for different
+   projects/directories. The built in ~make-local-variable~ is
+   convenient in helping you create those variables.
 
-  I find annoying when I edit those local variables
-  that they are not picked up automatically for open buffers. Those two
-  functions help me with the reloading of those locals.
-  #+BEGIN_SRC emacs-lisp
-    (defun my-reload-dir-locals-for-current-buffer ()
-      "Reloads dir locals for the current buffer."
-      (interactive)
-      (let ((enable-local-variables :all))
-        (hack-dir-local-variables-non-file-buffer)))
+   I find annoying when I edit those local variables
+   that they are not picked up automatically for open buffers. Those two
+   functions help me with the reloading of those locals.
+   #+BEGIN_SRC emacs-lisp
+     (defun my-reload-dir-locals-for-current-buffer ()
+       "Reloads dir locals for the current buffer."
+       (interactive)
+       (let ((enable-local-variables :all))
+         (hack-dir-local-variables-non-file-buffer)))
 
-    (defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
-      "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
-      (interactive)
-      (let ((dir default-directory))
-        (dolist (buffer (buffer-list))
-          (with-current-buffer buffer
-            (when (equal default-directory dir))
-            (my-reload-dir-locals-for-current-buffer)))))
-  #+END_SRC
+     (defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
+       "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
+       (interactive)
+       (let ((dir default-directory))
+         (dolist (buffer (buffer-list))
+           (with-current-buffer buffer
+             (when (equal default-directory dir))
+             (my-reload-dir-locals-for-current-buffer)))))
+   #+END_SRC
+
+** Better Defaults
+   I like setting the path manually as other solutions like ~exec-path-from-shell~
+   slow down my Emacs.
+
+   #+BEGIN_SRC emacs-lisp
+     (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
+     (let ((home-folder (getenv "HOME")))
+       (setenv "PATH" (concat
+                              "/home/linuxbrew/.linuxbrew/bin/:"
+                              (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
+                              (concat home-folder "/n/bin/:")
+                              (concat home-folder "/.local/bin/:")
+                              (concat home-folder "/work/dox-compose/bin/:")
+                              (concat home-folder "/.rbenv/shims:")
+                              (concat home-folder "/.rbenv/bin:")
+                              (concat home-folder "/.fzf/bin:")
+                              "/usr/bin:"
+                              "/usr/local/bin:"
+                              "/bin"))
+
+       (setq exec-path `(
+                         "/home/linuxbrew/.linuxbrew/bin/"
+                         ,(concat home-folder "/.config/yarn/global/node_modules/.bin/")
+                         ,(concat home-folder "/work/dox-compose/bin/")
+                         ,(concat home-folder "/n/bin/")
+                         ,(concat home-folder "/.rbenv/bin/")
+                         ,(concat home-folder "/.rbenv/shims/")
+                         ,(concat home-folder "/dotfiles/bin/")
+                         ,(concat home-folder "/.fzf/bin")
+                         ,(concat home-folder "/.local/bin")
+                         ,(concat home-folder "/bin")
+                         "/usr/local/opt/node@10/bin/"
+                         "/usr/local/bin"
+                         "/bin/"
+                         "/usr/local/sbin/"
+                         "/usr/bin/")))
+   #+END_SRC
+
+   Emacs can be really fast with large files too. The trick is to
+   disable
+   #+BEGIN_SRC emacs-lisp
+     (defun check-large-file-hook ()
+       "If a file is over a given size, turn off minor modes."
+       (when (> (buffer-size) (* 1024 100)) ;; 100K
+         (fundamental-mode)
+         (font-lock-mode -1)
+         (setq buffer-read-only t)
+         (buffer-disable-undo)))
+
+     (add-hook 'find-file-hooks 'check-large-file-hook)
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (setq help-window-select t)
+     (setq inhibit-startup-message t)
+     (setq delete-by-moving-to-trash t)
+     (setq tab-always-indent 'complete)
+     ;; show end of buffer on left fringe
+     (setq-default default-indicate-empty-lines nil)
+     (make-variable-buffer-local 'compile-command)
+     (defalias 'yes-or-no-p 'y-or-n-p) ;; instead of typing yes or no, type y or n
+     (setq ring-bell-function 'ignore) ;; please don't startle me with a bell!
+
+     (setq backup-by-copying t      ; don't clobber symlinks
+           backup-directory-alist
+           '((".*" . "~/.local/share/emacs-saves"))    ; don't litter my fs tree
+           delete-old-versions t
+           kept-new-versions 6
+           kept-old-versions 2
+           auto-save-default t ;files starting with # are generated by autosave
+           auto-save-timeout 60 ; number of seconds before auto-saving
+           auto-save-interval 200 ; number of keystrokes before auto-saves
+           version-control t) ; use versioned backups
+     (setq create-lockfiles nil)
+     (setq auto-save-file-name-transforms
+           `((".*" ,"~/.local/share/emacs-saves" t)))
+
+     ;; if file has no change, just load any changes
+     ;; coming from an external process
+     (setq global-auto-revert-non-file-buffers t)
+     (global-auto-revert-mode 1)
+
+     ;;; replace selected text when typing
+     (pending-delete-mode 1)
+
+     (prefer-coding-system 'utf-8)
+     (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
+
+     ;; gives each line only one visual line and don't show a continuation on next line
+     (set-default 'truncate-lines t)
+   #+END_SRC
+
+   Sentences end with one space after point. The default two space is
+   an historical setting. This makes Emacs sentence based commands more
+   understandable to me.
+   #+BEGIN_SRC emacs-lisp
+   (setq sentence-end-double-space nil)
+   #+END_SRC
+
+   I want error highlights and error bindings in shell modes too.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
+   #+END_SRC
+
+   ~C-c C-w~ to copy regex
+   ~C-c C-q~ to quit re-builder and to remove highlights
+   #+BEGIN_SRC emacs-lisp
+   ( require 're-builder)
+   (setq reb-re-syntax 'string)
+   #+END_SRC
+
+*** tabs and whitespace
+    By default I disable tabs. I use ~whitespace-mode~ in programming
+    buffers because sometimes when copy pasting code from external
+    sources those external sources have tabs. I want to see those tabs
+    to remove them.
+
+    I don't use the ~global-whitespace-mode~ as some emacs mode like
+    ~magit~ use tabs.
+
+    You can remove all tabs from your buffer with ~untabify~
+    #+BEGIN_SRC emacs-lisp
+      (setq-default
+       indent-tabs-mode nil    ;no tabs
+       c-basic-offset 2)
+      (setq-default whitespace-style '(face trailing tabs tab-mark))
+      (add-hook 'before-save-hook 'delete-trailing-whitespace)
+      (add-hook 'prog-mode-hook 'whitespace-mode)
+      (eval-after-load "whitespace"
+        '(diminish 'whitespace-mode))
+    #+END_SRC
+
+*** Recent files
+    #+BEGIN_SRC emacs-lisp
+    (recentf-mode 1)
+    (setq recentf-max-menu-items 200)
+    (setq recentf-max-saved-items 200)
+    #+END_SRC
 
 * Utility functions
   #+BEGIN_SRC emacs-lisp
@@ -197,145 +334,6 @@ Vim keybindings with ~evil-toggle-key~.
   (add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
   #+END_SRC
 
-* Better Defaults
-  I like setting the path manually as other solutions like ~exec-path-from-shell~
-  slow down my Emacs.
-
-  #+BEGIN_SRC emacs-lisp
-    (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
-    (let ((home-folder (getenv "HOME")))
-      (setenv "PATH" (concat
-                             "/home/linuxbrew/.linuxbrew/bin/:"
-                             (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
-                             (concat home-folder "/n/bin/:")
-                             (concat home-folder "/.local/bin/:")
-                             (concat home-folder "/work/dox-compose/bin/:")
-                             (concat home-folder "/.rbenv/shims:")
-                             (concat home-folder "/.rbenv/bin:")
-                             (concat home-folder "/.fzf/bin:")
-                             "/usr/bin:"
-                             "/usr/local/bin:"
-                             "/bin"))
-
-      (setq exec-path `(
-                        "/home/linuxbrew/.linuxbrew/bin/"
-                        ,(concat home-folder "/.config/yarn/global/node_modules/.bin/")
-                        ,(concat home-folder "/work/dox-compose/bin/")
-                        ,(concat home-folder "/n/bin/")
-                        ,(concat home-folder "/.rbenv/bin/")
-                        ,(concat home-folder "/.rbenv/shims/")
-                        ,(concat home-folder "/dotfiles/bin/")
-                        ,(concat home-folder "/.fzf/bin")
-                        ,(concat home-folder "/.local/bin")
-                        ,(concat home-folder "/bin")
-                        "/usr/local/opt/node@10/bin/"
-                        "/usr/local/bin"
-                        "/bin/"
-                        "/usr/local/sbin/"
-                        "/usr/bin/")))
-  #+END_SRC
-
-  Emacs can be really fast with large files too. The trick is to
-  disable
-  #+BEGIN_SRC emacs-lisp
-    (defun check-large-file-hook ()
-      "If a file is over a given size, turn off minor modes."
-      (when (> (buffer-size) (* 1024 100)) ;; 100K
-        (fundamental-mode)
-        (font-lock-mode -1)
-        (setq buffer-read-only t)
-        (buffer-disable-undo)))
-
-    (add-hook 'find-file-hooks 'check-large-file-hook)
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-    (setq help-window-select t)
-    (setq inhibit-startup-message t)
-    (setq delete-by-moving-to-trash t)
-    (setq tab-always-indent 'complete)
-    ;; show end of buffer on left fringe
-    (setq-default default-indicate-empty-lines nil)
-    (make-variable-buffer-local 'compile-command)
-    (defalias 'yes-or-no-p 'y-or-n-p) ;; instead of typing yes or no, type y or n
-    (setq ring-bell-function 'ignore) ;; please don't startle me with a bell!
-
-    (setq backup-by-copying t      ; don't clobber symlinks
-          backup-directory-alist
-          '((".*" . "~/.local/share/emacs-saves"))    ; don't litter my fs tree
-          delete-old-versions t
-          kept-new-versions 6
-          kept-old-versions 2
-          auto-save-default t ;files starting with # are generated by autosave
-          auto-save-timeout 60 ; number of seconds before auto-saving
-          auto-save-interval 200 ; number of keystrokes before auto-saves
-          version-control t) ; use versioned backups
-    (setq create-lockfiles nil)
-    (setq auto-save-file-name-transforms
-          `((".*" ,"~/.local/share/emacs-saves" t)))
-
-    ;; if file has no change, just load any changes
-    ;; coming from an external process
-    (setq global-auto-revert-non-file-buffers t)
-    (global-auto-revert-mode 1)
-
-    ;;; replace selected text when typing
-    (pending-delete-mode 1)
-
-    (prefer-coding-system 'utf-8)
-    (modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
-
-    ;; gives each line only one visual line and don't show a continuation on next line
-    (set-default 'truncate-lines t)
-  #+END_SRC
-
-  Sentences end with one space after point. The default two space is
-  an historical setting. This makes Emacs sentence based commands more
-  understandable to me.
-  #+BEGIN_SRC emacs-lisp
-  (setq sentence-end-double-space nil)
-  #+END_SRC
-
-  I want error highlights and error bindings in shell modes too.
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
-  #+END_SRC
-
-  ~C-c C-w~ to copy regex
-  ~C-c C-q~ to quit re-builder and to remove highlights
-  #+BEGIN_SRC emacs-lisp
-  ( require 're-builder)
-  (setq reb-re-syntax 'string)
-  #+END_SRC
-
-** tabs and whitespace
-   By default I disable tabs. I use ~whitespace-mode~ in programming
-   buffers because sometimes when copy pasting code from external
-   sources those external sources have tabs. I want to see those tabs
-   to remove them.
-
-   I don't use the ~global-whitespace-mode~ as some emacs mode like
-   ~magit~ use tabs.
-
-   You can remove all tabs from your buffer with ~untabify~
-   #+BEGIN_SRC emacs-lisp
-     (setq-default
-      indent-tabs-mode nil    ;no tabs
-      c-basic-offset 2)
-     (setq-default whitespace-style '(face trailing tabs tab-mark))
-     (add-hook 'before-save-hook 'delete-trailing-whitespace)
-     (add-hook 'prog-mode-hook 'whitespace-mode)
-     (eval-after-load "whitespace"
-       '(diminish 'whitespace-mode))
-   #+END_SRC
-
-** Recent files
-   #+BEGIN_SRC emacs-lisp
-   (recentf-mode 1)
-   (setq recentf-max-menu-items 200)
-   (setq recentf-max-saved-items 200)
-   #+END_SRC
-
 * GUI
   #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
@@ -373,115 +371,115 @@ Vim keybindings with ~evil-toggle-key~.
      (diminish 'my-keys-minor-mode)
      (diminish 'eldoc-mode))
   #+END_SRC
-* Colors
-  This is a list of all the colors I use with Emacs. When I want to
-  change a color I look through those colors. This helps me achieve
-  consistency.
-** Pantone
+** Colors
+   This is a list of all the colors I use with Emacs. When I want to
+   change a color I look through those colors. This helps me achieve
+   consistency.
+*** Pantone
 
-   | Hex     | Pantone Color Name |
-   |---------+--------------------|
-   | #fff166 | 101U               |
-   | #fccf61 | 128u               |
-   | #f79b2f | 130u               |
-   | #c97f3a | 145u               |
-   | #ffa2cb | 210u               |
-   | #f56d9e | 213u               |
-   | #dcc6ea | 263u               |
-   | #bfa1e3 | 264u               |
-   | #9d7ad2 | 265u               |
-   | #adcff1 | 277u               |
-   | #7ab1e8 | 284u               |
-   | #5b8edb | 279u               |
-   | #8eddeb | 304u               |
-   | #00b4e4 | 395u               |
-   | #93e8d3 | 331u               |
-   | #97d88a | 358u               |
-   | #5cb860 | 360u               |
-   | #56944f | 362u               |
-   | #f1f2f1 | 11-0601 tpx        |
-   | #e8eae8 | 11-4800 tpx        |
-   | #dad9d6 | cool gray 1u       |
-   | #c5c5c5 | cool gray 3u       |
-   | #adaeb0 | cool gray 5u       |
-   | #939598 | cool gray 8u       |
-   | #e4f4e9 | 9063u              |
-   | #c5f2e6 | 9520u              |
-   | #ffcfd8 | 9284u              |
-   | #69615f | 440u               |
-   | #4c4e56 | black7u            |
-   | #885a61 | 195u               |
-   | #f65058 | red 032u           |
-   | #bc3e44 | 3517u              |
-   | #34855b | 348u               |
-   | #546758 | 350u               |
-   | #4982cf | 285u               |
-   | #3a499c | Reflex Blue U      |
-   | #65428a | medium purple      |
-** One Half
-**** Dark
+    | Hex     | Pantone Color Name |
+    |---------+--------------------|
+    | #fff166 | 101U               |
+    | #fccf61 | 128u               |
+    | #f79b2f | 130u               |
+    | #c97f3a | 145u               |
+    | #ffa2cb | 210u               |
+    | #f56d9e | 213u               |
+    | #dcc6ea | 263u               |
+    | #bfa1e3 | 264u               |
+    | #9d7ad2 | 265u               |
+    | #adcff1 | 277u               |
+    | #7ab1e8 | 284u               |
+    | #5b8edb | 279u               |
+    | #8eddeb | 304u               |
+    | #00b4e4 | 395u               |
+    | #93e8d3 | 331u               |
+    | #97d88a | 358u               |
+    | #5cb860 | 360u               |
+    | #56944f | 362u               |
+    | #f1f2f1 | 11-0601 tpx        |
+    | #e8eae8 | 11-4800 tpx        |
+    | #dad9d6 | cool gray 1u       |
+    | #c5c5c5 | cool gray 3u       |
+    | #adaeb0 | cool gray 5u       |
+    | #939598 | cool gray 8u       |
+    | #e4f4e9 | 9063u              |
+    | #c5f2e6 | 9520u              |
+    | #ffcfd8 | 9284u              |
+    | #69615f | 440u               |
+    | #4c4e56 | black7u            |
+    | #885a61 | 195u               |
+    | #f65058 | red 032u           |
+    | #bc3e44 | 3517u              |
+    | #34855b | 348u               |
+    | #546758 | 350u               |
+    | #4982cf | 285u               |
+    | #3a499c | Reflex Blue U      |
+    | #65428a | medium purple      |
+*** One Half
+***** Dark
 
-     | Color Name     | Hex             |
-     |----------------+-----------------|
-     | "background"   | "#282C34"       |
-     | "black"        | "#282C34"       |
-     | "blue"         | "#61AFEF"       |
-     | "brightBlack"  | "#282C34"       |
-     | "brightBlue"   | "#61AFEF"       |
-     | "brightCyan"   | "#56B6C2"       |
-     | "brightGreen"  | "#98C379"       |
-     | "brightPurple" | "#C678DD"       |
-     | "brightRed"    | "#E06C75"       |
-     | "brightWhite"  | "#DCDFE4"       |
-     | "brightYellow" | "#E5C07B"       |
-     | "cyan"         | "#56B6C2"       |
-     | "foreground"   | "#DCDFE4"       |
-     | "green"        | "#98C379"       |
-     | "purple"       | "#C678DD"       |
-     | "red"          | "#E06C75"       |
-     | "white"        | "#DCDFE4"       |
-     | "yellow"       | "#E5C07B"       |
+      | Color Name     | Hex             |
+      |----------------+-----------------|
+      | "background"   | "#282C34"       |
+      | "black"        | "#282C34"       |
+      | "blue"         | "#61AFEF"       |
+      | "brightBlack"  | "#282C34"       |
+      | "brightBlue"   | "#61AFEF"       |
+      | "brightCyan"   | "#56B6C2"       |
+      | "brightGreen"  | "#98C379"       |
+      | "brightPurple" | "#C678DD"       |
+      | "brightRed"    | "#E06C75"       |
+      | "brightWhite"  | "#DCDFE4"       |
+      | "brightYellow" | "#E5C07B"       |
+      | "cyan"         | "#56B6C2"       |
+      | "foreground"   | "#DCDFE4"       |
+      | "green"        | "#98C379"       |
+      | "purple"       | "#C678DD"       |
+      | "red"          | "#E06C75"       |
+      | "white"        | "#DCDFE4"       |
+      | "yellow"       | "#E5C07B"       |
 
-**** Light
+***** Light
 
-     | Color Name     | Hex       |
-     |----------------+-----------|
-     | "background"   | "#FAFAFA" |
-     | "black"        | "#383A42" |
-     | "blue"         | "#0184BC" |
-     | "brightBlack"  | "#383A42" |
-     | "brightBlue"   | "#0184BC" |
-     | "brightCyan"   | "#0997B3" |
-     | "brightGreen"  | "#50A14F" |
-     | "brightPurple" | "#A626A4" |
-     | "brightRed"    | "#E45649" |
-     | "brightWhite"  | "#FAFAFA" |
-     | "brightYellow" | "#C18401" |
-     | "cyan"         | "#0997B3" |
-     | "foreground"   | "#383A42" |
-     | "green"        | "#50A14F" |
-     | "purple"       | "#A626A4" |
-     | "red"          | "#E45649" |
-     | "white"        | "#FAFAFA" |
-     | "yellow"       | "#C18401" |
+      | Color Name     | Hex       |
+      |----------------+-----------|
+      | "background"   | "#FAFAFA" |
+      | "black"        | "#383A42" |
+      | "blue"         | "#0184BC" |
+      | "brightBlack"  | "#383A42" |
+      | "brightBlue"   | "#0184BC" |
+      | "brightCyan"   | "#0997B3" |
+      | "brightGreen"  | "#50A14F" |
+      | "brightPurple" | "#A626A4" |
+      | "brightRed"    | "#E45649" |
+      | "brightWhite"  | "#FAFAFA" |
+      | "brightYellow" | "#C18401" |
+      | "cyan"         | "#0997B3" |
+      | "foreground"   | "#383A42" |
+      | "green"        | "#50A14F" |
+      | "purple"       | "#A626A4" |
+      | "red"          | "#E45649" |
+      | "white"        | "#FAFAFA" |
+      | "yellow"       | "#C18401" |
 
-** Tronesque
-    #081724
-    #033340
-    #1d5483
-    #2872b2
-    #d3f9ee
-    #a6f3dd
-    #effffe
-    #fffed9
-    #ff694d
-    #f5b55f
-    #fffe4e
-    #afc0fd
-    #96a5d9
-    #bad6e2
-    #d2f1ff
-    #68f6cb
+*** Tronesque
+     #081724
+     #033340
+     #1d5483
+     #2872b2
+     #d3f9ee
+     #a6f3dd
+     #effffe
+     #fffed9
+     #ff694d
+     #f5b55f
+     #fffe4e
+     #afc0fd
+     #96a5d9
+     #bad6e2
+     #d2f1ff
+     #68f6cb
 * Windows
   Splitting can be done with ~C-x 2~ and ~C-x 3~ but I prefer more
   memorable keybindings.
@@ -532,119 +530,279 @@ Vim keybindings with ~evil-toggle-key~.
   (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
   (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
   #+END_SRC
-* Clojure
-  #+BEGIN_SRC emacs-lisp
-  (use-package clojure-mode
-    :mode "\\.clj\\'"
-    :config
-    (add-hook 'clojure-mode-hook #'subword-mode)
-    (use-package cider))
-  #+END_SRC
-* Ruby
-  #+BEGIN_SRC emacs-lisp
-  (use-package yaml-mode
-    :mode "\\.ya?ml\\'")
+* Programming languages
 
-  (use-package ruby-mode
-    :mode "\\.rake\\'"
-    :mode "Rakefile\\'"
-    :mode "\\.gemspec\\'"
-    :mode "\\.ru\\'"
-    :mode "Gemfile\\'"
-    :mode "Guardfile\\'"
-    :mode "Capfile\\'"
-    :mode "\\.cap\\'"
-    :mode "\\.thor\\'"
-    :mode "\\.rabl\\'"
-    :mode "Thorfile\\'"
-    :mode "Vagrantfile\\'"
-    :mode "\\.jbuilder\\'"
-    :mode "Podfile\\'"
-    :mode "\\.podspec\\'"
-    :mode "Puppetfile\\'"
-    :mode "Berksfile\\'"
-    :mode "Appraisals\\'"
-    :mode "\\.rb$"
-    :mode "ruby"
-    :config
+#+BEGIN_SRC emacs-lisp
+(defun my-prog-mode-auto-fill-hook ()
+  (setq fill-column 80)
+  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+  (auto-fill-mode t))
+(add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
+#+END_SRC
 
-    (add-hook 'ruby-mode-hook 'subword-mode)
+** Clojure
+   #+BEGIN_SRC emacs-lisp
+   (use-package clojure-mode
+     :mode "\\.clj\\'"
+     :config
+     (add-hook 'clojure-mode-hook #'subword-mode)
+     (use-package cider))
+   #+END_SRC
+** Ruby
+   #+BEGIN_SRC emacs-lisp
+   (use-package yaml-mode
+     :mode "\\.ya?ml\\'")
 
-    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
-    (use-package ruby-interpolation
-      :diminish ruby-interpolation-mode)
-    (use-package ruby-end
-      :diminish ruby-end-mode)
-    (use-package rspec-mode))
-  #+END_SRC
+   (use-package ruby-mode
+     :mode "\\.rake\\'"
+     :mode "Rakefile\\'"
+     :mode "\\.gemspec\\'"
+     :mode "\\.ru\\'"
+     :mode "Gemfile\\'"
+     :mode "Guardfile\\'"
+     :mode "Capfile\\'"
+     :mode "\\.cap\\'"
+     :mode "\\.thor\\'"
+     :mode "\\.rabl\\'"
+     :mode "Thorfile\\'"
+     :mode "Vagrantfile\\'"
+     :mode "\\.jbuilder\\'"
+     :mode "Podfile\\'"
+     :mode "\\.podspec\\'"
+     :mode "Puppetfile\\'"
+     :mode "Berksfile\\'"
+     :mode "Appraisals\\'"
+     :mode "\\.rb$"
+     :mode "ruby"
+     :config
 
-  I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freebie-xmpfilter/][Ruby Tapas.]] Hit ~M-;~ twice adds a special
-  comment for xmpfilter. Running ~xmp~ will evaluate the line and put
-  the result after the comment.
-  #+BEGIN_SRC emacs-lisp
-    (use-package rcodetools
-      :load-path "/site-lisp/rcodetools.el"
-      :pin manual
-      :ensure nil
+     (add-hook 'ruby-mode-hook 'subword-mode)
+
+     (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+     (use-package ruby-interpolation
+       :diminish ruby-interpolation-mode)
+     (use-package ruby-end
+       :diminish ruby-end-mode)
+     (use-package rspec-mode))
+   #+END_SRC
+
+   I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freebie-xmpfilter/][Ruby Tapas.]] Hit ~M-;~ twice adds a special
+   comment for xmpfilter. Running ~xmp~ will evaluate the line and put
+   the result after the comment.
+   #+BEGIN_SRC emacs-lisp
+     (use-package rcodetools
+       :load-path "/site-lisp/rcodetools.el"
+       :pin manual
+       :ensure nil
+       :config
+       (defadvice comment-dwim (around rct-hack activate)
+         "If comment-dwim is successively called, add => mark."
+         (if (and (or (eq major-mode 'enh-ruby-mode)
+                      (eq major-mode 'ruby-mode))
+                  (eq last-command 'comment-dwim))
+             (progn
+               (if (eq major-mode 'enh-ruby-mode)
+                   (end-of-line))
+               (insert "=>"))
+           ad-do-it)))
+   #+END_SRC
+** Go
+
+   #+BEGIN_SRC emacs-lisp
+   (use-package go-mode)
+   #+END_SRC
+
+** HTML
+
+   #+BEGIN_SRC emacs-lisp
+   (use-package web-mode
+     :mode "\\.html\\'")
+ (use-package web-mode
+   :mode "\\.gohtml\\'")
+
+   (use-package emmet-mode
+   :after evil
+     :diminish emmet-mode
+     :config
+     (progn
+       (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
+       (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
+
+     (add-hook 'css-mode-hook
+               (lambda ()
+                 (emmet-mode)
+                 (setq emmet-expand-jsx-className? nil)))
+
+     (add-hook 'sgml-mode-hook
+               (lambda ()
+                 (emmet-mode)
+                 (setq emmet-expand-jsx-className? nil)))
+
+     (add-hook 'web-mode-hook
+               (lambda ()
+                 (emmet-mode))))
+   #+END_SRC
+
+** CSS
+   #+BEGIN_SRC emacs-lisp
+   (use-package scss-mode
+     :mode "\\.scss\\'")
+
+   (use-package sass-mode :mode "\\.sass\\'")
+
+   (use-package less-css-mode
+     :mode "\\.less\\'")
+   #+END_SRC
+** JavaScript
+   Node compilation errors messages are not understood by Emacs by
+   default. All that's needed to make it work is to add a new regex
+   describing what are the components of the messages.
+
+   After running the compile command, you can navigate through the
+   errors with ~next-error~ and ~previous-error~
+   #+BEGIN_SRC emacs-lisp
+   (require 'compile)
+   (setq compilation-error-regexp-alist-alist
+         (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
+                      1 ;; file
+                      2 ;; line
+                      )
+               compilation-error-regexp-alist-alist))
+   (setq compilation-error-regexp-alist
+         (cons 'node compilation-error-regexp-alist))
+
+   (add-hook 'js2-mode-hook
+             (lambda ()
+               (set (make-local-variable 'compile-command)
+                    (format "node %s" (file-name-nondirectory buffer-file-name)))))
+
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (setq js-indent-level 2)
+
+     (use-package js2-mode
+       :config
+       (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+       (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
+       (setq js2-mode-show-parse-errors nil
+             js2-mode-show-strict-warnings nil
+             js2-basic-offset 2
+             js2-highlight-level 3
+             css-indent-offset 2
+             web-mode-markup-indent-offset 2
+             web-mode-script-padding 0
+             web-mode-css-indent-offset 2
+             web-mode-style-padding 2
+             web-mode-code-indent-offset 2
+             web-mode-attr-indent-offset 2)
+       :config
+       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+       (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+
+       (use-package xref-js2
+         :init
+         (setq xref-js2-search-program 'rg)
+         :config
+         (add-hook 'js2-mode-hook (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+
+     (use-package json-mode
+       :mode "\\.json\\'"
+       :mode "\\.eslintrc\\'")
+
+     (use-package coffee-mode
+       :mode "\\.coffee\\'"
+       :config
+       (use-package highlight-indentation)
+       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+       (custom-set-variables '(coffee-tab-width 2)))
+
+     (use-package typescript-mode
+       :mode "\\.ts\\'")
+   #+END_SRC
+
+   Auto-format JavaScript on save
+   #+BEGIN_SRC emacs-lisp
+   (use-package prettier-js
+     :diminish prettier-js-mode
+     :config
+     (setq prettier-args '(
+                           "--trailing-comma" "es5"
+                           "--single-quote" "true"
+                           )
+           prettier-js-command "prettier")
+     (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+     (add-hook 'js2-mode-hook 'prettier-js-mode))
+   #+END_SRC
+
+   Context-coloring highlights code based on closures.
+   This gives a refreshing view of the code and helps using closures
+   efficiently.
+   #+BEGIN_SRC emacs-lisp
+   (use-package context-coloring
+     :ensure t
+     :diminish context-coloring-mode
+     :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
+     :config
+     (add-hook 'js2-mode-hook #'context-coloring-mode))
+   #+END_SRC
+
+*** React
+
+    The following shows a pretty interesting way to quickly create
+    major modes _magically_. It parses the file to detect if this is a
+    react file. If yes I run a function to use web-mode and make some
+    adjustments for JSX.
+    #+BEGIN_SRC emacs-lisp
+    (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+    (defun my-jsx-hook ()
+      "Set web mode with adjustments for JSX"
+      (interactive)
+      (web-mode)
+      (web-mode-set-content-type "jsx")
+      (setq imenu-create-index-function 'auray-js-imenu-make-index
+            emmet-expand-jsx-className? t)
+      (flycheck-select-checker 'javascript-eslint)
+      (emmet-mode)))
+
+    (use-package prettier-js
       :config
-      (defadvice comment-dwim (around rct-hack activate)
-        "If comment-dwim is successively called, add => mark."
-        (if (and (or (eq major-mode 'enh-ruby-mode)
-                     (eq major-mode 'ruby-mode))
-                 (eq last-command 'comment-dwim))
-            (progn
-              (if (eq major-mode 'enh-ruby-mode)
-                  (end-of-line))
-              (insert "=>"))
-          ad-do-it))))
-  #+END_SRC
-* Go
+      (add-hook 'web-mode-hook #'(lambda ()
+                                   (enable-minor-mode
+                                    '("\\.jsx?\\'" . prettier-js-mode)))))
+    #+END_SRC
+*** Vue
+    #+BEGIN_SRC emacs-lisp
+    (use-package web-mode
+      :mode "\\.vue\\'"
+      :config
+      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)
+      (setq web-mode-script-padding 0)
+      (defun jjpandari/merge-imenu (index-fun)
+        (interactive)
+        (let ((mode-imenu (funcall index-fun))
+              (custom-imenu (imenu--generic-function imenu-generic-expression)))
+          (append custom-imenu mode-imenu)))
 
-  #+BEGIN_SRC emacs-lisp
-  (use-package go-mode)
-  #+END_SRC
+      (use-package prettier
+        :config
+        (add-hook 'web-mode-hook #'(lambda ()
+                                     (enable-minor-mode
+                                      '("\\.vue?\\'" . prettier-js-mode)))))
 
-* HTML
+      (add-hook 'web-mode-hook
+                (lambda ()
+                  (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index))))))
 
-  #+BEGIN_SRC emacs-lisp
-  (use-package web-mode
-    :mode "\\.html\\'")
-(use-package web-mode
-  :mode "\\.gohtml\\'")
-
-  (use-package emmet-mode
-  :after evil
-    :diminish emmet-mode
-    :config
-    (progn
-      (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
-      (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
-
-    (add-hook 'css-mode-hook
-              (lambda ()
-                (emmet-mode)
-                (setq emmet-expand-jsx-className? nil)))
-
-    (add-hook 'sgml-mode-hook
-              (lambda ()
-                (emmet-mode)
-                (setq emmet-expand-jsx-className? nil)))
-
-    (add-hook 'web-mode-hook
-              (lambda ()
-                (emmet-mode))))
-  #+END_SRC
-
-* CSS
-  #+BEGIN_SRC emacs-lisp
-  (use-package scss-mode
-    :mode "\\.scss\\'")
-
-  (use-package sass-mode :mode "\\.sass\\'")
-
-  (use-package less-css-mode
-    :mode "\\.less\\'")
-  #+END_SRC
+    (require 'aurayb-narrow-indirect-vue)
+    ;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
+    ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
+    ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+    ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
+    #+END_SRC
 * Docker
   #+BEGIN_SRC emacs-lisp
   (use-package docker
@@ -661,160 +819,6 @@ Vim keybindings with ~evil-toggle-key~.
   ;; (require 'dox-dc)
   ;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
   ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
-  #+END_SRC
-* JavaScript
-  Node compilation errors messages are not understood by Emacs by
-  default. All that's needed to make it work is to add a new regex
-  describing what are the components of the messages.
-
-  After running the compile command, you can navigate through the
-  errors with ~next-error~ and ~previous-error~
-  #+BEGIN_SRC emacs-lisp
-  (require 'compile)
-  (setq compilation-error-regexp-alist-alist
-        (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
-                     1 ;; file
-                     2 ;; line
-                     )
-              compilation-error-regexp-alist-alist))
-  (setq compilation-error-regexp-alist
-        (cons 'node compilation-error-regexp-alist))
-
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (set (make-local-variable 'compile-command)
-                   (format "node %s" (file-name-nondirectory buffer-file-name)))))
-
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-    (setq js-indent-level 2)
-
-    (use-package js2-mode
-      :config
-      (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-      (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
-      (setq js2-mode-show-parse-errors nil
-            js2-mode-show-strict-warnings nil
-            js2-basic-offset 2
-            js2-highlight-level 3
-            css-indent-offset 2
-            web-mode-markup-indent-offset 2
-            web-mode-script-padding 0
-            web-mode-css-indent-offset 2
-            web-mode-style-padding 2
-            web-mode-code-indent-offset 2
-            web-mode-attr-indent-offset 2)
-      :config
-      (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-      (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
-
-      (use-package xref-js2
-        :init
-        (setq xref-js2-search-program 'rg)
-        :config
-        (add-hook 'js2-mode-hook (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
-
-    (use-package json-mode
-      :mode "\\.json\\'"
-      :mode "\\.eslintrc\\'")
-
-    (use-package coffee-mode
-      :mode "\\.coffee\\'"
-      :config
-      (use-package highlight-indentation)
-      (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-      (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-      (custom-set-variables '(coffee-tab-width 2)))
-
-    (use-package typescript-mode
-      :mode "\\.ts\\'")
-  #+END_SRC
-
-  Auto-format JavaScript on save
-  #+BEGIN_SRC emacs-lisp
-  (use-package prettier-js
-    :diminish prettier-js-mode
-    :config
-    (setq prettier-args '(
-                          "--trailing-comma" "es5"
-                          "--single-quote" "true"
-                          )
-          prettier-js-command "prettier")
-    (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-    (add-hook 'js2-mode-hook 'prettier-js-mode))
-  #+END_SRC
-
-  Context-coloring highlights code based on closures.
-  This gives a refreshing view of the code and helps using closures
-  efficiently.
-  #+BEGIN_SRC emacs-lisp
-  (use-package context-coloring
-    :ensure t
-    :diminish context-coloring-mode
-    :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
-    :config
-    (add-hook 'js2-mode-hook #'context-coloring-mode))
-  #+END_SRC
-
-** React
-
-   The following shows a pretty interesting way to quickly create
-   major modes _magically_. It parses the file to detect if this is a
-   react file. If yes I run a function to use web-mode and make some
-   adjustments for JSX.
-   #+BEGIN_SRC emacs-lisp
-   (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
-   (defun my-jsx-hook ()
-     "Set web mode with adjustments for JSX"
-     (interactive)
-     (web-mode)
-     (web-mode-set-content-type "jsx")
-     (setq imenu-create-index-function 'auray-js-imenu-make-index
-           emmet-expand-jsx-className? t)
-     (flycheck-select-checker 'javascript-eslint)
-     (emmet-mode)))
-
-   (use-package prettier-js
-     :config
-     (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                   '("\\.jsx?\\'" . prettier-js-mode)))))
-   #+END_SRC
-** Vue
-   #+BEGIN_SRC emacs-lisp
-   (use-package web-mode
-     :mode "\\.vue\\'"
-     :config
-     (setq web-mode-markup-indent-offset 2)
-     (setq web-mode-css-indent-offset 2)
-     (setq web-mode-code-indent-offset 2)
-     (setq web-mode-script-padding 0)
-     (defun jjpandari/merge-imenu (index-fun)
-       (interactive)
-       (let ((mode-imenu (funcall index-fun))
-             (custom-imenu (imenu--generic-function imenu-generic-expression)))
-         (append custom-imenu mode-imenu)))
-
-     (use-package prettier
-       :config
-       (add-hook 'web-mode-hook #'(lambda ()
-                                    (enable-minor-mode
-                                     '("\\.vue?\\'" . prettier-js-mode)))))
-
-     (add-hook 'web-mode-hook
-               (lambda ()
-                 (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index))))))
-
-   (require 'aurayb-narrow-indirect-vue)
-   ;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
-   ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
-   ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
-   ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
-   #+END_SRC
-* Markdown
-  #+BEGIN_SRC emacs-lisp
-  (use-package markdown-mode)
   #+END_SRC
 * Flycheck
   #+BEGIN_SRC emacs-lisp
@@ -1060,6 +1064,10 @@ Vim keybindings with ~evil-toggle-key~.
         '((sequence "TODO" "WAITING" "|" "DONE(!)")))
   #+END_SRC
 
+** Markdown
+  #+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode)
+  #+END_SRC
 ** Capture Ideas
 
    ~C-c l~ to store a link and ~C-c C-l~ to insert that link.
@@ -1688,7 +1696,7 @@ Vim keybindings with ~evil-toggle-key~.
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
    #+END_SRC
 
-* IDE
+* Projects
   Emacs is not an IDE but I can be pretty close to one.
   Here are some tools I use that are IDE oriented.
 
@@ -1879,7 +1887,7 @@ Vim keybindings with ~evil-toggle-key~.
                    ("gr" . xref-find-references)))
    #+END_SRC
 
-* completion
+* Completion
 ** Hippie expand
    Bound to ~s-/~, it provides a simple on demand completion mechanism.
    You can customize its behaviour by choosing different expand functions.
@@ -1963,8 +1971,7 @@ Vim keybindings with ~evil-toggle-key~.
        (yatemplate-fill-alist))
    #+END_SRC
 
-* files and directories
-
+* Files and directories
 ** Dired
    #+BEGIN_SRC emacs-lisp
      (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform

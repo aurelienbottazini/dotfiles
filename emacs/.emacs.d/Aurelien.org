@@ -679,47 +679,47 @@ you can use ~check-parens~
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-     (setq js-indent-level 2)
+   (setq js-indent-level 2)
 
-     (use-package js2-mode
-       :config
-       (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-       (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
-       (setq js2-mode-show-parse-errors nil
-             js2-mode-show-strict-warnings nil
-             js2-basic-offset 2
-             js2-highlight-level 3
-             css-indent-offset 2
-             web-mode-markup-indent-offset 2
-             web-mode-script-padding 0
-             web-mode-css-indent-offset 2
-             web-mode-style-padding 2
-             web-mode-code-indent-offset 2
-             web-mode-attr-indent-offset 2)
-       :config
-       (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-       (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+   (use-package js2-mode
+     :config
+     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
+     (setq js2-mode-show-parse-errors nil
+           js2-mode-show-strict-warnings nil
+           js2-basic-offset 2
+           js2-highlight-level 3
+           css-indent-offset 2
+           web-mode-markup-indent-offset 2
+           web-mode-script-padding 0
+           web-mode-css-indent-offset 2
+           web-mode-style-padding 2
+           web-mode-code-indent-offset 2
+           web-mode-attr-indent-offset 2)
+     :config
+     (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+     (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
 
-       (use-package xref-js2
-         :init
-         (setq xref-js2-search-program 'rg)
-         :config
-         (add-hook 'js2-mode-hook (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+     ;; (use-package xref-js2
+     ;;   :init
+     ;;   (setq xref-js2-search-program 'rg)
+     ;;   :config
+     ;;   (add-hook 'js2-mode-hook (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 
-     (use-package json-mode
-       :mode "\\.json\\'"
-       :mode "\\.eslintrc\\'")
+   (use-package json-mode
+     :mode "\\.json\\'"
+     :mode "\\.eslintrc\\'")
 
-     (use-package coffee-mode
-       :mode "\\.coffee\\'"
-       :config
-       (use-package highlight-indentation)
-       (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
-       (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
-       (custom-set-variables '(coffee-tab-width 2)))
+   (use-package coffee-mode
+     :mode "\\.coffee\\'"
+     :config
+     (use-package highlight-indentation)
+     (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+     (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+     (custom-set-variables '(coffee-tab-width 2)))
 
-     (use-package typescript-mode
-       :mode "\\.ts\\'")
+   (use-package typescript-mode
+     :mode "\\.ts\\'")
    #+END_SRC
 
    Auto-format JavaScript on save
@@ -787,7 +787,7 @@ you can use ~check-parens~
               (custom-imenu (imenu--generic-function imenu-generic-expression)))
           (append custom-imenu mode-imenu)))
 
-      (use-package prettier
+      (use-package prettier-js
         :config
         (add-hook 'web-mode-hook #'(lambda ()
                                      (enable-minor-mode
@@ -1168,6 +1168,7 @@ you can use ~check-parens~
      :bind (:map my-keys-minor-mode-map
                  ("C-c z" . writeroom-mode)))
 
+   (use-package htmlize) ;; for org html export
    (setq org-src-preserve-indentation nil
          org-html-indent nil
          org-edit-src-content-indentation 0)

@@ -906,7 +906,7 @@ you can use ~check-parens~
    (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
    (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/Aurelien.org")))
    (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
-   (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-writing-folder**)))
+   (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-blog-folder**)))
    (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
    (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
    (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
@@ -1176,10 +1176,10 @@ you can use ~check-parens~
    (setq org-html-validation-link nil)
    (setq org-publish-project-alist
          '(
-           ("wiki-files"
-            :base-directory **local-writing-folder**
+           ("blog-files"
+            :base-directory **local-blog-folder**
             :base-extension "org"
-            :publishing-directory **local-published-folder**
+            :publishing-directory **local-blog-exported-folder**
             :recursive t
             :publishing-function org-html-publish-to-html
             :headline-levels 4             ; Just the default for this project.

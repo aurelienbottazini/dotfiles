@@ -616,7 +616,9 @@ you can use ~check-parens~
 
    #+BEGIN_SRC emacs-lisp
    (use-package web-mode
-     :mode "\\.html\\'")
+     :mode "\\.html\\'"
+     :config
+     (setq web-mode-enable-auto-closing t))
  (use-package web-mode
    :mode "\\.gohtml\\'")
 

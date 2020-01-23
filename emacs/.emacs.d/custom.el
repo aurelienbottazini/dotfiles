@@ -109,8 +109,8 @@
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil)
  '(vc-follow-symlinks t)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -150,6 +150,11 @@
  '(shadow ((t (:background "#222222"))))
  '(success ((t (:foreground "#97d88a" :weight bold))))
  '(swiper-line-face ((t (:background "#4982cf" :foreground "black"))))
+ '(term-color-blue ((t (:background "#5b7edb" :foreground "#5b8edb"))))
+ '(term-color-cyan ((t (:background "#adcff1" :foreground "#adcff1"))))
+ '(term-color-green ((t (:background "#5cb860" :foreground "#5cb860"))))
+ '(term-color-magenta ((t (:background "#9d7ad2" :foreground "#9d7ad2"))))
+ '(term-color-red ((t (:background "#f65058" :foreground "#f65058"))))
  '(web-mode-html-tag-face ((t (:foreground "#8eddeb"))))
  '(which-func ((t (:foreground "DarkGrey"))))
  '(widget-field ((t (:background "#dad9d6" :foreground "black")))))

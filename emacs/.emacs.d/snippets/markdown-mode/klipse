@@ -11,4 +11,6 @@ theme: 'zenburnesque'
 }
 };
 </script>
+<script src="/js/opal.min.js"></script>
+<script src="/js/opal-parser.min.js"></script>
 <script src="/js/klipse_plugin.min.js"></script>

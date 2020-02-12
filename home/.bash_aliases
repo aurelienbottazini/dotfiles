@@ -31,5 +31,6 @@ alias g="git-status"
 alias ec="TERM=xterm-24bit emacsclient -s $(tmux display-message -p '#S') -ta ''"
 alias ee="TERM=xterm-24bit emacs -nw"
 alias emg="emacs . >/dev/null 0>&2 &; disown $1"
+alias idea="/opt/idea-IU-193.6015.39/bin/idea.sh"
 
 alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"

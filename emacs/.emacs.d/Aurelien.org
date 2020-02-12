@@ -8,8 +8,8 @@ However if I use the Emacs GUI I need to make sure the colors match
 what my terminal settings are.
 #+BEGIN_SRC emacs-lisp
 (when (display-graphic-p)
-  (set-face-background 'default "#282c34")
-  (set-face-foreground 'default "#dcdfe4"))
+  (set-face-background 'default "white")
+  (set-face-foreground 'default "black"))
 #+END_SRC
 
 I  use Vim keybindings everywhere except with special modes
@@ -582,9 +582,17 @@ you can use ~check-parens~
      (use-package ruby-interpolation
        :diminish ruby-interpolation-mode)
      (use-package ruby-end
-       :diminish ruby-end-mode)
+       :diminish ruby-end-mode
+       :config
+       (defun ruby-end-insert-end ()
+         "Closes block by inserting end."
+         (save-excursion
+           (newline)
+           (insert "end")
+           (indent-according-to-mode)))
+       )
      (use-package rspec-mode))
-   #+END_SRC
+       #+END_SRC
 
    I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freebie-xmpfilter/][Ruby Tapas.]] Hit ~M-;~ twice adds a special
    comment for xmpfilter. Running ~xmp~ will evaluate the line and put
@@ -1067,9 +1075,9 @@ you can use ~check-parens~
   #+END_SRC
 
 ** Markdown
-  #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode)
-  #+END_SRC
+   #+END_SRC
 ** Capture Ideas
 
    ~C-c l~ to store a link and ~C-c C-l~ to insert that link.
@@ -1170,10 +1178,10 @@ you can use ~check-parens~
      :bind (:map my-keys-minor-mode-map
                  ("C-c z" . writeroom-mode)))
 
-   (use-package htmlize) ;; for org html export
    (setq org-src-preserve-indentation nil
          org-html-indent nil
          org-edit-src-content-indentation 0)
+   (use-package htmlize) ;; for org html export
    (setq system-time-locale "C") ;; make sure time local is in english when exporting
    (setq org-html-validation-link nil)
    (setq org-publish-project-alist
@@ -1181,7 +1189,7 @@ you can use ~check-parens~
            ("blog-files"
             :base-directory **local-blog-folder**
             :base-extension "org"
-            :publishing-directory **local-blog-exportedhed-folder**
+            :publishing-directory **local-blog-exported-folder**
             :recursive t
             :publishing-function org-html-publish-to-html
             :headline-levels 4             ; Just the default for this project.
@@ -2046,3 +2054,10 @@ you can use ~check-parens~
      :demand
      :bind (("C-x C-f" . counsel-find-file)))
    #+END_SRC
+
+
+#+begin_src emacs-lisp :results silent
+(use-package leuven-theme
+  :config
+  (load-theme 'leuven t))
+#+end_src

@@ -33,6 +33,8 @@
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-sideline-enable nil)
+ '(magit-auto-revert-mode t)
+ '(magit-commit-show-diff nil)
  '(menu-bar-mode nil)
  '(org-agenda-files
    (quote
@@ -114,4 +116,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 140 :family "Input Mono")))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 140 :family "Input Mono"))))
+ '(custom-variable-tag ((t (:foreground "blue1" :weight normal))))
+ '(font-lock-comment-face ((t (:foreground "#adaeb0"))))
+ '(font-lock-warning-face ((t (:inherit error))))
+ '(magit-blame-heading ((t (:inherit magit-blame-highlight :slant normal :weight normal))))
+ '(magit-diff-file-heading ((t (:weight normal))))
+ '(magit-filename ((t (:weight normal))))
+ '(mode-line-buffer-id ((t (:foreground "black" :slant italic :weight normal))))
+ '(org-block ((t (:inherit shadow :background "#f1f2f1"))))
+ '(org-level-1 ((t (:inherit outline-1 :overline nil :height 1.6)))))

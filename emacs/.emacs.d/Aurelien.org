@@ -2054,10 +2054,3 @@ you can use ~check-parens~
      :demand
      :bind (("C-x C-f" . counsel-find-file)))
    #+END_SRC
-
-
-#+begin_src emacs-lisp :results silent
-(use-package leuven-theme
-  :config
-  (load-theme 'leuven t))
-#+end_src

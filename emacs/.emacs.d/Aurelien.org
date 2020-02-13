@@ -987,57 +987,6 @@ you can use ~check-parens~
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
    #+END_SRC
 
-* Completion
-
-  #+BEGIN_SRC emacs-lisp
-   (use-package company
-     :commands (company-mode global-company-mode company-complete
-                             company-complete-common company-manual-begin company-grab-line)
-     :after evil
-     :config
-     (setq company-idle-delay 0.5
-           company-tooltip-limit 10
-           company-dabbrev-downcase nil
-           company-dabbrev-ignore-case nil
-           company-dabbrev-code-other-buffers t
-           company-tooltip-align-annotations t
-           company-require-match 'never
-           company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
-           company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-           company-backends '(company-capf company-dabbrev company-ispell company-yasnippet)
-           company-transformers '(company-sort-by-occurrence))
-     (global-company-mode +1))
-
-     (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
-   ;; helps rank completion candidates based on usage
-   (use-package company-statistics
-     :after company
-     :config
-     (setq company-statistics-file "~/.emacs.d/company-stats-cache.el")
-     (company-statistics-mode +1))
-
-   (use-package company-dict
-     :commands company-dict
-     :config
-     (defun +company|enable-project-dicts (mode &rest _)
-       "Enable per-project dictionaries."
-       (if (symbol-value mode)
-           (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
-         (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
-     (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
-
-
-     (autoload 'company-capf "company-capf")
-     (autoload 'company-yasnippet "company-yasnippet")
-     (autoload 'company-dabbrev "company-dabbrev")
-     (autoload 'company-dabbrev-code "company-dabbrev-code")
-     (autoload 'company-etags "company-etags")
-     (autoload 'company-elisp "company-elisp")
-     (autoload 'company-files "company-files")
-     (autoload 'company-gtags "company-gtags")
-     (autoload 'company-ispell "company-ispell")
-  #+END_SRC
-
 * Notes
 
   Some people switch to Emacs just to use org-mode.
@@ -1922,38 +1871,77 @@ you can use ~check-parens~
    or with ~enter~. You can also invoke the popup manually with ~C-x
    C-o~
    #+BEGIN_SRC emacs-lisp
-      (use-package company
-        :diminish company-mode
-        :config
-        (add-hook 'after-init-hook 'global-company-mode)
-        (setq company-dabbrev-downcase nil)
-        (setq company-show-numbers t)
-        (setq company-backends '((company-files company-capf company-dabbrev)))
+   (use-package company
+     :diminish company-mode
+     :config
+     (setq company-idle-delay 0.5
+           company-tooltip-limit 10
+           company-dabbrev-downcase nil
+           company-dabbrev-ignore-case nil
+           company-dabbrev-code-other-buffers t
+           company-tooltip-align-annotations t
+           company-require-match 'never
+           company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
+           company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
+           company-backends '(company-files company-capf company-dabbrev company-yasnippet company-ispell)
+           company-transformers '(company-sort-by-occurrence))
+     (global-company-mode +1)
 
-        (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
-        (let ((map company-active-map))
-          (mapc
-           (lambda (x)
-             (define-key map (format "%d" x) 'ora-company-number))
-           (number-sequence 0 9))
-          (define-key map " " (lambda ()
-                                (interactive)
-                                (company-abort)
-                                (self-insert-command 1)))
-          (define-key map (kbd "<return>") nil))
+     (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
+     (add-hook 'after-init-hook 'global-company-mode)
+     (setq company-dabbrev-downcase nil)
+     (setq company-show-numbers t)
+     (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
 
-        (defun ora-company-number ()
-          "Forward to `company-complete-number'.
+     (use-package company-statistics
+       :after company
+       :config
+       (setq company-statistics-file "~/.emacs.d/company-stats-cache.el")
+       (company-statistics-mode +1))
+
+     (use-package company-dict
+       :commands company-dict
+       :config
+       (defun +company|enable-project-dicts (mode &rest _)
+         "Enable per-project dictionaries."
+         (if (symbol-value mode)
+             (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
+           (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
+       (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
+
+
+     (autoload 'company-capf "company-capf")
+     (autoload 'company-yasnippet "company-yasnippet")
+     (autoload 'company-dabbrev "company-dabbrev")
+     (autoload 'company-dabbrev-code "company-dabbrev-code")
+     (autoload 'company-etags "company-etags")
+     (autoload 'company-elisp "company-elisp")
+     (autoload 'company-files "company-files")
+     (autoload 'company-gtags "company-gtags")
+     (autoload 'company-ispell "company-ispell")
+     (let ((map company-active-map))
+       (mapc
+        (lambda (x)
+          (define-key map (format "%d" x) 'ora-company-number))
+        (number-sequence 0 9))
+       (define-key map " " (lambda ()
+                             (interactive)
+                             (company-abort)
+                             (self-insert-command 1)))
+       (define-key map (kbd "<return>") nil))
+
+     (defun ora-company-number ()
+       "Forward to `company-complete-number'.
 
         Unless the number is potentially part of the candidate.
         In that case, insert the number."
-          (interactive)
-          (let* ((k (this-command-keys))
-                 (re (concat "^" company-prefix k)))
-            (if (cl-find-if (lambda (s) (string-match re s))
-                            company-candidates)
-                (self-insert-command 1)
-              (company-complete-number (string-to-number k))))))
+       (interactive)
+       (let* ((k (this-command-keys))
+              (re (concat "^" company-prefix k)))
+         (if (cl-find-if (lambda (s) (string-match re s))
+                         company-candidates)
+             (self-insert-command 1)
+           (company-complete-number (string-to-number k))))))
    #+END_SRC
 
 ** Snippets

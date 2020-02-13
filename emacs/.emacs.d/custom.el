@@ -117,13 +117,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 140 :family "Input Mono"))))
+ '(bold ((t (:weight normal))))
  '(custom-variable-tag ((t (:foreground "blue1" :weight normal))))
  '(font-lock-comment-face ((t (:foreground "#adaeb0"))))
  '(font-lock-warning-face ((t (:inherit error))))
  '(magit-blame-heading ((t (:inherit magit-blame-highlight :slant normal :weight normal))))
  '(magit-diff-file-heading ((t (:weight normal))))
  '(magit-filename ((t (:weight normal))))
+ '(magit-section-secondary-heading ((t (:weight normal))))
  '(mode-line-buffer-id ((t (:foreground "black" :slant italic :weight normal))))
  '(org-block ((t (:inherit shadow :background "#f1f2f1"))))
- '(org-document-title ((t (:foreground "midnight blue" :weight normal))))
+ '(org-document-title ((t (:foreground "midnight blue" :weight normal :height 1.3))))
  '(org-level-1 ((t (:inherit outline-1 :overline nil :height 1.6)))))

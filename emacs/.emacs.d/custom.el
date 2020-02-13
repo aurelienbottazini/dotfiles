@@ -119,6 +119,7 @@
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight book :height 140 :family "OperatorMono"))))
  '(bold ((t (:weight normal))))
  '(custom-variable-tag ((t (:foreground "blue1" :weight normal))))
+ '(error ((t (:foreground "Red1" :weight normal))))
  '(font-lock-comment-face ((t (:foreground "#adaeb0"))))
  '(font-lock-warning-face ((t (:inherit error))))
  '(magit-blame-heading ((t (:inherit magit-blame-highlight :slant normal :weight normal))))

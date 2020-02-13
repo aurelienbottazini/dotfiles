@@ -995,7 +995,7 @@ you can use ~check-parens~
                              company-complete-common company-manual-begin company-grab-line)
      :after evil
      :config
-     (setq company-idle-delay nil
+     (setq company-idle-delay 0.5
            company-tooltip-limit 10
            company-dabbrev-downcase nil
            company-dabbrev-ignore-case nil

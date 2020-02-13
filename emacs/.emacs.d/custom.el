@@ -116,7 +116,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 140 :family "Input Mono"))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight book :height 140 :family "OperatorMono"))))
  '(bold ((t (:weight normal))))
  '(custom-variable-tag ((t (:foreground "blue1" :weight normal))))
  '(font-lock-comment-face ((t (:foreground "#adaeb0"))))

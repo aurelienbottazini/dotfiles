@@ -125,4 +125,5 @@
  '(magit-filename ((t (:weight normal))))
  '(mode-line-buffer-id ((t (:foreground "black" :slant italic :weight normal))))
  '(org-block ((t (:inherit shadow :background "#f1f2f1"))))
+ '(org-document-title ((t (:foreground "midnight blue" :weight normal))))
  '(org-level-1 ((t (:inherit outline-1 :overline nil :height 1.6)))))

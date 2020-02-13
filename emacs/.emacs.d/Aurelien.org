@@ -1347,7 +1347,7 @@ you can use ~check-parens~
   #+BEGIN_SRC emacs-lisp
   (use-package evil
     :config
-      (setq evil-insert-state-cursor '(bar "#97d88a")
+      (setq evil-insert-state-cursor '(bar "#4c4e56")
             evil-visual-state-cursor '(box "#adcff1")
             evil-emacs-state-cursor '(box "#ffa2cb")
             evil-normal-state-cursor '(box "#bc3e44")))

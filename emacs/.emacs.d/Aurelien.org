@@ -1673,7 +1673,7 @@ you can use ~check-parens~
           (setq-local ffip-project-root "~/projs/PROJECT_DIR/subproj1")
           ;; well, I'm not interested in concatenated BIG js file or file in dist/
           (setq-local ffip-find-options "-not -size +64k -not -iwholename '*/dist/*'")
-          ;; for this project, I'm only interested certain types of files
+          ;; for this project, I'm only interested in certain types of files
           (setq-local ffip-patterns '("*.html" "*.js" "*.css" "*.java" "*.xml" "*.js"))
           ;; maybe you want to search files in `bin' directory?
           (setq-local ffip-prune-patterns (delete "*/bin/*" ffip-prune-patterns))
@@ -1709,17 +1709,18 @@ you can use ~check-parens~
                )))
     #+END_SRC
 
-*** My config
+*** My configuration
 
     To install fd (rust replacement for find), download it
     [[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
     to use `fd` instead of find.
     #+BEGIN_SRC emacs-lisp
     (use-package find-file-in-project
+      :ensure t
       :bind (:map  my-keys-minor-mode-map
-                   ("C-c T" . find-file-in-project)
+                   ("C-c t" . find-file-in-project)
                    ;; ("C-c t" . counsel-fzf)
-                   ("C-c t" . find-file-in-project-by-selected)
+                   ("C-c T" . find-file-in-project-by-selected)
                    ("C-c s" . abo-find-file-with-similar-name)
                    :map evil-normal-state-map
                    ("gf" . find-file-in-project-at-point))
@@ -1744,18 +1745,7 @@ you can use ~check-parens~
     #+END_SRC
 
     #+BEGIN_SRC emacs-lisp
-      (defun abo-find-file-with-similar-name (&optional open-another-window)
-        "Use base name of current file as keyword which could be further stripped.
-      by `ffip-strip-file-name-regex'.
-      If OPEN-ANOTHER-WINDOW is not nil, the file will be opened in new window."
-        (interactive "P")
-        (when buffer-file-name
-          (let* ((keyword (concat (file-name-base buffer-file-name) "") ))
-            (if ffip-strip-file-name-regex
-                (setq keyword (replace-regexp-in-string ffip-strip-file-name-regex
-                                                        ""
-                                                        keyword)))
-            (ffip-find-files keyword open-another-window))))
+    (require 'abo-find-in-project)
     #+END_SRC
 ** Switch between projects
 

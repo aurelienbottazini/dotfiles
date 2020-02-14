@@ -131,4 +131,6 @@
  '(mode-line-emphasis ((t (:weight normal))))
  '(org-block ((t (:inherit shadow :background "#f1f2f1"))))
  '(org-document-title ((t (:foreground "midnight blue" :weight normal :height 1.6))))
- '(org-level-1 ((t (:inherit outline-1 :overline nil :slant italic :height 1.6)))))
+ '(org-level-1 ((t (:inherit outline-1 :overline nil :slant italic :height 1.6))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.1)))))

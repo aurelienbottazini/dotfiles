@@ -903,8 +903,10 @@ you can use ~check-parens~
    (use-package paredit
      :diminish paredit-mode
      :bind (:map my-keys-minor-mode-map
-            ("C-)" . paredit-forward-slurp-sexp)
-            ("C-}" . paredit-forward-bard-sexp))
+            ("C-c 0" . paredit-forward-slurp-sexp)
+            ("C-c 9" . paredit-backward-slurp-sexp)
+            ("C-c ]" . paredit-forward-barf-sexp)
+            ("C-c [" . paredit-backward-barf-sexp))
      :config
      (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
 

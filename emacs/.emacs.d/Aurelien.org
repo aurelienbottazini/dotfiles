@@ -27,7 +27,6 @@ you can use ~check-parens~
 (check-parens)
 #+end_src
 
-
 * Setup
   It is important to load custom settings first. Those are the ones
   managed by Emacs through customization menus. They can impact the
@@ -1747,7 +1746,8 @@ you can use ~check-parens~
     #+END_SRC
 
     #+BEGIN_SRC emacs-lisp
-    (require 'abo-find-in-project)
+    (eval-after-load "ivy"
+      '(lambda () (require 'abo-find-in-project)))
     #+END_SRC
 ** Switch between projects
 

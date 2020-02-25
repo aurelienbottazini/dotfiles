@@ -1722,7 +1722,6 @@ you can use ~check-parens~
                    ("C-c t" . find-file-in-project)
                    ;; ("C-c t" . counsel-fzf)
                    ("C-c T" . find-file-in-project-by-selected)
-                   ("C-c s" . abo-find-file-with-similar-name)
                    :map evil-normal-state-map
                    ("gf" . find-file-in-project-at-point))
       :config
@@ -1747,7 +1746,8 @@ you can use ~check-parens~
 
     #+BEGIN_SRC emacs-lisp
     (eval-after-load "ivy"
-      '(lambda () (require 'abo-find-in-project)))
+      '(lambda () (require 'abo-find-in-project)
+      (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name)))
     #+END_SRC
 ** Switch between projects
 
@@ -1840,6 +1840,12 @@ you can use ~check-parens~
                    ("gr" . xref-find-references)))
    #+END_SRC
 
+** Navigation tree
+  #+begin_src emacs-lisp :results silent
+  (use-package treemacs
+    :bind (:map my-keys-minor-mode-map
+                ("C-c 1" . treemacs)))
+  #+end_src
 * Completion
 ** Hippie expand
    Bound to ~s-/~, it provides a simple on demand completion mechanism.

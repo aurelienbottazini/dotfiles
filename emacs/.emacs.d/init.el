@@ -611,7 +611,7 @@
 (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
 (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
 (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
-(define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/Aurelien.org")))
+(define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.org")))
 (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
 (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-blog-folder**)))
 (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))

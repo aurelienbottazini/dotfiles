@@ -1,10 +1,1281 @@
-;;;  -*- lexical-binding: t; -*-
-;; Load the rest of the packages
-(package-initialize t)
-(require 'cl)
+(when (display-graphic-p)
+  (set-face-background 'default "white")
+  (set-face-foreground 'default "black"))
+
+(setq evil-toggle-key "C-c e")
+
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+
+(if (file-exists-p "~/.emacs.d/.emacs-local")
+  (load "~/.emacs.d/.emacs-local"))
+
+(let ((default-directory  "~/.emacs.d/site-lisp/"))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
+
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t " my-keys" 'my-keys-minor-mode-map)
+(my-keys-minor-mode 1)
+
+(defadvice load (after give-my-keybindings-priority)
+  "Try to ensure that my keybindings always have priority."
+  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+        (add-to-list 'minor-mode-map-alist mykeys))))
+(ad-activate 'load)
+
+(setq package-archives
+      '(("melpa"       . "http://melpa.milkbox.net/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")
+        ("gnu"         . "http://elpa.gnu.org/packages/")))
+
+(setq package-user-dir (concat user-emacs-directory "elpa"))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(defun require-package (package &optional min-version)
+  "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
+  (unless (package-installed-p package min-version)
+    (package-install package)))
+
+(require-package 'use-package)
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+(defun my-reload-dir-locals-for-current-buffer ()
+  "Reloads dir locals for the current buffer."
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+
+(defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
+  "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
+  (interactive)
+  (let ((dir default-directory))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (equal default-directory dir))
+        (my-reload-dir-locals-for-current-buffer)))))
+
+(setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
+(let ((home-folder (getenv "HOME")))
+  (setenv "PATH" (concat
+                         "/home/linuxbrew/.linuxbrew/bin/:"
+                         (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
+                         (concat home-folder "/n/bin/:")
+                         (concat home-folder "/.local/bin/:")
+                         (concat home-folder "/work/dox-compose/bin/:")
+                         (concat home-folder "/.rbenv/shims:")
+                         (concat home-folder "/.rbenv/bin:")
+                         (concat home-folder "/.fzf/bin:")
+                         "/usr/bin:"
+                         "/usr/local/bin:"
+                         "/bin"))
+
+  (setq exec-path `(
+                    "/home/linuxbrew/.linuxbrew/bin/"
+                    ,(concat home-folder "/.config/yarn/global/node_modules/.bin/")
+                    ,(concat home-folder "/work/dox-compose/bin/")
+                    ,(concat home-folder "/n/bin/")
+                    ,(concat home-folder "/.rbenv/bin/")
+                    ,(concat home-folder "/.rbenv/shims/")
+                    ,(concat home-folder "/dotfiles/bin/")
+                    ,(concat home-folder "/.fzf/bin")
+                    ,(concat home-folder "/.local/bin")
+                    ,(concat home-folder "/bin")
+                    "/usr/local/opt/node@10/bin/"
+                    "/usr/local/bin"
+                    "/bin/"
+                    "/usr/local/sbin/"
+                    "/usr/bin/")))
+
+(defun check-large-file-hook ()
+  "If a file is over a given size, turn off minor modes."
+  (when (> (buffer-size) (* 1024 100)) ;; 100K
+    (fundamental-mode)
+    (font-lock-mode -1)
+    (setq buffer-read-only t)
+    (buffer-disable-undo)))
+
+(add-hook 'find-file-hooks 'check-large-file-hook)
+
+(setq help-window-select t)
+(setq inhibit-startup-message t)
+(setq delete-by-moving-to-trash t)
+(setq tab-always-indent 'complete)
+;; show end of buffer on left fringe
+(setq-default default-indicate-empty-lines nil)
+(make-variable-buffer-local 'compile-command)
+(defalias 'yes-or-no-p 'y-or-n-p) ;; instead of typing yes or no, type y or n
+(setq ring-bell-function 'ignore) ;; please don't startle me with a bell!
+
+(setq backup-by-copying t      ; don't clobber symlinks
+      backup-directory-alist
+      '((".*" . "~/.local/share/emacs-saves"))    ; don't litter my fs tree
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      auto-save-default t ;files starting with # are generated by autosave
+      auto-save-timeout 60 ; number of seconds before auto-saving
+      auto-save-interval 200 ; number of keystrokes before auto-saves
+      version-control t) ; use versioned backups
+(setq create-lockfiles nil)
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/.local/share/emacs-saves" t)))
+
+;; if file has no change, just load any changes
+;; coming from an external process
+(setq global-auto-revert-non-file-buffers t)
+(global-auto-revert-mode 1)
+
+;;; replace selected text when typing
+(pending-delete-mode 1)
+
+(prefer-coding-system 'utf-8)
+(modify-coding-system-alist 'process "\\*compilation\\*\\'"   'utf-8)
+
+;; gives each line only one visual line and don't show a continuation on next line
+(set-default 'truncate-lines t)
+
+(setq sentence-end-double-space nil)
+
+(add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
+
+( require 're-builder)
+(setq reb-re-syntax 'string)
+
+(setq-default
+ indent-tabs-mode nil    ;no tabs
+ c-basic-offset 2)
+(setq-default whitespace-style '(face trailing tabs tab-mark))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'prog-mode-hook 'whitespace-mode)
+(eval-after-load "whitespace"
+  '(diminish 'whitespace-mode))
+
+(recentf-mode 1)
+(setq recentf-max-menu-items 200)
+(setq recentf-max-saved-items 200)
+
+(defun sudo ()
+  "Use TRAMP to `sudo' the file for current buffer."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+             buffer-file-name))))
+
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+          (funcall (cdr my-pair)))))
+
+(defun filepath-with-line-number-for-current-buffer ()
+  "Return a string with Buffer-file-name:line-number.
+             Make it easier to prepare commands for tools like rspec"
+  (interactive)
+  (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
+
+(defun add-date-to-filename ()
+  "Add current date in front of filename for current buffer. This is useful with some
+        Blog tools like Jekyll to publish new articles."
+  (interactive)
+  (let* ((date (format-time-string "%Y-%m-%d"))
+         (buffer-file (buffer-file-name))
+         (new-file-name (concat (file-name-directory buffer-file)
+                                date
+                                "-"
+                                (file-name-nondirectory buffer-file)))
+         )
+    (rename-file buffer-file new-file-name)
+    (set-visited-file-name new-file-name)
+    (save-buffer)))
+
+(defun toggle-html-export-on-save ()
+  "Enable or disable HTML export when saving current org buffer."
+  (interactive)
+  (when (not (eq major-mode 'org-mode))
+    (error "Not an org-mode file!"))
+  (if (memq 'org-html-export-to-html after-save-hook)
+      (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
+             (message "Disabled org html export on save"))
+    (add-hook 'after-save-hook 'org-publish-current-file nil t)
+    (set-buffer-modified-p t)
+    (message "Enabled org html export on save")))
+
+
+(defun abo-jump-to-note-file ()
+  "Jump to org note file for current buffer"
+  (interactive)
+  (find-file **local-note-file**))
+(define-key my-keys-minor-mode-map "\C-cn" 'abo-jump-to-note-file)
+
+(defun abo-change-line-endings-to-unix ()
+  (let ((coding-str (symbol-name buffer-file-coding-system)))
+    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+      (set-buffer-file-coding-system 'unix))))
+
+(add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
+
+(blink-cursor-mode 0)
+(column-number-mode)
+
+(electric-indent-mode t)
+
+(electric-pair-mode)
+(defun inhibit-electric-pair-mode-in-minibuffer (char)
+  (minibufferp))
+(setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
+
+;; file path in frame title
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+
+(define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
+(setq blink-matching-paren 'jump-offscreen)
+
+;; makes fringe big enough with HDPI
+(fringe-mode 20)
+
+(use-package diminish
+  :config
+  (eval-after-load "undo-tree"
+    '(diminish 'undo-tree-mode))
+    (eval-after-load "subword"
+    '(diminish 'subword-mode))
+  (diminish 'auto-fill-function)
+  (diminish 'my-keys-minor-mode)
+  (diminish 'eldoc-mode))
+
+(define-key my-keys-minor-mode-map (kbd "C-c \\") 'split-window-right)
+(define-key my-keys-minor-mode-map (kbd "C-c -") 'split-window-below)
+
+(defun tmux-socket-command-string ()
+  (interactive)
+  (concat "tmux -S "
+          (replace-regexp-in-string "\n\\'" ""
+                                    (shell-command-to-string "echo $TMUX | sed -e 's/,.*//g'"))))
+
+(defun tmux-move-right ()
+  (interactive)
+  (condition-case nil
+      (evil-window-right 1)
+    (error (unless window-system (shell-command (concat
+                                                 (tmux-socket-command-string) " select-pane -R") nil)))))
+
+(defun tmux-move-left ()
+  (interactive)
+  (condition-case nil
+      (evil-window-left 1)
+    (error (unless window-system (shell-command (concat
+                                                 (tmux-socket-command-string) " select-pane -L") nil)))))
+
+(defun tmux-move-up ()
+  (interactive)
+  (condition-case nil
+      (evil-window-up 1)
+    (error (unless window-system (shell-command (concat
+                                                 (tmux-socket-command-string) " select-pane -U") nil)))))
+
+(defun tmux-move-down ()
+  (interactive)
+  (condition-case nil
+      (evil-window-down 1)
+    (error (unless window-system (shell-command (concat
+                                                 (tmux-socket-command-string) " select-pane -D") nil)))))
+
+(define-key my-keys-minor-mode-map (kbd "C-h") 'tmux-move-left)
+(define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
+(define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
+(define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
+
+(defun my-prog-mode-auto-fill-hook ()
+  (setq fill-column 80)
+  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+  (auto-fill-mode t))
+(add-hook 'prog-mode-hook 'my-prog-mode-auto-fill-hook)
+
+(use-package clojure-mode
+  :mode "\\.clj\\'"
+  :config
+  (add-hook 'clojure-mode-hook #'subword-mode)
+  (use-package cider))
+
+(use-package yaml-mode
+  :mode "\\.ya?ml\\'")
+
+(use-package ruby-mode
+  :mode "\\.rake\\'"
+  :mode "Rakefile\\'"
+  :mode "\\.gemspec\\'"
+  :mode "\\.ru\\'"
+  :mode "Gemfile\\'"
+  :mode "Guardfile\\'"
+  :mode "Capfile\\'"
+  :mode "\\.cap\\'"
+  :mode "\\.thor\\'"
+  :mode "\\.rabl\\'"
+  :mode "Thorfile\\'"
+  :mode "Vagrantfile\\'"
+  :mode "\\.jbuilder\\'"
+  :mode "Podfile\\'"
+  :mode "\\.podspec\\'"
+  :mode "Puppetfile\\'"
+  :mode "Berksfile\\'"
+  :mode "Appraisals\\'"
+  :mode "\\.rb$"
+  :mode "ruby"
+  :config
+
+  (add-hook 'ruby-mode-hook 'subword-mode)
+
+  (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)
+  (use-package ruby-interpolation
+    :diminish ruby-interpolation-mode)
+  (use-package ruby-end
+    :diminish ruby-end-mode
+    :config
+    (defun ruby-end-insert-end ()
+      "Closes block by inserting end."
+      (save-excursion
+        (newline)
+        (insert "end")
+        (indent-according-to-mode)))
+    )
+  (use-package rspec-mode))
+
+(use-package rcodetools
+  :load-path "/site-lisp/rcodetools.el"
+  :pin manual
+  :ensure nil
+  :config
+  (defadvice comment-dwim (around rct-hack activate)
+    "If comment-dwim is successively called, add => mark."
+    (if (and (or (eq major-mode 'enh-ruby-mode)
+                 (eq major-mode 'ruby-mode))
+             (eq last-command 'comment-dwim))
+        (progn
+          (if (eq major-mode 'enh-ruby-mode)
+              (end-of-line))
+          (insert "=>"))
+      ad-do-it)))
+
+(use-package go-mode)
+
+(use-package web-mode
+    :mode "\\.html\\'"
+    :config
+    (setq web-mode-enable-auto-closing t))
+(use-package web-mode
+  :mode "\\.gohtml\\'")
+
+  (use-package emmet-mode
+  :after evil
+    :diminish emmet-mode
+    :config
+    (progn
+      (evil-define-key 'insert emmet-mode-keymap (kbd "C-j") 'emmet-expand-line)
+      (evil-define-key 'emacs emmet-mode-keymap (kbd "C-j") 'emmet-expand-line))
+
+    (add-hook 'css-mode-hook
+              (lambda ()
+                (emmet-mode)
+                (setq emmet-expand-jsx-className? nil)))
+
+    (add-hook 'sgml-mode-hook
+              (lambda ()
+                (emmet-mode)
+                (setq emmet-expand-jsx-className? nil)))
+
+    (add-hook 'web-mode-hook
+              (lambda ()
+                (emmet-mode))))
+
+(use-package scss-mode
+  :mode "\\.scss\\'")
+
+(use-package sass-mode :mode "\\.sass\\'")
+
+(use-package less-css-mode
+  :mode "\\.less\\'")
+
+(require 'compile)
+(setq compilation-error-regexp-alist-alist
+      (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
+                   1 ;; file
+                   2 ;; line
+                   )
+            compilation-error-regexp-alist-alist))
+(setq compilation-error-regexp-alist
+      (cons 'node compilation-error-regexp-alist))
+
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command)
+                 (format "node %s" (file-name-nondirectory buffer-file-name)))))
+
+(setq js-indent-level 2)
+
+(use-package js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
+  (setq js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        js2-basic-offset 2
+        js2-highlight-level 3
+        css-indent-offset 2
+        web-mode-markup-indent-offset 2
+        web-mode-script-padding 0
+        web-mode-css-indent-offset 2
+        web-mode-style-padding 2
+        web-mode-code-indent-offset 2
+        web-mode-attr-indent-offset 2)
+  :config
+  (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook (lambda() (subword-mode t)))
+
+  ;; (use-package xref-js2
+  ;;   :init
+  ;;   (setq xref-js2-search-program 'rg)
+  ;;   :config
+  ;;   (add-hook 'js2-mode-hook (lambda () (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+
+(use-package json-mode
+  :mode "\\.json\\'"
+  :mode "\\.eslintrc\\'")
+
+(use-package coffee-mode
+  :mode "\\.coffee\\'"
+  :config
+  (use-package highlight-indentation)
+  (add-hook 'coffee-mode-hook '(lambda () (highlight-indentation-mode)))
+  (add-hook 'coffee-mode-hook '(lambda () (subword-mode +1)))
+  (custom-set-variables '(coffee-tab-width 2)))
+
+(use-package typescript-mode
+  :mode "\\.ts\\'")
+
+(use-package prettier-js
+  :diminish prettier-js-mode
+  :config
+  (setq prettier-args '(
+                        "--trailing-comma" "es5"
+                        "--single-quote" "true"
+                        )
+        prettier-js-command "prettier")
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook 'prettier-js-mode))
+
+(use-package context-coloring
+  :ensure t
+  :diminish context-coloring-mode
+  :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
+  :config
+  (add-hook 'js2-mode-hook #'context-coloring-mode))
+
+(add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
+(defun my-jsx-hook ()
+  "Set web mode with adjustments for JSX"
+  (interactive)
+  (web-mode)
+  (web-mode-set-content-type "jsx")
+  (setq imenu-create-index-function 'auray-js-imenu-make-index
+        emmet-expand-jsx-className? t)
+  (flycheck-select-checker 'javascript-eslint)
+  (emmet-mode)))
+
+(use-package prettier-js
+  :config
+  (add-hook 'web-mode-hook #'(lambda ()
+                               (enable-minor-mode
+                                '("\\.jsx?\\'" . prettier-js-mode)))))
+
+(use-package web-mode
+  :mode "\\.vue\\'"
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-script-padding 0)
+  (defun jjpandari/merge-imenu (index-fun)
+    (interactive)
+    (let ((mode-imenu (funcall index-fun))
+          (custom-imenu (imenu--generic-function imenu-generic-expression)))
+      (append custom-imenu mode-imenu)))
+
+  (use-package prettier-js
+    :config
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (enable-minor-mode
+                                  '("\\.vue?\\'" . prettier-js-mode)))))
+
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (setq imenu-create-index-function (lambda () (jjpandari/merge-imenu 'web-mode-imenu-index))))))
+
+(require 'aurayb-narrow-indirect-vue)
+;; (define-key my-keys-minor-mode-map (kbd "nj") (aurayb-make-narrow-indirect-vue "script" 'js2-mode))
+;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
+;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
+;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
+
+(use-package docker
+ :ensure t
+ :bind ("C-c d d". docker)
+ :config
+    (defadvice docker-image-mode (after docker-image-mode-change-to-emacs-state activate compile)
+      "when entering git-timemachine mode, change evil normal state to emacs state"
+      (if (evil-normal-state-p)
+          (evil-emacs-state)
+        (evil-normal-state))))
+
+;; (use-package transient)
+;; (require 'dox-dc)
+;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
+;; (evil-set-initial-state 'dox-dc-mode 'emacs)
+
+(use-package flycheck
+  :diminish flycheck-mode
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (add-hook 'web-mode-hook 'flycheck-mode)
+  (add-hook 'js2-mode-hook 'flycheck-mode)
+  (defun my/use-eslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint (and root
+                        (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                          root))))
+      (when (and eslint (file-executable-p eslint))
+        (setq-local flycheck-javascript-eslint-executable eslint))))
+  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+(define-derived-mode cfn-mode yaml-mode
+  "Cloudformation"
+  "Cloudformation template mode.")
+(add-to-list 'auto-mode-alist '(".template.yaml\\'" . cfn-mode))
+(add-hook 'cfn-mode-hook 'flycheck-mode)
+(flycheck-define-checker cfn-lint
+  "A Cloudformation linter using cfn-python-lint.
+            See URL 'https://github.com/awslabs/cfn-python-lint'."
+  :command ("cfn-lint" "-f" "parseable" source)
+  :error-patterns (
+                   (warning line-start (file-name) ":" line ":" column
+                            ":" (one-or-more digit) ":" (one-or-more digit) ":"
+                            (id "W" (one-or-more digit)) ":" (message) line-end)
+                   (error line-start (file-name) ":" line ":" column
+                          ":" (one-or-more digit) ":" (one-or-more digit) ":"
+                          (id "E" (one-or-more digit)) ":" (message) line-end)
+                   )
+  :modes (cfn-mode))
+(add-to-list 'flycheck-checkers 'cfn-lint))
+
+(define-key my-keys-minor-mode-map (kbd "C-x C-m") 'execute-extended-command)
+(define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
+
+(use-package which-key
+  :diminish which-key-mode
+  :config
+  (which-key-mode))
+
+(define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
+
+;; makes grep buffers writable and apply the changes to files.
+(use-package wgrep :defer t)
+
+(use-package paredit
+  :diminish paredit-mode
+  :bind (:map my-keys-minor-mode-map
+         ("C-c 0" . paredit-forward-slurp-sexp)
+         ("C-c 9" . paredit-backward-slurp-sexp)
+         ("C-c ]" . paredit-forward-barf-sexp)
+         ("C-c [" . paredit-backward-barf-sexp))
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode))
+
+(use-package expand-region
+  :bind (:map my-keys-minor-mode-map ("C-c w" . er/expand-region)))
+
+(define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
+(define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
+(define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
+(define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/Aurelien.org")))
+(define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
+(define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-blog-folder**)))
+(define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
+(define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
+(define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
+(define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
+
+(define-key my-keys-minor-mode-map (kbd "<f5>") 'ispell-buffer)
+
+(define-key my-keys-minor-mode-map (kbd "C-c h") 'highlight-symbol-at-point)
+(define-key my-keys-minor-mode-map (kbd "C-c H") 'unhighlight-regexp)
+(define-key my-keys-minor-mode-map (kbd "C-c oh") '(lambda ()
+  (interactive)
+  (hi-lock-mode -1)
+  (evil-search-highlight-persist-remove-all)))
+
+(defun hide-line-numbers ()
+  (interactive)
+  (setq display-line-numbers (quote nil)))
+(define-key my-keys-minor-mode-map (kbd "C-c olh") 'hide-line-numbers)
+
+(defun show-line-numbers ()
+  (interactive)
+  (setq display-line-numbers (quote absolute)))
+(define-key my-keys-minor-mode-map (kbd "C-c oll") 'show-line-numbers)
+(define-key my-keys-minor-mode-map (kbd "C-c ow") 'visual-line-mode)
+(define-key my-keys-minor-mode-map (kbd "C-c of") 'auto-fill-mode)
+(define-key my-keys-minor-mode-map (kbd "C-c og") 'global-hl-line-mode)
+
+(use-package rainbow-mode
+  :diminish rainbow-mode
+  :bind (:map my-keys-minor-mode-map
+              ("C-c or" . rainbow-mode)))
+
+(define-key my-keys-minor-mode-map (kbd "C-c ot") 'toggle-truncate-lines)
+
+(use-package evil
+  :config
+   (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+   (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+   (define-key evil-normal-state-map (kbd "]e") 'next-error)
+   (define-key evil-normal-state-map (kbd "[e") 'previous-error))
+
+(use-package windresize
+  :bind (:map evil-normal-state-map
+              ("C-w r" . windresize)))
+
+(use-package drag-stuff
+  :diminish t
+  :bind (:map my-keys-minor-mode-map
+         ("C-M-<up>" . drag-stuff-up)
+         ("C-M-<down>" . drag-stuff-down))
+  :config
+  (drag-stuff-global-mode t))
+
+(use-package key-chord
+  :after evil
+  :config
+  (key-chord-mode 1)
+  (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+
+(use-package evil
+  :config
+  (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
+
+(setq org-directory **local-org-folder**)
+
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+(add-hook 'org-capture-mode-hook 'evil-insert-state)
+
+(use-package evil
+  :init
+  (setq org-use-speed-commands nil)
+  :config
+  (evil-define-key 'normal org-mode-map
+    (kbd "M-l") 'org-shiftmetaright
+    (kbd "M-h") 'org-shiftmetaleft
+    (kbd "M-k") 'org-move-subtree-up
+    (kbd "M-j") 'org-move-subtree-down
+    (kbd "M-p") 'org-publish-current-project
+    (kbd "TAB") 'org-cycle)
+  )
 (require 'org)
-(require 'ob-tangle)
+(add-to-list 'org-modules "org-habit")
+(setq org-log-into-drawer t)
+
+(setq org-todo-keywords
+      '((sequence "TODO" "WAITING" "|" "DONE(!)")))
+
+(use-package markdown-mode)
+
+(define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
+
+(use-package palimpsest
+  :diminish palimpsest-mode
+  :config
+  (add-hook 'org-mode-hook 'palimpsest-mode))
+
+(setq org-capture-templates
+       '(("n" "Notes" entry (file+headline **local-note-file** "Inbox") "* %?\n")))
+
+(define-key my-keys-minor-mode-map (kbd "C-c n") 'org-capture)
+(add-hook 'org-capture-mode-hook 'evil-insert-state)
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame"
+  (if (equal "global-org-capture" (frame-parameter nil 'name))
+      (progn
+        (delete-frame))))
+
+(defadvice org-capture-destroy
+    (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame"
+  (if (equal "global-org-capture" (frame-parameter nil 'name))
+      (progn
+        (delete-frame))))
+
+;; make the frame contain a single window. by default org-capture
+;; splits the window.
+(add-hook 'org-capture-mode-hook
+          'delete-other-windows)
+
+(require 'ob-clojure) ;; run cider-jack-in from org buffer to be able to run
+                      ;; clojure code
+(use-package ob-clojurescript) ;; requires [[https://github.com/anmonteiro/lumo][lumo]]
+(setq org-babel-clojure-backend 'cider)
+(require 'ob-js)
+(setq org-babel-js-function-wrapper "require('util').log(require('util').inspect(function(){%s}()));")
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((shell . t)
+                               (ditaa . t)))
+(setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.11.0/libexec/ditaa-0.11.0-standalone.jar")
+
+(setq
+ time-stamp-active t
+ time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
+ time-stamp-format "%04y-%02m-%02d") ;
+
+(use-package writeroom-mode
+  :bind (:map my-keys-minor-mode-map
+              ("C-c z" . writeroom-mode)))
+
+(setq org-src-preserve-indentation nil
+      org-html-indent nil
+      org-edit-src-content-indentation 0)
+(use-package htmlize) ;; for org html export
+(setq system-time-locale "C") ;; make sure time local is in english when exporting
+(setq org-html-validation-link nil)
+(setq org-publish-project-alist
+      '(
+        ("blog-files"
+         :base-directory **local-blog-folder**
+         :base-extension "org"
+         :publishing-directory **local-blog-exported-folder**
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :headline-levels 4             ; Just the default for this project.
+         :auto-preamble t
+         :html-head nil
+         :html-head-extra nil
+         :body-only true
+         )
+        ;; ... add all the components here (see below)...
+        ;; ("wiki" :components ("wiki-files"))
+        )
+      org-export-with-toc nil
+      org-html-doctype "html5"
+      org-html-head nil
+      org-html-head-include-default-style nil
+      org-html-head-include-scripts nil
+      org-html-html5-fancy t
+      org-html-postamble nil
+      org-html-indent t)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local time-stamp-start "Updated on[ 	]+\\\\?[\"<]+")
+            (add-hook 'before-save-hook 'time-stamp nil 'local)))
+
+(add-hook 'write-file-hooks 'time-stamp) ; update when saving
+(require 'ox-publish)
+(setq system-time-locale "C") ;; make sure time local is in english when exporting
+(setq org-html-validation-link nil)
+
+(setq ispell-program-name "aspell")
+(setq ispell-silently-savep t)
+(setq ispell-personal-dictionary **local-personal-dictionary**)
+;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
+(setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+
+(add-hook 'org-mode-hook 'turn-on-flyspell)
+(eval-after-load "flyspell"
+     '(diminish 'flyspell-mode))
+
+(use-package define-word
+  :config
+  (evil-define-key 'normal org-mode-map
+    (kbd "z w") 'define-word-at-point))
+
+(use-package powerthesaurus
+  :config
+  (evil-define-key 'normal org-mode-map
+    (kbd "z s") 'powerthesaurus-lookup-word-dwim))
+
+(use-package writegood-mode
+ :config
+ (evil-define-key 'normal org-mode-map
+    (kbd "z g g") 'writegood-mode)
+ (evil-define-key 'normal org-mode-map
+    (kbd "z g r") 'writegood-reading-ease)
+ (evil-define-key 'normal org-mode-map
+    (kbd "z g l") 'writegood-grade-level))
+
+(require 'browse-url) ; part of gnu emacs
+
+(defun my-lookup-wikipedia ()
+  "Look up the word under cursor in Wikipedia.
+If there is a text selection (a phrase), use that.
+
+This command switches to browser."
+  (interactive)
+  (let (word)
+    (setq word
+          (if (use-region-p)
+              (buffer-substring-no-properties (region-beginning) (region-end))
+            (current-word)))
+    (setq word (replace-regexp-in-string " " "_" word))
+    (browse-url (concat "http://en.wikipedia.org/wiki/" word))
+    ;; (eww myUrl) ; emacs's own browser
+    ))
+
+(use-package evil
+  :config
+  (defun my-evil-record-macro ()
+    (interactive)
+    (if buffer-read-only
+        (quit-window)
+      (call-interactively 'evil-record-macro)))
+
+  (with-eval-after-load 'evil-maps
+    (define-key evil-normal-state-map (kbd "q") 'my-evil-record-macro)))
+
+(use-package evil-surround
+  :after evil
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-commentary
+  :after evil
+  :diminish evil-commentary-mode
+  :config
+  (evil-commentary-mode))
+
+(use-package evil-visualstar
+  :after evil
+  :config
+  (global-evil-visualstar-mode t))
+
+(use-package evil-matchit
+  :after evil
+  :config
+  (global-evil-matchit-mode 1))
+
+(use-package evil-search-highlight-persist
+  :config
+  (global-evil-search-highlight-persist t))
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-mode-line-format nil)
+  :config
+
+  (evil-mode 1)
+  (evil-set-initial-state 'deft-mode 'insert)
+  (evil-set-initial-state 'dired-mode 'emacs)
+  (evil-set-initial-state 'magit-mode 'emacs)
+  (evil-set-initial-state 'magit-mode 'emacs)
+  (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+
+  (evil-ex-define-cmd "W" 'save-buffer))
+
+(lexical-let ((default-color (cons (face-background 'mode-line)
+                                 (face-foreground 'mode-line))))
+(add-hook 'post-command-hook
+          (lambda ()
+            (let ((color (cond ((minibufferp) default-color)
+                               ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
+                               ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
+                               ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
+                               ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
+                               (t default-color)))
+                  )
+
+              (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
+              (set-face-background 'mode-line (car color))
+              (set-face-foreground 'mode-line-buffer-id (cdr color))
+              (set-face-foreground 'mode-line (cdr color))))))
+
+(use-package evil
+  :config
+    (setq evil-insert-state-cursor '(bar "#4c4e56")
+          evil-visual-state-cursor '(box "#adcff1")
+          evil-emacs-state-cursor '(box "#ffa2cb")
+          evil-normal-state-cursor '(box "#bc3e44")))
+
+(use-package evil-indent-plus
+  :after evil
+  :config
+  (evil-indent-plus-default-bindings))
+
+(use-package ivy
+  :diminish ivy-mode
+  :bind (("C-s" . swiper-isearch)
+         :map my-keys-minor-mode-map
+         ("C-c v" . ivy-push-view)
+         ("C-c V" . ivy-pop-view))
+  :init
+  (setq ivy-use-selectable-prompt t)
+  ;; enable bookmarks and recent-f
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-initial-inputs-alist nil)
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-plus)))
+  :config
+  (use-package ivy-hydra)
+  (ivy-mode 1)
+  (defun ivy-switch-buffer-occur ()
+    "Occur function for `ivy-switch-buffer' using `ibuffer'."
+    (ibuffer nil (buffer-name) (list (cons 'name ivy--old-re))))
+  (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
+  (eval-after-load "ivy"
+    '(define-key ivy-minibuffer-map (kbd "C-c SPC") 'ivy-restrict-to-matches))
+
+(use-package avy
+  :bind (:map my-keys-minor-mode-map
+         ("C-c ;" . avy-goto-char-timer)))
+
+(use-package counsel
+  :bind (:map my-keys-minor-mode-map ("C-c f" . counsel-rg)))
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("<f1> f" . counsel-describe-function)
+         ("<f1> v" . counsel-describe-variable)
+         ("<f1> l" . counsel-find-library)
+         ("<f2> i" . counsel-info-lookup-symbol)
+         ("<f2> u" . counsel-unicode-char)
+         :map minibuffer-local-map
+         ("C-r" . counsel-minibuffer-history)
+         :map my-keys-minor-mode-map
+         ("C-c r" . counsel-recentf)
+         ("C-c i" . counsel-imenu)
+         ("C-c b" . counsel-ibuffer)
+         ("C-c m" . counsel-bookmark))
+  :init
+  (setq counsel-git-cmd "rg --files")
+  (setq counsel-rg-base-command
+        "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s ."))
+
+(eval-after-load "counsel" '(progn
+                              (defun counsel-imenu-categorize-functions (items)
+                                "Categorize all the functions of imenu."
+                                (let ((fns (cl-remove-if #'listp items :key #'cdr)))
+                                  (if fns
+                                      (nconc (cl-remove-if #'nlistp items :key #'cdr)
+                                             `((":" ,@fns)))
+                                    items)))))
+
+(use-package iedit
+ :bind (:map my-keys-minor-mode-map ("<f6>" . iedit-mode)))
+
+(use-package multiple-cursors
+  :bind (:map my-keys-minor-mode-map
+              ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+              ("C-c c a" . mc/mark-all-like-this)
+              ("C-c c p" . mc/mark-previous-like-this)
+              ("C-c c n" . mc/mark-next-like-this)))
+
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+(setq ediff-split-window-function 'split-window-vertically)
+
+(use-package git-link
+  :bind (:map my-keys-minor-mode-map
+              ("C-c gl" . git-link)))
+
+(use-package git-timemachine
+  :bind (:map my-keys-minor-mode-map
+              ("C-c gt" . git-timemachine-toggle))
+  :config
+  (defadvice git-timemachine-mode (after git-timemachine-change-to-emacs-state activate compile)
+    "when entering git-timemachine mode, change evil normal state to emacs state"
+    (if (evil-normal-state-p)
+        (evil-emacs-state)
+      (evil-normal-state)))
+
+  (ad-activate 'git-timemachine-mode))
+
+(use-package fullframe
+  :config
+  (fullframe vc-annotate quit-window))
+
+(eval-after-load "vc-annotate"
+     '(progn
+      (define-key vc-annotate-mode-map "j" 'evil-next-line)
+      (define-key vc-annotate-mode-map "k" 'evil-previous-line)))
+
+(use-package evil
+  :config
+  (evil-define-key 'normal diff-mode-map (kbd "q") 'quit-window))
+
+(use-package magit
+  :bind (:map my-keys-minor-mode-map
+              ("C-c gs" . magit-status)
+              ("C-c gc" . magit-commit)
+              ("C-c gp" . magit-push-current)
+              ("C-c gf" . magit-file-dispatch))
+  :init
+  (setq magit-commit-show-diff nil
+        magit-revert-buffers 1))
+
+(use-package fullframe
+  :after magit
+  :config
+  (fullframe magit-status magit-mode-quit-window))
+
+(use-package evil
+  :config
+  (add-hook 'with-editor-mode-hook 'evil-insert-state))
+
+(defun ab-run-gitsh ()
+  "Start gitsh in current git project. Uses st as a terminal."
+  (interactive)
+  (let ((default-directory (locate-dominating-file (expand-file-name default-directory) ".gitignore")))
+    (start-process "gitsh" nil "gnome-terminal" "--geometry=120x70" "--class=scratch-term" "--" "gitsh")))
+(define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
+
+(use-package diff-hl
+  :after magit
+  :config
+  (add-hook 'prog-mode-hook 'diff-hl-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+(use-package find-file-in-project
+  :ensure t
+  :bind (:map  my-keys-minor-mode-map
+               ("C-c t" . find-file-in-project)
+               ;; ("C-c t" . counsel-fzf)
+               ("C-c T" . find-file-in-project-by-selected)
+               :map evil-normal-state-map
+               ("gf" . find-file-in-project-at-point))
+  :config
+  (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
+  (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
+  (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
+  (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.gif")) ffip-ignore-filenames))
+  (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.bmp")) ffip-ignore-filenames))
+  (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.ico")) ffip-ignore-filenames))
+  (setq ffip-prefer-ido-mode nil)
+  (setq ffip-use-rust-fd nil) ;; find works better than fd. fd with ffip ignores my .emacs.d directory for some reason
+  (setq ffip-strip-file-name-regex "\\(\\.mock\\|_test\\|\\.test\\|\\.mockup\\|\\.spec\\)")
+  (add-to-list 'ffip-prune-patterns "*/.git/*")
+  (add-to-list 'ffip-prune-patterns "*/dist/*")
+  (add-to-list 'ffip-prune-patterns "*/.emacs.d/elpa/*")
+  (add-to-list 'ffip-prune-patterns "*/.nuxt/*")
+  (add-to-list 'ffip-prune-patterns "*/spec/coverage/*")
+  (add-to-list 'ffip-prune-patterns "*/public/*")
+  (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
+  (add-to-list 'ffip-prune-patterns "node_modules/*"))
+
+(eval-after-load "ivy"
+  '(lambda () (require 'abo-find-in-project)
+  (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name)))
+
+(use-package projectile
+  :demand
+  :bind (:map my-keys-minor-mode-map
+         ("C-c p" . projectile-command-map))
+  :init
+  (setq projectile-switch-project-action 'projectile-dired)
+  (setq projectile-mode-line-prefix " ")
+  :config
+  (projectile-mode t))
+
+(use-package projectile
+  :config
+  (projectile-register-project-type 'npm '("package.json")
+                                    :compile "npm install"
+                                    :test "npm test"
+                                    :run "npm start"
+                                    :test-suffix ".spec"))
+
+(use-package dumb-jump
+  :bind (:map evil-normal-state-map
+              ("gd" . dumb-jump-go)
+              ("gD" . dumb-jump-go-other-window))
+  :init
+  (setq dumb-jump-selector 'ivy)
+  :config
+  (add-hook 'dumb-jump-after-jump-hook
+            (defun abo-dumb-jump-pulse-line ()
+              (pulse-momentary-highlight-one-line (point)))))
+
+(use-package evil
+  :bind (:map evil-normal-state-map
+                ("g." . xref-find-definitions)
+                ("gr" . xref-find-references)))
+
+(use-package treemacs
+  :bind (:map my-keys-minor-mode-map
+              ("C-c 1" . treemacs)))
+
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
+(require 'mode-local)
+(setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line))
+(require 'mode-local)
+(setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+(define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
+
+(use-package company
+  :diminish company-mode
+  :config
+  (setq company-idle-delay 0.5
+        company-tooltip-limit 10
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case nil
+        company-dabbrev-code-other-buffers t
+        company-tooltip-align-annotations t
+        company-require-match 'never
+        company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
+        company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
+        company-backends '(company-files company-capf company-dabbrev company-yasnippet company-ispell)
+        company-transformers '(company-sort-by-occurrence))
+  (global-company-mode +1)
+
+  (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-dabbrev-downcase nil)
+  (setq company-show-numbers t)
+  (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
+
+  (use-package company-statistics
+    :after company
+    :config
+    (setq company-statistics-file "~/.emacs.d/company-stats-cache.el")
+    (company-statistics-mode +1))
+
+  (use-package company-dict
+    :commands company-dict
+    :config
+    (defun +company|enable-project-dicts (mode &rest _)
+      "Enable per-project dictionaries."
+      (if (symbol-value mode)
+          (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
+        (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
+    (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
+
+
+  (autoload 'company-capf "company-capf")
+  (autoload 'company-yasnippet "company-yasnippet")
+  (autoload 'company-dabbrev "company-dabbrev")
+  (autoload 'company-dabbrev-code "company-dabbrev-code")
+  (autoload 'company-etags "company-etags")
+  (autoload 'company-elisp "company-elisp")
+  (autoload 'company-files "company-files")
+  (autoload 'company-gtags "company-gtags")
+  (autoload 'company-ispell "company-ispell")
+  (let ((map company-active-map))
+    (mapc
+     (lambda (x)
+       (define-key map (format "%d" x) 'ora-company-number))
+     (number-sequence 0 9))
+    (define-key map " " (lambda ()
+                          (interactive)
+                          (company-abort)
+                          (self-insert-command 1)))
+    (define-key map (kbd "<return>") nil))
+
+  (defun ora-company-number ()
+    "Forward to `company-complete-number'.
+
+     Unless the number is potentially part of the candidate.
+     In that case, insert the number."
+    (interactive)
+    (let* ((k (this-command-keys))
+           (re (concat "^" company-prefix k)))
+      (if (cl-find-if (lambda (s) (string-match re s))
+                      company-candidates)
+          (self-insert-command 1)
+        (company-complete-number (string-to-number k))))))
+
+(use-package yasnippet
+  :demand
+  :commands yas-expand-snippet
+  :bind (:map my-keys-minor-mode-map
+              ("C-c yd" . yas-describe-tables))
+  :diminish yas-minor-mode
+  :init
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"))
+  :config
+  (yas-global-mode 1)
+  (add-hook 'term-mode-hook (lambda()
+                              (yas-minor-mode -1))))
+
+(use-package yatemplate
+  :config
+  (add-hook 'find-file-hook 'auto-insert)
+  (yatemplate-fill-alist))
+
+(setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform
+(setq dired-listing-switches "-alh")
+;; on mac there is some weird prefixing going on for GNU Tools like ls.
+;; I favor GNU ls over MacOSX default ls
+(when (string-equal system-type "darwin")
+  (setq insert-directory-program "gls"))
+
+(require 'dired )
+(defun my-dired-mode-setup ()
+  "to be run as hook for `dired-mode'."
+  (dired-hide-details-mode 1))
+(add-hook 'dired-mode-hook 'my-dired-mode-setup)
+
+(put 'dired-find-alternate-file 'disabled nil)
+(setq dired-dwim-target t)
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")
+            ;; Set dired-x global variables here.  For example:
+            ;; (setq dired-guess-shell-gnutar "gtar")
+            ;; (setq dired-x-hands-off-my-keys nil)
+            (setq dired-recursive-copies (quote always)) ; “always” means no asking
+            (setq dired-recursive-deletes (quote top)) ; “top” means ask once
+            ))
+
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map "-" 'dired-up-directory)
+     (define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
+     (define-key dired-mode-map (kbd "/") 'evil-search-forward)
+     (define-key dired-mode-map (kbd "j") 'dired-next-line)
+     (define-key dired-mode-map (kbd "k") 'dired-previous-line)
+     (define-key dired-mode-map (kbd "[b") 'previous-buffer)
+     (define-key dired-mode-map (kbd "]b") 'next-buffer)
+     (evil-define-key 'normal dired-mode-map
+       "gg" 'evil-goto-first-line
+       "^" '(lambda () (interactive) (find-alternate-file "..")))))
+
+(define-key package-menu-mode-map (kbd "/") 'evil-search-forward)
+
+(use-package dired-rsync
+:config
+(bind-key "p" 'dired-rsync dired-mode-map))
+
+(use-package counsel
+  :demand
+  :bind (("C-x C-f" . counsel-find-file)))
+
 (setq vc-follow-symlinks t)
-(org-babel-load-file (expand-file-name "~/.emacs.d/Aurelien.org"))
 (put 'magit-edit-line-commit 'disabled nil)
 (put 'narrow-to-region 'disabled nil)

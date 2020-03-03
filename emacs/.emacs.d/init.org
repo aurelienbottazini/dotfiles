@@ -1017,6 +1017,7 @@ you can use ~check-parens~
       (kbd "M-p") 'org-publish-current-project
       (kbd "TAB") 'org-cycle)
     )
+  (require 'org)
   (add-to-list 'org-modules "org-habit")
   (setq org-log-into-drawer t)
 
@@ -2040,3 +2041,15 @@ you can use ~check-parens~
      :demand
      :bind (("C-x C-f" . counsel-find-file)))
    #+END_SRC
+
+#+begin_src emacs-lisp :results silent
+(setq vc-follow-symlinks t)
+(put 'magit-edit-line-commit 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+#+end_src
+
+* Local variables
+
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
+# End:

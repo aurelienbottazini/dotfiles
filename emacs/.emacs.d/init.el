@@ -791,6 +791,7 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (setq-local time-stamp-start "Updated on[ 	]+\\\\?[\"<]+")
+            (org-indent-mode t)
             (add-hook 'before-save-hook 'time-stamp nil 'local)))
 
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
@@ -1140,7 +1141,7 @@ This command switches to browser."
 (use-package company
   :diminish company-mode
   :config
-  (setq company-idle-delay 0.5
+  (setq company-idle-delay 0.2
         company-tooltip-limit 10
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case nil
@@ -1279,3 +1280,7 @@ This command switches to browser."
 (setq vc-follow-symlinks t)
 (put 'magit-edit-line-commit 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+;; I don't want to keep the current tags table when there's another one in the directory i am visiting.
+;; Let's automatically switch to the new one without asking
+(setq tags-add-tables nil)

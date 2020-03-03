@@ -915,7 +915,7 @@ you can use ~check-parens~
    (define-key my-keys-minor-mode-map (kbd "C-c a") 'org-agenda)
    (define-key my-keys-minor-mode-map (kbd "C-c R") 'revert-buffer)
    (define-key my-keys-minor-mode-map (kbd "C-c jc") 'org-clock-jump-to-current-clock)
-   (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/Aurelien.org")))
+   (define-key my-keys-minor-mode-map (kbd "C-c je") '(lambda () (interactive) (find-file "~/dotfiles/emacs/.emacs.d/init.org")))
    (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
    (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-blog-folder**)))
    (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
@@ -1164,6 +1164,7 @@ you can use ~check-parens~
    (add-hook 'org-mode-hook
              (lambda ()
                (setq-local time-stamp-start "Updated on[ 	]+\\\\?[\"<]+")
+               (org-indent-mode t)
                (add-hook 'before-save-hook 'time-stamp nil 'local)))
 
    (add-hook 'write-file-hooks 'time-stamp) ; update when saving
@@ -1873,7 +1874,7 @@ you can use ~check-parens~
    (use-package company
      :diminish company-mode
      :config
-     (setq company-idle-delay 0.5
+     (setq company-idle-delay 0.2
            company-tooltip-limit 10
            company-dabbrev-downcase nil
            company-dabbrev-ignore-case nil
@@ -2042,10 +2043,16 @@ you can use ~check-parens~
      :bind (("C-x C-f" . counsel-find-file)))
    #+END_SRC
 
+* Testing
+
 #+begin_src emacs-lisp :results silent
 (setq vc-follow-symlinks t)
 (put 'magit-edit-line-commit 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+;; I don't want to keep the current tags table when there's another one in the directory i am visiting.
+;; Let's automatically switch to the new one without asking
+(setq tags-add-tables nil)
 #+end_src
 
 * Local variables

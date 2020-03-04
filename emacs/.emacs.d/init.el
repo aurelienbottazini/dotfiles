@@ -702,6 +702,15 @@
 (setq org-todo-keywords
       '((sequence "TODO" "WAITING" "|" "DONE(!)")))
 
+(use-package deft
+ :bind (:map my-keys-minor-mode-map
+             ("<f8>" . deft))
+ :commands (deft)
+ :config
+ (setq deft-extensions '("org" "md")
+       deft-recursive t
+       deft-directory **local-deft-directory**))
+
 (use-package markdown-mode)
 
 (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)

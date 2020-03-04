@@ -1025,52 +1025,63 @@ you can use ~check-parens~
         '((sequence "TODO" "WAITING" "|" "DONE(!)")))
   #+END_SRC
 
+** Navigate Notes
+#+begin_src emacs-lisp :results silent
+(use-package deft
+ :bind (:map my-keys-minor-mode-map
+             ("<f8>" . deft))
+ :commands (deft)
+ :config
+ (setq deft-extensions '("org" "md")
+       deft-recursive t
+       deft-directory **local-deft-directory**))
+#+end_src
 ** Markdown
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package markdown-mode)
-   #+END_SRC
+#+END_SRC
 ** Capture Ideas
 
-   ~C-c l~ to store a link and ~C-c C-l~ to insert that link.
+~C-c l~ to store a link and ~C-c C-l~ to insert that link.
 
-   If you have a selection, it will be part of the link and Emacs will
-   actually look for that selection If you visit the link.
-   #+BEGIN_SRC emacs-lisp
+If you have a selection, it will be part of the link and Emacs will
+actually look for that selection If you visit the link.
+#+BEGIN_SRC emacs-lisp
    (define-key my-keys-minor-mode-map "\C-cl" 'org-store-link)
-   #+END_SRC
+#+END_SRC
 
-   Palimpsest makes it easier to quickly discard blocks of text.
-   Main use is to just send the block of text at the bottom of the
-   buffer. This way I can revise my writing without losing my drafts.
-   ~C-c C-q~ move region to trash
-   ~C-c C-r~ move region to bottom
-   #+BEGIN_SRC emacs-lisp
+Palimpsest makes it easier to quickly discard blocks of text.
+Main use is to just send the block of text at the bottom of the
+buffer. This way I can revise my writing without losing my drafts.
+~C-c C-q~ move region to trash
+~C-c C-r~ move region to bottom
+#+BEGIN_SRC emacs-lisp
    (use-package palimpsest
      :diminish palimpsest-mode
      :config
      (add-hook 'org-mode-hook 'palimpsest-mode))
-   #+END_SRC
+#+END_SRC
 
-   org-capture allows to set up templates for quick note taking.
-   This is a must to capture ideas quickly.
-   #+BEGIN_SRC emacs-lisp
+org-capture allows to set up templates for quick note taking.
+This is a must to capture ideas quickly.
+#+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
            '(("n" "Notes" entry (file+headline **local-note-file** "Inbox") "* %?\n")))
 
     (define-key my-keys-minor-mode-map (kbd "C-c n") 'org-capture)
     (add-hook 'org-capture-mode-hook 'evil-insert-state)
-   #+END_SRC
+#+END_SRC
 
-   To launch an Emacs client with a capture frame selecting the ~n~ template
-   ~emacsclient -ca "" --frame-parameters='(quote (name .
-   "global-org-capture"))' -e '(org-capture nil "n")'~.
+To launch an Emacs client with a capture frame selecting the ~n~ template
+~emacsclient -ca "" --frame-parameters='(quote (name .
+"global-org-capture"))' -e '(org-capture nil "n")'~.
 
-   It works nicely on Linux, however on Mac the focus and input focus
-   is sketchy and is not reliable.
+It works nicely on Linux, however on Mac the focus and input focus
+is sketchy and is not reliable.
 
-   The following takes advantage that I name those capture frame
-   ~global-org-capture~ to do some housekeeping around them
-   #+BEGIN_SRC emacs-lisp
+The following takes advantage that I name those capture frame
+~global-org-capture~ to do some housekeeping around them
+#+BEGIN_SRC emacs-lisp
      (defadvice org-capture-finalize
          (after delete-capture-frame activate)
        "Advise capture-finalize to close the frame"
@@ -1089,15 +1100,15 @@ you can use ~check-parens~
      ;; splits the window.
      (add-hook 'org-capture-mode-hook
                'delete-other-windows)
-   #+END_SRC
+#+END_SRC
 
 ** Inline Code
 
-   Org babel allows to evaluate code snippets inside org files.
-   This is the best way I know of doing [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
+Org babel allows to evaluate code snippets inside org files.
+This is the best way I know of doing [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
 
-   This loads more programming languages to use with org-babel.
-   #+BEGIN_SRC emacs-lisp
+This loads more programming languages to use with org-babel.
+#+BEGIN_SRC emacs-lisp
    (require 'ob-clojure) ;; run cider-jack-in from org buffer to be able to run
                          ;; clojure code
    (use-package ob-clojurescript) ;; requires [[https://github.com/anmonteiro/lumo][lumo]]
@@ -1110,16 +1121,16 @@ you can use ~check-parens~
    (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.11.0/libexec/ditaa-0.11.0-standalone.jar")
 
 
-   #+END_SRC
+#+END_SRC
 
 ** Publish
-   My strategy is to keep my writings in the same folder
-   ~$HOME/Dropbox/org/writing~ and run ~org-publish-current-file~ or
-   ~org-publish~ to export to HTML.
+My strategy is to keep my writings in the same folder
+~$HOME/Dropbox/org/writing~ and run ~org-publish-current-file~ or
+~org-publish~ to export to HTML.
 
-   The HTML export has just the body. I then use a tool like ~jekyll~
-   or ~hugo~ to make it accessible on internet.
-   #+BEGIN_SRC emacs-lisp
+The HTML export has just the body. I then use a tool like ~jekyll~
+or ~hugo~ to make it accessible on internet.
+#+BEGIN_SRC emacs-lisp
    (setq
     time-stamp-active t
     time-stamp-line-limit 30     ; check first 30 buffer lines for Time-stamp:
@@ -1171,13 +1182,13 @@ you can use ~check-parens~
    (require 'ox-publish)
    (setq system-time-locale "C") ;; make sure time local is in english when exporting
    (setq org-html-validation-link nil)
-   #+END_SRC
+#+END_SRC
 
 ** Feedback
 
-   Ispell buffer with ~F5~
-   Ispell word with ~z =~
-   #+BEGIN_SRC emacs-lisp
+Ispell buffer with ~F5~
+Ispell word with ~z =~
+#+BEGIN_SRC emacs-lisp
    (setq ispell-program-name "aspell")
    (setq ispell-silently-savep t)
    (setq ispell-personal-dictionary **local-personal-dictionary**)
@@ -1187,27 +1198,27 @@ you can use ~check-parens~
    (add-hook 'org-mode-hook 'turn-on-flyspell)
    (eval-after-load "flyspell"
         '(diminish 'flyspell-mode))
-   #+END_SRC
+#+END_SRC
 
-   Word definition
-   #+BEGIN_SRC emacs-lisp
+Word definition
+#+BEGIN_SRC emacs-lisp
    (use-package define-word
      :config
      (evil-define-key 'normal org-mode-map
        (kbd "z w") 'define-word-at-point))
-   #+END_SRC
+#+END_SRC
 
-   Word synonyms.
-   #+BEGIN_SRC emacs-lisp
+Word synonyms.
+#+BEGIN_SRC emacs-lisp
    (use-package powerthesaurus
      :config
      (evil-define-key 'normal org-mode-map
        (kbd "z s") 'powerthesaurus-lookup-word-dwim))
-   #+END_SRC
+#+END_SRC
 
-   For most documents, aim for a score of approximately 60 to 70 for
-   the reading ease and 7.0 to 8.0 for the grade level.
-   #+BEGIN_SRC emacs-lisp
+For most documents, aim for a score of approximately 60 to 70 for
+the reading ease and 7.0 to 8.0 for the grade level.
+#+BEGIN_SRC emacs-lisp
    (use-package writegood-mode
     :config
     (evil-define-key 'normal org-mode-map
@@ -1216,11 +1227,11 @@ you can use ~check-parens~
        (kbd "z g r") 'writegood-reading-ease)
     (evil-define-key 'normal org-mode-map
        (kbd "z g l") 'writegood-grade-level))
-   #+END_SRC
+#+END_SRC
 
-   If you need additional feedback from an external service here is an
-   easy way to do it:
-   #+BEGIN_SRC emacs-lisp
+If you need additional feedback from an external service here is an
+easy way to do it:
+#+BEGIN_SRC emacs-lisp
    (require 'browse-url) ; part of gnu emacs
 
    (defun my-lookup-wikipedia ()
@@ -1238,19 +1249,18 @@ you can use ~check-parens~
        (browse-url (concat "http://en.wikipedia.org/wiki/" word))
        ;; (eww myUrl) ; emacs's own browser
        ))
-   #+END_SRC
-
+#+END_SRC
 * Vim
-  I started using Vim to help me prevent [[https://www.emacswiki.org/emacs/RepeatedStrainInjury][emacs RSI.]]
-  Now I am sticking with it because It makes me feel like beethoven
-  manipulating text :-)
+I started using Vim to help me prevent [[https://www.emacswiki.org/emacs/RepeatedStrainInjury][emacs RSI.]]
+Now I am sticking with it because It makes me feel like beethoven
+manipulating text :-)
 
-  Here is an awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
+Here is an awesome [[https://github.com/noctuid/evil-guide][Evil Guide]]
 
-  Quit read-only windows with Q instead of trying to register a Vim
-  Macro.
-  This is mainly to restore emacs behavior with help windows.
-  #+BEGIN_SRC emacs-lisp
+Quit read-only windows with Q instead of trying to register a Vim
+Macro.
+This is mainly to restore emacs behavior with help windows.
+#+BEGIN_SRC emacs-lisp
   (use-package evil
     :config
     (defun my-evil-record-macro ()
@@ -1261,139 +1271,139 @@ you can use ~check-parens~
 
     (with-eval-after-load 'evil-maps
       (define-key evil-normal-state-map (kbd "q") 'my-evil-record-macro)))
-  #+END_SRC
+#+END_SRC
 
-  Surround things with
+Surround things with
   - ~S~ in visual mode
   - ~ys<text-object>~ in normal mode
-  You can also change surroundings ~cs~ or delete surroundings ~ds~.
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil-surround
-    :after evil
-    :config
-    (global-evil-surround-mode 1))
-  #+END_SRC
+    You can also change surroundings ~cs~ or delete surroundings ~ds~.
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-surround
+      :after evil
+      :config
+      (global-evil-surround-mode 1))
+    #+END_SRC
 
-  Comment things with ~gc~. Comment and copy with ~gy~
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil-commentary
-    :after evil
-    :diminish evil-commentary-mode
-    :config
-    (evil-commentary-mode))
-  #+END_SRC
+    Comment things with ~gc~. Comment and copy with ~gy~
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-commentary
+      :after evil
+      :diminish evil-commentary-mode
+      :config
+      (evil-commentary-mode))
+    #+END_SRC
 
-  Start a search from visual selection with ~*~ or ~#~ (backward).
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil-visualstar
-    :after evil
-    :config
-    (global-evil-visualstar-mode t))
-  #+END_SRC
+    Start a search from visual selection with ~*~ or ~#~ (backward).
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-visualstar
+      :after evil
+      :config
+      (global-evil-visualstar-mode t))
+    #+END_SRC
 
-  Jump to matching pairs with ~%~.
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil-matchit
-    :after evil
-    :config
-    (global-evil-matchit-mode 1))
-  #+END_SRC
+    Jump to matching pairs with ~%~.
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-matchit
+      :after evil
+      :config
+      (global-evil-matchit-mode 1))
+    #+END_SRC
 
-  Persist highlight from ~evil search~ and ~isearch~
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil-search-highlight-persist
-    :config
-    (global-evil-search-highlight-persist t))
-  #+END_SRC
+    Persist highlight from ~evil search~ and ~isearch~
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-search-highlight-persist
+      :config
+      (global-evil-search-highlight-persist t))
+    #+END_SRC
 
-  I prefer to not start in normal mode with some modes.
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :ensure t
-    :init
-    (setq evil-mode-line-format nil)
-    :config
+    I prefer to not start in normal mode with some modes.
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-mode-line-format nil)
+      :config
 
-    (evil-mode 1)
-    (evil-set-initial-state 'deft-mode 'insert)
-    (evil-set-initial-state 'dired-mode 'emacs)
-    (evil-set-initial-state 'magit-mode 'emacs)
-    (evil-set-initial-state 'magit-mode 'emacs)
-    (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+      (evil-mode 1)
+      (evil-set-initial-state 'deft-mode 'insert)
+      (evil-set-initial-state 'dired-mode 'emacs)
+      (evil-set-initial-state 'magit-mode 'emacs)
+      (evil-set-initial-state 'magit-mode 'emacs)
+      (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
-    (evil-ex-define-cmd "W" 'save-buffer))
-  #+END_SRC
+      (evil-ex-define-cmd "W" 'save-buffer))
+    #+END_SRC
 
-  Changes mode-line color depending on Evil state, if buffer is
-  modified etc...
-  #+BEGIN_SRC emacs-lisp
-     (lexical-let ((default-color (cons (face-background 'mode-line)
-                                      (face-foreground 'mode-line))))
-     (add-hook 'post-command-hook
-               (lambda ()
-                 (let ((color (cond ((minibufferp) default-color)
-                                    ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
-                                    ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
-                                    ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
-                                    ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
-                                    (t default-color)))
-                       )
+    Changes mode-line color depending on Evil state, if buffer is
+    modified etc...
+    #+BEGIN_SRC emacs-lisp
+       (lexical-let ((default-color (cons (face-background 'mode-line)
+                                        (face-foreground 'mode-line))))
+       (add-hook 'post-command-hook
+                 (lambda ()
+                   (let ((color (cond ((minibufferp) default-color)
+                                      ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
+                                      ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
+                                      ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
+                                      ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
+                                      (t default-color)))
+                         )
 
-                   (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
-                   (set-face-background 'mode-line (car color))
-                   (set-face-foreground 'mode-line-buffer-id (cdr color))
-                   (set-face-foreground 'mode-line (cdr color))))))
+                     (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
+                     (set-face-background 'mode-line (car color))
+                     (set-face-foreground 'mode-line-buffer-id (cdr color))
+                     (set-face-foreground 'mode-line (cdr color))))))
 
-  #+END_SRC
+    #+END_SRC
 
-  Make my cursor match my modeline color
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :config
-      (setq evil-insert-state-cursor '(bar "#4c4e56")
-            evil-visual-state-cursor '(box "#adcff1")
-            evil-emacs-state-cursor '(box "#ffa2cb")
-            evil-normal-state-cursor '(box "#bc3e44")))
-  #+END_SRC
+    Make my cursor match my modeline color
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil
+      :config
+        (setq evil-insert-state-cursor '(bar "#4c4e56")
+              evil-visual-state-cursor '(box "#adcff1")
+              evil-emacs-state-cursor '(box "#ffa2cb")
+              evil-normal-state-cursor '(box "#bc3e44")))
+    #+END_SRC
 
-  Add text objects to select, copy things based on indentation level.
-  Use it with ~vii~ and ~yii~.
-  #+BEGIN_SRC emacs-lisp
-  (use-package evil-indent-plus
-    :after evil
-    :config
-    (evil-indent-plus-default-bindings))
-  #+END_SRC
+    Add text objects to select, copy things based on indentation level.
+    Use it with ~vii~ and ~yii~.
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-indent-plus
+      :after evil
+      :config
+      (evil-indent-plus-default-bindings))
+    #+END_SRC
 
 * Search
-  Searching is probably the most important thing in a code editor.
-  Here is how I search.
+Searching is probably the most important thing in a code editor.
+Here is how I search.
 
 ** Search in current file/buffer
 
-   I have two main way to search in a buffer:
+I have two main way to search in a buffer:
 
 *** Vim way
-    I use ~evil-search-forward~ (bound to ~/~) and
-    ~evil-search-backward~ (bound to ~?~) as it allows me to do
-    powerful /vim/ combinations.
+I use ~evil-search-forward~ (bound to ~/~) and
+~evil-search-backward~ (bound to ~?~) as it allows me to do
+powerful /vim/ combinations.
 
-    For example I do a search, then navigate through the search list
-    with ~n~ or ~N~. Or do a search then replace matches with ~:
-    %s//replacement/gc~
+For example I do a search, then navigate through the search list
+with ~n~ or ~N~. Or do a search then replace matches with ~:
+%s//replacement/gc~
 
 *** swiper
-    I use ~swiper-isearch~ when I am exploring the buffer or when I
-    want to do some search refinements or complex replacements.
+I use ~swiper-isearch~ when I am exploring the buffer or when I
+want to do some search refinements or complex replacements.
 
-    From counsel it is easy to swith to occur with ~C-c C-o~. This
-    allows me to have a list of matches in a seperate buffer and edit
-    them using:
-    - ~C-x C-q~
-    - make the changes in the occur buffer
-    - ~C-x C-s~ to save the changes
+From counsel it is easy to swith to occur with ~C-c C-o~. This
+allows me to have a list of matches in a seperate buffer and edit
+them using:
+- ~C-x C-q~
+- make the changes in the occur buffer
+- ~C-x C-s~ to save the changes
 
-    #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
       (use-package ivy
         :diminish ivy-mode
         :bind (("C-s" . swiper-isearch)
@@ -1417,48 +1427,48 @@ you can use ~check-parens~
         (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
         (eval-after-load "ivy"
           '(define-key ivy-minibuffer-map (kbd "C-c SPC") 'ivy-restrict-to-matches))
-    #+END_SRC
+  #+END_SRC
 
 ** Search in visible windows
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package avy
         :bind (:map my-keys-minor-mode-map
                ("C-c ;" . avy-goto-char-timer)))
-   #+END_SRC
+#+END_SRC
 ** Search in project
 
-   ~counsel-rg~ is my main way to search. Invoked with an argument, it
-   allows you to specify the directory and search options.
-   #+BEGIN_SRC emacs-lisp
+~counsel-rg~ is my main way to search. Invoked with an argument, it
+allows you to specify the directory and search options.
+#+BEGIN_SRC emacs-lisp
     (use-package counsel
       :bind (:map my-keys-minor-mode-map ("C-c f" . counsel-rg)))
-   #+END_SRC
+#+END_SRC
 
-   When I am investigating things, I like to see a preview of the
-   results as I scroll down the search results. I do it with ~C-o~ then
-   either ~g~ on the entry I want to preview or ~c~ to automatically
-   preview results as I move through the result list.
+When I am investigating things, I like to see a preview of the
+results as I scroll down the search results. I do it with ~C-o~ then
+either ~g~ on the entry I want to preview or ~c~ to automatically
+preview results as I move through the result list.
 
-   A trick I am learning is to use ~C-'~ to jump directly to a
-   search results.
+A trick I am learning is to use ~C-'~ to jump directly to a
+search results.
 
 *** When I need to narrow down my search to specific files
 
 **** Narrowing on the file-type
 
-     Launch ~counsel-rg~ with a prefix and then I can use for example
-     ~-tjs~ as an argument to search only inside javascript files.
-     ~-Tjs~ searches inside files but javascript ones.
+Launch ~counsel-rg~ with a prefix and then I can use for example
+~-tjs~ as an argument to search only inside javascript files.
+~-Tjs~ searches inside files but javascript ones.
 
 **** From Dired
-     ~C-x d~ to launch dired . I mark the files I am interested in with
-     ~m~. Then I can grep those files with ~A~ and do a query replace
-     with ~Q~.
+~C-x d~ to launch dired . I mark the files I am interested in with
+~m~. Then I can grep those files with ~A~ and do a query replace
+with ~Q~.
 ** Search Emacs documentation
 
-   Remplacements for emacs search and completion commands.
-   I find the UI better.
-   #+BEGIN_SRC emacs-lisp
+Remplacements for emacs search and completion commands.
+I find the UI better.
+#+BEGIN_SRC emacs-lisp
      (use-package counsel
        :bind (("M-x" . counsel-M-x)
               ("C-x C-f" . counsel-find-file)
@@ -1488,68 +1498,68 @@ you can use ~check-parens~
                                                   `((":" ,@fns)))
                                          items)))))
 
-   #+END_SRC
+#+END_SRC
 
 ** Rename
 
-   ~iedit~ makes it very easy to
-   Prefix with ~0~ to only match in current function.
-   Prefix with universal argument to repeat the previous iedit match.
-   Select region and press ~F6~ again to restrict to region.
-   ~tab~ and ~S-tab~ to navigate between matches. ~M-;~ to clear a match.
+~iedit~ makes it very easy to
+Prefix with ~0~ to only match in current function.
+Prefix with universal argument to repeat the previous iedit match.
+Select region and press ~F6~ again to restrict to region.
+~tab~ and ~S-tab~ to navigate between matches. ~M-;~ to clear a match.
 
-   Shows only matching lines with ~C-'~
-   #+BEGIN_SRC emacs-lisp
+Shows only matching lines with ~C-'~
+#+BEGIN_SRC emacs-lisp
      (use-package iedit
       :bind (:map my-keys-minor-mode-map ("<f6>" . iedit-mode)))
-   #+END_SRC
+#+END_SRC
 
-   Sometimes I like to use the mouse to setup multiple cursors. For
-   other /multiple-cursors/ usage I prefer to use either
-   ~evil-visual-block-mode~ or ~iedit~.
-   #+BEGIN_SRC emacs-lisp
+Sometimes I like to use the mouse to setup multiple cursors. For
+other /multiple-cursors/ usage I prefer to use either
+~evil-visual-block-mode~ or ~iedit~.
+#+BEGIN_SRC emacs-lisp
    (use-package multiple-cursors
      :bind (:map my-keys-minor-mode-map
                  ("C-S-<mouse-1>" . mc/add-cursor-on-click)
                  ("C-c c a" . mc/mark-all-like-this)
                  ("C-c c p" . mc/mark-previous-like-this)
                  ("C-c c n" . mc/mark-next-like-this)))
-   #+END_SRC
+#+END_SRC
 
 * VCS
-  I mainly use git. I prefix all git related keybindings with ~c-c g~.
+I mainly use git. I prefix all git related keybindings with ~c-c g~.
 
-  Don't forget emacs vcs features accessible with the prefix ~C-x v~!
+Don't forget emacs vcs features accessible with the prefix ~C-x v~!
 
 ** Resolving conflicts
 
-   This is to prevent popup windows when resolving file conflicts.
-   I prefer to have the ediff take over and restove the windows when
-   done.
-   #+BEGIN_SRC emacs-lisp
+This is to prevent popup windows when resolving file conflicts.
+I prefer to have the ediff take over and restove the windows when
+done.
+#+BEGIN_SRC emacs-lisp
      (setq ediff-window-setup-function 'ediff-setup-windows-plain)
      (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
      (setq ediff-split-window-function 'split-window-vertically)
-   #+END_SRC
+#+END_SRC
 
 ** Working with github
 
-   To grab a link I can share with co-workers from the region or file.
-   #+BEGIN_SRC emacs-lisp
+To grab a link I can share with co-workers from the region or file.
+#+BEGIN_SRC emacs-lisp
      (use-package git-link
        :bind (:map my-keys-minor-mode-map
                    ("C-c gl" . git-link)))
-   #+END_SRC
+#+END_SRC
 
-   Otherwise I launch a ~gitsh~ session and I use [[https://github.com/github/hub][hub]] to interact with
-   github directly
+Otherwise I launch a ~gitsh~ session and I use [[https://github.com/github/hub][hub]] to interact with
+github directly
 
 ** View History
 *** timemachine
-    Allows to view previous versions of a file. It is not focused on the
-    diff but on the file itself. Use ~n~ and ~p~ to navigate between
-    versions.
-    #+BEGIN_SRC emacs-lisp
+Allows to view previous versions of a file. It is not focused on the
+diff but on the file itself. Use ~n~ and ~p~ to navigate between
+versions.
+#+BEGIN_SRC emacs-lisp
      (use-package git-timemachine
        :bind (:map my-keys-minor-mode-map
                    ("C-c gt" . git-timemachine-toggle))
@@ -1561,24 +1571,24 @@ you can use ~check-parens~
            (evil-normal-state)))
 
        (ad-activate 'git-timemachine-mode))
-    #+END_SRC
+#+END_SRC
 *** vc-annotate
 
-    Bound to ~C-x v g~.
-    - Use ~l~ to see the commit message
-    - ~f~ to see what the file looked like at that revision. You can
-      then use /git-link/ to grab a link with ~C-c gl~
-    - ~n~ and ~p~ to navigate between revisions
-    - ~=~ to see the diff.
+Bound to ~C-x v g~.
+- Use ~l~ to see the commit message
+- ~f~ to see what the file looked like at that revision. You can
+  then use /git-link/ to grab a link with ~C-c gl~
+- ~n~ and ~p~ to navigate between revisions
+- ~=~ to see the diff.
 
-    I prefer to use a full-window with vc-annotate
-    #+BEGIN_SRC emacs-lisp
+  I prefer to use a full-window with vc-annotate
+  #+BEGIN_SRC emacs-lisp
      (use-package fullframe
        :config
        (fullframe vc-annotate quit-window))
-    #+END_SRC
+  #+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
      (eval-after-load "vc-annotate"
           '(progn
            (define-key vc-annotate-mode-map "j" 'evil-next-line)
@@ -1587,22 +1597,22 @@ you can use ~check-parens~
      (use-package evil
        :config
        (evil-define-key 'normal diff-mode-map (kbd "q") 'quit-window))
-    #+END_SRC
+  #+END_SRC
 
 ** Magit
 
-   #+BEGIN_QUOTE
-   [[https://magit.vc/][Magit]] is an interface to the version control system Git, implemented
-   as an Emacs package. Magit aspires to be a complete Git porcelain.
-   While we cannot (yet) claim that Magit wraps and improves upon each
-   and every Git command, it is complete enough to allow even
-   experienced Git users to perform almost all of their daily version
-   control tasks directly from within Emacs. While many fine Git
-   clients exist, only Magit and Git itself deserve to be called
-   porcelains.
-   #+END_QUOTE
+#+BEGIN_QUOTE
+[[https://magit.vc/][Magit]] is an interface to the version control system Git, implemented
+as an Emacs package. Magit aspires to be a complete Git porcelain.
+While we cannot (yet) claim that Magit wraps and improves upon each
+and every Git command, it is complete enough to allow even
+experienced Git users to perform almost all of their daily version
+control tasks directly from within Emacs. While many fine Git
+clients exist, only Magit and Git itself deserve to be called
+porcelains.
+#+END_QUOTE
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package magit
        :bind (:map my-keys-minor-mode-map
                    ("C-c gs" . magit-status)
@@ -1612,61 +1622,61 @@ you can use ~check-parens~
        :init
        (setq magit-commit-show-diff nil
              magit-revert-buffers 1))
-   #+END_SRC
+#+END_SRC
 
-   When I use magit, I prefer to have it use the full emacs frame
-   instead of splitting the current buffer.
-   #+BEGIN_SRC emacs-lisp
+When I use magit, I prefer to have it use the full emacs frame
+instead of splitting the current buffer.
+#+BEGIN_SRC emacs-lisp
      (use-package fullframe
        :after magit
        :config
        (fullframe magit-status magit-mode-quit-window))
-   #+END_SRC
+#+END_SRC
 
-   Start in insert mode when committing from vcs
-   #+BEGIN_SRC emacs-lisp
+Start in insert mode when committing from vcs
+#+BEGIN_SRC emacs-lisp
      (use-package evil
        :config
        (add-hook 'with-editor-mode-hook 'evil-insert-state))
-   #+END_SRC
+#+END_SRC
 
 ** gitsh
 
-   #+BEGIN_QUOTE
-   The [[https://github.com/thoughtbot/gitsh][gitsh]] program is an interactive shell for git. From within
-   gitsh you can issue any git command, even using your local aliases
-   and configuration
-   #+END_QUOTE
+#+BEGIN_QUOTE
+The [[https://github.com/thoughtbot/gitsh][gitsh]] program is an interactive shell for git. From within
+gitsh you can issue any git command, even using your local aliases
+and configuration
+#+END_QUOTE
 
-   When I have to do git related things that are painful to do with
-   magit, I just fire a terminal with /gitsh/ for the current project.
-   #+BEGIN_SRC emacs-lisp
+When I have to do git related things that are painful to do with
+magit, I just fire a terminal with /gitsh/ for the current project.
+#+BEGIN_SRC emacs-lisp
      (defun ab-run-gitsh ()
        "Start gitsh in current git project. Uses st as a terminal."
        (interactive)
        (let ((default-directory (locate-dominating-file (expand-file-name default-directory) ".gitignore")))
          (start-process "gitsh" nil "gnome-terminal" "--geometry=120x70" "--class=scratch-term" "--" "gitsh")))
      (define-key my-keys-minor-mode-map (kbd "C-c gg") 'ab-run-gitsh)
-   #+END_SRC
+#+END_SRC
 
 ** Visual enhancements
 
-   See in the fringe lines added, changed and removed since last commit.
-   #+BEGIN_SRC emacs-lisp
+See in the fringe lines added, changed and removed since last commit.
+#+BEGIN_SRC emacs-lisp
      (use-package diff-hl
        :after magit
        :config
        (add-hook 'prog-mode-hook 'diff-hl-mode)
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
-   #+END_SRC
+#+END_SRC
 
 * Projects
-  Emacs is not an IDE but I can be pretty close to one.
-  Here are some tools I use that are IDE oriented.
+Emacs is not an IDE but I can be pretty close to one.
+Here are some tools I use that are IDE oriented.
 
 ** Find file in project
 *** Examples
-    #+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
       ;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
       ;; OR if I'm reading my personal issue track document,
       (defun my-setup-develop-environment ()
@@ -1687,17 +1697,17 @@ you can use ~check-parens~
 
       ;; most major modes inherit from prog-mode, so below line is enough
       (add-hook 'prog-mode-hook 'my-setup-develop-environment)
-    #+END_SRC
+#+END_SRC
 
-    All variables may be overridden on a per-directory basis in your
-    .dir-locals.el. See (info “(Emacs) Directory Variables”) for
-    details.
+All variables may be overridden on a per-directory basis in your
+.dir-locals.el. See (info “(Emacs) Directory Variables”) for
+details.
 
-    You can place .dir-locals.el into your project root directory.
+You can place .dir-locals.el into your project root directory.
 
-    A sample .dir-locals.el,
+A sample .dir-locals.el,
 
-    #+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
       ((nil . ((ffip-project-root . "~/projs/PROJECT_DIR")
                ;; ignore files bigger than 64k and directory "dist/" when searching
                (ffip-find-options . "-not -size +64k -not -iwholename '*/dist/*'")
@@ -1710,14 +1720,14 @@ you can use ~check-parens~
                          ;; Do NOT ignore directory "bin/" when searching
                          (setq ffip-prune-patterns `(delete "*/bin/*" ,@ffip-prune-patterns))))
                )))
-    #+END_SRC
+#+END_SRC
 
 *** My configuration
 
-    To install fd (rust replacement for find), download it
-    [[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
-    to use `fd` instead of find.
-    #+BEGIN_SRC emacs-lisp
+To install fd (rust replacement for find), download it
+[[https://github.com/sharkdp/fd/releases][here]] and run ~sudo dpkg -i fd_7.0.0_amd64.deb~. You can then choose
+to use `fd` instead of find.
+#+BEGIN_SRC emacs-lisp
     (use-package find-file-in-project
       :ensure t
       :bind (:map  my-keys-minor-mode-map
@@ -1744,21 +1754,21 @@ you can use ~check-parens~
       (add-to-list 'ffip-prune-patterns "*/public/*")
       (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
       (add-to-list 'ffip-prune-patterns "node_modules/*"))
-    #+END_SRC
+#+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
     (eval-after-load "ivy"
       '(lambda () (require 'abo-find-in-project)
       (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name)))
-    #+END_SRC
+#+END_SRC
 ** Switch between projects
 
-   The main command I use with projectile is ~C-c p p~ to switch quickly
-   between projects. I keep projectile because I has a lot of functions
-   project oriented and I use them from time to time. Also
+The main command I use with projectile is ~C-c p p~ to switch quickly
+between projects. I keep projectile because I has a lot of functions
+project oriented and I use them from time to time. Also
 
-   ~projectile-commander~ accessible with ~C-c p m~ has a pretty nice UI.
-   #+BEGIN_SRC emacs-lisp
+~projectile-commander~ accessible with ~C-c p m~ has a pretty nice UI.
+#+BEGIN_SRC emacs-lisp
      (use-package projectile
        :demand
        :bind (:map my-keys-minor-mode-map
@@ -1768,14 +1778,14 @@ you can use ~check-parens~
        (setq projectile-mode-line-prefix " ")
        :config
        (projectile-mode t))
-   #+END_SRC
+#+END_SRC
 
 ** Switch between test and implementation
 
-   This defines a new project type, the interesting part is the test suffix. I
-   use it to jump quickly between a test and its implementation.
-   Default projectile shortcut for that is ~C-c p t~
-   #+BEGIN_SRC emacs-lisp
+This defines a new project type, the interesting part is the test suffix. I
+use it to jump quickly between a test and its implementation.
+Default projectile shortcut for that is ~C-c p t~
+#+BEGIN_SRC emacs-lisp
      (use-package projectile
        :config
        (projectile-register-project-type 'npm '("package.json")
@@ -1783,16 +1793,16 @@ you can use ~check-parens~
                                          :test "npm test"
                                          :run "npm start"
                                          :test-suffix ".spec"))
-   #+END_SRC
+#+END_SRC
 
 ** Jump
 
-   /dumb-jump/ just do a search through the project to try to guess the
-   correct jump location for the current symbol. It is not has good as an
-   IDE code analysis but it works surprisingly well.
+/dumb-jump/ just do a search through the project to try to guess the
+correct jump location for the current symbol. It is not has good as an
+IDE code analysis but it works surprisingly well.
 
-   I added a small function to make the current line flash just after a jump
-   #+BEGIN_SRC emacs-lisp
+I added a small function to make the current line flash just after a jump
+#+BEGIN_SRC emacs-lisp
      (use-package dumb-jump
        :bind (:map evil-normal-state-map
                    ("gd" . dumb-jump-go)
@@ -1803,59 +1813,59 @@ you can use ~check-parens~
        (add-hook 'dumb-jump-after-jump-hook
                  (defun abo-dumb-jump-pulse-line ()
                    (pulse-momentary-highlight-one-line (point)))))
-   #+END_SRC
+#+END_SRC
 
 ** Tags
 
-   Tags are generated through a [[file:~/dotfiles/git/.git_template/hooks/post-commit::.git/hooks/create_ctags%20>/dev/null%202>&1%20&][git hook]] with [[https://ctags.io/][Universal ctags]].
+Tags are generated through a [[file:~/dotfiles/git/.git_template/hooks/post-commit::.git/hooks/create_ctags%20>/dev/null%202>&1%20&][git hook]] with [[https://ctags.io/][Universal ctags]].
 
-   To make sure my hooks are used I delete the hooks directory
-   ~./git/config~ and run ~git init .~ again from the concerned project
-   directory.
+To make sure my hooks are used I delete the hooks directory
+~./git/config~ and run ~git init .~ again from the concerned project
+directory.
 
-   My [[file:~/dotfiles/git/.git_template][templates]] are used thanks to the [[~GIT_TEMPLATE_DIR][~GIT_TEMPLATE_DIR~]] environment variable.
-   #+BEGIN_SRC shell :results output
+My [[file:~/dotfiles/git/.git_template][templates]] are used thanks to the [[~GIT_TEMPLATE_DIR][~GIT_TEMPLATE_DIR~]] environment variable.
+#+BEGIN_SRC shell :results output
    env | grep GIT_TEMPLATE_DIR
-   #+END_SRC
+#+END_SRC
 
-   #+RESULTS:
-   : GIT_TEMPLATE_DIR=/home/auray/.git_template
+#+RESULTS:
+: GIT_TEMPLATE_DIR=/home/auray/.git_template
 
-   I install Universal ctags with
-   #+BEGIN_SRC shell :results output
+I install Universal ctags with
+#+BEGIN_SRC shell :results output
    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-   #+END_SRC
+#+END_SRC
 
-   To verify you have the proper version of universal ctags run
-   #+BEGIN_SRC shell :results output
+To verify you have the proper version of universal ctags run
+#+BEGIN_SRC shell :results output
    ctags --version | grep -q "Universal Ctags" >/dev/null && echo "Universal ctags is installed" || echo "Missing Universal ctags"
-   #+END_SRC
+#+END_SRC
 
-   #+RESULTS:
-   : Universal ctags is installed
+#+RESULTS:
+: Universal ctags is installed
 
-   These are my two go commands to navigate between code references.
-   #+BEGIN_SRC emacs-lisp
+These are my two go commands to navigate between code references.
+#+BEGIN_SRC emacs-lisp
    (use-package evil
      :bind (:map evil-normal-state-map
                    ("g." . xref-find-definitions)
                    ("gr" . xref-find-references)))
-   #+END_SRC
+#+END_SRC
 
 ** Navigation tree
-  #+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp :results silent
   (use-package treemacs
     :bind (:map my-keys-minor-mode-map
                 ("C-c 1" . treemacs)))
-  #+end_src
+#+end_src
 * Completion
 ** Hippie expand
-   Bound to ~s-/~, it provides a simple on demand completion mechanism.
-   You can customize its behaviour by choosing different expand functions.
+Bound to ~s-/~, it provides a simple on demand completion mechanism.
+You can customize its behaviour by choosing different expand functions.
 
-   The description of all the hippie expand functions is inside
-   [[https://github.com/emacs-mirror/emacs/blob/master/lisp/hippie-exp.el#L63][~hippie-exp.el~]] (location can vary on your system)
-   #+BEGIN_SRC emacs-lisp
+The description of all the hippie expand functions is inside
+[[https://github.com/emacs-mirror/emacs/blob/master/lisp/hippie-exp.el#L63][~hippie-exp.el~]] (location can vary on your system)
+#+BEGIN_SRC emacs-lisp
     (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
     (require 'mode-local)
     (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
@@ -1863,14 +1873,14 @@ you can use ~check-parens~
     (require 'mode-local)
     (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
     (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
-   #+END_SRC
+#+END_SRC
 
 ** Auto-Completion
 
-   company shows a popup where you can select completions with a number
-   or with ~enter~. You can also invoke the popup manually with ~C-x
-   C-o~
-   #+BEGIN_SRC emacs-lisp
+company shows a popup where you can select completions with a number
+or with ~enter~. You can also invoke the popup manually with ~C-x
+C-o~
+#+BEGIN_SRC emacs-lisp
    (use-package company
      :diminish company-mode
      :config
@@ -1942,11 +1952,11 @@ you can use ~check-parens~
                          company-candidates)
              (self-insert-command 1)
            (company-complete-number (string-to-number k))))))
-   #+END_SRC
+#+END_SRC
 
 ** Snippets
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package yasnippet
        :demand
        :commands yas-expand-snippet
@@ -1960,20 +1970,20 @@ you can use ~check-parens~
        (yas-global-mode 1)
        (add-hook 'term-mode-hook (lambda()
                                    (yas-minor-mode -1))))
-   #+END_SRC
+#+END_SRC
 
-   This allow me to automatically expand [[https://github.com/aurelienbottazini/dotfiles/blob/master/emacs/.emacs.d/templates/][templates]] into new files using
-   the yasnippet format. The filenames for the template are regexes.
-   #+BEGIN_SRC emacs-lisp
+This allow me to automatically expand [[https://github.com/aurelienbottazini/dotfiles/blob/master/emacs/.emacs.d/templates/][templates]] into new files using
+the yasnippet format. The filenames for the template are regexes.
+#+BEGIN_SRC emacs-lisp
      (use-package yatemplate
        :config
        (add-hook 'find-file-hook 'auto-insert)
        (yatemplate-fill-alist))
-   #+END_SRC
+#+END_SRC
 
 * Files and directories
 ** Dired
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (setq ls-lisp-use-insert-directory-program t) ;same ls-lisp for Dired regardless of the platform
      (setq dired-listing-switches "-alh")
      ;; on mac there is some weird prefixing going on for GNU Tools like ls.
@@ -2017,31 +2027,31 @@ you can use ~check-parens~
      (use-package dired-rsync
      :config
      (bind-key "p" 'dired-rsync dired-mode-map))
-   #+END_SRC
+#+END_SRC
 
 ** Counsel
-   I redefine the standard ~C-x C-f~ to use counsel. It allows me to do
-   pretty cool stuff with it [[https://oremacs.com/2017/11/18/dired-occur/][thanks to ivy-occur and dired]].
+I redefine the standard ~C-x C-f~ to use counsel. It allows me to do
+pretty cool stuff with it [[https://oremacs.com/2017/11/18/dired-occur/][thanks to ivy-occur and dired]].
 
-   #+BEGIN_QUOTE
-   To delete all *.elc files in the current folder do:
+#+BEGIN_QUOTE
+To delete all *.elc files in the current folder do:
 
-   ~C-x C-f elc$ C-c C-o tDy.~
+~C-x C-f elc$ C-c C-o tDy.~
 
-   To copy all Org files in a Git project to some directory do:
+To copy all Org files in a Git project to some directory do:
 
-   ~M-x counsel-git org$ C-c C-o tC.~
+~M-x counsel-git org$ C-c C-o tC.~
 
-   To get a list of videos to watch do:
+To get a list of videos to watch do:
 
-   ~M-x counsel-fzf mp4$ C-c C-o.~
-   #+END_QUOTE
+~M-x counsel-fzf mp4$ C-c C-o.~
+#+END_QUOTE
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package counsel
      :demand
      :bind (("C-x C-f" . counsel-find-file)))
-   #+END_SRC
+#+END_SRC
 
 * Testing
 

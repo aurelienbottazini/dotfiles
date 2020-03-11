@@ -5,6 +5,7 @@
 	quotepath = false
 	excludesfile = ~/.gitignore_global
 	editor = vim
+	autocrlf = input
 [push]
 	default = current # allows to set upstream automatically with git push -u
 [alias]

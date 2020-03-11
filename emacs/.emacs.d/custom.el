@@ -9,8 +9,8 @@
    (quote
     ("0809c08440b51a39c77ec5529f89af83ab256a9d48107b088d40098ce322c7d8" "e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" default)))
  '(deft-new-file-format "%Y-%m-%dT%H:%M")
- '(deft-use-filename-as-title t t)
- '(deft-use-filter-string-for-filename t t)
+ '(deft-use-filename-as-title t)
+ '(deft-use-filter-string-for-filename t)
  '(display-line-numbers nil)
  '(display-line-numbers-type (quote visual))
  '(dumb-jump-force-searcher (quote ag))
@@ -125,8 +125,10 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight book :height 160 :family "OperatorMono"))))
  '(bold ((t (:weight normal))))
- '(custom-variable-tag ((t (:foreground "blue1" :weight normal))))
+ '(custom-variable-tag ((t (:foreground "#3a499c" :weight normal))))
+ '(deft-title-face ((t (:inherit font-lock-function-name-face :weight normal))))
  '(error ((t (:foreground "Red1" :weight normal))))
+ '(font-lock-function-name-face ((t (:foreground "#3a499c"))))
  '(font-lock-comment-face ((t (:foreground "#adaeb0" :slant italic))))
  '(font-lock-warning-face ((t (:inherit error))))
  '(magit-blame-heading ((t (:inherit magit-blame-highlight :slant normal :weight normal))))

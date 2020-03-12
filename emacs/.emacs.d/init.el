@@ -1293,3 +1293,14 @@ This command switches to browser."
 ;; I don't want to keep the current tags table when there's another one in the directory i am visiting.
 ;; Let's automatically switch to the new one without asking
 (setq tags-add-tables nil)
+
+(use-package org-ref
+  :config
+  (setq reftex-default-bibliography `(,(concat **local-dropbox-folder** "/bibliography/references.bib")
+                                      ,(concat **local-dropbox-folder** "/bibliography/zotero.bib")))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes (concat **local-dropbox-folder** "/bibliography/notes.org")
+        org-ref-default-bibliography `(,(concat **local-dropbox-folder** "/bibliography/references.bib")
+                                       ,(concat **local-dropbox-folder** "/bibliography/zotero.bib"))
+        org-ref-pdf-directory (concat **local-dropbox-folder** "/bibliography/bibtex-pdfs/")))

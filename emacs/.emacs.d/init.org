@@ -2065,6 +2065,19 @@ To get a list of videos to watch do:
 (setq tags-add-tables nil)
 #+end_src
 
+#+begin_src emacs-lisp :results silent
+(use-package org-ref
+  :config
+  (setq reftex-default-bibliography `(,(concat **local-dropbox-folder** "/bibliography/references.bib")
+                                      ,(concat **local-dropbox-folder** "/bibliography/zotero.bib")))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes (concat **local-dropbox-folder** "/bibliography/notes.org")
+        org-ref-default-bibliography `(,(concat **local-dropbox-folder** "/bibliography/references.bib")
+                                       ,(concat **local-dropbox-folder** "/bibliography/zotero.bib"))
+        org-ref-pdf-directory (concat **local-dropbox-folder** "/bibliography/bibtex-pdfs/")))
+#+end_src
+
 * Local variables
 
 # Local Variables:

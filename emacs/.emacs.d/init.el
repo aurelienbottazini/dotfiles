@@ -616,6 +616,7 @@
 (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
 (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-blog-folder**)))
 (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
+(define-key my-keys-minor-mode-map (kbd "C-c jd") '(lambda () (interactive) (find-file **local-note-file**)))
 (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
 (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
 (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
@@ -705,12 +706,30 @@
 
 (use-package deft
  :bind (:map my-keys-minor-mode-map
-             ("<f8>" . deft))
+             ("<f9>" . deft))
  :commands (deft)
  :config
  (setq deft-extensions '("org" "md")
        deft-recursive t
        deft-directory **local-deft-directory**))
+
+(use-package org-ref
+  :config
+  (setq reftex-default-bibliography `(,(concat **local-org-folder** "/references.bib")))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes (concat **local-org-folder** "/references-notes/")
+        org-ref-default-bibliography `(,(concat **local-org-folder** "/references.bib"))
+        org-ref-pdf-directory (concat **local-org-folder** "/bibtex-pdfs/"))
+  (require 'org-ref-pdf)
+  (require 'org-ref-url-utils))
+  (require 'org-ref-isbn)
+  (require 'org-ref-bibtex)
+
+(use-package ivy-bibtex
+  :config
+  (setq bibtex-completion-bibliography reftex-default-bibliography)
+  (setq bibtex-completion-notes-path (concat **local-org-folder** "/references-notes/")))
 
 (use-package markdown-mode)
 
@@ -1294,14 +1313,3 @@ This command switches to browser."
 ;; I don't want to keep the current tags table when there's another one in the directory i am visiting.
 ;; Let's automatically switch to the new one without asking
 (setq tags-add-tables nil)
-
-(use-package org-ref
-  :config
-  (setq reftex-default-bibliography `(,(concat **local-dropbox-folder** "/bibliography/references.bib")
-                                      ,(concat **local-dropbox-folder** "/bibliography/zotero.bib")))
-
-  ;; see org-ref for use of these variables
-  (setq org-ref-bibliography-notes (concat **local-dropbox-folder** "/bibliography/notes.org")
-        org-ref-default-bibliography `(,(concat **local-dropbox-folder** "/bibliography/references.bib")
-                                       ,(concat **local-dropbox-folder** "/bibliography/zotero.bib"))
-        org-ref-pdf-directory (concat **local-dropbox-folder** "/bibliography/bibtex-pdfs/")))

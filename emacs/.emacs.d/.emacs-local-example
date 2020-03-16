@@ -1,0 +1,8 @@
+(setq **local-dropbox-folder** "/mnt/c/Users/abott/Dropbox/")
+
+(setq **local-org-folder** (concat **local-dropbox-folder** "/org"))
+(setq **local-note-file** (concat **local-dropbox-folder** "/org/notes.org"))
+(setq **local-writing-folder** (concat **local-dropbox-folder** "/org/writing/"))
+(setq **local-published-folder** (concat **local-dropbox-folder** "/org/writing_exported/"))
+(setq **local-personal-dictionary** (concat **local-dropbox-folder** "/.aspell.en.pws"))
+(setq **local-deft-directory** (concat **local-dropbox-folder** "/org/"))

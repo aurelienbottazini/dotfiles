@@ -245,7 +245,8 @@
 (setq blink-matching-paren 'jump-offscreen)
 
 ;; makes fringe big enough with HDPI
-(fringe-mode 20)
+(when (boundp 'fringe-mode)
+  (fringe-mode 20))
 
 (use-package diminish
   :config

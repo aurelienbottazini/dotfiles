@@ -616,7 +616,9 @@
 (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
 (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file **local-blog-folder**)))
 (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
-(define-key my-keys-minor-mode-map (kbd "C-c jd") '(lambda () (interactive) (find-file **local-note-file**)))
+(define-key my-keys-minor-mode-map (kbd "C-c js") '(lambda () (interactive) (find-file (concat **local-dropbox-folder** "org/slip-box"))))
+(define-key my-keys-minor-mode-map (kbd "C-c ji") '(lambda () (interactive) (find-file (concat **local-dropbox-folder** "org/slip-box/index.org"))))
+(define-key my-keys-minor-mode-map (kbd "C-c jr") '(lambda () (interactive) (find-file (concat **local-dropbox-folder** "org/references-notes"))))
 (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)
 (define-key my-keys-minor-mode-map (kbd "C-c k") 'recompile)
 (define-key my-keys-minor-mode-map (kbd "C-c K") 'compile)
@@ -727,6 +729,8 @@
   (require 'org-ref-bibtex)
 
 (use-package ivy-bibtex
+  :bind (:map my-keys-minor-mode-map
+             ("C-c b" . ivy-bibtex))
   :config
   (setq bibtex-completion-bibliography reftex-default-bibliography)
   (setq bibtex-completion-notes-path (concat **local-org-folder** "/references-notes/")))
@@ -999,7 +1003,6 @@ This command switches to browser."
          :map my-keys-minor-mode-map
          ("C-c r" . counsel-recentf)
          ("C-c i" . counsel-imenu)
-         ("C-c b" . counsel-ibuffer)
          ("C-c m" . counsel-bookmark))
   :init
   (setq counsel-git-cmd "rg --files")

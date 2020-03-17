@@ -732,6 +732,7 @@
   :bind (:map my-keys-minor-mode-map
              ("C-c b" . ivy-bibtex))
   :config
+  (setq ivy-bibtex-default-action 'ivy-bibtex-insert-citation)
   (setq bibtex-completion-bibliography reftex-default-bibliography)
   (setq bibtex-completion-notes-path (concat **local-org-folder** "/references-notes/")))
 

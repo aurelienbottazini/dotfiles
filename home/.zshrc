@@ -24,6 +24,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# export GDK_SCALE=2 #retina support
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
 bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work
@@ -104,7 +105,6 @@ PROMPT='%{$fg[blue]%}[%~] %{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}
 RPROMPT=''
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export GDK_SCALE=2 #retina support
 export GIT_TEMPLATE_DIR=$HOME/.git_template
 
 zstyle ':completion:*' menu select

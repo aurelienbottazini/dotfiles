@@ -1,15 +1,6 @@
 All my Dotfiles managed with [[https://www.gnu.org/software/stow/][GNU Stow]]
 
-Includes config files for:
- - Emacs
- - Vim
- - Fish
- - Xmonad
- - Xmobar
- - Bash
- - Git
- - st
- - dmenu
+You can find in this repo advanced configurations for Emacs, Vim, Tmux.
 
 * Usage
 
@@ -27,6 +18,4 @@ Includes config files for:
   ~stow home~
   ~stow home_linux~
 
-  There is one exception with the ~root~ directory.
-  It needs to be run with ~stow -t / root~. It contains files specific
-  to my linux configuration and involving what I consider tricky settings.
+  Directories containing root is their filename should be run with with ~sudo stow -t / root~.

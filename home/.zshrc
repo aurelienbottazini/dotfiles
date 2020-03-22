@@ -87,6 +87,7 @@ export CDPATH=.:~/:~/projects:~/work
 HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
 [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
+[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
 # Load version control information
 autoload -Uz vcs_info

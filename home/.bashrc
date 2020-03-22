@@ -131,7 +131,7 @@ hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
 #[ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 2>/dev/null
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null && tat
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null 
 
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH

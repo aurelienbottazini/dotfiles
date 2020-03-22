@@ -114,4 +114,4 @@ then
   sudo /sbin/sysctl -p > /dev/null
 fi
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat >/dev/null

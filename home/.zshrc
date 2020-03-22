@@ -76,8 +76,8 @@ export PATH=/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 export PATH=$HOME/.rbenv/bin:$PATH
 
-[ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
-eval "$(rbenv init -)"
+ [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
+ eval "$(rbenv init -)"
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
 export BROWSER="browser.sh"
@@ -87,8 +87,7 @@ export CDPATH=.:~/:~/projects:~/work
 HOSTNAME=$HOST
 /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
 [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
-# sysctl -p 1>/dev/null
-#
+
 # Load version control information
 autoload -Uz vcs_info
 # zstyle ':vcs_info:*' enable git

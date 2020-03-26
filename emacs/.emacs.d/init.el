@@ -839,7 +839,7 @@
 ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
 (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
-(add-hook 'org-mode-hook 'turn-on-flyspell)
+;; (add-hook 'org-mode-hook 'turn-on-flyspell)
 (eval-after-load "flyspell"
      '(diminish 'flyspell-mode))
 
@@ -1121,10 +1121,6 @@ This command switches to browser."
   (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
   (add-to-list 'ffip-prune-patterns "node_modules/*"))
 
-(eval-after-load "ivy"
-  '(lambda () (require 'abo-find-in-project)
-  (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name)))
-
 (use-package projectile
   :demand
   :bind (:map my-keys-minor-mode-map
@@ -1174,7 +1170,7 @@ This command switches to browser."
 (use-package company
   :diminish company-mode
   :config
-  (setq company-idle-delay 0.2
+  (setq company-idle-delay nil
         company-tooltip-limit 10
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case nil

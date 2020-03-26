@@ -28,39 +28,39 @@ you can use ~check-parens~
 #+end_src
 
 * Setup
-  It is important to load custom settings first. Those are the ones
-  managed by Emacs through customization menus. They can impact the
-  loading of other packages.
-  #+BEGIN_SRC emacs-lisp
+It is important to load custom settings first. Those are the ones
+managed by Emacs through customization menus. They can impact the
+loading of other packages.
+#+BEGIN_SRC emacs-lisp
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)
-  #+END_SRC
+#+END_SRC
 
-  As I work on different computers, I need slightly different
-  settings. Instead of embedding machine specific code through
-  conditionals, I use a file to load machine specifics global
-  variables that are used in other parts of this configuration. I have
-  a small convention for the names. I surround them with double stars
-  and the name starts with local. Ex: ~(setq **local-my-variable**
-  "foo/bar")~.
-  #+BEGIN_SRC emacs-lisp
+As I work on different computers, I need slightly different
+settings. Instead of embedding machine specific code through
+conditionals, I use a file to load machine specifics global
+variables that are used in other parts of this configuration. I have
+a small convention for the names. I surround them with double stars
+and the name starts with local. Ex: ~(setq **local-my-variable**
+"foo/bar")~.
+#+BEGIN_SRC emacs-lisp
   (if (file-exists-p "~/.emacs.d/.emacs-local")
     (load "~/.emacs.d/.emacs-local"))
-  #+END_SRC
+#+END_SRC
 
-  I keep elisp I write inside the site-lisp directory. The files
-  inside that directory are automatically added to the Emacs load-path.
-  #+BEGIN_SRC emacs-lisp
+I keep elisp I write inside the site-lisp directory. The files
+inside that directory are automatically added to the Emacs load-path.
+#+BEGIN_SRC emacs-lisp
   (let ((default-directory  "~/.emacs.d/site-lisp/"))
     (normal-top-level-add-to-load-path '("."))
     (normal-top-level-add-subdirs-to-load-path))
-  #+END_SRC
+#+END_SRC
 
-  I use a special keymap ~my-keys-minor-mode-map~ where i store my global keybindings.
-  This is mainly to use a ~defadvice~ to make sure that any key I
-  define in my keymap as priority over ones defined elsewhere by
-  built-in Emacs modes or 3rd party packages
-  #+BEGIN_SRC emacs-lisp
+I use a special keymap ~my-keys-minor-mode-map~ where i store my global keybindings.
+This is mainly to use a ~defadvice~ to make sure that any key I
+define in my keymap as priority over ones defined elsewhere by
+built-in Emacs modes or 3rd party packages
+#+BEGIN_SRC emacs-lisp
   (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
   (define-minor-mode my-keys-minor-mode
     "A minor mode so that my key settings override annoying major modes."
@@ -74,10 +74,10 @@ you can use ~check-parens~
           (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
           (add-to-list 'minor-mode-map-alist mykeys))))
   (ad-activate 'load)
-  #+END_SRC
+#+END_SRC
 
 ** Package library initialization
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (setq package-archives
            '(("melpa"       . "http://melpa.milkbox.net/packages/")
              ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -97,23 +97,23 @@ you can use ~check-parens~
      (require-package 'use-package)
      (require 'use-package)
      (setq use-package-always-ensure t)
-   #+END_SRC
+#+END_SRC
 
-   You can get the time it took for emacs to start with.
-   It ~c-c c-c~ and it will show in the echo area.
-   #+BEGIN_SRC emacs-lisp :tangle no
+You can get the time it took for emacs to start with.
+It ~c-c c-c~ and it will show in the echo area.
+#+BEGIN_SRC emacs-lisp :tangle no
    (emacs-init-time)
-   #+END_SRC
+#+END_SRC
 
 ** Local variables
-   Local variables are useful to customize your settings for different
-   projects/directories. The built in ~make-local-variable~ is
-   convenient in helping you create those variables.
+Local variables are useful to customize your settings for different
+projects/directories. The built in ~make-local-variable~ is
+convenient in helping you create those variables.
 
-   I find annoying when I edit those local variables
-   that they are not picked up automatically for open buffers. Those two
-   functions help me with the reloading of those locals.
-   #+BEGIN_SRC emacs-lisp
+I find annoying when I edit those local variables
+that they are not picked up automatically for open buffers. Those two
+functions help me with the reloading of those locals.
+#+BEGIN_SRC emacs-lisp
      (defun my-reload-dir-locals-for-current-buffer ()
        "Reloads dir locals for the current buffer."
        (interactive)
@@ -128,13 +128,13 @@ you can use ~check-parens~
            (with-current-buffer buffer
              (when (equal default-directory dir))
              (my-reload-dir-locals-for-current-buffer)))))
-   #+END_SRC
+#+END_SRC
 
 ** Better Defaults
-   I like setting the path manually as other solutions like ~exec-path-from-shell~
-   slow down my Emacs.
+I like setting the path manually as other solutions like ~exec-path-from-shell~
+slow down my Emacs.
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/adoptopenjdk-12.0.2.jdk/Contents/Home")
      (let ((home-folder (getenv "HOME")))
        (setenv "PATH" (concat
@@ -166,11 +166,11 @@ you can use ~check-parens~
                          "/bin/"
                          "/usr/local/sbin/"
                          "/usr/bin/")))
-   #+END_SRC
+#+END_SRC
 
-   Emacs can be really fast with large files too. The trick is to
-   disable
-   #+BEGIN_SRC emacs-lisp
+Emacs can be really fast with large files too. The trick is to
+disable
+#+BEGIN_SRC emacs-lisp
      (defun check-large-file-hook ()
        "If a file is over a given size, turn off minor modes."
        (when (> (buffer-size) (* 1024 100)) ;; 100K
@@ -180,9 +180,9 @@ you can use ~check-parens~
          (buffer-disable-undo)))
 
      (add-hook 'find-file-hooks 'check-large-file-hook)
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (setq help-window-select t)
      (setq inhibit-startup-message t)
      (setq delete-by-moving-to-trash t)
@@ -220,38 +220,38 @@ you can use ~check-parens~
 
      ;; gives each line only one visual line and don't show a continuation on next line
      (set-default 'truncate-lines t)
-   #+END_SRC
+#+END_SRC
 
-   Sentences end with one space after point. The default two space is
-   an historical setting. This makes Emacs sentence based commands more
-   understandable to me.
-   #+BEGIN_SRC emacs-lisp
+Sentences end with one space after point. The default two space is
+an historical setting. This makes Emacs sentence based commands more
+understandable to me.
+#+BEGIN_SRC emacs-lisp
    (setq sentence-end-double-space nil)
-   #+END_SRC
+#+END_SRC
 
-   I want error highlights and error bindings in shell modes too.
-   #+BEGIN_SRC emacs-lisp
+I want error highlights and error bindings in shell modes too.
+#+BEGIN_SRC emacs-lisp
      (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
-   #+END_SRC
+#+END_SRC
 
-   ~C-c C-w~ to copy regex
-   ~C-c C-q~ to quit re-builder and to remove highlights
-   #+BEGIN_SRC emacs-lisp
+~C-c C-w~ to copy regex
+~C-c C-q~ to quit re-builder and to remove highlights
+#+BEGIN_SRC emacs-lisp
    ( require 're-builder)
    (setq reb-re-syntax 'string)
-   #+END_SRC
+#+END_SRC
 
 *** tabs and whitespace
-    By default I disable tabs. I use ~whitespace-mode~ in programming
-    buffers because sometimes when copy pasting code from external
-    sources those external sources have tabs. I want to see those tabs
-    to remove them.
+By default I disable tabs. I use ~whitespace-mode~ in programming
+buffers because sometimes when copy pasting code from external
+sources those external sources have tabs. I want to see those tabs
+to remove them.
 
-    I don't use the ~global-whitespace-mode~ as some emacs mode like
-    ~magit~ use tabs.
+I don't use the ~global-whitespace-mode~ as some emacs mode like
+~magit~ use tabs.
 
-    You can remove all tabs from your buffer with ~untabify~
-    #+BEGIN_SRC emacs-lisp
+You can remove all tabs from your buffer with ~untabify~
+#+BEGIN_SRC emacs-lisp
       (setq-default
        indent-tabs-mode nil    ;no tabs
        c-basic-offset 2)
@@ -260,17 +260,17 @@ you can use ~check-parens~
       (add-hook 'prog-mode-hook 'whitespace-mode)
       (eval-after-load "whitespace"
         '(diminish 'whitespace-mode))
-    #+END_SRC
+#+END_SRC
 
 *** Recent files
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
     (recentf-mode 1)
     (setq recentf-max-menu-items 200)
     (setq recentf-max-saved-items 200)
-    #+END_SRC
+#+END_SRC
 
 * Utility functions
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun sudo ()
     "Use TRAMP to `sudo' the file for current buffer."
     (interactive)
@@ -331,10 +331,10 @@ you can use ~check-parens~
         (set-buffer-file-coding-system 'unix))))
 
   (add-hook 'find-file-hooks 'abo-change-line-endings-to-unix)
-  #+END_SRC
+#+END_SRC
 
 * GUI
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (blink-cursor-mode 0)
   (column-number-mode)
 
@@ -358,9 +358,9 @@ you can use ~check-parens~
   ;; makes fringe big enough with HDPI
   (when (boundp 'fringe-mode)
     (fringe-mode 20))
-  #+END_SRC
+#+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package diminish
      :config
      (eval-after-load "undo-tree"
@@ -370,127 +370,127 @@ you can use ~check-parens~
      (diminish 'auto-fill-function)
      (diminish 'my-keys-minor-mode)
      (diminish 'eldoc-mode))
-  #+END_SRC
+#+END_SRC
 ** Colors
-   This is a list of all the colors I use with Emacs. When I want to
-   change a color I look through those colors. This helps me achieve
-   consistency.
+This is a list of all the colors I use with Emacs. When I want to
+change a color I look through those colors. This helps me achieve
+consistency.
 *** Pantone
 
-    | Hex     | Pantone Color Name |
-    |---------+--------------------|
-    | #fff166 | 101U               |
-    | #fccf61 | 128u               |
-    | #f79b2f | 130u               |
-    | #c97f3a | 145u               |
-    | #ffa2cb | 210u               |
-    | #f56d9e | 213u               |
-    | #dcc6ea | 263u               |
-    | #bfa1e3 | 264u               |
-    | #9d7ad2 | 265u               |
-    | #adcff1 | 277u               |
-    | #7ab1e8 | 284u               |
-    | #5b8edb | 279u               |
-    | #8eddeb | 304u               |
-    | #00b4e4 | 395u               |
-    | #93e8d3 | 331u               |
-    | #97d88a | 358u               |
-    | #5cb860 | 360u               |
-    | #56944f | 362u               |
-    | #f1f2f1 | 11-0601 tpx        |
-    | #e8eae8 | 11-4800 tpx        |
-    | #dad9d6 | cool gray 1u       |
-    | #c5c5c5 | cool gray 3u       |
-    | #adaeb0 | cool gray 5u       |
-    | #939598 | cool gray 8u       |
-    | #e4f4e9 | 9063u              |
-    | #c5f2e6 | 9520u              |
-    | #ffcfd8 | 9284u              |
-    | #69615f | 440u               |
-    | #4c4e56 | black7u            |
-    | #885a61 | 195u               |
-    | #f65058 | red 032u           |
-    | #bc3e44 | 3517u              |
-    | #34855b | 348u               |
-    | #546758 | 350u               |
-    | #4982cf | 285u               |
-    | #3a499c | Reflex Blue U      |
-    | #65428a | medium purple      |
+| Hex     | Pantone Color Name |
+|---------+--------------------|
+| #fff166 | 101U               |
+| #fccf61 | 128u               |
+| #f79b2f | 130u               |
+| #c97f3a | 145u               |
+| #ffa2cb | 210u               |
+| #f56d9e | 213u               |
+| #dcc6ea | 263u               |
+| #bfa1e3 | 264u               |
+| #9d7ad2 | 265u               |
+| #adcff1 | 277u               |
+| #7ab1e8 | 284u               |
+| #5b8edb | 279u               |
+| #8eddeb | 304u               |
+| #00b4e4 | 395u               |
+| #93e8d3 | 331u               |
+| #97d88a | 358u               |
+| #5cb860 | 360u               |
+| #56944f | 362u               |
+| #f1f2f1 | 11-0601 tpx        |
+| #e8eae8 | 11-4800 tpx        |
+| #dad9d6 | cool gray 1u       |
+| #c5c5c5 | cool gray 3u       |
+| #adaeb0 | cool gray 5u       |
+| #939598 | cool gray 8u       |
+| #e4f4e9 | 9063u              |
+| #c5f2e6 | 9520u              |
+| #ffcfd8 | 9284u              |
+| #69615f | 440u               |
+| #4c4e56 | black7u            |
+| #885a61 | 195u               |
+| #f65058 | red 032u           |
+| #bc3e44 | 3517u              |
+| #34855b | 348u               |
+| #546758 | 350u               |
+| #4982cf | 285u               |
+| #3a499c | Reflex Blue U      |
+| #65428a | medium purple      |
 *** One Half
 ***** Dark
 
-      | Color Name     | Hex             |
-      |----------------+-----------------|
-      | "background"   | "#282C34"       |
-      | "black"        | "#282C34"       |
-      | "blue"         | "#61AFEF"       |
-      | "brightBlack"  | "#282C34"       |
-      | "brightBlue"   | "#61AFEF"       |
-      | "brightCyan"   | "#56B6C2"       |
-      | "brightGreen"  | "#98C379"       |
-      | "brightPurple" | "#C678DD"       |
-      | "brightRed"    | "#E06C75"       |
-      | "brightWhite"  | "#DCDFE4"       |
-      | "brightYellow" | "#E5C07B"       |
-      | "cyan"         | "#56B6C2"       |
-      | "foreground"   | "#DCDFE4"       |
-      | "green"        | "#98C379"       |
-      | "purple"       | "#C678DD"       |
-      | "red"          | "#E06C75"       |
-      | "white"        | "#DCDFE4"       |
-      | "yellow"       | "#E5C07B"       |
+| Color Name     | Hex             |
+|----------------+-----------------|
+| "background"   | "#282C34"       |
+| "black"        | "#282C34"       |
+| "blue"         | "#61AFEF"       |
+| "brightBlack"  | "#282C34"       |
+| "brightBlue"   | "#61AFEF"       |
+| "brightCyan"   | "#56B6C2"       |
+| "brightGreen"  | "#98C379"       |
+| "brightPurple" | "#C678DD"       |
+| "brightRed"    | "#E06C75"       |
+| "brightWhite"  | "#DCDFE4"       |
+| "brightYellow" | "#E5C07B"       |
+| "cyan"         | "#56B6C2"       |
+| "foreground"   | "#DCDFE4"       |
+| "green"        | "#98C379"       |
+| "purple"       | "#C678DD"       |
+| "red"          | "#E06C75"       |
+| "white"        | "#DCDFE4"       |
+| "yellow"       | "#E5C07B"       |
 
 ***** Light
 
-      | Color Name     | Hex       |
-      |----------------+-----------|
-      | "background"   | "#FAFAFA" |
-      | "black"        | "#383A42" |
-      | "blue"         | "#0184BC" |
-      | "brightBlack"  | "#383A42" |
-      | "brightBlue"   | "#0184BC" |
-      | "brightCyan"   | "#0997B3" |
-      | "brightGreen"  | "#50A14F" |
-      | "brightPurple" | "#A626A4" |
-      | "brightRed"    | "#E45649" |
-      | "brightWhite"  | "#FAFAFA" |
-      | "brightYellow" | "#C18401" |
-      | "cyan"         | "#0997B3" |
-      | "foreground"   | "#383A42" |
-      | "green"        | "#50A14F" |
-      | "purple"       | "#A626A4" |
-      | "red"          | "#E45649" |
-      | "white"        | "#FAFAFA" |
-      | "yellow"       | "#C18401" |
+| Color Name     | Hex       |
+|----------------+-----------|
+| "background"   | "#FAFAFA" |
+| "black"        | "#383A42" |
+| "blue"         | "#0184BC" |
+| "brightBlack"  | "#383A42" |
+| "brightBlue"   | "#0184BC" |
+| "brightCyan"   | "#0997B3" |
+| "brightGreen"  | "#50A14F" |
+| "brightPurple" | "#A626A4" |
+| "brightRed"    | "#E45649" |
+| "brightWhite"  | "#FAFAFA" |
+| "brightYellow" | "#C18401" |
+| "cyan"         | "#0997B3" |
+| "foreground"   | "#383A42" |
+| "green"        | "#50A14F" |
+| "purple"       | "#A626A4" |
+| "red"          | "#E45649" |
+| "white"        | "#FAFAFA" |
+| "yellow"       | "#C18401" |
 
 *** Tronesque
-     #081724
-     #033340
-     #1d5483
-     #2872b2
-     #d3f9ee
-     #a6f3dd
-     #effffe
-     #fffed9
-     #ff694d
-     #f5b55f
-     #fffe4e
-     #afc0fd
-     #96a5d9
-     #bad6e2
-     #d2f1ff
-     #68f6cb
+#081724
+#033340
+#1d5483
+#2872b2
+#d3f9ee
+#a6f3dd
+#effffe
+#fffed9
+#ff694d
+#f5b55f
+#fffe4e
+#afc0fd
+#96a5d9
+#bad6e2
+#d2f1ff
+#68f6cb
 * Windows
-  Splitting can be done with ~C-x 2~ and ~C-x 3~ but I prefer more
-  memorable keybindings.
-  #+BEGIN_SRC emacs-lisp
+Splitting can be done with ~C-x 2~ and ~C-x 3~ but I prefer more
+memorable keybindings.
+#+BEGIN_SRC emacs-lisp
      (define-key my-keys-minor-mode-map (kbd "C-c \\") 'split-window-right)
      (define-key my-keys-minor-mode-map (kbd "C-c -") 'split-window-below)
-  #+END_SRC
+#+END_SRC
 
-  Move between buffers with C-h C-j C-k C-l. My Tmux bindings are made
-  to [[file:~/dotfiles/tmux/.tmux.conf::is_vim_or_emacs='echo%20"#{pane_current_command}"%20|%20grep%20-iqE%20"vim|emacs|reattach-to-user-namespace"'%20bind%20-n%20C-h%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-h"%20"select-pane%20-L"%20bind%20-n%20C-j%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-j"%20"select-pane%20-D"%20bind%20-n%20C-k%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-k"%20"select-pane%20-U"%20bind%20-n%20C-l%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-l"%20"select-pane%20-R"][make it work seamlessly]] with Emacs.
-  #+BEGIN_SRC emacs-lisp
+Move between buffers with C-h C-j C-k C-l. My Tmux bindings are made
+to [[file:~/dotfiles/tmux/.tmux.conf::is_vim_or_emacs='echo%20"#{pane_current_command}"%20|%20grep%20-iqE%20"vim|emacs|reattach-to-user-namespace"'%20bind%20-n%20C-h%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-h"%20"select-pane%20-L"%20bind%20-n%20C-j%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-j"%20"select-pane%20-D"%20bind%20-n%20C-k%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-k"%20"select-pane%20-U"%20bind%20-n%20C-l%20if-shell%20"$is_vim_or_emacs"%20"send-keys%20C-l"%20"select-pane%20-R"][make it work seamlessly]] with Emacs.
+#+BEGIN_SRC emacs-lisp
   (defun tmux-socket-command-string ()
     (interactive)
     (concat "tmux -S "
@@ -529,7 +529,7 @@ you can use ~check-parens~
   (define-key my-keys-minor-mode-map (kbd "C-j") 'tmux-move-down)
   (define-key my-keys-minor-mode-map (kbd "C-k") 'tmux-move-up)
   (define-key my-keys-minor-mode-map (kbd "C-l") 'tmux-move-right)
-  #+END_SRC
+#+END_SRC
 * Programming languages
 
 #+BEGIN_SRC emacs-lisp
@@ -541,15 +541,15 @@ you can use ~check-parens~
 #+END_SRC
 
 ** Clojure
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package clojure-mode
      :mode "\\.clj\\'"
      :config
      (add-hook 'clojure-mode-hook #'subword-mode)
      (use-package cider))
-   #+END_SRC
+#+END_SRC
 ** Ruby
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package yaml-mode
      :mode "\\.ya?ml\\'")
 
@@ -592,12 +592,12 @@ you can use ~check-parens~
            (indent-according-to-mode)))
        )
      (use-package rspec-mode))
-       #+END_SRC
+#+END_SRC
 
-   I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freebie-xmpfilter/][Ruby Tapas.]] Hit ~M-;~ twice adds a special
-   comment for xmpfilter. Running ~xmp~ will evaluate the line and put
-   the result after the comment.
-   #+BEGIN_SRC emacs-lisp
+I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freebie-xmpfilter/][Ruby Tapas.]] Hit ~M-;~ twice adds a special
+comment for xmpfilter. Running ~xmp~ will evaluate the line and put
+the result after the comment.
+#+BEGIN_SRC emacs-lisp
      (use-package rcodetools
        :load-path "/site-lisp/rcodetools.el"
        :pin manual
@@ -613,16 +613,16 @@ you can use ~check-parens~
                    (end-of-line))
                (insert "=>"))
            ad-do-it)))
-   #+END_SRC
+#+END_SRC
 ** Go
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package go-mode)
-   #+END_SRC
+#+END_SRC
 
 ** HTML
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package web-mode
      :mode "\\.html\\'"
      :config
@@ -651,10 +651,10 @@ you can use ~check-parens~
      (add-hook 'web-mode-hook
                (lambda ()
                  (emmet-mode))))
-   #+END_SRC
+#+END_SRC
 
 ** CSS
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package scss-mode
      :mode "\\.scss\\'")
 
@@ -662,15 +662,15 @@ you can use ~check-parens~
 
    (use-package less-css-mode
      :mode "\\.less\\'")
-   #+END_SRC
+#+END_SRC
 ** JavaScript
-   Node compilation errors messages are not understood by Emacs by
-   default. All that's needed to make it work is to add a new regex
-   describing what are the components of the messages.
+Node compilation errors messages are not understood by Emacs by
+default. All that's needed to make it work is to add a new regex
+describing what are the components of the messages.
 
-   After running the compile command, you can navigate through the
-   errors with ~next-error~ and ~previous-error~
-   #+BEGIN_SRC emacs-lisp
+After running the compile command, you can navigate through the
+errors with ~next-error~ and ~previous-error~
+#+BEGIN_SRC emacs-lisp
    (require 'compile)
    (setq compilation-error-regexp-alist-alist
          (cons '(node "^\\([a-zA-Z\.0-9\/-]+\\):\\([0-9]+\\)$"
@@ -686,9 +686,9 @@ you can use ~check-parens~
                (set (make-local-variable 'compile-command)
                     (format "node %s" (file-name-nondirectory buffer-file-name)))))
 
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (setq js-indent-level 2)
 
    (use-package js2-mode
@@ -730,10 +730,10 @@ you can use ~check-parens~
 
    (use-package typescript-mode
      :mode "\\.ts\\'")
-   #+END_SRC
+#+END_SRC
 
-   Auto-format JavaScript on save
-   #+BEGIN_SRC emacs-lisp
+Auto-format JavaScript on save
+#+BEGIN_SRC emacs-lisp
    (use-package prettier-js
      :diminish prettier-js-mode
      :config
@@ -744,27 +744,27 @@ you can use ~check-parens~
            prettier-js-command "prettier")
      (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
      (add-hook 'js2-mode-hook 'prettier-js-mode))
-   #+END_SRC
+#+END_SRC
 
-   Context-coloring highlights code based on closures.
-   This gives a refreshing view of the code and helps using closures
-   efficiently.
-   #+BEGIN_SRC emacs-lisp
+Context-coloring highlights code based on closures.
+This gives a refreshing view of the code and helps using closures
+efficiently.
+#+BEGIN_SRC emacs-lisp
    (use-package context-coloring
      :ensure t
      :diminish context-coloring-mode
      :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
      :config
      (add-hook 'js2-mode-hook #'context-coloring-mode))
-   #+END_SRC
+#+END_SRC
 
 *** React
 
-    The following shows a pretty interesting way to quickly create
-    major modes _magically_. It parses the file to detect if this is a
-    react file. If yes I run a function to use web-mode and make some
-    adjustments for JSX.
-    #+BEGIN_SRC emacs-lisp
+The following shows a pretty interesting way to quickly create
+major modes _magically_. It parses the file to detect if this is a
+react file. If yes I run a function to use web-mode and make some
+adjustments for JSX.
+#+BEGIN_SRC emacs-lisp
     (add-to-list 'magic-mode-alist '("^import.*React.* from 'react'" . my-jsx-hook) )
     (defun my-jsx-hook ()
       "Set web mode with adjustments for JSX"
@@ -781,9 +781,9 @@ you can use ~check-parens~
       (add-hook 'web-mode-hook #'(lambda ()
                                    (enable-minor-mode
                                     '("\\.jsx?\\'" . prettier-js-mode)))))
-    #+END_SRC
+#+END_SRC
 *** Vue
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
     (use-package web-mode
       :mode "\\.vue\\'"
       :config
@@ -812,9 +812,9 @@ you can use ~check-parens~
     ;; (define-key my-keys-minor-mode-map (kbd "nh") (aurayb-make-narrow-indirect-vue "template" 'html-mode))
     ;; (define-key my-keys-minor-mode-map (kbd "ns") (aurayb-make-narrow-indirect-vue "style" 'scss-mode))
     ;; (define-key my-keys-minor-mode-map (kbd "nn") '(lambda () (interactive) (pop-to-buffer-same-window (buffer-base-buffer))))
-    #+END_SRC
+#+END_SRC
 * Docker
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package docker
    :ensure t
    :bind ("C-c d d". docker)
@@ -829,9 +829,9 @@ you can use ~check-parens~
   ;; (require 'dox-dc)
   ;; (define-key my-keys-minor-mode-map (kbd "C-c d x") (dox-dc))
   ;; (evil-set-initial-state 'dox-dc-mode 'emacs)
-  #+END_SRC
+#+END_SRC
 * Flycheck
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package flycheck
     :diminish flycheck-mode
     :config
@@ -869,37 +869,37 @@ you can use ~check-parens~
     :modes (cfn-mode))
   (add-to-list 'flycheck-checkers 'cfn-lint))
 
-  #+END_SRC
+#+END_SRC
 * Bindings
 ** General
-   Easier to type M-x
-   #+BEGIN_SRC emacs-lisp
+Easier to type M-x
+#+BEGIN_SRC emacs-lisp
    (define-key my-keys-minor-mode-map (kbd "C-x C-m") 'execute-extended-command)
    (define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
-   #+END_SRC
+#+END_SRC
 
-   Shows a key combination helper in the minibuffer
-   #+BEGIN_SRC emacs-lisp
+Shows a key combination helper in the minibuffer
+#+BEGIN_SRC emacs-lisp
      (use-package which-key
        :diminish which-key-mode
        :config
        (which-key-mode))
-   #+END_SRC
+#+END_SRC
 
-   ~recursived-edit~, combined with C-M-c (exit-recursive-edit),
-   allows to stop doing something momentarily, do something else and
-   come back to it later.
-   #+BEGIN_SRC emacs-lisp
+~recursived-edit~, combined with C-M-c (exit-recursive-edit),
+allows to stop doing something momentarily, do something else and
+come back to it later.
+#+BEGIN_SRC emacs-lisp
     (define-key my-keys-minor-mode-map (kbd "C-M-e") 'recursive-edit)
-   #+END_SRC
+#+END_SRC
 
-   Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
-   #+BEGIN_SRC emacs-lisp
+Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
+#+BEGIN_SRC emacs-lisp
     ;; makes grep buffers writable and apply the changes to files.
     (use-package wgrep :defer t)
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    (use-package paredit
      :diminish paredit-mode
      :bind (:map my-keys-minor-mode-map
@@ -966,9 +966,9 @@ you can use ~check-parens~
    (use-package windresize
      :bind (:map evil-normal-state-map
                  ("C-w r" . windresize)))
-   #+END_SRC
+#+END_SRC
 ** Drag stuff
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package drag-stuff
        :diminish t
        :bind (:map my-keys-minor-mode-map
@@ -976,35 +976,35 @@ you can use ~check-parens~
               ("C-M-<down>" . drag-stuff-down))
        :config
        (drag-stuff-global-mode t))
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package key-chord
     :after evil
     :config
     (key-chord-mode 1)
     (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
     (use-package evil
       :config
       (evil-define-key 'insert lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp))
-   #+END_SRC
+#+END_SRC
 
 * Notes
 
-  Some people switch to Emacs just to use org-mode.
+Some people switch to Emacs just to use org-mode.
 
-  It is one of the best tool for note taking and writing
+It is one of the best tool for note taking and writing
 
-  Setting the org-directory helps integration with org-agenda and
-  for org template captures.
-  #+BEGIN_SRC emacs-lisp
+Setting the org-directory helps integration with org-agenda and
+for org template captures.
+#+BEGIN_SRC emacs-lisp
   (setq org-directory **local-org-folder**)
-  #+END_SRC
+#+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
@@ -1027,7 +1027,7 @@ you can use ~check-parens~
 
   (setq org-todo-keywords
         '((sequence "TODO" "WAITING" "|" "DONE(!)")))
-  #+END_SRC
+#+END_SRC
 
 
 
@@ -1219,15 +1219,15 @@ or ~hugo~ to make it accessible on internet.
 Ispell buffer with ~F5~
 Ispell word with ~z =~
 #+BEGIN_SRC emacs-lisp
-   (setq ispell-program-name "aspell")
-   (setq ispell-silently-savep t)
-   (setq ispell-personal-dictionary **local-personal-dictionary**)
-   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
-   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+(setq ispell-program-name "aspell")
+(setq ispell-silently-savep t)
+(setq ispell-personal-dictionary **local-personal-dictionary**)
+;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
+(setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
-   (add-hook 'org-mode-hook 'turn-on-flyspell)
-   (eval-after-load "flyspell"
-        '(diminish 'flyspell-mode))
+;; (add-hook 'org-mode-hook 'turn-on-flyspell)
+(eval-after-load "flyspell"
+     '(diminish 'flyspell-mode))
 #+END_SRC
 
 Word definition
@@ -1304,106 +1304,106 @@ This is mainly to restore emacs behavior with help windows.
 #+END_SRC
 
 Surround things with
-  - ~S~ in visual mode
-  - ~ys<text-object>~ in normal mode
-    You can also change surroundings ~cs~ or delete surroundings ~ds~.
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-surround
-      :after evil
-      :config
-      (global-evil-surround-mode 1))
-    #+END_SRC
+- ~S~ in visual mode
+- ~ys<text-object>~ in normal mode
+  You can also change surroundings ~cs~ or delete surroundings ~ds~.
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+    :after evil
+    :config
+    (global-evil-surround-mode 1))
+  #+END_SRC
 
-    Comment things with ~gc~. Comment and copy with ~gy~
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-commentary
-      :after evil
-      :diminish evil-commentary-mode
-      :config
-      (evil-commentary-mode))
-    #+END_SRC
+  Comment things with ~gc~. Comment and copy with ~gy~
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary
+    :after evil
+    :diminish evil-commentary-mode
+    :config
+    (evil-commentary-mode))
+  #+END_SRC
 
-    Start a search from visual selection with ~*~ or ~#~ (backward).
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-visualstar
-      :after evil
-      :config
-      (global-evil-visualstar-mode t))
-    #+END_SRC
+  Start a search from visual selection with ~*~ or ~#~ (backward).
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-visualstar
+    :after evil
+    :config
+    (global-evil-visualstar-mode t))
+  #+END_SRC
 
-    Jump to matching pairs with ~%~.
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-matchit
-      :after evil
-      :config
-      (global-evil-matchit-mode 1))
-    #+END_SRC
+  Jump to matching pairs with ~%~.
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :after evil
+    :config
+    (global-evil-matchit-mode 1))
+  #+END_SRC
 
-    Persist highlight from ~evil search~ and ~isearch~
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-search-highlight-persist
-      :config
-      (global-evil-search-highlight-persist t))
-    #+END_SRC
+  Persist highlight from ~evil search~ and ~isearch~
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-search-highlight-persist
+    :config
+    (global-evil-search-highlight-persist t))
+  #+END_SRC
 
-    I prefer to not start in normal mode with some modes.
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil
-      :ensure t
-      :init
-      (setq evil-mode-line-format nil)
-      :config
+  I prefer to not start in normal mode with some modes.
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-mode-line-format nil)
+    :config
 
-      (evil-mode 1)
-      (evil-set-initial-state 'deft-mode 'insert)
-      (evil-set-initial-state 'dired-mode 'emacs)
-      (evil-set-initial-state 'magit-mode 'emacs)
-      (evil-set-initial-state 'magit-mode 'emacs)
-      (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+    (evil-mode 1)
+    (evil-set-initial-state 'deft-mode 'insert)
+    (evil-set-initial-state 'dired-mode 'emacs)
+    (evil-set-initial-state 'magit-mode 'emacs)
+    (evil-set-initial-state 'magit-mode 'emacs)
+    (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
-      (evil-ex-define-cmd "W" 'save-buffer))
-    #+END_SRC
+    (evil-ex-define-cmd "W" 'save-buffer))
+  #+END_SRC
 
-    Changes mode-line color depending on Evil state, if buffer is
-    modified etc...
-    #+BEGIN_SRC emacs-lisp
-       (lexical-let ((default-color (cons (face-background 'mode-line)
-                                        (face-foreground 'mode-line))))
-       (add-hook 'post-command-hook
-                 (lambda ()
-                   (let ((color (cond ((minibufferp) default-color)
-                                      ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
-                                      ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
-                                      ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
-                                      ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
-                                      (t default-color)))
-                         )
+  Changes mode-line color depending on Evil state, if buffer is
+  modified etc...
+  #+BEGIN_SRC emacs-lisp
+     (lexical-let ((default-color (cons (face-background 'mode-line)
+                                      (face-foreground 'mode-line))))
+     (add-hook 'post-command-hook
+               (lambda ()
+                 (let ((color (cond ((minibufferp) default-color)
+                                    ((evil-emacs-state-p)  '("#ffa2cb" . "#4c4e56"))
+                                    ((evil-visual-state-p) '("#adcff1" . "#4c4e56"))
+                                    ((evil-insert-state-p)  '("#97d88a" . "#4c4e56"))
+                                    ((buffer-modified-p)   '("#f79b2f" . "#4c4e56"))
+                                    (t default-color)))
+                       )
 
-                     (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
-                     (set-face-background 'mode-line (car color))
-                     (set-face-foreground 'mode-line-buffer-id (cdr color))
-                     (set-face-foreground 'mode-line (cdr color))))))
+                   (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
+                   (set-face-background 'mode-line (car color))
+                   (set-face-foreground 'mode-line-buffer-id (cdr color))
+                   (set-face-foreground 'mode-line (cdr color))))))
 
-    #+END_SRC
+  #+END_SRC
 
-    Make my cursor match my modeline color
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil
-      :config
-        (setq evil-insert-state-cursor '(bar "#4c4e56")
-              evil-visual-state-cursor '(box "#adcff1")
-              evil-emacs-state-cursor '(box "#ffa2cb")
-              evil-normal-state-cursor '(box "#bc3e44")))
-    #+END_SRC
+  Make my cursor match my modeline color
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :config
+      (setq evil-insert-state-cursor '(bar "#4c4e56")
+            evil-visual-state-cursor '(box "#adcff1")
+            evil-emacs-state-cursor '(box "#ffa2cb")
+            evil-normal-state-cursor '(box "#bc3e44")))
+  #+END_SRC
 
-    Add text objects to select, copy things based on indentation level.
-    Use it with ~vii~ and ~yii~.
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-indent-plus
-      :after evil
-      :config
-      (evil-indent-plus-default-bindings))
-    #+END_SRC
+  Add text objects to select, copy things based on indentation level.
+  Use it with ~vii~ and ~yii~.
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-indent-plus
+    :after evil
+    :config
+    (evil-indent-plus-default-bindings))
+  #+END_SRC
 
 * Search
 Searching is probably the most important thing in a code editor.
@@ -1785,10 +1785,11 @@ to use `fd` instead of find.
       (add-to-list 'ffip-prune-patterns "node_modules/*"))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-    (eval-after-load "ivy"
-      '(lambda () (require 'abo-find-in-project)
-      (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name)))
+#+BEGIN_SRC emacs-lisp :tangle no
+(use-package ivy
+  :config
+  (require 'abo-find-in-project)
+  (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name))
 #+END_SRC
 ** Switch between projects
 
@@ -1913,7 +1914,7 @@ C-o~
    (use-package company
      :diminish company-mode
      :config
-     (setq company-idle-delay 0.2
+     (setq company-idle-delay nil
            company-tooltip-limit 10
            company-dabbrev-downcase nil
            company-dabbrev-ignore-case nil

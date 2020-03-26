@@ -80,7 +80,7 @@ export PATH=$HOME/.rbenv/bin:$PATH
  eval "$(rbenv init -)"
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
-export BROWSER="browser.sh"
+export BROWSER="wslview"
 
 export CDPATH=.:~/:~/projects:~/work
 
@@ -114,4 +114,4 @@ then
   sudo /sbin/sysctl -p > /dev/null
 fi
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && tat >/dev/null
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$TERMINAL_EMULATOR" ] && tat >/dev/null

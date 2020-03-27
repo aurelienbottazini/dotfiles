@@ -5,6 +5,7 @@
 .DS_Store
 .idea
 .quokka
+/emacs/.emacs.d/init.el
 /emacs/.emacs.d/.litable-lists.el
 /emacs/.emacs.d/ac-comphist.dat
 /emacs/.emacs.d/company-statistics-cache.el

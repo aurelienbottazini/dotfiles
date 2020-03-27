@@ -839,7 +839,7 @@
 ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
 (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
 
-;; (add-hook 'org-mode-hook 'turn-on-flyspell)
+(add-hook 'org-mode-hook 'turn-on-flyspell)
 (eval-after-load "flyspell"
      '(diminish 'flyspell-mode))
 
@@ -1121,24 +1121,6 @@ This command switches to browser."
   (add-to-list 'ffip-prune-patterns "*/.shadow-cljs/*")
   (add-to-list 'ffip-prune-patterns "node_modules/*"))
 
-(use-package projectile
-  :demand
-  :bind (:map my-keys-minor-mode-map
-         ("C-c p" . projectile-command-map))
-  :init
-  (setq projectile-switch-project-action 'projectile-dired)
-  (setq projectile-mode-line-prefix " ")
-  :config
-  (projectile-mode t))
-
-(use-package projectile
-  :config
-  (projectile-register-project-type 'npm '("package.json")
-                                    :compile "npm install"
-                                    :test "npm test"
-                                    :run "npm start"
-                                    :test-suffix ".spec"))
-
 (use-package dumb-jump
   :bind (:map evil-normal-state-map
               ("gd" . dumb-jump-go)
@@ -1194,17 +1176,6 @@ This command switches to browser."
     :config
     (setq company-statistics-file "~/.emacs.d/company-stats-cache.el")
     (company-statistics-mode +1))
-
-  (use-package company-dict
-    :commands company-dict
-    :config
-    (defun +company|enable-project-dicts (mode &rest _)
-      "Enable per-project dictionaries."
-      (if (symbol-value mode)
-          (cl-pushnew mode company-dict-minor-mode-list :test #'eq)
-        (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
-    (add-hook 'projectile-after-switch-project-hook #'+company|enable-project-dicts))
-
 
   (autoload 'company-capf "company-capf")
   (autoload 'company-yasnippet "company-yasnippet")

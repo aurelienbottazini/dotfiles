@@ -335,29 +335,24 @@ You can remove all tabs from your buffer with ~untabify~
 
 * GUI
 #+BEGIN_SRC emacs-lisp
-  (blink-cursor-mode 0)
-  (column-number-mode)
+(blink-cursor-mode 0)
+(column-number-mode)
 
-  (electric-indent-mode t)
+(electric-indent-mode t)
 
-  (electric-pair-mode)
-  (defun inhibit-electric-pair-mode-in-minibuffer (char)
-    (minibufferp))
-  (setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
+(electric-pair-mode)
+(defun inhibit-electric-pair-mode-in-minibuffer (char)
+  (minibufferp))
+(setq electric-pair-inhibit-predicate #'inhibit-electric-pair-mode-in-minibuffer)
 
-  ;; file path in frame title
-  (setq frame-title-format
-        '((:eval (if (buffer-file-name)
-                     (abbreviate-file-name (buffer-file-name))
-                   "%b"))))
+(setq frame-title-format "emacs")
 
+(define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
+(setq blink-matching-paren 'jump-offscreen)
 
-  (define-key my-keys-minor-mode-map (kbd "C-c op") 'show-paren-mode)
-  (setq blink-matching-paren 'jump-offscreen)
-
-  ;; makes fringe big enough with HDPI
-  (when (boundp 'fringe-mode)
-    (fringe-mode 20))
+;; makes fringe big enough with HDPI
+(when (boundp 'fringe-mode)
+  (fringe-mode 20))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

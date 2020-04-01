@@ -1884,7 +1884,7 @@ C-o~
            company-require-match 'never
            company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
            company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-           company-backends '(company-files company-capf company-dabbrev company-yasnippet company-ispell)
+           company-backends '((company-files company-yasnippet company-capf))
            company-transformers '(company-sort-by-occurrence))
      (global-company-mode +1)
 
@@ -2043,6 +2043,10 @@ To get a list of videos to watch do:
 ;; I don't want to keep the current tags table when there's another one in the directory i am visiting.
 ;; Let's automatically switch to the new one without asking
 (setq tags-add-tables nil)
+#+end_src
+
+#+begin_src emacs-lisp :results silent
+(require 'wat-mode)
 #+end_src
 
 * Local variables

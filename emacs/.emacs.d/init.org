@@ -1857,10 +1857,10 @@ You can customize its behaviour by choosing different expand functions.
 The description of all the hippie expand functions is inside
 [[https://github.com/emacs-mirror/emacs/blob/master/lisp/hippie-exp.el#L63][~hippie-exp.el~]] (location can vary on your system)
 #+BEGIN_SRC emacs-lisp
-    (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line))
+    (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kil try-expand-all-abbrevs try-expand-list try-expand-line))
     (require 'mode-local)
-    (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
-    (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+    (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
+    (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
     (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
     (define-key evil-insert-state-map (kbd "M-/") 'hippie-expand)
 #+END_SRC
@@ -1876,15 +1876,11 @@ C-o~
      :config
      (setq company-idle-delay nil
            company-tooltip-limit 10
-           company-dabbrev-downcase nil
-           company-dabbrev-ignore-case nil
-           company-dabbrev-code-other-buffers nil
-           company-dabbrev-other-buffers nil
            company-tooltip-align-annotations t
            company-require-match 'never
            company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
            company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-           company-backends '((company-files company-yasnippet company-dabbrev company-capf))
+           company-backends '((company-files company-yasnippet))
            company-transformers '(company-sort-by-occurrence))
      (global-company-mode +1)
 
@@ -1902,13 +1898,9 @@ C-o~
 
      (autoload 'company-capf "company-capf")
      (autoload 'company-yasnippet "company-yasnippet")
-     (autoload 'company-dabbrev "company-dabbrev")
-     (autoload 'company-dabbrev-code "company-dabbrev-code")
      (autoload 'company-etags "company-etags")
      (autoload 'company-elisp "company-elisp")
      (autoload 'company-files "company-files")
-     (autoload 'company-gtags "company-gtags")
-     (autoload 'company-ispell "company-ispell")
      (let ((map company-active-map))
        (mapc
         (lambda (x)

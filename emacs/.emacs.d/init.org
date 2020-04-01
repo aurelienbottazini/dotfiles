@@ -68,25 +68,26 @@ built-in Emacs modes or 3rd party packages
 
 ** Package library initialization
 #+BEGIN_SRC emacs-lisp
-     (setq package-archives
-           '(("melpa"       . "http://melpa.milkbox.net/packages/")
-             ("marmalade" . "http://marmalade-repo.org/packages/")
-             ("gnu"         . "http://elpa.gnu.org/packages/")))
+(setq package-archives
+      '(("melpa"       . "http://melpa.milkbox.net/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")
+        ("gnu"         . "http://elpa.gnu.org/packages/")))
 
-     (setq package-user-dir (concat user-emacs-directory "elpa"))
+(setq package-user-dir (concat user-emacs-directory "elpa"))
 
-     (package-initialize)
-     (unless package-archive-contents
-       (package-refresh-contents))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
 
-     (defun require-package (package &optional min-version)
-       "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
-       (unless (package-installed-p package min-version)
-         (package-install package)))
+(defun require-package (package &optional min-version)
+  "Ask elpa to install given PACKAGE. You can specify a MIN-VERSION for your PACKAGE."
+  (unless (package-installed-p package min-version)
+    (package-install package)))
 
-     (require-package 'use-package)
-     (require 'use-package)
-     (setq use-package-always-ensure t)
+(require-package 'use-package)
+(require 'use-package)
+(setq use-package-compute-statistics t) ;; For (use-package-report)
+(setq use-package-always-ensure t) ;; Install package if it is missing
 #+END_SRC
 
 You can get the time it took for emacs to start with.
@@ -584,6 +585,7 @@ comment for xmpfilter. Running ~xmp~ will evaluate the line and put
 the result after the comment.
 #+BEGIN_SRC emacs-lisp
      (use-package rcodetools
+       :after ruby
        :load-path "/site-lisp/rcodetools.el"
        :pin manual
        :ensure nil
@@ -601,7 +603,7 @@ the result after the comment.
 #+END_SRC
 ** Go
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
    (use-package go-mode)
 #+END_SRC
 
@@ -610,13 +612,13 @@ the result after the comment.
 #+BEGIN_SRC emacs-lisp
    (use-package web-mode
      :mode "\\.html\\'"
+     :mode "\\.gohtml\\'"
      :config
      (setq web-mode-enable-auto-closing t))
- (use-package web-mode
-   :mode "\\.gohtml\\'")
 
    (use-package emmet-mode
-   :after evil
+     :hook (css-mode sgml-mode web-mode)
+     :after evil
      :diminish emmet-mode
      :config
      (progn
@@ -632,10 +634,7 @@ the result after the comment.
                (lambda ()
                  (emmet-mode)
                  (setq emmet-expand-jsx-className? nil)))
-
-     (add-hook 'web-mode-hook
-               (lambda ()
-                 (emmet-mode))))
+                 )
 #+END_SRC
 
 ** CSS
@@ -677,9 +676,9 @@ errors with ~next-error~ and ~previous-error~
    (setq js-indent-level 2)
 
    (use-package js2-mode
+     :mode "\\.js\\'"
+     :mode "\\.jsx\\'"
      :config
-     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
      (setq js2-mode-show-parse-errors nil
            js2-mode-show-strict-warnings nil
            js2-basic-offset 2
@@ -818,11 +817,12 @@ adjustments for JSX.
 * Flycheck
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
+    :hook web-mode
+    :hook js2-mode
+    :hook cfn-mode-hook
     :diminish flycheck-mode
     :config
     (flycheck-add-mode 'javascript-eslint 'web-mode)
-    (add-hook 'web-mode-hook 'flycheck-mode)
-    (add-hook 'js2-mode-hook 'flycheck-mode)
     (defun my/use-eslint-from-node-modules ()
       (let* ((root (locate-dominating-file
                     (or (buffer-file-name) default-directory)
@@ -838,7 +838,6 @@ adjustments for JSX.
     "Cloudformation"
     "Cloudformation template mode.")
   (add-to-list 'auto-mode-alist '(".template.yaml\\'" . cfn-mode))
-  (add-hook 'cfn-mode-hook 'flycheck-mode)
   (flycheck-define-checker cfn-lint
     "A Cloudformation linter using cfn-python-lint.
               See URL 'https://github.com/awslabs/cfn-python-lint'."
@@ -965,6 +964,7 @@ Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
 
 #+BEGIN_SRC emacs-lisp
   (use-package key-chord
+    :defer 2
     :after evil
     :config
     (key-chord-mode 1)
@@ -1028,7 +1028,7 @@ for org template captures.
        deft-directory **local-deft-directory**))
 #+end_src
 ** References
-#+begin_src emacs-lisp :results silent
+#+begin_src emacs-lisp :results silent :tangle no
 (use-package org-ref
   :config
   (setq reftex-default-bibliography `(,(concat **local-org-folder** "/references.bib")))
@@ -1038,9 +1038,9 @@ for org template captures.
         org-ref-default-bibliography `(,(concat **local-org-folder** "/references.bib"))
         org-ref-pdf-directory (concat **local-org-folder** "/bibtex-pdfs/"))
   (require 'org-ref-pdf)
-  (require 'org-ref-url-utils))
+  (require 'org-ref-url-utils)
   (require 'org-ref-isbn)
-  (require 'org-ref-bibtex)
+  (require 'org-ref-bibtex))
 
 (use-package ivy-bibtex
   :bind (:map my-keys-minor-mode-map
@@ -1053,7 +1053,9 @@ for org template captures.
 
 ** Markdown
 #+BEGIN_SRC emacs-lisp
-  (use-package markdown-mode)
+  (use-package markdown-mode
+   :mode "\\.md\\'"
+)
 #+END_SRC
 ** Capture Ideas
 
@@ -1158,7 +1160,7 @@ or ~hugo~ to make it accessible on internet.
    (setq org-src-preserve-indentation nil
          org-html-indent nil
          org-edit-src-content-indentation 0)
-   (use-package htmlize) ;; for org html export
+   (use-package htmlize :defer 2) ;; for org html export
    (setq system-time-locale "C") ;; make sure time local is in english when exporting
    (setq org-html-validation-link nil)
    (setq org-publish-project-alist
@@ -1218,30 +1220,27 @@ Ispell word with ~z =~
 Word definition
 #+BEGIN_SRC emacs-lisp
    (use-package define-word
-     :config
-     (evil-define-key 'normal org-mode-map
-       (kbd "z w") 'define-word-at-point))
+     :bind (:map evil-normal-state-map
+             ("zw" . define-word-at-point)))
 #+END_SRC
 
 Word synonyms.
 #+BEGIN_SRC emacs-lisp
    (use-package powerthesaurus
-     :config
-     (evil-define-key 'normal org-mode-map
-       (kbd "z s") 'powerthesaurus-lookup-word-dwim))
+     :bind (:map evil-normal-state-map
+             ("zs" . powerthesaurus-lookup-word-dwim)))
 #+END_SRC
 
 For most documents, aim for a score of approximately 60 to 70 for
 the reading ease and 7.0 to 8.0 for the grade level.
 #+BEGIN_SRC emacs-lisp
    (use-package writegood-mode
-    :config
-    (evil-define-key 'normal org-mode-map
-       (kbd "z g g") 'writegood-mode)
-    (evil-define-key 'normal org-mode-map
-       (kbd "z g r") 'writegood-reading-ease)
-    (evil-define-key 'normal org-mode-map
-       (kbd "z g l") 'writegood-grade-level))
+    :bind (:map evil-normal-state-map
+    (
+            ("zgg" . writegood-mode)
+            ("zgr" . writegood-reading-ease)
+            ("zgl" . writegood-grade-level)
+     )))
 #+END_SRC
 
 If you need additional feedback from an external service here is an
@@ -1319,6 +1318,7 @@ Surround things with
   Jump to matching pairs with ~%~.
   #+BEGIN_SRC emacs-lisp
   (use-package evil-matchit
+    :defer 2
     :after evil
     :config
     (global-evil-matchit-mode 1))
@@ -1327,6 +1327,7 @@ Surround things with
   Persist highlight from ~evil search~ and ~isearch~
   #+BEGIN_SRC emacs-lisp
   (use-package evil-search-highlight-persist
+    :defer 2
     :config
     (global-evil-search-highlight-persist t))
   #+END_SRC
@@ -1352,8 +1353,8 @@ Surround things with
   Changes mode-line color depending on Evil state, if buffer is
   modified etc...
   #+BEGIN_SRC emacs-lisp
-     (lexical-let ((default-color (cons (face-background 'mode-line)
-                                      (face-foreground 'mode-line))))
+     (setq default-color (cons (face-background 'mode-line)
+                                      (face-foreground 'mode-line)))
      (add-hook 'post-command-hook
                (lambda ()
                  (let ((color (cond ((minibufferp) default-color)
@@ -1367,7 +1368,7 @@ Surround things with
                    (set-face-attribute 'mode-line nil :box `(:line-width 2 :color ,(car color)))
                    (set-face-background 'mode-line (car color))
                    (set-face-foreground 'mode-line-buffer-id (cdr color))
-                   (set-face-foreground 'mode-line (cdr color))))))
+                   (set-face-foreground 'mode-line (cdr color)))))
 
   #+END_SRC
 
@@ -1862,6 +1863,7 @@ or with ~enter~. You can also invoke the popup manually with ~C-x
 C-o~
 #+BEGIN_SRC emacs-lisp
    (use-package company
+     :defer 2
      :diminish company-mode
      :config
      (setq company-idle-delay nil
@@ -1888,7 +1890,6 @@ C-o~
 
      (autoload 'company-capf "company-capf")
      (autoload 'company-yasnippet "company-yasnippet")
-     (autoload 'company-etags "company-etags")
      (autoload 'company-elisp "company-elisp")
      (autoload 'company-files "company-files")
      (let ((map company-active-map))
@@ -1920,7 +1921,7 @@ C-o~
 
 #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
-       :demand
+       :defer 3
        :commands yas-expand-snippet
        :bind (:map my-keys-minor-mode-map
                    ("C-c yd" . yas-describe-tables))
@@ -1936,7 +1937,7 @@ C-o~
 
 This allow me to automatically expand [[https://github.com/aurelienbottazini/dotfiles/blob/master/emacs/.emacs.d/templates/][templates]] into new files using
 the yasnippet format. The filenames for the template are regexes.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
      (use-package yatemplate
        :config
        (add-hook 'find-file-hook 'auto-insert)
@@ -1987,8 +1988,7 @@ the yasnippet format. The filenames for the template are regexes.
      (define-key package-menu-mode-map (kbd "/") 'evil-search-forward)
 
      (use-package dired-rsync
-     :config
-     (bind-key "p" 'dired-rsync dired-mode-map))
+     :bind (:map dired-mode-map ("p" . dired-rsync)))
 #+END_SRC
 
 ** Counsel
@@ -2011,7 +2011,6 @@ To get a list of videos to watch do:
 
 #+BEGIN_SRC emacs-lisp
    (use-package counsel
-     :demand
      :bind (("C-x C-f" . counsel-find-file)))
 #+END_SRC
 

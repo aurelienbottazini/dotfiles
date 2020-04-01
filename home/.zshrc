@@ -82,7 +82,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
 export BROWSER="wslview"
-expoet CHROME_BIN="chromium-browser"
+export CHROME_BIN="chromium-browser"
 
 export CDPATH=.:~/:~/projects:~/work
 

@@ -3,6 +3,7 @@
 #+PROPERTY: header-args :results silent :tangle yes
 
 #+begin_src emacs-lisp :results silent
+;; -*- lexical-binding: t; -*-
 (defvar last-file-name-handler-alist file-name-handler-alist)
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6

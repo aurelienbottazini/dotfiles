@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-matching-paren (quote jump-offscreen))
+ '(coffee-tab-width 2)
  '(company-minimum-prefix-length 1)
  '(custom-safe-themes
    (quote
@@ -34,7 +35,7 @@
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-sideline-enable nil)
  '(magit-auto-revert-mode t)
- '(magit-commit-show-diff nil t)
+ '(magit-commit-show-diff nil)
  '(menu-bar-mode nil)
  '(org-agenda-files
    (quote
@@ -118,11 +119,13 @@
  '(treemacs-position (quote right))
  '(truncate-partial-width-windows nil)
  '(vc-follow-symlinks t)
- '(web-mode-code-indent-offset 0 t)
- '(web-mode-css-indent-offset 0 t))
+ '(web-mode-code-indent-offset 0)
+ '(web-mode-css-indent-offset 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(magit-diff-file-heading ((t (:foreground "black" :weight bold))))
+ '(magit-diff-file-heading-highlight ((t (:inherit magit-section-highlight :foreground "black"))))
+ '(magit-section-secondary-heading ((t (:foreground "black" :weight bold)))))

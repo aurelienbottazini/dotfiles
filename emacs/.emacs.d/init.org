@@ -1862,6 +1862,7 @@ The description of all the hippie expand functions is inside
     (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
     (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
     (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
+    (define-key evil-insert-state-map (kbd "M-/") 'hippie-expand)
 #+END_SRC
 
 ** Auto-Completion
@@ -1883,7 +1884,7 @@ C-o~
            company-require-match 'never
            company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
            company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-           company-backends '((company-files company-yasnippet company-dabbrev company-dabbrev-code company-capf))
+           company-backends '((company-files company-yasnippet company-dabbrev company-capf))
            company-transformers '(company-sort-by-occurrence))
      (global-company-mode +1)
 

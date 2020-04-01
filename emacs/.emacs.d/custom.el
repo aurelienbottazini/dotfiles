@@ -34,7 +34,7 @@
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-sideline-enable nil)
  '(magit-auto-revert-mode t)
- '(magit-commit-show-diff nil t)
+ '(magit-commit-show-diff nil)
  '(menu-bar-mode nil)
  '(org-agenda-files
    (quote

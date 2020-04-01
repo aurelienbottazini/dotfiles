@@ -56,6 +56,7 @@ Plug 'cormacrelf/vim-colors-github'
 Plug 'morhetz/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -77,9 +78,13 @@ let g:ctrlp_max_height = 30
 
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
-let g:gruvbox_contrast_dark = 'medium'
-colorscheme gruvbox
-set background=dark
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+colorscheme onehalflight
 
 " set tabstop=4
 " set shiftwidth=4

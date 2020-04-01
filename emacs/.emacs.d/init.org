@@ -88,6 +88,10 @@ built-in Emacs modes or 3rd party packages
 
 (setq package-user-dir (concat user-emacs-directory "elpa"))
 
+(setq ;; this tells package.el not to add those pesky customized variable settings
+      ;; at the end of your init.el
+      package--init-file-ensured t)
+
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))

@@ -1,10 +1,15 @@
 imap jk <Esc>
 set scrolloff=5
 
+set easymotion
 set surround
+set multiple-cursors
+set commentary
 set incsearch
 set hls
 set ignorecase
+set clipboard+=unnamed
+set ideajoin
 
 set visualbell
 set noerrorbells
@@ -24,9 +29,7 @@ let mapleader = " "
 map <leader>oh :nohlsearch<CR>
 map <leader>os :source ~/.ideavimrc<CR>
 
-set clipboard+=unnamed
 
-set ideajoin
 
 " :actionlist to know what to bind to shortcuts
 " RecentChangedFiles                                 <C-S-E>

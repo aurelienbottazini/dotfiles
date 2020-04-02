@@ -1362,7 +1362,7 @@ Surround things with
     (evil-set-initial-state 'deft-mode 'insert)
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-set-initial-state 'magit-mode 'emacs)
-    (evil-set-initial-state 'magit-mode 'emacs)
+    (evil-set-initial-state 'use-package-statistics 'emacs)
     (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
     (evil-ex-define-cmd "W" 'save-buffer))

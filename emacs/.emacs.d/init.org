@@ -178,7 +178,7 @@ slow down my Emacs.
 #+END_SRC
 
 Emacs can be really fast with large files too. The trick is to
-disable
+disable modes and stick to fundamental mode
 #+BEGIN_SRC emacs-lisp
 (defun check-large-file-hook ()
   "If a file is over a given size, turn off minor modes."
@@ -621,8 +621,9 @@ the result after the comment.
 #+END_SRC
 ** Go
 
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package go-mode)
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :mode "\\.go\\'")
 #+END_SRC
 
 ** HTML

@@ -60,6 +60,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 let g:prettier#autoformat = 0

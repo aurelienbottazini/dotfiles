@@ -1047,8 +1047,9 @@ for org template captures.
        deft-directory **local-deft-directory**))
 #+end_src
 ** References
-#+begin_src emacs-lisp :results silent :tangle no
+#+begin_src emacs-lisp :results silent :tangle yes
 (use-package org-ref
+  :defer 2
   :config
   (setq reftex-default-bibliography `(,(concat **local-org-folder** "/references.bib")))
 

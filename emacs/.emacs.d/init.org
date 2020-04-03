@@ -290,6 +290,7 @@ You can remove all tabs from your buffer with ~untabify~
   (find-file (concat **local-dropbox-folder** "org/slip-box/"))
   (other-window 1))
 
+;; we can do the same with ivy, with M-o r
 (defun sudo ()
   "Use TRAMP to `sudo' the file for current buffer."
   (interactive)

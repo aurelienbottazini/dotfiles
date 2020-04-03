@@ -2062,6 +2062,12 @@ To get a list of videos to watch do:
 (require 'wat-mode)
 #+end_src
 
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode
+ :bind (:map rust-mode-map
+        "C-c C-c" . rust-run))
+#+END_SRC
+
 * Local variables
 
 # Local Variables:

@@ -1869,7 +1869,7 @@ You can customize its behaviour by choosing different expand functions.
 The description of all the hippie expand functions is inside
 [[https://github.com/emacs-mirror/emacs/blob/master/lisp/hippie-exp.el#L63][~hippie-exp.el~]] (location can vary on your system)
 #+BEGIN_SRC emacs-lisp
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kil try-expand-all-abbrevs try-expand-list try-expand-line))
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-all-abbrevs try-expand-list try-expand-line))
 (require 'mode-local)
 (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))
 (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-all-abbrevs try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol))

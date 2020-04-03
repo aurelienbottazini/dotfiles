@@ -3,6 +3,8 @@ apiari.db
 public/assets
 apiary.apib
 *.dic
-.git/*
+.git/
 yarn.lock
-.nuxt/*
+.nuxt/
+TAGS
+.eslintrc-todo.yml

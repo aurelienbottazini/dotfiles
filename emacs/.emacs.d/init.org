@@ -280,6 +280,16 @@ You can remove all tabs from your buffer with ~untabify~
 
 * Utility functions
 #+BEGIN_SRC emacs-lisp
+(defun slip-box()
+  "Setup windows to work with my slip box"
+  (interactive)
+  (delete-other-windows)
+  (find-file (concat **local-dropbox-folder** "org/slip-box/index.org"))
+  (split-window-horizontally)
+  (other-window 1)
+  (find-file (concat **local-dropbox-folder** "org/slip-box/"))
+  (other-window 1))
+
 (defun sudo ()
   "Use TRAMP to `sudo' the file for current buffer."
   (interactive)
@@ -923,7 +933,7 @@ Make grep buffers writable with ~C-c C-p~. Apply changes with ~C-c C-e~
 (define-key my-keys-minor-mode-map (kbd "C-c jp") '(lambda () (interactive) (find-file "~/projects/")))
 (define-key my-keys-minor-mode-map (kbd "C-c jw") '(lambda () (interactive) (find-file "~/work")))
 (define-key my-keys-minor-mode-map (kbd "C-c jn") '(lambda () (interactive) (find-file **local-note-file**)))
-(define-key my-keys-minor-mode-map (kbd "C-c js") '(lambda () (interactive) (find-file (concat **local-dropbox-folder** "org/slip-box"))))
+(define-key my-keys-minor-mode-map (kbd "C-c js") 'slip-box)
 (define-key my-keys-minor-mode-map (kbd "C-c ji") '(lambda () (interactive) (find-file (concat **local-dropbox-folder** "org/slip-box/index.org"))))
 (define-key my-keys-minor-mode-map (kbd "C-c jr") '(lambda () (interactive) (find-file (concat **local-dropbox-folder** "org/references-notes"))))
 (define-key my-keys-minor-mode-map (kbd "C-c jj") 'dired-jump)

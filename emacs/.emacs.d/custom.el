@@ -129,4 +129,5 @@
  '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :family "JetbrainsMono"))))
  '(magit-diff-file-heading ((t (:foreground "black" :weight bold))))
  '(magit-diff-file-heading-highlight ((t (:inherit magit-section-highlight :foreground "black"))))
- '(magit-section-secondary-heading ((t (:foreground "black" :weight bold)))))
+ '(magit-section-secondary-heading ((t (:foreground "black" :weight bold))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.6)))))

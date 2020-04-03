@@ -83,6 +83,7 @@ export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH
 export BROWSER="wslview"
 export CHROME_BIN="chromium-browser"
+export BAT_THEME="OneHalfLight"
 
 export CDPATH=.:~/:~/projects:~/work
 

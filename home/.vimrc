@@ -60,6 +60,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 let g:prettier#autoformat = 0
@@ -148,7 +149,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='gruvbox'
+let g:airline_theme='papercolor'
 let g:airline_symbols_ascii = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd

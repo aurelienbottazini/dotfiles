@@ -178,7 +178,7 @@ slow down my Emacs.
 #+END_SRC
 
 Emacs can be really fast with large files too. The trick is to
-disable
+disable modes and stick to fundamental mode
 #+BEGIN_SRC emacs-lisp
 (defun check-large-file-hook ()
   "If a file is over a given size, turn off minor modes."
@@ -621,8 +621,9 @@ the result after the comment.
 #+END_SRC
 ** Go
 
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package go-mode)
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :mode "\\.go\\'")
 #+END_SRC
 
 ** HTML
@@ -1046,8 +1047,9 @@ for org template captures.
        deft-directory **local-deft-directory**))
 #+end_src
 ** References
-#+begin_src emacs-lisp :results silent :tangle no
+#+begin_src emacs-lisp :results silent :tangle yes
 (use-package org-ref
+  :defer 2
   :config
   (setq reftex-default-bibliography `(,(concat **local-org-folder** "/references.bib")))
 
@@ -1363,7 +1365,7 @@ Surround things with
     (evil-set-initial-state 'deft-mode 'insert)
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-set-initial-state 'magit-mode 'emacs)
-    (evil-set-initial-state 'magit-mode 'emacs)
+    (evil-set-initial-state 'use-package-statistics 'emacs)
     (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 
     (evil-ex-define-cmd "W" 'save-buffer))

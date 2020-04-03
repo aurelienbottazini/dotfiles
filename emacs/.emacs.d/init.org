@@ -1302,6 +1302,10 @@ This is mainly to restore emacs behavior with help windows.
     (define-key evil-normal-state-map (kbd "q") 'my-evil-record-macro)))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package evil-easymotion)
+#+END_SRC
+
 Surround things with
 - ~S~ in visual mode
 - ~ys<text-object>~ in normal mode

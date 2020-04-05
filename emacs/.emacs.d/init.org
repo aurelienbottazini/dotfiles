@@ -387,67 +387,38 @@ You can remove all tabs from your buffer with ~untabify~
   (diminish 'eldoc-mode))
 #+END_SRC
 ** Colors
-This is a list of all the colors I use with Emacs. When I want to
-change a color I look through those colors. This helps me achieve
-consistency.
-*** Pantone
 
-| Hex     | Pantone Color Name |
-|---------+--------------------|
-| #fff166 | 101U               |
-| #fccf61 | 128u               |
-| #f79b2f | 130u               |
-| #c97f3a | 145u               |
-| #ffa2cb | 210u               |
-| #f56d9e | 213u               |
-| #dcc6ea | 263u               |
-| #bfa1e3 | 264u               |
-| #9d7ad2 | 265u               |
-| #adcff1 | 277u               |
-| #7ab1e8 | 284u               |
-| #5b8edb | 279u               |
-| #8eddeb | 304u               |
-| #00b4e4 | 395u               |
-| #93e8d3 | 331u               |
-| #97d88a | 358u               |
-| #5cb860 | 360u               |
-| #56944f | 362u               |
-| #f1f2f1 | 11-0601 tpx        |
-| #e8eae8 | 11-4800 tpx        |
-| #dad9d6 | cool gray 1u       |
-| #c5c5c5 | cool gray 3u       |
-| #adaeb0 | cool gray 5u       |
-| #939598 | cool gray 8u       |
-| #e4f4e9 | 9063u              |
-| #c5f2e6 | 9520u              |
-| #ffcfd8 | 9284u              |
-| #69615f | 440u               |
-| #4c4e56 | black7u            |
-| #885a61 | 195u               |
-| #f65058 | red 032u           |
-| #bc3e44 | 3517u              |
-| #34855b | 348u               |
-| #546758 | 350u               |
-| #4982cf | 285u               |
-| #3a499c | Reflex Blue U      |
-| #65428a | medium purple      |
-*** Tronesque
-#081724
-#033340
-#1d5483
-#2872b2
-#d3f9ee
-#a6f3dd
-#effffe
-#fffed9
-#ff694d
-#f5b55f
-#fffe4e
-#afc0fd
-#96a5d9
-#bad6e2
-#d2f1ff
-#68f6cb
+*** Emacs defaults
+
+| face     | color        | Hex     |
+|----------+--------------+---------|
+| comment  | Firebrick    | #b22222 |
+| constant | Dark Cyan    | #008b8b |
+| function | Blue1        | #0000ff |
+| keyword  | purple       | #a020f0 |
+| string   | violetred4   | #8b2252 |
+| type     | forest green | #228b22 |
+| variable | sienna       | #a0522d |
+| error    | red1         | #ff0000 |
+
+*** Ansi colors derived from emacs list colors display
+
+| color          | name         | Hex     |
+| red            | firebrick    | #b22222 |
+| brightred      | red          | #ff0000 |
+| blue           | blue1        | #0000ff |
+| bright blue    | dark blue    | #00008b |
+| yellow         | yellow       | #ffff00 |
+| bright yellow  | gold         | #ffd700 |
+| green          | forest green | #228b22 |
+| dark green     | dark green   | #006400 |
+| cyan           | dark cyan    | #008b8b |
+| bright cyan    | cyan         | #00ffff |
+| magenta        | purple       | #a020f0 |
+| bright magenta | magenta      | #ff00ff |
+| bright white   | dark gray    | #a9a9a9 |
+| bright black   | dim gray     | #696969 |
+
 * Windows
 Splitting can be done with ~C-x 2~ and ~C-x 3~ but I prefer more
 memorable keybindings.

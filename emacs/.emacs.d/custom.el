@@ -35,7 +35,7 @@
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-sideline-enable nil)
  '(magit-auto-revert-mode t)
- '(magit-commit-show-diff nil)
+ '(magit-commit-show-diff nil t)
  '(menu-bar-mode nil)
  '(org-agenda-files
    (quote
@@ -127,10 +127,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :family "JetbrainsMono"))))
- '(error ((t (:foreground "#f65058" :weight bold))))
- '(font-lock-string-face ((t (:foreground "#34855b" :slant italic))))
- '(font-lock-type-face ((t (:foreground "#34855b"))))
- '(font-lock-variable-name-face ((t (:foreground "#885a61"))))
  '(magit-diff-file-heading ((t (:foreground "black" :weight bold))))
  '(magit-diff-file-heading-highlight ((t (:inherit magit-section-highlight :foreground "black"))))
  '(magit-section-secondary-heading ((t (:foreground "black" :weight bold))))

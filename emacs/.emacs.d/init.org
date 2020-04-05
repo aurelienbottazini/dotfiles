@@ -150,6 +150,7 @@ slow down my Emacs.
                   "/home/linuxbrew/.linuxbrew/bin/:"
                   (concat home-folder "/.config/yarn/global/node_modules/.bin/:")
                   (concat home-folder "/n/bin/:")
+                  (concat home-folder "/.cargo/bin/:")
                   (concat home-folder "/.local/bin/:")
                   (concat home-folder "/work/dox-compose/bin/:")
                   (concat home-folder "/.rbenv/shims:")

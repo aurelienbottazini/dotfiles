@@ -126,7 +126,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :family "JetbrainsMono"))))
+ '(default ((t (:inherit nil :stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :family "JetbrainsMono"))))
  '(magit-diff-file-heading ((t (:foreground "black" :weight bold))))
  '(magit-diff-file-heading-highlight ((t (:inherit magit-section-highlight :foreground "black"))))
  '(magit-section-secondary-heading ((t (:foreground "black" :weight bold))))

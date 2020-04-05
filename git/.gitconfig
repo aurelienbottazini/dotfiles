@@ -74,6 +74,7 @@
 	sort = version:refname
 [color]
   ui = auto
+  modified = blue
 [gitsh]
   defaultcommand = status -sb
   gitcommand = hub
@@ -81,3 +82,5 @@
   prompt = "\n%D %c(%b%#)%w $"
 [gpg]
 	program = gpg2
+[gitsh "color"]
+	modified = red

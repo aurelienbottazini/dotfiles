@@ -401,24 +401,7 @@ You can remove all tabs from your buffer with ~untabify~
 | variable | sienna       | #a0522d |
 | error    | red1         | #ff0000 |
 
-*** Ansi colors derived from emacs list colors display
-
-| color          | name         | Hex     |
-| red            | firebrick    | #b22222 |
-| brightred      | red          | #ff0000 |
-| blue           | blue1        | #0000ff |
-| bright blue    | dark blue    | #00008b |
-| yellow         | yellow       | #ffff00 |
-| bright yellow  | gold         | #ffd700 |
-| green          | forest green | #228b22 |
-| dark green     | dark green   | #006400 |
-| cyan           | dark cyan    | #008b8b |
-| bright cyan    | cyan         | #00ffff |
-| magenta        | purple       | #a020f0 |
-| bright magenta | magenta      | #ff00ff |
-| bright white   | dark gray    | #a9a9a9 |
-| bright black   | dim gray     | #696969 |
-
+*** [[https://gist.github.com/aurelienbottazini/63b6fbd69e570374975a8b3b86798dae][Ansi colors for a light terminal]]
 * Windows
 Splitting can be done with ~C-x 2~ and ~C-x 3~ but I prefer more
 memorable keybindings.

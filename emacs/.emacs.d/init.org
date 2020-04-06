@@ -810,12 +810,6 @@ adjustments for JSX.
 #+END_SRC
 * Bindings
 ** General
-Easier to type M-x
-#+BEGIN_SRC emacs-lisp
-(define-key my-keys-minor-mode-map (kbd "C-x C-m") 'execute-extended-command)
-(define-key my-keys-minor-mode-map (kbd "C-c C-m") 'execute-extended-command)
-#+END_SRC
-
 Shows a key combination helper in the minibuffer
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
@@ -1443,6 +1437,8 @@ I find the UI better.
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
+         ("C-x C-m" . execute-extended-command)
+         ("C-c C-m" . execute-extended-command)
          ("C-x C-f" . counsel-find-file)
          ("<f1> f" . counsel-describe-function)
          ("<f1> v" . counsel-describe-variable)
@@ -1990,6 +1986,14 @@ To get a list of videos to watch do:
 (use-package rust-mode
  :bind (:map rust-mode-map
         ("C-c C-c" . rust-run)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package engine-mode
+  :bind (:map my-keys-minor-mode-map
+         ("C-c s m" . engine/search-mdn))
+  :config
+  (defengine mdn "https://developer.mozilla.org/en-US/search?q=%s" :keybinding "m"))
 #+END_SRC
 
 * Local variables

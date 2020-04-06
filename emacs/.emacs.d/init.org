@@ -1991,9 +1991,16 @@ To get a list of videos to watch do:
 #+BEGIN_SRC emacs-lisp
 (use-package engine-mode
   :bind (:map my-keys-minor-mode-map
-         ("C-c s m" . engine/search-mdn))
+         ("C-c s c" . engine/search-caniuse)
+         ("C-c s m" . engine/search-mdn)
+         ("C-c s ra" . engine/search-rails)
+         ("C-c s rr" . engine/search-ruby))
   :config
-  (defengine mdn "https://developer.mozilla.org/en-US/search?q=%s" :keybinding "m"))
+  (defengine ruby "https://apidock.com/ruby/search?query=%s")
+  (defengine rails "https://api.rubyonrails.org/?q=%s")
+  (defengine mdn "https://developer.mozilla.org/en-US/search?q=%s")
+  (defengine caniuse "https://caniuse.com/#search=%s")
+)
 #+END_SRC
 
 * Local variables

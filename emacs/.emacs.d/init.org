@@ -1909,12 +1909,13 @@ the yasnippet format. The filenames for the template are regexes.
 (eval-after-load "dired"
   '(progn
      (define-key dired-mode-map "-" 'dired-up-directory)
-     (define-key dired-mode-map (kbd "C-u k") 'dired-kill-subdir)
      (define-key dired-mode-map (kbd "/") 'evil-search-forward)
      (define-key dired-mode-map (kbd "j") 'dired-next-line)
      (define-key dired-mode-map (kbd "k") 'dired-previous-line)
      (define-key dired-mode-map (kbd "[b") 'previous-buffer)
      (define-key dired-mode-map (kbd "]b") 'next-buffer)
+     (define-key dired-mode-map (kbd "C-u") 'evil-scroll-page-up)
+     (define-key dired-mode-map (kbd "C-d") 'evil-scroll-page-down)
      (evil-define-key 'normal dired-mode-map
        "gg" 'evil-goto-first-line
        "^" '(lambda () (interactive) (find-alternate-file "..")))))

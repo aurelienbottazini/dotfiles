@@ -132,4 +132,5 @@
  '(magit-diff-file-heading-highlight ((t (:inherit magit-section-highlight :foreground "black"))))
  '(magit-section-secondary-heading ((t (:foreground "black" :weight bold))))
  '(mode-line-buffer-id ((t (:foreground "black" :slant italic))))
+ '(org-document-info-keyword ((t (:inherit shadow :slant italic))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.6)))))

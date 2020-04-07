@@ -387,7 +387,6 @@ You can remove all tabs from your buffer with ~untabify~
   (diminish 'eldoc-mode))
 #+END_SRC
 ** Colors
-
 *** Emacs defaults
 
 | face     | color        | Hex     |

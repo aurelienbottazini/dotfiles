@@ -39,7 +39,6 @@ Plug 'tpope/vim-repeat' " better . support for plugins
 Plug 'tpope/vim-commentary' " gc to comment
 Plug 'thoughtbot/vim-rspec'
 Plug 'christoomey/vim-tmux-runner' " send commands from vim to tmux
-Plug 'jnurmine/Zenburn' " color theme
 Plug 'tpope/vim-rake' " use rails.vim commands in non rails projects
 Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
@@ -52,8 +51,6 @@ Plug 'tpope/vim-unimpaired' " [ ] mappings
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
-Plug 'cormacrelf/vim-colors-github'
-Plug 'morhetz/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
@@ -61,6 +58,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'easymotion/vim-easymotion'
+Plug 'jeffkreeftmeijer/vim-dim'
 call plug#end()
 
 let g:prettier#autoformat = 0
@@ -85,7 +83,7 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-colorscheme onehalflight
+colorscheme dim
 
 " set tabstop=4
 " set shiftwidth=4
@@ -149,7 +147,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='papercolor'
+let g:airline_theme='sol'
 let g:airline_symbols_ascii = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd

@@ -1986,6 +1986,11 @@ To get a list of videos to watch do:
 )
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(define-key my-keys-minor-mode-map "\C-c u" 'universal-argument)
+(define-key my-keys-minor-mode-map "\C-u" 'evil-scroll-up)
+#+END_SRC
+
 * Local variables
 
 # Local Variables:

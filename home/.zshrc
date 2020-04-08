@@ -24,7 +24,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# export GDK_SCALE=2 #retina support
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
 bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work

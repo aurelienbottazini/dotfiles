@@ -57,8 +57,7 @@ _gen_fzf_default_opts() {
 }
 _gen_fzf_default_opts
 
-autoload -Uz compinit
-compinit # on OSX needs to be run before using compdef
+autoload -Uz compinit -d ~/.cache/zcompdump-$ZSH_VERSION
 zstyle ':completion:*:*:git:*' script ~/.config/git/.git-completion.zsh
 compdef git-status='git'
 

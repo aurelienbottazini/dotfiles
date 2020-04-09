@@ -27,7 +27,7 @@ export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+[[ -z $DISPLAY ]] && export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export CHROME_BIN="chromium-browser"
 export BAT_THEME="OneHalfLight"
 

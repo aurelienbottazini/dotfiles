@@ -29,7 +29,7 @@ bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides
 [ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
 
 autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
-zstyle ':completion:*:*:git:*' script ~/.config/git/.git-completion.zsh
+zstyle ':completion:*:*:git:*' script $XDG_CONFIG_HOME/git/.git-completion.zsh
 compdef git-status='git'
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
@@ -42,7 +42,7 @@ HOSTNAME=$HOST
 
 # Load version control information
 autoload -Uz vcs_info
-# zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' formats "%b %u %c " enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true

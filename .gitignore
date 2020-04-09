@@ -88,3 +88,4 @@ emacs/.emacs.d/.emacs-local
 /emacs/.emacs.d/init.shell
 TAGS
 git/.config/git/gitsh_history
+home/.config/shell/.zsh_history

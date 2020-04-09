@@ -1,7 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -12,39 +8,23 @@ esac
 shopt -s histappend
 # Avoid duplicates
 HISTCONTROL=ignoredups:erasedups
-# After each command, append to the history file and reread it
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.config/shell/aliases ]; then
+    . ~/.config/shell/aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -53,24 +33,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
-
-#export LC_ALL="en_US"
-#export LANG="en_US"
-export EDITOR="vim"
-export VISUAL="vim"
+[[ -f ~/.config/shell/local ]] && source ~/.config/shell/local
+[[ -f ~/.config/shell/exports ]] && source ~/.config/shell/exports
 
 complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
       || complete -o default -o nospace -F _git g
 
-export PATH=/usr/local/bin:~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_modules/.bin:~/.cabal/bin:~/dotfiles/bin/:/usr/local/sbin:/usr/local/opt/go/libexec/bin:~/Library/Python/3.6/bin:~/idea-IU/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
-
 # to use with bash_completion version 2 otherwise it makes bash startup very slow
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-export CDPATH=.:~/:~/projects:~/work
 
 source ~/.config/git/.git-completion.bash
-source ~/.config/git/git-prompt.sh
+source ~/.config/git/.git-prompt.sh
+
 export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[35;1m\]$(__git_ps1 " (%s)")\n\[\e[0m\]\[\e[31;1m\]\$\[\e[0m\] '
 __git_complete g _git
 
@@ -101,45 +75,13 @@ _gen_fzf_default_opts() {
   local cyan="37"
   local green="64"
 
-  # Comment and uncomment below for the light theme.
-
-  # Solarized Dark color scheme for fzf
-  export FZF_DEFAULT_OPTS="--color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue,info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-  "
-  ## Solarized Light color scheme for fzf
-  #export FZF_DEFAULT_OPTS="
-  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
-  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
-  #"
+  export FZF_DEFAULT_OPTS="--color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue,info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
 }
 _gen_fzf_default_opts
 
-export XDG_CURRENT_DESKTOP=gnome
-export GTAGSLABEL=pygments
-export XDG_CURRENT_DESKTOP=GNOME # for gnome-control-center to work correctly on xmonad
-export CHROME_BIN=/usr/bin/chromium-browser # for karmajs specs
-export NNN_CONTEXT_COLORS='5173'
-export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
-export MC_SKIN="$HOME/.config/mc/solarized.ini"
-export XDG_CONFIG_HOME="$HOME/.config"
-export GIT_TEMPLATE_DIR="$HOME/.git_template"
-#export JAVA_HOME=$(/usr/libexec/java_home)
-
-export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-export PATH="$HOME/.rbenv/bin:$PATH"
 hash rbenv 2>/dev/null && eval "$(rbenv init -)"
-
-#[ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 2>/dev/null
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null
 
-export N_PREFIX="$HOME/n";
-export PATH=$N_PREFIX/bin:$PATH
-export BROWSER="browser.sh"
-
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
-
-# /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
-# source $HOME/.keychain/$HOSTNAME-sh
-# sysctl -p 1>/dev/null

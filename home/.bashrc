@@ -69,8 +69,8 @@ export PATH=/usr/local/bin:~/bin:~/bin/DataGrip/bin:~/.config/yarn/global/node_m
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 export CDPATH=.:~/:~/projects:~/work
 
-source ~/.git-completion.bash
-source ~/.git-prompt.sh
+source ~/.config/git/.git-completion.bash
+source ~/.config/git/git-prompt.sh
 export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[35;1m\]$(__git_ps1 " (%s)")\n\[\e[0m\]\[\e[31;1m\]\$\[\e[0m\] '
 __git_complete g _git
 
@@ -131,7 +131,7 @@ hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 
 #[ -f /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 2>/dev/null
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null 
+[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && ! shopt -q login_shell && hash tat 2>/dev/null
 
 export N_PREFIX="$HOME/n";
 export PATH=$N_PREFIX/bin:$PATH

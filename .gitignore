@@ -86,3 +86,4 @@ emacs/.emacs.d/vim.el
 emacs/.emacs.d/.emacs-local
 /emacs/.emacs.d/.cache/
 /emacs/.emacs.d/init.shell
+TAGS

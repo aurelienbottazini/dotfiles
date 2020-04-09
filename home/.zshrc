@@ -59,7 +59,7 @@ _gen_fzf_default_opts
 
 autoload -Uz compinit
 compinit # on OSX needs to be run before using compdef
-zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
+zstyle ':completion:*:*:git:*' script ~/.config/git/.git-completion.zsh
 compdef git-status='git'
 
 export EDITOR="vim"
@@ -106,6 +106,7 @@ RPROMPT=''
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export GIT_TEMPLATE_DIR=$HOME/.git_template
+export XDG_CONFIG_HOME=$HOME/.config
 
 zstyle ':completion:*' menu select
 

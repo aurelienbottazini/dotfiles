@@ -107,6 +107,7 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
 
 export GIT_TEMPLATE_DIR=$XDG_CONFIG_HOME/git/.git_template
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey

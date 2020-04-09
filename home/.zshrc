@@ -20,48 +20,20 @@ setopt share_history          # share command history data
 
 stty -ixon # disable legacy c-s scroll-lock
 
-[[ -f ~/$XDG_CONFIG_HOME/shell/aliases ]] && source ~/$XDG_CONFIG_HOME/shell/aliases
-[[ -f ~/$XDG_CONFIG_HOME/shell/zsh.local ]] && source ~/$XDG_CONFIG_HOME/shell/zsh.local
+[[ -f ~/.config/shell/exports ]] && . ~/.config/shell/exports
+[[ -f $XDG_CONFIG_HOME/shell/aliases ]] && . $XDG_CONFIG_HOME/shell/aliases
+[[ -f $XDG_CONFIG_HOME/shell/zsh.local ]] && . $XDG_CONFIG_HOME/shell/zsh.local
 
 bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work
-[ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
-[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 [ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh
 [ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
 
-_gen_fzf_default_opts() {
-  local base03="234"
-  local base02="235"
-  local base01="240"
-  local base00="241"
-  local base0="244"
-  local base1="245"
-  local base2="254"
-  local base3="230"
-  local yellow="136"
-  local orange="166"
-  local red="160"
-  local magenta="125"
-  local violet="61"
-  local blue="33"
-  local cyan="37"
-  local green="64"
-
-  export FZF_DEFAULT_OPTS="
-   --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
-   --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
-  "
-}
-_gen_fzf_default_opts
-
-autoload -Uz compinit -d ~/$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
+autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
 zstyle ':completion:*:*:git:*' script ~/.config/git/.git-completion.zsh
 compdef git-status='git'
 
-
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 eval "$(rbenv init -)"
-
 
 HOSTNAME=$HOST
 [ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null

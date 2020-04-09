@@ -40,7 +40,6 @@ then
   [ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
   [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
 fi
-# [ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
 setopt prompt_subst
 autoload -U colors && colors

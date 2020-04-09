@@ -52,7 +52,6 @@ __git_complete g _git
 [ -f ~/.config/fzf/.fzf.bash ] && source ~/.config/fzf/.fzf.bash
 [ -f /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
 [ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
-[ -f /usr/share/autojump/autojump.bash ] && source /usr/share/autojump/autojump.bash
 
 hash rbenv 2>/dev/null && eval "$(rbenv init -)"
 

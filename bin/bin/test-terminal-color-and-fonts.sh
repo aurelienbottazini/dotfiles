@@ -17,5 +17,7 @@ awk 'BEGIN{
     printf "\n";
 }'
 
-echo "\e[3mThis should be in italic\e[23m"
+echo "\e[32;3mThis should be in green italic\e[0m"
+echo "\e[31;1mThis should be in red bold\e[0m"
 echo "Ligatures: != -> == && =>"
+echo "Emojis: 😎🤞🏻🐢"

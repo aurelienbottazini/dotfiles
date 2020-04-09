@@ -7,6 +7,11 @@ set easymotion
 set surround
 set multiple-cursors
 set commentary
+set argtextobj
+set ReplaceWithRegister
+set textobj-entire
+
+set showcmd
 set incsearch
 set hls
 set ignorecase

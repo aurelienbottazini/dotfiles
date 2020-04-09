@@ -53,23 +53,18 @@ Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'chrisbra/Colorizer'
 Plug 'posva/vim-vue'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'easymotion/vim-easymotion'
 Plug 'jeffkreeftmeijer/vim-dim'
+Plug 'jremmen/vim-ripgrep'
 call plug#end()
 
 let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_async = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-" Use Silver Searcher instead of grep
-set grepprg=rg\ --vimgrep
-" set grepprg=ag
-set grepformat=%f:%l:%c:%m
-let g:grep_cmd_opts = '--line-numbers --noheading'
 let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!.git/*"'
 let g:ctrlp_use_caching = 0
 " Let ctrlp have up to 30 results.

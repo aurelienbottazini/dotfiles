@@ -33,22 +33,15 @@ zstyle ':completion:*:*:git:*' script $XDG_CONFIG_HOME/git/.git-completion.zsh
 compdef git-status='git'
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
-eval "$(rbenv init -)"
 
 HOSTNAME=$HOST
-[ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
-[ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
-[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
+if [ -z $SSH_AGENT_PID ]
+then
+  [ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
+  [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
+fi
+# [ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
-# Load version control information
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' formats "%b %u %c " enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' check-for-staged-changes true
-precmd() {
-  vcs_info
-}
 setopt prompt_subst
 autoload -U colors && colors
 PROMPT='%{$fg[blue]%}[%~] %{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}
@@ -57,9 +50,9 @@ RPROMPT=''
 
 zstyle ':completion:*' menu select
 
-if [ `uname` != "Darwin" ]
-then
-  sudo /sbin/sysctl -p > /dev/null
-fi
+# if [ `uname` != "Darwin" ]
+# then
+#   sudo /sbin/sysctl -p > /dev/null
+# fi
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$TERMINAL_EMULATOR" ] && tat >/dev/null

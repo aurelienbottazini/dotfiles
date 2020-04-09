@@ -4,6 +4,9 @@ case $- in
       *) return;;
 esac
 
+[[ -f ~/.config/shell/local ]] && source ~/.config/shell/local
+[[ -f ~/.config/shell/exports ]] && source ~/.config/shell/exports
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 # Avoid duplicates
@@ -32,9 +35,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-[[ -f ~/.config/shell/local ]] && source ~/.config/shell/local
-[[ -f ~/.config/shell/exports ]] && source ~/.config/shell/exports
 
 complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
       || complete -o default -o nospace -F _git g

@@ -204,14 +204,12 @@ function! EchoTags()
 endfunction
 
 set cursorline
-" set cursorcolumn
-" set colorcolumn=80
 
 hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
-" hi clear CursorLine
 hi CursorLine term=underline cterm=underline gui=underline
 
-nmap <leader>i :set list!<CR>
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+map <leader>oi :set list!<CR>
 highlight NonText ctermbg=NONE ctermfg=10
 highlight SpecialKey ctermbg=NONE ctermfg=10
 highlight EndOfBuffer ctermfg=3 guifg=#268bd2

@@ -105,8 +105,10 @@ PROMPT='%{$fg[blue]%}[%~] %{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}
 RPROMPT=''
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export GIT_TEMPLATE_DIR=$HOME/.git_template
+export GIT_TEMPLATE_DIR=$HOME/.config/git/.git_template
 export XDG_CONFIG_HOME=$HOME/.config
+export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 
 zstyle ':completion:*' menu select
 

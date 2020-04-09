@@ -15,7 +15,7 @@ gc-cons-percentage 0.1
 file-name-handler-alist last-file-name-handler-alist)))
 #+end_src
 
-I  use Vim keybindings everywhere except with special modes
+I use Vim keybindings everywhere except with special modes
 like Magit, Dired... I setup those special modes to start with Emacs
 keybindings by default. If for any reason I encounter other modes
 where the Vim keybindings are interfering too much, I can disable the

@@ -80,6 +80,7 @@
   gitcommand = hub
   nogreeting = true
   prompt = "\n%D %c(%b%#)%w $"
+  historyFile = ~/.config/git/gitsh_history
 [gpg]
 	program = gpg2
 [gitsh "color"]

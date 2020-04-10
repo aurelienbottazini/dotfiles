@@ -1,1 +1,7 @@
-: 1586502519:0;exit
+: 1586509857:0;g
+: 1586509869:0;echo home/.local/share/zsh/history >> .gitignore
+: 1586509881:0;echo home/.config/zsh/.zcompdump >> .gitginore
+: 1586509882:0;g
+: 1586509884:0;g add .
+: 1586509884:0;g
+: 1586509888:0;git add .

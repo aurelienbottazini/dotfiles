@@ -8,6 +8,7 @@ esac
 [[ -f $XDG_CONFIG_HOME/shell/local ]] && source $XDG_CONFIG_HOME/shell/local
 [[ -f $XDG_CONFIG_HOME/shell/aliases ]] && . $XDG_CONFIG_HOME/shell/aliases
 
+export HISTFILE="$XDG_DATA_HOME"/bash/history
 # append to the history file, don't overwrite it
 shopt -s histappend
 # Avoid duplicates

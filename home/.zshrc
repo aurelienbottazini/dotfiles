@@ -5,7 +5,7 @@ case $- in
 esac
 
 ## History file configuration
-[ -z "$HISTFILE" ] && HISTFILE="$HOME/.config/shell/.zsh_history"
+export HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTSIZE=50000
 SAVEHIST=10000
 #

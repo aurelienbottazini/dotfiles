@@ -20,6 +20,7 @@ export GTAGSLABEL=pygments
 export NNN_CONTEXT_COLORS='5173'
 export NNN_BMS='d:~/Dropbox;p:~/projects/;f:/media/aurelienbottazini/Files;.:~/dotfiles'
 
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
 export N_PREFIX="$HOME/n";

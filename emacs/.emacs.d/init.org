@@ -1015,7 +1015,7 @@ This is a must to capture ideas quickly.
 (setq org-capture-templates
        '(("n" "Notes" entry (file+headline **local-note-file** "Inbox") "* %?\n")))
 
-(define-key my-keys-minor-mode-map (kbd "C-c n") 'org-capture)
+(define-key my-keys-minor-mode-map (kbd "C-c n") '(lambda () (interactive) (org-capture nil "n")))
 (add-hook 'org-capture-mode-hook 'evil-insert-state)
 #+END_SRC
 

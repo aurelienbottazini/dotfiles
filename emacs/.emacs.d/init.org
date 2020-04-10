@@ -1705,11 +1705,12 @@ to use `fd` instead of find.
   (add-to-list 'ffip-prune-patterns "node_modules/*"))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package ivy
+  :bind (:map my-keys-minor-mode-map
+         ("C-c s" . abo-find-file-with-similar-name))
   :config
-  (require 'abo-find-in-project)
-  (define-key my-keys-minor-mode-map "\C-cs" 'abo-find-file-with-similar-name))
+  (require 'abo-find-in-project))
 #+END_SRC
 ** Jump
 

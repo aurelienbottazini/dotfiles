@@ -8,6 +8,8 @@ export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
 export EDITOR="vim"
 export VISUAL="vim"
 
+export N_PREFIX="$XDG_DATA_HOME/n";
+
 export PATH=/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 export PATH=$HOME/.rbenv/bin:$PATH
@@ -25,7 +27,6 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
-export N_PREFIX="$HOME/n";
 export BROWSER="wslview"
 export GIT_TEMPLATE_DIR=$XDG_CONFIG_HOME/git/.git_template
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey

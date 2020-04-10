@@ -89,3 +89,4 @@ emacs/.emacs.d/.emacs-local
 TAGS
 git/.config/git/gitsh_history
 home/.config/shell/.zsh_history
+home/.config/vim/*

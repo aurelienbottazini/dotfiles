@@ -2,6 +2,13 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+set undodir=$XDG_DATA_HOME/vim/undo
+set directory=$XDG_DATA_HOME/vim/swap
+set backupdir=$XDG_DATA_HOME/vim/backup
+set viewdir=$XDG_DATA_HOME/vim/view
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+
 let mapleader = "\<Space>"
 " Split edit your vimrc. Type space, v, r in sequence to trigger
 nmap <leader>ve :e $MYVIMRC<cr>
@@ -24,13 +31,13 @@ set t_ut=
   " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " endif
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall --sync | source ~/.config/vim/vimrc
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim' " quickly find files
 Plug 'tpope/vim-sensible' " base set of configurations
 Plug 'tpope/vim-surround' " s to surround

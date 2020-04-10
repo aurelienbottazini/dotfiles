@@ -1974,10 +1974,10 @@ To get a list of videos to watch do:
 #+BEGIN_SRC emacs-lisp
 (use-package engine-mode
   :bind (:map my-keys-minor-mode-map
-         ("C-c s c" . engine/search-caniuse)
-         ("C-c s m" . engine/search-mdn)
-         ("C-c s ra" . engine/search-rails)
-         ("C-c s rr" . engine/search-ruby))
+         ("C-c d c" . engine/search-caniuse)
+         ("C-c d m" . engine/search-mdn)
+         ("C-c d ra" . engine/search-rails)
+         ("C-c d rr" . engine/search-ruby))
   :config
   (defengine ruby "https://apidock.com/ruby/search?query=%s")
   (defengine rails "https://api.rubyonrails.org/?q=%s")

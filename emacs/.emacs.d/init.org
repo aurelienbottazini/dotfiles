@@ -1785,6 +1785,7 @@ The description of all the hippie expand functions is inside
 #+BEGIN_SRC emacs-lisp
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-all-abbrevs try-expand-list))
 (require 'mode-local)
+(setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol))
 (setq-mode-local elisp-mode hippie-expand-try-functions-list '(try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-all-abbrevs try-complete-lisp-symbol-partially try-complete-lisp-symbol))
 (define-key evil-insert-state-map (kbd "s-/") 'hippie-expand)
 (define-key evil-insert-state-map (kbd "M-/") 'hippie-expand)
@@ -1993,6 +1994,12 @@ To get a list of videos to watch do:
 
 #+BEGIN_SRC emacs-lisp
 (use-package restclient)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package smart-mode-line
+ :config
+ (smart-mode-line-enable))
 #+END_SRC
 
 * Local variables

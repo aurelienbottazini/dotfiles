@@ -15,6 +15,7 @@ export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 export PATH=$HOME/.rbenv/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$N_PREFIX/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 export CDPATH=.:~/:~/projects:~/work
 
@@ -33,6 +34,7 @@ export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export GDK_SCALE=2
 [[ -z $DISPLAY ]] && export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export CHROME_BIN="chromium-browser"
 export BAT_THEME="OneHalfLight"

@@ -7,7 +7,6 @@ alias la='ls -A'
 alias l='ls -CF'
 alias l.='ls -d .*'
 alias tmux='tmux -u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
-alias j='autojump'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 alias toast='powershell.exe -command New-BurntToastNotification'

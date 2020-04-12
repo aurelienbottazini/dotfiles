@@ -153,7 +153,7 @@ let g:airline_theme='sol'
 let g:airline_symbols_ascii = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
-noremap <Leader>f :Ag<Space>
+noremap <Leader>f :Rg<Space>
 :nnoremap <leader>b :buffers<CR>:buffer<Space>
 
 set expandtab

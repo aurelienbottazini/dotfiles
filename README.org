@@ -1,6 +1,6 @@
 All my Dotfiles managed with [[https://www.gnu.org/software/stow/][GNU Stow]]
 
-You can find in this repo advanced configurations for Emacs, Vim, Tmux.
+You can find in this repo advanced configurations for Emacs, Vim, Tmux...
 
 * Usage
 
@@ -18,4 +18,4 @@ You can find in this repo advanced configurations for Emacs, Vim, Tmux.
   ~stow home~
   ~stow home_linux~
 
-  Directories containing root is their filename should be run with with ~sudo stow -t / root~.
+  Directories containing root in their filename should be run with with ~sudo stow -t / root~.

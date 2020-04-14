@@ -2002,6 +2002,12 @@ To get a list of videos to watch do:
  (smart-mode-line-enable))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+ (use-package peep-dired
+  :defer t ; don't access `dired-mode-map' until `peep-dired' is loaded
+  :bind (:map dired-mode-map
+              ("P" . peep-dired)))
+#+END_SRC
 * Local variables
 
 # Local Variables:

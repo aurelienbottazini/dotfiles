@@ -93,3 +93,6 @@ home/.config/vim/*
 home/.local/share/zsh/history
 /tmux/.local/runtime/dconf/
 /home/.config/zsh/.zcompdump
+bin/.local/bin/datagrip
+bin/.local/bin/idea
+bin/.local/bin/jetbrains-toolbox

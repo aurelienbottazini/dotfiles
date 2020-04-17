@@ -30,6 +30,10 @@ you can use ~check-parens~
 (check-parens)
 #+end_src
 
+#+begin_src emacs-lisp :tangle no
+(toggle-debug-on-error)
+#+end_src
+
 * Setup
 It is important to load custom settings first. Those are the ones
 managed by Emacs through customization menus. They can impact the
@@ -1405,6 +1409,7 @@ I find the UI better.
   (setq counsel-rg-base-command
         "rg --smart-case -M 120 --hidden --no-heading --line-number --color never %s ."))
 
+  :config
 (eval-after-load "counsel" '(progn
                               (defun counsel-imenu-categorize-functions (items)
                                 "Categorize all the functions of imenu."
@@ -1673,11 +1678,10 @@ to use `fd` instead of find.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package ivy
-  :bind (:map my-keys-minor-mode-map
-         ("C-c s" . abo-find-file-with-similar-name))
-  :config
-  (require 'abo-find-in-project))
+(eval-after-load "ivy"
+  '(progn
+    (require 'abo-find-in-project)
+    (define-key my-keys-minor-mode-map (kbd "C-c s") 'abo-find-file-with-similar-name)))
 #+END_SRC
 ** Jump
 

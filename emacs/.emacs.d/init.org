@@ -1740,8 +1740,10 @@ These are my two go commands to navigate between code references.
 
 ** Navigation tree
 #+begin_src emacs-lisp
+ (setq speedbar-directory-unshown-regexp "^$")
  (define-key my-keys-minor-mode-map (kbd "C-c 1") 'speedbar-get-focus)
 #+end_src
+
 * Completion
 ** Hippie expand
 Bound to ~s-/~, it provides a simple on demand completion mechanism.

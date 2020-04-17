@@ -25,11 +25,8 @@
       (message "There's no alternate files"))
      ((equal 1 (length alternate-files))
       (find-file (car alternate-files)))
-     (t (ivy-read
-         "Alternate files:"
-         alternate-files
-         :action 'find-file))
-     )))
+     (t find-file (ido-completing-read
+         "Alternate files: "
+         alternate-files)))))
 
-(alternate-files-for-current-buffer)
 (provide 'abo-find-in-project)

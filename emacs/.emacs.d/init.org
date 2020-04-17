@@ -1677,11 +1677,9 @@ to use `fd` instead of find.
   (add-to-list 'ffip-prune-patterns "node_modules/*"))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle no
-(eval-after-load "counsel"
-  '(progn
-    (require 'abo-find-in-project)
-    (define-key my-keys-minor-mode-map (kbd "C-c s") 'abo-find-file-with-similar-name)))
+#+BEGIN_SRC emacs-lisp
+(require 'abo-find-in-project)
+(define-key my-keys-minor-mode-map (kbd "C-c s") 'abo-find-file-with-similar-name)
 #+END_SRC
 ** Jump
 

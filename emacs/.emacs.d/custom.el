@@ -35,7 +35,7 @@
  '(lsp-ui-doc-use-webkit nil)
  '(lsp-ui-sideline-enable nil)
  '(magit-auto-revert-mode t)
- '(magit-commit-show-diff nil)
+ '(magit-commit-show-diff nil t)
  '(menu-bar-mode nil)
  '(org-agenda-files
    (quote
@@ -114,6 +114,18 @@
  '(scroll-bar-mode nil)
  '(show-paren-when-point-in-periphery t)
  '(show-paren-when-point-inside-paren t)
+ '(speedbar-default-position (quote right))
+ '(speedbar-frame-parameters
+   (quote
+    ((minibuffer)
+     (width . 100)
+     (border-width . 0)
+     (menu-bar-lines . 0)
+     (tool-bar-lines . 0)
+     (unsplittable . t)
+     (left-fringe . 0)
+     (height . 60))))
+ '(speedbar-show-unknown-files t)
  '(swiper-goto-start-of-match t)
  '(tool-bar-mode nil)
  '(treemacs-position (quote right))

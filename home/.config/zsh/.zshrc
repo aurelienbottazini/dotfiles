@@ -50,9 +50,6 @@ RPROMPT=''
 
 zstyle ':completion:*' menu select
 
-# if [ `uname` != "Darwin" ]
-# then
-#   sudo /sbin/sysctl -p > /dev/null
-# fi
+sudo /sbin/sysctl -p > /dev/null
 
 [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$TERMINAL_EMULATOR" ] && tat >/dev/null

@@ -1739,10 +1739,8 @@ These are my two go commands to navigate between code references.
 #+END_SRC
 
 ** Navigation tree
-#+begin_src emacs-lisp :results silent
-(use-package treemacs
-  :bind (:map my-keys-minor-mode-map
-              ("C-c 1" . treemacs)))
+#+begin_src emacs-lisp
+ (define-key my-keys-minor-mode-map (kbd "C-c 1") 'speedbar-get-focus)
 #+end_src
 * Completion
 ** Hippie expand

@@ -30,7 +30,7 @@ you can use ~check-parens~
 (check-parens)
 #+end_src
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (toggle-debug-on-error)
 #+end_src
 
@@ -1390,8 +1390,8 @@ I find the UI better.
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-         ("C-x C-m" . execute-extended-command)
-         ("C-c C-m" . execute-extended-command)
+         ("C-x C-m" . counsel-M-x)
+         ("C-c C-m" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("<f1> f" . counsel-describe-function)
          ("<f1> v" . counsel-describe-variable)
@@ -1677,8 +1677,8 @@ to use `fd` instead of find.
   (add-to-list 'ffip-prune-patterns "node_modules/*"))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-(eval-after-load "ivy"
+#+BEGIN_SRC emacs-lisp :tangle no
+(eval-after-load "counsel"
   '(progn
     (require 'abo-find-in-project)
     (define-key my-keys-minor-mode-map (kbd "C-c s") 'abo-find-file-with-similar-name)))

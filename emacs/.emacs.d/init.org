@@ -694,9 +694,7 @@ adjustments for JSX.
   (interactive)
   (web-mode)
   (web-mode-set-content-type "jsx")
-  (setq imenu-create-index-function 'auray-js-imenu-make-index
-        emmet-expand-jsx-className? t)
-  (flycheck-select-checker 'javascript-eslint)
+  (setq emmet-expand-jsx-className? t)
   (emmet-mode)))
 
 (use-package prettier-js
@@ -756,10 +754,11 @@ adjustments for JSX.
 * Flycheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
-  :hook web-mode
-  :hook js2-mode
-  :hook cfn-mode-hook
   :diminish flycheck-mode
+  :init
+  (add-hook 'web-mode-hook 'flycheck-mode)
+  (add-hook 'js2-mode-hook 'flycheck-mode)
+  (add-hook 'cfn-mode-hook 'flycheck-mode)
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (defun my/use-eslint-from-node-modules ()
@@ -978,7 +977,7 @@ for org template captures.
 
 (use-package ivy-bibtex
   :bind (:map my-keys-minor-mode-map
-             ("C-c b" . ivy-bibtex))
+             ("C-c B" . ivy-bibtex))
   :config
   (setq ivy-bibtex-default-action 'ivy-bibtex-insert-citation)
   (setq bibtex-completion-bibliography reftex-default-bibliography)
@@ -1741,7 +1740,7 @@ These are my two go commands to navigate between code references.
 ** Navigation tree
 #+begin_src emacs-lisp
  (setq speedbar-directory-unshown-regexp "^$")
- (define-key my-keys-minor-mode-map (kbd "C-c 1") 'speedbar-get-focus)
+ (define-key my-keys-minor-mode-map (kbd "C-c b") 'speedbar-get-focus)
 #+end_src
 
 * Completion

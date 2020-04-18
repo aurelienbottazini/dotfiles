@@ -1,2 +1,2 @@
-#!/bin/bash
-~/.rbenv/shims/xmpfilter $1 | sponge $1
+#!/bin/zsh
+/home/linuxbrew/.linuxbrew/bin/xmpfilter $1 | sponge $1

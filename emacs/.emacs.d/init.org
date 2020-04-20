@@ -523,13 +523,8 @@ I learned about this on [[http://www.virtuouscode.com/2013/06/24/rubytapas-freeb
 comment for xmpfilter. Running ~xmp~ will evaluate the line and put
 the result after the comment.
 #+BEGIN_SRC emacs-lisp
-(use-package rcodetools
-  :after ruby
-  :load-path "/site-lisp/rcodetools.el"
-  :pin manual
-  :ensure nil
-  :config
-  (defadvice comment-dwim (around rct-hack activate)
+(require 'rcodetools)
+(defadvice comment-dwim (around rct-hack activate)
     "If comment-dwim is successively called, add => mark."
     (if (and (or (eq major-mode 'enh-ruby-mode)
                  (eq major-mode 'ruby-mode))
@@ -538,7 +533,7 @@ the result after the comment.
           (if (eq major-mode 'enh-ruby-mode)
               (end-of-line))
           (insert "=>"))
-      ad-do-it)))
+      ad-do-it))
 #+END_SRC
 ** Go
 

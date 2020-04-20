@@ -9,8 +9,8 @@ from __future__ import (absolute_import, division, print_function)
 
 from ranger.gui.colorscheme import ColorScheme
 from ranger.gui.color import (
-    cyan, magenta, red, white, default,
-    normal, bold, reverse,
+    cyan, magenta, red, white, default, blue,
+    normal, bold, reverse, black,
     default_colors,
 )
 
@@ -25,9 +25,10 @@ class SolarizedAuray(ColorScheme):
             return default_colors
 
         elif context.in_browser:
-            fg = 244
+            fg = black
             if context.selected:
                 attr = reverse
+                fg = white
             else:
                 attr = normal
             if context.empty or context.error:
@@ -43,7 +44,8 @@ class SolarizedAuray(ColorScheme):
             if context.container:
                 fg = 61
             if context.directory:
-                fg = 33
+                fg = blue
+                bg = white
             elif context.executable and not \
                     any((context.media, context.container,
                          context.fifo, context.socket)):

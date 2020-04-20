@@ -159,6 +159,7 @@ slow down my Emacs.
                   (concat home-folder "/.rbenv/shims:")
                   (concat home-folder "/.rbenv/bin:")
                   (concat home-folder "/.fzf/bin:")
+                  "/mnt/c/Windows/system32:"
                   "/usr/bin:"
                   "/usr/local/bin:"
                   "/bin"))
@@ -678,7 +679,7 @@ efficiently.
      :diminish context-coloring-mode
      :bind (:map my-keys-minor-mode-map ("C-c oc" . context-coloring-mode))
      :config
-     (add-hook 'js2-mode-hook #'context-coloring-mode))
+     (add-hook 'js2-mode-hook 'context-coloring-mode))
 #+END_SRC
 
 *** React

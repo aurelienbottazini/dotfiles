@@ -10,12 +10,12 @@ export VISUAL="vim"
 
 export N_PREFIX="$XDG_DATA_HOME/n";
 
-export PATH=/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-export PATH=$HOME/.rbenv/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$N_PREFIX/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$PATH:/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+export PATH=$PATH:$HOME/.rbenv/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$N_PREFIX/bin
+export PATH=$PATH:$HOME/.local/bin
 
 export CDPATH=.:~/:~/projects:~/work
 
@@ -28,7 +28,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
-export BROWSER="wslview"
+export BROWSER="host_firefox"
 export GIT_TEMPLATE_DIR=$XDG_CONFIG_HOME/git/.git_template
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history

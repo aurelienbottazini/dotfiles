@@ -16,6 +16,7 @@ export PATH=$PATH:$HOME/.rbenv/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$N_PREFIX/bin
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/share/npm/bin/
 
 export CDPATH=.:~/:~/projects:~/work
 

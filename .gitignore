@@ -96,3 +96,5 @@ home/.local/share/zsh/history
 bin/.local/bin/datagrip
 bin/.local/bin/idea
 bin/.local/bin/jetbrains-toolbox
+bin/.local/bin/pip
+bin/.local/bin/pip*

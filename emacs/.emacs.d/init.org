@@ -1771,11 +1771,10 @@ C-o~
         company-require-match 'never
         company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
         company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-        company-backends '((company-files company-yasnippet))
+        company-backends '((company-files))
         company-transformers '(company-sort-by-occurrence))
   (global-company-mode +1)
 
-  (define-key evil-insert-state-map (kbd "C-c c") 'company-complete)
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase nil)
   (setq company-show-numbers t)
@@ -1823,7 +1822,7 @@ C-o~
   :defer 3
   :commands yas-expand-snippet
   :bind (:map my-keys-minor-mode-map
-              ("C-c yd" . yas-describe-tables))
+              ("C-c y" . yas-insert-snippet))
   :diminish yas-minor-mode
   :init
   (setq yas-snippet-dirs

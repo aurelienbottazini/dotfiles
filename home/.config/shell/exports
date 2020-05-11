@@ -11,12 +11,13 @@ export VISUAL="vim"
 export N_PREFIX="$XDG_DATA_HOME/n";
 
 export PATH=$PATH:/usr/local/bin:$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin
-export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-export PATH=$PATH:$HOME/.rbenv/bin
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$N_PREFIX/bin
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.local/share/npm/bin/
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH=$HOME/.rbenv/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$N_PREFIX/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/share/npm/bin/:$PATH
+export PATH=$HOME/.local/idea/bin/:$PATH
 
 export CDPATH=.:~/:~/projects:~/work
 

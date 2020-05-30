@@ -25,7 +25,8 @@ function ee() {
 }
 
 alias ee="TERM=xterm-24bit emacs -nw"
-alias emg="emacs . >/dev/null 0>&2 &; disown $1"
+alias emg="emacs . >/dev/null 2>&1 &; disown $1"
+alias idea="idea.sh >/dev/null 2>&1 &; disown $1"
 alias code="code-insiders"
 
 alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"

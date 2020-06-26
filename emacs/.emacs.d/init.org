@@ -1765,13 +1765,13 @@ C-o~
   :defer 2
   :diminish company-mode
   :config
-  (setq company-idle-delay nil
+  (setq company-idle-delay 0.2
         company-tooltip-limit 10
         company-tooltip-align-annotations t
         company-require-match 'never
         company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
         company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-        company-backends '((company-files))
+        company-backends '((company-files company-dabbrev company-capf company-yasnippet))
         company-transformers '(company-sort-by-occurrence))
   (global-company-mode +1)
 
@@ -1816,7 +1816,6 @@ C-o~
 #+END_SRC
 
 ** Snippets
-
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
   :defer 3

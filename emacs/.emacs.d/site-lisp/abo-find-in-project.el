@@ -25,8 +25,8 @@
       (message "There's no alternate files"))
      ((equal 1 (length alternate-files))
       (find-file (car alternate-files)))
-     (t find-file (ido-completing-read
-         "Alternate files: "
-         alternate-files)))))
+     (t (find-file (ido-completing-read
+                    "Alternate files: "
+                    alternate-files))))))
 
 (provide 'abo-find-in-project)

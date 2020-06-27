@@ -5,6 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(blink-matching-paren (quote jump-offscreen))
  '(coffee-tab-width 2)
+ '(company-dabbrev-char-regexp "\\sw\\|\\s_")
+ '(company-dabbrev-ignore-case nil)
  '(company-minimum-prefix-length 1)
  '(custom-safe-themes
    (quote
@@ -131,8 +133,8 @@
  '(treemacs-position (quote right))
  '(truncate-partial-width-windows nil)
  '(vc-follow-symlinks t)
- '(web-mode-code-indent-offset 0)
- '(web-mode-css-indent-offset 0))
+ '(web-mode-code-indent-offset 0 t)
+ '(web-mode-css-indent-offset 0 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

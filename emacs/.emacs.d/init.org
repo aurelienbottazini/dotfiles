@@ -1957,7 +1957,10 @@ To get a list of videos to watch do:
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package restclient)
+(use-package restclient
+ :demand t
+ :config
+ (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

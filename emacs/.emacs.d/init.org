@@ -1771,7 +1771,7 @@ C-o~
         company-require-match 'never
         company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
         company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-        company-backends '((company-files))
+        company-backends '((company-dabbrev company-files))
         company-transformers '(company-sort-by-occurrence))
   (global-company-mode +1)
 
@@ -1957,12 +1957,6 @@ To get a list of videos to watch do:
 
 #+BEGIN_SRC emacs-lisp
 (use-package restclient)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package smart-mode-line
- :config
- (smart-mode-line-enable))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

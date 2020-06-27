@@ -42,11 +42,12 @@ then
   [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
 fi
 
-setopt prompt_subst
-autoload -U colors && colors
-PROMPT='%{$fg[blue]%}[%~] %{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}
-%{$fg[red]%}%(!.#.$)%{$reset_color%} '
-RPROMPT=''
+# mkdir -p "$HOME/.zsh"
+# git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
 
 zstyle ':completion:*' menu select
 

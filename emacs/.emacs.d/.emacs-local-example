@@ -6,3 +6,5 @@
 (setq **local-published-folder** (concat **local-dropbox-folder** "/org/writing_exported/"))
 (setq **local-personal-dictionary** (concat **local-dropbox-folder** "/.aspell.en.pws"))
 (setq **local-deft-directory** (concat **local-dropbox-folder** "/org/slip-box"))
+
+(setq default-frame-alist '((font . "PragmataPro Liga-28")))

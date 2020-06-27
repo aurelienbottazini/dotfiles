@@ -138,7 +138,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background nil :foreground "#000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 260 :width normal :family "PragmataPro Liga"))))
+ '(default ((t (:inherit nil :stipple nil :background nil :foreground "#000"))))
  '(font-lock-comment-face ((t (:foreground "Firebrick" :slant italic))))
  '(font-lock-string-face ((t (:foreground "VioletRed4" :slant italic))))
  '(magit-diff-file-heading ((t (:foreground "black" :weight bold))))

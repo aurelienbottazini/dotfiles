@@ -1266,8 +1266,8 @@ Surround things with
   #+BEGIN_SRC emacs-lisp
   (use-package evil
     :ensure t
-    :init
-    (setq evil-mode-line-format nil)
+    ;; :init
+    ;; (setq evil-mode-line-format nil)
     :config
 
     (evil-mode 1)
@@ -1276,6 +1276,7 @@ Surround things with
     (evil-set-initial-state 'magit-mode 'emacs)
     (evil-set-initial-state 'use-package-statistics 'emacs)
     (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+    (evil-set-initial-state 'term-mode 'emacs)
 
     (evil-ex-define-cmd "W" 'save-buffer))
   #+END_SRC
@@ -1653,6 +1654,7 @@ to use `fd` instead of find.
                :map evil-normal-state-map
                ("gf" . find-file-in-project-at-point))
   :config
+
   (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.png")) ffip-ignore-filenames))
   (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpg")) ffip-ignore-filenames))
   (setq ffip-ignore-filenames (seq-remove (lambda (astring) (string= astring "*.jpeg")) ffip-ignore-filenames))
@@ -1765,13 +1767,13 @@ C-o~
   :defer 2
   :diminish company-mode
   :config
-  (setq company-idle-delay nil
+  (setq company-idle-delay 0.2
         company-tooltip-limit 10
         company-tooltip-align-annotations t
         company-require-match 'never
         company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
         company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-        company-backends '((company-dabbrev company-files))
+        company-backends '((company-files company-dabbrev company-capf company-yasnippet))
         company-transformers '(company-sort-by-occurrence))
   (global-company-mode +1)
 
@@ -1816,7 +1818,6 @@ C-o~
 #+END_SRC
 
 ** Snippets
-
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
   :defer 3
@@ -1965,6 +1966,8 @@ To get a list of videos to watch do:
   :bind (:map dired-mode-map
               ("P" . peep-dired)))
 #+END_SRC
+
+
 * Local variables
 
 # Local Variables:

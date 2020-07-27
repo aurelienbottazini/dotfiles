@@ -86,7 +86,7 @@ built-in Emacs modes or 3rd party packages
 ** Package library initialization
 #+BEGIN_SRC emacs-lisp
 (setq package-archives
-      '(("melpa"       . "http://melpa.milkbox.net/packages/")
+      '(("melpa"       . "https://melpa.org/packages/")
         ("marmalade" . "http://marmalade-repo.org/packages/")
         ("gnu"         . "http://elpa.gnu.org/packages/")))
 

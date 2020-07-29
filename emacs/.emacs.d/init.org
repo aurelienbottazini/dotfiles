@@ -1970,6 +1970,19 @@ To get a list of videos to watch do:
               ("P" . peep-dired)))
 #+END_SRC
 
+#+begin_src emacs-lisp :results silent
+(use-package general
+ :config
+(general-create-definer my-leader-def
+  ;; :prefix my-leader
+  :prefix "SPC")
+
+(my-leader-def
+  :states 'normal
+  :keymaps 'override
+  "SPC" 'counsel-rg
+  "b" 'counsel-bookmark))
+#+end_src
 
 * Local variables
 

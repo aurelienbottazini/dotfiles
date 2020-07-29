@@ -99,3 +99,4 @@ bin/.local/bin/jetbrains-toolbox
 bin/.local/bin/pip
 bin/.local/bin/pip*
 home/.config/shell/zsh.local
+/a.out

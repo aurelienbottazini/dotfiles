@@ -1272,7 +1272,7 @@ Surround things with
 
     (evil-mode 1)
     (evil-set-initial-state 'deft-mode 'insert)
-    (evil-set-initial-state 'dired-mode 'emacs)
+    (evil-set-initial-state 'dired-mode 'normal)
     (evil-set-initial-state 'magit-mode 'emacs)
     (evil-set-initial-state 'use-package-statistics 'emacs)
     (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
@@ -1981,7 +1981,9 @@ To get a list of videos to watch do:
   :states 'normal
   :keymaps 'override
   "SPC" 'counsel-rg
-  "b" 'counsel-bookmark))
+  "p" 'find-file-in-project
+  "b" 'counsel-buffer-or-recentf
+  "m" 'counsel-bookmark))
 #+end_src
 
 * Local variables

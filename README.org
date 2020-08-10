@@ -4,18 +4,18 @@ You can find in this repo advanced configurations for Emacs, Vim, Tmux...
 
 * Usage
 
-  All the directories are meant to be used with stow. I split my
-  config files depending on usage and importance of the software.
-  For example Emacs as a dedicated folder even though It could have
-  been included inside the ~home~ directory.
+All the directories are meant to be used with stow. I split my
+configuration files depending on usage and importance of the software.
+For example Emacs as a dedicated folder even though It could have
+been included inside the ~home~ directory.
 
-  Example Usage:
+Example Usage:
 
-  run ~stow <directory-name>~ commands to symlink directories.
-  Those example commands will work if this repository is checked out
-  as a subfolder of your home directory. For example ~\~/dotfiles~
-  For example on my linux desktop machine I run:
-  ~stow home~
-  ~stow home_linux~
+run ~stow <directory-name>~ commands to symlink directories.
+Those example commands will work if this repository is checked out
+as a subfolder of your home directory. For example ~\~/dotfiles~
+For example on my linux desktop machine I run:
+~stow home~
+~stow home_linux~
 
-  Directories containing root in their filename should be run with with ~sudo stow -t / root~.
+Directories containing root in their filename should be run with with ~sudo stow -t / root~.

@@ -100,3 +100,6 @@ bin/.local/bin/pip
 bin/.local/bin/pip*
 home/.config/shell/zsh.local
 /a.out
+home/.local/share/bash/history
+home/.local/share/autojump.txt
+home/.local/share/autojump.txt.bak

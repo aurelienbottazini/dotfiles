@@ -1,6 +1,7 @@
-// Settings in here override those in "Default/Preferences.sublime-settings",
-// and are overridden in turn by syntax-specific settings.
 {
-  "ignored_packages": [],
-  "vintage_start_in_command_mode": true
+	"font_size": 11,
+	"ignored_packages":
+	[
+	],
+	"vintage_start_in_command_mode": true
 }

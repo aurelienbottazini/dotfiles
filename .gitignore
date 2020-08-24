@@ -103,3 +103,9 @@ home/.config/shell/zsh.local
 home/.local/share/bash/history
 home/.local/share/autojump.txt
 home/.local/share/autojump.txt.bak
+/home/.config/sublime-text-3/
+/home/.local/share/JetBrains/
+/home/.local/share/Trash/
+/home/.local/share/applications/
+/home/.local/share/fonts/
+/home/.local/share/n/

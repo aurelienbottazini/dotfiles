@@ -1977,6 +1977,13 @@ To get a list of videos to watch do:
   "m" 'counsel-bookmark))
 #+end_src
 
+Code folding
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package origami
+ :config
+  (global-origami-mode))
+#+END_SRC
+
 * Local variables
 
 # Local Variables:

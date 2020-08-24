@@ -1687,12 +1687,11 @@ IDE code analysis but it works surprisingly well.
 I added a small function to make the current line flash just after a jump
 #+BEGIN_SRC emacs-lisp
 (use-package dumb-jump
-  :bind (:map evil-normal-state-map
-              ("gd" . dumb-jump-go)
-              ("gD" . dumb-jump-go-other-window))
   :init
   (setq dumb-jump-selector 'ivy)
   :config
+(setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions))
+(add-to-list 'xref-backend-functions #'dumb-jump-xref-activate t)
   (add-hook 'dumb-jump-after-jump-hook
             (defun abo-dumb-jump-pulse-line ()
               (pulse-momentary-highlight-one-line (point)))))
@@ -1726,14 +1725,6 @@ To verify you have the proper version of universal ctags run
 
 #+RESULTS:
 : Universal ctags is installed
-
-These are my two go commands to navigate between code references.
-#+BEGIN_SRC emacs-lisp
-(use-package evil
-  :bind (:map evil-normal-state-map
-                ("g." . xref-find-definitions)
-                ("gr" . xref-find-references)))
-#+END_SRC
 
 ** Navigation tree
 #+begin_src emacs-lisp

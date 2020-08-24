@@ -26,13 +26,17 @@ function ee() {
 
 alias ee="TERM=xterm-24bit emacs -nw"
 alias emg="emacs . >/dev/null 2>&1 &; disown $1"
-alias idea="/opt/idea/bin/idea.sh >/dev/null 2>&1 &; disown $1"
+alias idea="~/.local/idea/bin/idea.sh >/dev/null 2>&1 &; disown $1"
 alias dg="datagrip >/dev/null 2>&1 &; disown $1"
-alias code="code-insiders"
 
 alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias open="explorer.exe"
 
 function ie() {
   idea > /dev/null 2>&1 $1 &
+}
+
+function restart-ads() {
+    dox-dc down;
+    dox-dc up -d doximity doximity-workers doximity-daemons activities activities-daemons activities-workers campaigns campaigns-daemons campaigns-workers doximity-client-vue
 }

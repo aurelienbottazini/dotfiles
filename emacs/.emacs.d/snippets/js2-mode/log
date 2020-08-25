@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: log
-# key: log
-# expand-env: ((yas-wrap-around-region t))
-# --
-console.log($0);

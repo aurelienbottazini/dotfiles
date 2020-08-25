@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: ruby-demo
-# key: dem
-# --
-puts ->() {
-  $0
-}.()

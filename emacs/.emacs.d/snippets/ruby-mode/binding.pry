@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: binding.pry
-# key: bpr
-# --
-::Kernel.binding.remote_pry$0

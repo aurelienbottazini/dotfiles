@@ -1,2 +1,0 @@
-#+TITLE: $0
-#+SETUPFILE: ~/Dropbox/org/conf/setup.config

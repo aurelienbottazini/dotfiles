@@ -1,7 +1,17 @@
 {
-	"font_size": 11,
+	"auto_complete": false,
+	"color_scheme": "Packages/Color Scheme - Quokka/Brackets Light.sublime-color-scheme",
+	"default_line_ending": "unix",
+	"ensure_newline_at_eof_on_save": true,
+	"fallback_encoding": "UTF-8",
+	"font_face": "Operator Mono Book",
+	"font_size": 12,
 	"ignored_packages":
 	[
 	],
+	"tab_size": 2,
+	"theme": "Default.sublime-theme",
+	"translate_tabs_to_space": true,
+	"trim_trailing_white_space_on_save": true,
 	"vintage_start_in_command_mode": true
 }

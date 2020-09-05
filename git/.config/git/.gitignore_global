@@ -34,3 +34,5 @@ wallaby.js
 __mock__/*
 .git/*
 /.graphqlconfig
+*.sublime-project
+*.sublime-workspace

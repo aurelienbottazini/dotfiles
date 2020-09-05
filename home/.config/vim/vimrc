@@ -51,6 +51,7 @@ Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-airline/vim-airline' " better status and tab line
 Plug 'vim-airline/vim-airline-themes' " better status and tab line
+Plug 'altercation/vim-colors-solarized'
 Plug 'mkitt/tabline.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
@@ -85,8 +86,8 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-colorscheme dim
-
+set background=dark
+colorscheme solarized
 " set tabstop=4
 " set shiftwidth=4
 " set softtabstop=4
@@ -149,7 +150,8 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='sol'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 let g:airline_symbols_ascii = 1
 
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
@@ -204,11 +206,6 @@ command! TagFiles :call EchoTags()
 function! EchoTags()
     echo join(split(&tags, ","), "\n")
 endfunction
-
-set cursorline
-
-hi CursorLineNr term=NONE ctermfg=3 gui=bold guifg=Yellow
-hi CursorLine term=underline cterm=underline gui=underline
 
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 map <leader>oi :set list!<CR>

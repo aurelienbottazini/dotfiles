@@ -51,7 +51,6 @@ Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-airline/vim-airline' " better status and tab line
 Plug 'vim-airline/vim-airline-themes' " better status and tab line
-Plug 'altercation/vim-colors-solarized'
 Plug 'mkitt/tabline.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'christoomey/vim-tmux-navigator' " seamless vim & tmux navigation
@@ -60,6 +59,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' " react jsx
 Plug 'bronson/vim-visual-star-search' " seach current selection with *
 Plug 'chrisbra/Colorizer'
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
@@ -87,7 +87,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 set background=dark
-colorscheme solarized
+colorscheme onehalfdark
 " set tabstop=4
 " set shiftwidth=4
 " set softtabstop=4
@@ -150,7 +150,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline_theme='solarized'
+let g:airline_theme='onehalfdark'
 let g:airline_solarized_bg='dark'
 let g:airline_symbols_ascii = 1
 

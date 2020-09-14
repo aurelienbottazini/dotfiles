@@ -53,4 +53,4 @@ zstyle ':completion:*' menu select
 
 sudo /sbin/sysctl -p > /dev/null
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [-z "$INSIDE_SUBLIME"] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null
+# [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null

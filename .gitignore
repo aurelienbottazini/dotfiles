@@ -110,3 +110,6 @@ home/.local/share/autojump.txt.bak
 /home/.local/share/fonts/
 /home/.local/share/n/
 home/.local/share/npm
+bin/.local/bin/clojure-repl
+home/.local/share/ScaleFT
+home/.local/share/recently-used.xbel

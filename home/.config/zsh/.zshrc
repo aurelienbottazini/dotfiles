@@ -53,4 +53,10 @@ zstyle ':completion:*' menu select
 
 sudo /sbin/sysctl -p > /dev/null
 
+## problems trying to run it without sudo with sudoers permission trick.
+# %LimitedAdmins ALL=NOPASSWD: /usr/sbin/ntpdate time.windows.com
+#
+# The things ntpdate seems to need even more authorization
+## sudo ntpdate time.windows.com > /dev/null 2>&1 &
+
 # [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null

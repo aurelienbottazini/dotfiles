@@ -113,3 +113,10 @@ home/.local/share/npm
 bin/.local/bin/clojure-repl
 home/.local/share/ScaleFT
 home/.local/share/recently-used.xbel
+bin/.local/bin/f2py
+bin/.local/bin/f2py3
+bin/.local/bin/f2py3.8
+bin/.local/bin/sample
+bin/.local/bin/tqdm
+home/.local/share/vim/
+home/.local/share/yarn/

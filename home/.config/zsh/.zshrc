@@ -5,9 +5,11 @@ case $- in
 esac
 
 ## History file configuration
-export HISTFILE="$XDG_DATA_HOME"/zsh/history
-HISTSIZE=50000
-SAVEHIST=10000
+# export HISTFILE="$XDG_DATA_HOME/zsh/history"
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+# [ -z "$HISTFILE" ] && HISTFILE="$XDG_DATA_HOME/zsh/history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 #
 ### History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
@@ -27,6 +29,8 @@ stty -ixon # disable legacy c-s scroll-lock
 bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work
 [ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh
 [ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
+[ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
+[ -f ~/.config/fzf/key-bindings.zsh ] && source ~/.config/fzf/key-bindings.zsh
 
 autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
 zstyle ':completion:*:*:git:*' script $XDG_CONFIG_HOME/git/.git-completion.zsh

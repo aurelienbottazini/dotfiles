@@ -73,3 +73,6 @@ _gen_fzf_default_opts
 # Makes opengl animation is smooth with glxgears, always requires to disable native opengl in vcxsrv
 # see https://superuser.com/questions/1487555/how-to-troubleshoot-opengl-on-ubuntu-under-windows-10-wsl
 export LIBGL_ALWAYS_INDIRECT=0
+#
+#
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

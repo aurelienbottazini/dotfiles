@@ -39,7 +39,7 @@ function ie() {
 
 function restart-ads() {
     dox-dc down;
-    dox-dc up -d doximity doximity-workers doximity-daemons activities activities-daemons activities-workers campaigns campaigns-daemons campaigns-workers doximity-client-vue
+    dox-dc up -d doximity doc-news doc-news-workers doximity-workers doximity-daemons activities activities-daemons activities-workers campaigns campaigns-daemons campaigns-workers doximity-client-vue
 }
 
 alias update-time='sudo ntpdate pool.ntp.org'

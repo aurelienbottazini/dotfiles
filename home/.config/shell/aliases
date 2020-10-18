@@ -20,12 +20,11 @@ alias g="git-status"
 
 # You will need for 24 bits emacs:
 # tic -x -o ~/.terminfo ~/dotfiles/emacs/.emacs.d/terminfo-24bit.src
-function ee() {
-  # wrap in a function, otherwise it shows an error message on start when not in tmux
-  TERM=xterm-24bit emacsclient -s $(tmux display-message -p '#S') -ta ''
+function ec() {
+  emacsclient -s $(tmux display-message -p '#S') -ta ''
 }
 
-alias ee="TERM=xterm-24bit emacs -nw"
+alias ee="emacs -nw"
 alias emg="emacs . >/dev/null 2>&1 &; disown $1"
 alias idea="~/.local/idea/bin/idea.sh >/dev/null 2>&1 &; disown $1"
 alias dg="datagrip >/dev/null 2>&1 &; disown $1"

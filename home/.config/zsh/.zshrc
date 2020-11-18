@@ -46,9 +46,6 @@ then
   [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
 fi
 
-# mkdir -p "$HOME/.zsh"
-# git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
-
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure

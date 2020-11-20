@@ -1,0 +1,9 @@
+name: blog
+root: /mnt/c/Users/abott/Dropbox/org/blog/
+
+windows:
+  - emacs:
+      layout: main-vertical
+      panes:
+        - ec .
+        - autoreload-server -w "**/**.{html,css,js}" ./blog_published 8008

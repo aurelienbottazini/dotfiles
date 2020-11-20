@@ -21,7 +21,7 @@ alias g="git-status"
 # You will need for 24 bits emacs:
 # tic -x -o ~/.terminfo ~/dotfiles/emacs/.emacs.d/terminfo-24bit.src
 function ec() {
-  emacsclient -ta ''
+  emacsclient -ta '' $1
 }
 
 alias ee="emacs -nw"

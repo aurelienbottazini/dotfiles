@@ -5,7 +5,7 @@ Port 993
 User abottazini@fastmail.fm
 # For simplicity, this is how to read the password from another file.
 # For better security you should use GPG https://gnupg.org/
-PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+PassCmd "cat ~/.fastmail"
 SSLType IMAPS
 SSLVersions TLSv1.2
 

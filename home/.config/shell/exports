@@ -18,6 +18,7 @@ export PATH=$N_PREFIX/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/share/npm/bin/:$PATH
 export PATH=$HOME/.local/idea/bin/:$PATH
+export MU_PLAY_PROGRAM="wsl-open"
 
 export CDPATH=.:~/:~/projects:~/work
 

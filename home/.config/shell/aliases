@@ -8,6 +8,7 @@ alias l='ls -CF'
 alias l.='ls -d .*'
 alias tmux='tmux -u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias open="xdg-open"
 
 alias toast='powershell.exe -command New-BurntToastNotification'
 
@@ -30,7 +31,6 @@ alias idea="~/.local/idea/bin/idea.sh >/dev/null 2>&1 &; disown $1"
 alias dg="datagrip >/dev/null 2>&1 &; disown $1"
 
 alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias open="explorer.exe"
 
 function ie() {
   idea > /dev/null 2>&1 $1 &

@@ -25,7 +25,7 @@ Channel fastmail
 Master :fastmail-remote:
 Slave :fastmail-local:
 Patterns * # sync all folders
-Expunge None # don't destroy messages locally or on server
+Expunge Both # delete messages locally and on server
 CopyArrivalDate yes # when you move messages around, keep the arrival date
 Sync All
 Create Both # create missing mailboxes locally and on server

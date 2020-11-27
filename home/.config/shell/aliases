@@ -19,9 +19,6 @@ alias v.="(cd dotfiles &&  vim .)"
 
 alias g="git-status"
 
-# You will need for 24 bits emacs:
-# tic -x -o ~/.terminfo ~/dotfiles/emacs/.emacs.d/terminfo-24bit.src
-
 # It is necessary to have a socket with the tmux session name.
 # It allows my emacs/tmux bindings to be forwared to the correct tmux instance.
 # https://github.com/aurelienbottazini/.emacs.d/blob/7c2064ab8ada6fa01f1b2a7e5cdc42b11b23ee92/init.org#L417-L418

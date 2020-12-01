@@ -26,7 +26,7 @@ function ec() {
   TERM=xterm-24bit emacsclient -s $(tmux display-message -p '#S') -ta ''
 }
 
-alias ee="TERM=xterm-25bit emacs -nw"
+alias ee="TERM=xterm-24bit emacs -nw"
 alias emg="TERM=xterm24-bit emacs . >/dev/null 2>&1 &; disown $1"
 
 alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"

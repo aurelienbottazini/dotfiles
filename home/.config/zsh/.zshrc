@@ -39,12 +39,12 @@ compdef git-status='git'
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 [ -f $HOME/.config/autojump.zsh ] && . $HOME/.config/autojump.zsh
 
-HOSTNAME=$HOST
-if [ -z $SSH_AGENT_PID ]
-then
-  [ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
-  [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
-fi
+# HOSTNAME=$HOST
+# if [ -z $SSH_AGENT_PID ]
+# then
+#   [ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
+#   [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
+# fi
 
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
@@ -53,7 +53,7 @@ prompt pure
 
 zstyle ':completion:*' menu select
 
-sudo /sbin/sysctl -p > /dev/null
+# sudo /sbin/sysctl -p > /dev/null
 
 ## problems trying to run it without sudo with sudoers permission trick.
 # %LimitedAdmins ALL=NOPASSWD: /usr/sbin/ntpdate time.windows.com

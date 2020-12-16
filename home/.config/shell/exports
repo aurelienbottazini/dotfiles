@@ -30,7 +30,6 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export MC_SKIN="$HOME/.config/mc/solarized.ini"
-export BROWSER="host_firefox"
 export GIT_TEMPLATE_DIR=$XDG_CONFIG_HOME/git/.git_template
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history

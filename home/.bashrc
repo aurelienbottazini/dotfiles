@@ -47,7 +47,8 @@ export PS1='\[\e[34;4;3;1m\]\w\[\e[0m\]\[\e[35;1m\]$(__git_ps1 " (%s)")\n\[\e[0m
 __git_complete g _git
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
-[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/
+  key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
 [ -f /usr/share/bash-completion/completions/fzf-key-bindings ] && source /usr/share/bash-completion/completions/fzf-key-bindings
 [ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
 [ -f ~/.config/fzf/.fzf.bash ] && source ~/.config/fzf/.fzf.bash

@@ -61,4 +61,4 @@ zstyle ':completion:*' menu select
 # The things ntpdate seems to need even more authorization
 ## sudo ntpdate time.windows.com > /dev/null 2>&1 &
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null
+# [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null

@@ -34,6 +34,7 @@ bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides
 
 autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
 zstyle ':completion:*:*:git:*' script $XDG_CONFIG_HOME/git/.git-completion.zsh
+compinit
 compdef git-status='git'
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"

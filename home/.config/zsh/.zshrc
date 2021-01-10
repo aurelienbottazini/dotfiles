@@ -27,9 +27,6 @@ stty -ixon # disable legacy c-s scroll-lock
 [[ -f $XDG_CONFIG_HOME/shell/zsh.local ]] && . $XDG_CONFIG_HOME/shell/zsh.local
 
 bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work
-[ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh
-[ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
-[ -f /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh ] && source /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh
 [ -f ~/.config/fzf/key-bindings.zsh ] && source ~/.config/fzf/key-bindings.zsh
 
 autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
@@ -62,4 +59,4 @@ zstyle ':completion:*' menu select
 # The things ntpdate seems to need even more authorization
 ## sudo ntpdate time.windows.com > /dev/null 2>&1 &
 
-[ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null
+# [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null

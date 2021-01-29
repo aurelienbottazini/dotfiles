@@ -121,3 +121,5 @@ bin/.local/bin/tqdm
 home/.local/share/vim/
 home/.local/share/yarn/
 home/.config/zsh/zsh.local
+.zsh_history
+.zsh_sessions

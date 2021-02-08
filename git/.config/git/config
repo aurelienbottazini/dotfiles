@@ -85,3 +85,5 @@
 	program = gpg2
 [gitsh "color"]
 	modified = red
+[pull]
+	ff = only

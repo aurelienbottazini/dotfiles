@@ -22,8 +22,8 @@ export PATH=$HOME/.local/share/npm/bin/:$PATH
 export PATH=$HOME/.local/idea/bin/:$PATH
 
 # make GNU commands available on OSX
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+#export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
+# previous brew fix: export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
 
 export MU_PLAY_PROGRAM="wsl-open"
 

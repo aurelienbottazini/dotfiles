@@ -37,26 +37,7 @@ compdef git-status='git'
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 [ -f $HOME/.config/autojump.zsh ] && . $HOME/.config/autojump.zsh
 
-# HOSTNAME=$HOST
-# if [ -z $SSH_AGENT_PID ]
-# then
-#   [ -f /usr/bin/keychain ] && /usr/bin/keychain --nogui $HOME/.ssh/id_rsa &>/dev/null
-#   [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
-# fi
-
-fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
-PURE_PROMPT_SYMBOL="$"
-prompt pure
+PROMPT=$'%F{blue}%n@%m:%F{green}%12<...<%d%<<%{\e[0m%}$ '
 
 zstyle ':completion:*' menu select
-
-# sudo /sbin/sysctl -p > /dev/null
-
-## problems trying to run it without sudo with sudoers permission trick.
-# %LimitedAdmins ALL=NOPASSWD: /usr/sbin/ntpdate time.windows.com
-#
-# The things ntpdate seems to need even more authorization
-## sudo ntpdate time.windows.com > /dev/null 2>&1 &
-
-# [ -z "$TMUX" ] && [ "$TERM" != "dumb" ] && [ -z "$INSIDE_SUBLIME" ] && [ -z "$INSIDE_EMACS" ] && [ -z "$INTELLIJ" ] && [[ -o interactive ]] && tat 2>/dev/null

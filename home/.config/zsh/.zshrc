@@ -38,7 +38,7 @@ compdef git-status='git'
 [ -f $HOME/.config/autojump.zsh ] && . $HOME/.config/autojump.zsh
 
 autoload -U promptinit; promptinit
-PROMPT=$'%F{blue}%n@%m:%F{green}%12<...<%d%<<%{\e[0m%}$ '
+PROMPT=$'%F{blue}%n@%m:%F{green}%12<...<%d%<<%{\e[0m%}$ %f'
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }

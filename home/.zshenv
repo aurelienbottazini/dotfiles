@@ -6,3 +6,5 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/share/npm/bin/:$PATH
 export PATH=$HOME/.local/idea/bin/:$PATH
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.local/share/n/bin:$PATH"
+

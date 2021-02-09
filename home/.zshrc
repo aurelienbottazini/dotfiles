@@ -28,7 +28,6 @@ bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides
 [ -f ~/.config/fzf/key-bindings.zsh ] && source ~/.config/fzf/key-bindings.zsh
 
 autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
-zstyle ':completion:*:*:git:*' script $XDG_CONFIG_HOME/git/.git-completion.zsh
 compinit
 compdef git-status='git'
 

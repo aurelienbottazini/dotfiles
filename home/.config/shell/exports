@@ -1,6 +1,6 @@
-export XDG_CONFIG_HOME=$HOME/.config export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config 
+export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
-export XDG_CURRENT_DESKTOP=GNOME # for gnome-control-center to work correctly on xmonad
 export XDG_RUNTIME_DIR=$HOME/.local/runtime
 
 export LANG=en_US.UTF-8
@@ -11,21 +11,6 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 export N_PREFIX="$XDG_DATA_HOME/n";
-
-export PATH=$PATH:/usr/local/bin:$HOME/bin:$HOME/.bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:$HOME/Library/Python/3.6/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-export PATH=$HOME/.rbenv/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$N_PREFIX/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.local/share/npm/bin/:$PATH
-export PATH=$HOME/.local/idea/bin/:$PATH
-
-# make GNU commands available on OSX
-#export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
-# previous brew fix: export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
-
-export MU_PLAY_PROGRAM="wsl-open"
 
 export CDPATH=.:~/:~/projects:~/work
 
@@ -43,9 +28,6 @@ export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-export GDK_SCALE=2
-[[ -z $DISPLAY ]] && export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export CHROME_BIN="chromium-browser"
 export BAT_THEME="OneHalfLight"
 
 # you can generate that string with `dircolors`
@@ -77,18 +59,3 @@ _gen_fzf_default_opts() {
 }
 _gen_fzf_default_opts
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude vendor/cache'
-
-# Makes opengl animation is smooth with glxgears, always requires to disable native opengl in vcxsrv
-# see https://superuser.com/questions/1487555/how-to-troubleshoot-opengl-on-ubuntu-under-windows-10-wsl
-export LIBGL_ALWAYS_INDIRECT=0
-#
-#
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export JAVA_HOME=/usr/lib/jvm/default-java
-# export PATH=$PATH:$JAVA_HOME/bin
-#export ANDROID_HOME=$HOME/sources/Android
-export ANDROID_HOME=/usr/lib/android-sdk/
-#export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin
-#export PATH=$PATH:$ANDROID_HOME/platform-tools
-export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
-export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037

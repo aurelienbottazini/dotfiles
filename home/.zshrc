@@ -32,6 +32,7 @@ compinit
 compdef git-status='git'
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
+export PATH=$HOME/.rbenv/shims:$PATH
 [ -f $HOME/.config/autojump.zsh ] && . $HOME/.config/autojump.zsh
 
 autoload -U promptinit; promptinit

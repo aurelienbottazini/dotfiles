@@ -1,15 +1,16 @@
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
 let mapleader = " "
 
 imap jk <Esc>
 set scrolloff=5
 
-set easymotion
-set surround
-set multiple-cursors
-set commentary
-set argtextobj
-set ReplaceWithRegister
-set textobj-entire
+set easymotion " leader leader motion key to move
+set surround " s text object
+set multiple-cursors "<A-n>, <A-x>, <A-p>, g<A-n>
+set commentary " 'gc' and 'gcc'
+set argtextobj " 'a' argument text object
+set ReplaceWithRegister " 'gr' to replace with register without replace paste register with deleted lines
+set textobj-entire " 'ae' and 'ai' to select the whole buffer
 
 set showcmd
 set incsearch
@@ -17,6 +18,8 @@ set hls
 set ignorecase
 set clipboard+=unnamed
 set ideajoin
+set highlightedyank
+set NERDTree
 
 set visualbell
 set noerrorbells
@@ -32,4 +35,4 @@ nnoremap <C-k> :action TabShiftActions.MoveFocusUp<CR>
 nnoremap <C-l> :action TabShiftActions.MoveFocusRight<CR>
 
 map <leader>oh :nohlsearch<CR>
-map <leader>os :source ~/.ideavimrc<CR>
+map <leader>ov :source ~/.ideavimrc<CR>

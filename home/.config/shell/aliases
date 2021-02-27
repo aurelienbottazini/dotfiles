@@ -12,6 +12,7 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias toast='powershell.exe -command New-BurntToastNotification'
 
 alias cljr='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
+alias cljn='clojure -Sdeps "{:deps {nrepl/nrepl {:mvn/version \"RELEASE\"}}}" -M -m nrepl.cmdline'
 
 # alias vim="nvim"
 alias v.="(cd dotfiles &&  vim .)"
@@ -55,4 +56,3 @@ ra() {
 	echo "opening $file" &&
 	xdg-open "$file"
 }
-

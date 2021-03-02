@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # Test 24 bits color support for current terminal
 # If successful it displays a gradient colored rgb bar
 
@@ -17,7 +17,11 @@ awk 'BEGIN{
     printf "\n";
 }'
 
-echo "\e[32;3mThis should be in green italic\e[0m"
-echo "\e[31;1mThis should be in red bold\e[0m"
+echo -e "\e[1mbold\e[0m"
+echo -e "\e[3mitalic\e[0m"
+echo -e "\e[3m\e[1mbold italic\e[0m"
+echo -e "\e[4munderline\e[0m"
+echo -e "\e[9mstrikethrough\e[0m"
+
 echo "Ligatures: != -> == && =>"
 echo "Emojis: 😎🤞🏻🐢"

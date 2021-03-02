@@ -25,7 +25,7 @@ stty -ixon # disable legacy c-s scroll-lock
 [[ -f $XDG_CONFIG_HOME/shell/zsh.local ]] && . $XDG_CONFIG_HOME/shell/zsh.local
 
 bindkey -e # C-a and C-e bindings. Must be before fzf shell completion overrides for fzf C-r to work
-[ -f ~/.config/fzf/key-bindings.zsh ] && source ~/.config/fzf/key-bindings.zsh
+[ -f ~/.config/fzf/key-bindings.zsh ] && . ~/.config/fzf/key-bindings.zsh
 
 autoload -Uz compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
 compinit
@@ -33,7 +33,6 @@ compdef git-status='git'
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 export PATH=$HOME/.rbenv/shims:$PATH
-[ -f $HOME/.config/autojump.zsh ] && . $HOME/.config/autojump.zsh
 
 autoload -U promptinit; promptinit
 PROMPT=$'%F{blue}%n@%m:%F{green}%12<...<%d%<<%{\e[0m%}$ %f'

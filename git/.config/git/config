@@ -84,4 +84,3 @@
 [gitsh "color"]
 	modified = red
 [pull]
-	ff = only

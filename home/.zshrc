@@ -33,6 +33,7 @@ compdef git-status='git'
 
 [ -f ~/work/dox-compose/bin/dox-init ] && eval "$(~/work/dox-compose/bin/dox-init)"
 export PATH=$HOME/.rbenv/shims:$PATH
+export PATH=/usr/local/bin:$PATH
 
 autoload -U promptinit; promptinit
 PROMPT=$'%F{blue}%n@%m:%F{green}%12<...<%d%<<%{\e[0m%}$ %f'

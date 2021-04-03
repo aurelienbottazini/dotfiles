@@ -36,7 +36,7 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=/usr/local/bin:$PATH
 
 autoload -U promptinit; promptinit
-PROMPT=$'%F{blue}%n@%m:%F{green}%12<...<%d%<<%{\e[0m%}$ %f'
+PROMPT=$'%F{black}%K{blue}%n@%m:%K{green}%12<...<%d%<<%{\e[0m%} $ %f'
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }

@@ -1,2 +1,2 @@
 #!/bin/sh
-.git/hooks/create_ctags >/dev/null 2>&1 &
+#.git/hooks/create_ctags >/dev/null 2>&1 &

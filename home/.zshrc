@@ -36,7 +36,7 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=/usr/local/bin:$PATH
 
 autoload -U promptinit; promptinit
-PROMPT=$'%F{black}%K{blue}%n@%m:%K{green}%12<...<%d%<<%{\e[0m%} $ %f'
+PROMPT=$'%F{black}%K{blue}%n@%m:%K{green}%12<...<%d%<<%{\e[0m%}\n$ %k%f'
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
@@ -47,3 +47,4 @@ zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
 
 zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"

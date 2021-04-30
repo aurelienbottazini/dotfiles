@@ -152,7 +152,7 @@ set shiftwidth=2
 set softtabstop=2
 set encoding=utf-8
 
-map <leader>e :Explore<CR>
+map <leader>e :NERDTree<CR>
 
 command! W w " Bind W to w since sometimes I hold shift too long
 command! Q q " Bind Q to q since sometimes I hold shift too long

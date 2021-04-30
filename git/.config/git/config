@@ -84,5 +84,6 @@
 [gitsh "color"]
 	modified = red
 [pull]
+	rebase = false
 [init]
 	defaultBranch = main

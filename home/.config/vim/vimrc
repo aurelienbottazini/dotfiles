@@ -63,6 +63,7 @@ Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'mattn/emmet-vim' " shortcut is C-y '
 Plug 'preservim/nerdtree'
 Plug 'Olical/conjure', {'tag': 'v4.18.0'}
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 let g:prettier#autoformat = 0
@@ -70,7 +71,6 @@ let g:prettier#exec_cmd_async = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 nnoremap <C-p> :Files<CR>
-
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 set omnifunc=syntaxcomplete#Complete

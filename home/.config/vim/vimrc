@@ -60,7 +60,6 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'easymotion/vim-easymotion'
 Plug 'jeffkreeftmeijer/vim-dim'
-Plug 'jremmen/vim-ripgrep'
 Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 call plug#end()
 

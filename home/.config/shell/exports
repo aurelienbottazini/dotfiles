@@ -58,4 +58,4 @@ _gen_fzf_default_opts() {
   "
 }
 _gen_fzf_default_opts
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude vendor/cache'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --no-ignore --exclude vendor/cache'

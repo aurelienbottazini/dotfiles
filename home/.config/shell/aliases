@@ -8,13 +8,13 @@ alias l='ls -CF'
 alias l.='ls -d .*'
 alias tmux='tmux -u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias vim='nvim'
 
 alias toast='powershell.exe -command New-BurntToastNotification'
 
 alias cljr='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
 alias cljn='clojure -Sdeps "{:deps {nrepl/nrepl {:mvn/version \"RELEASE\"}}}" -M -m nrepl.cmdline'
 
-# alias vim="nvim"
 alias v.="(cd dotfiles &&  vim .)"
 
 alias g="git-status"

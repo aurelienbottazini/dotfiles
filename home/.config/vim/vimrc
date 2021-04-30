@@ -60,6 +60,7 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'easymotion/vim-easymotion'
 Plug 'jeffkreeftmeijer/vim-dim'
+Plug 'mattn/emmet-vim' " shortcut is C-y '
 call plug#end()
 
 let g:prettier#autoformat = 0

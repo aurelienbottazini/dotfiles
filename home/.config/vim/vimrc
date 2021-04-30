@@ -60,7 +60,6 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'easymotion/vim-easymotion'
 Plug 'jeffkreeftmeijer/vim-dim'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 call plug#end()
 
 let g:prettier#autoformat = 0
@@ -73,7 +72,7 @@ filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
 set background=dark
-" colorscheme onehalfdark " does not work well with sublime text terminus
+colorscheme onehalfdark " does not work well with sublime text terminus
 
 " set tabstop=4
 " set shiftwidth=4

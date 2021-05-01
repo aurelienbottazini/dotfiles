@@ -63,10 +63,6 @@ Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'mattn/emmet-vim' " shortcut is C-y '
 Plug 'preservim/nerdtree'
 Plug 'Olical/conjure', {'tag': 'v4.18.0'}
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
 let g:prettier#autoformat = 0

@@ -36,3 +36,4 @@ __mock__/*
 /.graphqlconfig
 *.sublime-project
 *.sublime-workspace
+todolist.txt

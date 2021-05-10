@@ -4,7 +4,7 @@
 [core]
 	quotepath = false
 	excludesfile = ~/.config/git/.gitignore_global
-	editor = vim
+	editor = nvim
 	autocrlf = input
 [push]
 	default = current # allows to set upstream automatically with git push -u

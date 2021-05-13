@@ -1,1 +1,1 @@
-bind main a ?git checkout -b %(prompt) %(commit)
+bind main a ?git checkout -b "%(prompt Enter branch name: )" %(commit)

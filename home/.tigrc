@@ -1,1 +1,7 @@
+# Template: https://github.com/jonas/tig/blob/master/tigrc
+
 bind main a ?git checkout -b "%(prompt Enter branch name: )" %(commit)
+
+color cursor			black	green	bold
+color title-blur		black	blue
+color title-focus		black	blue	bold

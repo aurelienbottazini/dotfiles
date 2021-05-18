@@ -37,3 +37,4 @@ __mock__/*
 *.sublime-project
 *.sublime-workspace
 todolist.txt
+*.todo

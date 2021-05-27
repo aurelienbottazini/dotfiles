@@ -9,3 +9,4 @@ export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 export PATH=$HOME/.local/share/n/bin:$PATH
 export PATH=$HOME/work/dox-compose/bin:$PATH
 
+. "$HOME/.cargo/env"

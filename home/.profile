@@ -6,3 +6,4 @@ source ~/.zshenv
 #### END FIG ENV VARIABLES ####
 
 
+. "$HOME/.cargo/env"

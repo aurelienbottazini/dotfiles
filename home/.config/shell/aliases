@@ -29,7 +29,7 @@ function ec() {
 alias ee="emacs -nw"
 alias emg="emacs . >/dev/null 2>&1 &; disown $1"
 
-alias whatismyip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias whatismyip="curl https://api.myip.com -H 'Content-Type: application/json' | jq"
 
 function ie() {
   idea > /dev/null 2>&1 $1 &

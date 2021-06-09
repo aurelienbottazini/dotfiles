@@ -38,3 +38,4 @@ __mock__/*
 *.sublime-workspace
 todolist.txt
 *.todo
+/.log

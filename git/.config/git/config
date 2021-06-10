@@ -21,6 +21,7 @@
 	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep
         rm-merged-branches = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+        remove-merged-branches = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
         new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	sla = log --oneline --decorate --graph --all
 	car = commit --amend --no-edit

@@ -125,3 +125,4 @@ home/.config/zsh/zsh.local
 .zsh_sessions
 home/.local/share/com.vercel.cli/
 home/.local/share/#*
+bin/.local/bin/dox

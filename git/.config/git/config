@@ -18,6 +18,7 @@
         b = branch
 	set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
         ignore-tracked = update-index --assume-unchanged
+        assume-unchanged = update-index --assume-unchanged
 	gtags = !.git/hooks/gtags
 	glog = log -E -i --grep
         rm-merged-branches = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"

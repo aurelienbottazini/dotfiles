@@ -21,6 +21,7 @@ setopt share_history          # share command history data
 stty -ixon # disable legacy c-s scroll-lock
 
 [[ -f ~/.config/shell/exports ]] && . ~/.config/shell/exports
+[[ -f ~/.export_secrets ]] && . ~/.export_secrets
 [[ -f $XDG_CONFIG_HOME/shell/aliases ]] && . $XDG_CONFIG_HOME/shell/aliases
 [[ -f $XDG_CONFIG_HOME/shell/zsh.local ]] && . $XDG_CONFIG_HOME/shell/zsh.local
 

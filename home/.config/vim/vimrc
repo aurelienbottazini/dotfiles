@@ -64,7 +64,13 @@ Plug 'jeffkreeftmeijer/vim-dim' " default colorscheme improved
 Plug 'mattn/emmet-vim' " shortcut is C-y '
 Plug 'preservim/nerdtree'
 Plug 'Olical/conjure', {'tag': 'v4.18.0'}
+Plug 'jremmen/vim-ripgrep'
 
+" :Rg Python - Search for every mention of Python.
+" VG - Visually select all the lines in the quickfix list.
+" :s/Python/Ruby/g - Substitute Python for Ruby globally.
+" :w - Write the quickfix list to reflect those changes out to each individual file.
+Plug 'stefandtw/quickfix-reflector.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -193,8 +199,14 @@ let g:airline_theme='onehalfdark'
 let g:airline_solarized_bg='dark'
 let g:airline_symbols_ascii = 1
 
+
 let g:ag_working_path_mode="r" " ag search from project root instead of cwd
+let g:rg_command = 'rg --vimgrep -S'
+" 1. :grep <search term>
+" 2. :cdo %s/<search term>/<replace term>/gc
+" 3. (If you want to save the changes in all files) :cdo update
 noremap <Leader>f :Rg<Space>
+
 :nnoremap <leader>b :buffers<CR>:buffer<Space>
 
 set expandtab

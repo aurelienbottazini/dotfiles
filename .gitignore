@@ -126,3 +126,4 @@ home/.config/zsh/zsh.local
 home/.local/share/com.vercel.cli/
 home/.local/share/#*
 bin/.local/bin/dox
+/home/.local/share/ranger/

@@ -23,7 +23,7 @@ alias g="git-status"
 # It allows my emacs/tmux bindings to be forwared to the correct tmux instance.
 # https://github.com/aurelienbottazini/.emacs.d/blob/7c2064ab8ada6fa01f1b2a7e5cdc42b11b23ee92/init.org#L417-L418
 function ec() {
-  TERM=xterm-emacs-rgb-italic emacsclient -s $(tmux display-message -p '#S') -ta ''
+  TERM=xterm-emacs-rgb-italic emacsclient -s $(tmux display-message -p '#S') -ta '' "$1"
 }
 
 alias ee="TERM=xterm-emacs-rgb-italic emacs -nw"

@@ -9,3 +9,4 @@ yarn.lock
 TAGS
 .eslintrc-todo.yml
 .idea
+vendor
